@@ -7,11 +7,11 @@ class ProfileDialog extends StatelessWidget {
   final VoidCallback? onContinue;
 
   const ProfileDialog({
-    Key? key,
+    super.key,
     this.title,
     this.description,
     this.onContinue,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
