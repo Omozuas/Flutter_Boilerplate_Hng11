@@ -14,10 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.interTextTheme()
-      ),
-      home: SignupScreen(),
+      theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
+      home: const SignupScreen(),
     );
   }
 }
