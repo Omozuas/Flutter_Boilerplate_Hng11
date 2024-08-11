@@ -52,13 +52,13 @@ class ProfileDialog extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: ElevatedButton(
                 onPressed: onContinue ??
-                        () {
+                    () {
                       Navigator.pop(context);
                     },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFF97316),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   minimumSize: const Size(93, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
