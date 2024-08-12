@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/request_types.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +19,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
-        home: const CompanySignupScreen());
+        home: const SignupScreen(),);
   }
 }
