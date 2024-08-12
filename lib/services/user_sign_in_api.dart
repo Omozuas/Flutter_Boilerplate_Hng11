@@ -1,10 +1,9 @@
-/// File: user_sign_in_api.dart
-/// Author: Otonye-dev
-/// Created: 2024-08-12
-///
-/// This file contains the UserSignInApi class, which handles the sign-in operation.
-/// It includes a method for signing in a user with their credentials.
-
+// File: user_sign_in_api.dart
+// Author: Otonye-dev
+// Created: 2024-08-12
+//
+// This file contains the UserSignInApi class, which handles the sign-in operation.
+// It includes a method for signing in a user with their credentials.
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;

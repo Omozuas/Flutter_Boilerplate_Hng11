@@ -1,16 +1,13 @@
-/// File: email_verification_api.dart
-/// Author: Otonye-dev
-/// Created: 2024-08-12
-///
-/// This file contains the EmailVerificationApi class, which handles operations related to
-/// email verification. It includes methods for requesting a verification token and
-/// verifying the email using a token.
-
-
+// File: email_verification_api.dart
+// Author: Otonye-dev
+// Created: 2024-08-12
+//
+// This file contains the EmailVerificationApi class, which handles operations related to
+// email verification. It includes methods for requesting a verification token and
+// verifying the email using a token.
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 
 /// Handles email verification operations.
 class EmailVerificationApi {

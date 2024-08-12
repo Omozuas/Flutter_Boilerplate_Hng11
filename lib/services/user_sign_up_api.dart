@@ -1,16 +1,14 @@
-/// File: user_sign_up_api.dart
-/// Author: Otonye-dev
-/// Created: 2024-08-12
-///
-/// This file contains the UserSignUpApi class, which handles user registration.
-/// It includes a method for signing up a new user with their details.
-
+// File: user_sign_up_api.dart
+// Author: Otonye-dev
+// Created: 2024-08-12
+//
+// This file contains the UserSignUpApi class, which handles user registration.
+// It includes a method for signing up a new user with their details.
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserSignUpApi {
-
   final String baseUrl = "https://api-golang.boilerplate.hng.tech/api/v1";
 
   Future<Map<String, dynamic>> registerUser({
