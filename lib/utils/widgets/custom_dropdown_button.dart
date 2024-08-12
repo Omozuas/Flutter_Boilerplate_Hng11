@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+
+class CustomDropdownButton extends StatefulWidget {
+  final List<String> items;
+  final String? initialValue;
+  final String placeholder;
+  final Function(String?)? onChanged;
+  final Color containerColor, borderColor, textColor;
+  final double width, height;
+
+  const CustomDropdownButton({
+    super.key,
+    required this.items,
+    this.initialValue,
+    this.placeholder = "Select", // this represents the initial text
+    this.onChanged,
+    required this.borderColor,
+    required this.height,
+    required this.containerColor,
+    required this.width,
+    required this.textColor,
+  });
+
+  @override
+  _CustomDropdownButtonState createState() => _CustomDropdownButtonState();
+}
+
+class _CustomDropdownButtonState extends State<CustomDropdownButton> {
+  String? _selectedItem; // declaring a selected item
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedItem = widget.initialValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        decoration: BoxDecoration(
+          color: widget.containerColor,
+          shape: BoxShape.rectangle,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(6),
+          ),
+          border: Border.all(width: 1, color: widget.borderColor),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton<String>(
+              value: _selectedItem,
+              hint: Text(
+                widget.placeholder,
+                style: TextStyle(color: widget.textColor),
+              ),
+              dropdownColor: widget.containerColor,
+              icon: Icon(Icons.keyboard_arrow_down, color: widget.textColor),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedItem = newValue;
+                });
+                if (widget.onChanged != null) {
+                  widget.onChanged!(newValue);
+                }
+              },
+              items: widget.items.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: TextStyle(color: widget.textColor),
+                  ),
+                );
+              }).toList(),
+              isExpanded: true,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
