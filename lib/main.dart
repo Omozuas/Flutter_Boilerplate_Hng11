@@ -6,7 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 late ApiService apiService;
 
 void main() {
-   apiService = ApiService(baseUrl: 'typical_url');
+  apiService = ApiService(
+      baseUrl: 'https://staging.api-nestjs.boilerplate.hng.tech/api/v1');
   runApp(const MyApp());
 }
 
