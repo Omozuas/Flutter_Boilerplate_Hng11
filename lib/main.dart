@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/signup_screen.dart';
+import 'package:flutter_boilerplate_hng11/services/request_types.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+late ApiService apiService;
+
 void main() {
+   apiService = ApiService(baseUrl: 'typical_url');
   runApp(const MyApp());
 }
 

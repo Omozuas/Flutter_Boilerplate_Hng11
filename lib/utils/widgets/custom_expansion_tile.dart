@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../global_colors.dart';
 
+
+
+/// To the person who build this class, please update the divider color in the global colors.
+/// For now it will be commented out
+/// thank you.
+
+
 class CustomExpansionTile extends StatefulWidget {
   const CustomExpansionTile({
     super.key,
@@ -18,7 +25,9 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: Theme.of(context).copyWith(dividerColor: GlobalColors.dividerColor),
+      data: Theme.of(context).copyWith(
+          //dividerColor: GlobalColors.dividerColor
+      ),
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
         childrenPadding:
@@ -37,7 +46,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
               _isExpanded
                   ? Icons.keyboard_arrow_down_outlined
                   : Icons.keyboard_arrow_up,
-              color: GlobalColors.iconColor,
+            //  color: GlobalColors.iconColor,
             ),
           ],
         ),
