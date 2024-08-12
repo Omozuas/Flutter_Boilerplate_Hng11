@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/utils/globalColors/global_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../global_colors.dart';
 
 class CustomExpansionTile extends StatefulWidget {
   const CustomExpansionTile({
