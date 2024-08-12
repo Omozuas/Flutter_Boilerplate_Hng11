@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -14,6 +15,9 @@ class CustomTextField extends StatelessWidget {
   final double? borderRadius;
   final EdgeInsets? margin;
   final int? maxLines;
+  final String? Function(String?)? validator;
+  final Color? borderColor;
+  final Color? focusedBorderColor;
 
   const CustomTextField({
     super.key,
@@ -30,6 +34,9 @@ class CustomTextField extends StatelessWidget {
     this.margin,
     this.borderRadius,
     this.maxLines,
+    this.validator,
+    this.borderColor,
+    this.focusedBorderColor,
   });
 
   @override
@@ -44,17 +51,19 @@ class CustomTextField extends StatelessWidget {
             style: labelStyle ??
                 const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: Color(0xFF0F172A),
                 ),
           ),
           const SizedBox(
             height: 8,
           ),
-          TextField(
+          TextFormField(
             controller: controller,
             keyboardType: keyboardType,
             obscureText: obscureText ?? false,
+            maxLines: maxLines ?? 1,
+            validator: validator,
             decoration: InputDecoration(
               contentPadding: padding ??
                   const EdgeInsets.symmetric(
@@ -69,22 +78,22 @@ class CustomTextField extends StatelessWidget {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 6),
-                borderSide: const BorderSide(
-                  color: Color(0xFFCBD5E1),
+                borderSide: BorderSide(
+                  color: GlobalColors.borderColor,
                   width: 1,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 6),
-                borderSide: const BorderSide(
-                  color: Color(0xFFCBD5E1),
+                borderSide: BorderSide(
+                  color: borderColor ?? GlobalColors.borderColor,
                   width: 1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 6),
-                borderSide: const BorderSide(
-                  color: Color(0xFFCBD5E1),
+                borderSide: BorderSide(
+                  color: focusedBorderColor ?? GlobalColors.orange,
                   width: 1,
                 ),
               ),
