@@ -27,7 +27,6 @@ class ResponseModel {
         status: json['status'],
         message: json['message'],
         statusCode: json['status_code'],
-        // ignore: prefer_if_null_operators
         accessToken: json['data']['access_token'] != null
             ? json['data']['access_token']
             : null,
