@@ -22,11 +22,12 @@ class ResponseModel {
   });
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
-    if (json['status_code'] == 200 ) {
+    if (json['status_code'] == 200) {
       return ResponseModel(
         status: json['status'],
         message: json['message'],
         statusCode: json['status_code'],
+        // ignore: prefer_if_null_operators
         accessToken: json['data']['access_token'] != null
             ? json['data']['access_token']
             : null,
@@ -46,4 +47,3 @@ class ResponseModel {
     }
   }
 }
-

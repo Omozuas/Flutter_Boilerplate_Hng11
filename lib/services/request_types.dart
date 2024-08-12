@@ -1,13 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'response_model.dart';
-
-
 
 class ApiService {
   final String baseUrl;
   final Dio _dio;
 
-  ApiService._internal(this.baseUrl) : _dio = Dio(BaseOptions(baseUrl: baseUrl));
+  ApiService._internal(this.baseUrl)
+      : _dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   static ApiService? _instance;
 
@@ -15,7 +16,8 @@ class ApiService {
     return _instance ??= ApiService._internal(baseUrl);
   }
 
-  Future<ResponseModel?> postRequest(String endpoint, Map<String, dynamic> body) async {
+  Future<ResponseModel?> postRequest(
+      String endpoint, Map<String, dynamic> body) async {
     try {
       final response = await _dio.post(endpoint, data: body);
 
@@ -45,7 +47,8 @@ class ApiService {
     }
   }
 
-  Future<ResponseModel?> updateRequest(String endpoint, Map<String, dynamic> body) async {
+  Future<ResponseModel?> updateRequest(
+      String endpoint, Map<String, dynamic> body) async {
     try {
       final response = await _dio.put(endpoint, data: body);
 
@@ -59,5 +62,4 @@ class ApiService {
       return null;
     }
   }
-
 }
