@@ -36,19 +36,19 @@ class SignupScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
+            const Text(
               'Sign up',
               style: TextStyle(
                 fontSize: 28.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10.0),
-            Text(
+            const SizedBox(height: 10.0),
+            const Text(
               'Create an account to get started with us.',
               style: TextStyle(
                 fontSize: 16.0,
@@ -56,14 +56,14 @@ class SignupScreen extends StatelessWidget {
               ),
             ),
             // Google signup button
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 12.0),
-                side: BorderSide(color: Colors.grey),
-                shape: RoundedRectangleBorder(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                side: const BorderSide(color: Colors.grey),
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(4)),
                 ),
               ),
@@ -72,21 +72,21 @@ class SignupScreen extends StatelessWidget {
                 'assets/images/g.png',
                 height: 25,
               ),
-              label: Text('Sign Up With Google'),
+              label: const Text('Sign Up With Google'),
             ),
-            SizedBox(height: 10.0),
-            Row(
+            const SizedBox(height: 10.0),
+            const Row(
               children: <Widget>[
                 Expanded(child: Divider()),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text('Or'),
                 ),
                 Expanded(child: Divider()),
               ],
             ),
             // Input fields
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             CustomTextField(
@@ -105,12 +105,12 @@ class SignupScreen extends StatelessWidget {
                 label: 'Password',
                 controller: passwordController,
                 hintText: 'Create your password'),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
                   backgroundColor: GlobalColors.orange,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)))),
               onPressed: () {},
               child: Text(
@@ -118,7 +118,7 @@ class SignupScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16.0, color: GlobalColors.white),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Center(
               child: RichText(
                 text: TextSpan(
@@ -134,7 +134,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
           ],
         ),
       ),
