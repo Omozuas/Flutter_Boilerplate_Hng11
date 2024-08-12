@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomDropdownButton extends StatefulWidget {
   final List<String> items;
   final String? initialValue;
-  final String placeholder;
+  final String placeholder; // initial text for the dropdown
   final Function(String?)? onChanged;
   final Color containerColor, borderColor, textColor;
   final double width, height;
@@ -12,7 +12,7 @@ class CustomDropdownButton extends StatefulWidget {
     super.key,
     required this.items,
     this.initialValue,
-    this.placeholder = "Select", // this represents the initial text
+    this.placeholder = "Select", // initial text for the dropdown
     this.onChanged,
     required this.borderColor,
     required this.height,
@@ -22,11 +22,11 @@ class CustomDropdownButton extends StatefulWidget {
   });
 
   @override
-  _CustomDropdownButtonState createState() => _CustomDropdownButtonState();
+  CustomDropdownButtonState createState() => CustomDropdownButtonState();
 }
 
-class _CustomDropdownButtonState extends State<CustomDropdownButton> {
-  String? _selectedItem; // declaring a selected item
+class CustomDropdownButtonState extends State<CustomDropdownButton> {
+  String? _selectedItem;
 
   @override
   void initState() {
@@ -77,7 +77,8 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
                   ),
                 );
               }).toList(),
-              isExpanded: true,
+              isExpanded:
+                  true, // this makes dropdown expand to fill container width
             ),
           ),
         ),
