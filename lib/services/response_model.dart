@@ -27,9 +27,7 @@ class ResponseModel {
         status: json['status'],
         message: json['message'],
         statusCode: json['status_code'],
-        accessToken: json['data']['access_token'] != null
-            ? json['data']['access_token']
-            : null,
+        accessToken: json['data']['access_token'],
       );
     } else if (json['status_code'] == 422) {
       return ResponseModel(
