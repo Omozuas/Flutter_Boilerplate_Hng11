@@ -66,7 +66,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/services/response_model.dart';
 
-
 class DioProvider {
   final Dio _dio;
   String? _accessToken;

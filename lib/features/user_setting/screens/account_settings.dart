@@ -11,7 +11,8 @@ class SettingsScreen extends StatelessWidget {
         title: const Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 1.0), // Adjust this padding to align with the avatar
+            padding: EdgeInsets.only(
+                left: 1.0), // Adjust this padding to align with the avatar
             child: Text(
               'Profile',
               style: TextStyle(
