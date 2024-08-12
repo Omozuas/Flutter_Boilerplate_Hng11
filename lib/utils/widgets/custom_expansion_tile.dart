@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-/// To the person who build this class, please update the divider color in the global colors.
-/// For now it will be commented out
-/// thank you.
+import '../global_colors.dart';
 
 class CustomExpansionTile extends StatefulWidget {
   const CustomExpansionTile({
     super.key,
     required this.title,
+    required this.content,
+    this.space,
+    this.icon,
+    this.horizontalTitlePadding,
+    this.verticalTitlePadding,
+    this.verticalChildrenPadding,
+    this.horizontalChildrenPadding,
   });
   final String title;
-
+  final List<Widget> content;
+  final double? space;
+  final IconData? icon;
+  final EdgeInsets? horizontalTitlePadding;
+  final EdgeInsets? verticalTitlePadding;
+  final EdgeInsets? verticalChildrenPadding;
+  final EdgeInsets? horizontalChildrenPadding;
   @override
   State<CustomExpansionTile> createState() => _CustomExpansionTileState();
 }
@@ -21,14 +31,15 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: Theme.of(context).copyWith(
-          //dividerColor: GlobalColors.dividerColor
-          ),
+      data: Theme.of(context).copyWith(dividerColor: GlobalColors.dividerColor),
       child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-        childrenPadding:
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        trailing: const Icon(null),
+        tilePadding: EdgeInsets.symmetric(
+            horizontal: widget.horizontalTitlePadding?.horizontal ?? 15,
+            vertical: widget.verticalChildrenPadding?.vertical ?? 0),
+        childrenPadding: EdgeInsets.symmetric(
+            horizontal: widget.horizontalChildrenPadding?.horizontal ?? 15,
+            vertical: widget.verticalChildrenPadding?.vertical ?? 10),
+        trailing: Icon(widget.icon),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -42,7 +53,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
               _isExpanded
                   ? Icons.keyboard_arrow_down_outlined
                   : Icons.keyboard_arrow_up,
-              //  color: GlobalColors.iconColor,
+              color: GlobalColors.iconColor,
             ),
           ],
         ),
@@ -51,11 +62,15 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
             _isExpanded = expanded;
           });
         },
-        children: const [
+        children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [],
-          ),
+            children: widget.content
+                .map((child) => Padding(
+                      padding: EdgeInsets.only(bottom: widget.space ?? 16),
+                      child: child,
+                    ))
+                .toList(),
+          )
         ],
       ),
     );
