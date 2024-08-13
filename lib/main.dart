@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   setupLocator();
-  await dotenv.load();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
