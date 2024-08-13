@@ -50,6 +50,10 @@ class AuthApi {
         'email': email,
         'password': password,
       });
+      if (response != null && response.data != null) {
+        String accessToken = response.data['access_token'];
+        dioProvider.updateAccessToken(accessToken);
+      }
       return response;
     } catch (e) {
       debugPrint('Error during login: ${e.toString()}');
