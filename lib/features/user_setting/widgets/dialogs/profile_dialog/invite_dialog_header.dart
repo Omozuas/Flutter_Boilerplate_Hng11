@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InviteDialogHeader extends StatelessWidget {
@@ -16,7 +17,7 @@ class InviteDialogHeader extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundColor: const Color(0xFFD9D9D9),
+          backgroundColor: GlobalColors.deemWhite,
           child: Text(
             "KP", // This can be dynamic based on user initials
             style: GoogleFonts.inter(

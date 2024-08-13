@@ -3,12 +3,13 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MembersSettings extends StatelessWidget {
-  final bool isInviteLinkActive = false;
+  final bool isInviteLinkActive;
+  const MembersSettings({Key? key, this.isInviteLinkActive = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
