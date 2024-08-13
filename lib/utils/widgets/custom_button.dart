@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class Custombutton extends StatelessWidget {
-  VoidCallback onTap;
-  Color containerColor, borderColor, textColor;
-  String text;
-  double width, height;
-  Custombutton({
+  final VoidCallback onTap;
+  final Color containerColor, borderColor, textColor;
+  final String text;
+  final double width, height;
+  const Custombutton({
     super.key,
     required this.onTap,
     required this.borderColor,

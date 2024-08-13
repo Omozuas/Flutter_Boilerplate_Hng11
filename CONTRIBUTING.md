@@ -31,6 +31,12 @@ We appreciate your interest in contributing to the Flutter HNG Boilerplate. Here
      git commit -m "feat: Describe the changes made"
      ```
    
+   - **Pull Changes from Dev:** Push and sync recent changes from the dev branch:
+     
+     ```bash
+     git pull origin dev
+     ```
+   
    - **Push Your Changes:** Push your changes to your created branch:
      
      ```bash
@@ -39,6 +45,35 @@ We appreciate your interest in contributing to the Flutter HNG Boilerplate. Here
    
    - **Create a Pull Request:** Open a pull request to the main branch with a description of your changes.
 
+# Merging
+
+Under any circumstances should you merge a pull requests on a specific branch to the `dev` or `main` branch
+
+### _Commit CheatSheet_
+
+| Type     |                          | Description                                                                                                 |
+| -------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| feat     | Features                 | A new feature                                                                                               |
+| fix      | Bug Fixes                | A bug fix                                                                                                   |
+| docs     | Documentation            | Documentation only changes                                                                                  |
+| style    | Styles                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)      |
+| refactor | Code Refactoring         | A code change that neither fixes a bug nor adds a feature                                                   |
+| perf     | Performance Improvements | A code change that improves performance                                                                     |
+| test     | Tests                    | Adding missing tests or correcting existing tests                                                           |
+| build    | Builds                   | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)         |
+| ci       | Continuous Integrations  | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) |
+| chore    | Chores                   | Other changes that don't modify , frontend or test files                                                    |
+| revert   | Reverts                  | Reverts a previous commit                                                                                   |
+
+> _Sample Commit Messages_
+
+- `chore: Update README file` := `chore` is used because the commit didn't make any changes to the , frontend or test folders in any way.
+- `feat: Add plugin info endpoints` := `feat` is used here because the feature was non-existent before the commit.
+
+### Note : Commit messages
+- Use the present tense ("Add feature" not "Added feature")
+
+
 ## Code of Conduct
 
 Please follow our [Code of Conduct](CODE_OF_CONDUCT.md) when contributing to this project.
@@ -46,7 +81,15 @@ Please follow our [Code of Conduct](CODE_OF_CONDUCT.md) when contributing to thi
 ## Style Guide
 
 - Follow the Dart style guide for code formatting.
+- Make use of the Re-Usable Components created in lib/utils/widgets
+- Make use of the global colors created in lib/utils/globalColors
+- Make use of PascalCase for Classes
+- Make use of snake_case for File names
+- Make use of camelCase for Methods
 - Ensure your code is well-documented with comments and documentation.
+- If you need to export image or icon from Figma, always do that in 4x.
+- Always implement the flutter screen_util package in order to ensure responsiveness
+  [online documentation](https://pub.dev/packages/flutter_screenutil)
 
 
 Thank you for contributing to the Flutter HNG Boilerplate!
