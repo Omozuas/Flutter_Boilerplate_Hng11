@@ -18,4 +18,8 @@ class AppRouter {
 
 class AppRoute {
   static const String splash = '/splash';
+  static const String home = '/home';
+  static const String productListing = '/product_listing';
+  static const String cart = '/cart';
+  static const String settings = '/settings';
 }
