@@ -14,6 +14,18 @@ import '../providers/show_social_button_provider.dart';
 class RegularSignUpScreen extends ConsumerWidget {
   const RegularSignUpScreen({super.key});
 
+  // Retrieve the TextEditingControllers
+  static final firstNameController = TextEditingController();
+  static final lastNameController = TextEditingController();
+  static final emailController = TextEditingController();
+  static final passwordController = TextEditingController();
+  static final formKey = GlobalKey<FormState>();
+  static final firstNameFocusNode = FocusNode();
+  static final lastNameFocusNode = FocusNode();
+  static final emailFocusNode = FocusNode();
+  static final passwordFocusNode = FocusNode();
+static     final authApiProvider = Provider((ref) => AuthApi());
+  static final isLoadingProvider = StateProvider<bool>((ref) => false);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formState = ref.watch(signupFormProvider);
@@ -21,18 +33,7 @@ class RegularSignUpScreen extends ConsumerWidget {
     final socialButtonsController =
         ref.read(showSocialButtonsProvider.notifier);
 
-    // Retrieve the TextEditingControllers
-    final firstNameController = TextEditingController();
-    final lastNameController = TextEditingController();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
 
-    final formKey = GlobalKey<FormState>();
-
-    final firstNameFocusNode = FocusNode();
-    final lastNameFocusNode = FocusNode();
-    final emailFocusNode = FocusNode();
-    final passwordFocusNode = FocusNode();
 
     // Add listeners to hide social buttons when focusing on any TextField
     firstNameFocusNode.addListener(() {
@@ -58,9 +59,9 @@ class RegularSignUpScreen extends ConsumerWidget {
         socialButtonsController.hideSocialButtons();
       }
     });
-    final authApiProvider = Provider((ref) => AuthApi());
+
     final authApi = ref.read(authApiProvider);
-    final isLoadingProvider = StateProvider<bool>((ref) => false);
+    final isLoading = ref.watch(isLoadingProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -196,17 +197,14 @@ class RegularSignUpScreen extends ConsumerWidget {
                   SizedBox(height: 10.h),
                   CustomButton(
                     text: 'Create Account',
+                    loading: isLoading,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-
-                        formController.validate();
-
                         if (formState.firstNameError == null &&
                             formState.lastNameError == null &&
                             formState.emailError == null &&
                             formState.passwordError == null) {
                           ref.read(isLoadingProvider.notifier).state = true;
-
                           try {
                             final response = await authApi.registerSingleUser(
                               email: emailController.text,
@@ -221,7 +219,8 @@ class RegularSignUpScreen extends ConsumerWidget {
                                     content: Text('Registration successful')),
                               );
                               // Navigate to the next screen or perform any other action
-                            } else {
+                            }
+                            else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text(
@@ -238,9 +237,6 @@ class RegularSignUpScreen extends ConsumerWidget {
                             ref.read(isLoadingProvider.notifier).state = false;
                           }
                         }
-
-
-
                       }
                     },
                     textColor: GlobalColors.white,
