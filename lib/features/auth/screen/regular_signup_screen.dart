@@ -4,14 +4,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
+import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 
+import '../auth_api.dart';
 import '../providers/auth.provider.dart';
 import '../providers/show_social_button_provider.dart';
 
 class RegularSignUpScreen extends ConsumerWidget {
   const RegularSignUpScreen({super.key});
 
+  // Retrieve the TextEditingControllers
+  static final firstNameController = TextEditingController();
+  static final lastNameController = TextEditingController();
+  static final emailController = TextEditingController();
+  static final passwordController = TextEditingController();
+  static final formKey = GlobalKey<FormState>();
+  static final firstNameFocusNode = FocusNode();
+  static final lastNameFocusNode = FocusNode();
+  static final emailFocusNode = FocusNode();
+  static final passwordFocusNode = FocusNode();
+static     final authApiProvider = Provider((ref) => AuthApi());
+  static final isLoadingProvider = StateProvider<bool>((ref) => false);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formState = ref.watch(signupFormProvider);
@@ -19,18 +33,7 @@ class RegularSignUpScreen extends ConsumerWidget {
     final socialButtonsController =
         ref.read(showSocialButtonsProvider.notifier);
 
-    // Retrieve the TextEditingControllers
-    final firstNameController = TextEditingController();
-    final lastNameController = TextEditingController();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
 
-    final formKey = GlobalKey<FormState>();
-
-    final firstNameFocusNode = FocusNode();
-    final lastNameFocusNode = FocusNode();
-    final emailFocusNode = FocusNode();
-    final passwordFocusNode = FocusNode();
 
     // Add listeners to hide social buttons when focusing on any TextField
     firstNameFocusNode.addListener(() {
@@ -56,6 +59,9 @@ class RegularSignUpScreen extends ConsumerWidget {
         socialButtonsController.hideSocialButtons();
       }
     });
+
+    final authApi = ref.read(authApiProvider);
+    final isLoading = ref.watch(isLoadingProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -104,6 +110,15 @@ class RegularSignUpScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 30.h),
                   if (showSocialButtons)
+                    // CustomButton(
+                    //     onTap: () {},
+                    //     borderColor: GlobalColors.borderColor,
+                    //     text: 'Sign Up With Google',
+                    //     height: 55.w,
+                    //     containerColor: GlobalColors.white,
+                    //     width: 50.w,
+                    //     textColor: GlobalColors.iconColor),
+                    //     Image.asset('assets/images/google.png',),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black,
@@ -180,31 +195,69 @@ class RegularSignUpScreen extends ConsumerWidget {
                     focusNode: passwordFocusNode,
                   ),
                   SizedBox(height: 10.h),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15.h),
-                      backgroundColor: GlobalColors.orange,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                      ),
-                    ),
-                    onPressed: () {
+                  CustomButton(
+                    text: 'Create Account',
+                    loading: isLoading,
+                    onTap: () async {
                       if (formKey.currentState!.validate()) {
-                       // formController.validate();
+                        if (formState.firstNameError == null &&
+                            formState.lastNameError == null &&
+                            formState.emailError == null &&
+                            formState.passwordError == null) {
+                          ref.read(isLoadingProvider.notifier).state = true;
+                          try {
+                            final response = await authApi.registerSingleUser(
+                              email: emailController.text,
+                              firstName: firstNameController.text,
+                              lastName: lastNameController.text,
+                              password: passwordController.text,
+                            );
+
+                            if (response != null) {
+                              if(context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Registration successful')),
+                              );
+                              }
+                              // Navigate to the next screen or perform any other action
+                            }
+                            else {
+                              if(context.mounted)
+                              {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Registration failed. Please try again.')),
+                                );
+                              }
+                            }
+                          } catch (e) {
+                            if(context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      'An error occurred: ${e.toString()}')),
+                            );
+                            }
+                          } finally {
+                            ref.read(isLoadingProvider.notifier).state = false;
+                          }
+                        }
                       }
                     },
-                    child: Text(
-                      'Create Account',
-                      style:
-                          TextStyle(fontSize: 16.w, color: GlobalColors.whiteColor),
-                    ),
+                    textColor: GlobalColors.white,
+                    borderColor: GlobalColors.orange,
+                    height: 55.h,
+                    containerColor: GlobalColors.orange,
+                    width: 50,
                   ),
                   SizedBox(height: 20.h),
                   Center(
                     child: RichText(
                       text: TextSpan(
                         text: 'Already Have An Account? ',
-                        style: TextStyle(color: GlobalColors.blackColor),
+                        style: TextStyle(color: GlobalColors.black),
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Login',
