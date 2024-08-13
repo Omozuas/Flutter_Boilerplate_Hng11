@@ -1,5 +1,5 @@
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/consumer_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
