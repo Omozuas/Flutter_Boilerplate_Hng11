@@ -65,6 +65,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/services/response_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DioProvider {
   final Dio _dio;
@@ -72,7 +73,7 @@ class DioProvider {
 
   DioProvider()
       : _dio = Dio(BaseOptions(
-          baseUrl: 'base_url',
+          baseUrl: dotenv.env['BASE_URL']!,
           connectTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 10),
           responseType: ResponseType.json,
