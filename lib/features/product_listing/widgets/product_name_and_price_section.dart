@@ -4,6 +4,8 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/screens/style
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../utils/Styles/text_styles.dart';
+
 class ProductNameAndPriceSection extends StatelessWidget {
   const ProductNameAndPriceSection({
     super.key,
@@ -29,7 +31,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: DetailStyles.label,
+                    style: CustomTextStyles.productTextTitleBlack,
                   ),
                   SizedBox(height: 6.h),
                   Text(
@@ -46,7 +48,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 children: [
                   Text(
                     "\$${product.price.toStringAsFixed(2)}",
-                    style: DetailStyles.title,
+                    style: CustomTextStyles.productTextTitleBlack,
                   ),
                   SizedBox(height: 6.h),
                   const Row(
