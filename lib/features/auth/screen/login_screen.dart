@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       "Remember Me",
                       style: GoogleFonts.inter(
-                          color: Color(0XFF0A0A0A),
+                          color: const Color(0XFF0A0A0A),
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500),
                     ),

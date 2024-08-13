@@ -12,10 +12,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2),(){
+    Future.delayed(const Duration(seconds: 2), () {
       context.go(AppRoute.regularSignUp);
     });
     super.initState();
@@ -23,8 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

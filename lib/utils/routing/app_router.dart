@@ -18,19 +18,19 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.companySignUp,
         builder: (context, state, ref) {
-          return  CompanySignUpScreen();
+          return CompanySignUpScreen();
         },
       ),
       ConsumerGoRoute(
         path: AppRoute.regularSignUp,
         builder: (context, state, ref) {
-          return  const RegularSignUpScreen();
+          return const RegularSignUpScreen();
         },
       ),
       ConsumerGoRoute(
         path: AppRoute.login,
         builder: (context, state, ref) {
-          return  const LoginScreen();
+          return const LoginScreen();
         },
       ),
     ],

@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CompanySignUpScreen extends StatelessWidget {
-   CompanySignUpScreen({super.key});
+  CompanySignUpScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
