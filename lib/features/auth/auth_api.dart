@@ -6,9 +6,14 @@ import '../../models/company_user.dart';
 import '../../services/response_model.dart';
 import '../../utils/error/error.dart';
 
+
+
+
 class AuthApi {
   //Inject the DioProvider Dependency
   DioProvider dioProvider = locator<DioProvider>();
+
+  /// Ensure you call updateAccessToken after login and registration success.
 
   Future<ResponseModel?> registerSingleUser({
     required String email,
@@ -35,7 +40,6 @@ class AuthApi {
     }
   }
 
-//You can start creating auth functions now
 
   Future<ResponseModel?> loginUser({
     required String email,
@@ -53,7 +57,7 @@ class AuthApi {
     }
   }
 
-  /// Ensure you call updateAccessToken after login and registration success.
+
 }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
