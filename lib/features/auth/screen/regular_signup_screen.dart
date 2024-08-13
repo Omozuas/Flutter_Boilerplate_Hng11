@@ -10,8 +10,8 @@ import '../../../utils/widgets/custom_text_field.dart';
 import '../providers/auth.provider.dart';
 import '../providers/show_social_button_provider.dart';
 
-class SignupScreen extends ConsumerWidget {
-  const SignupScreen({super.key});
+class RegularSignUpScreen extends ConsumerWidget {
+  const RegularSignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

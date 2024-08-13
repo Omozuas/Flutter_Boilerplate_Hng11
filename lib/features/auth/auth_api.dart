@@ -7,7 +7,7 @@ class AuthApi {
   //Inject the DioProvider Dependency
   DioProvider dioProvider = locator<DioProvider>();
 
-  Future<ResponseModel?> registerUser({
+  Future<ResponseModel?> registerSingleUser({
     required String email,
     required String firstName,
     required String lastName,
@@ -31,10 +31,10 @@ class AuthApi {
       return null;
     }
   }
-  
+
 //You can start creating auth functions now
 
-Future<ResponseModel?> loginUser({
+  Future<ResponseModel?> loginUser({
     required String email,
     required String password,
   }) async {
@@ -49,7 +49,6 @@ Future<ResponseModel?> loginUser({
       return null;
     }
   }
-
 
   /// Ensure you call updateAccessToken after login and registration success.
 }
