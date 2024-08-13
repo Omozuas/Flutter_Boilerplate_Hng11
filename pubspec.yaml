@@ -39,11 +39,7 @@ dependencies:
   google_fonts: ^6.2.1
   hexcolor: ^3.0.1
   dio: ^5.5.0+1
-  flutter_dotenv: ^5.1.0
   google_sign_in: ^6.2.1
-  get_it: ^7.7.0
-  dio: ^5.5.0+1
-  flutter_dotenv: ^5.1.0
   get_it: ^7.7.0
   flutter_screenutil: ^5.9.3
   flutter_riverpod: ^2.5.1
@@ -85,8 +81,6 @@ flutter:
   assets:
     - assets/images/
     - .env
-<<<<<<< HEAD
-=======
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -113,4 +107,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
->>>>>>> 37df4bd3ec98086055a0cacb4ab11e3a602bbabf
