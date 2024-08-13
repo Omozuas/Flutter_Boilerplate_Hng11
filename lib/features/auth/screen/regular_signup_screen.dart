@@ -214,25 +214,32 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                             );
 
                             if (response != null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              if(context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text('Registration successful')),
                               );
+                              }
                               // Navigate to the next screen or perform any other action
                             }
                             else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'Registration failed. Please try again.')),
-                              );
+                              if(context.mounted)
+                              {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Registration failed. Please try again.')),
+                                );
+                              }
                             }
                           } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
+                            if(context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                   content: Text(
                                       'An error occurred: ${e.toString()}')),
                             );
+                            }
                           } finally {
                             ref.read(isLoadingProvider.notifier).state = false;
                           }
