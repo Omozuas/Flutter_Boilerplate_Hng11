@@ -2,6 +2,8 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dar
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/product_listing/screens/add_product_screen.dart';
+
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoute.splash,
@@ -9,7 +11,8 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.splash,
         builder: (context, state, ref) {
-          return const SplashScreen();
+          return const AddProductScreen();
+          // SplashScreen();
         },
       ),
     ],
