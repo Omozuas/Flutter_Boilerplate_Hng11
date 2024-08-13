@@ -1,8 +1,8 @@
 class ApiError implements Exception {
-  final int statusCode;
+  final int? statusCode;
   final String message;
 
-  const ApiError({required this.statusCode, required this.message});
+  const ApiError({ this.statusCode, required this.message});
 
   factory ApiError.fromJson(Map<String, dynamic> json) {
     return ApiError(
