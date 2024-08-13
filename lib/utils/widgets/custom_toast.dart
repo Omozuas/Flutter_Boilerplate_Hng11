@@ -16,7 +16,7 @@ class CustomToast extends StatefulWidget {
   });
 
   @override
-  _CustomToastState createState() => _CustomToastState();
+  CustomToastState createState() => CustomToastState();
 
   static void show(BuildContext context, CustomToast toast) {
     OverlayState overlayState = Overlay.of(context);
@@ -32,13 +32,13 @@ class CustomToast extends StatefulWidget {
     overlayState.insert(overlayEntry);
 
     // Auto-dismiss after a few seconds, if required
-    Future.delayed(Duration(seconds: 3)).then((_) {
+    Future.delayed(const Duration(seconds: 3)).then((_) {
       overlayEntry.remove();
     });
   }
 }
 
-class _CustomToastState extends State<CustomToast> {
+class CustomToastState extends State<CustomToast> {
   @override
   Widget build(BuildContext context) {
     return Material(
