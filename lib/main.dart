@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -28,6 +29,12 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             textTheme: GoogleFonts.interTextTheme(),
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              scrolledUnderElevation: 0,
+              systemOverlayStyle: SystemUiOverlayStyle.dark
+            )
           ),
         ),
       ),

@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin;
   final int? maxLines;
   final String? Function(String?)? validator;
+  final Function(String?)? onChanged;
   final Color? borderColor;
   final Color? focusedBorderColor;
 
@@ -38,7 +39,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     this.validator,
     this.borderColor,
-    this.focusedBorderColor,
+    this.focusedBorderColor, this.onChanged,
   });
 
   @override
@@ -68,6 +69,7 @@ class CustomTextField extends StatelessWidget {
           TextFormField(
             controller: controller,
             keyboardType: keyboardType,
+            onChanged: onChanged,
             obscureText: obscureText ?? false,
             maxLines: maxLines ?? 1,
             validator: validator,

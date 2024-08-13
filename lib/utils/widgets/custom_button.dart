@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Custombutton extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Color containerColor, borderColor, textColor;
   final String text;
+  final FontWeight? fontWeight;
   final double width, height;
   const Custombutton({
     super.key,
@@ -13,7 +14,7 @@ class Custombutton extends StatelessWidget {
     required this.height,
     required this.containerColor,
     required this.width,
-    required this.textColor,
+    required this.textColor, this.fontWeight,
   });
 
   @override
@@ -35,7 +36,7 @@ class Custombutton extends StatelessWidget {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 14, color: textColor, fontWeight: FontWeight.w500),
+                fontSize: 14, color: textColor, fontWeight: fontWeight?? FontWeight.w500),
           ),
         ),
       ),

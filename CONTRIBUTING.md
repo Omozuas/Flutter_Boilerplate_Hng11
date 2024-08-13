@@ -20,7 +20,7 @@ We appreciate your interest in contributing to the Flutter HNG Boilerplate. Here
      
      ```bash
      git checkout -b feat/slack-id/your-feature
-     ```
+     ```[custom_text_field.dart](lib%2Futils%2Fwidgets%2Fcustom_text_field.dart)
    
    - **Make Changes:** Implement your changes or new features.
    - **Test Your Changes:** Ensure your changes work as expected and do not break existing functionality.
