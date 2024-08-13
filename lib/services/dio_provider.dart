@@ -84,6 +84,7 @@ class DioProvider {
   }
 
   Future post(String path, {Map? data}) async {
+
     try {
       var response = await _dio.post(path, data: data);
       return ResponseModel.fromJson(response.data);
