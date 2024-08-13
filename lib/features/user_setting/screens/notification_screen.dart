@@ -39,7 +39,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         titleSpacing: -6.sp,
         leading: GestureDetector(
           onTap: () {
-            ///TODO: Perform onTap function for this icon
+            ///tODO: Perform onTap function for this icon
           },
           child: const Icon(Icons.chevron_left),
         ),
