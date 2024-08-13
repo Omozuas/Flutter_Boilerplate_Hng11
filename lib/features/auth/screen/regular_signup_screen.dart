@@ -196,7 +196,7 @@ class RegularSignUpScreen extends ConsumerWidget {
                     child: Text(
                       'Create Account',
                       style:
-                          TextStyle(fontSize: 16.w, color: GlobalColors.white),
+                          TextStyle(fontSize: 16.w, color: GlobalColors.whiteColor),
                     ),
                   ),
                   SizedBox(height: 20.h),
@@ -204,7 +204,7 @@ class RegularSignUpScreen extends ConsumerWidget {
                     child: RichText(
                       text: TextSpan(
                         text: 'Already Have An Account? ',
-                        style: TextStyle(color: GlobalColors.black),
+                        style: TextStyle(color: GlobalColors.blackColor),
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Login',
