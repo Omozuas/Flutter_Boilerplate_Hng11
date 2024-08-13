@@ -26,11 +26,13 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => MaterialApp.router(
           routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
+
           theme: ThemeData(
             textTheme: GoogleFonts.interTextTheme(),
           ),
         ),
       ),
+
     );
   }
 }
