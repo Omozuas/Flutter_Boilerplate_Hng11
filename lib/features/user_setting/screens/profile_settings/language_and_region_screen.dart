@@ -9,10 +9,11 @@ class LanguageAndRegionScreen extends StatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
   @override
-  LanguageAndRegionScreenState createState() => LanguageAndRegionScreenState();
+  State<LanguageAndRegionScreen> createState() =>
+      _LanguageAndRegionScreenState();
 }
 
-class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
+class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
   String? selectedLanguage;
   String? selectedRegion;
   String? selectedTimeZone;
@@ -58,7 +59,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         titleSpacing: -6.sp,
         leading: GestureDetector(
           onTap: () {
-            //tODO: Perform onTap function for this icon
+            ///tODO: Perform onTap function for this icon
           },
           child: const Icon(Icons.chevron_left),
         ),
