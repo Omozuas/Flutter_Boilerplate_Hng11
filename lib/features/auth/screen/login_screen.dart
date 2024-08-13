@@ -220,13 +220,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 8.h,
                 ),
                 Custombutton(
-                    onTap: () {},
-                    borderColor: GlobalColors.borderColor,
-                    text: "Use Magic Link instead",
-                    height: 48.h,
-                    containerColor: Colors.white,
-                    width: 342.w,
-                    textColor: GlobalColors.darkOne),
+                  onTap: () {},
+                  borderColor: GlobalColors.borderColor,
+                  text: "Use Magic Link instead",
+                  height: 48.h,
+                  containerColor: Colors.white,
+                  width: 342.w,
+                  textColor: GlobalColors.darkOne,
+                ),
                 const SizedBox(
                   height: 23.5,
                 ),
@@ -252,24 +253,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 49.h,
                 ),
-                Center(
+                SizedBox(
+                  width: 342.w,
+                  height: 48.h,
                   child: RichText(
                     text: TextSpan(
                       text: 'By logging in, you agree with our ',
-                      style: TextStyle(color: GlobalColors.darkOne),
+                      style: GoogleFonts.inter(
+                          color: GlobalColors.bgsurface700,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400),
                       children: [
                         TextSpan(
                           text: 'Terms & \nUse ',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
+                              fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
-                        const TextSpan(
+                        TextSpan(
                           text: 'and ',
+                          style: GoogleFonts.inter(
+                            color: GlobalColors.black,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                         TextSpan(
                           text: 'Privacy Policy.',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
+                              fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
