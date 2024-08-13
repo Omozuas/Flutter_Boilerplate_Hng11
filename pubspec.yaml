@@ -18,11 +18,13 @@ dependencies:
   google_fonts: ^6.2.1
   hexcolor: ^3.0.1
   google_sign_in: ^6.2.1
-  firebase_core: ^3.2.0
-  firebase_auth: ^5.1.2 
   get_it: ^7.7.0
   dio: ^5.5.0+1
   flutter_screenutil: ^5.9.3
+  flutter_dotenv: ^5.1.0
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
+
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +40,4 @@ flutter:
 
   assets:
     - assets/images/
+    - .env
