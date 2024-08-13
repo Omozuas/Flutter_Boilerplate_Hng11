@@ -8,7 +8,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../utils/global_colors.dart';
+import '../../../../utils/global_colors.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -146,7 +146,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Custombutton(
+                        child: CustomButton(
                           borderColor: GlobalColors.lightGray,
                           text: 'Cancel',
                           height: 40.h,
@@ -158,7 +158,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       SizedBox(width: 12.h),
                       Expanded(
-                        child: Custombutton(
+                        child: CustomButton(
                           borderColor: Colors.transparent,
                           text: 'Save Changes',
                           height: 40.h,
