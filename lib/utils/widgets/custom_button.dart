@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+/// Note for all, The CustomButton class updated.
+/// It was properly renamed from  Custombutton to CustomButton
+/// A new property called loading was added. You need to set up a riverpod
+/// Stateprovider in the class where you are calling this custom button
+/// so u can manage the loading state. before starting the onPressed function,
+/// set the state to true, after the function has finished execution,
+/// set the state to false before leaving that screen
+
+
 class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final Color containerColor, borderColor, textColor;
