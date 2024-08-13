@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MembersSettings extends StatelessWidget {
   final bool isInviteLinkActive;
-  const MembersSettings({Key? key, this.isInviteLinkActive = false}) : super(key: key);
+  const MembersSettings({super.key, this.isInviteLinkActive = false});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class MembersSettings extends StatelessWidget {
                 onChanged: (bool value) {
                   // Handle toggle logic here
                 },
-                title: Text('Invite Link'),
+                title: const Text('Invite Link'),
                 subtitle: Text(
                   'This provides a unique URL that allows anyone to join your workspace',
                   style: TextStyle(fontSize: 12.sp, color: GlobalColors.lightGray),
