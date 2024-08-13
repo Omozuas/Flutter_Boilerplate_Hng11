@@ -11,7 +11,6 @@ class SplashScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           const SizedBox(
             width: double.infinity,
           ),
@@ -22,11 +21,14 @@ class SplashScreen extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          Text('HNG Boilerplate',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24.sp,
-                  color: GlobalColors.darkOne))
+          Text(
+            'HNG Boilerplate',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 24.sp,
+              color: GlobalColors.darkOne,
+            ),
+          )
         ],
       ),
     );
