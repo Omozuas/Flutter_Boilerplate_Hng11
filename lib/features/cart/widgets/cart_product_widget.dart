@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,9 +66,9 @@ class CartWidget extends StatelessWidget {
                         width: 25.sp,
                         height: 25.sp,
                         decoration: ShapeDecoration(
-                          color: Color(0xFFFAFAFA),
+                          color: const Color(0xFFFAFAFA),
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(width: 1, color: Color(0xFF525252)),
+                            side: const BorderSide(width: 1, color: Color(0xFF525252)),
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
