@@ -20,18 +20,36 @@ dependencies:
   get_it: ^7.7.0
   dio: ^5.5.0+1
   flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
+  flutter_gen_runner:
   flutter_lints: ^3.0.0
+  flutter_gen: ^5.6.0
+  build_runner: ^2.4.12
+
+flutter_gen:
+  integrations:
+    flutter_localizations: true
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    lottie: true
+  l10n:
+    enabled: true
+    name: AppLocalization  # optional
+    path: lib/l10n         # optional
+    useDeferredLoading: false  # optional
 
 flutter:
-
-
+  generate: true
   uses-material-design: true
-
   assets:
     - assets/images/
+    - assets/images/png/
+    - assets/images/svg/
+    - assets/images/svg/product_listing/
+    - assets/images/png/product_listing/
