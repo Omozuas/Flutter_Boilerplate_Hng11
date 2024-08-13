@@ -146,7 +146,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Custombutton(
+                        child: CustomButton(
                           borderColor: GlobalColors.lightGray,
                           text: 'Cancel',
                           height: 40.h,
@@ -158,7 +158,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       SizedBox(width: 12.h),
                       Expanded(
-                        child: Custombutton(
+                        child: CustomButton(
                           borderColor: Colors.transparent,
                           text: 'Save Changes',
                           height: 40.h,
