@@ -13,4 +13,5 @@ class GlobalColors {
   static HexColor green = HexColor('#10AF20');
   static HexColor lightOrange = HexColor('#FF7D06');
   static HexColor deemWhite = HexColor('#F9F9F9');
+  static HexColor bgsurface700 = HexColor('21202D');
 }
