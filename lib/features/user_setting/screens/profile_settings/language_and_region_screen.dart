@@ -59,7 +59,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         titleSpacing: -6.sp,
         leading: GestureDetector(
           onTap: () {
-            ///TODO: Perform onTap function for this icon
+            ///tODO: Perform onTap function for this icon
           },
           child: const Icon(Icons.chevron_left),
         ),
