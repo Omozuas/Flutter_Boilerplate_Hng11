@@ -1,49 +1,63 @@
-// File: auth_response.dart
-// Author: Otonye-dev
-// Created: 2024-08-12
-//
-// This file contains the unified class representing the auth response from the API.
-
-import 'error_detail.dart';
+import '../features/auth/models/user_model.dart';
 
 class ResponseModel {
+  final int statusCode;
   final String status;
-  final int? statusCode;
   final String? message;
-  final List<ErrorDetail>? errors;
-  final String? accessToken; // Only used in the login success case
+  final String? accessToken;
+  final User? user;
 
   ResponseModel({
+    required this.statusCode,
     required this.status,
-    this.statusCode,
     this.message,
-    this.errors,
     this.accessToken,
+    this.user,
   });
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
-    if (json['status_code'] == 200) {
+    final int statusCode = json['status_code'] ?? 0;
+
+    if (statusCode == 200 || statusCode == 201) {
+      if (json.containsKey('access_token')) {
+        // Login response
+        return ResponseModel(
+          statusCode: statusCode,
+          status: 'success',
+          message: json['message'],
+          accessToken: json['access_token'],
+          user: User.fromJson(json['data']['user']),
+        );
+      } else if (json.containsKey('data') && json['data'].containsKey('user')) {
+        // Registration response
+        return ResponseModel(
+          statusCode: statusCode,
+          status: 'success',
+          message: json['message'],
+          user: User.fromJson(json['data']['user']),
+        );
+      } else {
+        // Unexpected success format
+        return ResponseModel(
+          statusCode: statusCode,
+          status: 'success',
+          message: 'Unexpected response format',
+        );
+      }
+    } else if (statusCode == 400 || statusCode == 401) {
+      // Error response
       return ResponseModel(
-        status: json['status'],
+        statusCode: statusCode,
+        status: 'error',
         message: json['message'],
-        statusCode: json['status_code'],
-        // ignore: prefer_if_null_operators
-        accessToken: json['data']['access_token'] != null
-            ? json['data']['access_token']
-            : null,
-      );
-    } else if (json['status_code'] == 422) {
-      return ResponseModel(
-        status: json['status'],
-        message: json['message'],
-        statusCode: json['status_code'],
-        errors: (json['errors'] as List<dynamic>?)
-            ?.map((e) => ErrorDetail.fromJson(e))
-            .toList(),
       );
     } else {
-      // Unexpected error
-      throw Exception('Unexpected error occurred');
+      // Unexpected status code
+      return ResponseModel(
+        statusCode: statusCode,
+        status: 'error',
+        message: 'Unexpected error occurred',
+      );
     }
   }
 }
