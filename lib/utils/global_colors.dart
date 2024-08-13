@@ -7,4 +7,6 @@ class GlobalColors {
   static HexColor dividerColor = HexColor('#EEEEEE');
   static HexColor iconColor = HexColor('#141414');
   static HexColor darkOne = HexColor('#525252');
+  static HexColor black = HexColor('#000000');
+  static HexColor white = HexColor('#ffffff');
 }

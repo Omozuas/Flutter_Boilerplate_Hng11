@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   setupLocator();
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,10 +21,9 @@ class MyApp extends StatelessWidget {
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
-        home: const SplashScreen(),
-      ),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
+          home: const SignupScreen()),
     );
   }
 }
