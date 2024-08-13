@@ -36,7 +36,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       );
     } else {
       setState(() {
-        _errorMessage = 'This email doesn\'t match our records, try again.';
+        _errorMessage = 'This email doesn\'t match our records, please try again';
       });
     }
   }
@@ -45,7 +45,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forgot Password'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
