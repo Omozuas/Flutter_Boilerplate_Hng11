@@ -8,8 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'features/auth/screen/splash_screen.dart';
-
 void main() async {
   setupLocator();
   await dotenv.load(fileName: ".env");
@@ -33,7 +31,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 }
