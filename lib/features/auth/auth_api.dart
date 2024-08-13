@@ -31,25 +31,8 @@ class AuthApi {
       return null;
     }
   }
-  
+
 //You can start creating auth functions now
-
-Future<ResponseModel?> loginUser({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final response = await dioProvider.post('auth/login', data: {
-        'email': email,
-        'password': password,
-      });
-      return response;
-    } catch (e) {
-      debugPrint('Error during login: ${e.toString()}');
-      return null;
-    }
-  }
-
 
   /// Ensure you call updateAccessToken after login and registration success.
 }
