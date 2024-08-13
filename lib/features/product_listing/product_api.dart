@@ -6,6 +6,4 @@ class ProductApi {
   DioProvider dioProvider = locator<DioProvider>();
 
 //You can start creating product listing functions now
-
-
 }
