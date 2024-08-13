@@ -3,6 +3,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dar
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   setupLocator();
@@ -15,13 +16,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      ensureScreenSize: true,
-      designSize: const Size(390, 844),
-      builder: (context, child) => MaterialApp(
+    return ProviderScope(
+      child: ScreenUtilInit(
+        ensureScreenSize: true,
+        designSize: const Size(390, 844),
+        builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
-          home: const SplashScreen()),
+          theme: ThemeData(
+            textTheme: GoogleFonts.interTextTheme(),
+          ),
+          home: const SplashScreen(),
+        ),
+      ),
     );
   }
 }
