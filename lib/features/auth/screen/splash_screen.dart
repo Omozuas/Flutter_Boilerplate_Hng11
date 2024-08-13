@@ -11,6 +11,7 @@ class SplashScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
           const SizedBox(
             width: double.infinity,
           ),
