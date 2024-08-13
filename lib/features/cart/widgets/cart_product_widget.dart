@@ -20,6 +20,8 @@ class CartWidget extends StatelessWidget {
     required this.isSelected,
     required this.removeItem,
     required this.selectItem,
+    required this.addQuantity,
+    required this.reduceQuantity,
   });
 
   final String name;
@@ -31,6 +33,8 @@ class CartWidget extends StatelessWidget {
   final bool isSelected;
   final VoidCallback removeItem;
   final VoidCallback selectItem;
+  final VoidCallback addQuantity;
+  final VoidCallback reduceQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +146,7 @@ class CartWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               NewIconButton(
-                                onPressed: (){}, isAdd: false,
+                                onPressed: reduceQuantity, isAdd: false,
                               ),
                               11.w.sbW,
                               Padding(
@@ -157,7 +161,7 @@ class CartWidget extends StatelessWidget {
                               ),
                               11.w.sbW,
                               NewIconButton(
-                                onPressed: (){},
+                                onPressed: addQuantity,
                                 isAdd: true,
                               ),
                             ],

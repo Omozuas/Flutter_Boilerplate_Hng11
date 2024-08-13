@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin;
   final int? maxLines;
   final String? Function(String?)? validator;
+  final Function(String?)? onchanged;
   final Color? borderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
@@ -40,7 +41,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.borderColor,
     this.focusedBorderColor,
-    this.focusNode,
+    this.focusNode, this.onchanged,
   });
 
   @override
@@ -74,6 +75,7 @@ class CustomTextField extends StatelessWidget {
             maxLines: maxLines ?? 1,
             validator: validator,
             focusNode: focusNode,
+            onChanged: onchanged,
             decoration: InputDecoration(
               contentPadding: padding ??
                   EdgeInsets.symmetric(
