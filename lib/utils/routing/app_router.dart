@@ -19,3 +19,5 @@ class AppRouter {
 class AppRoute {
   static const String splash = '/splash';
 }
+
+
