@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DeleteMemberDialog extends StatelessWidget {
@@ -20,7 +22,7 @@ class DeleteMemberDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-             "Delete Member",
+              "Delete Member",
               style: GoogleFonts.inter(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -31,7 +33,7 @@ class DeleteMemberDialog extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-             "Are you sure you want to delete Chad Bosewick ? All data will be permanently removed. This action cannot be undone.",
+              "Are you sure you want to delete Chad Bosewick? All data will be permanently removed. This action cannot be undone.",
               style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -45,26 +47,37 @@ class DeleteMemberDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomButton(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    borderColor: GlobalColors.lightGray,
-                    text: "Cancel",
-                    height: 40,
-                    containerColor: GlobalColors.white,
-                    width: 80,
-                    textColor: GlobalColors.darkTwo),
-                const SizedBox(width: 8,),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  borderColor: GlobalColors.lightGray,
+                  text: "Cancel",
+                  height: 40,
+                  containerColor: GlobalColors.white,
+                  width: 80,
+                  textColor: GlobalColors.darkTwo,
+                ),
+                const SizedBox(width: 8),
                 CustomButton(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    borderColor: Colors.transparent,
-                    text: "Delete",
-                    height: 40,
-                    containerColor: GlobalColors.red,
-                    width: 80,
-                    textColor: GlobalColors.white),
+                  onTap: () {
+                    Navigator.pop(context);
+                    CustomToast.show(
+                      context,
+                      CustomToast(
+                        message: "Member removed successfully",
+                        backgroundColor: GlobalColors.toastBgSurface,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: GlobalColors.red, width: 2),
+                      ),
+                    );
+                  },
+                  borderColor: Colors.transparent,
+                  text: "Delete",
+                  height: 40,
+                  containerColor: GlobalColors.red,
+                  width: 80,
+                  textColor: GlobalColors.white,
+                ),
               ],
             ),
           ],
