@@ -3,7 +3,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../utils/widgets/custom_dropdown_button.dart';
+import '../../../../utils/widgets/custom_dropdown_button.dart';
 
 class LanguageAndRegionScreen extends StatefulWidget {
   const LanguageAndRegionScreen({super.key});
@@ -173,7 +173,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Custombutton(
+                CustomButton(
                     onTap: validateSelections,
                     borderColor: Colors.transparent,
                     text: 'Save',
@@ -182,7 +182,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                     width: 65.sp,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
-                Custombutton(
+                CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: 'Cancel',

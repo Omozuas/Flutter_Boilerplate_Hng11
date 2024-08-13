@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 ///TODO: You need to add an optional leading Icon to this widget  please
-class Custombutton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final Color containerColor, borderColor, textColor;
   final String text;
   final double width, height;
-  const Custombutton({
+  const CustomButton({
     super.key,
     required this.onTap,
     required this.borderColor,

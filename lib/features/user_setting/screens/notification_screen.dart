@@ -195,7 +195,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             Positioned(
                 right: 0,
                 top: 0,
-                child: Custombutton(
+                child: CustomButton(
                     onTap: () {
                       showDialog(
                           context: (context),
