@@ -20,9 +20,11 @@ class MyApp extends StatelessWidget {
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
-          home: const SignupScreen()),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
+        home: const SplashScreen(),
+      ),
+
     );
   }
 }
