@@ -8,7 +8,7 @@ We appreciate your interest in contributing to the Flutter HNG Boilerplate. Here
 
    Get your linear ticket approved for either feature or fix.
 
-2. **Submit Code:**
+2. **Submit Code:**[custom_text_field.dart](lib%2Futils%2Fwidgets%2Fcustom_text_field.dart)
 
    - **Clone the Repository:** Start by cloning the repository on GitHub.
      
@@ -19,7 +19,7 @@ We appreciate your interest in contributing to the Flutter HNG Boilerplate. Here
    - **Create a Branch:** Create a branch for your changes:
      
      ```bash
-     git checkout -b feat/slack-id/your-feature
+     git checkout -b feat/slack-id/your-feature[custom_text_field.dart](lib%2Futils%2Fwidgets%2Fcustom_text_field.dart)
      ```[custom_text_field.dart](lib%2Futils%2Fwidgets%2Fcustom_text_field.dart)
    
    - **Make Changes:** Implement your changes or new features.
