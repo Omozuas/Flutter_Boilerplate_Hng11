@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 late ApiService apiService;
 
 void main() {
-   apiService = ApiService(baseUrl: 'typical_url');
+  apiService = ApiService(baseUrl: 'typical_url');
   runApp(const MyApp());
 }
 
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
