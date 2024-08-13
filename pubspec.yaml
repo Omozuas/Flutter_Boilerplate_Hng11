@@ -42,6 +42,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   get_it: ^7.7.0
   flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
   flutter_riverpod: ^2.5.1
   go_router: ^14.2.3
   back_button_interceptor: ^7.0.3
@@ -49,34 +50,41 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^3.0.0
   flutter_launcher_icons: ^0.13.1
-
+  
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/images/logo.png"
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  flutter_gen_runner:
+  flutter_lints: ^3.0.0
+  flutter_gen: ^5.6.0
+  build_runner: ^2.4.12
 
-# The following section is specific to Flutter packages.
+flutter_gen:
+  integrations:
+    flutter_localizations: true
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    lottie: true
+  l10n:
+    enabled: true
+    name: AppLocalization  # optional
+    path: lib/l10n         # optional
+    useDeferredLoading: false  # optional
+
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+  generate: true
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/png/
+    - assets/images/svg/
+    - assets/images/svg/product_listing/
+    - assets/images/png/product_listing/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
