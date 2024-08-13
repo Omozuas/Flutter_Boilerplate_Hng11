@@ -43,3 +43,5 @@ class AppRoute {
   static const String regularSignUp = '/regularSignUp';
   static const String login = '/login';
 }
+
+
