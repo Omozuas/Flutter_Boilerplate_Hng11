@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String label;
+  final String? label;
   final TextStyle? labelStyle;
   final TextEditingController controller;
   final EdgeInsets? padding;
-  final String hintText;
+  final String? hintText;
   final TextStyle? hintTextStyle;
   final TextInputType? keyboardType;
   final bool? obscureText;
@@ -21,11 +22,11 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
-    required this.label,
+    this.label,
     this.labelStyle,
     required this.controller,
     this.padding,
-    required this.hintText,
+    this.hintText,
     this.hintTextStyle,
     this.keyboardType,
     this.obscureText,
@@ -42,22 +43,27 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? const EdgeInsets.only(bottom: 16),
+      margin: margin ?? EdgeInsets.only(bottom: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            label,
+            label ?? "",
             style: labelStyle ??
-                const TextStyle(
-                  fontSize: 14,
+                TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xFF0F172A),
+                  color: const Color(0xFF0F172A),
                 ),
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          label == null
+              ? SizedBox(
+                  height: 0.h,
+                  // child: Text("data"),
+                )
+              : SizedBox(
+                  height: 8.h,
+                ),
           TextFormField(
             controller: controller,
             keyboardType: keyboardType,
@@ -66,35 +72,35 @@ class CustomTextField extends StatelessWidget {
             validator: validator,
             decoration: InputDecoration(
               contentPadding: padding ??
-                  const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 12,
+                  EdgeInsets.symmetric(
+                    vertical: 8.h,
+                    horizontal: 12.w,
                   ),
               hintText: hintText,
-              hintStyle: const TextStyle(
-                fontSize: 14,
+              hintStyle: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color: Color(0xFF94A3B8),
+                color: const Color(0xFF94A3B8),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 6),
+                borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
                 borderSide: BorderSide(
                   color: GlobalColors.borderColor,
-                  width: 1,
+                  width: 1.w,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 6),
+                borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
                 borderSide: BorderSide(
                   color: borderColor ?? GlobalColors.borderColor,
-                  width: 1,
+                  width: 1.w,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 6),
+                borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
                 borderSide: BorderSide(
                   color: focusedBorderColor ?? GlobalColors.orange,
-                  width: 1,
+                  width: 1.w,
                 ),
               ),
               prefixIcon: prefixIcon,
