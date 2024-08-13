@@ -75,7 +75,6 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
 
   updateItem(CartData item, int index) async {
     products[index] = item;
-    print(products[index].quantity);
     getPrice();
     notifyListeners();
   }

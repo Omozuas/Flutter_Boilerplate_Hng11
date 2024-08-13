@@ -18,15 +18,15 @@ class CartData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image'] = this.image;
-    data['name'] = this.name;
-    data['quantity'] = this.quantity;
-    data['price'] = this.price;
-    data['description'] = this.description;
+    data['image'] = image;
+    data['name'] = name;
+    data['quantity'] = quantity;
+    data['price'] = price;
+    data['description'] = description;
     return data;
   }
 
   void updateQuantity(int newQuantity) {
-    this.quantity = newQuantity;
+    quantity = newQuantity;
   }
 }
