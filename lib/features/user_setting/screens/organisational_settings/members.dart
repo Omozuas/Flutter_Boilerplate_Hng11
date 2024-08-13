@@ -61,7 +61,9 @@ class _MembersSettingsState extends State<MembersSettings> {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
+
                   color: GlobalColors.lightGray,
+
                 ),
               ),
               Divider(
@@ -78,7 +80,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 title: const Text('Invite Link'),
                 subtitle: Text(
                   'This provides a unique URL that allows anyone to join your workspace',
-                  style: TextStyle(fontSize: 12.sp, color: GlobalColors.lightGray),
+                  style: TextStyle(fontSize: 12.sp),
                 ),
               ),
               Divider(
