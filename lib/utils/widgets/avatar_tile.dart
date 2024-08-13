@@ -7,6 +7,9 @@ class AvatarTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(radius: 40.0, backgroundImage: NetworkImage(image ?? 'https://github.com/user-attachments/assets/93e38020-8447-4f79-a623-cfea02d6bd4b'));
+    return CircleAvatar(
+        radius: 40.0,
+        backgroundImage: NetworkImage(image ??
+            'https://github.com/user-attachments/assets/93e38020-8447-4f79-a623-cfea02d6bd4b'));
   }
 }
