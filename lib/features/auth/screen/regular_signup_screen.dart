@@ -5,8 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
+import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 
+import '../auth_api.dart';
 import '../providers/auth.provider.dart';
 import '../providers/show_social_button_provider.dart';
 
@@ -59,6 +61,9 @@ class RegularSignUpScreen extends ConsumerWidget {
         socialButtonsController.hideSocialButtons();
       }
     });
+    final authApiProvider = Provider((ref) => AuthApi());
+    final authApi = ref.read(authApiProvider);
+    final isLoadingProvider = StateProvider<bool>((ref) => false);
 
     return Scaffold(
       appBar: AppBar(
@@ -107,6 +112,15 @@ class RegularSignUpScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 30.h),
                   if (showSocialButtons)
+                    // CustomButton(
+                    //     onTap: () {},
+                    //     borderColor: GlobalColors.borderColor,
+                    //     text: 'Sign Up With Google',
+                    //     height: 55.w,
+                    //     containerColor: GlobalColors.white,
+                    //     width: 50.w,
+                    //     textColor: GlobalColors.iconColor),
+                    //     Image.asset('assets/images/google.png',),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black,
@@ -183,24 +197,56 @@ class RegularSignUpScreen extends ConsumerWidget {
                     focusNode: passwordFocusNode,
                   ),
                   SizedBox(height: 10.h),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15.h),
-                      backgroundColor: GlobalColors.orange,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                      ),
-                    ),
-                    onPressed: () {
+                  CustomButton(
+                    text: 'Create Account',
+                    onTap: () async {
                       if (formKey.currentState!.validate()) {
                         formController.validate();
+
+                        if (formState.firstNameError == null &&
+                            formState.lastNameError == null &&
+                            formState.emailError == null &&
+                            formState.passwordError == null) {
+                          ref.read(isLoadingProvider.notifier).state = true;
+
+                          try {
+                            final response = await authApi.registerSingleUser(
+                              email: emailController.text,
+                              firstName: firstNameController.text,
+                              lastName: lastNameController.text,
+                              password: passwordController.text,
+                            );
+
+                            if (response != null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Registration successful')),
+                              );
+                              // Navigate to the next screen or perform any other action
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Registration failed. Please try again.')),
+                              );
+                            }
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      'An error occurred: ${e.toString()}')),
+                            );
+                          } finally {
+                            ref.read(isLoadingProvider.notifier).state = false;
+                          }
+                        }
                       }
                     },
-                    child: Text(
-                      'Create Account',
-                      style:
-                          TextStyle(fontSize: 16.w, color: GlobalColors.white),
-                    ),
+                    textColor: GlobalColors.white,
+                    borderColor: GlobalColors.orange,
+                    height: 55.h,
+                    containerColor: GlobalColors.orange,
+                    width: 50,
                   ),
                   SizedBox(height: 20.h),
                   Center(
