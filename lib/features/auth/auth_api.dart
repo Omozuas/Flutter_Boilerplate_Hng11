@@ -32,6 +32,46 @@ class AuthApi {
     }
   }
 
+  // forgot password api
+  Future<ResponseModel?> forgotPassword({
+    required String email,
+  }) async {
+    try {
+      final response = await dioProvider.post(
+        '/auth/forgot-password',
+        data: {
+          'email': email,
+        },
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error: ${e.toString()}');
+      return null;
+    }
+  }
+
+  // reset password api
+  Future<ResponseModel?> resetPassword({
+    required String email,
+    required String otp,
+    required String newpassword,
+  }) async {
+    try {
+      final response = await dioProvider.patchUpdate(
+        "/auth/password-reset",
+        data: {
+          'email': email,
+          'token': otp,
+          'new_Password': newpassword,
+        },
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error In Resetting password: ${e.toString()}');
+      return null;
+    }
+  }
+
 //You can start creating auth functions now
 
   /// Ensure you call updateAccessToken after login and registration success.
