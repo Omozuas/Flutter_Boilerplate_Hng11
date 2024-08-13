@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ProviderScope(
       child: ScreenUtilInit(
         ensureScreenSize: true,
@@ -29,7 +27,6 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.interTextTheme(),
           ),
         ),
-
       ),
     );
   }
