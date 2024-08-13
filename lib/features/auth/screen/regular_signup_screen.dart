@@ -1,4 +1,3 @@
-// import 'package:flutter/gestures.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,8 +17,6 @@ class RegularSignUpScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formState = ref.watch(signupFormProvider);
-    final formController = ref.read(signupFormProvider.notifier);
-
     final showSocialButtons = ref.watch(showSocialButtonsProvider);
     final socialButtonsController =
         ref.read(showSocialButtonsProvider.notifier);
@@ -201,6 +198,7 @@ class RegularSignUpScreen extends ConsumerWidget {
                     text: 'Create Account',
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
+
                         formController.validate();
 
                         if (formState.firstNameError == null &&
@@ -240,6 +238,9 @@ class RegularSignUpScreen extends ConsumerWidget {
                             ref.read(isLoadingProvider.notifier).state = false;
                           }
                         }
+
+
+
                       }
                     },
                     textColor: GlobalColors.white,
