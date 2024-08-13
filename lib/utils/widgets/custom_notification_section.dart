@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../global_colors.dart';
 
@@ -20,7 +21,8 @@ class CustomNotificationSection extends StatelessWidget {
       children: [
         Text(
           sectionTitle,
-          style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w600),
+          style:
+              GoogleFonts.inter(fontSize: 18.sp, fontWeight: FontWeight.w600),
         ),
         if (showDivider)
           Divider(
