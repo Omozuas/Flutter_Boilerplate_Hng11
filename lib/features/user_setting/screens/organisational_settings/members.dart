@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MembersSettings extends StatefulWidget {
   const MembersSettings({super.key});
@@ -78,7 +76,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 title: const Text('Invite Link'),
                 subtitle: Text(
                   'This provides a unique URL that allows anyone to join your workspace',
-                  style: TextStyle(fontSize: 12.sp, color: GlobalColors.lightGray),
+                  style: TextStyle(fontSize: 12.sp),
                 ),
               ),
               Divider(
