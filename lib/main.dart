@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
