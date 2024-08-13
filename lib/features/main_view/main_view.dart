@@ -7,23 +7,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
-class MainView extends ConsumerStatefulWidget {
+class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});
   final StatefulNavigationShell navigationShell;
 
   final String name = 'MainView';
 
   @override
-  ConsumerState<MainView> createState() => _MainViewState();
+  State<MainView> createState() => _MainViewState();
 }
 
-class _MainViewState extends ConsumerState<MainView> {
+class _MainViewState extends State<MainView> {
   final _scaffoldkey = GlobalKey<ScaffoldState>();
+
+  final ValueNotifier<int> _bottomBarIndex = ValueNotifier(0);
 
   @override
   void initState() {
     super.initState();
-
     BackButtonInterceptor.add(
       myInterceptor,
       name: widget.name,
@@ -37,21 +38,17 @@ class _MainViewState extends ConsumerState<MainView> {
     super.dispose();
   }
 
-  void goBranch(WidgetRef ref, int index) {
-    final currentIndex = ref.read(bottomNavBarIndexProvider);
+  void goBranch(int index) {
+    final currentIndex = _bottomBarIndex.value;
     widget.navigationShell.goBranch(
       index,
       initialLocation: index == currentIndex,
     );
-    ref.read(bottomNavBarIndexProvider.notifier).setIndex(index);
+    _bottomBarIndex.value = index;
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    final bottomBarIndex = ref.watch(bottomNavBarIndexProvider);
-
+  Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldkey,
       body: widget.navigationShell,
@@ -77,12 +74,12 @@ class _MainViewState extends ConsumerState<MainView> {
             label: 'Settings',
           ),
         ],
-        currentIndex: bottomBarIndex,
+        currentIndex: _bottomBarIndex.value,
         selectedItemColor: Colors.amber[800],
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: (index) {
-          goBranch(ref, index);
+          goBranch(index);
         },
       ),
     );
@@ -91,7 +88,7 @@ class _MainViewState extends ConsumerState<MainView> {
   FutureOr<bool> myInterceptor(
       bool stopDefaultButtonEvent, RouteInfo routeInfo) {
     if (widget.navigationShell.currentIndex != 0) {
-      goBranch(ref, 0);
+      goBranch(0);
       return true;
     }
     return false;
