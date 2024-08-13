@@ -3,12 +3,13 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MembersSettings extends StatelessWidget {
-  const MembersSettings({super.key});
+  final bool isInviteLinkActive;
+  const MembersSettings({Key? key, this.isInviteLinkActive = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
@@ -40,12 +41,28 @@ class MembersSettings extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
+                    color: GlobalColors.lightGray
                 ),
               ),
               Divider(
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
-              )
+              ),
+              SwitchListTile(
+                value: isInviteLinkActive,
+                onChanged: (bool value) {
+                  // Handle toggle logic here
+                },
+                title: Text('Invite Link'),
+                subtitle: Text(
+                  'This provides a unique URL that allows anyone to join your workspace',
+                  style: TextStyle(fontSize: 12.sp, color: GlobalColors.lightGray),
+                ),
+              ),
+              Divider(
+                color: GlobalColors.borderColor,
+                thickness: 1.h,
+              ),
             ],
           ),
         ),
