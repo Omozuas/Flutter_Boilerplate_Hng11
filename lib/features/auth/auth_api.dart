@@ -7,7 +7,7 @@ class AuthApi {
   //Inject the DioProvider Dependency
   DioProvider dioProvider = locator<DioProvider>();
 
-  Future<ResponseModel?> registerUser({
+  Future<ResponseModel?> registerSingleUser({
     required String email,
     required String firstName,
     required String lastName,

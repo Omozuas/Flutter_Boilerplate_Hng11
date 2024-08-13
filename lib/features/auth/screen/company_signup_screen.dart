@@ -5,22 +5,25 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.d
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CompanySignupScreen extends StatefulWidget {
-  const CompanySignupScreen({super.key});
+class CompanySignupScreen extends StatelessWidget {
+   CompanySignupScreen({super.key});
 
-  @override
-  State<CompanySignupScreen> createState() => _CompanySignupScreenState();
-}
-
-class _CompanySignupScreenState extends State<CompanySignupScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final _companyNameController = TextEditingController();
+
   final _companyEmailController = TextEditingController();
+
   final _companyIndustryController = TextEditingController();
+
   final _companyTypeController = TextEditingController();
+
   final _companyCountryController = TextEditingController();
+
   final _companyStateController = TextEditingController();
+
   final _companyAddressController = TextEditingController();
+
   final _companyLgaController = TextEditingController();
 
   @override
@@ -28,14 +31,14 @@ class _CompanySignupScreenState extends State<CompanySignupScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: Icon(
-            Icons.chevron_left_rounded,
-            size: 30.sp,
-          ),
-          backgroundColor: Colors.white,
-          // surfaceTintColor: Colors.white,
-        ),
+        // appBar: AppBar(
+        //   leading: Icon(
+        //     Icons.chevron_left_rounded,
+        //     size: 30.sp,
+        //   ),
+        //   backgroundColor: Colors.white,
+        //   // surfaceTintColor: Colors.white,
+        // ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -272,7 +275,7 @@ class _CompanySignupScreenState extends State<CompanySignupScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Custombutton(
+                          CustomButton(
                             onTap: () {
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {

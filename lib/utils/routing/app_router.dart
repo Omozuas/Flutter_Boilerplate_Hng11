@@ -1,3 +1,4 @@
+import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
@@ -12,10 +13,17 @@ class AppRouter {
           return const SplashScreen();
         },
       ),
+      ConsumerGoRoute(
+        path: AppRoute.companySignUp,
+        builder: (context, state, ref) {
+          return  CompanySignupScreen();
+        },
+      ),
     ],
   );
 }
 
 class AppRoute {
   static const String splash = '/splash';
+  static const String companySignUp = '/companySignUp';
 }
