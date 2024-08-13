@@ -203,10 +203,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 32.h,
                 ),
-                Custombutton(
+                CustomButton(
                     onTap: () {
                       _formKey.currentState?.validate();
-
                       //:TODO
                       // add logic for login
                     },
@@ -219,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 8.h,
                 ),
-                Custombutton(
+                CustomButton(
                     onTap: () {},
                     borderColor: GlobalColors.borderColor,
                     text: "Use Magic Link instead",
