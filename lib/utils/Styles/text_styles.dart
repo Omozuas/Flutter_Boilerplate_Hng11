@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextStyles {
+  //definig my textstyles
   static TextStyle headerTextBlack = TextStyle(
       fontSize: 24.sp,
       color: GlobalColors.blackColor,
