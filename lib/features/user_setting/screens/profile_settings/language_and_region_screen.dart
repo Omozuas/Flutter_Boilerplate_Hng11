@@ -9,10 +9,11 @@ class LanguageAndRegionScreen extends StatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
   @override
-  LanguageAndRegionScreenState createState() => LanguageAndRegionScreenState();
+  State<LanguageAndRegionScreen> createState() =>
+      _LanguageAndRegionScreenState();
 }
 
-class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
+class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
   String? selectedLanguage;
   String? selectedRegion;
   String? selectedTimeZone;
@@ -58,7 +59,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         titleSpacing: -6.sp,
         leading: GestureDetector(
           onTap: () {
-            //tODO: Perform onTap function for this icon
+            ///tODO: Perform onTap function for this icon
           },
           child: const Icon(Icons.chevron_left),
         ),
@@ -172,7 +173,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Custombutton(
+                CustomButton(
                     onTap: validateSelections,
                     borderColor: Colors.transparent,
                     text: 'Save',
@@ -181,7 +182,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                     width: 65.sp,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
-                Custombutton(
+                CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: 'Cancel',
