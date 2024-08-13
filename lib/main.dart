@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ProviderScope(
       child: ScreenUtilInit(
         ensureScreenSize: true,
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.interTextTheme(),
           ),
         ),
+
       ),
     );
   }
