@@ -14,7 +14,7 @@ class CheckoutAndCartActions extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Custombutton(
+          CustomButton(
             onTap: () {},
             borderColor: GlobalColors.borderColor,
             text: "Checkout",
@@ -23,7 +23,7 @@ class CheckoutAndCartActions extends StatelessWidget {
             width: screenWidth * 0.4,
             textColor: Colors.black,
           ),
-          Custombutton(
+          CustomButton(
             onTap: () {},
             borderColor: GlobalColors.orange,
             text: "Add to Cart",
