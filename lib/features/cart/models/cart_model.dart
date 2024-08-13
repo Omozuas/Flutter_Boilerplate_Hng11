@@ -17,7 +17,7 @@ class CartData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['image'] = image;
     data['name'] = name;
     data['quantity'] = quantity;
