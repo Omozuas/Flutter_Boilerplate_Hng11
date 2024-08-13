@@ -1,5 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../utils/global_colors.dart';
+import '../../../utils/widgets/custom_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -8,7 +13,7 @@ class ForgotPasswordScreen extends StatefulWidget {
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState   extends State<ForgotPasswordScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
   String? _errorMessage;
 
@@ -26,7 +31,8 @@ class _ForgotPasswordScreenState   extends State<ForgotPasswordScreen> {
     if (email == 'test@example.com') {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => VerificationScreen(email: email)),
+        MaterialPageRoute(
+            builder: (context) => VerificationScreen(email: email)),
       );
     } else {
       setState(() {
@@ -55,7 +61,7 @@ class _ForgotPasswordScreenState   extends State<ForgotPasswordScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             const SizedBox(height: 16),
-            const Text('Enter your email to reset your password.'),
+            const Text('Enter your email'),
             const SizedBox(height: 16),
             TextField(
               controller: _emailController,
@@ -67,10 +73,33 @@ class _ForgotPasswordScreenState   extends State<ForgotPasswordScreen> {
               keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _handleSend,
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-              child: const Text('Send'),
+            CustomButton(
+                onTap: () {},
+                borderColor: GlobalColors.borderColor,
+                text: "Send",
+                height: 48.h,
+                containerColor: GlobalColors.orange,
+                width: 342.w,
+                textColor: Colors.white),
+            const SizedBox(height: 23.5),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  text: 'Remember your password? ',
+                  style: TextStyle(color: GlobalColors.darkOne),
+                  children: [
+                    TextSpan(
+                        text: 'Login',
+                        style: TextStyle(
+                            color: GlobalColors.orange,
+                            fontWeight: FontWeight.bold),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // :TODO add function to go sign up page
+                          }),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

@@ -1,6 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../utils/global_colors.dart';
+import '../../../utils/widgets/custom_button.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -12,7 +16,8 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  final List<TextEditingController> _codeControllers = List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _codeControllers =
+      List.generate(6, (_) => TextEditingController());
   bool _isCodeComplete = false;
   bool _isCodeValid = true;
   int _countdown = 60;
@@ -39,10 +44,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void _handleVerify() {
     final code = _codeControllers.map((c) => c.text).join();
     // Simulate code validation
-    if (code == '123456') { // Simulate successful verification
+    if (code == '123456') {
+      // Simulate successful verification
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const VerificationSuccessScreen()),
+        MaterialPageRoute(
+            builder: (context) => const VerificationSuccessScreen()),
       );
     } else {
       setState(() {
@@ -97,7 +104,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text('Input the code from your email: ${widget.email}'),
+                      child: Text(
+                          'Input the code from your email: ${widget.email}'),
                     ),
                     const SizedBox(width: 16),
                     Text(
@@ -133,7 +141,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           }
 
                           setState(() {
-                            _isCodeComplete = _codeControllers.every((controller) => controller.text.isNotEmpty);
+                            _isCodeComplete = _codeControllers.every(
+                                (controller) => controller.text.isNotEmpty);
                           });
                         },
                       ),
@@ -144,8 +153,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ElevatedButton(
                   onPressed: _isCodeComplete ? _handleVerify : null,
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(8)),
-                    backgroundColor: _isCodeComplete ? Colors.orange : Colors.grey,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    backgroundColor:
+                        _isCodeComplete ? Colors.orange : Colors.grey,
                   ),
                   child: const Text('Verify'),
                 ),
@@ -154,21 +165,27 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Column( children: [
-                      TextButton(
-                        onPressed: _handleResend,
-                        child: const Text('Resend Code'),
+                      Column(
+                        children: [
+                          TextButton(
+                            onPressed: _handleResend,
+                            child: const Text('Resend Code'),
+                          ),
+                        ],
                       ),
-                      ],),
                       const SizedBox(width: 16),
                       const Text('or'),
                       Column(
                         children: [
-                      TextButton(
-                        onPressed: _handleChangeEmail,
-                        child: const Text('Change Email', style: TextStyle(color: Colors.orange, decoration: TextDecoration.underline)),
+                          TextButton(
+                            onPressed: _handleChangeEmail,
+                            child: const Text('Change Email',
+                                style: TextStyle(
+                                    color: Colors.orange,
+                                    decoration: TextDecoration.underline)),
+                          ),
+                        ],
                       ),
-                        ],),
                     ],
                   ),
                 ],
@@ -182,7 +199,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
               right: 0,
               child: Container(
                 color: Colors.red,
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 child: Row(
                   children: [
                     const Icon(Icons.error, color: Colors.white),
@@ -244,31 +262,36 @@ class VerificationSuccessScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 80), // Add space for Snackbar
-                const Text(
+                Text(
                   'Verification Successful',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
                 ),
                 const SizedBox(height: 16),
-                const Text('Verification is successful and you can now reset your password.'),
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: () async {
-                    // Show loading indicator
-                    await _showLoadingIndicator(context);
-
-                    // Simulate network request
-                    await Future.delayed(const Duration(seconds: 2));
-
-                    // Hide loading indicator
-                    Navigator.of(context).pop(); // Close the loading dialog
-
-                    // Proceed to reset password screen or other actions
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(8)),
-                    backgroundColor: Colors.orange),
-                  child: const Text('Reset Password'),
+                const Text(
+                  'Your verification was successful, you can now proceed to reset your password',
+                  style: TextStyle(fontSize: 13),
                 ),
+                const SizedBox(height: 24),
+                CustomButton(
+                    onTap: () async {
+                      // Show loading indicator
+                      await _showLoadingIndicator(context);
+
+                      // Simulate network request
+                      await Future.delayed(const Duration(seconds: 2));
+
+                      // Hide loading indicator
+                      Navigator.of(context).pop(); // Close the loading dialog
+
+                      // Proceed to reset password screen or other actions
+                    },
+                    borderColor: GlobalColors.borderColor,
+                    text: "Continue to Login",
+                    height: 48.h,
+                    containerColor: GlobalColors.orange,
+                    width: 342.w,
+                    textColor: Colors.white),
               ],
             ),
           ),
