@@ -41,7 +41,6 @@ class MembersSettings extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                    color: GlobalColors.lightGray
                 ),
               ),
               Divider(
@@ -56,7 +55,7 @@ class MembersSettings extends StatelessWidget {
                 title: Text('Invite Link'),
                 subtitle: Text(
                   'This provides a unique URL that allows anyone to join your workspace',
-                  style: TextStyle(fontSize: 12.sp, color: GlobalColors.lightGray),
+                  style: TextStyle(fontSize: 12.sp),
                 ),
               ),
               Divider(
