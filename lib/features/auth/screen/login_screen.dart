@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       "Remember Me",
                       style: GoogleFonts.inter(
-                          color: Color(0XFF0A0A0A),
+                          color: const Color(0XFF0A0A0A),
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500),
                     ),
@@ -203,10 +203,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 32.h,
                 ),
-                Custombutton(
+                CustomButton(
                     onTap: () {
                       _formKey.currentState?.validate();
-
                       //:TODO
                       // add logic for login
                     },
@@ -219,15 +218,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 8.h,
                 ),
-                Custombutton(
-                  onTap: () {},
-                  borderColor: GlobalColors.borderColor,
-                  text: "Use Magic Link instead",
-                  height: 48.h,
-                  containerColor: Colors.white,
-                  width: 342.w,
-                  textColor: GlobalColors.darkOne,
-                ),
+                CustomButton(
+                    onTap: () {},
+                    borderColor: GlobalColors.borderColor,
+                    text: "Use Magic Link instead",
+                    height: 48.h,
+                    containerColor: Colors.white,
+                    width: 342.w,
+                    textColor: GlobalColors.darkOne),
                 const SizedBox(
                   height: 23.5,
                 ),
