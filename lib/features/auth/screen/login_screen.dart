@@ -274,24 +274,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 49.h,
                 ),
-                Center(
+                SizedBox(
+                  width: 342.w,
+                  height: 48.h,
                   child: RichText(
                     text: TextSpan(
                       text: 'By logging in, you agree with our ',
-                      style: TextStyle(color: GlobalColors.darkOne),
+                      style: GoogleFonts.inter(
+                          color: GlobalColors.bgsurface700,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400),
                       children: [
                         TextSpan(
                           text: 'Terms & \nUse ',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
+                              fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
-                        const TextSpan(
+                        TextSpan(
                           text: 'and ',
+                          style: GoogleFonts.inter(
+                            color: GlobalColors.black,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                         TextSpan(
                           text: 'Privacy Policy.',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
+                              fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),

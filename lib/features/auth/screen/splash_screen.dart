@@ -11,11 +11,12 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2), () {
-      context.go(AppRoute.regularSignUp);
+      context.go(AppRoute.companySignUp);
     });
     super.initState();
   }
