@@ -1,38 +1,28 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_boilerplate_hng11/models/company_user.dart';
 import 'package:flutter_boilerplate_hng11/utils/error/error.dart';
 
-Future<void> registerCompany(Company company) async {
+//Keep in mind that an organisation/company is generated for every user upon successful sign up.
+Future<Company> registerCompany(Company company) async {
   final dio = Dio();
-  //This is a workaround for the certicate error I keep getting.
-  // (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
-  //     (HttpClient client) {
-  //   client.badCertificateCallback =
-  //       (X509Certificate cert, String host, int port) => true;
-  //   return client;
-  // };
+  var registeredCompany = Company.initial();
   try {
-    const baseUrl = 'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/';
-    var response = await dio.postUri(
-      Uri.parse('$baseUrl/organisations'),
+    var response = await dio.post(
+      'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/organisations',
       data: company.toMap(),
       options: Options(headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         // An authenticated user is required for this request to be completed based on the api.
         // TODO: Remove access token in place of currently signed user's token.
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFiOTQ4YmNmLWIzNGQtNDE4OC1iNjlkLTUxZmNmNjkyZTU5ZCIsInN1YiI6ImFiOTQ4YmNmLWIzNGQtNDE4OC1iNjlkLTUxZmNmNjkyZTU5ZCIsImVtYWlsIjoiamF5b2tlbG9sYTM0MUBleGFtcGxlLmNvbSIsImlhdCI6MTcyMzQ4ODc3OSwiZXhwIjoxNzIzNTEwMzc5fQ.b6xgdeL_-1jl2yCJTeY3mPRL2Rv_jeMmmCTDQz7kkm8'
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMjdhMjBhLWJjMjMtNDI5NS05ZWM5LTA1MDM1ZGMyZmYzZCIsInN1YiI6ImFmMjdhMjBhLWJjMjMtNDI5NS05ZWM5LTA1MDM1ZGMyZmYzZCIsImVtYWlsIjoiamF5b2tlbG9sYTM0MUBnbWFpbC5jb20iLCJpYXQiOjE3MjM1NDUxODYsImV4cCI6MTcyMzU2Njc4Nn0.2fesL140kBGWTxooNycLbqZoFNULSRWUcXUXmLynOEc'
       }),
     );
-    // debugPrint(response.data.toString());
-    // debugPrint(Company.fromMap(response.data).toString());
+    registeredCompany = Company.fromMap(response.data['data']);
   } on DioException catch (e) {
     throw ApiError(message: e.message!);
   }
 
-  //return Company.fromMap(response.data);
+  return registeredCompany;
 }

@@ -24,14 +24,14 @@ class Company {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'description': description,
-      'email': email,
-      'state': state,
-      'industry': industry,
-      'type': type,
-      'address': address,
-      'country': country,
+      "name": name,
+      "description": description,
+      "email": email,
+      "industry": industry,
+      "type": type,
+      "country": country,
+      "address": address,
+      "state": state,
     };
   }
 
