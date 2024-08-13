@@ -9,7 +9,7 @@ class LanguageAndRegionScreen extends StatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
   @override
-  _LanguageAndRegionScreenState createState() =>
+  State<LanguageAndRegionScreen> createState() =>
       _LanguageAndRegionScreenState();
 }
 
