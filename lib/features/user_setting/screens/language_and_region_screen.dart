@@ -172,7 +172,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Custombutton(
+                CustomButton(
                     onTap: validateSelections,
                     borderColor: Colors.transparent,
                     text: 'Save',
@@ -181,7 +181,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                     width: 65.sp,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
-                Custombutton(
+                CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: 'Cancel',
