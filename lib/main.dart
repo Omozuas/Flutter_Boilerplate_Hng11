@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
