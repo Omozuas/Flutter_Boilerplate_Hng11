@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -18,6 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool isChecked = false;
   final _formKey = GlobalKey<FormState>();
+  final AuthApi authApi = AuthApi();
+  bool isLoading = false;
   String? validateEmail(String? value, TextEditingController emailController) {
     if (value == null || value.isEmpty) {
       return 'This field is required';
@@ -204,8 +207,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 32.h,
                 ),
                 CustomButton(
-                    onTap: () {
-                      _formKey.currentState?.validate();
+                    onTap: () async {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        try {
+                          final response = await authApi.loginUser(
+                              email: _emailController.text,
+                              password: _passwordController.text);
+                          if (response != null) {
+                            //Navigate to the next screen
+                          }
+                        } catch (e) {
+                          debugPrint(
+                              'Error occured during login: ${e.toString()}');
+                        } finally {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      }
+
                       //:TODO
                       // add logic for login
                     },
@@ -251,24 +274,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 49.h,
                 ),
-                Center(
+                SizedBox(
+                  width: 342.w,
+                  height: 48.h,
                   child: RichText(
                     text: TextSpan(
                       text: 'By logging in, you agree with our ',
-                      style: TextStyle(color: GlobalColors.darkOne),
+                      style: GoogleFonts.inter(
+                          color: GlobalColors.bgsurface700,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400),
                       children: [
                         TextSpan(
                           text: 'Terms & \nUse ',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
+                              fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
-                        const TextSpan(
+                        TextSpan(
                           text: 'and ',
+                          style: GoogleFonts.inter(
+                            color: GlobalColors.black,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                         TextSpan(
                           text: 'Privacy Policy.',
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
+                              fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
