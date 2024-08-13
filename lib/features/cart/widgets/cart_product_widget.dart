@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/global_colors.dart';
 import '../utils/widget_extensions.dart';
-import 'cart_add-remove_button.dart';
+import 'cart_add_remove_button.dart';
 import 'price_text_widget.dart';
 
 class CartWidget extends StatelessWidget {
