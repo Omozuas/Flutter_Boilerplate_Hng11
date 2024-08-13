@@ -87,6 +87,7 @@ Please follow our [Code of Conduct](CODE_OF_CONDUCT.md) when contributing to thi
 - Make use of snake_case for File names
 - Make use of camelCase for Methods
 - Ensure your code is well-documented with comments and documentation.
+- If you need to export image or icon from Figma, always do that in 4x.
 
 
 Thank you for contributing to the Flutter HNG Boilerplate!
