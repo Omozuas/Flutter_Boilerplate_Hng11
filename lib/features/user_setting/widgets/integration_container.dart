@@ -21,9 +21,7 @@ class IntegrationContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
+    return Container(
           height: 123.h,
           width: 342.w,
           decoration: BoxDecoration(
@@ -72,8 +70,6 @@ class IntegrationContainer extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }
