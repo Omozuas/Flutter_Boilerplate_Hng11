@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_notification_item
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../utils/widgets/custom_notification_section.dart';
+import '../../../../utils/widgets/custom_notification_section.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
