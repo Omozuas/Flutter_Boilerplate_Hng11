@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/widgets/custom_text_field.dart';
+import 'breaking_border_container.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -34,7 +35,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
         centerTitle: true,
         title: Text(
           'Add a Product',
@@ -52,7 +55,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            width: 380.w,
+            // color: Colors.red,
+            width: 355.w,
             height: 715.h,
             margin: EdgeInsets.only(top: 17.h),
             child: Column(
@@ -61,6 +65,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: 379.w,
                   height: 66.h,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         height: 20.h,
@@ -81,7 +86,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: 379.w,
                   height: 126.h,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         height: 20.h,
@@ -115,6 +120,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: 379.w,
                   height: 66.h,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         height: 20.h,
@@ -130,9 +136,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       ),
                       Container(
-                          height: 40.h,
-                          width: 379.w,
-                          child: Text('Category dropdown here'))
+                        height: 40.h,
+                        width: 379.w,
+                        child: Text(
+                          'Category dropdown here',
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -143,6 +152,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: 379.w,
                   height: 66.h,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         height: 20.h,
@@ -150,9 +160,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         child: compulsoryTitle('Standard Price'),
                       ),
                       Container(
-                          height: 40.h,
-                          width: 379.w,
-                          child: Text('Standard Price textfield here'))
+                        height: 40.h,
+                        width: 379.w,
+                        child: Text(
+                          'Standard Price textfield here',
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -163,6 +176,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: 379.w,
                   height: 66.h,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         height: 20.h,
@@ -173,6 +187,120 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           height: 40.h,
                           width: 379.w,
                           child: Text('Quantity textfield here'))
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 6.h,
+                ),
+                Container(
+                  width: 379.w,
+                  height: 93.h,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 20.h,
+                        width: 379.w,
+                        child: compulsoryTitle('Product Variations'),
+                      ),
+                      Container(
+                          height: 67.h,
+                          width: 368.w,
+                          child: Text('Product Variations container list here'))
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 6.h,
+                ),
+                Container(
+                  width: 379.w,
+                  height: 151.h,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 20.h,
+                        width: 379.w,
+                        child: Text(
+                          'Media',
+                          style: GoogleFonts.inter(
+                            color: Color.fromRGBO(10, 10, 10, 1),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            height: 20 / 14,
+                          ),
+                        ),
+                      ),
+                      BreakingBorderContainer(
+                        child: Container(
+                          height: 125.h,
+                          width: 379.w,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFAFAFA),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: 58.h,
+                              width: 250.w,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      height: 32.h,
+                                      width: 114.w,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1,
+                                              color: Color.fromRGBO(
+                                                  226, 232, 240, 1)),
+                                          color:
+                                              Color.fromRGBO(255, 255, 255, 1),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromRGBO(
+                                                  10, 57, 176, 0.12),
+                                              offset: Offset(0, 1),
+                                              blurRadius: 18,
+                                              spreadRadius: 0,
+                                            )
+                                          ]),
+                                      child: Center(
+                                        child: Text(
+                                          'Upload New',
+                                          style: GoogleFonts.inter(
+                                            color:
+                                                Color.fromRGBO(10, 10, 10, 1),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
+                                            height: 24 / 14,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Accepts images, videos or 3D models',
+                                    style: GoogleFonts.inter(
+                                      color: Color.fromRGBO(82, 82, 82, 1),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                      height: 16.94 / 14,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
