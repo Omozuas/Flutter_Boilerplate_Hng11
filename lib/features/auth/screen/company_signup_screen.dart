@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
@@ -29,20 +31,26 @@ class CompanySignUpScreen extends ConsumerWidget {
   final _companyLgaController = TextEditingController();
 
   final loadingProvider = StateProvider<bool>((ref) => false);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isLoading = ref.watch(loadingProvider);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   leading: Icon(
-        //     Icons.chevron_left_rounded,
-        //     size: 30.sp,
-        //   ),
-        //   backgroundColor: Colors.white,
-        //   // surfaceTintColor: Colors.white,
-        // ),
+        appBar: AppBar(
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 30.sp,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          // surfaceTintColor: Colors.white,
+        ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -280,14 +288,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomButton(
-                            onTap: () async{
-
+                            onTap: () async {
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
                                 //Submission async function here
-                                ref.read(loadingProvider.notifier).state = false;
-
+                                ref.read(loadingProvider.notifier).state =
+                                    false;
                               }
                             },
                             loading: isLoading,
@@ -313,10 +320,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                               SizedBox(width: 10.sp),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const LoginScreen()),
-                            );
+                                  context.push(AppRoute.login);
                                 },
                                 child: Text(
                                   'Login',
