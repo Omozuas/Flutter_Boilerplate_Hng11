@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
-import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 
@@ -12,19 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  setupLocator();
-  await dotenv.load(fileName: ".env");
-  // await Firebase.initializeApp(
-  //     options: FirebaseOptions(
-  //   apiKey: dotenv.env['apiKey']!,
-  //   appId: dotenv.env['appId']!,
-  //   messagingSenderId: dotenv.env['messagingSenderId']!,
-  //   projectId: dotenv.env['projectId']!,
-  // ));
-  runApp(const MyApp());
   await initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

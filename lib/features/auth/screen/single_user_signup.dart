@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -63,12 +62,22 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                       ),
                     ),
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/images/google.png',
-                      fit: BoxFit.contain,
-                      width: 200.w,
-                    ),
+                    onPressed: () {
+                      ref.read(authProvider.notifier).googleSignin();
+                    },
+                    child: loading
+                        ? SizedBox(
+                            width: 16.w,
+                            height: 16.w,
+                            child: CircularProgressIndicator.adaptive(
+                              strokeWidth: 2.w,
+                            ),
+                          )
+                        : Image.asset(
+                            'assets/images/google.png',
+                            fit: BoxFit.contain,
+                            width: 200.w,
+                          ),
                   ),
                   SizedBox(height: 10.h),
                   Row(

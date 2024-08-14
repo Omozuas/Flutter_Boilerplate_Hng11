@@ -93,6 +93,30 @@ class AuthApi {
       return null;
     }
   }
+
+  // google sign in
+  Future<ResponseModel> googleSignIn(String idToken) async {
+    try {
+      ResponseModel response = await dioProvider.post(
+        // 'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/
+        '/auth/google?mobile=true',
+        data: {
+          'id_token': idToken,
+        },
+      );
+      log(response.message!);
+
+      if (response.message == 'Authentication successful') {
+        // Update the access token if needed
+        // dioProvider.updateAccessToken(response.accessToken ?? '');
+      }
+      box.write("accessToken", response.accessToken);
+      return response;
+    } catch (e) {
+      debugPrint('Error during Google sign-in: $e');
+      rethrow; // Optional: Re-throw the error to handle it further up the call stack
+    }
+  }
 }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
