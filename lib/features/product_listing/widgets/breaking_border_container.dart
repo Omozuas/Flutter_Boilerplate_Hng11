@@ -18,7 +18,7 @@ class BreakingBorderPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double dashWidth = 8, dashSpace = 5;
     final paint = Paint()
-      ..color = Color.fromRGBO(203, 213, 225, 1)
+      ..color = Color.fromRGBO(203, 213, 225, 10)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 
