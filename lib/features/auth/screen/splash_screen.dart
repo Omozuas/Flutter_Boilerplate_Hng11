@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:one_context/one_context.dart';
 
-class SplashScreen extends StatefulWidget {
+import '../../../utils/widgets/custom_button.dart';
+
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-      context.go(AppRoute.companySignUp);
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +36,48 @@ class _SplashScreenState extends State<SplashScreen> {
               fontSize: 24.sp,
               color: GlobalColors.darkOne,
             ),
-          )
+          ),
+          SizedBox(height: 60.h,),
+          CustomButton(
+            text: 'Sign Up',
+            onTap: (){
+              OneContext().showModalBottomSheet(
+                  builder: (ct)=>
+                      Container(
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextButton(onPressed: (){
+                              Navigator.pop(ct);
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CompanySignUpScreen()));                            }, child: Text('As a company',style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold),
+                            )),
+                            TextButton(onPressed: (){
+                              Navigator.pop(ct);
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>SingleUserSignUpScreen()));
+                            }, child: Text('As a single user',style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold),)),
+                          ],
+                        ),
+                      ));
+            },
+            textColor: GlobalColors.white,
+            borderColor: GlobalColors.orange,
+            height: 40.h,
+            containerColor: GlobalColors.orange,
+            width: 250,
+          ),
+          SizedBox(height: 20.h,),
+          CustomButton(
+            text: 'Login',
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+            },
+            textColor: GlobalColors.white,
+            borderColor: GlobalColors.orange,
+            height: 40.h,
+            containerColor: GlobalColors.orange,
+            width: 250,
+          ),
         ],
       ),
     );

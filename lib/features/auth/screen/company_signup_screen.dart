@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
@@ -28,20 +31,24 @@ class CompanySignUpScreen extends ConsumerWidget {
   final _companyLgaController = TextEditingController();
 
   final loadingProvider = StateProvider<bool>((ref) => false);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isLoading = ref.watch(loadingProvider);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   leading: Icon(
-        //     Icons.chevron_left_rounded,
-        //     size: 30.sp,
-        //   ),
-        //   backgroundColor: Colors.white,
-        //   // surfaceTintColor: Colors.white,
-        // ),
+        appBar: AppBar(
+          leading: InkWell(
+            onTap: (){Navigator.pop(context);},
+            child: Icon(
+              Icons.chevron_left_rounded,
+              size: 30.sp,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          // surfaceTintColor: Colors.white,
+        ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -311,7 +318,11 @@ class CompanySignUpScreen extends ConsumerWidget {
                               ),
                               SizedBox(width: 10.sp),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  context.push(
+                                      AppRoute.login);
+                                },
+
                                 child: Text(
                                   'Login',
                                   style: TextStyle(
