@@ -34,7 +34,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Product Details",
+          "Product Description",
           style: CustomTextStyles.titleTextBlack,
         ),
         centerTitle: true,
