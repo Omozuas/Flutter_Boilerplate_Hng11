@@ -26,4 +26,9 @@ class GlobalColors {
   static HexColor black = HexColor('#000000');
   static HexColor bgsurface700 = HexColor('21202D');
   static HexColor white = HexColor('#FFFFFF');
+
+  static HexColor mutedTextColor = HexColor('#71717A');
+  static HexColor zinc50 = HexColor("#FAFAFA");
+  static HexColor dark2 = HexColor("#0A0A0A");
+  static HexColor verified = HexColor("#6DC347");
 }
