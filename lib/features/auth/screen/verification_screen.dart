@@ -83,7 +83,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.chevron_left),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -95,20 +95,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  'Verification',
+                  'Verification Code',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.sp),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
-                          'Input the code from your email: ${widget.email}'),
+                          'Confirm the email sent to: ${widget.email} and enter the verification code.'),
                     ),
-                    const SizedBox(width: 16),
                     Text(
-                      'Time remaining: $_countdown s',
+                      'Code expires in $_countdown s',
                       style: const TextStyle(color: Colors.orange),
                     ),
                   ],

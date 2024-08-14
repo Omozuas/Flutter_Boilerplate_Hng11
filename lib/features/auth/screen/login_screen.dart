@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -191,6 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
+                        Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()),
+                            );
                         //:TODO add function for forgot password
                       },
                       child: Text(
@@ -265,7 +271,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                // :TODO add function to go sign up page
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CompanySignUpScreen()),
+                            );
                               }),
                       ],
                     ),

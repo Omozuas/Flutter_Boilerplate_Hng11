@@ -46,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.chevron_left),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -59,9 +59,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               'Forgot Password',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.sp),
             const Text('Enter your email'),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.sp),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
@@ -71,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.sp),
             CustomButton(
                 onTap: () {},
                 borderColor: GlobalColors.borderColor,
@@ -80,7 +80,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 containerColor: GlobalColors.orange,
                 width: 342.w,
                 textColor: Colors.white),
-            const SizedBox(height: 23.5),
+             SizedBox(height: 23.5.sp),
             Center(
               child: RichText(
                 text: TextSpan(
@@ -94,7 +94,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            // :TODO add function to go sign up page
+                            // :TODO add function to go login page
                           }),
                   ],
                 ),

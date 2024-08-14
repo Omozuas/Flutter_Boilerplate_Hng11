@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
@@ -311,7 +312,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                               ),
                               SizedBox(width: 10.sp),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                            );
+                                },
                                 child: Text(
                                   'Login',
                                   style: TextStyle(
