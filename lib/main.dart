@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/push_notification.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
-
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  PushNotificationServices().requestPermission();
   setupLocator();
   await dotenv.load(fileName: ".env");
   runApp(const MyApp());
