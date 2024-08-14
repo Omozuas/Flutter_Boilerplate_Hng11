@@ -8,9 +8,6 @@ import '../../services/response_model.dart';
 import '../../utils/error/error.dart';
 import '../../utils/initializations.dart';
 
-
-
-
 class AuthApi {
   //Inject the DioProvider Dependency
   DioProvider dioProvider = locator<DioProvider>();
@@ -33,6 +30,7 @@ class AuthApi {
       return null;
     }
   }
+
 
   // forgot password api
   Future<ResponseModel?> forgotPassword({
@@ -76,6 +74,7 @@ class AuthApi {
 
 
 
+
   Future<ResponseModel?> loginUser({
     required String email,
     required String password,
@@ -96,8 +95,6 @@ class AuthApi {
       return null;
     }
   }
-
-
 }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
@@ -106,11 +103,7 @@ Future<Company> registerCompany(Company company) async {
   // An authenticated user is required for this request to be completed based on the api.
   // TODO: Remove access token in place of currently signed user's token.
  // box.write('accessToken','accessToken');
-  // dioProvider.updateAccessToken(
-  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMjdhMjBhLWJjMjMtNDI5NS05ZWM5LTA1MDM1ZG'
-  //         'MyZmYzZCIsInN1YiI6ImFmMjdhMjBhLWJjMjMtNDI5NS05ZWM5LTA1MDM1ZGMyZmYzZCIsImVtYW'
-  //         'lsIjoiamF5b2tlbG9sYTM0MUBnbWFpbC5jb20iLCJpYXQiOjE3MjM1NDUxODYsImV4cCI6MTcyMzU2Njc4N'
-  //         'n0.2fesL140kBGWTxooNycLbqZoFNULSRWUcXUXmLynOEc');
+
   var registeredCompany = Company.initial();
   try {
     var response = await dioProvider.post(

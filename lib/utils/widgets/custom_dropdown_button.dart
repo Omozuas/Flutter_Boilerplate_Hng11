@@ -7,6 +7,9 @@ class CustomDropdownButton extends StatefulWidget {
   final Function(String?)? onChanged;
   final Color containerColor, borderColor, textColor;
   final double width, height;
+  final double? borderRadius;
+  final EdgeInsets? textPadding;
+  final TextStyle? valueStyle;
 
   const CustomDropdownButton({
     super.key,
@@ -19,6 +22,9 @@ class CustomDropdownButton extends StatefulWidget {
     required this.containerColor,
     required this.width,
     required this.textColor,
+    this.valueStyle,
+    this.textPadding,
+    this.borderRadius,
   });
 
   @override
@@ -44,15 +50,16 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
         decoration: BoxDecoration(
           color: widget.containerColor,
           shape: BoxShape.rectangle,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(6),
+          borderRadius: BorderRadius.all(
+            Radius.circular(widget.borderRadius ?? 6),
           ),
           border: Border.all(width: 1, color: widget.borderColor),
         ),
         child: DropdownButtonHideUnderline(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: widget.textPadding ?? const EdgeInsets.all(8.0),
             child: DropdownButton<String>(
+              style: widget.valueStyle,
               value: _selectedItem,
               hint: Text(
                 widget.placeholder,

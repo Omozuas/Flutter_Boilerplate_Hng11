@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -152,6 +154,12 @@ class SettingsScreen extends StatelessWidget {
                         title: 'Members',
                         onTap: () {
                           // Navigate to Members Settings
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MembersSettings(),
+                            ),
+                          );
                         },
                       ),
                       SettingsTile(
@@ -159,6 +167,11 @@ class SettingsScreen extends StatelessWidget {
                         title: 'Roles and Permissions',
                         onTap: () {
                           // Navigate to Roles and Permissions Settings
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const RoleScreen();
+                            },
+                          ));
                         },
                       ),
                       SettingsTile(
