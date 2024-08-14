@@ -18,8 +18,10 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin;
   final int? maxLines;
   final String? Function(String?)? validator;
+  final Function(String?)? onchanged;
   final Color? borderColor;
   final Color? focusedBorderColor;
+  final FocusNode? focusNode;
 
   const CustomTextField({
     super.key,
@@ -39,6 +41,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.borderColor,
     this.focusedBorderColor,
+    this.focusNode, this.onchanged,
   });
 
   @override
@@ -71,6 +74,8 @@ class CustomTextField extends StatelessWidget {
             obscureText: obscureText ?? false,
             maxLines: maxLines ?? 1,
             validator: validator,
+            focusNode: focusNode,
+            onChanged: onchanged,
             decoration: InputDecoration(
               contentPadding: padding ??
                   EdgeInsets.symmetric(

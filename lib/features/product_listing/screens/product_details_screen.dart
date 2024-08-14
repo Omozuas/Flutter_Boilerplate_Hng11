@@ -9,6 +9,8 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../utils/Styles/text_styles.dart';
+
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
 
@@ -34,7 +36,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         backgroundColor: Colors.white,
         title: Text(
           "Product Details",
-          style: DetailStyles.header,
+          style: CustomTextStyles.titleTextBlack,
         ),
         centerTitle: true,
         surfaceTintColor: Colors.white,
