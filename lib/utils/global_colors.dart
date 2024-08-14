@@ -9,6 +9,7 @@ class GlobalColors {
   static HexColor dividerColor = HexColor('#EEEEEE');
   static HexColor iconColor = HexColor('#141414');
   static HexColor darkOne = HexColor('#525252');
+  static HexColor darkTwo = HexColor('#0F172A');
   static HexColor blackColor = HexColor('#000000');
   static HexColor black200Color = HexColor('#09090B');
   static HexColor gray200Color = HexColor('#353535');
@@ -27,5 +28,9 @@ class GlobalColors {
   static HexColor black = HexColor('#000000');
   static HexColor diverColor = HexColor('#DEDEDE');
   static HexColor bgsurface700 = HexColor('21202D');
+  static HexColor red = HexColor('#E00414');
+  static HexColor green = HexColor('#10AF20');
   static HexColor white = HexColor('#FFFFFF');
+  static HexColor toastBgSurface = HexColor('#FDE7E7');
+  static HexColor toastBgSurface2 = HexColor('##E7F7E9');
 }

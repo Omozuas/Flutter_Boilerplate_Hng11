@@ -7,7 +7,7 @@ import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/proucts_home_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/account_settings.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
@@ -92,7 +92,6 @@ class AppRoute {
   static const String settings = '/settings';
 
   static const String products = '/products';
-  static const String productsHome = '/products';
 
   static const String home = '/home';
 }
