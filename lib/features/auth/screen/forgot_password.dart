@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
+import '../../../utils/widgets/custom_text_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -15,14 +17,12 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
-  String? _errorMessage;
 
   void _handleSend() {
     final email = _emailController.text;
     // Validate email format
     if (email.isEmpty || !email.contains('@')) {
       setState(() {
-        _errorMessage = 'Please enter a valid email address.';
       });
       return;
     }
@@ -36,7 +36,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       );
     } else {
       setState(() {
-        _errorMessage = 'This email doesn\'t match our records, please try again';
       });
     }
   }
@@ -46,7 +45,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.chevron_left),
+          icon: const Icon(
+            Icons.chevron_left,
+            size: 24,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -59,28 +61,49 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               'Forgot Password',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            SizedBox(height: 16.sp),
-            const Text('Enter your email'),
-            SizedBox(height: 16.sp),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: const OutlineInputBorder(),
-                errorText: _errorMessage,
-              ),
-              keyboardType: TextInputType.emailAddress,
+            SizedBox(height: 8.sp),
+            const Text(
+              'Enter the email address you used to create the account to receive instructions on how to reset your password',
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
             ),
-            SizedBox(height: 16.sp),
+            SizedBox(height: 28.sp),
+            CustomTextField(
+              label: "Email",
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              hintText: "Enter your email",
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'This field is required';
+                }
+                if (value == _emailController.text) {
+                  // Email validation regex
+                  final emailRegex = RegExp(
+                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+
+                  return null;
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 32.sp),
             CustomButton(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const VerificationScreen(email: '',)),
+                            );
+                },
                 borderColor: GlobalColors.borderColor,
                 text: "Send",
                 height: 48.h,
                 containerColor: GlobalColors.orange,
                 width: 342.w,
                 textColor: Colors.white),
-             SizedBox(height: 23.5.sp),
+            SizedBox(height: 16.sp),
             Center(
               child: RichText(
                 text: TextSpan(
@@ -94,6 +117,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()),
+                            );
                             // :TODO add function to go login page
                           }),
                   ],

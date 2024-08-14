@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
-
+import 'login_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -43,28 +43,25 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   void _handleVerify() {
     final code = _codeControllers.map((c) => c.text).join();
-    // Simulate code validation
     if (code == '123456') {
-      // Simulate successful verification
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const VerificationSuccessScreen()),
+          builder: (context) => const VerificationSuccessScreen(),
+        ),
       );
     } else {
       setState(() {
         _isCodeValid = false;
-        // Show resend code and change email prompts
       });
     }
   }
 
   void _handleResend() {
-    // Handle code resend logic
     setState(() {
       _countdown = 60;
       _startTimer();
-      _isCodeValid = true; // Reset code validity
+      _isCodeValid = true;
     });
   }
 
@@ -83,14 +80,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.chevron_left),
+          icon: const Icon(Icons.chevron_left, size: 24),
           onPressed: () => Navigator.pop(context),
         ),
       ),
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -98,26 +95,29 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   'Verification Code',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
-                SizedBox(height: 16.sp),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                          'Confirm the email sent to: ${widget.email} and enter the verification code.'),
-                    ),
-                    Text(
-                      'Code expires in $_countdown s',
-                      style: const TextStyle(color: Colors.orange),
-                    ),
-                  ],
+                SizedBox(height: 16.h),
+                RichText(
+                  text: TextSpan(
+                    text: 'Confirm the email sent to ${widget.email} and enter the verification code. Code expires in ',
+                    style: TextStyle(color: GlobalColors.darkOne),
+                    children: [
+                      TextSpan(
+                        text: '00:$_countdown s',
+                        style: TextStyle(
+                          color: GlobalColors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(6, (index) {
                     return SizedBox(
-                      width: 40,
+                      width: 40.w,
+                      height: 40.h,
                       child: TextField(
                         controller: _codeControllers[index],
                         maxLength: 1,
@@ -137,54 +137,60 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           } else if (value.isEmpty && index > 0) {
                             FocusScope.of(context).previousFocus();
                           }
-
                           setState(() {
                             _isCodeComplete = _codeControllers.every(
-                                (controller) => controller.text.isNotEmpty);
+                              (controller) => controller.text.isNotEmpty,
+                            );
                           });
                         },
                       ),
                     );
                   }),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.sp),
                 ElevatedButton(
                   onPressed: _isCodeComplete ? _handleVerify : null,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    backgroundColor:
-                        _isCodeComplete ? Colors.orange : Colors.grey,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: _isCodeComplete ? Colors.orange : Colors.grey,
                   ),
-                  child: const Text('Verify'),
-                ),
+                  child: const Text('Verify', style: TextStyle(color: Colors.white,),
+                ),),
                 if (!_isCodeValid || _countdown == 0) ...[
-                  const SizedBox(height: 16),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
+                  SizedBox(height: 16.sp),
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Didn\'t receive any code? ',
+                        style: TextStyle(color: GlobalColors.darkOne),
                         children: [
-                          TextButton(
-                            onPressed: _handleResend,
-                            child: const Text('Resend Code'),
+                          TextSpan(
+                            text: 'Resend OTP',
+                            style: TextStyle(
+                              color: GlobalColors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = _handleResend,
                           ),
                         ],
                       ),
-                      const SizedBox(width: 16),
-                      const Text('or'),
-                      Column(
-                        children: [
-                          TextButton(
-                            onPressed: _handleChangeEmail,
-                            child: const Text('Change Email',
-                                style: TextStyle(
-                                    color: Colors.orange,
-                                    decoration: TextDecoration.underline)),
-                          ),
-                        ],
+                    ),
+                  ),
+                  SizedBox(height: 16.sp),
+                  Center(
+                    child: TextButton(
+                      onPressed: _handleChangeEmail,
+                      child: const Text(
+                        'Change Email',
+                        style: TextStyle(
+                          color: Colors.orange,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ],
@@ -197,12 +203,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
               right: 0,
               child: Container(
                 color: Colors.red,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
                 child: Row(
                   children: [
                     const Icon(Icons.error, color: Colors.white),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.sp),
                     const Expanded(
                       child: Text(
                         'Invalid code, please try again.',
@@ -255,41 +260,47 @@ class VerificationSuccessScreen extends StatelessWidget {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 80), // Add space for Snackbar
+                const SizedBox(height: 80), // Space for Snackbar
                 Text(
                   'Verification Successful',
-                  style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.sp),
                 const Text(
-                  'Your verification was successful, you can now proceed to reset your password',
+                  'Your verification was successful, you can now proceed to reset your password.',
                   style: TextStyle(fontSize: 13),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.sp),
                 CustomButton(
-                    onTap: () async {
-                      // Show loading indicator
-                      await _showLoadingIndicator(context);
+                  onTap: () async {
+                    // Show loading indicator
+                    await _showLoadingIndicator(context);
 
-                      // Simulate network request
-                      await Future.delayed(const Duration(seconds: 2));
+                    // Simulate network request
+                    await Future.delayed(const Duration(seconds: 2));
 
-                      // Hide loading indicator
-                      Navigator.of(context).pop(); // Close the loading dialog
+                    // Hide loading indicator
+                    Navigator.of(context).pop(); // Close the loading dialog
 
-                      // Proceed to reset password screen or other actions
-                    },
-                    borderColor: GlobalColors.borderColor,
-                    text: "Continue to Login",
-                    height: 48.h,
-                    containerColor: GlobalColors.orange,
-                    width: 342.w,
-                    textColor: Colors.white),
+                    // Proceed to reset password screen or other actions
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  borderColor: GlobalColors.borderColor,
+                  text: "Continue to Login",
+                  height: 48.h,
+                  containerColor: GlobalColors.orange,
+                  width: 342.w,
+                  textColor: Colors.white,
+                ),
               ],
             ),
           ),
@@ -299,11 +310,11 @@ class VerificationSuccessScreen extends StatelessWidget {
             right: 0,
             child: Container(
               color: Colors.green,
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
               child: Row(
                 children: [
                   const Icon(Icons.check_circle, color: Colors.white),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8.sp),
                   const Expanded(
                     child: Text(
                       'Successfully Verified',
@@ -313,7 +324,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.close, color: Colors.white),
                     onPressed: () {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      Navigator.pop(context);
                     },
                   ),
                 ],
