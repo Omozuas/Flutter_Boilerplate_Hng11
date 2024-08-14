@@ -45,7 +45,7 @@ class IntegrationContainer extends StatelessWidget {
                         value: isToggled,
                         onChanged: onChanged,
                         activeColor: GlobalColors.orange,
-                        thumbColor: GlobalColors.deemWhite,
+                        thumbColor: GlobalColors.deemWhiteColor,
                       ),
                     ),
                   ],
@@ -55,7 +55,7 @@ class IntegrationContainer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: GlobalColors.black,
+                    color: GlobalColors.blackColor,
                   ),
                 ),
                 Text(
@@ -64,7 +64,7 @@ class IntegrationContainer extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-                    color: GlobalColors.black,
+                    color: GlobalColors.blackColor,
                   ),
                 ),
               ],
