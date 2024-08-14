@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/regular_signup_sc
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/proucts_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/account_settings.dart';
@@ -36,6 +37,12 @@ class AppRouter {
         path: AppRoute.login,
         builder: (context, state, ref) {
           return const LoginScreen();
+        },
+      ),
+      ConsumerGoRoute(
+        path: '${AppRoute.products}/:id',
+        builder: (context, state, ref) {
+          return const ProductDetailsScreen();
         },
       ),
       StatefulShellRoute.indexedStack(
