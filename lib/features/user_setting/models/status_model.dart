@@ -2,23 +2,23 @@ import 'dart:convert';
 
 import 'user_models.dart';
 
-RequestUserIndo requestUserIndoFromJson(String str) =>
-    RequestUserIndo.fromJson(json.decode(str));
+RequestUserInfo requestUserInfoFromJson(String str) =>
+    RequestUserInfo.fromJson(json.decode(str));
 
-String requestUserIndoToJson(RequestUserIndo data) =>
+String requestUserInfoToJson(RequestUserInfo data) =>
     json.encode(data.toJson());
 
-class RequestUserIndo {
+class RequestUserInfo {
   int statusCode;
   User user;
 
-  RequestUserIndo({
+  RequestUserInfo({
     required this.statusCode,
     required this.user,
   });
 
-  factory RequestUserIndo.fromJson(Map<String, dynamic> json) =>
-      RequestUserIndo(
+  factory RequestUserInfo.fromJson(Map<String, dynamic> json) =>
+      RequestUserInfo(
         statusCode: json["status_code"],
         user: User.fromJson(json["user"]),
       );
