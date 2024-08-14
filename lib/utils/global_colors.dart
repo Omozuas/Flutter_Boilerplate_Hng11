@@ -17,4 +17,5 @@ class GlobalColors {
   static HexColor bgsurface700 = HexColor('21202D');
   static HexColor toastBgSurface = HexColor('#FDE7E7');
   static HexColor toastBgSurface2 = HexColor('##E7F7E9');
+  static HexColor integrationTextColor = HexColor('#0A0A0A');
 }
