@@ -84,6 +84,7 @@ import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider extends StateNotifier<bool> {
   AuthProvider() : super(false);
@@ -93,6 +94,33 @@ class AuthProvider extends StateNotifier<bool> {
     try {
       final res = await AuthApi().registerSingleUser(data: data);
       log('reg res:$res');
+    } catch (e) {
+      rethrow;
+    } finally {
+      state = false;
+    }
+  }
+
+  Future<void> googleSignin() async {
+    state = true;
+
+    try {
+      final googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/userinfo.profile',
+        ],
+      );
+
+      final googleUser = await googleSignIn.signIn();
+
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+
+        log('ID Token: ${googleAuth.idToken}');
+        final res = await AuthApi().googleSignIn(googleAuth.idToken!);
+        log('reg res:$res');
+      }
     } catch (e) {
       rethrow;
     } finally {
