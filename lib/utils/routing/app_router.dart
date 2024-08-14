@@ -92,6 +92,7 @@ class AppRoute {
   static const String settings = '/settings';
 
   static const String products = '/products';
+  static const String productsHome = '/products';
 
   static const String home = '/home';
 }
