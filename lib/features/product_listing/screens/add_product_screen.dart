@@ -473,30 +473,41 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Widget previewItem({required PlatformFile previewFile}) {
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Image.file(
-            File(previewFile.xFile.path),
-            height: 100,
-            fit: BoxFit.cover,
+    try {
+      return Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Image.file(
+              File(previewFile.xFile.path),
+              height: 100,
+              fit: BoxFit.cover,
+            ),
           ),
+          Positioned(
+              top: 1,
+              right: 1,
+              child: GestureDetector(
+                onTap: () {
+                  removeFile(previewFile);
+                },
+                child: Icon(
+                  Icons.remove_circle_outline_outlined,
+                  color: Colors.red.shade300,
+                  size: 20,
+                ),
+              ))
+        ],
+      );
+    } catch (e) {
+      return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4), color: Colors.white),
+        child: const Icon(
+          Icons.play_circle_outline_outlined,
+          color: Colors.grey,
         ),
-        Positioned(
-            top: 1,
-            right: 1,
-            child: GestureDetector(
-              onTap: () {
-                removeFile(previewFile);
-              },
-              child: Icon(
-                Icons.remove_circle_outline_outlined,
-                color: Colors.red.shade300,
-                size: 20,
-              ),
-            ))
-      ],
-    );
+      );
+    }
   }
 }
