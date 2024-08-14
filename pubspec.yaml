@@ -94,6 +94,7 @@ flutter:
         - asset: assets/fonts/Inter/static/Inter_18pt-Black.ttf
           weight: 900
 
+
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
