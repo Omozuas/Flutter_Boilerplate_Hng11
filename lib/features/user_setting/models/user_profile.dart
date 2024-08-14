@@ -3,7 +3,7 @@ import 'dart:convert';
 class UserProfile {
   final String id;
   final DateTime createdAt;
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
   final String? username;
   final String? jobTitle;
   final String? pronouns;
@@ -75,7 +75,7 @@ class UserProfile {
     return <String, dynamic>{
       'id': id,
       'created_at': createdAt.toIso8601String(),
-      if (updatedAt != null) 'updated_at': updatedAt!.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
       if (username != null) 'username': username,
       if (jobTitle != null) 'jobTitle': jobTitle,
       if (pronouns != null) 'pronouns': pronouns,
@@ -95,7 +95,7 @@ class UserProfile {
     return UserProfile(
       id: map['id'] as String,
       createdAt: DateTime.parse(map['created_at'] ?? ''),
-      updatedAt: DateTime.tryParse(map['updated_at'] ?? ''),
+      updatedAt: DateTime.parse(map['updated_at'] ?? ''),
       username: map['username'] as String?,
       jobTitle: map['jobTitle'] as String?,
       pronouns: map['pronouns'] as String?,

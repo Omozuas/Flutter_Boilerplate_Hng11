@@ -3,7 +3,7 @@ import 'dart:convert';
 class UserOwnedOrganization {
   final String id;
   final DateTime createdAt;
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
   final String name;
   final String? description;
   final String email;
@@ -63,7 +63,7 @@ class UserOwnedOrganization {
     return <String, dynamic>{
       'id': id,
       'created_at': createdAt.toIso8601String(),
-      if (updatedAt != null) 'updated_at': updatedAt!.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
       'name': name,
       if (description != null) 'description': description,
       'email': email,
@@ -80,7 +80,7 @@ class UserOwnedOrganization {
     return UserOwnedOrganization(
       id: map['id'] as String,
       createdAt: DateTime.parse(map['created_at'] ?? ''),
-      updatedAt: DateTime.tryParse(map['updated_at'] ?? ''),
+      updatedAt: DateTime.parse(map['updated_at'] ?? ''),
       name: map['name'] as String,
       description: map['description'] as String?,
       email: map['email'] as String,

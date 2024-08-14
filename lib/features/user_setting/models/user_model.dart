@@ -6,7 +6,7 @@ import 'user_profile.dart';
 class User {
   final String id;
   final DateTime createdAt;
-  final DateTime? updatedAt;
+  final DateTime updatedAt;
   final String firstName;
   final String lastName;
   final String email;
@@ -86,7 +86,7 @@ class User {
     return <String, dynamic>{
       'id': id,
       'created_at': createdAt.toIso8601String(),
-      if (updatedAt != null) 'updated_at': updatedAt!.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
       'first_name': firstName,
       'last_name': lastName,
       'email': email,
@@ -108,23 +108,23 @@ class User {
     return User(
       id: map['id'] as String,
       createdAt: DateTime.parse(map['created_at'] ?? ''),
-      updatedAt: DateTime.tryParse(map['updated_at'] ?? ''),
+      updatedAt: DateTime.parse(map['updated_at'] ?? ''),
       firstName: map['first_name'] as String,
       lastName: map['last_name'] as String,
       email: map['email'] as String,
-      status: map['status'] as String,
-      phone: map['phone'] as String,
-      isActive: map['is_active'] as bool,
+      status: map['status'] as String?,
+      phone: map['phone'] as String?,
+      isActive: map['is_active'] ?? false,
       backupCodes: List<String>.from((map['backup_codes'] ?? [])),
       attemptsLeft: map['attempts_left'] as int?,
       timeLeft: map['time_left'] as int?,
-      secret: map['secret'] as String,
-      is2FAEnabled: map['is_2fa_enabled'] as bool,
+      secret: map['secret'] as String?,
+      is2FAEnabled: map['is_2fa_enabled'] ?? false,
       deletedAt: DateTime.tryParse(map['deletedAt'] ?? ''),
       profile: UserProfile.fromMap(map['profile'] as Map<String, dynamic>),
       organisations: List<UserOwnedOrganization>.from(
-        (map['owned_organisations'] as List<Map<String, dynamic>>)
-            .map(UserOwnedOrganization.fromMap),
+        (map['owned_organisations'] as List)
+            .map((e)=>UserOwnedOrganization.fromMap(e)),
       ),
     );
   }
