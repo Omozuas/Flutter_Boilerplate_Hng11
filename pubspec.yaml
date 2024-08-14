@@ -80,6 +80,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   fonts:
+    - family:  NavBar
+      fonts:
+        - asset: assets/icons/bottom_bar/NavBar.ttf
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter/static/Inter_18pt-Thin.ttf
