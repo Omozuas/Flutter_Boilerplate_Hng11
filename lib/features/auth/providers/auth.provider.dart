@@ -77,3 +77,4 @@ class SignupFormController extends StateNotifier<SignupFormState> {
 final signupFormProvider =
     StateNotifierProvider<SignupFormController, SignupFormState>(
         (ref) => SignupFormController());
+

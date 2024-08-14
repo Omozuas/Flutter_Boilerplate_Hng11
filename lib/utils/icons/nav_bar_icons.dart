@@ -6,10 +6,10 @@
 /// following in your pubspec.yaml
 ///
 /// flutter:
-///   fonts:
-///    - family:  NavBar
-///      fonts:
-///       - asset: fonts/NavBar.ttf
+  //  fonts:
+  //   - family:  NavBar
+  //     fonts:
+  //      - asset: fonts/NavBar.ttf
 ///
 /// 
 ///

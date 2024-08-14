@@ -3,9 +3,10 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CompanySignUpScreen extends StatelessWidget {
+class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
@@ -26,8 +27,10 @@ class CompanySignUpScreen extends StatelessWidget {
 
   final _companyLgaController = TextEditingController();
 
+  final loadingProvider = StateProvider<bool>((ref) => false);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool isLoading = ref.watch(loadingProvider);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -276,12 +279,17 @@ class CompanySignUpScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomButton(
-                            onTap: () {
+                            onTap: () async{
+
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
-                                //Submission code here
+                                ref.read(loadingProvider.notifier).state = true;
+                                //Submission async function here
+                                ref.read(loadingProvider.notifier).state = false;
+
                               }
                             },
+                            loading: isLoading,
                             borderColor: GlobalColors.orange,
                             text: 'Create Account',
                             height: 40.sp,
