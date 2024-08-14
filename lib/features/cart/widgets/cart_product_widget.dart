@@ -52,12 +52,8 @@ class CartWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
                     image: DecorationImage(
-                        image: CachedNetworkImageProvider(
-                            image
-                        ),
-                        fit: BoxFit.cover
-                    )
-                ),
+                        image: CachedNetworkImageProvider(image),
+                        fit: BoxFit.cover)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -72,13 +68,16 @@ class CartWidget extends StatelessWidget {
                         decoration: ShapeDecoration(
                           color: const Color(0xFFFAFAFA),
                           shape: RoundedRectangleBorder(
-                            side: const BorderSide(width: 1, color: Color(0xFF525252)),
+                            side: const BorderSide(
+                                width: 1, color: Color(0xFF525252)),
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
-                        child: isSelected? Container(
-                          color: GlobalColors.orange,
-                        ): null,
+                        child: isSelected
+                            ? Container(
+                                color: GlobalColors.orange,
+                              )
+                            : null,
                       ),
                     )
                   ],
@@ -108,14 +107,12 @@ class CartWidget extends StatelessWidget {
                                   ),
                                 ),
                                 5.h.sbH,
-                                Text(
-                                    description,
+                                Text(description,
                                     maxLines: 2,
                                     style: GoogleFonts.plusJakartaSans(
                                       fontSize: 12.sp,
                                       color: const Color(0xFF6E7079),
-                                    )
-                                )
+                                    ))
                               ],
                             ),
                           ),
@@ -125,7 +122,8 @@ class CartWidget extends StatelessWidget {
                             child: Container(
                               padding: 8.w.padA,
                               child: Icon(
-                                Icons.close, size: 24.sp,
+                                Icons.close,
+                                size: 24.sp,
                                 color: GlobalColors.darkOne,
                               ),
                             ),
@@ -146,7 +144,8 @@ class CartWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               NewIconButton(
-                                onPressed: reduceQuantity, isAdd: false,
+                                onPressed: reduceQuantity,
+                                isAdd: false,
                               ),
                               11.w.sbW,
                               Padding(
@@ -155,8 +154,7 @@ class CartWidget extends StatelessWidget {
                                   "$quantity",
                                   style: GoogleFonts.inter(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w600
-                                  ),
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ),
                               11.w.sbW,
@@ -176,9 +174,12 @@ class CartWidget extends StatelessWidget {
           ),
         ),
         16.h.sbH,
-        isLast?
-        0.0.sbH:
-        Divider(color: const Color(0xFFDEDEDE), height: 1.h,),
+        isLast
+            ? 0.0.sbH
+            : Divider(
+                color: const Color(0xFFDEDEDE),
+                height: 1.h,
+              ),
       ],
     );
   }

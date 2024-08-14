@@ -28,12 +28,12 @@ class InviteDialog extends StatelessWidget {
           children: [
             InviteDialogHeader(
               title: title,
-              onClose: (){
+              onClose: () {
                 Navigator.pop(context);
               },
             ),
             const Divider(),
-             const SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Email TextField
             TextField(

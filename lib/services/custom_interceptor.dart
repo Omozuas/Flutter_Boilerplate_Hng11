@@ -2,11 +2,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
-
 
 class CustomInterceptor extends Interceptor {
-
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     ErrorHandlers.allErrorHandler(err);
@@ -19,7 +16,6 @@ class CustomInterceptor extends Interceptor {
     log('body >> ${options.data}');
     options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
     super.onRequest(options, handler);
-
   }
 
   @override
@@ -28,8 +24,3 @@ class CustomInterceptor extends Interceptor {
     super.onResponse(response, handler);
   }
 }
-
-
-
-
-

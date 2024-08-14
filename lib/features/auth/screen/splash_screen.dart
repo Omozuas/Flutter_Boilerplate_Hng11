@@ -3,9 +3,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_sc
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 
 import '../../../utils/widgets/custom_button.dart';
@@ -37,25 +35,48 @@ class SplashScreen extends StatelessWidget {
               color: GlobalColors.darkOne,
             ),
           ),
-          SizedBox(height: 60.h,),
+          SizedBox(
+            height: 60.h,
+          ),
           CustomButton(
             text: 'Sign Up',
-            onTap: (){
+            onTap: () {
               OneContext().showModalBottomSheet(
-                  builder: (ct)=>
-                      Container(
+                  builder: (ct) => SizedBox(
                         width: double.infinity,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            TextButton(onPressed: (){
-                              Navigator.pop(ct);
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CompanySignUpScreen()));                            }, child: Text('As a company',style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold),
-                            )),
-                            TextButton(onPressed: (){
-                              Navigator.pop(ct);
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>SingleUserSignUpScreen()));
-                            }, child: Text('As a single user',style: TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold),)),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(ct);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CompanySignUpScreen()));
+                                },
+                                child: Text(
+                                  'As a company',
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(ct);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SingleUserSignUpScreen()));
+                                },
+                                child: Text(
+                                  'As a single user',
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold),
+                                )),
                           ],
                         ),
                       ));
@@ -66,11 +87,14 @@ class SplashScreen extends StatelessWidget {
             containerColor: GlobalColors.orange,
             width: 250,
           ),
-          SizedBox(height: 20.h,),
+          SizedBox(
+            height: 20.h,
+          ),
           CustomButton(
             text: 'Login',
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
             },
             textColor: GlobalColors.white,
             borderColor: GlobalColors.orange,

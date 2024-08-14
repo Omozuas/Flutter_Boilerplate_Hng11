@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
@@ -40,7 +39,9 @@ class CompanySignUpScreen extends ConsumerWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: InkWell(
-            onTap: (){Navigator.pop(context);},
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: Icon(
               Icons.chevron_left_rounded,
               size: 30.sp,
@@ -286,14 +287,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomButton(
-                            onTap: () async{
-
+                            onTap: () async {
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
                                 //Submission async function here
-                                ref.read(loadingProvider.notifier).state = false;
-
+                                ref.read(loadingProvider.notifier).state =
+                                    false;
                               }
                             },
                             loading: isLoading,
@@ -319,10 +319,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                               SizedBox(width: 10.sp),
                               GestureDetector(
                                 onTap: () {
-                                  context.push(
-                                      AppRoute.login);
+                                  context.push(AppRoute.login);
                                 },
-
                                 child: Text(
                                   'Login',
                                   style: TextStyle(

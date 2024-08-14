@@ -51,6 +51,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   back_button_interceptor: ^7.0.3
 
+  vector_graphics: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

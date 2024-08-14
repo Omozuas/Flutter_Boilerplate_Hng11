@@ -4,7 +4,6 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextStyles {
-
   //textstyles for detail screen
   //  static final header = TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,);
   // static final title = TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w600,);
@@ -44,8 +43,6 @@ class CustomTextStyles {
       fontSize: 14.sp,
       color: GlobalColors.gray500Color,
       fontWeight: FontWeight.w400);
-       static TextStyle bodyTextOrange = TextStyle(
+  static TextStyle bodyTextOrange = TextStyle(
       fontSize: 14.sp, color: GlobalColors.orange, fontWeight: FontWeight.w400);
-
-
 }

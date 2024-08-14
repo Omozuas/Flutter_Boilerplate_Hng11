@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +10,7 @@ import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 
-import '../auth_api.dart';
 import '../providers/auth.provider.dart';
-import '../providers/show_social_button_provider.dart';
 
 class SingleUserSignUpScreen extends ConsumerWidget {
   const SingleUserSignUpScreen({super.key});
@@ -26,23 +23,20 @@ class SingleUserSignUpScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    final loading  = ref.watch(authProvider);
+    final loading = ref.watch(authProvider);
 
     return Scaffold(
-
       backgroundColor: Colors.white,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
-          padding:  EdgeInsets.symmetric(horizontal: 16.w,vertical: 76.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 76.h),
           child: FocusScope(
             child: Form(
               key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-
                   Text(
                     'Sign up',
                     style: TextStyle(
@@ -59,35 +53,34 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(height: 30.h),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(vertical: 12.h),
-                        side: const BorderSide(color: Colors.grey),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Image.asset(
-                        'assets/images/google.png',
-                        fit: BoxFit.contain,
-                        width: 200.w,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      side: const BorderSide(color: Colors.grey),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
                       ),
                     ),
-                    SizedBox(height: 10.h),
-                    Row(
-                      children: <Widget>[
-                        const Expanded(child: Divider()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: const Text('Or'),
-                        ),
-                        const Expanded(child: Divider()),
-                      ],
+                    onPressed: () {},
+                    child: Image.asset(
+                      'assets/images/google.png',
+                      fit: BoxFit.contain,
+                      width: 200.w,
                     ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: <Widget>[
+                      const Expanded(child: Divider()),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: const Text('Or'),
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
                   SizedBox(height: 10.h),
                   CustomTextField(
                     label: 'First Name',
@@ -97,7 +90,6 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     validator: Validators.nameValidator,
                   ),
                   CustomTextField(
-
                     label: 'Last Name',
                     controller: lastNameController,
                     hintText: 'Enter your last name',
@@ -122,17 +114,15 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   SizedBox(height: 10.h),
                   CustomButton(
                     text: 'Create Account',
-                   loading: loading,
+                    loading: loading,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                         ref.read(authProvider.notifier)
-                            .registerSingleUser(
-                            {
-                              'email': emailController.text,
-                              'firstName': firstNameController.text,
-                              'lastName': lastNameController.text,
-                              'password': passwordController.text,
-                            });
+                        ref.read(authProvider.notifier).registerSingleUser({
+                          'email': emailController.text,
+                          'firstName': firstNameController.text,
+                          'lastName': lastNameController.text,
+                          'password': passwordController.text,
+                        });
                       }
                     },
                     textColor: GlobalColors.white,
@@ -151,9 +141,10 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                           TextSpan(
                             text: 'Login',
                             style: TextStyle(color: GlobalColors.orange),
-                            recognizer: TapGestureRecognizer()..onTap = () {
-                              context.go(AppRoute.login);
-                            },
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.go(AppRoute.login);
+                              },
                           ),
                         ],
                       ),

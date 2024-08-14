@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
-import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import '../../models/company_user.dart';
@@ -18,19 +17,15 @@ class AuthApi {
     required Map<String, dynamic> data,
     String? adminSecret,
   }) async {
-    data['admin_secret'] = adminSecret??123;
+    data['admin_secret'] = adminSecret ?? 123;
     try {
-      final response = await dioProvider.post(
-        '/auth/register',
-        data: data
-      );
+      final response = await dioProvider.post('/auth/register', data: data);
       return response;
     } catch (e) {
       //ErrorHandlers.allErrorHandler(e);
       return null;
     }
   }
-
 
   // forgot password api
   Future<ResponseModel?> forgotPassword({
@@ -72,9 +67,6 @@ class AuthApi {
     }
   }
 
-
-
-
   Future<ResponseModel?> loginUser({
     required String email,
     required String password,
@@ -86,8 +78,8 @@ class AuthApi {
       });
       if (response != null && response.data != null) {
         String accessToken = response.data['access_token'];
-        box.write('accessToken',accessToken);
-      //  dioProvider.updateAccessToken(accessToken);
+        box.write('accessToken', accessToken);
+        //  dioProvider.updateAccessToken(accessToken);
       }
       return response;
     } catch (e) {
@@ -102,7 +94,7 @@ Future<Company> registerCompany(Company company) async {
   DioProvider dioProvider = locator<DioProvider>();
   // An authenticated user is required for this request to be completed based on the api.
   // TODO: Remove access token in place of currently signed user's token.
- // box.write('accessToken','accessToken');
+  // box.write('accessToken','accessToken');
 
   var registeredCompany = Company.initial();
   try {

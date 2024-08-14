@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
-
-
-
-
 
 void main() async {
   await initializeApp();
@@ -34,14 +28,12 @@ class MyApp extends StatelessWidget {
           routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            textTheme: GoogleFonts.interTextTheme(),
-            scaffoldBackgroundColor: Colors.white,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.transparent,
-              scrolledUnderElevation: 0,
-              systemOverlayStyle: SystemUiOverlayStyle.dark
-            )
-          ),
+              textTheme: GoogleFonts.interTextTheme(),
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  scrolledUnderElevation: 0,
+                  systemOverlayStyle: SystemUiOverlayStyle.dark)),
         ),
       ),
     );

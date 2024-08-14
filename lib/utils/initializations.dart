@@ -5,8 +5,7 @@ import '../services/service_locator.dart';
 
 final box = GetStorage();
 
-
- initializeApp()async{
+initializeApp() async {
   setupLocator();
   await dotenv.load();
   await GetStorage.init();
