@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 import '../widgets/breaking_border_container.dart';
+import '../widgets/components/formfields.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -35,6 +36,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final productNameController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(255, 255, 255, 1),
       appBar: AppBar(
@@ -73,17 +77,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       width: 379.w,
                       height: 66.h,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: 20.h,
-                            width: 379.w,
-                            child: compulsoryTitle('Title'),
-                          ),
-                          Container(
-                              height: 40.h,
-                              width: 379.w,
-                              child: Text('product name textfield here'))
+                          compulsoryTitle('Title'),
+                          const ProductNameFormField()
+                          // Container(
+                          //   color: Colors.amber,
+                          //   height: 40.h,
+                          //   width: 379.w,
+                          //   child: CustomTextField(
+                          //     controller: productNameController,
+                          //     borderColor: Color.fromRGBO(203, 213, 225, 1),
+                          //     hintText: 'Product name',
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
