@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
@@ -13,18 +12,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load();
-
-  await Firebase.initializeApp(
-      options: FirebaseOptions(
-    apiKey: dotenv.env['apiKey']!,
-    appId: dotenv.env['appId']!,
-    messagingSenderId: dotenv.env['messagingSenderId']!,
-    projectId: dotenv.env['projectId']!,
-  ));
-
   setupLocator();
   await dotenv.load(fileName: ".env");
+  // await Firebase.initializeApp(
+  //     options: FirebaseOptions(
+  //   apiKey: dotenv.env['apiKey']!,
+  //   appId: dotenv.env['appId']!,
+  //   messagingSenderId: dotenv.env['messagingSenderId']!,
+  //   projectId: dotenv.env['projectId']!,
+  // ));
   runApp(const MyApp());
 }
 

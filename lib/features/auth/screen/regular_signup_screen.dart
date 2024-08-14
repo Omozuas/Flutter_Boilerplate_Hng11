@@ -24,7 +24,7 @@ class RegularSignUpScreen extends ConsumerWidget {
   static final lastNameFocusNode = FocusNode();
   static final emailFocusNode = FocusNode();
   static final passwordFocusNode = FocusNode();
-static     final authApiProvider = Provider((ref) => AuthApi());
+  static final authApiProvider = Provider((ref) => AuthApi());
   static final isLoadingProvider = StateProvider<bool>((ref) => false);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,8 +32,6 @@ static     final authApiProvider = Provider((ref) => AuthApi());
     final showSocialButtons = ref.watch(showSocialButtonsProvider);
     final socialButtonsController =
         ref.read(showSocialButtonsProvider.notifier);
-
-
 
     // Add listeners to hide social buttons when focusing on any TextField
     firstNameFocusNode.addListener(() {
@@ -129,7 +127,9 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                           borderRadius: BorderRadius.all(Radius.circular(4)),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await authApi.googleSignIn();
+                      },
                       child: Image.asset(
                         'assets/images/google.png',
                         fit: BoxFit.contain,
@@ -214,17 +214,15 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                             );
 
                             if (response != null) {
-                              if(context.mounted) {
+                              if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Registration successful')),
-                              );
+                                  const SnackBar(
+                                      content: Text('Registration successful')),
+                                );
                               }
                               // Navigate to the next screen or perform any other action
-                            }
-                            else {
-                              if(context.mounted)
-                              {
+                            } else {
+                              if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text(
@@ -233,12 +231,12 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                               }
                             }
                           } catch (e) {
-                            if(context.mounted) {
+                            if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(
-                                      'An error occurred: ${e.toString()}')),
-                            );
+                                SnackBar(
+                                    content: Text(
+                                        'An error occurred: ${e.toString()}')),
+                              );
                             }
                           } finally {
                             ref.read(isLoadingProvider.notifier).state = false;

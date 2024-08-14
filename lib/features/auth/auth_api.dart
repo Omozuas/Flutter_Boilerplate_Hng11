@@ -1,13 +1,15 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../models/company_user.dart';
 import '../../services/response_model.dart';
 import '../../utils/error/error.dart';
-
-
-
 
 class AuthApi {
   //Inject the DioProvider Dependency
@@ -80,8 +82,6 @@ class AuthApi {
     }
   }
 
-
-
   Future<ResponseModel?> loginUser({
     required String email,
     required String password,
@@ -102,7 +102,78 @@ class AuthApi {
     }
   }
 
+  // google sign in
 
+  Future<ResponseModel> googleSignIn() async {
+    try {
+      final googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/userinfo.profile',
+        ],
+      );
+
+      final googleUser = await googleSignIn.signIn();
+
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+
+        log('ID Token: ${googleAuth.idToken}');
+
+        ResponseModel response = await dioProvider.post(
+          'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/auth/google?mobile=true',
+          data: {
+            'id_token': googleAuth.idToken,
+          },
+        );
+        log(response.message!);
+
+        log(response.accessToken!);
+
+        if (response.message == 'Authentication successful') {
+          log('Access Token: ${response.accessToken}');
+          // Update the access token if needed
+          dioProvider.updateAccessToken(response.accessToken ?? '');
+        }
+
+        return response;
+      } else {
+        throw Exception('Google sign-in failed');
+      }
+    } catch (e) {
+      debugPrint('Error during Google sign-in: $e');
+      rethrow; // Optional: Re-throw the error to handle it further up the call stack
+    }
+  }
+
+  // Future<ResponseModel> googleSignin() async {
+  //   try {
+  //     final googlesignIn = GoogleSignIn(scopes: [
+  //       'email',
+  //       'https://www.googleapis.com/auth/userinfo.profile'
+  //     ]);
+  //     final googleUser = await googlesignIn.signIn();
+  //     if (googleUser != null) {
+  //       final googleAuth = await googleUser.authentication;
+
+  //       log('id_token ${googleAuth.idToken!}');
+
+  //       ResponseModel response = await dioProvider.post(
+  //         'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/auth/google?mobile=true',
+  //         data: {"id_token": googleAuth.idToken},
+  //       );
+  //       // print('This is the response message ${response.statusCode}');
+
+  //       if (response.message == 'Authentication successful') {
+  //         print(response.accessToken);
+  //         // dioProvider.updateAccessToken(response ?? '');
+  //       }
+  //       return response;
+  //     }
+  //   } catch (e) {
+  //     debugPrint('Error during google signIn: ${e.toString()}');
+  //   }
+  // }
 }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
