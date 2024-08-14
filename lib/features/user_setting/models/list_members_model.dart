@@ -7,7 +7,7 @@ class Members {
   Members({
     required this.id,
     required this.name,
-    required this.phoneNumber,
+    this.phoneNumber,
     required this.email,
   });
 
