@@ -10,8 +10,6 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/user_setting/screens/integrations_screen.dart';
-
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoute.home,
@@ -73,13 +71,6 @@ class AppRouter {
           navigationShell: navigationShell,
         ),
       ),
-
-      ConsumerGoRoute(
-        path: AppRoute.integration, // Add the new route path
-        builder: (context, state, ref) {
-          return const IntegrationScreen(); // Return the IntegrationScreen here
-        },
-      ),
     ],
   );
 }
@@ -89,7 +80,17 @@ class AppRoute {
   static const String companySignUp = '/companySignUp';
   static const String regularSignUp = '/regularSignUp';
   static const String login = '/login';
-  static const String membersSettings = '/membersSettings';
+  static const String cart = '/cart';
+
+  static const String settings = '/settings';
+
+  static const String products = '/products';
+
+  static const String home = '/home';
 }
+
+
+
+
 
 
