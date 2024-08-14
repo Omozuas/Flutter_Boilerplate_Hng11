@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/proucts_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
@@ -43,7 +44,7 @@ class AppRouter {
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
-              builder: (context, state, ref) => const HomeScreen(),
+              builder: (context, state, ref) => const ProductHomeScreen(),
             ),
           ]),
           StatefulShellBranch(routes: [
@@ -85,6 +86,7 @@ class AppRoute {
   static const String settings = '/settings';
 
   static const String products = '/products';
+  static const String productsHome = '/products';
 
   static const String home = '/home';
 }
