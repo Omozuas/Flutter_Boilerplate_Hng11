@@ -17,7 +17,7 @@ class InviteDialogHeader extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundColor: GlobalColors.deemWhite,
+          backgroundColor: GlobalColors.deemWhiteColor,
           child: Text(
             "KP", // This can be dynamic based on user initials
             style: GoogleFonts.inter(
