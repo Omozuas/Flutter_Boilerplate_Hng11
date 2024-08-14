@@ -16,7 +16,7 @@ class CustomTextStyles {
       fontWeight: FontWeight.w600);
   static TextStyle bannerHeaderTextWhite = TextStyle(
       fontSize: 20.sp,
-      color: GlobalColors.whiteColor,
+      color: GlobalColors.white,
       fontWeight: FontWeight.w700);
   static TextStyle bannerbodyTextOrange = TextStyle(
       fontSize: 12.sp, color: GlobalColors.orange, fontWeight: FontWeight.w400);
