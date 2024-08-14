@@ -19,7 +19,8 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.splash,
         builder: (context, state, ref) {
-          return const AddProductScreen();
+          return const SplashScreen();
+          //AddProductScreen();
           // SplashScreen();
         },
       ),
@@ -46,7 +47,8 @@ class AppRouter {
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
-              builder: (context, state, ref) => const HomeScreen(),
+              builder: (context, state, ref) => const AddProductScreen(),
+              //HomeScreen(),
             ),
           ]),
           StatefulShellBranch(routes: [

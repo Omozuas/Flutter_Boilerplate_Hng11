@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate_hng11/main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/widgets/custom_text_field.dart';
-import 'breaking_border_container.dart';
+import '../widgets/breaking_border_container.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -41,7 +41,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
         centerTitle: true,
         title: Text(
           'Add a Product',
-          style: DetailStyles.header,
+          style: GoogleFonts.inter(
+            color: Color.fromRGBO(10, 10, 10, 1),
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            height: 24 / 14,
+          ),
         ),
         elevation: 0,
         bottom: PreferredSize(
@@ -238,7 +243,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           height: 125.h,
                           width: 379.w,
                           decoration: BoxDecoration(
-                            color: Color(0xFFFAFAFA),
+                            color: Color.fromRGBO(250, 250, 250, 1),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Center(
@@ -286,13 +291,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       ),
                                     ),
                                   ),
-                                  Text(
-                                    'Accepts images, videos or 3D models',
-                                    style: GoogleFonts.inter(
-                                      color: Color.fromRGBO(82, 82, 82, 1),
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400,
-                                      height: 16.94 / 14,
+                                  Container(
+                                    height: 17.h,
+                                    width: 250.w,
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        'Accepts images, videos or 3D models',
+                                        style: GoogleFonts.inter(
+                                          color: Color.fromRGBO(82, 82, 82, 1),
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          height: 16.94 / 14,
+                                        ),
+                                      ),
                                     ),
                                   )
                                 ],
