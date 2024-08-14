@@ -22,13 +22,29 @@ class ProductScreen extends ConsumerWidget {
             SizedBox(
               height: 24.h,
             ),
-            Text(
-              "Products",
-              style: CustomTextStyles.titleTextBlack,
-            ),
-            Text(
-              "View all products",
-              style: CustomTextStyles.productTextBodyBlack,
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Products",
+                      style: CustomTextStyles.titleTextBlack,
+                    ),
+                    Text(
+                      "View all products",
+                      style: CustomTextStyles.productTextBodyBlack,
+                    ),
+                  ],
+                ),
+                // const Spacer(),
+                Assets.images.svg.productListing.listIcon.svg(),
+                // SizedBox(
+                //   width: 8.w,
+                // ),
+                Assets.images.svg.productListing.gridIcon.svg(),
+              ],
             ),
             SizedBox(
               height: 16.h,
