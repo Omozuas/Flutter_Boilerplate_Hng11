@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-//TODO: uncomment if using a pdf functionality
-// import 'package:pdf/pdf.dart';
-
 const ext = 0;
 
 extension WidgetExtensions on double {
@@ -18,7 +15,7 @@ extension WidgetExtensions on double {
   Widget get sbHW => SizedBox(
         width: w,
         height: h,
-  );
+      );
 
   EdgeInsetsGeometry get padA => EdgeInsets.all(this);
 
