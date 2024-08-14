@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/account_settings.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
