@@ -138,11 +138,11 @@ class _MembersSettingsState extends State<MembersSettings> {
                               ],
                             ),
                             hintText:
-                            'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
+                                'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
-                              BorderSide(color: GlobalColors.borderColor),
+                                  BorderSide(color: GlobalColors.borderColor),
                             )),
                       ),
                     )
@@ -185,7 +185,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return InviteDialog();
+                              return const InviteDialog();
                             });
                       },
                       borderColor: const Color(0xffF97316),
@@ -315,7 +315,6 @@ class _MembersSettingsState extends State<MembersSettings> {
                   PopupMenuButton<String>(
                     offset: const Offset(0, 30),
                     padding: EdgeInsets.zero,
-                    menuPadding: EdgeInsets.zero,
                     icon: const Icon(
                       Icons.more_vert_rounded,
                       size: 35,
@@ -330,7 +329,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                       }
                     },
                     itemBuilder: (BuildContext context) =>
-                    <PopupMenuEntry<String>>[
+                        <PopupMenuEntry<String>>[
                       PopupMenuItem<String>(
                         value: 'delete',
                         padding: EdgeInsets.zero,
