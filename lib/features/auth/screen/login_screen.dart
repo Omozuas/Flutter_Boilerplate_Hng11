@@ -88,10 +88,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                            height: 24.h,
-                            width: 24.w,
-                            child: Image.asset("assets/images/googleIcon.png")),
+                        GestureDetector(
+                          onTap: () {
+                            // kindly uncomment the code below when the login screen has been changed to a consumer stateless widget
+                            //  ref.read(authProvider.notifier).googleSignin(context);
+                          },
+                          child: SizedBox(
+                              height: 24.h,
+                              width: 24.w,
+                              child:
+                                  Image.asset("assets/images/googleIcon.png")),
+                        ),
                         SizedBox(
                           width: 10.w,
                         ),

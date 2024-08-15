@@ -81,7 +81,9 @@
 //
 
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -116,13 +118,13 @@ class AuthProvider extends StateNotifier<bool> {
     }
   }
 
-  Future<void> googleSignin() async {
+  Future<void> googleSignin(BuildContext context) async {
     state = true;
+    FirebaseAuth auth = FirebaseAuth.instance;
 
     try {
       final googleSignIn = GoogleSignIn(
         scopes: [
-          'email',
           'https://www.googleapis.com/auth/userinfo.profile',
         ],
       );
@@ -131,11 +133,19 @@ class AuthProvider extends StateNotifier<bool> {
 
       if (googleUser != null) {
         final googleAuth = await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken,
+          accessToken: googleAuth.accessToken,
+        );
+        final u = await auth.signInWithCredential(credential);
 
         log('ID Token: ${googleAuth.idToken}');
         final res = await AuthApi().googleSignIn(googleAuth.idToken!);
         if (res != null) {
-          /// TODO: Update Access Token
+          showSnackBar('Registration successful');
+          if (context.mounted) {
+            context.go(AppRoute.home);
+          }
         }
         log('reg res:$res');
       }
