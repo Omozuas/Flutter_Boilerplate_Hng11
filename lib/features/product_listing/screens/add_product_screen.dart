@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import '../widgets/components/formfields.dart';
+import '../widgets/add_product_formfields.dart';
 import '../widgets/components/product_category.dart';
 import '../widgets/components/product_variation.dart';
 import '../widgets/product_images.dart';
@@ -101,12 +102,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             compulsoryTitle('Title'),
-                            // const ProductNameFormField()
-                            Container(
-                              height: 40.h,
-                              width: 379.w,
-                              child: const Text('Product textfield here'),
-                            )
+                            const ProductNameFormField()
+                            // Container(
+                            //   height: 40.h,
+                            //   width: 379.w,
+                            //   child: const Text('Product textfield here'),
+                            // )
                           ],
                         ),
                       ),
@@ -132,12 +133,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ),
                               ),
                             ),
-                            //const DescriptionFormField(),
-                            Container(
-                              height: 80.h,
-                              width: 379.w,
-                              child: const Text('description textfield here'),
-                            ),
+                            const DescriptionFormField(),
+                            // Container(
+                            //   height: 80.h,
+                            //   width: 379.w,
+                            //   child: const Text('description textfield here'),
+                            // ),
                             Container(
                               height: 20.h,
                               width: 379.w,
@@ -201,14 +202,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle('Standard Price'),
                             ),
-                            //const ProductPriceFormField(),
-                            Container(
-                              height: 40.h,
-                              width: 379.w,
-                              child: const Text(
-                                'Standard Price textfield here',
-                              ),
-                            )
+                            const ProductPriceFormField(),
+                            // Container(
+                            //   height: 40.h,
+                            //   width: 379.w,
+                            //   child: const Text(
+                            //     'Standard Price textfield here',
+                            //   ),
+                            // )
                           ],
                         ),
                       ),
@@ -226,12 +227,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle('Quantity'),
                             ),
-                            //const ProductQuantityFormField()
-                            Container(
-                              height: 40.h,
-                              width: 379.w,
-                              child: const Text('Quantity textfield here'),
-                            )
+                            const ProductQuantityFormField()
+                            // Container(
+                            //   height: 40.h,
+                            //   width: 379.w,
+                            //   child: const Text('Quantity textfield here'),
+                            // )
                           ],
                         ),
                       ),
