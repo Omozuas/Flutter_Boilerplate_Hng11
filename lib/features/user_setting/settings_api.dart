@@ -1,97 +1,26 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/get_members_model.dart';
-import 'package:flutter_boilerplate_hng11/services/response_model.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'models/status_model.dart';
+import 'models/user_model.dart';
+import 'provider/settings_dio_provider.dart';
 
-class UserDioProvider {
-  final Dio _dio;
-  String? _accessToken;
+class SettingsApi {
+  SettingsApi(this.ref);
+  final Ref ref;
 
-  UserDioProvider()
-      : _dio = Dio(BaseOptions(
-          baseUrl: dotenv.env['BASE_URL']!,
-          connectTimeout: const Duration(seconds: 10),
-          receiveTimeout: const Duration(seconds: 10),
-          responseType: ResponseType.json,
-        ));
+//You can start creating account settings functions now
 
-  void updateAccessToken(String token) {
-    _accessToken = token;
-    _dio.options.headers['Authorization'] = 'Bearer $_accessToken';
-  }
-
-  Future post(String path, {Map? data}) async {
+  // fetches a single user with a give id.
+  // this doesn't really work well for now because the ResponseModel
+  // being returned from "dioProvider.get" is wrong.
+  Future<UserModel> getUser(String id) async {
+    final dio = ref.read(settingsDioProvider);
     try {
-      var response = await _dio.post(path, data: data);
-      return ResponseModel.fromJson(response.data);
+      final response = await dio.get('/users/$id');
+      return UserModel.fromMap(response);
     } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
+      rethrow;
     }
   }
-
-  Future multipart(String path, {Map? data}) async {
-    try {
-      final formData = FormData.fromMap(data as Map<String, dynamic>);
-      var response = await _dio.post(path, data: formData);
-      return ResponseModel.fromJson(response.data);
-    } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
-    }
-  }
-
-  Future putUpdate(String path, {Map? data}) async {
-    try {
-      var response = await _dio.put(path, data: data);
-      return ResponseModel.fromJson(response.data);
-    } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
-    }
-  }
-
-  Future patchUpdate(String path, {Map? data}) async {
-    try {
-      var response = await _dio.patch(path, data: data);
-      return RequestUserInfo.fromJson(response.data);
-    } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
-    }
-  }
-
-  Future getUserById(String path, {Map<String, dynamic>? query}) async {
-    try {
-      var response = await _dio.get(path, queryParameters: query);
-      return RequestUserInfo.fromJson(response.data);
-    } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
-    }
-  }
-
-  Future delete(String path, {Map? data}) async {
-    try {
-      var response = await _dio.delete(path, data: data);
-      return ResponseModel.fromJson(response.data);
-    } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
-    }
-  }
-
-
-
-// Oganization settings
-
- Future getAllMembersOrganization(String path, {Map<String, dynamic>? query}) async {
-    try {
-      var response = await _dio.get(path, queryParameters: query);
-      return GetMembers.fromJson(response.data);
-    } catch (e) {
-      debugPrint("ERROR ${e.toString()}");
-    }
-  }
-
-
 }
 
-
+final settingsApiProvider = Provider<SettingsApi>((ref) => SettingsApi(ref));

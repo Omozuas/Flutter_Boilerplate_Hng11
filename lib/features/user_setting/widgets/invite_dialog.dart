@@ -7,17 +7,17 @@ class InviteDialog extends StatefulWidget {
   final String? title;
   final VoidCallback? onInvite;
 
-  InviteDialog({
+  const InviteDialog({
     super.key,
     this.title,
     this.onInvite,
   });
 
   @override
-  _InviteDialogState createState() => _InviteDialogState();
+  InviteDialogState createState() => InviteDialogState();
 }
 
-class _InviteDialogState extends State<InviteDialog> {
+class InviteDialogState extends State<InviteDialog> {
   final TextEditingController emailController = TextEditingController();
   String? selectedRole;
 
