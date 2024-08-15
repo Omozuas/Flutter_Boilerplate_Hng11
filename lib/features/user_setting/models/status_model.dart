@@ -10,7 +10,7 @@ String requestUserInfoToJson(RequestUserInfo data) =>
 
 class RequestUserInfo {
   int statusCode;
-  User user;
+  UserModels user;
 
   RequestUserInfo({
     required this.statusCode,
@@ -20,7 +20,7 @@ class RequestUserInfo {
   factory RequestUserInfo.fromJson(Map<String, dynamic> json) =>
       RequestUserInfo(
         statusCode: json["status_code"],
-        user: User.fromJson(json["user"]),
+        user: UserModels.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {

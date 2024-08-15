@@ -17,6 +17,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+
   /// When you are ready to handle send, uncomment this function
   // void _handleSend() {
   //   final email = _emailController.text;
