@@ -183,6 +183,42 @@ class AuthProvider extends StateNotifier<bool> {
   }
 }
 
+// FORGOT PASSWORD 
+Future<void> forgotPassword(
+      String email, BuildContext context) async {
+    state = true;
+    try {
+      final res = await AuthApi().forgotPassword(email);
+      if (res != null) {
+        showSnackBar(res.message.toString());
+         context.go(AppRoute.home);
+      }
+    } catch (e) {
+      //TODO: Do something with caught error;
+    } finally {
+      state = false;
+    }
+  }
+
+
+//reset password
+Future<void> resetPassword(
+      Map<String, dynamic> details, BuildContext context) async {
+    state = true;
+    try {
+      final res = await AuthApi().resetPassword(details);
+      if (res != null) {
+        showSnackBar(res.message.toString());
+         context.go(AppRoute.home);
+      }else{
+         showSnackBar(res.message.toString());
+    } catch (e) {
+      //TODO: Do something with caught error;
+    } finally {
+      state = false;
+    }
+  }
+
 final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
   return AuthProvider();
 });
