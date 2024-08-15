@@ -1,113 +1,99 @@
 import 'dart:convert';
 
 class UserProfile {
-  final String id;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String userID;
+  final String firstname;
+  final String lastname;
+  final String? phoneNumber;
+  final String? avatarURL;
   final String? username;
+  final String? pronoun;
   final String? jobTitle;
-  final String? pronouns;
-  final String? department;
-  final String email;
   final String? bio;
-  final List<String> socialLinks;
-  final String? language;
-  final String? region;
-  final String? timezones;
-  final String? profilePicURL;
-  final DateTime? deletedAt;
+  final String? department;
+  final String? facebookLink;
+  final String? twitterLink;
+  final String? linkedInLink;
 
   const UserProfile({
-    required this.id,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.userID,
+    required this.firstname,
+    required this.lastname,
+    required this.phoneNumber,
+    required this.avatarURL,
     required this.username,
+    required this.pronoun,
     required this.jobTitle,
-    required this.pronouns,
-    required this.department,
-    required this.email,
     required this.bio,
-    required this.socialLinks,
-    required this.language,
-    required this.region,
-    required this.timezones,
-    required this.profilePicURL,
-    required this.deletedAt,
+    required this.department,
+    required this.facebookLink,
+    required this.twitterLink,
+    required this.linkedInLink,
   });
 
   UserProfile copyWith({
-    String? id,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    String? userID,
+    String? firstname,
+    String? lastname,
+    String? phoneNumber,
+    String? avatarURL,
     String? username,
+    String? pronoun,
     String? jobTitle,
-    String? pronouns,
-    String? department,
-    String? email,
     String? bio,
-    List<String>? socialLinks,
-    String? language,
-    String? region,
-    String? timezones,
-    String? profilePicURL,
-    DateTime? deletedAt,
+    String? department,
+    String? facebookLink,
+    String? twitterLink,
+    String? linkedInLink,
   }) {
     return UserProfile(
-      id: id ?? this.id,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
+      userID: userID ?? this.userID,
+      firstname: firstname ?? this.firstname,
+      lastname: lastname ?? this.lastname,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      avatarURL: avatarURL ?? this.avatarURL,
       username: username ?? this.username,
-      jobTitle: jobTitle ?? this.jobTitle,
-      pronouns: pronouns ?? this.pronouns,
-      department: department ?? this.department,
-      email: email ?? this.email,
+      pronoun: pronoun ?? this.pronoun,
       bio: bio ?? this.bio,
-      socialLinks: socialLinks ?? this.socialLinks,
-      language: language ?? this.language,
-      region: region ?? this.region,
-      timezones: timezones ?? this.timezones,
-      profilePicURL: profilePicURL ?? this.profilePicURL,
-      deletedAt: deletedAt ?? this.deletedAt,
+      department: department ?? this.department,
+      facebookLink: facebookLink ?? this.facebookLink,
+      twitterLink: twitterLink ?? this.twitterLink,
+      linkedInLink: linkedInLink ?? this.linkedInLink,
+      jobTitle: jobTitle ?? this.jobTitle,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
-      if (username != null) 'username': username,
-      if (jobTitle != null) 'jobTitle': jobTitle,
-      if (pronouns != null) 'pronouns': pronouns,
-      if (department != null) 'department': department,
-      'email': email,
-      if (bio != null) 'bio': bio,
-      'social_links': socialLinks,
-      if (language != null) 'language': language,
-      if (region != null) 'region': region,
-      if (timezones != null) 'timezones': timezones,
-      if (profilePicURL != null) 'profile_pic_url': profilePicURL,
-      if (deletedAt != null) 'deletedAt': deletedAt!.toIso8601String(),
+      "bio": bio,
+      "department": department,
+      "phone_number": phoneNumber,
+      "job_title": jobTitle,
+      "last_name": lastname,
+      "pronoun": pronoun,
+      "first_name": firstname,
+      "user_name": username,
+      "facebook_link": facebookLink,
+      "twitter_link": twitterLink,
+      "linkedin_link": linkedInLink,
     };
   }
 
   factory UserProfile.fromMap(Map<String, dynamic> map) {
     return UserProfile(
-      id: map['id'] as String,
-      createdAt: DateTime.parse(map['created_at'] ?? ''),
-      updatedAt: DateTime.parse(map['updated_at'] ?? ''),
-      username: map['username'] as String?,
-      jobTitle: map['jobTitle'] as String?,
-      pronouns: map['pronouns'] as String?,
-      department: map['department'] as String?,
-      email: map['email'] as String,
+      userID: map['user_id'] as String,
+      firstname: map['first_name'] as String,
+      lastname: map['last_name'] as String,
+      phoneNumber: map['phone_number'] as String?,
+      avatarURL: map['avatar_url'] as String?,
+      username: map['user_name'] as String?,
+      pronoun: map['pronoun'] as String?,
+      jobTitle: map['job_title'] as String?,
       bio: map['bio'] as String?,
-      socialLinks: List<String>.from((map['social_links'] ?? [])),
-      language: map['language'] as String?,
-      region: map['region'] as String?,
-      timezones: map['timezones'] as String?,
-      profilePicURL: map['profile_pic_url'] as String?,
-      deletedAt: DateTime.tryParse(map['deletedAt'] ?? ''),
+      department: map['department'] as String?,
+      facebookLink: map['facebook_link'] as String?,
+      twitterLink: map['twitter_link'] as String?,
+      linkedInLink: map['linkedin_link'] as String?,
     );
   }
 
@@ -117,19 +103,19 @@ class UserProfile {
       UserProfile.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'UserProfile(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, username: $username, jobTitle: $jobTitle, pronouns: $pronouns, department: $department, email: $email, bio: $bio, socialLinks: $socialLinks, language: $language, region: $region, timezones: $timezones, profilePicURL: $profilePicURL, deletedAt: $deletedAt)';
-  }
-
-  @override
   bool operator ==(covariant UserProfile other) {
     if (identical(this, other)) return true;
 
-    return other.id == id;
+    return other.userID == userID;
   }
 
   @override
   int get hashCode {
-    return id.hashCode;
+    return userID.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'UserProfile(userID: $userID, firstname: $firstname, lastname: $lastname, phoneNumber: $phoneNumber, avatarURL: $avatarURL, username: $username, pronoun: $pronoun, jobTitle: $jobTitle, bio: $bio, department: $department, facebookLink: $facebookLink, twitterLink: $twitterLink, linkedInLink: $linkedInLink)';
   }
 }

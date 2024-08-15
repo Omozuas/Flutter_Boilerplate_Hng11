@@ -12,12 +12,11 @@ class SettingsApi {
   // fetches a single user with a give id.
   // this doesn't really work well for now because the ResponseModel
   // being returned from "dioProvider.get" is wrong.
-  Future<User> getUser(String id) async {
+  Future<UserModel> getUser(String id) async {
     final dio = ref.read(settingsDioProvider);
     try {
       final response = await dio.get('/users/$id');
-      print(response);
-      return User.fromMap(response['user']);
+      return UserModel.fromMap(response);
     } catch (e) {
       rethrow;
     }
