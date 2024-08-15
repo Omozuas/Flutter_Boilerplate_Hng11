@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -91,13 +91,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             SizedBox(height: 32.sp),
             CustomButton(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const VerificationScreen(
-                              email: '',
-                            )),
-                  );
+              context.push(AppRoute.verificationScreen);
                 },
                 borderColor: GlobalColors.borderColor,
                 text: "Send",
@@ -119,12 +113,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()),
-                            );
-                            // :TODO add function to go login page
+                          context.push(AppRoute.login);
+                         // :TODO add function to go login page
                           }),
                   ],
                 ),

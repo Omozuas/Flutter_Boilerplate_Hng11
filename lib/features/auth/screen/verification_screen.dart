@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
-import 'login_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -297,12 +298,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                       Navigator.of(context).pop(); // Close the loading dialog
 
                       // Proceed to reset password screen or other actions
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      );
+                     context.pushReplacement(AppRoute.login);
                     }
                   },
                   borderColor: GlobalColors.borderColor,
