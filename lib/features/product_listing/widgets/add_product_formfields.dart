@@ -1,120 +1,164 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../utils/global_colors.dart';
 
-class CustomFormField extends StatelessWidget {
-  final String? label;
-  final TextStyle? labelStyle;
-  final TextEditingController controller;
-  final EdgeInsets? padding;
+class CustomTextField extends StatelessWidget {
   final String? hintText;
   final TextStyle? hintTextStyle;
+  final TextEditingController controller;
+  final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
-  final bool? obscureText;
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
-  final double? borderRadius;
-  final EdgeInsets? margin;
-  final int? maxLines;
-  final String? Function(String?)? validator;
-  final Function(String?)? onChanged;
-  final Color? borderColor;
-  final Color? focusedBorderColor;
-  final FocusNode? focusNode;
   final int? maxLength;
+  final int? maxLines;
+  final Color? borderColor;
+  final double? borderRadius;
+  final bool showCounter;
 
-  const CustomFormField({
-    super.key,
-    this.label,
-    this.labelStyle,
-    required this.controller,
-    this.padding,
+  CustomTextField({
     this.hintText,
     this.hintTextStyle,
-    this.keyboardType,
-    this.obscureText,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.margin,
-    this.borderRadius,
-    this.maxLines,
+    required this.controller,
     this.validator,
-    this.borderColor,
-    this.focusedBorderColor,
-    this.focusNode,
-    this.onChanged,
+    this.keyboardType,
     this.maxLength,
+    this.maxLines,
+    this.borderColor,
+    this.borderRadius,
+    this.showCounter = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin ?? EdgeInsets.only(bottom: 16.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (label != null)
-            Text(
-              label!,
-              style: labelStyle ??
-                  TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF0F172A),
-                  ),
-            ),
-          if (label != null)
-            SizedBox(
-              height: 8.h,
-            ),
-          TextFormField(
-            controller: controller,
-            keyboardType: keyboardType,
-            obscureText: obscureText ?? false,
-            maxLines: maxLines ?? 1,
-            maxLength: maxLength,
-            validator: validator,
-            focusNode: focusNode,
-            onChanged: onChanged,
-            decoration: InputDecoration(
-              contentPadding: padding ??
-                  EdgeInsets.symmetric(
-                    vertical: 8.h,
-                    horizontal: 12.w,
-                  ),
-              hintText: hintText,
-              hintStyle: hintTextStyle ??
-                  TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF94A3B8),
-                  ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 50.0.r),
-                borderSide: BorderSide(
-                  color: borderColor ?? GlobalColors.borderColor,
-                  width: 1.w,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 50.0.r),
-                borderSide: BorderSide(
-                  color: borderColor ?? GlobalColors.borderColor,
-                  width: 1.w,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 50.0.r),
-                borderSide: BorderSide(
-                  color: focusedBorderColor ?? GlobalColors.orange,
-                  width: 1.w,
-                ),
-              ),
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
-            ),
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+          borderSide: BorderSide(
+            color: Color.fromRGBO(203, 213, 225, 1),
+            width: 1.w,
           ),
-        ],
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+          borderSide: BorderSide(
+            color: borderColor ?? GlobalColors.borderColor,
+            width: 1.w,
+          ),
+        ),
+        counterText: showCounter ? null : '',
+        hintStyle: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: const Color(0xFF94A3B8),
+        ),
+        contentPadding: const EdgeInsets.only(
+          left: 12, top: 12, right: 12, bottom: 10,
+        ),
+        alignLabelWithHint: true,
+      ),
+      keyboardType: keyboardType,
+      validator: validator,
+      maxLength: maxLength,
+      maxLines: maxLines,
+      expands: maxLines == null,
+      textAlignVertical: TextAlignVertical.top,
+    );
+  }
+}
+
+class ProductNameFormField extends StatelessWidget {
+  const ProductNameFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final productNameController = TextEditingController();
+    return Container(
+      height: 40.h,
+      width: 379.w,
+      child: CustomTextField(
+        controller: productNameController,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: 'Product name',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter a product name';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+}
+
+class DescriptionFormField extends StatelessWidget {
+  const DescriptionFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final productDescriptionController = TextEditingController();
+    return Container(
+      height: 80.h,
+      width: 379.w,
+      child: CustomTextField(
+        controller: productDescriptionController,
+        maxLength: 72,
+        maxLines: null,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: 'Enter product description',
+        showCounter: false,
+      ),
+    );
+  }
+}
+
+class ProductPriceFormField extends StatelessWidget {
+  const ProductPriceFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final productPriceController = TextEditingController();
+    return Container(
+      height: 40.h,
+      width: 379.w,
+      child: CustomTextField(
+        controller: productPriceController,
+        keyboardType: TextInputType.number,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: '0.00',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter a price';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+}
+
+class ProductQuantityFormField extends StatelessWidget {
+  const ProductQuantityFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final productQuantityController = TextEditingController();
+    return Container(
+      height: 40.h,
+      width: 379.w,
+      child: CustomTextField(
+        controller: productQuantityController,
+        keyboardType: TextInputType.number,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: '0.00 pcs',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter the quantity of product';
+          }
+          return null;
+        },
       ),
     );
   }
