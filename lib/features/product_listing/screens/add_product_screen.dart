@@ -54,17 +54,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    void _resetForm() {
-      _formKey.currentState!.reset();
+    void resetForm() {
+      formKey.currentState!.reset();
       setState(() {
         // FilePicker.();
       });
     }
 
     Future<void> addProduct() async {
-      if (!_formKey.currentState!.validate()) {
+      if (!formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Please Complete form fill'),
@@ -78,20 +78,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
       productDescriptionController.clear();
       productPriceController.clear();
       productQuantityController.clear();
-      _resetForm();
+      resetForm();
 
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Success'),
-            content: Text('Product added successfully'),
+            title: const Text('Success'),
+            content: const Text('Product added successfully'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(); // Dismiss the dialog
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -125,7 +125,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               children: [
                 Container(
@@ -141,7 +141,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 379.w,
                         height: 66.h,
                         child: Column(
@@ -163,13 +163,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 379.w,
                         height: 126.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 20.h,
                               width: 379.w,
                               child: Text(
@@ -190,7 +190,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             //   width: 379.w,
                             //   child: const Text('description textfield here'),
                             // ),
-                            Container(
+                            SizedBox(
                               height: 20.h,
                               width: 379.w,
                               child: Text(
@@ -209,13 +209,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 379.w,
                         height: 66.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 20.h,
                               width: 379.w,
                               child: Text(
@@ -228,7 +228,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ),
                               ),
                             ),
-                            Container(
+                            SizedBox(
                               height: 40.h,
                               width: 379.w,
                               // child: const Text(
@@ -242,13 +242,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 379.w,
                         height: 66.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 20.h,
                               width: 379.w,
                               child: compulsoryTitle('Standard Price'),
@@ -269,13 +269,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 379.w,
                         height: 66.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 20.h,
                               width: 379.w,
                               child: compulsoryTitle('Quantity'),
@@ -294,13 +294,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 379.w,
                         height: 93.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 20.h,
                               width: 379.w,
                               child: compulsoryTitle('Product Variations'),
