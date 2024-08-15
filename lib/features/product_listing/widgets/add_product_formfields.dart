@@ -73,16 +73,17 @@ class CustomTextField extends StatelessWidget {
 }
 
 class ProductNameFormField extends StatelessWidget {
-  const ProductNameFormField({super.key});
-
+  const ProductNameFormField({super.key, required this.controller});
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    final productNameController = TextEditingController();
+    // final productNameController = TextEditingController();
+
     return Container(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
-        controller: productNameController,
+        controller: controller,
         borderColor: const Color.fromRGBO(203, 213, 225, 1),
         hintText: 'Product name',
         validator: (value) {
@@ -97,16 +98,16 @@ class ProductNameFormField extends StatelessWidget {
 }
 
 class DescriptionFormField extends StatelessWidget {
-  const DescriptionFormField({super.key});
-
+  const DescriptionFormField({super.key, required this.controller});
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    final productDescriptionController = TextEditingController();
+    // final productDescriptionController = TextEditingController();
     return Container(
       height: 80.h,
       width: 379.w,
       child: CustomTextField(
-        controller: productDescriptionController,
+        controller: controller,
         maxLength: 72,
         maxLines: null,
         borderColor: const Color.fromRGBO(203, 213, 225, 1),
@@ -118,19 +119,19 @@ class DescriptionFormField extends StatelessWidget {
 }
 
 class ProductPriceFormField extends StatelessWidget {
-  const ProductPriceFormField({super.key});
-
+  const ProductPriceFormField({super.key, required this.controller});
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    final productPriceController = TextEditingController();
+    // final productPriceController = TextEditingController();
     return Container(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
-        controller: productPriceController,
+        controller: controller,
         keyboardType: TextInputType.number,
         borderColor: const Color.fromRGBO(203, 213, 225, 1),
-        hintText: '0.00',
+        hintText: '\$ 0.00',
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter a price';
@@ -143,16 +144,17 @@ class ProductPriceFormField extends StatelessWidget {
 }
 
 class ProductQuantityFormField extends StatelessWidget {
-  const ProductQuantityFormField({super.key});
+  const ProductQuantityFormField({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-    final productQuantityController = TextEditingController();
+    // final productQuantityController = TextEditingController();
     return Container(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
-        controller: productQuantityController,
+        controller: controller,
         keyboardType: TextInputType.number,
         borderColor: const Color.fromRGBO(203, 213, 225, 1),
         hintText: '0.00 pcs',

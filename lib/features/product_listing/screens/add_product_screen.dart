@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import '../widgets/components/formfields.dart';
 import '../widgets/add_product_formfields.dart';
-import '../widgets/components/product_category.dart';
+
 import '../widgets/components/product_variation.dart';
+import '../widgets/product_category.dart';
 import '../widgets/product_images.dart';
+import '../widgets/product_variation.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -18,7 +20,21 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  final nameController = TextEditingController();
+  // final nameController = TextEditingController();
+  final productNameController = TextEditingController();
+  final productDescriptionController = TextEditingController();
+  final productPriceController = TextEditingController();
+  final productQuantityController = TextEditingController();
+
+  @override
+  void dispose() {
+    productNameController.dispose();
+    productDescriptionController.dispose();
+    productPriceController.dispose();
+    productQuantityController.dispose();
+
+    super.dispose();
+  }
 
   compulsoryTitle(String title) {
     return RichText(
@@ -40,6 +56,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+    void _resetForm() {
+      _formKey.currentState!.reset();
+      setState(() {
+        // FilePicker.();
+      });
+    }
+
     Future<void> addProduct() async {
       if (!_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -50,6 +74,30 @@ class _AddProductScreenState extends State<AddProductScreen> {
         );
         return;
       }
+
+      productNameController.clear();
+      productDescriptionController.clear();
+      productPriceController.clear();
+      productQuantityController.clear();
+      _resetForm();
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Product added successfully'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Dismiss the dialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
 
     return Scaffold(
@@ -102,7 +150,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             compulsoryTitle('Title'),
-                            const ProductNameFormField()
+                            ProductNameFormField(
+                              controller: productNameController,
+                            )
                             // Container(
                             //   height: 40.h,
                             //   width: 379.w,
@@ -133,7 +183,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ),
                               ),
                             ),
-                            const DescriptionFormField(),
+                            DescriptionFormField(
+                              controller: productDescriptionController,
+                            ),
                             // Container(
                             //   height: 80.h,
                             //   width: 379.w,
@@ -202,7 +254,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle('Standard Price'),
                             ),
-                            const ProductPriceFormField(),
+                            ProductPriceFormField(
+                              controller: productPriceController,
+                            ),
                             // Container(
                             //   height: 40.h,
                             //   width: 379.w,
@@ -227,7 +281,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle('Quantity'),
                             ),
-                            const ProductQuantityFormField()
+                            ProductQuantityFormField(
+                              controller: productQuantityController,
+                            )
                             // Container(
                             //   height: 40.h,
                             //   width: 379.w,

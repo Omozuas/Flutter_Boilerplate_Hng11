@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../breaking_border_container.dart';
-import '../image_preview.dart';
+import 'breaking_border_container.dart';
+import 'image_preview.dart';
 
 class ProductVariation extends StatefulWidget {
   final Function(List<PlatformFile> files) getProductList;
