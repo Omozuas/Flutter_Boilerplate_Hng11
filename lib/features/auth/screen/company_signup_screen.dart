@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
@@ -36,7 +37,7 @@ class CompanySignUpScreen extends ConsumerWidget {
     bool isLoading = ref.watch(loadingProvider);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: GlobalColors.white,
         appBar: AppBar(
           leading: InkWell(
             onTap: () {
@@ -47,16 +48,15 @@ class CompanySignUpScreen extends ConsumerWidget {
               size: 30.sp,
             ),
           ),
-          backgroundColor: Colors.white,
-          // surfaceTintColor: Colors.white,
+          backgroundColor: GlobalColors.white,
+          // surfaceTintColor: GlobalColors.white,
         ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
-              // width: MediaQuery.of(context).size.width * 0.9,
               width: 350.w,
               padding: EdgeInsets.symmetric(vertical: 20.h),
-              color: Colors.white,
+              color: GlobalColors.white,
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -69,18 +69,16 @@ class CompanySignUpScreen extends ConsumerWidget {
                         children: [
                           Text(
                             'Sign up',
-                            style: TextStyle(
+                            style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
                             'Create an account to get started with us.',
-                            style: TextStyle(
-                              color: Colors.grey,
+                            style: CustomTextStyle.regular(
+                              color: GlobalColors.gray500Color,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           SizedBox(height: 20.sp),
@@ -95,10 +93,13 @@ class CompanySignUpScreen extends ConsumerWidget {
 
                               return null;
                             },
-                            labelStyle: TextStyle(
+                            labelStyle: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
                             ),
                           ),
                           SizedBox(height: 10.sp),
@@ -108,63 +109,81 @@ class CompanySignUpScreen extends ConsumerWidget {
                             keyboardType: TextInputType.emailAddress,
                             hintText: 'Enter company\'s email address',
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter valid email';
-                              }
+                              final emailRegex = RegExp(
+                                  r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter email address';
+                              }
+                              if (!emailRegex.hasMatch(value)) {
+                                return 'Please enter a valid email address';
+                              }
                               return null;
                             },
-                            labelStyle: TextStyle(
+                            labelStyle: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           Text(
                             'Select Industry',
-                            style: TextStyle(
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
                               'Agriculture',
-                              'Development',
+                              'Manufacturing',
+                              'Technology',
+                              'Healthcare',
+                              'Education',
                             ],
                             onChanged: (String? value) {
                               _companyIndustryController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
                           Text(
                             'Organization Type',
-                            style: TextStyle(
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              'Sole Proprietorship',
+                              'Partnership',
+                              'Corporation',
                             ],
                             onChanged: (String? value) {
                               _companyTypeController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -180,57 +199,67 @@ class CompanySignUpScreen extends ConsumerWidget {
                         children: [
                           Text(
                             'Company Address',
-                            style: TextStyle(
+                            style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           Text(
                             'Select country',
-                            style: TextStyle(
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              'Germany',
+                              'Nigeria',
+                              'Canada',
+                              'Brazil',
+                              'Japan',
                             ],
                             onChanged: (String? value) {
                               _companyCountryController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
                           Text(
                             'Select state',
-                            style: TextStyle(
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              'Lagos',
+                              'Florida',
+                              'Texas',
+                              'California',
                             ],
                             onChanged: (String? value) {
                               _companyStateController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -246,33 +275,41 @@ class CompanySignUpScreen extends ConsumerWidget {
 
                               return null;
                             },
-                            labelStyle: TextStyle(
+                            labelStyle: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           Text(
                             'LGA',
-                            style: TextStyle(
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              'Ikeja',
+                              'Brisbane City',
+                              'City of Sydney',
+                              'Ibadan North',
                             ],
                             onChanged: (String? value) {
                               _companyLgaController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -302,7 +339,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             height: 40.sp,
                             containerColor: GlobalColors.orange,
                             width: double.infinity,
-                            textColor: Colors.white,
+                            textColor: GlobalColors.white,
                           ),
                           SizedBox(height: 20.sp),
                           Row(
@@ -310,10 +347,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 'Already Have An Account?',
-                                style: TextStyle(
+                                style: CustomTextStyle.regular(
                                   color: GlobalColors.darkOne,
                                   fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               SizedBox(width: 10.sp),
@@ -323,10 +359,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                                 },
                                 child: Text(
                                   'Login',
-                                  style: TextStyle(
+                                  style: CustomTextStyle.regular(
                                     color: GlobalColors.orange,
                                     fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               )
