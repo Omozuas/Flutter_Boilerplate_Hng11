@@ -4,7 +4,6 @@ import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:one_context/one_context.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -153,7 +152,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                             style: TextStyle(color: GlobalColors.orange),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                OneContext().context?.go(AppRoute.login);
+                                context.go(AppRoute.login);
                               },
                           ),
                         ],

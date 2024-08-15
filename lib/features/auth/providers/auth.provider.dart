@@ -90,7 +90,6 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:one_context/one_context.dart';
 
 class AuthProvider extends StateNotifier<bool> {
   AuthProvider() : super(false);
@@ -110,7 +109,7 @@ class AuthProvider extends StateNotifier<bool> {
         }
       }
     } catch (e) {
-      OneContext().context?.go(AppRoute.home);
+
       //TODO: Do something with caught error;
     } finally {
       state = false;
