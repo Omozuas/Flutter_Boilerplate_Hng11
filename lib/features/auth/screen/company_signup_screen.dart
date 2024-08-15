@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
 
-  final _formKey = GlobalKey<FormState>();
+  final _companyFormKey = GlobalKey<FormState>();
 
   final _companyNameController = TextEditingController();
 
@@ -58,7 +58,7 @@ class CompanySignUpScreen extends ConsumerWidget {
               padding: EdgeInsets.symmetric(vertical: 20.h),
               color: GlobalColors.white,
               child: Form(
-                key: _formKey,
+                key: _companyFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -326,7 +326,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           CustomButton(
                             onTap: () async {
                               // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState!.validate()) {
+                              if (_companyFormKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
                                 //Submission async function here
                                 ref.read(loadingProvider.notifier).state =
