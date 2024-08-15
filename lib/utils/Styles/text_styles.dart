@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextStyles {
-
   //textstyles for detail screen
   //  static final header = TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,);
   // static final title = TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w600,);
@@ -44,8 +44,25 @@ class CustomTextStyles {
       fontSize: 14.sp,
       color: GlobalColors.gray500Color,
       fontWeight: FontWeight.w400);
-       static TextStyle bodyTextOrange = TextStyle(
+  static TextStyle bodyTextOrange = TextStyle(
       fontSize: 14.sp, color: GlobalColors.orange, fontWeight: FontWeight.w400);
+  static TextStyle producHeaderBlack = TextStyle(
+      fontSize: 18.sp, color: GlobalColors.black, fontWeight: FontWeight.w700);
+  static TextStyle productSmallBodyTextBlack = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.darkOne,
+      fontWeight: FontWeight.w400);
+}
 
-
+class PlusJakartaTextStyle {
+  static TextStyle headerText2 = TextStyle(
+      fontSize: 16.sp,
+      color: GlobalColors.black,
+      fontFamily: GoogleFonts.plusJakartaSans.toString(),
+      fontWeight: FontWeight.w700);
+  static TextStyle bodyTextGrey = TextStyle(
+      fontSize: 14.sp,
+      color: GlobalColors.gray600Color,
+      fontFamily: GoogleFonts.plusJakartaSans.toString(),
+      fontWeight: FontWeight.w400);
 }
