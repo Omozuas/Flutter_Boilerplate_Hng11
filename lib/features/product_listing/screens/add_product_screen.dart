@@ -87,7 +87,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   margin: EdgeInsets.only(top: 17.h),
                   child: Column(
                     children: [
-                      ProductImages(getProductFiles: (files) {
+                      ProductImage(getProductFiles: (files) {
                         // Add functionality to submit
                       }),
                       SizedBox(
