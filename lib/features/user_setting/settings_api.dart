@@ -1,6 +1,6 @@
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
-import 'models/app_user_model.dart';
+import 'models/user_model.dart';
 
 class SettingsApi {
   //Inject the DioProvider Dependency
