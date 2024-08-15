@@ -81,7 +81,6 @@
 //
 
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -125,6 +124,7 @@ class AuthProvider extends StateNotifier<bool> {
     try {
       final googleSignIn = GoogleSignIn(
         scopes: [
+          'email',
           'https://www.googleapis.com/auth/userinfo.profile',
         ],
       );
