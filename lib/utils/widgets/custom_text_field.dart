@@ -77,6 +77,7 @@ class CustomTextField extends StatelessWidget {
             validator: validator,
             focusNode: focusNode,
             onChanged: onchanged,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               contentPadding: padding ??
                   EdgeInsets.symmetric(
