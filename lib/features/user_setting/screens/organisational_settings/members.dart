@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/invite_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -200,7 +201,11 @@ class _MembersSettingsState extends State<MembersSettings> {
               Row(
                 children: [
                   TextButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return const SubscriptionsScreen();
+                      }));
+                    },
                     child: Row(
                       children: [
                         Text(
