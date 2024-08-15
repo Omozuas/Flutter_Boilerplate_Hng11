@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 // import '../widgets/components/formfields.dart';
 import '../widgets/add_product_formfields.dart';
 
-import '../widgets/components/product_variation.dart';
 import '../widgets/product_category.dart';
 import '../widgets/product_images.dart';
 import '../widgets/product_variation.dart';

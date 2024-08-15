@@ -11,8 +11,6 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/product_listing/screens/add_product_screen.dart';
-
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoute.splash,
@@ -52,8 +50,7 @@ class AppRouter {
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
-              builder: (context, state, ref) => const AddProductScreen(),
-              //HomeScreen(),
+              builder: (context, state, ref) => const ProductHomeScreen(),
             ),
           ]),
           StatefulShellBranch(routes: [
