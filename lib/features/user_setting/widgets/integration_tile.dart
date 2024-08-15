@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/integration_container.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class IntegrationListView extends StatelessWidget {
   const IntegrationListView({super.key});
 
@@ -79,24 +78,24 @@ class IntegrationListView extends StatelessWidget {
 
     return ListView.builder(
       shrinkWrap: true,
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        itemCount: integrationData.length,
-        itemBuilder: (context, index) {
-          final item = integrationData[index];
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: IntegrationContainer(
-              isToggled: item['isToggled'],
-              image: item['image'],
-              nameText: item['name'],
-              detailText: item['details'],
-              onChanged: (bool value) {
-                // Handle toggle switch change
-                print('${item['nameText']} is now ${value ? 'enabled' : 'disabled'}');
-              },
-            ),
-          );
-        },
-      );
+      padding: EdgeInsets.symmetric(vertical: 8.h),
+      itemCount: integrationData.length,
+      itemBuilder: (context, index) {
+        final item = integrationData[index];
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: IntegrationContainer(
+            isToggled: item['isToggled'],
+            image: item['image'],
+            nameText: item['name'],
+            detailText: item['details'],
+            onChanged: (bool value) {
+              // Handle toggle switch change
+              // print('${item['nameText']} is now ${value ? 'enabled' : 'disabled'}');
+            },
+          ),
+        );
+      },
+    );
   }
 }
