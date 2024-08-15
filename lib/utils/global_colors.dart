@@ -24,7 +24,6 @@ class GlobalColors {
   static HexColor redColor = HexColor('#E00414');
   static HexColor lightOrangeColor = HexColor('#FF7D06');
   static HexColor deemWhiteColor = HexColor('#F9F9F9');
-  static HexColor greenColor = HexColor('#10AF20');
   static HexColor black = HexColor('#000000');
   static HexColor diverColor = HexColor('#DEDEDE');
   static HexColor bgsurface700 = HexColor('21202D');
@@ -33,4 +32,8 @@ class GlobalColors {
   static HexColor white = HexColor('#FFFFFF');
   static HexColor toastBgSurface = HexColor('#FDE7E7');
   static HexColor toastBgSurface2 = HexColor('##E7F7E9');
+  static HexColor integrationTextColor = HexColor('#0A0A0A');
+  static HexColor containerBgColor = HexColor('#FFF8F2');
+  static HexColor btnBgColor = HexColor('#FDEEE3');
 }
+

@@ -88,7 +88,7 @@ class ProductHomeScreen extends StatelessWidget {
                             GlobalScreenSize.getScreenHeight(context) * 0.04,
                         width: GlobalScreenSize.getScreenWidth(context) * 0.25,
                         decoration: BoxDecoration(
-                            color: GlobalColors.whiteColor,
+                            color: GlobalColors.white,
                             borderRadius: BorderRadius.circular(12.r)),
                         child: Center(
                           child: Text(
