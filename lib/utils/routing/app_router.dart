@@ -1,9 +1,11 @@
 import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/reset_password.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
@@ -62,6 +64,12 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
+        path: AppRoute.resetPassword,
+        builder: (context, state, ref) {
+          return const ResetPassword();
+        },
+      ),
+      ConsumerGoRoute(
         path: '${AppRoute.products}/:id',
         builder: (context, state, ref) {
           return const ProductDetailsScreen();
@@ -112,6 +120,7 @@ class AppRoute {
   static const String forgotPassword = '/forgotPassword';
   static const String verificationScreen = '/verificationScreen';
   static const String verificationSuccess = '/verificationSuccess';
+  static const String resetPassword = '/resetPassword';
   static const String cart = '/cart';
 
   static const String settings = '/settings';

@@ -44,9 +44,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(
+          icon:  Icon(
             Icons.chevron_left,
-            size: 24,
+            size: 30.sp,
           ),
           onPressed: () => Navigator.pop(context),
         ),
