@@ -22,13 +22,13 @@ class PreviewItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: Image.file(
               File(previewFile.xFile.path),
-              height: 100,
+              width: double.infinity,
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
-              top: 1,
-              right: 1,
+              top: 5,
+              right: 5,
               child: GestureDetector(
                 onTap: removeItem,
                 child: Icon(
@@ -56,8 +56,8 @@ class PreviewItem extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: 1,
-            right: 1,
+            top: 5,
+            right: 5,
             child: GestureDetector(
               onTap: removeItem,
               child: Icon(
