@@ -65,6 +65,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
+                  color: GlobalColors.darkOne,
                 ),
               ),
               Divider(
