@@ -147,6 +147,122 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   margin: EdgeInsets.only(top: 17.h),
                   child: Column(
                     children: [
+                      BreakingBorderContainer(
+                        child: Container(
+                          height: 125.h,
+                          width: 379.w,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(239, 239, 239, 1.0),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: result!.files.isEmpty
+                              ? Center(
+                                  child: SizedBox(
+                                    height: 58.h,
+                                    width: 250.w,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: pickFile,
+                                          // () {
+                                          //   pickFile();
+                                          // },
+                                          child: Container(
+                                            height: 32.h,
+                                            width: 114.w,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: const Color.fromRGBO(
+                                                        226, 232, 240, 1)),
+                                                color: const Color.fromRGBO(
+                                                    255, 255, 255, 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                    color: Color.fromRGBO(
+                                                        10, 57, 176, 0.12),
+                                                    offset: Offset(0, 1),
+                                                    blurRadius: 18,
+                                                    spreadRadius: 0,
+                                                  )
+                                                ]),
+                                            child: Center(
+                                              child: Text(
+                                                'Upload New',
+                                                style: GoogleFonts.inter(
+                                                  color: const Color.fromRGBO(
+                                                      10, 10, 10, 1),
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  height: 24 / 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 17.h,
+                                          width: 250.w,
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: Text(
+                                              'Accepts images, videos or 3D models',
+                                              style: GoogleFonts.inter(
+                                                color: const Color.fromRGBO(
+                                                    82, 82, 82, 1),
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                                height: 16.94 / 14,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : GridView.builder(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 5,
+                                          mainAxisSpacing: 4.0,
+                                          crossAxisSpacing: 4.0),
+                                  // physics: NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.all(8.h),
+                                  itemBuilder: (context, index) {
+                                    if (index == 0) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          addFile();
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              color: Colors.white),
+                                          child: const Icon(
+                                            Icons.add_circle_outline_rounded,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    return previewItem(
+                                      previewFile: result!.files[index - 1],
+                                    );
+                                  },
+                                  itemCount: result!.files.length + 1,
+                                ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6.h,
+                      ),
                       Container(
                         width: 379.w,
                         height: 66.h,
@@ -156,16 +272,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           children: [
                             compulsoryTitle('Title'),
                             const ProductNameFormField()
-                            // Container(
-                            //   color: Colors.amber,
-                            //   height: 40.h,
-                            //   width: 379.w,
-                            //   child: CustomTextField(
-                            //     controller: productNameController,
-                            //     borderColor: Color.fromRGBO(203, 213, 225, 1),
-                            //     hintText: 'Product name',
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -315,154 +421,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      Container(
-                        width: 379.w,
-                        height: 151.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: 20.h,
-                              width: 379.w,
-                              child: Text(
-                                'Media',
-                                style: GoogleFonts.inter(
-                                  color: const Color.fromRGBO(10, 10, 10, 1),
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  height: 20 / 14,
-                                ),
-                              ),
-                            ),
-                            BreakingBorderContainer(
-                              child: Container(
-                                height: 125.h,
-                                width: 379.w,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromRGBO(239, 239, 239, 1.0),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: result!.files.isEmpty
-                                    ? Center(
-                                        child: SizedBox(
-                                          height: 58.h,
-                                          width: 250.w,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  pickFile();
-                                                },
-                                                child: Container(
-                                                  height: 32.h,
-                                                  width: 114.w,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 1,
-                                                          color: const Color
-                                                              .fromRGBO(226,
-                                                              232, 240, 1)),
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              255, 255, 255, 1),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                          color: Color.fromRGBO(
-                                                              10,
-                                                              57,
-                                                              176,
-                                                              0.12),
-                                                          offset: Offset(0, 1),
-                                                          blurRadius: 18,
-                                                          spreadRadius: 0,
-                                                        )
-                                                      ]),
-                                                  child: Center(
-                                                    child: Text(
-                                                      'Upload New',
-                                                      style: GoogleFonts.inter(
-                                                        color: const Color
-                                                            .fromRGBO(
-                                                            10, 10, 10, 1),
-                                                        fontSize: 14.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        height: 24 / 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 17.h,
-                                                width: 250.w,
-                                                child: FittedBox(
-                                                  fit: BoxFit.scaleDown,
-                                                  child: Text(
-                                                    'Accepts images, videos or 3D models',
-                                                    style: GoogleFonts.inter(
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              82, 82, 82, 1),
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      height: 16.94 / 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    : GridView.builder(
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 5,
-                                                mainAxisSpacing: 4.0,
-                                                crossAxisSpacing: 4.0),
-                                        // physics: NeverScrollableScrollPhysics(),
-                                        padding: EdgeInsets.all(8.h),
-                                        itemBuilder: (context, index) {
-                                          if (index == 0) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                addFile();
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    color: Colors.white),
-                                                child: const Icon(
-                                                  Icons
-                                                      .add_circle_outline_rounded,
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                            );
-                                          }
-
-                                          return previewItem(
-                                            previewFile:
-                                                result!.files[index - 1],
-                                          );
-                                        },
-                                        itemCount: result!.files.length + 1,
-                                      ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -481,6 +439,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         width: 172.5.w,
                         textColor: const Color.fromRGBO(15, 23, 42, 1),
                       ),
+                      // SizedBox(
+                      //   width: 10.w,
+                      // ),
                       CustomButton(
                         onTap: addProduct,
                         // () {},
