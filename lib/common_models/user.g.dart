@@ -15,13 +15,13 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       isSuperadmin: json['is_superadmin'] as bool?,
       lastName: json['last_name'] as String?,
     );
-
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
-      'avatar_url': instance.avatarUrl,
-      'email': instance.email,
-      'created_at': instance.createdAt,
-      'is_superadmin': instance.isSuperadmin,
-    };
+//
+// Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+//       'id': instance.id,
+//       'first_name': instance.firstName,
+//       'last_name': instance.lastName,
+//       'avatar_url': instance.avatarUrl,
+//       'email': instance.email,
+//       'created_at': instance.createdAt,
+//       'is_superadmin': instance.isSuperadmin,
+//     };

@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
-import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:get_storage/get_storage.dart';
 
 class CustomInterceptor extends Interceptor {
@@ -25,7 +24,7 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-   // log('Response >> ${response}');
+    // log('Response >> ${response}');
 
     super.onResponse(response, handler);
   }

@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
@@ -19,275 +17,273 @@ class LoginScreen extends ConsumerWidget {
 
   static final TextEditingController _emailController = TextEditingController();
 
- static final TextEditingController _passwordController = TextEditingController();
-
+  static final TextEditingController _passwordController =
+      TextEditingController();
 
   static final _formKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   final isChecked = ref.watch(checkBoxProvider);
-   final loading = ref.watch(authProvider);
+    final isChecked = ref.watch(checkBoxProvider);
+    final loading = ref.watch(authProvider);
     return SafeArea(
         child: Scaffold(
-          body: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 48.h,
+                ),
+                Text(
+                  "Login",
+                  style: GoogleFonts.inter(
+                      color: const Color(0xFF141414),
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Text(
+                  "Welcome back, please enter your details",
+                  style: GoogleFonts.inter(
+                      color: GlobalColors.darkOne,
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w400),
+                ),
+                SizedBox(
+                  height: 28.h,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      side: const BorderSide(color: Colors.grey),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                      ),
+                    ),
+                    onPressed: () {
+                      ref.read(authProvider.notifier).googleSignin(context);
+                    },
+                    child: loading
+                        ? SizedBox(
+                            width: 16.w,
+                            height: 16.w,
+                            child: CircularProgressIndicator.adaptive(
+                              strokeWidth: 2.w,
+                            ),
+                          )
+                        : Image.asset(
+                            'assets/images/google.png',
+                            fit: BoxFit.contain,
+                            width: 200.w,
+                          ),
+                  ),
+                ),
+                SizedBox(
+                  height: 24.h,
+                ),
+                Row(
                   children: [
-                    SizedBox(
-                      height: 48.h,
-                    ),
+                    SizedBox(width: 105.w, child: const Divider()),
+                    const Spacer(),
                     Text(
-                      "Login",
-                      style: GoogleFonts.inter(
-                          color: const Color(0xFF141414),
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text(
-                      "Welcome back, please enter your details",
+                      "or continue with",
                       style: GoogleFonts.inter(
                           color: GlobalColors.darkOne,
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w400),
                     ),
-                    SizedBox(
-                      height: 28.h,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
-                          side: const BorderSide(color: Colors.grey),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                          ),
-                        ),
-                        onPressed: () {
-                          ref.read(authProvider.notifier).googleSignin(context);
-                        },
-                        child: loading
-                            ? SizedBox(
-                          width: 16.w,
-                          height: 16.w,
-                          child: CircularProgressIndicator.adaptive(
-                            strokeWidth: 2.w,
-                          ),
-                        )
-                            : Image.asset(
-                          'assets/images/google.png',
-                          fit: BoxFit.contain,
-                          width: 200.w,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 105.w, child: const Divider()),
-                        const Spacer(),
-                        Text(
-                          "or continue with",
-                          style: GoogleFonts.inter(
-                              color: GlobalColors.darkOne,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        const Spacer(),
-                        SizedBox(width: 105.w, child: const Divider()),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 28.h,
-                    ),
-                    CustomTextField(
-                      label: "Email",
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      hintText: "Enter your email",
-                      validator:(v)=> Validators.emailValidator(v),
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    CustomTextField(
-                      label: "Password",
-                      obscureText: true,
-                      controller: _passwordController,
-                      hintText: "Enter your password",
-                      suffixIcon: const Icon(Icons.visibility_off),
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            padding: EdgeInsets.zero,
-                            child: GestureDetector(
-                              onTap: () {
-                                ref.read(checkBoxProvider.notifier).state =
-                                    !  ref.read(checkBoxProvider.notifier).state;
-                              },
-                              child: Icon(
-                                isChecked
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                                color: isChecked
-                                    ? GlobalColors.orange
-                                    : GlobalColors.darkOne,
-                              ),
-                            )),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(
-                          "Remember Me",
-                          style: GoogleFonts.inter(
-                              color: const Color(0XFF0A0A0A),
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                  const ForgotPasswordScreen()),
-                            );
-                            //:TODO add function for forgot password
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: GoogleFonts.inter(
-                                color: GlobalColors.orange,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    CustomButton(
-                      loading: loading,
-                        onTap: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                              ref.read(authProvider.notifier).login({
-                                'email': _emailController.text,
-                                'password': _passwordController.text,
-                              }, context);
-                          }
-                        },
-                        borderColor: GlobalColors.borderColor,
-                        text: "Login",
-                        height: 48.h,
-                        containerColor: GlobalColors.orange,
-                        width: 342.w,
-                        textColor: Colors.white),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    CustomButton(
-                        onTap: () {},
-                        borderColor: GlobalColors.borderColor,
-                        text: "Use Magic Link instead",
-                        height: 48.h,
-                        containerColor: Colors.white,
-                        width: 342.w,
-                        textColor: GlobalColors.darkOne),
-                    const SizedBox(
-                      height: 23.5,
-                    ),
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: 'Don\'t have an account? ',
-                          style: TextStyle(color: GlobalColors.darkOne),
-                          children: [
-                            TextSpan(
-                                text: 'Sign Up',
-                                style: TextStyle(
-                                    color: GlobalColors.orange,
-                                    fontWeight: FontWeight.bold),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CompanySignUpScreen()),
-                                    );
-                                  }),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 49.h,
-                    ),
-                    SizedBox(
-                      width: 342.w,
-                      height: 48.h,
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: 'By logging in, you agree with our ',
-                          style: GoogleFonts.inter(
-                              color: GlobalColors.bgsurface700,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400),
-                          children: [
-                            TextSpan(
-                              text: 'Terms & \nUse ',
-                              style: GoogleFonts.inter(
-                                  fontSize: 14.sp,
-                                  color: GlobalColors.orange,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            TextSpan(
-                              text: 'and ',
-                              style: GoogleFonts.inter(
-                                color: GlobalColors.black,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Privacy Policy.',
-                              style: GoogleFonts.inter(
-                                  fontSize: 14.sp,
-                                  color: GlobalColors.orange,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const Spacer(),
+                    SizedBox(width: 105.w, child: const Divider()),
                   ],
                 ),
-              ),
+                SizedBox(
+                  height: 28.h,
+                ),
+                CustomTextField(
+                  label: "Email",
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  hintText: "Enter your email",
+                  validator: (v) => Validators.emailValidator(v),
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                CustomTextField(
+                  label: "Password",
+                  obscureText: true,
+                  controller: _passwordController,
+                  hintText: "Enter your password",
+                  suffixIcon: const Icon(Icons.visibility_off),
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.zero,
+                        child: GestureDetector(
+                          onTap: () {
+                            ref.read(checkBoxProvider.notifier).state =
+                                !ref.read(checkBoxProvider.notifier).state;
+                          },
+                          child: Icon(
+                            isChecked
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank,
+                            color: isChecked
+                                ? GlobalColors.orange
+                                : GlobalColors.darkOne,
+                          ),
+                        )),
+                    SizedBox(
+                      width: 8.w,
+                    ),
+                    Text(
+                      "Remember Me",
+                      style: GoogleFonts.inter(
+                          color: const Color(0XFF0A0A0A),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordScreen()),
+                        );
+                        //:TODO add function for forgot password
+                      },
+                      child: Text(
+                        "Forgot Password?",
+                        style: GoogleFonts.inter(
+                            color: GlobalColors.orange,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 32.h,
+                ),
+                CustomButton(
+                    loading: loading,
+                    onTap: () async {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        ref.read(authProvider.notifier).login({
+                          'email': _emailController.text,
+                          'password': _passwordController.text,
+                        }, context);
+                      }
+                    },
+                    borderColor: GlobalColors.borderColor,
+                    text: "Login",
+                    height: 48.h,
+                    containerColor: GlobalColors.orange,
+                    width: 342.w,
+                    textColor: Colors.white),
+                SizedBox(
+                  height: 8.h,
+                ),
+                CustomButton(
+                    onTap: () {},
+                    borderColor: GlobalColors.borderColor,
+                    text: "Use Magic Link instead",
+                    height: 48.h,
+                    containerColor: Colors.white,
+                    width: 342.w,
+                    textColor: GlobalColors.darkOne),
+                const SizedBox(
+                  height: 23.5,
+                ),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Don\'t have an account? ',
+                      style: TextStyle(color: GlobalColors.darkOne),
+                      children: [
+                        TextSpan(
+                            text: 'Sign Up',
+                            style: TextStyle(
+                                color: GlobalColors.orange,
+                                fontWeight: FontWeight.bold),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          CompanySignUpScreen()),
+                                );
+                              }),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 49.h,
+                ),
+                SizedBox(
+                  width: 342.w,
+                  height: 48.h,
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: 'By logging in, you agree with our ',
+                      style: GoogleFonts.inter(
+                          color: GlobalColors.bgsurface700,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400),
+                      children: [
+                        TextSpan(
+                          text: 'Terms & \nUse ',
+                          style: GoogleFonts.inter(
+                              fontSize: 14.sp,
+                              color: GlobalColors.orange,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        TextSpan(
+                          text: 'and ',
+                          style: GoogleFonts.inter(
+                            color: GlobalColors.black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Privacy Policy.',
+                          style: GoogleFonts.inter(
+                              fontSize: 14.sp,
+                              color: GlobalColors.orange,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }
 

@@ -57,6 +57,7 @@ dependencies:
   vector_graphics: any
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
+  json_annotation: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

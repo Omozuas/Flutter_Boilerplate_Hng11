@@ -108,11 +108,11 @@ class AuthProvider extends StateNotifier<bool> {
       //The set up is such that if the response is successful, res will not be null.
       //Otherwise it will be null. That is why I am checking.
       if (res != null) {
-       showSnackBar(res.message.toString());
-       UserRegData userRegData = UserRegData.fromJson(res.data);
+        showSnackBar(res.message.toString());
+        UserRegData userRegData = UserRegData.fromJson(res.data);
         if (context.mounted) {
-         context.go(AppRoute.home);
-         box.write('accessToken', userRegData.accessToken );
+          context.go(AppRoute.home);
+          box.write('accessToken', userRegData.accessToken);
         }
       }
     } catch (e) {
@@ -144,18 +144,16 @@ class AuthProvider extends StateNotifier<bool> {
         );
         final u = await auth.signInWithCredential(credential);
 
-        log('ID Token: ${googleAuth.idToken}');
-        // final res = await AuthApi().googleSignIn(googleAuth.idToken!);
-        // if (res != null) {
-        //   showSnackBar(res.message.toString());
-        //   UserRegData userRegData = UserRegData.fromJson(res.data);
-        //   log('kfh:${res.data}');
-        //   if (context.mounted) {
-        //     // context.go(AppRoute.home);
-        //     // box.write('accessToken', userRegData.accessToken );
-        //   }
-        // }
-        // log('reg res:$res');
+        log('ID Token: ${googleAuth.idToken}...u=$u');
+        final res = await AuthApi().googleSignIn(googleAuth.idToken!);
+        if (res != null) {
+          showSnackBar(res.message.toString());
+          UserRegData userRegData = UserRegData.fromJson(res.data);
+          if (context.mounted) {
+            context.go(AppRoute.home);
+            box.write('accessToken', userRegData.accessToken );
+          }
+        }
       }
     } catch (e) {
       rethrow;
@@ -164,8 +162,7 @@ class AuthProvider extends StateNotifier<bool> {
     }
   }
 
-  Future<void> login(
-      Map<String, dynamic> data, BuildContext context) async {
+  Future<void> login(Map<String, dynamic> data, BuildContext context) async {
     state = true;
     try {
       final res = await AuthApi().loginUser(data);
@@ -175,7 +172,7 @@ class AuthProvider extends StateNotifier<bool> {
         UserRegData userRegData = UserRegData.fromJson(res.data);
         if (context.mounted) {
           context.go(AppRoute.home);
-          box.write('accessToken', userRegData.accessToken );
+          box.write('accessToken', userRegData.accessToken);
         }
       }
     } catch (e) {
@@ -190,5 +187,4 @@ final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
   return AuthProvider();
 });
 
-
-final checkBoxProvider = StateProvider<bool>((ref)=>false);
+final checkBoxProvider = StateProvider<bool>((ref) => false);
