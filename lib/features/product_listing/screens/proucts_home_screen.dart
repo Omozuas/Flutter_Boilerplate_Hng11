@@ -111,19 +111,9 @@ class ProductHomeScreen extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            Row(
-              children: [
-                Text(
-                  "Available Products",
-                  style: CustomTextStyles.titleTextBlack,
-                ),
-                const Spacer(),
-                Assets.images.svg.productListing.listIcon.svg(),
-                SizedBox(
-                  width: 8.w,
-                ),
-                Assets.images.svg.productListing.gridIcon.svg(),
-              ],
+            Text(
+              "Available Products",
+              style: CustomTextStyles.titleTextBlack,
             ),
             SizedBox(
               height: 16.h,
