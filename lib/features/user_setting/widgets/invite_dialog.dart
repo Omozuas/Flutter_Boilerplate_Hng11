@@ -35,7 +35,7 @@ class _InviteDialogState extends State<InviteDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InviteDialogHeader(
-              title: widget.title,
+              title: title,
               onClose: () {
                 Navigator.pop(context);
               },

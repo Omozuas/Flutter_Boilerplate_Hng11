@@ -17,41 +17,39 @@ class PriceWidget extends StatelessWidget {
   final int decimalPlaces;
   final double? iconSize;
   final FontWeight? weight;
-  const PriceWidget({
-    super.key,
-    this.value = 0,
-    this.size,
-    this.color,
-    this.roundUp,
-    this.family,
-    this.isBold = false,
-    this.weight,
-    this.isDollar = true,
-    this.decimalPlaces = 2,
-    this.iconSize,
-    this.spaceSize
-  });
+  const PriceWidget(
+      {super.key,
+      this.value = 0,
+      this.size,
+      this.color,
+      this.roundUp,
+      this.family,
+      this.isBold = false,
+      this.weight,
+      this.isDollar = true,
+      this.decimalPlaces = 2,
+      this.iconSize,
+      this.spaceSize});
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          isDollar? "\$" : "₦",
+          isDollar ? "\$" : "₦",
           style: GoogleFonts.inter(
-            fontSize: iconSize?? size,
-            fontWeight: isBold? FontWeight.w600: weight,
+            fontSize: iconSize ?? size,
+            fontWeight: isBold ? FontWeight.w600 : weight,
             color: color,
           ),
         ),
-        spaceSize==null? 0.0.sbW: spaceSize!.sp.sbW,
+        spaceSize == null ? 0.0.sbW : spaceSize!.sp.sbW,
         Text(
           formatNumber(value, roundUp: roundUp, decimalPlaces: decimalPlaces),
           style: GoogleFonts.inter(
             fontSize: size,
-            fontWeight: isBold? FontWeight.w600: weight,
+            fontWeight: isBold ? FontWeight.w600 : weight,
             color: color,
           ),
         )

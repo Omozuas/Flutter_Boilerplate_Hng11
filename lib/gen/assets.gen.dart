@@ -15,8 +15,56 @@ import 'package:vector_graphics/vector_graphics.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/atlassian.png
+  AssetGenImage get atlassian =>
+      const AssetGenImage('assets/images/atlassian.png');
+
+  /// File path: assets/images/chat_slack.png
+  AssetGenImage get chatSlack =>
+      const AssetGenImage('assets/images/chat_slack.png');
+
+  /// File path: assets/images/drive_google_google drive_icons.png
+  AssetGenImage get driveGoogleGoogleDriveIcons =>
+      const AssetGenImage('assets/images/drive_google_google drive_icons.png');
+
+  /// File path: assets/images/dropbox.png
+  AssetGenImage get dropbox => const AssetGenImage('assets/images/dropbox.png');
+
+  /// File path: assets/images/empty_avatar.png
+  AssetGenImage get emptyAvatar =>
+      const AssetGenImage('assets/images/empty_avatar.png');
+
+  /// File path: assets/images/google.png
+  AssetGenImage get google => const AssetGenImage('assets/images/google.png');
+
+  /// File path: assets/images/googleIcon.png
+  AssetGenImage get googleIcon =>
+      const AssetGenImage('assets/images/googleIcon.png');
+
+  /// File path: assets/images/hng-boilerplate-Logo.png
+  AssetGenImage get hngBoilerplateLogo =>
+      const AssetGenImage('assets/images/hng-boilerplate-Logo.png');
+
+  /// File path: assets/images/jira.png
+  AssetGenImage get jira => const AssetGenImage('assets/images/jira.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/microsoft_office.png
+  AssetGenImage get microsoftOffice =>
+      const AssetGenImage('assets/images/microsoft_office.png');
+
+  /// File path: assets/images/microsoft_office_office 365_teams.png
+  AssetGenImage get microsoftOfficeOffice365Teams => const AssetGenImage(
+      'assets/images/microsoft_office_office 365_teams.png');
+
+  /// File path: assets/images/notion.png
+  AssetGenImage get notion => const AssetGenImage('assets/images/notion.png');
+
+  /// File path: assets/images/onedrive.png
+  AssetGenImage get onedrive =>
+      const AssetGenImage('assets/images/onedrive.png');
 
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
@@ -24,8 +72,27 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/svg
   $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/trello.png
+  AssetGenImage get trello => const AssetGenImage('assets/images/trello.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [logo];
+  List<AssetGenImage> get values => [
+        atlassian,
+        chatSlack,
+        driveGoogleGoogleDriveIcons,
+        dropbox,
+        emptyAvatar,
+        google,
+        googleIcon,
+        hngBoilerplateLogo,
+        jira,
+        logo,
+        microsoftOffice,
+        microsoftOfficeOffice365Teams,
+        notion,
+        onedrive,
+        trello
+      ];
 }
 
 class $AssetsImagesPngGen {
@@ -66,6 +133,10 @@ class $AssetsImagesSvgProductListingGen {
   SvgGenImage get active =>
       const SvgGenImage('assets/images/svg/product_listing/active.svg');
 
+  /// File path: assets/images/svg/product_listing/filter_button.svg
+  SvgGenImage get filterButton =>
+      const SvgGenImage('assets/images/svg/product_listing/filter_button.svg');
+
   /// File path: assets/images/svg/product_listing/grid_icon.svg
   SvgGenImage get gridIcon =>
       const SvgGenImage('assets/images/svg/product_listing/grid_icon.svg');
@@ -78,14 +149,23 @@ class $AssetsImagesSvgProductListingGen {
   SvgGenImage get searchIcon =>
       const SvgGenImage('assets/images/svg/product_listing/search_icon.svg');
 
+  /// File path: assets/images/svg/product_listing/sort_icon.svg
+  SvgGenImage get sortIcon =>
+      const SvgGenImage('assets/images/svg/product_listing/sort_icon.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [active, gridIcon, listIcon, searchIcon];
+  List<SvgGenImage> get values =>
+      [active, filterButton, gridIcon, listIcon, searchIcon, sortIcon];
 }
 
 class Assets {
   Assets._();
 
+  static const String aEnv = '.env';
   static const $AssetsImagesGen images = $AssetsImagesGen();
+
+  /// List of all assets
+  static List<String> get values => [aEnv];
 }
 
 class AssetGenImage {
