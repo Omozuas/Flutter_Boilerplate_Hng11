@@ -111,9 +111,18 @@ class ProductHomeScreen extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            Text(
-              "Available Products",
-              style: CustomTextStyles.titleTextBlack,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Available Products",
+                  style: CustomTextStyles.titleTextBlack,
+                ),
+                Text(
+                  "See more",
+                  style: PlusJakartaTextStyle.bodyTextGrey,
+                )
+              ],
             ),
             SizedBox(
               height: 16.h,
