@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 
+enum SubscriptionPlan { free, basic, advanced, premium }
 
-enum SubscriptionPlan {free, basic, advanced, premium}
 class SubscriptionsScreen extends StatefulWidget {
   const SubscriptionsScreen({super.key});
 
@@ -63,52 +63,59 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             const SizedBox(
               height: 32,
             ),
-
-             PlanCard(
-                planCardPlan: SubscriptionPlan.free.name,
-                planCardPrice: 0,
-                isItCurrentPlan: true,
-              planCardDescription: "The essential to provide \nyour best work for clients.",
+            PlanCard(
+              planCardPlan: SubscriptionPlan.free.name,
+              planCardPrice: 0,
+              isItCurrentPlan: true,
+              planCardDescription:
+                  "The essential to provide \nyour best work for clients.",
               bulletDescription1: "10 Projects",
               bulletDescription2: "Up to 10 subscribers",
-              bulletDescription3: "Advanced analytics" ,
+              bulletDescription3: "Advanced analytics",
             ),
-             const SizedBox(height: 28,),
-             PlanCard(
-                planCardPlan: SubscriptionPlan.basic.name,
-                planCardPrice: 20,
-                isItCurrentPlan: false,
-              planCardDescription: "The essential to provide \nyour best work for clients.",
+            const SizedBox(
+              height: 28,
+            ),
+            PlanCard(
+              planCardPlan: SubscriptionPlan.basic.name,
+              planCardPrice: 20,
+              isItCurrentPlan: false,
+              planCardDescription:
+                  "The essential to provide \nyour best work for clients.",
               bulletDescription1: "100 Projects",
               bulletDescription2: "Up to 50 subscribers",
-              bulletDescription3: "Advanced analytics" ,
-               bulletDescription4: "24-hour support",
+              bulletDescription3: "Advanced analytics",
+              bulletDescription4: "24-hour support",
             ),
-            const SizedBox(height: 28,),
-
-             PlanCard(
-                planCardPlan: SubscriptionPlan.advanced.name,
-                planCardPrice: 50,
-                isItCurrentPlan: false,
-              planCardDescription: "The essential to provide \nyour best work for clients.",
+            const SizedBox(
+              height: 28,
+            ),
+            PlanCard(
+              planCardPlan: SubscriptionPlan.advanced.name,
+              planCardPrice: 50,
+              isItCurrentPlan: false,
+              planCardDescription:
+                  "The essential to provide \nyour best work for clients.",
               bulletDescription1: "200 Projects",
               bulletDescription2: "Up to 100 subscribers",
-              bulletDescription3: "Advanced analytics" ,
-               bulletDescription4: "24-hour support",
-               bulletDescription5: "Marketing advisor",
+              bulletDescription3: "Advanced analytics",
+              bulletDescription4: "24-hour support",
+              bulletDescription5: "Marketing advisor",
             ),
-            const SizedBox(height: 28,),
-
-             PlanCard(
-                planCardPlan: SubscriptionPlan.premium.name,
-                planCardPrice: 100,
-                isItCurrentPlan: false,
-              planCardDescription: "The essential to provide \nyour best work for clients.",
+            const SizedBox(
+              height: 28,
+            ),
+            PlanCard(
+              planCardPlan: SubscriptionPlan.premium.name,
+              planCardPrice: 100,
+              isItCurrentPlan: false,
+              planCardDescription:
+                  "The essential to provide \nyour best work for clients.",
               bulletDescription1: "300 Projects",
               bulletDescription2: "Up to 500 subscribers",
-              bulletDescription3: "Advanced analytics" ,
-               bulletDescription4: "24-hour support",
-               bulletDescription5: "Marketing advisor",
+              bulletDescription3: "Advanced analytics",
+              bulletDescription4: "24-hour support",
+              bulletDescription5: "Marketing advisor",
             ),
           ],
         ),
@@ -118,9 +125,9 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
 }
 
 class PlanCard extends StatelessWidget {
- final String planCardPlan;
- final double planCardPrice;
- final bool isItCurrentPlan;
+  final String planCardPlan;
+  final double planCardPrice;
+  final bool isItCurrentPlan;
   final String planCardDescription;
   final String? bulletDescription1;
   final String? bulletDescription2;
@@ -128,38 +135,48 @@ class PlanCard extends StatelessWidget {
   final String? bulletDescription4;
   final String? bulletDescription5;
   final String? bulletDescription6;
- final VoidCallback? onTap;
+  final VoidCallback? onTap;
 
-  const PlanCard({super.key, required this.planCardPlan, required this.planCardPrice, required this.isItCurrentPlan, required this.planCardDescription, this.bulletDescription1, this.bulletDescription2, this.bulletDescription3, this.bulletDescription4, this.bulletDescription5, this.bulletDescription6, this.onTap});
+  const PlanCard(
+      {super.key,
+      required this.planCardPlan,
+      required this.planCardPrice,
+      required this.isItCurrentPlan,
+      required this.planCardDescription,
+      this.bulletDescription1,
+      this.bulletDescription2,
+      this.bulletDescription3,
+      this.bulletDescription4,
+      this.bulletDescription5,
+      this.bulletDescription6,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      padding:
-      const EdgeInsets.only(left: 40, top: 40, right: 35, bottom: 30),
-
+    return Container(
+      padding: const EdgeInsets.only(left: 40, top: 40, right: 35, bottom: 30),
       decoration: BoxDecoration(
-       border: isItCurrentPlan ? Border.all(color:  GlobalColors.orange, width: 0.5) : const Border(),
+          border: isItCurrentPlan
+              ? Border.all(color: GlobalColors.orange, width: 0.5)
+              : const Border(),
           borderRadius: BorderRadius.circular(10),
-        color: isItCurrentPlan ? GlobalColors.white : GlobalColors.containerBgColor
-      ),
-
+          color: isItCurrentPlan
+              ? GlobalColors.white
+              : GlobalColors.containerBgColor),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Text(
+          Text(
             planCardPlan,
             style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                height: 19.2 / 16),
+                fontSize: 16, fontWeight: FontWeight.w600, height: 19.2 / 16),
           ),
           const SizedBox(
             height: 16,
           ),
           Row(
             children: [
-               Text(
+              Text(
                 "\$" "$planCardPrice",
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
@@ -191,7 +208,7 @@ class PlanCard extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          if (bulletDescription1 != null)  Text("•" " $bulletDescription1"),
+          if (bulletDescription1 != null) Text("•" " $bulletDescription1"),
           if (bulletDescription2 != null) Text("•" " $bulletDescription2"),
           if (bulletDescription3 != null) Text("•" " $bulletDescription3"),
           if (bulletDescription4 != null) Text("•" " $bulletDescription4"),
@@ -200,33 +217,33 @@ class PlanCard extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          if(isItCurrentPlan == true)
-          CustomButton(
+          if (isItCurrentPlan == true)
+            CustomButton(
               onTap: () {},
               borderColor: Colors.transparent,
               borderColors: Colors.transparent,
               text: "Current Plan",
               textStyle: const TextStyle(
-                height: 24/14,
+                height: 24 / 14,
               ),
               height: 40,
               containerColor: GlobalColors.btnBgColor,
               width: 180,
               textColor: GlobalColors.darkOne,
-          ) else
+            )
+          else
             CustomButton(
-                onTap: onTap ?? (){},
+              onTap: onTap ?? () {},
               borderColor: Colors.transparent,
               borderColors: Colors.transparent,
-                text: "Upgrade",
-                height: 40,
-                containerColor: GlobalColors.orange,
-                width: 180,
-                textColor: GlobalColors.white,
+              text: "Upgrade",
+              height: 40,
+              containerColor: GlobalColors.orange,
+              width: 180,
+              textColor: GlobalColors.white,
             ),
         ],
       ),
     );
   }
 }
-
