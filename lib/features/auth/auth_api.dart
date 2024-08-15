@@ -119,7 +119,7 @@ class AuthApi {
 Future<Company> registerCompany(Company company) async {
   DioProvider dioProvider = locator<DioProvider>();
   // An authenticated user is required for this request to be completed based on the api.
-  // TODO: Remove access token in place of currently signed user's token.
+  // tODO: Remove access token in place of currently signed user's token.
   // box.write('accessToken','accessToken');
 
   var registeredCompany = Company.initial();
