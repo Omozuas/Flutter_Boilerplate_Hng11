@@ -63,7 +63,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      ref.read(authProvider.notifier).googleSignin();
+                      ref.read(authProvider.notifier).googleSignin(context);
                     },
                     child: loading
                         ? SizedBox(
@@ -128,10 +128,10 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       if (formKey.currentState!.validate()) {
                         ref.read(authProvider.notifier).registerSingleUser({
                           'email': emailController.text,
-                          'firstName': firstNameController.text,
-                          'lastName': lastNameController.text,
+                          'first_name': firstNameController.text,
+                          'last_name': lastNameController.text,
                           'password': passwordController.text,
-                        });
+                        }, context);
                       }
                     },
                     textColor: GlobalColors.white,

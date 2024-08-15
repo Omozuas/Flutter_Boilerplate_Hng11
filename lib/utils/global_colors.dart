@@ -1,6 +1,7 @@
 import 'package:hexcolor/hexcolor.dart';
 
 class GlobalColors {
+
   static HexColor orange = HexColor('#F97316');
   static HexColor lightGray = HexColor('#E2E8F0');
   static HexColor borderColor = HexColor('#CBD5E1');
@@ -34,6 +35,7 @@ class GlobalColors {
   static HexColor toastBgSurface2 = HexColor('##E7F7E9');
   static HexColor integrationTextColor = HexColor('#0A0A0A');
   static HexColor containerBgColor = HexColor('#FFF8F2');
+  static HexColor containerBorderColor = HexColor('#CBD5E1');
   static HexColor btnBgColor = HexColor('#FDEEE3');
 }
 
