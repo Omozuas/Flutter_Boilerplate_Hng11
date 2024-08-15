@@ -1,7 +1,7 @@
 import 'organization_model.dart';
 import 'profile_model.dart';
 
-class User {
+class UserModels {
   String id;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -20,7 +20,7 @@ class User {
   Profile profile;
   List<OwnedOrganisation> ownedOrganisations;
 
-  User({
+  UserModels({
     required this.id,
     this.createdAt,
     this.updatedAt,
@@ -40,7 +40,7 @@ class User {
     required this.ownedOrganisations,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserModels.fromJson(Map<String, dynamic> json) => UserModels(
         id: json["id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
