@@ -30,4 +30,7 @@ class GlobalColors {
   static HexColor toastBgSurface = HexColor('#FDE7E7');
   static HexColor toastBgSurface2 = HexColor('##E7F7E9');
   static HexColor integrationTextColor = HexColor('#0A0A0A');
+  static HexColor containerBgColor = HexColor('#FFF8F2');
+  static HexColor btnBgColor = HexColor('#FDEEE3');
 }
+
