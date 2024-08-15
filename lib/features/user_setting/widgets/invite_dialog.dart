@@ -7,17 +7,17 @@ class InviteDialog extends StatefulWidget {
   final String? title;
   final VoidCallback? onInvite;
 
-  InviteDialog({
+  const InviteDialog({
     super.key,
     this.title,
     this.onInvite,
   });
 
   @override
-  _InviteDialogState createState() => _InviteDialogState();
+  InviteDialogState createState() => InviteDialogState();
 }
 
-class _InviteDialogState extends State<InviteDialog> {
+class InviteDialogState extends State<InviteDialog> {
   final TextEditingController emailController = TextEditingController();
   String? selectedRole;
 
@@ -35,7 +35,7 @@ class _InviteDialogState extends State<InviteDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InviteDialogHeader(
-              title: title,
+              title: widget.title,
               onClose: () {
                 Navigator.pop(context);
               },
@@ -64,10 +64,10 @@ class _InviteDialogState extends State<InviteDialog> {
               decoration: InputDecoration(
                 labelText: 'Invite As',
                 hintText: 'Select role',
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: const Color(0xFF0F172A),
+                  color: Color(0xFF0F172A),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
