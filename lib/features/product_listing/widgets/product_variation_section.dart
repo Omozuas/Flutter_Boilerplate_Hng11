@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +17,7 @@ class ProductVariationSection extends StatelessWidget {
         children: [
           Text(
             "Variation",
-            style: TextStyle(color: DetailColors.dark1, fontSize: 14.sp),
+            style: TextStyle(color: GlobalColors.darkOne, fontSize: 14.sp),
           ),
           SizedBox(height: 12.h),
           Row(
