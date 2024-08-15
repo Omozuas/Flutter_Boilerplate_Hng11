@@ -1,10 +1,11 @@
-import '../../services/dio_provider.dart';
-import '../../services/service_locator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'models/user_model.dart';
+import 'provider/settings_dio_provider.dart';
 
 class SettingsApi {
-  //Inject the DioProvider Dependency
-  DioProvider dioProvider = locator<DioProvider>();
+  SettingsApi(this.ref);
+  final Ref ref;
 
 //You can start creating account settings functions now
 
@@ -12,11 +13,15 @@ class SettingsApi {
   // this doesn't really work well for now because the ResponseModel
   // being returned from "dioProvider.get" is wrong.
   Future<User> getUser(String id) async {
+    final dio = ref.read(settingsDioProvider);
     try {
-      final response = await dioProvider.get('/users/$id');
-      return User.fromMap(response.data['user']);
+      final response = await dio.get('/users/$id');
+      print(response);
+      return User.fromMap(response['user']);
     } catch (e) {
       rethrow;
     }
   }
 }
+
+final settingsApiProvider = Provider<SettingsApi>((ref) => SettingsApi(ref));
