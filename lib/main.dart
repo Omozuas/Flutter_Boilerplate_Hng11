@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 
