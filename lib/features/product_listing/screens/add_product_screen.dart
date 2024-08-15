@@ -1,16 +1,13 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../utils/widgets/custom_text_field.dart';
-import '../widgets/breaking_border_container.dart';
 import '../widgets/components/formfields.dart';
 import '../widgets/components/product_category.dart';
 import '../widgets/components/product_variation.dart';
+import '../widgets/product_images.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -39,67 +36,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ]));
   }
 
-  FilePickerResult? result = const FilePickerResult([]);
-  String? _fileName;
-  PlatformFile? pickedFile;
-  bool isLoading = false;
-  File? fileToDisplay;
-
-  void pickFile() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
-      result = await FilePicker.platform.pickFiles(
-        type: FileType.media,
-      );
-      if (result != null) {
-        _fileName = result!.files.first.name;
-        pickedFile = result!.files.first;
-        fileToDisplay = File(pickedFile!.path.toString());
-      }
-      setState(() {
-        isLoading = false;
-      });
-    } catch (e) {
-      // print(e);
-    }
-  }
-
-  void addFile() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
-      final newFile = await FilePicker.platform.pickFiles(
-        type: FileType.media,
-      );
-      for (var file in newFile!.files) {
-        result!.files.add(file);
-      }
-      if (result != null) {
-        _fileName = result!.files.first.name;
-        pickedFile = result!.files.first;
-        fileToDisplay = File(pickedFile!.path.toString());
-      }
-      setState(() {
-        isLoading = false;
-      });
-    } catch (e) {
-      // print(e);
-    }
-  }
-
-  void removeFile(PlatformFile file) async {
-    setState(() {
-      result?.files.remove(file);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
     Future<void> addProduct() async {
       if (!_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -144,123 +83,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 Container(
                   // color: Colors.red,
                   width: 355.w,
-                  height: 670.h,
+                  // height: 715.h,
                   margin: EdgeInsets.only(top: 17.h),
                   child: Column(
                     children: [
-                      BreakingBorderContainer(
-                        child: Container(
-                          height: 125.h,
-                          width: 379.w,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(239, 239, 239, 1.0),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: result!.files.isEmpty
-                              ? Center(
-                                  child: SizedBox(
-                                    height: 58.h,
-                                    width: 250.w,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: pickFile,
-                                          // () {
-                                          //   pickFile();
-                                          // },
-                                          child: Container(
-                                            height: 32.h,
-                                            width: 114.w,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    width: 1,
-                                                    color: const Color.fromRGBO(
-                                                        226, 232, 240, 1)),
-                                                color: const Color.fromRGBO(
-                                                    255, 255, 255, 1),
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                    color: Color.fromRGBO(
-                                                        10, 57, 176, 0.12),
-                                                    offset: Offset(0, 1),
-                                                    blurRadius: 18,
-                                                    spreadRadius: 0,
-                                                  )
-                                                ]),
-                                            child: Center(
-                                              child: Text(
-                                                'Upload New',
-                                                style: GoogleFonts.inter(
-                                                  color: const Color.fromRGBO(
-                                                      10, 10, 10, 1),
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  height: 24 / 14,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 17.h,
-                                          width: 250.w,
-                                          child: FittedBox(
-                                            fit: BoxFit.scaleDown,
-                                            child: Text(
-                                              'Accepts images, videos or 3D models',
-                                              style: GoogleFonts.inter(
-                                                color: const Color.fromRGBO(
-                                                    82, 82, 82, 1),
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400,
-                                                height: 16.94 / 14,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              : GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 5,
-                                          mainAxisSpacing: 4.0,
-                                          crossAxisSpacing: 4.0),
-                                  // physics: NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.all(8.h),
-                                  itemBuilder: (context, index) {
-                                    if (index == 0) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          addFile();
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: Colors.white),
-                                          child: const Icon(
-                                            Icons.add_circle_outline_rounded,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      );
-                                    }
-
-                                    return previewItem(
-                                      previewFile: result!.files[index - 1],
-                                    );
-                                  },
-                                  itemCount: result!.files.length + 1,
-                                ),
-                        ),
-                      ),
+                      ProductImages(getProductFiles: (files) {
+                        // Add functionality to submit
+                      }),
                       SizedBox(
                         height: 6.h,
                       ),
@@ -410,7 +239,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle('Product Variations'),
                             ),
-                            ProductVariation(),
+                            ProductVariation(
+                              getProductList: (List<PlatformFile> files) {},
+                            ),
                             // Container(
                             //   height: 67.h,
                             //   width: 368.w,
@@ -421,7 +252,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 6.h,
+                        height: 28.h,
                       ),
                     ],
                   ),
@@ -466,44 +297,5 @@ class _AddProductScreenState extends State<AddProductScreen> {
         ),
       ),
     );
-  }
-
-  Widget previewItem({required PlatformFile previewFile}) {
-    try {
-      return Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Image.file(
-              File(previewFile.xFile.path),
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-              top: 1,
-              right: 1,
-              child: GestureDetector(
-                onTap: () {
-                  removeFile(previewFile);
-                },
-                child: Icon(
-                  Icons.remove_circle_outline_outlined,
-                  color: Colors.red.shade300,
-                  size: 20,
-                ),
-              ))
-        ],
-      );
-    } catch (e) {
-      return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4), color: Colors.white),
-        child: const Icon(
-          Icons.play_circle_outline_outlined,
-          color: Colors.grey,
-        ),
-      );
-    }
   }
 }

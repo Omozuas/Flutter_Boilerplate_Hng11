@@ -1,13 +1,25 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../utils/global_colors.dart';
 import '../breaking_border_container.dart';
+import '../image_preview.dart';
 
-class ProductVariation extends StatelessWidget {
-  const ProductVariation({super.key, this.itemCount = 4});
+class ProductVariation extends StatefulWidget {
+  final Function(List<PlatformFile> files) getProductList;
+
+  const ProductVariation(
+      {super.key, this.itemCount = 4, required this.getProductList});
+
   final int itemCount;
+
+  @override
+  State<ProductVariation> createState() => _ProductVariationState();
+}
+
+class _ProductVariationState extends State<ProductVariation> {
+  final List<PlatformFile> files = [];
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +27,7 @@ class ProductVariation extends StatelessWidget {
       height: 67.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: itemCount,
+        itemCount: widget.itemCount,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(
@@ -25,15 +37,15 @@ class ProductVariation extends StatelessWidget {
                 //add fxn to pick and add image functionality
               },
               child: BreakingBorderContainer(
-                child: Container(
-                  decoration: BoxDecoration(color: Color(0xFFFAFAFA)),
-                  height: 67.h,
-                  width: 83.w,
-                  child: Icon(
-                    Icons.add,
-                    size: 18.sp,
-                    color: GlobalColors.darkOne,
-                  ),
+                child: ImagePreview(
+                  addFileToList: (file) {
+                    files.add(file);
+                    widget.getProductList(files);
+                  },
+                  removeFileFromList: (file) {
+                    files.remove(file);
+                    widget.getProductList(files);
+                  },
                 ),
               ),
             ),
