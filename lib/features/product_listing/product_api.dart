@@ -40,7 +40,7 @@ class ProductApi {
         final product = Product.fromMap(foundProduct.first);
         return product;
       }
-      throw Exception('Failed to fetch products');
+      throw Exception('Failed to fetch product');
     } catch (e) {
       rethrow;
     }
