@@ -1,6 +1,6 @@
 import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/regular_signup_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
@@ -13,7 +13,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoute.home,
+    initialLocation: AppRoute.splash,
     routes: [
       ConsumerGoRoute(
         path: AppRoute.splash,
@@ -28,9 +28,9 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
-        path: AppRoute.regularSignUp,
+        path: AppRoute.singleUserSignUp,
         builder: (context, state, ref) {
-          return const RegularSignUpScreen();
+          return const SingleUserSignUpScreen();
         },
       ),
       ConsumerGoRoute(
@@ -85,7 +85,7 @@ class AppRouter {
 class AppRoute {
   static const String splash = '/splash';
   static const String companySignUp = '/companySignUp';
-  static const String regularSignUp = '/regularSignUp';
+  static const String singleUserSignUp = '/singleUserSignUp';
   static const String login = '/login';
   static const String cart = '/cart';
 

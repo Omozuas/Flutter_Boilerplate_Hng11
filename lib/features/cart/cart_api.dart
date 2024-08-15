@@ -1,4 +1,3 @@
-
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
 
@@ -7,6 +6,4 @@ class CartApi {
   DioProvider dioProvider = locator<DioProvider>();
 
 //You can start creating product listing functions now
-
-
 }

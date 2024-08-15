@@ -41,6 +41,7 @@ class ProductCardWiget extends StatelessWidget {
                         Text(
                           "Product 1",
                           style: CustomTextStyles.productTextTitleBlack,
+
                         ),
                         Text(
                           "P001",

@@ -10,13 +10,16 @@ class CartPriceOption extends StatelessWidget {
   final num value;
   final double? paddingBottom;
   const CartPriceOption({
-    super.key, required this.title, required this.value, this.paddingBottom,
+    super.key,
+    required this.title,
+    required this.value,
+    this.paddingBottom,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: (paddingBottom??16).h.padB,
+      padding: (paddingBottom ?? 16).h.padB,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -46,6 +46,7 @@ class CustomTextStyles {
       fontWeight: FontWeight.w400);
   static TextStyle bodyTextOrange = TextStyle(
       fontSize: 14.sp, color: GlobalColors.orange, fontWeight: FontWeight.w400);
+
   static TextStyle producHeaderBlack = TextStyle(
       fontSize: 18.sp, color: GlobalColors.black, fontWeight: FontWeight.w700);
   static TextStyle productSmallBodyTextBlack = TextStyle(

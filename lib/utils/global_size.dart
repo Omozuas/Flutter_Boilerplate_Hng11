@@ -13,5 +13,4 @@ class GlobalScreenSize {
   static double getDevicePixelRatio(BuildContext context) {
     return MediaQuery.of(context).devicePixelRatio;
   }
-
 }
