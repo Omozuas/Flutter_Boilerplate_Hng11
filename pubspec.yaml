@@ -50,6 +50,8 @@ dependencies:
   back_button_interceptor: ^7.0.3
 
   vector_graphics: any
+  get_storage: ^2.1.1
+  flutter_dotenv: ^5.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
