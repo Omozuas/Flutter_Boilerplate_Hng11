@@ -88,10 +88,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                            height: 24.h,
-                            width: 24.w,
-                            child: Image.asset("assets/images/googleIcon.png")),
+                        GestureDetector(
+                          onTap: () {
+                            // kindly uncomment the code below when the login screen has been changed to a consumer stateless widget
+                            //  ref.read(authProvider.notifier).googleSignin(context);
+                          },
+                          child: SizedBox(
+                              height: 24.h,
+                              width: 24.w,
+                              child:
+                                  Image.asset("assets/images/googleIcon.png")),
+                        ),
                         SizedBox(
                           width: 10.w,
                         ),
@@ -291,17 +298,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 342.w,
                   height: 48.h,
                   child: RichText(
+                    textAlign: TextAlign.center,
                     text: TextSpan(
                       text: 'By logging in, you agree with our ',
                       style: GoogleFonts.inter(
                           color: GlobalColors.bgsurface700,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400),
                       children: [
                         TextSpan(
                           text: 'Terms & \nUse ',
                           style: GoogleFonts.inter(
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
@@ -309,14 +317,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: 'and ',
                           style: GoogleFonts.inter(
                             color: GlobalColors.black,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                         TextSpan(
                           text: 'Privacy Policy.',
                           style: GoogleFonts.inter(
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),

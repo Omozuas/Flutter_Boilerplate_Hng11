@@ -55,6 +55,8 @@ dependencies:
   back_button_interceptor: ^7.0.3
 
   vector_graphics: any
+  firebase_auth: ^4.16.0
+  firebase_core: ^2.24.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
