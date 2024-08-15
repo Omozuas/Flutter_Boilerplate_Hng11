@@ -1,15 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/get_members_model.dart';
 import 'package:flutter_boilerplate_hng11/services/response_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'models/status_model.dart';
 
-class DioProvider {
+class UserDioProvider {
   final Dio _dio;
   String? _accessToken;
 
-  DioProvider()
+  UserDioProvider()
       : _dio = Dio(BaseOptions(
           baseUrl: dotenv.env['BASE_URL']!,
           connectTimeout: const Duration(seconds: 10),
@@ -76,4 +77,21 @@ class DioProvider {
       debugPrint("ERROR ${e.toString()}");
     }
   }
+
+
+
+// Oganization settings
+
+ Future getAllMembersOrganization(String path, {Map<String, dynamic>? query}) async {
+    try {
+      var response = await _dio.get(path, queryParameters: query);
+      return GetMembers.fromJson(response.data);
+    } catch (e) {
+      debugPrint("ERROR ${e.toString()}");
+    }
+  }
+
+
 }
+
+

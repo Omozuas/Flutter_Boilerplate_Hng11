@@ -16,14 +16,12 @@ class GlobalColors {
   static HexColor gray300Color = HexColor('#6E7079');
   static HexColor gray400Color = HexColor('#475467');
   static HexColor gray500Color = HexColor('#667085');
-  static HexColor whiteColor = HexColor('#ffffff');
   static HexColor cardGradintColorOne = HexColor('#0E131F');
   static HexColor cardGradintColorTwo = HexColor('#1F2A45');
   static HexColor cardGradintColorThree = HexColor('#3C5285');
   static HexColor redColor = HexColor('#E00414');
   static HexColor lightOrangeColor = HexColor('#FF7D06');
   static HexColor deemWhiteColor = HexColor('#F9F9F9');
-  static HexColor greenColor = HexColor('#10AF20');
   static HexColor black = HexColor('#000000');
   static HexColor red = HexColor('#E00414');
   static HexColor green = HexColor('#10AF20');
@@ -31,4 +29,8 @@ class GlobalColors {
   static HexColor white = HexColor('#FFFFFF');
   static HexColor toastBgSurface = HexColor('#FDE7E7');
   static HexColor toastBgSurface2 = HexColor('##E7F7E9');
+  static HexColor integrationTextColor = HexColor('#0A0A0A');
+  static HexColor containerBgColor = HexColor('#FFF8F2');
+  static HexColor btnBgColor = HexColor('#FDEEE3');
 }
+

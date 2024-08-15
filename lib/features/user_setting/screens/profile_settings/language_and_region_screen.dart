@@ -28,7 +28,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
 
       if (!showError) {
         feedBackMessage = 'Settings have been saved successfully.';
-        feedBackMessageColor = GlobalColors.greenColor;
+        feedBackMessageColor = GlobalColors.green;
       } else {
         feedBackMessage = null;
       }
@@ -52,9 +52,9 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalColors.whiteColor,
+      backgroundColor: GlobalColors.white,
       appBar: AppBar(
-        backgroundColor: GlobalColors.whiteColor,
+        backgroundColor: GlobalColors.white,
         surfaceTintColor: Colors.transparent,
         titleSpacing: -6.sp,
         leading: GestureDetector(
@@ -95,7 +95,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
               borderColor: GlobalColors.borderColor,
               height: 36.sp,
               width: double.infinity,
-              containerColor: GlobalColors.whiteColor,
+              containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
               placeholder: 'Language',
               onChanged: (value) {
@@ -125,7 +125,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
               borderColor: GlobalColors.borderColor,
               height: 36.sp,
               width: double.infinity,
-              containerColor: GlobalColors.whiteColor,
+              containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
               placeholder: 'Region',
               onChanged: (value) {
@@ -150,7 +150,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
               borderColor: GlobalColors.borderColor,
               height: 36.sp,
               width: double.infinity,
-              containerColor: GlobalColors.whiteColor,
+              containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
               placeholder: 'Time-Zone',
               onChanged: (value) {
@@ -180,14 +180,14 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                     height: 40.sp,
                     containerColor: GlobalColors.orange,
                     width: 65.sp,
-                    textColor: GlobalColors.whiteColor),
+                    textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: 'Cancel',
                     height: 40.sp,
-                    containerColor: GlobalColors.whiteColor,
+                    containerColor: GlobalColors.white,
                     width: 65.sp,
                     textColor: GlobalColors.darkOne),
               ],
