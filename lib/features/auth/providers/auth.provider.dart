@@ -145,17 +145,41 @@ class AuthProvider extends StateNotifier<bool> {
         final u = await auth.signInWithCredential(credential);
 
         log('ID Token: ${googleAuth.idToken}');
-        final res = await AuthApi().googleSignIn(googleAuth.idToken!);
-        if (res != null) {
-          showSnackBar('Registration successful');
-          if (context.mounted) {
-            context.go(AppRoute.home);
-          }
-        }
-        log('reg res:$res');
+        // final res = await AuthApi().googleSignIn(googleAuth.idToken!);
+        // if (res != null) {
+        //   showSnackBar(res.message.toString());
+        //   UserRegData userRegData = UserRegData.fromJson(res.data);
+        //   log('kfh:${res.data}');
+        //   if (context.mounted) {
+        //     // context.go(AppRoute.home);
+        //     // box.write('accessToken', userRegData.accessToken );
+        //   }
+        // }
+        // log('reg res:$res');
       }
     } catch (e) {
       rethrow;
+    } finally {
+      state = false;
+    }
+  }
+
+  Future<void> login(
+      Map<String, dynamic> data, BuildContext context) async {
+    state = true;
+    try {
+      final res = await AuthApi().loginUser(data);
+
+      if (res != null) {
+        showSnackBar(res.message.toString());
+        UserRegData userRegData = UserRegData.fromJson(res.data);
+        if (context.mounted) {
+          context.go(AppRoute.home);
+          box.write('accessToken', userRegData.accessToken );
+        }
+      }
+    } catch (e) {
+      //TODO: Do something with caught error;
     } finally {
       state = false;
     }
@@ -165,3 +189,6 @@ class AuthProvider extends StateNotifier<bool> {
 final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
   return AuthProvider();
 });
+
+
+final checkBoxProvider = StateProvider<bool>((ref)=>false);

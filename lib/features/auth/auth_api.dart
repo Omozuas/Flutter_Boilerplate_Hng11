@@ -57,15 +57,9 @@ class AuthApi {
     }
   }
 
-  Future<ResponseModel?> loginUser({
-    required String email,
-    required String password,
-  }) async {
+  Future<ResponseModel?> loginUser(Map data) async {
     try {
-      final response = await dioProvider.post('auth/login', data: {
-        'email': email,
-        'password': password,
-      });
+      final response = await dioProvider.post('auth/login', data:data);
       if (response != null && response.data != null) {
         String accessToken = response.data['access_token'];
         box.write('accessToken', accessToken);
