@@ -68,34 +68,6 @@ class ProductNameAndPriceSection extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16.h),
-          Row(children: [
-            ...List.generate(
-              5,
-              (index) => Padding(
-                padding: EdgeInsets.only(right: 8.w),
-                child: Icon(
-                  Icons.star,
-                  size: 16,
-                  color: index < 4
-                      ? GlobalColors.orange
-                      : GlobalColors.borderColor,
-                ),
-              ),
-            ),
-            const SizedBox(width: 4),
-            Text(
-              "(4.5)",
-              style: TextStyle(color: GlobalColors.mutedTextColor),
-            ),
-            SizedBox(width: 10.w),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                "See reviews",
-                style: CustomTextStyles.bannerbodyTextOrange,
-              ),
-            )
-          ]),
         ],
       ),
     );
