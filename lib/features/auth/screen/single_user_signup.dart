@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:one_context/one_context.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -128,10 +129,10 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       if (formKey.currentState!.validate()) {
                         ref.read(authProvider.notifier).registerSingleUser({
                           'email': emailController.text,
-                          'firstName': firstNameController.text,
-                          'lastName': lastNameController.text,
+                          'first_name': firstNameController.text,
+                          'last_name': lastNameController.text,
                           'password': passwordController.text,
-                        });
+                        }, context);
                       }
                     },
                     textColor: GlobalColors.white,
@@ -152,7 +153,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                             style: TextStyle(color: GlobalColors.orange),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                context.go(AppRoute.login);
+                                OneContext().context?.go(AppRoute.login);
                               },
                           ),
                         ],

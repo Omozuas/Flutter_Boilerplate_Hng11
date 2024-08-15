@@ -82,20 +82,35 @@
 
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:one_context/one_context.dart';
 
 class AuthProvider extends StateNotifier<bool> {
   AuthProvider() : super(false);
 
-  Future<void> registerSingleUser(Map<String, dynamic> data) async {
+  Future<void> registerSingleUser(
+      Map<String, dynamic> data, BuildContext context) async {
     state = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
-      log('reg res:$res');
+
+      //The set up is such that if the response is successful, res will not be null.
+      //Otherwise it will be null. That is why I am checking.
+      if (res != null) {
+        showSnackBar('Registration successful');
+        if (context.mounted) {
+          context.go(AppRoute.home);
+        }
+      }
     } catch (e) {
-      rethrow;
+      OneContext().context?.go(AppRoute.home);
+      //TODO: Do something with caught error;
     } finally {
       state = false;
     }
@@ -119,6 +134,9 @@ class AuthProvider extends StateNotifier<bool> {
 
         log('ID Token: ${googleAuth.idToken}');
         final res = await AuthApi().googleSignIn(googleAuth.idToken!);
+        if (res != null) {
+          /// TODO: Update Access Token
+        }
         log('reg res:$res');
       }
     } catch (e) {
