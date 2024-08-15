@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+
+import '../../../../utils/widgets/custom_search_field.dart';
 
 class RoleScreen extends StatefulWidget {
   const RoleScreen({super.key});
@@ -11,171 +14,180 @@ class RoleScreen extends StatefulWidget {
 }
 
 class _RoleScreenState extends State<RoleScreen> {
+  final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalColors.white,
-      body: Padding(
-        padding: EdgeInsets.only(top: 40.h, right: 15.w, left: 15.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SearchBar(
-                leading: const Icon(Icons.search_outlined),
-                hintText: 'Search',
-                backgroundColor:
-                    const WidgetStatePropertyAll(Colors.transparent),
-                elevation: const WidgetStatePropertyAll(0),
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                      side: BorderSide(color: GlobalColors.borderColor)),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomSearchField(
+                  searchController: searchController,
+                  hintText: 'Search',
+                  leading: Image.asset("assets/icons/search_icon.png"),
                 ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+                SizedBox(
+                  height: 28.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Roles',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                  fontSize: 24.sp, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          'Manage user roles for members',
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontSize: 12.sp,
+                                    color: GlobalColors.darkOne,
+                                  ),
+                        )
+                      ],
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CreateRole(),
+                          ),
+                        );
+                      },
+                      label: Text(
+                        'Create Role',
+                        style: TextStyle(
+                            color: GlobalColors.white, fontSize: 12.sp),
+                      ),
+                      icon: Icon(
+                        Icons.add,
+                        size: 14.sp,
+                        color: GlobalColors.white,
+                      ),
+                      style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(
+                            GlobalColors.orange,
+                          ),
+                          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.r)))),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10.h),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: GlobalColors.borderColor,
+                      ),
+                      borderRadius: BorderRadius.circular(6.r)),
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Roles',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(
-                                fontSize: 24.sp, fontWeight: FontWeight.w700),
+                      RoleOptionWidget(
+                        title: 'Administrator',
+                        subtitle: 'Full control and full permissions.',
+                        isSelected: true,
                       ),
-                      Text(
-                        'Manage user roles for members',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontSize: 12.sp,
-                              color: GlobalColors.darkOne,
-                            ),
-                      )
+                      RoleOptionWidget(
+                        title: 'Guest',
+                        subtitle: 'Full control and limited permissions.',
+                        isSelected: false,
+                      ),
+                      Divider(),
+                      RoleOptionWidget(
+                        title: 'User',
+                        subtitle: 'Limited control and limited permissions.',
+                        isSelected: false,
+                      ),
                     ],
                   ),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    label: Text(
-                      'Create Role',
-                      style:
-                          TextStyle(color: GlobalColors.white, fontSize: 12.sp),
-                    ),
-                    icon: Icon(
-                      Icons.add,
-                      size: 14.sp,
-                      color: GlobalColors.white,
-                    ),
-                    style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                          GlobalColors.orange,
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: GlobalColors.borderColor,
+                      ),
+                      borderRadius: BorderRadius.circular(6.r)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: 10.h,
+                          left: 10.w,
                         ),
-                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.r)))),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(10.h),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: GlobalColors.borderColor,
-                    ),
-                    borderRadius: BorderRadius.circular(6.r)),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RoleOptionWidget(
-                      title: 'Administrator',
-                      subtitle: 'Full control and full permissions.',
-                      isSelected: true,
-                    ),
-                    RoleOptionWidget(
-                      title: 'Guest',
-                      subtitle: 'Full control and limited permissions.',
-                      isSelected: false,
-                    ),
-                    Divider(),
-                    RoleOptionWidget(
-                      title: 'User',
-                      subtitle: 'Limited control and limited permissions.',
-                      isSelected: false,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: GlobalColors.borderColor,
-                    ),
-                    borderRadius: BorderRadius.circular(6.r)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: 10.h,
-                        left: 10.w,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Permissions',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                          ),
-                          Text(
-                            'See the list of permissions for this role.',
-                            style: TextStyle(
-                              color: GlobalColors.darkOne,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Permissions',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                             ),
-                          ),
-                        ],
+                            Text(
+                              'See the list of permissions for this role.',
+                              style: TextStyle(
+                                color: GlobalColors.darkOne,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const Divider(),
-                    PermissionsListTile(
-                        isPermitted: true,
-                        permissionTitle: 'Can view transactions'),
-                    PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can view refunds'),
-                    PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can log refunds'),
-                    PermissionsListTile(
-                        isPermitted: false, permissionTitle: 'Can view users'),
-                    PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can create users'),
-                    PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can edit users'),
-                    PermissionsListTile(
-                        isPermitted: true,
-                        permissionTitle: 'Can blacklist/whitelist users'),
-                  ],
+                      const Divider(),
+                      PermissionsListTile(
+                          isPermitted: true,
+                          permissionTitle: 'Can view transactions'),
+                      PermissionsListTile(
+                          isPermitted: true,
+                          permissionTitle: 'Can view refunds'),
+                      PermissionsListTile(
+                          isPermitted: true,
+                          permissionTitle: 'Can log refunds'),
+                      PermissionsListTile(
+                          isPermitted: false,
+                          permissionTitle: 'Can view users'),
+                      PermissionsListTile(
+                          isPermitted: true,
+                          permissionTitle: 'Can create users'),
+                      PermissionsListTile(
+                          isPermitted: true, permissionTitle: 'Can edit users'),
+                      PermissionsListTile(
+                          isPermitted: true,
+                          permissionTitle: 'Can blacklist/whitelist users'),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-            ],
+                SizedBox(
+                  height: 30.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),

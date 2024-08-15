@@ -17,6 +17,7 @@ class CustomButton extends StatelessWidget {
   final double width, height;
   final bool loading;
   final FontWeight? fontWeight;
+  final TextStyle? textStyle;
   const CustomButton(
       {super.key,
       required this.onTap,
@@ -26,9 +27,7 @@ class CustomButton extends StatelessWidget {
       required this.containerColor,
       required this.width,
       required this.textColor,
-      this.loading = false,
-      this.fontWeight,
-      this.borderColors});
+      this.loading = false, this.fontWeight, this.borderColors, this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +43,7 @@ class CustomButton extends StatelessWidget {
               Radius.circular(6),
             ),
             border: Border.all(
-                width: 1,
-                color: borderColors ??
-                    borderColor.withOpacity(loading ? 0.5 : 1))),
+                width: 1, color: borderColors?? borderColor.withOpacity(loading ? 0.5 : 1))),
         child: Center(
           child: loading
               ? SizedBox(
@@ -59,10 +56,10 @@ class CustomButton extends StatelessWidget {
               : Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: textStyle ?? TextStyle(
                       fontSize: 14,
                       color: textColor,
-                      fontWeight: fontWeight ?? FontWeight.w500),
+                      fontWeight:fontWeight??  FontWeight.w500),
                 ),
         ),
       ),
