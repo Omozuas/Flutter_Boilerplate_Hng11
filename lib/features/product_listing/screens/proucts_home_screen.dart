@@ -54,7 +54,7 @@ class ProductHomeScreen extends StatelessWidget {
               height: 20.h,
             ),
             Container(
-              height: GlobalScreenSize.getScreenHeight(context) * 0.168,
+              height: 170.h,
               width: GlobalScreenSize.getScreenWidth(context),
               padding: EdgeInsets.only(left: 22.w, top: 10.h),
               decoration: BoxDecoration(
@@ -62,8 +62,8 @@ class ProductHomeScreen extends StatelessWidget {
                     GlobalColors.cardGradintColorOne,
                     GlobalColors.cardGradintColorTwo,
                     GlobalColors.cardGradintColorThree,
-                  ]),
-                  borderRadius: BorderRadius.circular(12.r)),
+                  ],),
+                  borderRadius: BorderRadius.circular(12.r),),
               child: Stack(
                 children: [
                   Column(

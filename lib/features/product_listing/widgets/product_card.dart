@@ -14,7 +14,7 @@ class ProductCardWiget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: GlobalScreenSize.getScreenHeight(context) * .156,
+      // height: GlobalScreenSize.getScreenHeight(context) * .156,
       width: GlobalScreenSize.getScreenWidth(context),
       padding:
           EdgeInsets.only(top: 14.h, bottom: 14.h, right: 10.w, left: 8.5.w),

@@ -32,20 +32,22 @@ class ProductCardListWidget extends StatelessWidget {
           height: 16.h,
         ),
         SizedBox(
-            height: GlobalScreenSize.getScreenHeight(context) * .156,
-            width: GlobalScreenSize.getScreenWidth(context),
-            child: ListView.separated(
-              itemCount: 20,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (ctx, index) {
-                return SizedBox(
-                    width: GlobalScreenSize.getScreenWidth(context) * 0.88,
-                    child: const ProductCardWiget());
-              },
-              separatorBuilder: (BuildContext context, int index) => SizedBox(
-                width: 16.w,
-              ),
-            ))
+          height: GlobalScreenSize.getScreenHeight(context) * .19,
+          width: GlobalScreenSize.getScreenWidth(context),
+          child: ListView.separated(
+            itemCount: 20,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (ctx, index) {
+              return SizedBox(
+                width: GlobalScreenSize.getScreenWidth(context) * 0.88,
+                child: const ProductCardWiget(),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) => SizedBox(
+              width: 16.w,
+            ),
+          ),
+        )
       ],
     );
   }
