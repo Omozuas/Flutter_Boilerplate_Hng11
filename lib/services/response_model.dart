@@ -20,7 +20,7 @@ class ResponseModel {
     return ResponseModel(
       statusCode: json['status_code'] ?? 0,
       status: json['status'] ?? '',
-      data: json['data'] ?? {},
+      data: json,
       message: json['message'],
     );
     //final int statusCode = json['status_code'] ?? 0;

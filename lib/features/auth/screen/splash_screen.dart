@@ -5,21 +5,39 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signu
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 
+import '../../../services/service_locator.dart';
 import '../../../utils/widgets/custom_button.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
 
 
   @override
-  Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 2),(){
-      context.go(AppRoute.singleUserSignUp);
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  static GetStorage box = locator<GetStorage>();
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 1),(){
+      if( box.read('accessToken') == null){
+        context.go(AppRoute.singleUserSignUp);
+      }
+      else{
+        /// TODO: Implement a logic to get user details with saved token
+      }
     });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

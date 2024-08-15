@@ -84,13 +84,18 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../services/service_locator.dart';
+
 class AuthProvider extends StateNotifier<bool> {
+  GetStorage box = locator<GetStorage>();
   AuthProvider() : super(false);
 
   Future<void> registerSingleUser(
@@ -102,13 +107,14 @@ class AuthProvider extends StateNotifier<bool> {
       //The set up is such that if the response is successful, res will not be null.
       //Otherwise it will be null. That is why I am checking.
       if (res != null) {
-        showSnackBar('Registration successful');
+       showSnackBar(res.message.toString());
+       UserRegData userRegData = UserRegData.fromJson(res.data);
         if (context.mounted) {
-          context.go(AppRoute.home);
+         context.go(AppRoute.home);
+         box.write('accessToken', userRegData.accessToken );
         }
       }
     } catch (e) {
-
       //TODO: Do something with caught error;
     } finally {
       state = false;

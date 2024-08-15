@@ -25,7 +25,8 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    ///We can implement this later
+   // log('Response >> ${response}');
+
     super.onResponse(response, handler);
   }
 }
