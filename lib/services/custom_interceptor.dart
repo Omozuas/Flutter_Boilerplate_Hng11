@@ -19,6 +19,10 @@ class CustomInterceptor extends Interceptor {
     if (box.read('accessToken') != null) {
       options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
     }
+    else{
+      //todo: handle when access token is null
+      //todo: handle when access token is expired
+    }
     super.onRequest(options, handler);
   }
 
