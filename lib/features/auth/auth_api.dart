@@ -1,11 +1,13 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import '../../models/company_user.dart';
 import '../../services/response_model.dart';
 import '../../utils/error/error.dart';
-import '../../utils/initializations.dart';
 
 class AuthApi {
   //Inject the DioProvider Dependency
@@ -85,6 +87,30 @@ class AuthApi {
     } catch (e) {
       debugPrint('Error during login: ${e.toString()}');
       return null;
+    }
+  }
+
+  // google sign in
+  Future<ResponseModel> googleSignIn(String idToken) async {
+    try {
+      ResponseModel response = await dioProvider.post(
+        // 'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/
+        '/auth/google?mobile=true',
+        data: {
+          'id_token': idToken,
+        },
+      );
+      log(response.message!);
+
+      if (response.message == 'Authentication successful') {
+        // Update the access token if needed
+        // dioProvider.updateAccessToken(response.accessToken ?? '');
+      }
+      box.write("accessToken", response.accessToken);
+      return response;
+    } catch (e) {
+      debugPrint('Error during Google sign-in: $e');
+      rethrow; // Optional: Re-throw the error to handle it further up the call stack
     }
   }
 }

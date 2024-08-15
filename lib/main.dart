@@ -11,6 +11,7 @@ import 'package:one_context/one_context.dart';
 
 void main() async {
   await initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
