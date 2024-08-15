@@ -24,6 +24,7 @@ class _ProductCategoryState extends State<ProductCategory> {
       decoration: BoxDecoration(
           border: Border.all(color: Color.fromRGBO(203, 213, 225, 1), width: 1),
           borderRadius: BorderRadius.circular(6)),
+      // unable to reuse created customdropdown, it is overflowing with error
       child: DropdownButton<String>(
         padding: EdgeInsets.only(left: 8),
         dropdownColor: Color.fromRGBO(226, 232, 240, 1),

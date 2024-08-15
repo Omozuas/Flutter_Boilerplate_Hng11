@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter/material.dart';
 
 import '../../../../utils/global_colors.dart';
-// unable to reuse Judah customtextfield
+// unable to reuse created customtextfield, it is overflowing with error
 
 class CustomTextField extends StatelessWidget {
   final String? hintText;
@@ -116,12 +116,6 @@ class DescriptionFormField extends StatelessWidget {
         borderColor: const Color.fromRGBO(203, 213, 225, 1),
         hintText: hintText,
         showCounter: false,
-        // validator: (value) {
-        //   if (value == null || value.isEmpty) {
-        //     return 'Please $hintText';
-        //   }
-        //   return null;
-        // },
       ),
     );
   }

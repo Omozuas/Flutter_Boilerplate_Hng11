@@ -21,8 +21,6 @@ class AppRouter {
         path: AppRoute.splash,
         builder: (context, state, ref) {
           return const SplashScreen();
-          //AddProductScreen();
-          // SplashScreen();
         },
       ),
       ConsumerGoRoute(
