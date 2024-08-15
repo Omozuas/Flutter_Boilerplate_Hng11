@@ -20,16 +20,23 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
-  int get quantity => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  int? get quantity => throw _privateConstructorUsedError;
+  String? get size => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cost_price')
+  int? get costPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'delete_at')
+  DateTime? get deleteAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,14 +49,19 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String description,
-      int price,
-      String status,
-      int quantity,
-      @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+      {String? id,
+      String? name,
+      String? description,
+      int? price,
+      String? category,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      String? image,
+      int? quantity,
+      String? size,
+      String? status,
+      @JsonKey(name: 'cost_price') int? costPrice,
+      @JsonKey(name: 'delete_at') DateTime? deleteAt});
 }
 
 /// @nodoc
@@ -65,47 +77,72 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? price = null,
-    Object? status = null,
-    Object? quantity = null,
-    Object? createdAt = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
+    Object? price = freezed,
+    Object? category = freezed,
+    Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? image = freezed,
+    Object? quantity = freezed,
+    Object? size = freezed,
+    Object? status = freezed,
+    Object? costPrice = freezed,
+    Object? deleteAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
+              as int?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: freezed == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      costPrice: freezed == costPrice
+          ? _value.costPrice
+          : costPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
+      deleteAt: freezed == deleteAt
+          ? _value.deleteAt
+          : deleteAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -119,14 +156,19 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String description,
-      int price,
-      String status,
-      int quantity,
-      @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'updated_at') DateTime? updatedAt});
+      {String? id,
+      String? name,
+      String? description,
+      int? price,
+      String? category,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      String? image,
+      int? quantity,
+      String? size,
+      String? status,
+      @JsonKey(name: 'cost_price') int? costPrice,
+      @JsonKey(name: 'delete_at') DateTime? deleteAt});
 }
 
 /// @nodoc
@@ -140,47 +182,72 @@ class __$$ProductImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? price = null,
-    Object? status = null,
-    Object? quantity = null,
-    Object? createdAt = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? description = freezed,
+    Object? price = freezed,
+    Object? category = freezed,
+    Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? image = freezed,
+    Object? quantity = freezed,
+    Object? size = freezed,
+    Object? status = freezed,
+    Object? costPrice = freezed,
+    Object? deleteAt = freezed,
   }) {
     return _then(_$ProductImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
+              as int?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: freezed == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      costPrice: freezed == costPrice
+          ? _value.costPrice
+          : costPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
+      deleteAt: freezed == deleteAt
+          ? _value.deleteAt
+          : deleteAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -191,40 +258,57 @@ class __$$ProductImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$ProductImpl implements _Product {
   const _$ProductImpl(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.price,
-      required this.status,
-      required this.quantity,
-      @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'updated_at') this.updatedAt});
+      {this.id,
+      this.name,
+      this.description,
+      this.price,
+      this.category,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt,
+      this.image,
+      this.quantity,
+      this.size,
+      this.status,
+      @JsonKey(name: 'cost_price') this.costPrice,
+      @JsonKey(name: 'delete_at') this.deleteAt});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String description;
+  final String? description;
   @override
-  final int price;
+  final int? price;
   @override
-  final String status;
-  @override
-  final int quantity;
+  final String? category;
   @override
   @JsonKey(name: 'created_at')
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
+  @override
+  final String? image;
+  @override
+  final int? quantity;
+  @override
+  final String? size;
+  @override
+  final String? status;
+  @override
+  @JsonKey(name: 'cost_price')
+  final int? costPrice;
+  @override
+  @JsonKey(name: 'delete_at')
+  final DateTime? deleteAt;
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, description: $description, price: $price, status: $status, quantity: $quantity, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Product(id: $id, name: $name, description: $description, price: $price, category: $category, createdAt: $createdAt, updatedAt: $updatedAt, image: $image, quantity: $quantity, size: $size, status: $status, costPrice: $costPrice, deleteAt: $deleteAt)';
   }
 
   @override
@@ -237,19 +321,40 @@ class _$ProductImpl implements _Product {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.costPrice, costPrice) ||
+                other.costPrice == costPrice) &&
+            (identical(other.deleteAt, deleteAt) ||
+                other.deleteAt == deleteAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, price,
-      status, quantity, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      price,
+      category,
+      createdAt,
+      updatedAt,
+      image,
+      quantity,
+      size,
+      status,
+      costPrice,
+      deleteAt);
 
   @JsonKey(ignore: true)
   @override
@@ -267,35 +372,52 @@ class _$ProductImpl implements _Product {
 
 abstract class _Product implements Product {
   const factory _Product(
-      {required final String id,
-      required final String name,
-      required final String description,
-      required final int price,
-      required final String status,
-      required final int quantity,
-      @JsonKey(name: 'created_at') required final DateTime createdAt,
-      @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$ProductImpl;
+      {final String? id,
+      final String? name,
+      final String? description,
+      final int? price,
+      final String? category,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+      final String? image,
+      final int? quantity,
+      final String? size,
+      final String? status,
+      @JsonKey(name: 'cost_price') final int? costPrice,
+      @JsonKey(name: 'delete_at') final DateTime? deleteAt}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get description;
+  String? get description;
   @override
-  int get price;
+  int? get price;
   @override
-  String get status;
-  @override
-  int get quantity;
+  String? get category;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
+  @override
+  String? get image;
+  @override
+  int? get quantity;
+  @override
+  String? get size;
+  @override
+  String? get status;
+  @override
+  @JsonKey(name: 'cost_price')
+  int? get costPrice;
+  @override
+  @JsonKey(name: 'delete_at')
+  DateTime? get deleteAt;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
