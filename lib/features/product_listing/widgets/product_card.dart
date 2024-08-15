@@ -57,7 +57,7 @@ class ProductCardWiget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 8.h,
+                height: 6.h,
               ),
               Container(
                 height: 0.5,
@@ -65,14 +65,15 @@ class ProductCardWiget extends StatelessWidget {
                 color: GlobalColors.productBorderColor,
               ),
               SizedBox(
-                height: 8.h,
+                height: 6.h,
               ),
               SizedBox(
                 width: GlobalScreenSize.getScreenWidth(context) * 0.52,
                 child: Row(
                   children: [
                     Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           "Status:",
@@ -98,7 +99,7 @@ class ProductCardWiget extends StatelessWidget {
                         color: Colors.transparent,
                         child: Ink(
                           height:
-                              GlobalScreenSize.getScreenHeight(context) * 0.045,
+                              GlobalScreenSize.getScreenHeight(context) * 0.043,
                           width:
                               GlobalScreenSize.getScreenWidth(context) * 0.25,
                           decoration: BoxDecoration(
