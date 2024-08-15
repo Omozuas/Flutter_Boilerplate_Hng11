@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
@@ -39,6 +41,7 @@ class ProductCardWiget extends StatelessWidget {
                         Text(
                           "Product 1",
                           style: CustomTextStyles.productTextTitleBlack,
+
                         ),
                         Text(
                           "P001",
@@ -88,18 +91,28 @@ class ProductCardWiget extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    Container(
-                      height: GlobalScreenSize.getScreenHeight(context) * 0.045,
-                      width: GlobalScreenSize.getScreenWidth(context) * 0.25,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: GlobalColors.orange,
+                    InkWell(
+                      onTap: () {
+                        context.push('${AppRoute.products}/sdfsdf');
+                      },
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Ink(
+                          height:
+                              GlobalScreenSize.getScreenHeight(context) * 0.045,
+                          width:
+                              GlobalScreenSize.getScreenWidth(context) * 0.25,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: GlobalColors.orange,
+                              ),
+                              borderRadius: BorderRadius.circular(8.r)),
+                          child: Center(
+                            child: Text(
+                              'Add to Cart',
+                              style: CustomTextStyles.bodyTextOrange,
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(8.r)),
-                      child: Center(
-                        child: Text(
-                          'Add to Cart',
-                          style: CustomTextStyles.bodyTextOrange,
                         ),
                       ),
                     )
