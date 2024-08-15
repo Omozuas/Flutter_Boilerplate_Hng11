@@ -1,30 +1,30 @@
-import 'dart:convert';
+// import 'dart:convert';
 
-import 'user_models.dart';
+// import 'user_models.dart';
 
-RequestUserInfo requestUserInfoFromJson(String str) =>
-    RequestUserInfo.fromJson(json.decode(str));
+// RequestUserInfo requestUserInfoFromJson(String str) =>
+//     RequestUserInfo.fromJson(json.decode(str));
 
-String requestUserInfoToJson(RequestUserInfo data) =>
-    json.encode(data.toJson());
+// String requestUserInfoToJson(RequestUserInfo data) =>
+//     json.encode(data.toJson());
 
-class RequestUserInfo {
-  int statusCode;
-  UserModels user;
+// class RequestUserInfo {
+//   int statusCode;
+//   UserModels1 user;
 
-  RequestUserInfo({
-    required this.statusCode,
-    required this.user,
-  });
+//   RequestUserInfo({
+//     required this.statusCode,
+//     required this.user,
+//   });
 
-  factory RequestUserInfo.fromJson(Map<String, dynamic> json) =>
-      RequestUserInfo(
-        statusCode: json["status_code"],
-        user: UserModels.fromJson(json["user"]),
-      );
+//   factory RequestUserInfo.fromJson(Map<String, dynamic> json) =>
+//       RequestUserInfo(
+//         statusCode: json["status_code"],
+//         user: UserModels1.fromJson(json["user"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "status_code": statusCode,
-        "user": user.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "status_code": statusCode,
+//         "user": user.toJson(),
+//       };
+// }

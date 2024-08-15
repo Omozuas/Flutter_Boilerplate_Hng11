@@ -1,60 +1,62 @@
-class OwnedOrganisation {
-  String id;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  String? name;
-  String? description;
-  String? email;
-  String? industry;
-  String? type;
-  String? country;
-  String? address;
-  String? state;
-  bool? isDeleted;
+import 'dart:convert';
 
-  OwnedOrganisation({
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/Organisation_roles_model.dart';
+
+class OrganizationRoledById {
+  final String id;
+  final String name;
+  final String description;
+  final OrganisationRoles? permissions;
+
+  const OrganizationRoledById({
     required this.id,
-    this.createdAt,
-    this.updatedAt,
-    this.name,
-    this.description,
-    this.email,
-    this.industry,
-    this.type,
-    this.country,
-    this.address,
-    this.state,
-    this.isDeleted,
+    required this.name,
+    required this.description,
+    this.permissions,
   });
 
-  factory OwnedOrganisation.fromJson(Map<String, dynamic> json) =>
-      OwnedOrganisation(
-        id: json["id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        name: json["name"],
-        description: json["description"],
-        email: json["email"],
-        industry: json["industry"],
-        type: json["type"],
-        country: json["country"],
-        address: json["address"],
-        state: json["state"],
-        isDeleted: json["isDeleted"],
-      );
+  OrganizationRoledById copyWith(
+      {String? id,
+      String? name,
+      String? description,
+      OrganisationRoles? permissions}) {
+    return OrganizationRoledById(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      permissions: permissions ?? this.permissions,
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-        "name": name,
-        "description": description,
-        "email": email,
-        "industry": industry,
-        "type": type,
-        "country": country,
-        "address": address,
-        "state": state,
-        "isDeleted": isDeleted,
-      };
+  factory OrganizationRoledById.fromMap(Map<String, dynamic> map) {
+    return OrganizationRoledById(
+        id: map['id'] as String,
+        name: map['name'] as String,
+        description: map['description'] as String,
+        permissions: map['permissions'] == null
+            ? null
+            : OrganisationRoles.fromMap(
+                map['permissions'] as Map<String, dynamic>));
+  }
+
+  factory OrganizationRoledById.fromJson(String source) =>
+      OrganizationRoledById.fromMap(
+          json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool operator ==(covariant OrganizationRoledById other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'OrganizationRoledById (id: $id, name: $name, description: $description,permissions: $permissions )';
+  }
 }
