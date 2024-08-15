@@ -3,7 +3,6 @@ import 'package:get_storage/get_storage.dart';
 
 import '../services/service_locator.dart';
 
-final box = GetStorage();
 
 initializeApp() async {
   setupLocator();

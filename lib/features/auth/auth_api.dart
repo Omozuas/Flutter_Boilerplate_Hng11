@@ -4,12 +4,14 @@ import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../models/company_user.dart';
 import '../../services/response_model.dart';
 
 class AuthApi {
-  //Inject the DioProvider Dependency
+
   DioProvider dioProvider = locator<DioProvider>();
+  GetStorage box = locator<GetStorage>();
 
   /// Ensure you call updateAccessToken after login and registration success.
 
