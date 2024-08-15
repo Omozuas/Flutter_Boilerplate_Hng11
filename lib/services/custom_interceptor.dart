@@ -1,14 +1,26 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
+import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 
 class CustomInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    log('Endpoint >> ${err.response!.requestOptions.path}');
-    log('Code >> ${err.response!.statusCode}');
-    log('Error >> ${err.response!.data}');
-
+    ErrorHandlers.allErrorHandler(err);
     super.onError(err, handler);
+  }
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    log('Endpoint >> ${options.path}');
+    log('body >> ${options.data}');
+    options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
+    super.onRequest(options, handler);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    ///We can implement this later
+    super.onResponse(response, handler);
   }
 }

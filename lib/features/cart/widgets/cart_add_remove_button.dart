@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class NewIconButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isAdd;
-  const NewIconButton({super.key, required this.onPressed, required this.isAdd});
+  const NewIconButton(
+      {super.key, required this.onPressed, required this.isAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,8 @@ class NewIconButton extends StatelessWidget {
         alignment: Alignment.center,
         width: 32.w,
         padding: 5.sp.padA,
-        child: Icon(
-         isAdd? CupertinoIcons.add: CupertinoIcons.minus,
-          size: 18.sp,
-          color: const Color(0xFFF97316)
-        ),
+        child: Icon(isAdd ? CupertinoIcons.add : CupertinoIcons.minus,
+            size: 18.sp, color: const Color(0xFFF97316)),
       ),
     );
   }
