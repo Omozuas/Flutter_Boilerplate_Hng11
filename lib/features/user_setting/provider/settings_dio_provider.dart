@@ -21,10 +21,6 @@ class SettingsDioProvider {
       responseType: ResponseType.json,
     ));
   }
-  // void updateAccessToken(String token) {
-  //   _accessToken = token;
-  //   _dio.options.headers['Authorization'] = 'Bearer $_accessToken';
-  // }
 
   Future<DioResponseData> get(String path,
       {Map<String, dynamic>? query}) async {
@@ -39,51 +35,134 @@ class SettingsDioProvider {
     }
   }
 
-  // Future post(String path, {Map? data}) async {
-  //   try {
-  //     var response = await _dio.post(path, data: data);
-  //     return ResponseModel.fromJson(response.data);
-  //   } catch (e) {
-  //     //  ErrorHandlers.allErrorHandler(e);
-  //   }
-  // }
+  Future<DioResponseData> post(
+    String path, {
+    Map? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response =
+          await _dio.post(path, data: data, queryParameters: queryParameters);
+      return response.data as DioResponseData;
+    } on DioException catch (e) {
+      final errorMessage = _checkStatus(e.response!.statusCode!)!;
+      throw CustomApiError(errorMessage);
+    } catch (e) {
+      throw CustomApiError('An error occurred');
+    }
+  }
 
-  // Future putUpdate(String path, {Map? data}) async {
-  //   try {
-  //     var response = await _dio.put(path, data: data);
-  //     return ResponseModel.fromJson(response.data);
-  //   } catch (e) {
-  //     ErrorHandlers.allErrorHandler(e);
-  //   }
-  // }
+  Future put(
+    String path, {
+    Map? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response =
+          await _dio.put(path, data: data, queryParameters: queryParameters);
+      return response.data as DioResponseData;
+    } on DioException catch (e) {
+      final errorMessage = _checkStatus(e.response!.statusCode!)!;
+      throw CustomApiError(errorMessage);
+    } catch (e) {
+      throw CustomApiError('An error occurred');
+    }
+  }
 
-  // Future patchUpdate(String path, {Map? data}) async {
-  //   try {
-  //     final response = await _dio.patch(path, data: data);
-  //     // return ResponseModel.fromJson(response.data);
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  Future patch(
+    String path, {
+    Map? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response =
+          await _dio.patch(path, data: data, queryParameters: queryParameters);
+      return response.data as DioResponseData;
+    } on DioException catch (e) {
+      final errorMessage = _checkStatus(e.response!.statusCode!)!;
+      throw CustomApiError(errorMessage);
+    } catch (e) {
+      throw CustomApiError('An error occurred');
+    }
+  }
 
-  // Future multipart(String path, {Map? data}) async {
-  //   try {
-  //     final formData = FormData.fromMap(data as Map<String, dynamic>);
-  //     final response = await _dio.post(path, data: formData);
-  //     return ResponseModel.fromJson(response.data);
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  Future delete(String path, {Map<String, dynamic>? queryParameters}) async {
+    try {
+      final response =
+          await _dio.delete(path, queryParameters: queryParameters);
+      return response.data as DioResponseData;
+    } on DioException catch (e) {
+      final errorMessage = _checkStatus(e.response!.statusCode!)!;
+      throw CustomApiError(errorMessage);
+    } catch (e) {
+      throw CustomApiError('An error occurred');
+    }
+  }
 
-  // Future delete(String path, {Map? data}) async {
-  //   try {
-  //     var response = await _dio.delete(path, data: data);
-  //     return ResponseModel.fromJson(response.data);
-  //   } catch (e) {
-  //     ErrorHandlers.allErrorHandler(e);
-  //   }
-  // }
+/*
+
+    final bytes = await file.readAsBytes();
+    final multipart = MultipartFile.fromBytes(
+      bytes,
+      filename: file.path.split('/').last,
+    );
+
+    try {
+      final response = await _dio.post(
+        path,
+        data: {'DisplayPhoto': multipart},
+*/
+  Future multipartPUT(
+    String path, {
+    Map? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response = await _dio.put(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+      );
+
+      return response.data as DioResponseData;
+    } on DioException catch (e) {
+      final errorMessage = _checkStatus(e.response!.statusCode!)!;
+      throw CustomApiError(errorMessage);
+    } catch (e) {
+      throw CustomApiError('An error occurred');
+    }
+  }
+
+  Future multipartPOST(
+    String path, {
+    Map? data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response = await _dio.post(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+      );
+
+      return response.data as DioResponseData;
+    } on DioException catch (e) {
+      final errorMessage = _checkStatus(e.response!.statusCode!)!;
+      throw CustomApiError(errorMessage);
+    } catch (e) {
+      throw CustomApiError('An error occurred');
+    }
+  }
 
   String? _checkStatus(int code) {
     if (code <= 400) {
