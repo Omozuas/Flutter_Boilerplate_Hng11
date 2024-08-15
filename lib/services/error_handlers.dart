@@ -48,7 +48,7 @@ class ErrorHandlers {
 
   static void _serverErrorHandler(Response response) {
     log(response.toString());
-    showSnackBar(response.toString());
+    showSnackBar(response.data['message'] ?? response.toString());
     // switch (response.statusCode) {
     //   case 400:
     //   case 401:

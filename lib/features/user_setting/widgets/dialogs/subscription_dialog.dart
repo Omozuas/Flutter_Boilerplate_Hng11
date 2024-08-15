@@ -78,6 +78,7 @@ class SubscriptionDialog extends StatelessWidget {
                     textStyle: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
+                      color: GlobalColors.darkTwo,
                     ),
                   ),
                 ),
@@ -94,6 +95,7 @@ class SubscriptionDialog extends StatelessWidget {
                     textStyle: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
+                      color: GlobalColors.white,
                     ),
                   ),
                 ),
