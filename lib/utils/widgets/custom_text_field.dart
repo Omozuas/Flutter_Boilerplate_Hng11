@@ -41,7 +41,8 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.borderColor,
     this.focusedBorderColor,
-    this.focusNode, this.onchanged,
+    this.focusNode,
+    this.onchanged,
   });
 
   @override

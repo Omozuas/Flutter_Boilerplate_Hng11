@@ -1,4 +1,3 @@
-
 class ProductDetail {
   const ProductDetail({
     required this.description,
