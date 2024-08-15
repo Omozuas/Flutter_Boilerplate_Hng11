@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 import '../widgets/breaking_border_container.dart';
 import '../widgets/components/formfields.dart';
+import '../widgets/components/product_category.dart';
 import '../widgets/components/product_variation.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -143,7 +144,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 Container(
                   // color: Colors.red,
                   width: 355.w,
-                  height: 715.h,
+                  height: 670.h,
                   margin: EdgeInsets.only(top: 17.h),
                   child: Column(
                     children: [
@@ -304,11 +305,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               child: Text(
                                 'Maximum of 72 characters',
                                 style: GoogleFonts.inter(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                    height: 20 / 14,
-                                    color:
-                                        const Color.fromRGBO(100, 116, 139, 1)),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  height: 20 / 14,
+                                  color: const Color.fromRGBO(100, 116, 139, 1),
+                                ),
                               ),
                             ),
                           ],
@@ -339,9 +340,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             Container(
                               height: 40.h,
                               width: 379.w,
-                              child: const Text(
-                                'Category dropdown here',
-                              ),
+                              // child: const Text(
+                              //   'Category dropdown here',
+                              // ),
+                              child: ProductCategory(),
                             )
                           ],
                         ),

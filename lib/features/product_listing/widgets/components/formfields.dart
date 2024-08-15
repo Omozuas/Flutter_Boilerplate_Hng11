@@ -3,6 +3,8 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter/material.dart';
+
+import '../../../../utils/global_colors.dart';
 // unable to reuse Judah customtextfield
 
 class CustomTextField extends StatelessWidget {
@@ -14,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final int? maxLines;
   final Color? borderColor;
+  final double? borderRadius;
   final bool showCounter;
 
   CustomTextField({
@@ -25,6 +28,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLength,
     this.maxLines,
     this.borderColor,
+    this.borderRadius,
     this.showCounter = true,
   });
 
@@ -34,7 +38,20 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: hintText,
-        border: const OutlineInputBorder(),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+          borderSide: BorderSide(
+            color: Color.fromRGBO(203, 213, 225, 1),
+            width: 1.w,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+          borderSide: BorderSide(
+            color: borderColor ?? GlobalColors.borderColor,
+            width: 1.w,
+          ),
+        ),
         counterText: showCounter ? null : '',
         hintStyle: TextStyle(
           fontSize: 14.sp,
