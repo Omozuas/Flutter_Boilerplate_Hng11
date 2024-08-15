@@ -35,12 +35,12 @@ class ProductScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const Spacer(),
-              Assets.images.svg.productListing.listIcon.svg(),
-              SizedBox(
-                width: 8.w,
-              ),
-              Assets.images.svg.productListing.gridIcon.svg(),
+              // const Spacer(),
+              // Assets.images.svg.productListing.listIcon.svg(),
+              // SizedBox(
+              //   width: 8.w,
+              // ),
+              // Assets.images.svg.productListing.gridIcon.svg(),
             ],
           ),
         ),
