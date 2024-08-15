@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/invite_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                     'Members',
                     style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
@@ -78,33 +79,185 @@ class _MembersSettingsState extends State<MembersSettings> {
                     isInviteLinkActive = value;
                   });
                 },
-                title: const Text('Invite Link'),
+                inactiveTrackColor: GlobalColors.borderColor,
+                inactiveThumbColor: GlobalColors.white,
+                activeColor: GlobalColors.white,
+                activeTrackColor: GlobalColors.orange,
+                title:  Text(
+                    'Invite Link',
+                  style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xff525252),
+                  ),
+                ),
                 subtitle: Text(
                   'This provides a unique URL that allows anyone to join your workspace',
-                  style: TextStyle(fontSize: 12.sp),
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xff525252),
+                  ),
                 ),
               ),
+              if (isInviteLinkActive)...[
+                SizedBox(height: 10.h),
+                Row(
+                  children: [
+                    Expanded(
+                        child: TextField(
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            suffixIcon: Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.refresh, color: GlobalColors.orange),
+                                  onPressed: (){
+                                    // Logic to refresh the invite link goes here
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.copy, color: GlobalColors.orange),
+                                  onPressed: (){
+                                    // Logic to copy the invite link goes here
+                                  },
+                                ),
+                              ],
+                            ),
+                            hintText: 'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: GlobalColors.borderColor),
+                            )
+                          ),
+                        )
+                    )
+                  ],
+                ),
+              ],
               Divider(
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
               // Add buttons for demonstration
-              ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const DeleteMemberDialog(),
-                  );
-                },
-                child: const Text('Show Delete Member Dialog'),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     showDialog(
+              //       context: context,
+              //       builder: (context) => const DeleteMemberDialog(),
+              //     );
+              //   },
+              //   child: const Text('Show Delete Member Dialog'),
+              // ),
+              // ElevatedButton(
+              //   onPressed: () => showCustomToast(context),
+              //   child: const Text('Show Custom Toast'),
+              // ),
+              SizedBox(
+                height: 10.h,
               ),
-              ElevatedButton(
-                onPressed: () => showCustomToast(context),
-                child: const Text('Show Custom Toast'),
+              Row(
+                children: [
+                  Text(
+                    'Manage Members',
+                    style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        color: const Color(0xff0A0A0A)),
+                  ),
+                  const Spacer(),
+                  CustomButton(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return InviteDialog();
+                          }
+                        );
+                      },
+                      borderColor: const Color(0xffF97316),
+                      text: 'Invite people',
+                      height: 31.h,
+                      containerColor: const Color(0xffF97316),
+                      width: 105.h,
+                      textColor: const Color(0xffFFFFFF))
+                ],
               ),
               SizedBox(
                 height: 10.h,
               ),
+              Text(
+                'On the Free plan all members in a workspace are administrators. Upgrade to a paid plan to add the ability to assign or remove administrator roles.',
+                style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xff525252),
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: (){},
+                    child: Row(
+                      children: [
+                        Text(
+                        'Go to Plans',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xffF97316),
+                        ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward,
+                          size: 16,
+                          color:Color(0xffF97316),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search by name or email',
+                        prefixIcon: Icon(Icons.search, color: GlobalColors.gray200Color),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                            color: GlobalColors.lightGray,
+                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 05.w),
+                  DropdownButton<String>(
+                    dropdownColor: GlobalColors.white,
+                    iconEnabledColor: GlobalColors.gray200Color,
+                    value: 'All',
+                    onChanged: (String? newValue) {},
+                    items: <String>['All', 'Members', 'Suspended', 'Left workspace']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.w),
               Text(
                 '3 active members',
                 style: GoogleFonts.inter(
@@ -281,7 +434,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                       text: 'Export CSV',
                       height: 31.h,
                       containerColor: const Color(0xffF97316),
-                      width: 91.h,
+                      width: 105.h,
                       textColor: const Color(0xffFFFFFF))
                 ],
               ),
