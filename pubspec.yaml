@@ -119,6 +119,7 @@ flutter:
     - assets/images/png/product_listing/
     - assets/images/svg/product_listing/
     - assets/images/svg/
+    - assets/icons/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

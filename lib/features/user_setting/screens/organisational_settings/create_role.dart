@@ -87,9 +87,9 @@ class _CreateRoleState extends State<CreateRole> {
               alignment: Alignment.centerRight,
               child: CustomButton(
                 onTap: () {
-                  showDialog(
+                  showModalBottomSheet(
                     context: context,
-                    builder: (context) => const AddPermissionsDialog(),
+                    builder: (context) => const AddPermissionsModalSheet(),
                   );
                 },
                 borderColor: GlobalColors.orange,
@@ -107,87 +107,90 @@ class _CreateRoleState extends State<CreateRole> {
   }
 }
 
-class AddPermissionsDialog extends StatelessWidget {
-  const AddPermissionsDialog({
+class AddPermissionsModalSheet extends StatelessWidget {
+  const AddPermissionsModalSheet({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      backgroundColor: GlobalColors.white,
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 20.h),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Add Permissions',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16.sp,
-                      color: GlobalColors.darkTwo,
-                    ),
-                  ),
-                  Text(
-                    'See the list of permissions for this role.',
-                    style: TextStyle(
-                      color: GlobalColors.darkOne,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Divider(
-              color: GlobalColors.lightGray,
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            PermissionsListTile(
-                isPermitted: true, permissionTitle: 'Can view transactions'),
-            PermissionsListTile(
-                isPermitted: true, permissionTitle: 'Can view refunds'),
-            PermissionsListTile(
-                isPermitted: true, permissionTitle: 'Can log refunds'),
-            PermissionsListTile(
-                isPermitted: false, permissionTitle: 'Can view users'),
-            PermissionsListTile(
-                isPermitted: true, permissionTitle: 'Can create users'),
-            PermissionsListTile(
-                isPermitted: true, permissionTitle: 'Can edit users'),
-            PermissionsListTile(
-                isPermitted: true,
-                permissionTitle: 'Can blacklist/whitelist users'),
-            SizedBox(
-              height: 25.h,
-            ),
-            Center(
-              child: CustomButton(
-                onTap: () {},
-                borderColor: GlobalColors.lightGray,
-                text: "Save Preferences",
-                height: 40.h,
-                containerColor: GlobalColors.lightGray,
-                width: 150.w,
-                textColor: GlobalColors.darkTwo,
-              ),
-            ),
-          ],
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8.r),
+          topRight: Radius.circular(8.r),
         ),
+        color: GlobalColors.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Add Permissions',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16.sp,
+                    color: GlobalColors.darkTwo,
+                  ),
+                ),
+                Text(
+                  'See the list of permissions for this role.',
+                  style: TextStyle(
+                    color: GlobalColors.darkOne,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Divider(
+            color: GlobalColors.lightGray,
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle: 'Can view transactions'),
+                PermissionsListTile(
+                    isPermitted: true, permissionTitle: 'Can view refunds'),
+                PermissionsListTile(
+                    isPermitted: true, permissionTitle: 'Can log refunds'),
+                PermissionsListTile(
+                    isPermitted: false, permissionTitle: 'Can view users'),
+                PermissionsListTile(
+                    isPermitted: true, permissionTitle: 'Can create users'),
+                PermissionsListTile(
+                    isPermitted: true, permissionTitle: 'Can edit users'),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle: 'Can blacklist/whitelist users'),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 25.h,
+          ),
+          Center(
+            child: CustomButton(
+              onTap: () {},
+              borderColor: GlobalColors.lightGray,
+              text: "Save Preferences",
+              height: 40.h,
+              containerColor: GlobalColors.lightGray,
+              width: 150.w,
+              textColor: GlobalColors.darkTwo,
+            ),
+          ),
+        ],
       ),
     );
   }

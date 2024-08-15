@@ -26,10 +26,13 @@ class _RoleScreenState extends State<RoleScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomSearchField(
-                  searchController: searchController,
-                  hintText: 'Search',
-                  leading: Image.asset("assets/icons/search_icon.png"),
+                SizedBox(
+                  height: 40.h,
+                  child: CustomSearchField(
+                    searchController: searchController,
+                    hintText: 'Search',
+                    leading: Image.asset("assets/icons/search_icon.png"),
+                  ),
                 ),
                 SizedBox(
                   height: 28.h,
