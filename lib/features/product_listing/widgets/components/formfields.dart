@@ -6,20 +6,26 @@ import 'package:flutter/material.dart';
 // unable to reuse Judah customtextfield
 
 class CustomTextField extends StatelessWidget {
-  final String hintText;
+  final String? hintText;
+  final TextStyle? hintTextStyle;
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
   final int? maxLength;
+  final int? maxLines;
   final Color? borderColor;
+  final bool showCounter;
 
   CustomTextField({
-    required this.hintText,
+    this.hintText,
+    this.hintTextStyle,
     required this.controller,
     this.validator,
-    this.keyboardType = TextInputType.text,
+    this.keyboardType,
     this.maxLength,
+    this.maxLines,
     this.borderColor,
+    this.showCounter = true,
   });
 
   @override
@@ -28,11 +34,23 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: hintText,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
+        counterText: showCounter ? null : '',
+        hintStyle: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: const Color(0xFF94A3B8),
+        ),
+        contentPadding:
+            const EdgeInsets.only(left: 12, top: 12, right: 12, bottom: 10),
+        alignLabelWithHint: true,
       ),
       keyboardType: keyboardType,
       validator: validator,
       maxLength: maxLength,
+      maxLines: null,
+      expands: true,
+      textAlignVertical: TextAlignVertical.top,
     );
   }
 }
@@ -42,23 +60,106 @@ class ProductNameFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+    final hintText = 'Product name';
     final productNameController = TextEditingController();
+
     return Container(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
         controller: productNameController,
-        borderColor: Color.fromRGBO(203, 213, 225, 1),
-        hintText: 'Product name',
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: hintText,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please Enter $hintText';
+          }
+          return null;
+        },
       ),
     );
   }
 }
 
-//  Container(
-//                             height: 40.h,
-//                             width: 379.w,
-//                             child: Text('product name textfield here'),
-//                           ),
+class DescriptionFormField extends StatelessWidget {
+  const DescriptionFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final hintText = 'Enter product description';
+    final productNameController = TextEditingController();
+
+    return Container(
+      height: 80.h,
+      width: 379.w,
+      child: CustomTextField(
+        maxLength: 72,
+        //maxLines: max,
+        controller: productNameController,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: hintText,
+        showCounter: false,
+        // validator: (value) {
+        //   if (value == null || value.isEmpty) {
+        //     return 'Please $hintText';
+        //   }
+        //   return null;
+        // },
+      ),
+    );
+  }
+}
+
+class ProductPriceFormField extends StatelessWidget {
+  const ProductPriceFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final hintText = '0.00';
+    final productPriceController = TextEditingController();
+
+    return Container(
+      height: 40.h,
+      width: 379.w,
+      child: CustomTextField(
+        controller: productPriceController,
+        keyboardType: TextInputType.number,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: hintText,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please Enter a price';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+}
+
+class ProductQuantityFormField extends StatelessWidget {
+  const ProductQuantityFormField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final hintText = '0.00 pcs';
+    final productQuantityController = TextEditingController();
+
+    return Container(
+      height: 40.h,
+      width: 379.w,
+      child: CustomTextField(
+        controller: productQuantityController,
+        keyboardType: TextInputType.number,
+        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        hintText: hintText,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please Enter quantity of product';
+          }
+          return null;
+        },
+      ),
+    );
+  }
+}

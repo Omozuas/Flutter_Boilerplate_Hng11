@@ -76,6 +76,8 @@ class _MainViewState extends State<MainView> {
         selectedItemColor: Colors.amber[800],
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
+        elevation: 25,
+        backgroundColor: Colors.white,
         onTap: (index) {
           goBranch(index);
         },
