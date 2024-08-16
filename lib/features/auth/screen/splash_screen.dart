@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
       } else {
-        context.go(AppRoute.login);
+        if(box.read('rememberMe') != null && box.read('rememberMe')){
+        //  AuthProvider().s
+        }
+       else{
+          context.go(AppRoute.login);
+        }
 
         /// tODO: Implement a logic to get user details with saved token
       }

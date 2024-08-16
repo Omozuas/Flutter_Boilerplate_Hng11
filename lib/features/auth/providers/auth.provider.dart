@@ -119,8 +119,8 @@ class AuthState {
 }
 
 class AuthProvider extends StateNotifier<AuthState> {
-  GetStorage box = locator<GetStorage>();
 
+  GetStorage box = locator<GetStorage>();
   AuthProvider()
       : super(AuthState(
             normalButtonLoading: false,
@@ -156,6 +156,12 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          if(state.checkBoxState){
+            box.write('rememberMe', true);
+          }
+          else{
+            box.write('rememberMe', false);
+          }
         }
       }
     } catch (e) {
@@ -193,6 +199,13 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+
+          if(state.checkBoxState){
+            box.write('rememberMe', true);
+          }
+          else{
+            box.write('rememberMe', false);
+          }
         }
       }
     }
@@ -216,6 +229,12 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          if(state.checkBoxState){
+            box.write('rememberMe', true);
+          }
+          else{
+            box.write('rememberMe', false);
+          }
         }
       }
     } catch (e) {
