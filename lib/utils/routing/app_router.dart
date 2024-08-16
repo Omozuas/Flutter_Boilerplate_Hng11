@@ -11,6 +11,7 @@ import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/proucts_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/language_and_region_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/notification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_password.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -126,6 +128,7 @@ class AppRouter {
         path: AppRoute.editProfileScreen,
         builder: (context, state, ref) {
           final user = ref.read(profileProvider).user.requireValue;
+          final user = ref.watch(profileProvider).user.sureValue;
           return EditProfileScreen(user: user);
         },
       ),
