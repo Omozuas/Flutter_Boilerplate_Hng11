@@ -20,8 +20,8 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // UserService _user = locator<UserService>();
-    // String? userToken = _user.userAccessToken;
+    UserService _user = locator<UserService>();
+    String? userToken = _user.userAccessToken;
     // log('Endpoint >> ${options.path}');
     // log('Request body >> ${options.data}');
     // if (userToken != null) {
@@ -30,8 +30,8 @@ class CustomInterceptor extends Interceptor {
     log('Endpoint >> ${options.path}');
     log('Request body >> ${options.data}');
 
-    if (box.read('accessToken') != null) {
-      options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
+    if (userToken != null) {
+      options.headers["Authorization"] = "Bearer $userToken";
     }
     else if (options.path == 'auth/login'
         || options.path == '/auth/google?mobile=true'

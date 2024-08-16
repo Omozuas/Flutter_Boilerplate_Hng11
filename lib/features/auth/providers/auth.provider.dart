@@ -122,7 +122,6 @@ class AuthState {
 class AuthProvider extends StateNotifier<AuthState> {
   GetStorage box = locator<GetStorage>();
   UserService _userService = locator<UserService>();
-  AuthProvider() : super(false);
 
   AuthProvider()
       : super(AuthState(
@@ -226,12 +225,12 @@ class AuthProvider extends StateNotifier<AuthState> {
     } catch (e) {
       //TODO: Do something with caught error;
     } finally {
-      state = false;
+      setNormalButtonLoading = false;
     }
   }
 
   Future<void> getUser() async {
-    state = true;
+    setNormalButtonLoading = true;
     try {
       final res = await AuthApi().getUser();
       if (res?.data != null) {
