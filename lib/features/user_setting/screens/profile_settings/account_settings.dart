@@ -100,7 +100,9 @@ class SettingsScreen extends StatelessWidget {
                   SettingsTile(
                     leadingIcon: 'assets/images/data.png',
                     title: 'Data and Privacy ',
-                    onTap: () {},
+                    onTap: () {
+                      context.push(AppRoute.updatePassword);
+                    },
                   ),
                   SettingsTile(
                     leadingIcon: 'assets/images/world.png',
