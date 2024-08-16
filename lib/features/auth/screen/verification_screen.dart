@@ -291,18 +291,19 @@ class VerificationSuccessScreen extends StatelessWidget {
 
                     // Simulate network request
                     await Future.delayed(const Duration(seconds: 2));
-                    if(context.mounted)
+                    if (context.mounted)
                     // Hide loading indicator
-                      {
-                    Navigator.of(context).pop(); // Close the loading dialog
+                    {
+                      Navigator.of(context).pop(); // Close the loading dialog
 
-                    // Proceed to reset password screen or other actions
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
-                      ),
-                    );}
+                      // Proceed to reset password screen or other actions
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
+                    }
                   },
                   borderColor: GlobalColors.borderColor,
                   text: "Continue to Login",

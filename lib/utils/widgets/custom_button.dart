@@ -17,6 +17,7 @@ class CustomButton extends StatelessWidget {
   final double width, height;
   final bool loading;
   final FontWeight? fontWeight;
+  final TextStyle? textStyle;
   const CustomButton(
       {super.key,
       required this.onTap,
@@ -28,7 +29,8 @@ class CustomButton extends StatelessWidget {
       required this.textColor,
       this.loading = false,
       this.fontWeight,
-      this.borderColors});
+      this.borderColors,
+      this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +61,11 @@ class CustomButton extends StatelessWidget {
               : Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: textColor,
-                      fontWeight: fontWeight ?? FontWeight.w500),
+                  style: textStyle ??
+                      TextStyle(
+                          fontSize: 14,
+                          color: textColor,
+                          fontWeight: fontWeight ?? FontWeight.w500),
                 ),
         ),
       ),
