@@ -1,44 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/empty_avatar_tile.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/pronouns_textfield_dropdown.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_expansion_tile.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_social_textfield.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/global_colors.dart';
+import '../../../../utils/widgets/custom_button.dart';
+import '../../../../utils/widgets/custom_expansion_tile.dart';
+import '../../../../utils/widgets/custom_social_textfield.dart';
+import '../../../../utils/widgets/custom_text_field.dart';
+import '../../models/user_model.dart';
+import '../../models/user_profile.dart';
+import '../../provider/profile_provider.dart';
+import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
+import '../../widgets/empty_avatar_tile.dart';
+import '../../widgets/pronouns_textfield_dropdown.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+class EditProfileScreen extends ConsumerStatefulWidget {
+  const EditProfileScreen({super.key, required this.user});
+  final UserModel? user;
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _EditProfileScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final _usernameController = TextEditingController();
-  final _jobTitleController = TextEditingController();
-  final _departmentController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _bioController = TextEditingController();
-  final _xController = TextEditingController();
-  final _instagramController = TextEditingController();
-  final _linkedInController = TextEditingController();
+  late final TextEditingController _usernameController;
+  late final TextEditingController _jobTitleController;
+  late final TextEditingController _departmentController;
+  late final TextEditingController _bioController;
+  late final TextEditingController _xController;
+  late final TextEditingController _instagramController;
+  late final TextEditingController _linkedInController;
 
   Pronouns? _pronouns;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final profile = widget.user?.profile;
+    _usernameController = TextEditingController(text: profile?.username);
+    _jobTitleController = TextEditingController(text: profile?.jobTitle);
+    _departmentController = TextEditingController(text: profile?.department);
+    _bioController = TextEditingController(text: profile?.bio);
+    _xController = TextEditingController(text: profile?.twitterLink);
+    _instagramController = TextEditingController(text: profile?.facebookLink);
+    _linkedInController = TextEditingController(text: profile?.linkedInLink);
+    _pronouns = profile?.pronoun == null
+        ? null
+        : Pronouns.fromString(profile!.pronoun!);
+  }
 
   @override
   void dispose() {
     _usernameController.dispose();
     _jobTitleController.dispose();
     _departmentController.dispose();
-    _emailController.dispose();
     _bioController.dispose();
     _xController.dispose();
     _instagramController.dispose();
@@ -48,6 +70,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(profileProvider).profileUpdater.isLoading;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -107,11 +131,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   controller: _departmentController,
                   hintText: 'Enter a department or team',
                 ),
-                CustomTextField(
-                  label: 'Email',
-                  controller: _emailController,
-                  hintText: 'Enter email address',
-                ),
                 CustomExpansionTile(
                   title: 'Bio',
                   content: [
@@ -120,7 +139,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       children: [
                         CustomTextField(
                           label: '',
-                          controller: _emailController,
+                          controller: _bioController,
                           hintText: 'Type your messsage here',
                           maxLines: 3,
                         ),
@@ -141,18 +160,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SocialMediaInput(
                       controller: _xController,
                       hintText: 'Add X link',
-                      prefixIcon: Image.asset('assets/images/X logo.png'),
+                      prefixIcon: SvgPicture.asset(
+                        'assets/images/svg/account_settings/x_logo.svg',
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                     SocialMediaInput(
                       controller: _instagramController,
                       hintText: 'Add Instagram link',
-                      prefixIcon: Image.asset('assets/images/fe_instagram.png'),
+                      prefixIcon: SvgPicture.asset(
+                        'assets/images/svg/account_settings/instagram.svg',
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                     SocialMediaInput(
                       controller: _linkedInController,
                       hintText: 'Add Linkedin link',
-                      prefixIcon:
-                          Image.asset('assets/images/Instagram (2).png'),
+                      prefixIcon: SvgPicture.asset(
+                        'assets/images/svg/account_settings/linkedin.svg',
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                   ],
                 ),
@@ -174,26 +201,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       SizedBox(width: 12.h),
                       Expanded(
                         child: CustomButton(
-                          borderColor: Colors.transparent,
-                          text: 'Save Changes',
-                          height: 40.h,
-                          containerColor: GlobalColors.orange,
-                          width: 50.w,
-                          textColor: const Color(0xFFFAFAFA),
-                          onTap: () {
-                            showDialog(
-                                context: (context),
-                                builder: (BuildContext context) =>
-                                    ProfileDialog(
-                                      title: 'Profile Updated!',
-                                      description:
-                                          'Your profile has been successfully updated.',
-                                      onContinue: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ));
-                          },
-                        ),
+                            borderColor: Colors.transparent,
+                            text: 'Save Changes',
+                            height: 40.h,
+                            containerColor: GlobalColors.orange,
+                            width: 50.w,
+                            textColor: const Color(0xFFFAFAFA),
+                            loading: isLoading,
+                            onTap: () {
+                              if (isLoading) return;
+                              update(widget.user);
+                            }),
                       ),
                     ],
                   ),
@@ -204,5 +222,57 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> update(UserModel? user) async {
+    if (_usernameController.text.isEmpty &&
+        _jobTitleController.text.isEmpty &&
+        _departmentController.text.isEmpty &&
+        _bioController.text.isEmpty &&
+        _xController.text.isEmpty &&
+        _instagramController.text.isEmpty &&
+        _linkedInController.text.isEmpty) {
+      return;
+    }
+    if (user == null) return;
+
+    final profile = UserProfile(
+      userID: user.id,
+      firstname: user.profile?.firstname ?? '',
+      lastname: user.profile?.lastname ?? '',
+      phoneNumber: user.profile?.phoneNumber,
+      avatarURL: user.profile?.avatarURL,
+      username: _usernameController.text,
+      pronoun: _pronouns?.title,
+      jobTitle: _jobTitleController.text,
+      bio: _bioController.text,
+      department: _departmentController.text,
+      facebookLink: _instagramController.text,
+      twitterLink: _xController.text,
+      linkedInLink: _linkedInController.text,
+    );
+    try {
+      await ref
+          .read(profileProvider.notifier)
+          .updateProfile(email: user.email, profile: profile);
+
+      final pUpdater = ref.read(profileProvider).profileUpdater;
+      if (pUpdater.hasError) throw pUpdater.error!;
+      if (!mounted) return;
+      await showDialog(
+        context: context,
+        builder: (ctx) => ProfileDialog(
+          title: 'Profile Updated!',
+          description: 'Your profile has been successfully updated.',
+          onContinue: () {
+            Navigator.pop(ctx);
+          },
+        ),
+      );
+      if (!mounted) return;
+      context.pop();
+    } catch (e) {
+      // handle error;
+    }
   }
 }

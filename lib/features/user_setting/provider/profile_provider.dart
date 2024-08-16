@@ -1,14 +1,33 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/user_profile.dart';
 import '../settings_api.dart';
 
-class ProfileUpdater extends AutoDisposeAsyncNotifier {
+class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   @override
-  FutureOr<UserProfile?> build() => null;
+  ProfileProviderStates build() {
+    return const ProfileProviderStates(
+      user: AsyncData(null),
+      profileUpdater: AsyncData(null),
+      profileAvatarUpdater: AsyncData(null),
+    );
+  }
+
+  Future<void> getUser() async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(user: const AsyncLoading());
+      final res =
+          await settingsApi.getUser('292460cf-7a45-4c66-aa5b-4fbf74e037e3');
+      state = state.copyWith(user: AsyncData(res));
+    } catch (e) {
+      state = state.copyWith(user: AsyncError(e, StackTrace.current));
+    }
+  }
 
   Future<void> updateProfile({
     required String email,
@@ -16,23 +35,17 @@ class ProfileUpdater extends AutoDisposeAsyncNotifier {
   }) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
+      state = state.copyWith(profileUpdater: const AsyncLoading());
       final res = await settingsApi.updateProfile(
         email: email,
         profile: profile,
       );
-      state = AsyncData(res);
+      await getUser();
+      state = state.copyWith(profileUpdater: AsyncData(res));
     } catch (e) {
-      state = AsyncError(e, StackTrace.current);
+      state = state.copyWith(profileUpdater: AsyncError(e, StackTrace.current));
     }
   }
-}
-
-final profileUpdaterProvider =
-    AutoDisposeAsyncNotifierProvider<ProfileUpdater, void>(ProfileUpdater.new);
-
-class ProfileAvatarUpdater extends AutoDisposeAsyncNotifier {
-  @override
-  FutureOr<String?> build() => null;
 
   Future<void> updateProfileAvatar({
     required String email,
@@ -40,17 +53,44 @@ class ProfileAvatarUpdater extends AutoDisposeAsyncNotifier {
   }) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
+      state = state.copyWith(profileAvatarUpdater: const AsyncLoading());
       final res = await settingsApi.updateProfileAvatar(
         email: email,
         image: image,
       );
-      state = AsyncData(res);
+      await getUser();
+      state = state.copyWith(profileAvatarUpdater: AsyncData(res));
     } catch (e) {
-      state = AsyncError(e, StackTrace.current);
+      state = state.copyWith(
+          profileAvatarUpdater: AsyncError(e, StackTrace.current));
     }
   }
 }
 
-final profileAvatarUpdaterProvider =
-    AutoDisposeAsyncNotifierProvider<ProfileAvatarUpdater, void>(
-        ProfileAvatarUpdater.new);
+final profileProvider =
+    AutoDisposeNotifierProvider<ProfileProvider, ProfileProviderStates>(
+        ProfileProvider.new);
+
+class ProfileProviderStates {
+  final AsyncValue<UserModel?> user;
+  final AsyncValue<UserProfile?> profileUpdater;
+  final AsyncValue<String?> profileAvatarUpdater;
+
+  const ProfileProviderStates({
+    required this.user,
+    required this.profileUpdater,
+    required this.profileAvatarUpdater,
+  });
+
+  ProfileProviderStates copyWith({
+    AsyncValue<UserModel?>? user,
+    AsyncValue<UserProfile?>? profileUpdater,
+    AsyncValue<String?>? profileAvatarUpdater,
+  }) {
+    return ProfileProviderStates(
+      user: user ?? this.user,
+      profileUpdater: profileUpdater ?? this.profileUpdater,
+      profileAvatarUpdater: profileAvatarUpdater ?? this.profileAvatarUpdater,
+    );
+  }
+}
