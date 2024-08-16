@@ -15,13 +15,11 @@ class UserService {
   bool isUserServiceProvider = false;
 
   storeToken(String? token) async {
-    if(token != null){
+    if (token != null) {
       storageService.write('accessToken', token);
-      String? userToken = storageService.read('accessToken');
       userAccessToken = token;
-      print("SAVED TOKEN::: $userToken");
       isUserLoggedIn = true;
-    }else{
+    } else {
       isUserLoggedIn = false;
     }
     debugPrint("Is User Logged In:::: $isUserLoggedIn");
@@ -46,11 +44,11 @@ class UserService {
 
   storeUser(AuthUser? response) async {
     debugPrint("Store User");
-    if(response!=null){
+    if (response != null) {
       await storageService.write('user', jsonEncode(response));
       user = response;
       log("True");
-    }else{
+    } else {
       debugPrint("Unable to store User");
       log("False");
     }

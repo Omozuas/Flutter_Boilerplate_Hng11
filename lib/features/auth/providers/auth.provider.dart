@@ -127,7 +127,7 @@ class AuthState {
 
 class AuthProvider extends StateNotifier<AuthState> {
   GetStorage box = locator<GetStorage>();
-  UserService _userService = locator<UserService>();
+  final UserService _userService = locator<UserService>();
 
   AuthProvider()
       : super(AuthState(
@@ -251,7 +251,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
-          _userService.storeToken(userRegData.accessToken??"");
+          _userService.storeToken(userRegData.accessToken ?? "");
           getUser();
         }
       }

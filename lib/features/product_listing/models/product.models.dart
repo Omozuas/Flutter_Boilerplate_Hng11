@@ -1,4 +1,3 @@
-
 class GetAllProductsResponse {
   String? message;
   Metadata? metadata;
@@ -8,9 +7,8 @@ class GetAllProductsResponse {
 
   GetAllProductsResponse.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    metadata = json['metadata'] != null
-        ? Metadata.fromJson(json['metadata'])
-        : null;
+    metadata =
+        json['metadata'] != null ? Metadata.fromJson(json['metadata']) : null;
     if (json['data'] != null) {
       data = <ProductData>[];
       json['data'].forEach((v) {
@@ -21,9 +19,9 @@ class GetAllProductsResponse {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['message'] =message;
-    if (this.metadata != null) {
-      data['metadata'] =metadata!.toJson();
+    data['message'] = message;
+    if (metadata != null) {
+      data['metadata'] = metadata!.toJson();
     }
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -42,11 +40,11 @@ class Metadata {
 
   Metadata(
       {this.totalPages,
-        this.currentPage,
-        this.pageSize,
-        this.totalCount,
-        this.hasPrevious,
-        this.hasNext});
+      this.currentPage,
+      this.pageSize,
+      this.totalCount,
+      this.hasPrevious,
+      this.hasNext});
 
   Metadata.fromJson(Map<String, dynamic> json) {
     totalPages = json['totalPages'];
@@ -80,12 +78,12 @@ class ProductData {
 
   ProductData(
       {this.id,
-        this.name,
-        this.description,
-        this.price,
-        this.category,
-        this.createdAt,
-        this.updatedAt});
+      this.name,
+      this.description,
+      this.price,
+      this.category,
+      this.createdAt,
+      this.updatedAt});
 
   ProductData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -99,13 +97,13 @@ class ProductData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['id'] =id;
-    data['name'] =name;
-    data['description'] =description;
-    data['price'] =price;
-    data['category'] =category;
-    data['created_at'] =createdAt;
-    data['updated_at'] =updatedAt;
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['price'] = price;
+    data['category'] = category;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
