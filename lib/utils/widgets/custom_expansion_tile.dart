@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../global_colors.dart';
 
@@ -45,8 +46,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
           children: [
             Text(
               widget.title,
-              style:
-                  GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 14),
+              style: GoogleFonts.inter(
+                  fontWeight: FontWeight.w600, fontSize: 18.sp),
             ),
             const SizedBox(width: 8),
             Icon(

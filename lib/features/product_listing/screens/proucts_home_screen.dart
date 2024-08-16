@@ -24,6 +24,34 @@ class ProductHomeScreen extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
+            Row(
+              children: [
+                SizedBox(
+                    height: GlobalScreenSize.getScreenHeight(context) * 0.053,
+                    child: Assets.images.png.productListing.profile.image()),
+                SizedBox(
+                  width: 8.h,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Welcome Back!",
+                      style: CustomTextStyles.productSmallBodyTextBlack,
+                    ),
+                    Text(
+                      "DesignKid",
+                      style: CustomTextStyles.productTextBody2Black,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Assets.images.svg.productListing.notification.svg()
+              ],
+            ),
+            SizedBox(
+              height: 24.h,
+            ),
             Text(
               "Discover",
               style: CustomTextStyles.headerTextBlack,
