@@ -29,8 +29,7 @@ class CustomButton extends StatelessWidget {
       required this.textColor,
       this.loading = false,
       this.fontWeight,
-      this.borderColors,
-      this.textStyle});
+      this.borderColors, this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +60,10 @@ class CustomButton extends StatelessWidget {
               : Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: textStyle ??
-                      TextStyle(
-                          fontSize: 14,
-                          color: textColor,
-                          fontWeight: fontWeight ?? FontWeight.w500),
+                  style: textStyle ?? TextStyle(
+                      fontSize: 14,
+                      color: textColor,
+                      fontWeight: fontWeight ?? FontWeight.w500),
                 ),
         ),
       ),

@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       } else {
         context.go(AppRoute.login);
 
-        /// TODO: Implement a logic to get user details with saved token
+        /// tODO: Implement a logic to get user details with saved token
       }
     });
     super.initState();
