@@ -88,9 +88,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.all(16.sp),
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text(
                       'Verification Code',
@@ -160,7 +160,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         );
                       }),
                     ),
-                    SizedBox(height: 16.sp),
+                    SizedBox(height: 32.h),
                     CustomButton(
                       onTap: _isCodeComplete ? _handleVerify : () {},
                       borderColor: GlobalColors.borderColor,
@@ -193,7 +193,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16.sp),
+                      SizedBox(height: 8.h),
+                      Center(
+                        child: TextButton(
+                          onPressed: null,
+                          child: Text(
+                            '__________  Or  __________',
+                            style: TextStyle(
+                              color: GlobalColors.darkOne,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
                       Center(
                         child: TextButton(
                           onPressed: _handleChangeEmail,

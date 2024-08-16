@@ -17,9 +17,9 @@ class ResetPassword extends StatefulWidget {
 
 class _ResetPasswordState extends State<ResetPassword> {
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
 
   @override
   void initState() {
@@ -27,13 +27,12 @@ class _ResetPasswordState extends State<ResetPassword> {
     _startTimer();
   }
 
-  void _startTimer() {
-  }
+  void _startTimer() {}
 
   void _handleResetPassword() {
     if (_formKey.currentState?.validate() ?? false) {
       // Proceed with the password reset process
-      context.push(AppRoute.verificationScreen);
+      context.push(AppRoute.login);
     }
   }
 
@@ -44,7 +43,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   }
 
   void _handleChangeEmail() {
-    context.go(AppRoute.login);
+    context.go(AppRoute.forgotPassword);
   }
 
   @override
@@ -80,7 +79,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
               ),
               SizedBox(height: 28.sp),
-
               CustomTextField(
                 label: "New Password",
                 controller: _newPasswordController,
@@ -89,7 +87,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 validator: Validators.passwordValidator,
               ),
               SizedBox(height: 16.sp),
-
               CustomTextField(
                 label: "Confirm Password",
                 controller: _confirmPasswordController,
@@ -106,7 +103,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 },
               ),
               SizedBox(height: 32.sp),
-
               CustomButton(
                 onTap: _handleResetPassword,
                 borderColor: GlobalColors.borderColor,
@@ -117,39 +113,56 @@ class _ResetPasswordState extends State<ResetPassword> {
                 textColor: Colors.white,
               ),
               SizedBox(height: 16.sp),
-
               Center(
                 child: RichText(
                   text: TextSpan(
-                    text: 'Didn\'t receive any code? ',
+                    text: 'Remember your password? ',
                     style: TextStyle(color: GlobalColors.darkOne),
                     children: [
                       TextSpan(
-                        text: 'Resend OTP',
+                        text: 'Login here',
                         style: TextStyle(
                             color: GlobalColors.orange,
                             fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = _handleResend,
+                          ..onTap = () {
+                            context.pushReplacement(AppRoute.login);
+                          },
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 16.sp),
-
+              SizedBox(height: 8.h),
               Center(
                 child: TextButton(
-                  onPressed: _handleChangeEmail,
-                  child: const Text(
-                    'Change Email',
+                  onPressed: null,
+                  child: Text(
+                    '__________  Or  __________',
                     style: TextStyle(
-                      color: Colors.orange,
-                      decoration: TextDecoration.underline,
+                      color: GlobalColors.darkOne,
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 8.h),
+              Center(
+                child: TextButton(
+                  onPressed: _handleChangeEmail,
+                  child: Text(
+                    'Change Email',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: GlobalColors.orange,
+                      decoration: TextDecoration.underline,
+                      decorationColor: GlobalColors.orange,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+              )
             ],
           ),
         ),

@@ -26,12 +26,8 @@ class CustomInterceptor extends Interceptor {
       options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
     }
     else{
-      if(options.path == 'auth/login'){}
-      else{
-        Navigator.push(OneContext().context!, MaterialPageRoute(builder:
-            (context)=>const LoginScreen()
-        ));
-      }
+      //todo: handle when access token is null
+      //todo: handle when access token is expired
     }
     super.onRequest(options, handler);
   }
