@@ -32,22 +32,6 @@ class CustomInterceptor extends Interceptor {
 
     }
     else{
-<<<<<<< HEAD
-<<<<<<< HEAD
-      //todo: handle when access token is null
-      //todo: handle when access token is expired
-=======
-      if(options.path == 'auth/login'){}
-      else{
-        Navigator.push(OneContext().context!, MaterialPageRoute(builder:
-            (context)=>const LoginScreen()
-        ));
-      }
-
-      //when token is expired has been handled in the error handle as when status code is 401.
-
->>>>>>> e5306ef06daacf3f884bcd17690968add267b982
-=======
       OneContext().push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
       handler.reject(
         DioException(
@@ -56,7 +40,6 @@ class CustomInterceptor extends Interceptor {
           error: 'Access cannot be used',
         ),
       );
->>>>>>> 1968a69cbc0280e5fa85c6c55a94dce2ac97fdf3
     }
     super.onRequest(options, handler);
   }
