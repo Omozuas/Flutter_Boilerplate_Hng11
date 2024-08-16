@@ -95,13 +95,51 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../services/service_locator.dart';
 
-class AuthProvider extends StateNotifier<bool> {
+class AuthState {
+  final bool normalButtonLoading;
+  final bool googleButtonLoading;
+  final bool checkBoxState;
+
+  AuthState({
+    required this.normalButtonLoading,
+    required this.googleButtonLoading,
+    required this.checkBoxState,
+  });
+
+  // You can also add a copyWith method for easy state modification
+  AuthState copyWith({
+    bool? normalButtonLoading,
+    bool? googleButtonLoading,
+    bool? checkBoxState,
+  }) {
+    return AuthState(
+      normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
+      googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
+      checkBoxState: checkBoxState ?? this.checkBoxState,
+    );
+  }
+}
+
+class AuthProvider extends StateNotifier<AuthState> {
   GetStorage box = locator<GetStorage>();
-  AuthProvider() : super(false);
+  AuthProvider() : super(AuthState(normalButtonLoading: false, googleButtonLoading: false,
+      checkBoxState: false));
+
+  set setNormalButtonLoading(bool value) {
+    state = state.copyWith(normalButtonLoading: value);
+  }
+
+  set setGoogleButtonLoading(bool value) {
+    state = state.copyWith(googleButtonLoading: value);
+  }
+
+  set setCheckBoxState(bool value) {
+    state = state.copyWith(checkBoxState: value);
+  }
 
   Future<void> registerSingleUser(
       Map<String, dynamic> data, BuildContext context) async {
-    state = true;
+    setNormalButtonLoading = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
 
@@ -118,12 +156,13 @@ class AuthProvider extends StateNotifier<bool> {
     } catch (e) {
       //TODO: Do something with caught error;
     } finally {
-      state = false;
+      setNormalButtonLoading = false;
     }
   }
 
   Future<void> googleSignin(BuildContext context) async {
-    state = true;
+    setGoogleButtonLoading = true;
+
     FirebaseAuth auth = FirebaseAuth.instance;
 
     try {
@@ -158,12 +197,12 @@ class AuthProvider extends StateNotifier<bool> {
     } catch (e) {
       rethrow;
     } finally {
-      state = false;
+      setGoogleButtonLoading = false;
     }
   }
 
   Future<void> login(Map<String, dynamic> data, BuildContext context) async {
-    state = true;
+    setNormalButtonLoading = true;
     try {
       final res = await AuthApi().loginUser(data);
 
@@ -178,13 +217,15 @@ class AuthProvider extends StateNotifier<bool> {
     } catch (e) {
       //TODO: Do something with caught error;
     } finally {
-      state = false;
+      setNormalButtonLoading = false;
     }
   }
 }
 
-final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
+final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
   return AuthProvider();
 });
 
-final checkBoxProvider = StateProvider<bool>((ref) => false);
+//final checkBoxState = StateProvider<bool>((ref) => false);
+// final loadingGoogleButton = StateProvider<bool>((ref) => false);
+
