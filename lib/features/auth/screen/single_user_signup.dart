@@ -130,6 +130,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       text: 'Create Account',
                       loading: authProviderState.normalButtonLoading,
                       onTap: () async {
+                        _handleCreateAccount(ref, context);
                         if (formKey.currentState!.validate()) {
                           _handleCreateAccount(ref, context);
                           // ref.read(authProvider.notifier).registerSingleUser({

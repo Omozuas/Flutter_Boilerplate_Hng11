@@ -57,6 +57,7 @@ dependencies:
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   json_annotation: any
+  jwt_decoder: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,7 +73,6 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   build_runner: ^2.4.11
   json_serializable: ^6.7.1
-  jwt_decoder: ^2.0.1
 
 
 flutter_launcher_icons:

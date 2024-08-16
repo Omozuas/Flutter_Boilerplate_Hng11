@@ -1,17 +1,9 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/reset_password.dart';
-import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
-import 'package:flutter_boilerplate_hng11/main.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
-import 'package:get/get.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:go_router/go_router.dart';
-import 'package:one_context/one_context.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 class CustomInterceptor extends Interceptor {

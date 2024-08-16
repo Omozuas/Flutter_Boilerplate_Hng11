@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -18,29 +22,17 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
 
+  bool loading = false;
   /// When you are ready to handle send, uncomment this function
-  // void _handleSend() {
-  //   final email = _emailController.text;
-  //   // Validate email format
-  //   if (email.isEmpty || !email.contains('@')) {
-  //     setState(() {});
-  //     return;
-  //   }
-  //
-  //   // Simulate email check
-  //   if (email == 'test@example.com') {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) => VerificationScreen(email: email)),
-  //     );
-  //   } else {
-  //     setState(() {});
-  //   }
-  // }
+  void _handleSend()async {
+
+
+    }
+
 
   @override
   Widget build(BuildContext context) {
+   // loading = false;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -90,8 +82,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SizedBox(height: 32.sp),
             CustomButton(
+              loading: loading,
                 onTap: () {
-              context.push(AppRoute.verificationScreen);
+              _handleSend();
                 },
                 borderColor: GlobalColors.borderColor,
                 text: "Send",

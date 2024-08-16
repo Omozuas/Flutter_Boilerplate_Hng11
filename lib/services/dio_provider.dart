@@ -73,8 +73,8 @@ class DioProvider {
   DioProvider()
       : _dio = Dio(BaseOptions(
           baseUrl: dotenv.env['BASE_URL']!,
-          connectTimeout: const Duration(seconds: 10),
-          receiveTimeout: const Duration(seconds: 10),
+          connectTimeout: const Duration(seconds: 20),
+          receiveTimeout: const Duration(seconds: 20),
           responseType: ResponseType.json,
         ))
           ..interceptors.add(CustomInterceptor());

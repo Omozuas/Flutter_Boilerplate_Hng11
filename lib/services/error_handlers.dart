@@ -1,9 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
-import 'package:one_context/one_context.dart';
 
 import '../utils/widgets/custom_snackbar.dart';
 
@@ -50,10 +47,14 @@ class ErrorHandlers {
   }
 
   static void _serverErrorHandler(Response response) {
-    log('hhhttt${response.statusCode.toString()}');
+    log('hhhttt${response.toString()}');
 
+if(response.data != null){
+  showSnackBar(response.data['message'].toString());
+}
+else{
+  showSnackBar('Seems something happened');}
 
-   showSnackBar(response.data['message'].toString());
     log('hhhttt${response.toString()}');
     switch (response.statusCode) {
       case 400:
