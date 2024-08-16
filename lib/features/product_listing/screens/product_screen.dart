@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -17,103 +15,124 @@ class ProductScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(productListProvider).when(
-          data: (data) => log('$data'),
-          error: (Object error, StackTrace stackTrace) {
-            log('$error');
-          },
-          loading: () => log('list is loading'),
-        );
-
-    return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Padding(
-          padding:
-              EdgeInsets.only(left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
-          child: Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Products",
-                    style: CustomTextStyles.producHeaderBlack,
+    return ref.watch(productListProvider).when(
+      data: (data) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Products",
+                            style: CustomTextStyles.producHeaderBlack,
+                          ),
+                          Text(
+                            "View all products",
+                            style: CustomTextStyles.productSmallBodyTextBlack,
+                          ),
+                        ],
+                      ),
+                      // const Spacer(),
+                      // Assets.images.svg.productListing.listIcon.svg(),
+                      // SizedBox(
+                      //   width: 8.w,
+                      // ),
+                      // Assets.images.svg.productListing.gridIcon.svg(),
+                    ],
                   ),
-                  Text(
-                    "View all products",
-                    style: CustomTextStyles.productSmallBodyTextBlack,
-                  ),
-                ],
-              ),
-              // const Spacer(),
-              // Assets.images.svg.productListing.listIcon.svg(),
-              // SizedBox(
-              //   width: 8.w,
-              // ),
-              // Assets.images.svg.productListing.gridIcon.svg(),
-            ],
-          ),
-        ),
-        Divider(
-          color: GlobalColors.diverColor,
-        ),
-        SizedBox(
-          height: 24.h,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 23.w, right: 23.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 16, right: 16),
-                height: GlobalScreenSize.getScreenHeight(
-                      context,
-                    ) *
-                    0.052,
-                width: GlobalScreenSize.getScreenWidth(
-                      context,
-                    ) *
-                    0.7,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(color: GlobalColors.searchBorderColor)),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Search Product",
-                      suffixIcon: SvgPicture.asset(
-                        Assets.images.svg.productListing.sortIcon.path,
-                        height: 24.h,
-                        width: 24.w,
-                        fit: BoxFit.scaleDown,
-                      )),
                 ),
-              ),
-              Assets.images.svg.productListing.filterButton.svg(),
-            ],
-          ),
-        ),
-        Padding(
-            padding: EdgeInsets.only(
-              left: 24.h,
-              top: 24.h,
-            ),
-            child: SizedBox(
-              height: GlobalScreenSize.getScreenHeight(context),
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                itemBuilder: (txt, index) {
-                  return const ProductCardListWidget();
-                },
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                Divider(
+                  color: GlobalColors.diverColor,
+                ),
+                SizedBox(
                   height: 24.h,
                 ),
-                itemCount: 20,
-              ),
-            ))
-      ]),
-    ));
+                Padding(
+                  padding: EdgeInsets.only(left: 23.w, right: 23.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        height: GlobalScreenSize.getScreenHeight(
+                              context,
+                            ) *
+                            0.052,
+                        width: GlobalScreenSize.getScreenWidth(
+                              context,
+                            ) *
+                            0.7,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r),
+                            border: Border.all(
+                                color: GlobalColors.searchBorderColor)),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "Search Product",
+                              suffixIcon: SvgPicture.asset(
+                                Assets.images.svg.productListing.sortIcon.path,
+                                height: 24.h,
+                                width: 24.w,
+                                fit: BoxFit.scaleDown,
+                              )),
+                        ),
+                      ),
+                      Assets.images.svg.productListing.filterButton.svg(),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 24.h,
+                    top: 24.h,
+                  ),
+                  child: SizedBox(
+                    height: GlobalScreenSize.getScreenHeight(context),
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (txt, index) {
+                        return const ProductCardListWidget();
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(
+                        height: 24.h,
+                      ),
+                      itemCount: 20,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      error: (Object error, StackTrace stackTrace) {
+        return Scaffold(
+          body: Center(
+            child: Text(
+              'Something went wrong: $error',
+              style: TextStyle(color: Colors.red, fontSize: 16.sp),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      },
+      loading: () {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+    );
   }
 }
