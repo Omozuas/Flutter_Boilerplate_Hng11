@@ -47,20 +47,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
+            Text(
               'Forgot Password',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.sp),
             ),
-            SizedBox(height: 8.sp),
-            const Text(
+            SizedBox(height: 8.h),
+             Text(
               'Enter the email address you used to create the account to receive instructions on how to reset your password',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13.sp),
             ),
-            SizedBox(height: 28.sp),
+            SizedBox(height: 28.h),
             CustomTextField(
               label: "Email",
               controller: _emailController,
@@ -79,7 +79,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 containerColor: GlobalColors.orange,
                 width: 342.w,
                 textColor: Colors.white),
-            SizedBox(height: 16.sp),
+            SizedBox(height: 16.h),
             Center(
               child: RichText(
                 text: TextSpan(
