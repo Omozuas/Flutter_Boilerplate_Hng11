@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
