@@ -12,6 +12,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/search_icon.png
+  AssetGenImage get searchIcon =>
+      const AssetGenImage('assets/icons/search_icon.png');
+
+  /// File path: assets/icons/verified.svg
+  SvgGenImage get verified => const SvgGenImage('assets/icons/verified.svg');
+
+  /// List of all assets
+  List<dynamic> get values => [searchIcon, verified];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -69,6 +83,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
 
+  /// File path: assets/images/search.png
+  AssetGenImage get search => const AssetGenImage('assets/images/search.png');
+
   /// Directory path: assets/images/svg
   $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 
@@ -91,6 +108,7 @@ class $AssetsImagesGen {
         microsoftOfficeOffice365Teams,
         notion,
         onedrive,
+        search,
         trello
       ];
 }
@@ -162,6 +180,7 @@ class Assets {
   Assets._();
 
   static const String aEnv = '.env';
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 
   /// List of all assets
