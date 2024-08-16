@@ -162,16 +162,17 @@ class AuthProvider extends StateNotifier<AuthState> {
     try {
       final res = await AuthApi().forgotPassword(email: email);
       if (res != null) {
-        print(res);
         showSnackBar(res.message.toString());
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => VerificationScreen(email: email)));
-        // if (context.mounted) {
-        //   context.go(AppRoute.verificationScreen);
-        // }
+
+        if (context.mounted) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => VerificationScreen(email: email)));
+          // context.go(AppRoute.verificationScreen);
+        }
       }
-    } catch (e) {}
-    //:TODO catch error
+    } catch (e) {
+      //:TODO catch error
+    }
   }
 
   Future<void> verifyCode(
@@ -181,17 +182,20 @@ class AuthProvider extends StateNotifier<AuthState> {
       if (res != null) {
         debugPrint(res.toString());
         showSnackBar(res.message.toString());
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (_) => ResetPassword(
-                    email: email,
-                  )),
-        );
-        // if (context.mounted) {
-        //   context.go(AppRoute.verificationScreen);
-        // }
+
+        if (context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (_) => ResetPassword(
+                      email: email,
+                    )),
+          );
+          // context.go(AppRoute.verificationScreen);
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      //:TODO catch error
+    }
     //:TODO catch error
   }
 
@@ -205,15 +209,18 @@ class AuthProvider extends StateNotifier<AuthState> {
       if (res != null) {
         debugPrint(res.toString());
         showSnackBar(res.message.toString());
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => VerificationSuccessScreen()),
-        );
-        // if (context.mounted) {
-        //   context.go(AppRoute.verificationScreen);
-        // }
+
+        if (context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (_) => const VerificationSuccessScreen()),
+          );
+          // context.go(AppRoute.verificationScreen);
+        }
       }
-    } catch (e) {}
-    //:TODO catch error
+    } catch (e) {
+      //:TODO catch error
+    }
   }
 }
 
