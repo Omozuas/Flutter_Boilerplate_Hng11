@@ -99,19 +99,6 @@ class SettingsDioProvider {
     }
   }
 
-/*
-
-    final bytes = await file.readAsBytes();
-    final multipart = MultipartFile.fromBytes(
-      bytes,
-      filename: file.path.split('/').last,
-    );
-
-    try {
-      final response = await _dio.post(
-        path,
-        data: {'DisplayPhoto': multipart},
-*/
   Future multipartPUT(
     String path, {
     Map? data,

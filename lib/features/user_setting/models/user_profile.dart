@@ -65,17 +65,22 @@ class UserProfile {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      "bio": bio,
-      "department": department,
-      "phone_number": phoneNumber,
-      "job_title": jobTitle,
-      "last_name": lastname,
-      "pronoun": pronoun,
-      "first_name": firstname,
-      "user_name": username,
-      "facebook_link": facebookLink,
-      "twitter_link": twitterLink,
-      "linkedin_link": linkedInLink,
+      if (firstname.isNotEmpty) "first_name": firstname,
+      if (lastname.isNotEmpty) "last_name": lastname,
+      if (bio != null && bio!.isNotEmpty) "bio": bio,
+      if (department != null && department!.isNotEmpty)
+        "department": department,
+      if (phoneNumber != null && phoneNumber!.isNotEmpty)
+        "phone_number": phoneNumber,
+      if (jobTitle != null && jobTitle!.isNotEmpty) "job_title": jobTitle,
+      if (pronoun != null && pronoun!.isNotEmpty) "pronoun": pronoun,
+      if (username != null && username!.isNotEmpty) "user_name": username,
+      if (facebookLink != null && facebookLink!.isNotEmpty)
+        "facebook_link": facebookLink,
+      if (twitterLink != null && twitterLink!.isNotEmpty)
+        "twitter_link": twitterLink,
+      if (linkedInLink != null && linkedInLink!.isNotEmpty)
+        "linkedin_link": linkedInLink,
     };
   }
 
