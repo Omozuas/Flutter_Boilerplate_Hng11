@@ -109,3 +109,13 @@ class ProductData {
     return data;
   }
 }
+
+class ProductByCategory {
+  final String category;
+  final List<ProductData>? products;
+
+  ProductByCategory({
+    required this.category,
+    this.products,
+  });
+}

@@ -13,7 +13,7 @@ class ProductState {
   final bool productLoading;
   final bool overlayLoading;
   final bool checkBoxState;
-  final List<ProductData> products;
+  final List<ProductByCategory> products;
 
   ProductState(
       {required this.normalButtonLoading,
@@ -28,7 +28,7 @@ class ProductState {
       bool? productLoading,
       bool? overlayLoading,
       bool? checkBoxState,
-      List<ProductData>? products}) {
+      List<ProductByCategory>? products}) {
     return ProductState(
         normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
         productLoading: productLoading ?? this.productLoading,
@@ -63,7 +63,7 @@ class ProductProvider extends StateNotifier<ProductState> {
     state = state.copyWith(checkBoxState: value);
   }
 
-  set setProducts(List<ProductData> u) {
+  set setProducts(List<ProductByCategory> u) {
     state = state.copyWith(products: u);
   }
 
@@ -76,7 +76,7 @@ class ProductProvider extends StateNotifier<ProductState> {
     try {
       final res = await ProductApi().getAllProducts(page: page, pageSize: pageSize);
       if (res != null) {
-        setProducts= res;
+        setProducts= groupProductsByCategory(res) ??[];
       }
     } catch (e) {
       //tODO: Do something with caught error;
@@ -169,3 +169,23 @@ final productProvider = StateNotifierProvider<ProductProvider, ProductState>((re
 //final checkBoxState = StateProvider<bool>((ref) => false);
 // final loadingGoogleButton = StateProvider<bool>((ref) => false);
 
+List<ProductByCategory>? groupProductsByCategory(List<ProductData>? products) {
+  if (products == null || products.isEmpty) return null;
+
+  final Map<String, List<ProductData>> groupedMap =
+  <String, List<ProductData>>{};
+
+  for (var product in products) {
+    if (!groupedMap.containsKey(product.category)) {
+      groupedMap[product.category??""] = [];
+    }
+    groupedMap[product.category]!.add(product);
+  }
+
+  return groupedMap.entries
+      .map((entry) => ProductByCategory(
+    category: entry.key,
+    products: entry.value,
+  ))
+      .toList();
+}
