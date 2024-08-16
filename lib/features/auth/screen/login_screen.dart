@@ -2,13 +2,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -236,7 +234,7 @@ class LoginScreen extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          SingleUserSignUpScreen()),
+                                          const SingleUserSignUpScreen()),
                                 );
                               }),
                       ],

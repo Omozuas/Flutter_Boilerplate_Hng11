@@ -52,13 +52,17 @@ class VerificationSuccessScreen extends StatelessWidget {
                 CustomButton(
                   onTap: () async {
                     // Show loading indicator
+<<<<<<< HEAD
                     // await _showLoadingIndicator(context);
+=======
+                 //   await _showLoadingIndicator(context);
+>>>>>>> e5306ef06daacf3f884bcd17690968add267b982
 
                     // Simulate network request
-                    await Future.delayed(const Duration(seconds: 2));
+                  //  await Future.delayed(const Duration(seconds: 2));
                     if (context.mounted) {
                       // Hide loading indicator
-                      Navigator.of(context).pop(); // Close the loading dialog
+                     // Navigator.of(context).pop(); // Close the loading dialog
 
                       // Proceed to login screen
                       context.pushReplacement(AppRoute.login);

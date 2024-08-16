@@ -131,7 +131,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   });
                 },
                 child: !obscureText ?
-                Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
               ),
             ),
           ),
