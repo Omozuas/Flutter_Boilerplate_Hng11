@@ -153,6 +153,7 @@ class SubscriptionCheckout extends StatelessWidget {
                         buttonText1: 'Cancel Subscription',
                         buttonText2: 'Keep Subscription',
                         onTap1: () {
+                          Navigator.pop(context);
                           showDialog(
                             context: context,
                             builder: (context) => SubscriptionDialog(
@@ -165,10 +166,10 @@ class SubscriptionCheckout extends StatelessWidget {
                                 const CustomToast(
                                   message: 'Subscription Reactivated',
                                 );
-                                context.pop();
+                                Navigator.pop(context);
                               },
                               onTap2: () {
-                                context.pop();
+                                Navigator.pop(context);
                               },
                             ),
                           );
