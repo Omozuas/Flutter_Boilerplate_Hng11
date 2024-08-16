@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
@@ -14,6 +17,7 @@ part 'product_api.g.dart';
 ProductApi productApi(ProductApiRef ref) {
   return ProductApi();
 }
+
 
 class ProductApi implements ProductsApiContract {
   //Inject the DioProvider Dependency
@@ -91,6 +95,8 @@ class ProductApi implements ProductsApiContract {
     }
     return null;
   }
+
+//You can start creating product listing functions now
 }
 
 abstract class ProductsApiContract {
