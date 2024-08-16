@@ -86,6 +86,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/user.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,6 +113,9 @@ class AuthProvider extends StateNotifier<bool> {
       if (res != null) {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
+        ref
+            .read(userRegStateProviderModelProvider.notifier)
+            .updateUser(userRegData);
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
@@ -151,6 +155,10 @@ class AuthProvider extends StateNotifier<bool> {
         if (res != null) {
           showSnackBar(res.message.toString());
           UserRegData userRegData = UserRegData.fromJson(res.data);
+          ref
+              .read(userRegStateProviderModelProvider.notifier)
+              .updateUser(userRegData);
+
           if (context.mounted) {
             context.go(AppRoute.home);
             box.write('accessToken', userRegData.accessToken);
@@ -172,6 +180,9 @@ class AuthProvider extends StateNotifier<bool> {
       if (res != null) {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
+        ref
+            .read(userRegStateProviderModelProvider.notifier)
+            .updateUser(userRegData);
 
         if (context.mounted) {
           context.go(AppRoute.home);

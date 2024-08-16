@@ -16,10 +16,10 @@ class CustomInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     log('Endpoint >> ${options.path}');
     log('Request body >> ${options.data}');
+    log('url: ${options.uri}');
     if (box.read('accessToken') != null) {
       options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
-    }
-    else{
+    } else {
       //todo: handle when access token is null
       //todo: handle when access token is expired
     }

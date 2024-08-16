@@ -62,6 +62,8 @@
 //
 // }
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/custom_interceptor.dart';
 import 'package:flutter_boilerplate_hng11/services/response_model.dart';
@@ -97,11 +99,14 @@ class DioProvider {
 
   Future<ResponseModel?> patchUpdate(String path, {Map? data}) async {
     var response = await _dio.patch(path, data: data);
+
     return ResponseModel.fromJson(response.data);
   }
 
   Future<ResponseModel?> get(String path, {Map<String, dynamic>? query}) async {
     var response = await _dio.get(path, queryParameters: query);
+    log('${response.data}');
+
     return ResponseModel.fromJson(response.data);
   }
 

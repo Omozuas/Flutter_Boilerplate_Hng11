@@ -1,11 +1,11 @@
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/product_api.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/product_api.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product.provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ProductList extends _$ProductList {
   @override
   Future<List<Product>> build() async {
@@ -17,5 +17,4 @@ class ProductList extends _$ProductList {
         .watch(productApiProvider)
         .getAllProducts(orgId: org.organisationId);
   }
-
 }

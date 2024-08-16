@@ -1,10 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/product_endpoints.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../services/dio_provider.dart';
-import '../../services/service_locator.dart';
+import '../../../services/dio_provider.dart';
+import '../../../services/service_locator.dart';
+
+part 'product_api.g.dart';
+
+@Riverpod(keepAlive: true)
+ProductApi productApi(ProductApiRef ref) {
+  return ProductApi();
+}
 
 class ProductApi implements ProductsApiContract {
   //Inject the DioProvider Dependency
@@ -35,11 +44,14 @@ class ProductApi implements ProductsApiContract {
   @override
   Future<List<Product>> getAllProducts({required String orgId}) async {
     try {
+      log('API CALLED');
       final result =
           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
 
-      final jsonList = result?.data['data'] as List;
+      log('API DATA ${result?.data}');
 
+      final jsonList = result?.data['data'] as List;
+      log('Json: $jsonList');
       return jsonList
           .map(
             (e) => Product.fromJson(e),
@@ -90,7 +102,3 @@ abstract class ProductsApiContract {
   Future deleteProduct({required String id});
   Future getProduct({required String id});
 }
-
-final productApiProvider = Provider<ProductApi>(
-  (ref) => ProductApi(),
-);

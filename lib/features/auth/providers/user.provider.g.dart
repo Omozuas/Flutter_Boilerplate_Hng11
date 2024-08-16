@@ -7,12 +7,12 @@ part of 'user.provider.dart';
 // **************************************************************************
 
 String _$userRegStateProviderModelHash() =>
-    r'317af5e4ed9819faf33d9174b8dbd4928d553972';
+    r'd43ca2845f4fcca524563779d4c1731ad8384538';
 
 /// See also [UserRegStateProviderModel].
 @ProviderFor(UserRegStateProviderModel)
-final userRegStateProviderModelProvider = AutoDisposeNotifierProvider<
-    UserRegStateProviderModel, UserRegState>.internal(
+final userRegStateProviderModelProvider =
+    NotifierProvider<UserRegStateProviderModel, UserRegState>.internal(
   UserRegStateProviderModel.new,
   name: r'userRegStateProviderModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final userRegStateProviderModelProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$UserRegStateProviderModel = AutoDisposeNotifier<UserRegState>;
+typedef _$UserRegStateProviderModel = Notifier<UserRegState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
