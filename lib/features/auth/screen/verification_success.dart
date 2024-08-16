@@ -8,24 +8,24 @@ import 'package:go_router/go_router.dart';
 class VerificationSuccessScreen extends StatelessWidget {
   const VerificationSuccessScreen({super.key});
 
-  Future<void> _showLoadingIndicator(BuildContext context) async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return const AlertDialog(
-          content: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 20),
-              Text('Processing...'),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // Future<void> _showLoadingIndicator(BuildContext context) async {
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (context) {
+  //       return const AlertDialog(
+  //         content: Row(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             CircularProgressIndicator(),
+  //             SizedBox(width: 20),
+  //             Text('Processing...'),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                 CustomButton(
                   onTap: () async {
                     // Show loading indicator
-                    await _showLoadingIndicator(context);
+                    // await _showLoadingIndicator(context);
 
                     // Simulate network request
                     await Future.delayed(const Duration(seconds: 2));
@@ -60,12 +60,12 @@ class VerificationSuccessScreen extends StatelessWidget {
                       // Hide loading indicator
                       Navigator.of(context).pop(); // Close the loading dialog
 
-                      // Proceed to login screen or other actions
-                      context.pushReplacement(AppRoute.resetPassword);
+                      // Proceed to login screen
+                      context.pushReplacement(AppRoute.login);
                     }
                   },
                   borderColor: GlobalColors.borderColor,
-                  text: "Continue to Reset Password",
+                  text: "Continue to Login",
                   height: 48.h,
                   containerColor: GlobalColors.orange,
                   width: 342.w,

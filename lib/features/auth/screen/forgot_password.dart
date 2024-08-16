@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -71,24 +72,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               hintText: "Enter your email",
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'This field is required';
-                }
-                if (value == _emailController.text) {
-                  // Email validation regex
-                  final emailRegex = RegExp(
-                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                  if (!emailRegex.hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-
-                  return null;
-                }
-                return null;
-              },
+              validator: (v) => Validators.emailValidator(v),
             ),
-            SizedBox(height: 32.sp),
+            SizedBox(height: 32.h),
             CustomButton(
                 onTap: () {
               context.push(AppRoute.verificationScreen);
