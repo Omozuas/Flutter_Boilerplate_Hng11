@@ -151,7 +151,7 @@ class AuthProvider extends StateNotifier<bool> {
           UserRegData userRegData = UserRegData.fromJson(res.data);
           if (context.mounted) {
             context.go(AppRoute.home);
-            box.write('accessToken', userRegData.accessToken );
+            box.write('accessToken', userRegData.accessToken);
           }
         }
       }
@@ -188,3 +188,5 @@ final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
 });
 
 final checkBoxProvider = StateProvider<bool>((ref) => false);
+
+final passwordVisibleProvider = StateProvider<bool>((ref) => false);
