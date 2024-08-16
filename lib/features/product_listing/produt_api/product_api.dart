@@ -17,9 +17,7 @@ part 'product_api.g.dart';
 ProductApi productApi(ProductApiRef ref) {
   return ProductApi();
 }
-import '../../services/dio_provider.dart';
-import '../../services/service_locator.dart';
-import 'models/product.models.dart';
+
 
 class ProductApi implements ProductsApiContract {
   //Inject the DioProvider Dependency
@@ -102,8 +100,7 @@ class ProductApi implements ProductsApiContract {
 }
 
 abstract class ProductsApiContract {
-  Future getAllProducts({int? page, int? pageSize});
-  Future getAllUserProducts({required String orgId});
+  Future getAllProducts({required String orgId});
 
   Future createProduct({required covariant dynamic product});
   Future updateProduct(

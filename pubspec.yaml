@@ -54,7 +54,6 @@ dependencies:
   file_picker: ^8.1.1
 
   vector_graphics: any
-  syncfusion_flutter_charts: ^26.2.9
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   json_annotation: ^4.9.0

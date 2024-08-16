@@ -119,3 +119,38 @@ class ProductByCategory {
     this.products,
   });
 }
+
+
+//@override
+//   Future getAllUserProducts({required String orgId}) async {
+//     try {
+//       final result =
+//           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
+//
+//       final jsonList = result?.data['data'] as List;
+//
+//       return jsonList
+//           .map(
+//             (e) => Product.fromJson(e),
+//           )
+//           .toList();
+//     } catch (e) {
+//       rethrow;
+//     }
+//   }
+//
+//   @override
+//   Future<List<ProductData>?> getAllProducts({int? page, int? pageSize}) async {
+//     try {
+//       final result = await dioProvider.get(
+//         userProductsEndpoint,
+//         query: {
+//           "PageSize": pageSize?? 10000,
+//           "PageNumber": page ?? 1
+//         });
+//       return GetAllProductsResponse.fromJson(jsonDecode(jsonEncode(result?.data))).data??[];
+//     } catch (e) {
+//       debugPrint('Error during get product: ${e.toString()}');
+//       rethrow;
+//     }
+//   }
