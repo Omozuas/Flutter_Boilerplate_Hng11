@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../organisation.dart';
+part of 'organisation.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,15 +8,15 @@ part of '../organisation.dart';
 
 _$OrganisationImpl _$$OrganisationImplFromJson(Map<String, dynamic> json) =>
     _$OrganisationImpl(
-      organisationId: json['organisationId'] as String,
-      name: json['name'] as String,
-      role: json['role'] as String,
-      isOwner: json['is_owner'] as bool,
+      organisationId: json['organisation_id'] as String?,
+      name: json['name'] as String?,
+      role: json['role'] as String?,
+      isOwner: json['is_owner'] as bool?,
     );
 
 Map<String, dynamic> _$$OrganisationImplToJson(_$OrganisationImpl instance) =>
     <String, dynamic>{
-      'organisationId': instance.organisationId,
+      'organisation_id': instance.organisationId,
       'name': instance.name,
       'role': instance.role,
       'is_owner': instance.isOwner,

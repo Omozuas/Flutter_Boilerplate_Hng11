@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../organisation.dart';
+part of 'organisation.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -20,11 +20,12 @@ Organisation _$OrganisationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Organisation {
-  String get organisationId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get role => throw _privateConstructorUsedError;
+  @JsonKey(name: 'organisation_id')
+  String? get organisationId => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_owner')
-  bool get isOwner => throw _privateConstructorUsedError;
+  bool? get isOwner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,10 +40,10 @@ abstract class $OrganisationCopyWith<$Res> {
       _$OrganisationCopyWithImpl<$Res, Organisation>;
   @useResult
   $Res call(
-      {String organisationId,
-      String name,
-      String role,
-      @JsonKey(name: 'is_owner') bool isOwner});
+      {@JsonKey(name: 'organisation_id') String? organisationId,
+      String? name,
+      String? role,
+      @JsonKey(name: 'is_owner') bool? isOwner});
 }
 
 /// @nodoc
@@ -58,28 +59,28 @@ class _$OrganisationCopyWithImpl<$Res, $Val extends Organisation>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? organisationId = null,
-    Object? name = null,
-    Object? role = null,
-    Object? isOwner = null,
+    Object? organisationId = freezed,
+    Object? name = freezed,
+    Object? role = freezed,
+    Object? isOwner = freezed,
   }) {
     return _then(_value.copyWith(
-      organisationId: null == organisationId
+      organisationId: freezed == organisationId
           ? _value.organisationId
           : organisationId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      role: null == role
+              as String?,
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
-      isOwner: null == isOwner
+              as String?,
+      isOwner: freezed == isOwner
           ? _value.isOwner
           : isOwner // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -93,10 +94,10 @@ abstract class _$$OrganisationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String organisationId,
-      String name,
-      String role,
-      @JsonKey(name: 'is_owner') bool isOwner});
+      {@JsonKey(name: 'organisation_id') String? organisationId,
+      String? name,
+      String? role,
+      @JsonKey(name: 'is_owner') bool? isOwner});
 }
 
 /// @nodoc
@@ -110,28 +111,28 @@ class __$$OrganisationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? organisationId = null,
-    Object? name = null,
-    Object? role = null,
-    Object? isOwner = null,
+    Object? organisationId = freezed,
+    Object? name = freezed,
+    Object? role = freezed,
+    Object? isOwner = freezed,
   }) {
     return _then(_$OrganisationImpl(
-      organisationId: null == organisationId
+      organisationId: freezed == organisationId
           ? _value.organisationId
           : organisationId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      role: null == role
+              as String?,
+      role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String,
-      isOwner: null == isOwner
+              as String?,
+      isOwner: freezed == isOwner
           ? _value.isOwner
           : isOwner // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -140,23 +141,24 @@ class __$$OrganisationImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrganisationImpl implements _Organisation {
   const _$OrganisationImpl(
-      {required this.organisationId,
-      required this.name,
-      required this.role,
-      @JsonKey(name: 'is_owner') required this.isOwner});
+      {@JsonKey(name: 'organisation_id') this.organisationId,
+      this.name,
+      this.role,
+      @JsonKey(name: 'is_owner') this.isOwner});
 
   factory _$OrganisationImpl.fromJson(Map<String, dynamic> json) =>
       _$$OrganisationImplFromJson(json);
 
   @override
-  final String organisationId;
+  @JsonKey(name: 'organisation_id')
+  final String? organisationId;
   @override
-  final String name;
+  final String? name;
   @override
-  final String role;
+  final String? role;
   @override
   @JsonKey(name: 'is_owner')
-  final bool isOwner;
+  final bool? isOwner;
 
   @override
   String toString() {
@@ -196,24 +198,24 @@ class _$OrganisationImpl implements _Organisation {
 
 abstract class _Organisation implements Organisation {
   const factory _Organisation(
-          {required final String organisationId,
-          required final String name,
-          required final String role,
-          @JsonKey(name: 'is_owner') required final bool isOwner}) =
-      _$OrganisationImpl;
+      {@JsonKey(name: 'organisation_id') final String? organisationId,
+      final String? name,
+      final String? role,
+      @JsonKey(name: 'is_owner') final bool? isOwner}) = _$OrganisationImpl;
 
   factory _Organisation.fromJson(Map<String, dynamic> json) =
       _$OrganisationImpl.fromJson;
 
   @override
-  String get organisationId;
+  @JsonKey(name: 'organisation_id')
+  String? get organisationId;
   @override
-  String get name;
+  String? get name;
   @override
-  String get role;
+  String? get role;
   @override
   @JsonKey(name: 'is_owner')
-  bool get isOwner;
+  bool? get isOwner;
   @override
   @JsonKey(ignore: true)
   _$$OrganisationImplCopyWith<_$OrganisationImpl> get copyWith =>
