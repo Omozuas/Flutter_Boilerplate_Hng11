@@ -55,6 +55,7 @@ dependencies:
   back_button_interceptor: ^7.0.3
 
   vector_graphics: any
+  syncfusion_flutter_charts: ^26.2.9
 dev_dependencies:
   flutter_test:
     sdk: flutter
