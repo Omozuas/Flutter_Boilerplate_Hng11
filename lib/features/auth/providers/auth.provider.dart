@@ -82,6 +82,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
@@ -92,34 +93,41 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../common_models/user.dart';
 import '../../../services/service_locator.dart';
+import '../../../services/user.service.dart';
 
 class AuthState {
   final bool normalButtonLoading;
   final bool googleButtonLoading;
   final bool checkBoxState;
   final User? user;
+  final List<Organisation> organisations;
 
   AuthState(
       {required this.normalButtonLoading,
       required this.googleButtonLoading,
       required this.checkBoxState,
-      this.user});
+      this.user,
+      this.organisations = const []});
 
   AuthState copyWith(
       {bool? normalButtonLoading,
       bool? googleButtonLoading,
       bool? checkBoxState,
+      List<Organisation>? organisations,
       User? user}) {
     return AuthState(
-        normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
-        googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
-        checkBoxState: checkBoxState ?? this.checkBoxState,
-        user: user ?? this.user);
+      normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
+      googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
+      checkBoxState: checkBoxState ?? this.checkBoxState,
+      user: user ?? this.user,
+      organisations: organisations ?? this.organisations,
+    );
   }
 }
 
 class AuthProvider extends StateNotifier<AuthState> {
   GetStorage box = locator<GetStorage>();
+  final UserService _userService = locator<UserService>();
 
   AuthProvider()
       : super(AuthState(
@@ -143,6 +151,14 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(user: u);
   }
 
+  set setOrganizations(List<Organisation> organisations) {
+    state = state.copyWith(organisations: organisations);
+  }
+
+  set addOrganisation(Organisation org) {
+    state = state.copyWith(organisations: state.organisations..add(org));
+  }
+
   Future<void> registerSingleUser(
       Map<String, dynamic> data, BuildContext context) async {
     setNormalButtonLoading = true;
@@ -153,9 +169,18 @@ class AuthProvider extends StateNotifier<AuthState> {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
+        setOrganizations = (userRegData.data?['organisations'] as List?)
+                ?.map<Organisation>(
+                  (e) => Organisation.fromJson(e),
+                )
+                .toList() ??
+            [];
+
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     } catch (e) {
@@ -189,10 +214,18 @@ class AuthProvider extends StateNotifier<AuthState> {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
+        setOrganizations = (userRegData.data?['organisations'] as List?)
+                ?.map<Organisation>(
+                  (e) => Organisation.fromJson(e),
+                )
+                .toList() ??
+            [];
 
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     }
@@ -213,10 +246,32 @@ class AuthProvider extends StateNotifier<AuthState> {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
+        setOrganizations = (userRegData.data?['organisations'] as List?)
+                ?.map<Organisation>(
+                  (e) => Organisation.fromJson(e),
+                )
+                .toList() ??
+            [];
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
+      }
+    } catch (e) {
+      //TODO: Do something with caught error;
+    } finally {
+      setNormalButtonLoading = false;
+    }
+  }
+
+  Future<void> getUser() async {
+    setNormalButtonLoading = true;
+    try {
+      final res = await AuthApi().getUser();
+      if (res?.data != null) {
+        _userService.storeUser(res?.data);
       }
     } catch (e) {
       //tODO: Do something with caught error;

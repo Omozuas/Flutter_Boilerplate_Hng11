@@ -9,7 +9,22 @@ import 'package:one_context/one_context.dart';
 
 void main() async {
   await initializeApp();
-  runApp(const MyApp());
+
+  // Make app always in portrait
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
+
+  // Change status bar theme based on theme of app
+  SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+  ));
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,23 +32,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: ScreenUtilInit(
-        ensureScreenSize: true,
-        designSize: const Size(390, 844),
-        builder: (context, child) => MaterialApp.router(
-          builder: OneContext().builder,
-          key: OneContext().key,
-          routerConfig: AppRouter.router,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-              textTheme: GoogleFonts.interTextTheme(),
-              scaffoldBackgroundColor: Colors.white,
-              appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.transparent,
-                  scrolledUnderElevation: 0,
-                  systemOverlayStyle: SystemUiOverlayStyle.dark)),
-        ),
+    return ScreenUtilInit(
+      ensureScreenSize: true,
+      designSize: const Size(390, 844),
+      builder: (context, child) => MaterialApp.router(
+        builder: OneContext().builder,
+        key: OneContext().key,
+        routerConfig: AppRouter.router,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            textTheme: GoogleFonts.interTextTheme(),
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.transparent,
+                scrolledUnderElevation: 0,
+                systemOverlayStyle: SystemUiOverlayStyle.dark)),
       ),
     );
   }

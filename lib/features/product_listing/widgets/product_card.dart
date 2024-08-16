@@ -10,12 +10,19 @@ import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
 
 class ProductCardWiget extends StatelessWidget {
-  const ProductCardWiget({super.key});
+  const ProductCardWiget(
+      {super.key,
+      required this.productNmae,
+      required this.inStock,
+      required this.price});
 
+  final String productNmae;
+  final bool inStock;
+  final int price;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.push('${AppRoute.productsDetails}/jjjj'),
+       onTap: () => context.push('${AppRoute.productsDetails}/jjjj'),
       child: Container(
         height: GlobalScreenSize.getScreenHeight(context) * .156,
         width: GlobalScreenSize.getScreenWidth(context),
@@ -26,8 +33,8 @@ class ProductCardWiget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.r)),
         child: Row(
           children: [
-            Assets.images.png.productListing.product.image(
-                height: GlobalScreenSize.getScreenHeight(context) * .135),
+            Assets.images.png.productListing.product
+                .image(height: GlobalScreenSize.getScreenHeight(context) * .135),
             SizedBox(
               width: 14.w,
             ),
@@ -35,7 +42,7 @@ class ProductCardWiget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Product 1",
+                  productNmae,
                   style: CustomTextStyles.productTextTitleBlack,
                 ),
                 Text(
@@ -51,9 +58,20 @@ class ProductCardWiget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Assets.images.svg.productListing.active.svg(),
+                    if (inStock) ...[
+                      Assets.images.svg.productListing.active.svg(),
+                    ] else ...[
+                      Container(
+                        width: 1,
+                        height: 1,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
+                      )
+                    ],
                     Text(
-                      "In stock",
+                      inStock ? "In stock" : "Out of stock",
                       style: CustomTextStyles.productTextBody4Black,
                     ),
                   ],
@@ -62,7 +80,7 @@ class ProductCardWiget extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              "\$19.00",
+              "\$$price",
               style: CustomTextStyles.productTextBody2Black,
             )
           ],

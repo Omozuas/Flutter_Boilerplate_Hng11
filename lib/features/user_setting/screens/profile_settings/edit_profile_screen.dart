@@ -14,7 +14,7 @@ import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
-import '../../widgets/empty_avatar_tile.dart';
+import '../../widgets/profile_avatar_tile.dart';
 import '../../widgets/pronouns_textfield_dropdown.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -96,20 +96,20 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+            padding: EdgeInsets.only(left: 24.w, right: 24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                EmptyAvatarTile(
+                ProfileAvatarTile(
                   onTap: () {},
                 ),
-                SizedBox(height: 14.h),
+                SizedBox(height: 28.w),
                 Text(
                   'Personal Details',
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
-                SizedBox(height: 8.w),
+                SizedBox(height: 24.h),
                 CustomTextField(
                   label: 'Username',
                   controller: _usernameController,
@@ -121,6 +121,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     _pronouns = pronoun;
                   },
                 ),
+                SizedBox(height: 16.h),
                 CustomTextField(
                   label: 'Your job title',
                   controller: _jobTitleController,
@@ -136,9 +137,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   content: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomTextField(
-                          label: '',
                           controller: _bioController,
                           hintText: 'Type your messsage here',
                           maxLines: 3,
@@ -195,13 +196,13 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                           containerColor: Colors.white,
                           width: 50.w,
                           textColor: const Color(0xFF0F172A),
-                          onTap: () {},
+                          onTap: context.pop,
                         ),
                       ),
                       SizedBox(width: 12.h),
                       Expanded(
                         child: CustomButton(
-                            borderColor: Colors.transparent,
+                            borderColor: GlobalColors.orange,
                             text: 'Save Changes',
                             height: 40.h,
                             containerColor: GlobalColors.orange,
@@ -225,11 +226,14 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   }
 
   Future<void> update(UserModel? user) async {
+    final pickedImage = ref.read(profileProvider).pickedImage;
     if (_usernameController.text.isEmpty &&
         _jobTitleController.text.isEmpty &&
         _departmentController.text.isEmpty &&
         _bioController.text.isEmpty &&
         _xController.text.isEmpty &&
+        _pronouns == null &&
+        pickedImage == null &&
         _instagramController.text.isEmpty &&
         _linkedInController.text.isEmpty) {
       return;
@@ -252,9 +256,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       linkedInLink: _linkedInController.text,
     );
     try {
-      await ref
-          .read(profileProvider.notifier)
-          .updateProfile(email: user.email, profile: profile);
+      await ref.read(profileProvider.notifier).updateProfile(
+          email: user.email, profile: profile, image: pickedImage);
 
       final pUpdater = ref.read(profileProvider).profileUpdater;
       if (pUpdater.hasError) throw pUpdater.error!;

@@ -56,7 +56,12 @@ dependencies:
   vector_graphics: any
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
+  freezed_annotation: ^2.4.4
+  syncfusion_flutter_charts: ^26.2.9
+  riverpod_annotation: ^2.3.5
+  flutter_shimmer: ^2.1.2
   json_annotation: any
+  image_picker: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,7 +76,11 @@ dev_dependencies:
   flutter_gen_runner:
   flutter_launcher_icons: ^0.13.1
   build_runner: ^2.4.11
-  json_serializable: ^6.7.1
+  json_serializable: ^6.8.0
+  freezed: ^2.5.2
+  riverpod_generator: ^2.4.0
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -123,6 +132,7 @@ flutter:
     - assets/images/svg/product_listing/
     - assets/images/svg/account_settings/
     - assets/images/svg/
+    - assets/icons/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
