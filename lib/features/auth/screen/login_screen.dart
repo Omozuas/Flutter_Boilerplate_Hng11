@@ -131,7 +131,7 @@ class LoginScreen extends ConsumerWidget {
                     icon: Icon(
                         isVisible ? Icons.visibility_off : Icons.visibility),
                   ),
-                  validator: (v) => Validators.passwordValidator(v),
+                  // validator: (v) => Validators.passwordValidator(v),
                 ),
                 SizedBox(
                   height: 16.h,
