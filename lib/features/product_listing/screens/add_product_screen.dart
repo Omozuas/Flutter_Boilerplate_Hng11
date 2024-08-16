@@ -1,17 +1,14 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_category.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_images.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_variation.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-// import '../widgets/components/formfields.dart';
-import '../produt_api/product_api.dart';
-import '../widgets/add_product_formfields.dart';
-
-import '../widgets/product_category.dart';
-import '../widgets/product_images.dart';
-import '../widgets/product_variation.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
