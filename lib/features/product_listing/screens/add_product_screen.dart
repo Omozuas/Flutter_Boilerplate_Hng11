@@ -27,6 +27,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final productPriceController = TextEditingController();
   final productQuantityController = TextEditingController();
 
+  String? selectedCategory;
+
   @override
   void dispose() {
     productNameController.dispose();
@@ -65,6 +67,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
       });
     }
 
+    void onCategorySelected(String category) {
+      setState(() {
+        selectedCategory = category;
+      });
+    }
+
     Future<void> addProduct() async {
       if (!formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -81,6 +89,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         'description': productDescriptionController.text,
         'price': productPriceController.text,
         'quantity': productQuantityController.text,
+        'category': selectedCategory ?? ''
+        //'image_url':
       };
 
       try {
@@ -272,7 +282,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               // child: const Text(
                               //   'Category dropdown here',
                               // ),
-                              child: const ProductCategory(),
+                              child: ProductCategory(
+                                onCategorySelected: onCategorySelected,
+                              ),
                             )
                           ],
                         ),
