@@ -130,6 +130,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   Future<void> login(Map<String, dynamic> data, BuildContext context,
       {bool fromLoginScreen = true}) async {
     setNormalButtonLoading = true;
+
     try {
       final res = await AuthApi().loginUser(data);
 
