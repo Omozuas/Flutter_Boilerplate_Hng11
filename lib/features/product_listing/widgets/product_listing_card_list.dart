@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,11 @@ import '../../../utils/Styles/text_styles.dart';
 import 'product_card.dart';
 
 class ProductCardListWidget extends StatelessWidget {
-  const ProductCardListWidget({super.key});
+  const ProductCardListWidget(
+      {super.key, required this.categoryName, required this.products});
+
+  final String categoryName;
+  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class ProductCardListWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Breakfast",
+                categoryName,
                 style: PlusJakartaTextStyle.headerText2,
               ),
               Text(
@@ -37,14 +42,20 @@ class ProductCardListWidget extends StatelessWidget {
             height: GlobalScreenSize.getScreenHeight(context) * .156,
             width: GlobalScreenSize.getScreenWidth(context),
             child: ListView.separated(
-              itemCount: 20,
+              itemCount: products.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (ctx, index) {
+                final product = products[index];
                 return InkWell(
-                  onTap: () => context.push('${AppRoute.products}/sdfsdf'),
+                  onTap: () =>
+                      context.push('${AppRoute.products}/${product.id!}'),
                   child: SizedBox(
                     width: GlobalScreenSize.getScreenWidth(context) * 0.88,
-                    child: const ProductCardWiget(),
+                    child: ProductCardWiget(
+                      productNmae: '${product.name}',
+                      inStock: true,
+                      price: product.price ?? 0,
+                    ),
                   ),
                 );
               },
