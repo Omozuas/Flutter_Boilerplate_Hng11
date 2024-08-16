@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -123,15 +126,6 @@ class LoginScreen extends ConsumerWidget {
                   label: "Password",
                   controller: _passwordController,
                   hintText: "Enter your password",
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      ref.read(passwordVisibleProvider.notifier).state =
-                          !ref.read(passwordVisibleProvider.notifier).state;
-                    },
-                    icon: Icon(
-                        isVisible ? Icons.visibility_off : Icons.visibility),
-                  ),
-                  // validator: (v) => Validators.passwordValidator(v),
                 ),
                 SizedBox(
                   height: 16.h,
@@ -232,12 +226,13 @@ class LoginScreen extends ConsumerWidget {
                                 fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SingleUserSignUpScreen()),
-                                );
+                                context.go(AppRoute.singleUserSignUp);
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const SingleUserSignUpScreen()),
+                                // );
                               }),
                       ],
                     ),
@@ -248,7 +243,7 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 SizedBox(
                   width: 342.w,
-                  height: 34.h,
+                  // height: 35.h,
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
