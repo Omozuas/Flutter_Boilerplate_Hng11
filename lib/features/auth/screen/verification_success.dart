@@ -1,31 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
-import '../../../utils/global_colors.dart';
 import 'package:go_router/go_router.dart';
+import '../../../utils/global_colors.dart';
+import '../../../utils/widgets/custom_snackbar.dart';
+
 
 class VerificationSuccessScreen extends StatelessWidget {
   const VerificationSuccessScreen({super.key});
-
-  // Future<void> _showLoadingIndicator(BuildContext context) async {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (context) {
-  //       return const AlertDialog(
-  //         content: Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             CircularProgressIndicator(),
-  //             SizedBox(width: 20),
-  //             Text('Processing...'),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,30 +21,25 @@ class VerificationSuccessScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                 SizedBox(height: 80.h),
+                SizedBox(height: 80.h),
                 Text(
                   'Verification Successful',
-                  style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
+                  style: CustomTextStyles.producHeaderBlack, // Updated style
                 ),
-                SizedBox(height: 16.sp),
-                const Text(
+                SizedBox(height: 16.h),
+                Text(
                   'Your verification was successful, you can now proceed to reset your password.',
-                  style: TextStyle(fontSize: 13),
+                  style: CustomTextStyles.productTextBodyBlack, // Updated style
                 ),
-                SizedBox(height: 24.sp),
+                SizedBox(height: 24.h),
                 CustomButton(
                   onTap: () async {
-                    // Show loading indicator
-                 //   await _showLoadingIndicator(context);
+                    // Show a snackbar when the button is tapped
+                    showSnackBar("Redirecting to login...");
 
-                    // Simulate network request
-                  //  await Future.delayed(const Duration(seconds: 2));
+                    // Simulate a delay for the action
+                    await Future.delayed(const Duration(seconds: 2));
                     if (context.mounted) {
-                      // Hide loading indicator
-                     // Navigator.of(context).pop(); // Close the loading dialog
-
-                      // Proceed to login screen
                       context.pushReplacement(AppRoute.login);
                     }
                   },
@@ -85,10 +64,10 @@ class VerificationSuccessScreen extends StatelessWidget {
                 children: [
                   const Icon(Icons.check_circle, color: Colors.white),
                   SizedBox(width: 8.sp),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'Successfully Verified',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: CustomTextStyles.bannerHeaderTextWhite, // Updated style
                     ),
                   ),
                   IconButton(

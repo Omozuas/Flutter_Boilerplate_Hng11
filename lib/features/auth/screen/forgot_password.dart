@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       setState(() {});
       return;
     }
-  
+
     // Simulate email check
     if (email == 'test@example.com') {
       context.push(AppRoute.verificationScreen);
@@ -39,7 +40,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon:  Icon(
+          icon: Icon(
             Icons.chevron_left,
             size: 30.sp,
           ),
@@ -47,18 +48,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
       ),
       body: Padding(
-        padding:  EdgeInsets.all(16.sp),
+        padding: EdgeInsets.all(16.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'Forgot Password',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.sp),
+              style: CustomTextStyles.headerTextBlack, // Updated style
             ),
             SizedBox(height: 8.h),
-             Text(
+            Text(
               'Enter the email address you used to create the account to receive instructions on how to reset your password',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13.sp),
+              style: CustomTextStyles.productTextBodyBlack, // Updated style
             ),
             SizedBox(height: 28.h),
             CustomTextField(
@@ -70,32 +71,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SizedBox(height: 32.h),
             CustomButton(
-                onTap: () {
-              context.push(AppRoute.verificationScreen);
-                },
-                borderColor: GlobalColors.borderColor,
-                text: "Send",
-                height: 48.h,
-                containerColor: GlobalColors.orange,
-                width: 342.w,
-                textColor: Colors.white),
+              onTap: _handleSend,
+              borderColor: GlobalColors.borderColor,
+              text: "Send",
+              height: 48.h,
+              containerColor: GlobalColors.orange,
+              width: 342.w,
+              textColor: Colors.white,
+            ),
             SizedBox(height: 16.h),
             Center(
               child: RichText(
                 text: TextSpan(
                   text: 'Remember your password? ',
-                  style: TextStyle(color: GlobalColors.darkOne),
+                  style: CustomTextStyles.productTextBodyBlack, // Updated style
                   children: [
                     TextSpan(
-                        text: 'Login',
-                        style: TextStyle(
-                            color: GlobalColors.orange,
-                            fontWeight: FontWeight.bold),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
+                      text: 'Login',
+                      style: CustomTextStyles.bannerbodyTextOrange, // Updated style
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
                           context.push(AppRoute.login);
-                         // :TODO add function to go login page
-                          }),
+                          // :TODO add function to go login page
+                        },
+                    ),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
@@ -67,16 +68,12 @@ class _ResetPasswordState extends State<ResetPassword> {
             children: [
               Text(
                 'Reset Password',
-                style: TextStyle(
-                  color: GlobalColors.darkOne,
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: CustomTextStyles.headerTextBlack, // Updated style
               ),
               SizedBox(height: 8.sp),
-              const Text(
+              Text(
                 'Create a unique password. Your password should be easy to remember.',
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+                style: CustomTextStyles.productTextBodyBlack, // Updated style
               ),
               SizedBox(height: 28.sp),
               CustomTextField(
@@ -117,13 +114,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                 child: RichText(
                   text: TextSpan(
                     text: 'Remember your password? ',
-                    style: TextStyle(color: GlobalColors.darkOne),
+                    style: CustomTextStyles.productTextBodyBlack, // Updated style
                     children: [
                       TextSpan(
                         text: 'Login here',
-                        style: TextStyle(
-                            color: GlobalColors.orange,
-                            fontWeight: FontWeight.bold),
+                        style: CustomTextStyles.bannerbodyTextOrange, // Updated style
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             context.pushReplacement(AppRoute.login);
@@ -139,9 +134,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   onPressed: null,
                   child: Text(
                     '__________  Or  __________',
-                    style: TextStyle(
-                      color: GlobalColors.darkOne,
-                    ),
+                    style: CustomTextStyles.productTextBodyBlack, // Updated style
                   ),
                 ),
               ),
@@ -151,18 +144,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                   onPressed: _handleChangeEmail,
                   child: Text(
                     'Change Email',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: GlobalColors.orange,
-                      decoration: TextDecoration.underline,
-                      decorationColor: GlobalColors.orange,
-                    ),
+                    style: CustomTextStyles.bannerbodyTextOrange, // Updated style
                   ),
                 ),
               ),
-              SizedBox(
-                height: 8.h,
-              )
+              SizedBox(height: 8.h),
             ],
           ),
         ),
