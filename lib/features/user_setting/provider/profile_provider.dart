@@ -39,8 +39,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(user: const AsyncLoading());
-      final res =
-          await settingsApi.getUser('292460cf-7a45-4c66-aa5b-4fbf74e037e3');
+      final res = await settingsApi.getCurrentUser();
       state = state.copyWith(user: AsyncData(res));
     } catch (e) {
       state = state.copyWith(user: AsyncError(e, StackTrace.current));
