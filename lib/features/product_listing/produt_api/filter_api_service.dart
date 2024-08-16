@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter/filter_product_model.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/filter_product_model.dart';
 
 class ApiService {
   final Dio _dio = Dio();
