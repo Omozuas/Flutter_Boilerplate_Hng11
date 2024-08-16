@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/recent_t
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/subscription_benefit_card.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/subscription_header_card.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -153,6 +154,7 @@ class SubscriptionCheckout extends StatelessWidget {
                         buttonText1: 'Cancel Subscription',
                         buttonText2: 'Keep Subscription',
                         onTap1: () {
+                          Navigator.pop(context);
                           showDialog(
                             context: context,
                             builder: (context) => SubscriptionDialog(
@@ -165,10 +167,10 @@ class SubscriptionCheckout extends StatelessWidget {
                                 const CustomToast(
                                   message: 'Subscription Reactivated',
                                 );
-                                context.pop();
+                                Navigator.pop(context);
                               },
                               onTap2: () {
-                                context.pop();
+                                Navigator.pop(context);
                               },
                             ),
                           );
