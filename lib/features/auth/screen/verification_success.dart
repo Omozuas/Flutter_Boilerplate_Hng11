@@ -8,24 +8,24 @@ import 'package:go_router/go_router.dart';
 class VerificationSuccessScreen extends StatelessWidget {
   const VerificationSuccessScreen({super.key});
 
-  Future<void> _showLoadingIndicator(BuildContext context) async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return const AlertDialog(
-          content: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 20),
-              Text('Processing...'),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // Future<void> _showLoadingIndicator(BuildContext context) async {
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (context) {
+  //       return const AlertDialog(
+  //         content: Row(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             CircularProgressIndicator(),
+  //             SizedBox(width: 20),
+  //             Text('Processing...'),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

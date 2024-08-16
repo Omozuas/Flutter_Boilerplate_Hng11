@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
@@ -34,6 +33,7 @@ class CustomInterceptor extends Interceptor {
       }
 
       //when token is expired has been handled in the error handle as when status code is 401.
+
     }
     super.onRequest(options, handler);
   }
