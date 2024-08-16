@@ -22,8 +22,8 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/language_and_region_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/notification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_password.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -125,7 +125,7 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.editProfileScreen,
         builder: (context, state, ref) {
-          final user = ref.read(profileProvider).user.requireValue;
+          final user = ref.watch(profileProvider).user.sureValue;
           return EditProfileScreen(user: user);
         },
       ),

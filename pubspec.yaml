@@ -60,6 +60,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   syncfusion_flutter_charts: ^26.2.9
   riverpod_annotation: ^2.3.5
+  image_picker: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
