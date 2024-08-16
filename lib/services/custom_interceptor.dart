@@ -9,6 +9,7 @@ import 'package:one_context/one_context.dart';
 
 class CustomInterceptor extends Interceptor {
   GetStorage box = locator<GetStorage>();
+
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     ErrorHandlers.allErrorHandler(err);
@@ -24,24 +25,23 @@ class CustomInterceptor extends Interceptor {
     if (box.read('accessToken') != null) {
       options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
     }
+    else if (options.path == 'auth/login'
+        || options.path == '/auth/google?mobile=true'
+        || options.path == '/auth/register'
+    ){
+
+    }
     else{
-      if(options.path == 'auth/login'){}
-      else{
-        Navigator.push(OneContext().context!, MaterialPageRoute(builder:
-            (context)=>const LoginScreen()
-        ));
-      }
-
-      //when token is expired has been handled in the error handle as when status code is 401.
-
+      OneContext().push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
+      handler.reject(
+        DioException(
+          requestOptions: options,
+          type: DioExceptionType.cancel,
+          error: 'Access cannot be used',
+        ),
+      );
     }
     super.onRequest(options, handler);
   }
 
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // log('Response >> ${response}');
-
-    super.onResponse(response, handler);
-  }
 }

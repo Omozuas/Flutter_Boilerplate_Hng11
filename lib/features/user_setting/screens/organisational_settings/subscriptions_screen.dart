@@ -18,11 +18,11 @@ class SubscriptionsScreen extends StatefulWidget {
 class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   void navigateToCheckout(SubscriptionPlan plan) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SubscriptionCheckout(
-                  plan: plan,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => SubscriptionCheckout(plan: plan),
+      ),
+    );
   }
 
   @override

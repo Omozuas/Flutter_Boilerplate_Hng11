@@ -121,6 +121,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           maxLength: 1,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.zero,
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
