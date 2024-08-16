@@ -25,27 +25,57 @@ class AuthApi {
   Future<ResponseModel?> forgotPassword({
     required String email,
   }) async {
-    return await dioProvider.post(
-      '/auth/forgot-password',
-      data: {
-        'email': email,
-      },
-    );
+    try {
+      final response = await dioProvider.post(
+        '/auth/$email/forgot-password-mobile',
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error In Resetting password: ${e.toString()}');
+      return null;
+    }
+    // return await dioProvider.post(
+    //   '/auth/$email/forgot-password',
+    //   data: {
+    //     'email': email,
+    //   },
+    // );
+  }
+
+  Future<ResponseModel?> verifyCode({
+    required String email,
+    required String code,
+  }) async {
+    try {
+      final response = await dioProvider.post(
+        '/auth/$email/$code/verify-code',
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error In verrifying code: ${e.toString()}');
+      return null;
+    }
+    // return await dioProvider.post(
+    //   '/auth/$email/forgot-password',
+    //   data: {
+    //     'email': email,
+    //   },
+    // );
   }
 
   // reset password api
   Future<ResponseModel?> resetPassword({
     required String email,
-    required String otp,
-    required String newpassword,
+    required String confirmNewPassword,
+    required String newPassword,
   }) async {
     try {
-      final response = await dioProvider.patchUpdate(
-        "/auth/password-reset",
+      final response = await dioProvider.putUpdate(
+        "/auth/reset-password-mobile",
         data: {
-          'email': email,
-          'token': otp,
-          'new_Password': newpassword,
+          "newPassword": newPassword,
+          "confirmNewPassword": confirmNewPassword,
+          "email": email
         },
       );
       return response;
@@ -85,11 +115,11 @@ class AuthApi {
   }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
-Future<Company> registerCompany(Company company) async {
-  DioProvider dioProvider = locator<DioProvider>();
-  // An authenticated user is required for this request to be completed based on the api.
-  // tODO: Remove access token in place of currently signed user's token.
-  // box.write('accessToken','accessToken');
+  Future<Company> registerCompany(Company company) async {
+    DioProvider dioProvider = locator<DioProvider>();
+    // An authenticated user is required for this request to be completed based on the api.
+    // tODO: Remove access token in place of currently signed user's token.
+    // box.write('accessToken','accessToken');
 
     var registeredCompany = Company.initial();
     try {

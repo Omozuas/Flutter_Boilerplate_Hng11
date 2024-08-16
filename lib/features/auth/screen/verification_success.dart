@@ -37,7 +37,7 @@ class VerificationSuccessScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                 SizedBox(height: 80.h),
+                SizedBox(height: 80.h),
                 Text(
                   'Verification Successful',
                   style:
@@ -52,20 +52,20 @@ class VerificationSuccessScreen extends StatelessWidget {
                 CustomButton(
                   onTap: () async {
                     // Show loading indicator
-                 //   await _showLoadingIndicator(context);
+                    //   await _showLoadingIndicator(context);
 
                     // Simulate network request
-                  //  await Future.delayed(const Duration(seconds: 2));
+                    //  await Future.delayed(const Duration(seconds: 2));
                     if (context.mounted) {
                       // Hide loading indicator
-                     // Navigator.of(context).pop(); // Close the loading dialog
+                      // Navigator.of(context).pop(); // Close the loading dialog
 
                       // Proceed to login screen or other actions
-                      context.pushReplacement(AppRoute.resetPassword);
+                      context.pushReplacement(AppRoute.login);
                     }
                   },
                   borderColor: GlobalColors.borderColor,
-                  text: "Continue to Reset Password",
+                  text: "Continue to Login",
                   height: 48.h,
                   containerColor: GlobalColors.orange,
                   width: 342.w,
@@ -74,33 +74,33 @@ class VerificationSuccessScreen extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-              child: Row(
-                children: [
-                  const Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 8.sp),
-                  const Expanded(
-                    child: Text(
-                      'Successfully Verified',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     color: Colors.green,
+          //     padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
+          //     child: Row(
+          //       children: [
+          //         const Icon(Icons.check_circle, color: Colors.white),
+          //         SizedBox(width: 8.sp),
+          //         const Expanded(
+          //           child: Text(
+          //             'Successfully Verified',
+          //             style: TextStyle(color: Colors.white, fontSize: 16),
+          //           ),
+          //         ),
+          //         IconButton(
+          //           icon: const Icon(Icons.close, color: Colors.white),
+          //           onPressed: () {
+          //             Navigator.pop(context);
+          //           },
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
