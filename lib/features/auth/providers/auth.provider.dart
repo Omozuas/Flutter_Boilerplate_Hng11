@@ -80,19 +80,16 @@
 //
 //
 
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/organization_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:one_context/one_context.dart';
 
 import '../../../common_models/user.dart';
 import '../../../services/service_locator.dart';
