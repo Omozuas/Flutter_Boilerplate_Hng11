@@ -113,17 +113,36 @@ class ProductScreen extends ConsumerWidget {
                   ),
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (txt, index) {
-                        return const ProductCardListWidget();
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(
-                        height: 24.h,
-                      ),
-                      itemCount: 20,
-                    ),
+                    child: Builder(builder: (context) {
+                      final data = ref.watch(productsByCategoryProvider);
+                      return data.when(
+                        data: (data) {
+                          final allKeys = data.keys.toList();
+
+                          return ListView.separated(
+                            itemCount: allKeys.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (txt, index) {
+                              final myKey = allKeys[index];
+                              return ProductCardListWidget(
+                                categoryName: allKeys[index],
+                                products: data[myKey]!,
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) => SizedBox(
+                              height: 24.h,
+                            ),
+                          );
+                        },
+                        error: (error, stackTrace) {
+                          return const SizedBox();
+                        },
+                        loading: () {
+                          return const SizedBox();
+                        },
+                      );
+                    }),
                   ),
                 )
               ],

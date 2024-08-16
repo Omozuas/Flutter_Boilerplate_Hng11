@@ -6,12 +6,12 @@ part of 'organisation.provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getOrganisationHash() => r'7884fc22f793bfb37c0bf810fba5b6d69039907c';
+String _$getOrganisationHash() => r'eb337eba499f5868ebd3fe42f632ca75f52af98b';
 
 /// See also [GetOrganisation].
 @ProviderFor(GetOrganisation)
 final getOrganisationProvider =
-    NotifierProvider<GetOrganisation, Organisation?>.internal(
+    NotifierProvider<GetOrganisation, Organisation>.internal(
   GetOrganisation.new,
   name: r'getOrganisationProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,7 +21,7 @@ final getOrganisationProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$GetOrganisation = Notifier<Organisation?>;
+typedef _$GetOrganisation = Notifier<Organisation>;
 String _$orgnaisationIndexHash() => r'3c8584ae3e049326c57aa9b23665d830ce7cbeb8';
 
 /// See also [OrgnaisationIndex].
