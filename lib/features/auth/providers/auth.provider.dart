@@ -158,6 +158,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     } catch (e) {
@@ -195,6 +197,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     }
@@ -219,7 +223,7 @@ class AuthProvider extends StateNotifier<AuthState> {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
           _userService.storeToken(userRegData.accessToken??"");
-          getUser();
+          await getUser();
         }
       }
     } catch (e) {

@@ -32,7 +32,8 @@ class HomeScreen extends ConsumerWidget {
         bottomOpacity: 1,
         leading: Padding(
           padding: EdgeInsets.only(left: 26.0.w),
-          child: const CircleAvatar(
+          child:
+          const CircleAvatar(
             backgroundImage: AssetImage('assets/images/logo.png'),
           ),
         ),
