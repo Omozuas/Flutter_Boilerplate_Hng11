@@ -28,6 +28,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final productQuantityController = TextEditingController();
 
   String? selectedCategory;
+  List<PlatformFile> selectedFiles = [];
+
+  void onFilesSelected(List<PlatformFile> files) {
+    setState(() {
+      selectedFiles = files;
+    });
+  }
 
   @override
   void dispose() {
@@ -89,8 +96,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         'description': productDescriptionController.text,
         'price': productPriceController.text,
         'quantity': productQuantityController.text,
-        'category': selectedCategory ?? ''
-        //'image_url':
+        'category': selectedCategory ?? '',
+        'image_url': selectedFiles.isNotEmpty ? selectedFiles.first.path : '',
       };
 
       try {
@@ -106,7 +113,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // Dismiss the dialog
+                    Navigator.of(context).pop();
                   },
                   child: const Text('OK'),
                 ),
