@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter/filter_product_provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/filter_product_provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

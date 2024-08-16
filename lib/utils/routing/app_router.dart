@@ -129,6 +129,9 @@ class AppRouter {
         builder: (context, state, ref) {
           final user = ref.read(profileProvider).user.requireValue;
           // final user = ref.watch(profileProvider).user.sureValue;
+
+          // final user = ref.watch(profileProvider).user.sureValue;
+
           return EditProfileScreen(user: user);
         },
       ),
