@@ -26,6 +26,7 @@ mixin _$Product {
   int? get price => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -54,7 +55,9 @@ abstract class $ProductCopyWith<$Res> {
       String? description,
       int? price,
       String? category,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'created_at')
+      @JsonKey(name: 'created_at')
+      DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? image,
       int? quantity,
@@ -161,7 +164,9 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? description,
       int? price,
       String? category,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'created_at')
+      @JsonKey(name: 'created_at')
+      DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? image,
       int? quantity,
@@ -263,7 +268,7 @@ class _$ProductImpl implements _Product {
       this.description,
       this.price,
       this.category,
-      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'created_at') @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.image,
       this.quantity,
@@ -286,6 +291,7 @@ class _$ProductImpl implements _Product {
   @override
   final String? category;
   @override
+  @JsonKey(name: 'created_at')
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
@@ -377,7 +383,9 @@ abstract class _Product implements Product {
       final String? description,
       final int? price,
       final String? category,
-      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'created_at')
+      @JsonKey(name: 'created_at')
+      final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? image,
       final int? quantity,
@@ -399,6 +407,7 @@ abstract class _Product implements Product {
   @override
   String? get category;
   @override
+  @JsonKey(name: 'created_at')
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override

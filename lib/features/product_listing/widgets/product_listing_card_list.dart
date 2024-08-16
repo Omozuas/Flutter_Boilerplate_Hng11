@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import 'product_card.dart';
@@ -38,9 +40,13 @@ class ProductCardListWidget extends StatelessWidget {
               itemCount: 20,
               scrollDirection: Axis.horizontal,
               itemBuilder: (ctx, index) {
-                return SizedBox(
+                return InkWell(
+                  onTap: () => context.push('${AppRoute.products}/sdfsdf'),
+                  child: SizedBox(
                     width: GlobalScreenSize.getScreenWidth(context) * 0.88,
-                    child: const ProductCardWiget());
+                    child: const ProductCardWiget(),
+                  ),
+                );
               },
               separatorBuilder: (BuildContext context, int index) => SizedBox(
                 width: 16.w,

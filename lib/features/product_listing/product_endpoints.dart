@@ -1,4 +1,4 @@
-const String organisationEndpoint = '/api/v1/organisations';
+const String organisationEndpoint = '/organisations';
 
 String productsForOrganisationEndpoint({required String orgId}) =>
     '$organisationEndpoint/$orgId/products';
