@@ -28,7 +28,6 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-
     initialLocation: AppRoute.splash,
     routes: [
       ConsumerGoRoute(
@@ -78,7 +77,9 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.resetPassword,
         builder: (context, state, ref) {
-          return const ResetPassword();
+          return const ResetPassword(
+            email: '',
+          );
         },
       ),
       ConsumerGoRoute(
@@ -126,7 +127,7 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.editProfileScreen,
         builder: (context, state, ref) {
-          final user =ref.read(profileProvider).user.requireValue;
+          final user = ref.read(profileProvider).user.requireValue;
           return EditProfileScreen(user: user);
         },
       ),

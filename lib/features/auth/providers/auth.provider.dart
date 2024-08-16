@@ -1,8 +1,10 @@
-
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/reset_password.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
+import 'package:flutter_boilerplate_hng11/services/response_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +41,6 @@ class AuthState {
 }
 
 class AuthProvider extends StateNotifier<AuthState> {
-
   GetStorage box = locator<GetStorage>();
   AuthProvider()
       : super(AuthState(
@@ -78,7 +79,6 @@ class AuthProvider extends StateNotifier<AuthState> {
           box.write('accessToken', userRegData.accessToken);
           box.write('email', data['email']);
           box.write('password', data['password']);
-
         }
       }
     } catch (e) {
@@ -142,15 +142,13 @@ class AuthProvider extends StateNotifier<AuthState> {
           box.write('accessToken', userRegData.accessToken);
           box.write('email', data['email']);
           box.write('password', data['password']);
-          if(fromLoginScreen)
-         {
-           if(state.checkBoxState){
-             box.write('rememberMe', true);
-           }
-           else{
-             box.write('rememberMe', false);
-           }
-         }
+          if (fromLoginScreen) {
+            if (state.checkBoxState) {
+              box.write('rememberMe', true);
+            } else {
+              box.write('rememberMe', false);
+            }
+          }
         }
       }
     } catch (e) {
@@ -158,6 +156,72 @@ class AuthProvider extends StateNotifier<AuthState> {
     } finally {
       setNormalButtonLoading = false;
     }
+  }
+
+  Future<void> forgotPassword(String email, BuildContext context) async {
+    try {
+      setNormalButtonLoading = true;
+      final res = await AuthApi().forgotPassword(email: email);
+      if (res != null) {
+        showSnackBar(res.message.toString());
+        setNormalButtonLoading = false;
+        if (context.mounted) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => VerificationScreen(email: email)));
+          // context.go(AppRoute.verificationScreen);
+        }
+      }
+    } catch (e) {
+      //:TODO catch error
+    }
+  }
+
+  Future<void> verifyCode(
+      String email, String code, BuildContext context) async {
+    try {
+      final res = await AuthApi().verifyCode(email: email, code: code);
+      if (res != null) {
+        debugPrint(res.toString());
+        showSnackBar(res.message.toString());
+
+        if (context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (_) => ResetPassword(
+                      email: email,
+                    )),
+          );
+          // context.go(AppRoute.verificationScreen);
+        }
+      }
+    } catch (e) {
+      //:TODO catch error
+    }
+    //:TODO catch error
+  }
+
+  Future<ResponseModel?> resetPassword(String email, String newPassword,
+      String confirmNewPassword, BuildContext context) async {
+    try {
+      final res = await AuthApi().resetPassword(
+          email: email,
+          confirmNewPassword: confirmNewPassword,
+          newPassword: newPassword);
+      if (res != null) {
+        debugPrint(res.toString());
+        showSnackBar(res.message.toString());
+        if (context.mounted) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (_) => const VerificationSuccessScreen()),
+          );
+          // context.go(AppRoute.verificationScreen);
+        }
+      }
+    } catch (e) {
+      //:TODO catch error
+    }
+    return null;
   }
 }
 
