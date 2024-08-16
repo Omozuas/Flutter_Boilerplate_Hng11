@@ -116,7 +116,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     ),
                     SizedBox(height: 16.h),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: List.generate(6, (index) {
                         return SizedBox(
                           width: 40.w,
