@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
@@ -17,7 +14,6 @@ part 'product_api.g.dart';
 ProductApi productApi(ProductApiRef ref) {
   return ProductApi();
 }
-
 
 class ProductApi implements ProductsApiContract {
   //Inject the DioProvider Dependency
@@ -52,10 +48,7 @@ class ProductApi implements ProductsApiContract {
       final result =
           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
 
-      log('API DATA ${result?.data}');
-
       final jsonList = result?.data['data'] as List;
-      log('Json: $jsonList');
       return jsonList
           .map(
             (e) => Product.fromJson(e),

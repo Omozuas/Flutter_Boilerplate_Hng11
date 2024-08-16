@@ -20,8 +20,8 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    UserService _user = locator<UserService>();
-    String? userToken = _user.userAccessToken;
+    UserService user = locator<UserService>();
+    String? userToken = user.userAccessToken;
     // log('Endpoint >> ${options.path}');
     // log('Request body >> ${options.data}');
     // if (userToken != null) {
@@ -32,15 +32,12 @@ class CustomInterceptor extends Interceptor {
 
     if (userToken != null) {
       options.headers["Authorization"] = "Bearer $userToken";
-    }
-    else if (options.path == 'auth/login'
-        || options.path == '/auth/google?mobile=true'
-        || options.path == '/auth/register'
-    ){
-
-    }
-    else{
-      OneContext().push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
+    } else if (options.path == 'auth/login' ||
+        options.path == '/auth/google?mobile=true' ||
+        options.path == '/auth/register') {
+    } else {
+      OneContext()
+          .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
       handler.reject(
         DioException(
           requestOptions: options,
@@ -51,5 +48,4 @@ class CustomInterceptor extends Interceptor {
     }
     super.onRequest(options, handler);
   }
-
 }
