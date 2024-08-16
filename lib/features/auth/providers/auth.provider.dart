@@ -94,9 +94,11 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../services/service_locator.dart';
+import '../../../services/user.service.dart';
 
 class AuthProvider extends StateNotifier<bool> {
   GetStorage box = locator<GetStorage>();
+  UserService _userService = locator<UserService>();
   AuthProvider() : super(false);
 
   Future<void> registerSingleUser(
@@ -121,6 +123,7 @@ class AuthProvider extends StateNotifier<bool> {
       state = false;
     }
   }
+
 
   Future<void> googleSignin(BuildContext context) async {
     state = true;
@@ -173,6 +176,8 @@ class AuthProvider extends StateNotifier<bool> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          getUser();
         }
       }
     } catch (e) {
@@ -181,6 +186,22 @@ class AuthProvider extends StateNotifier<bool> {
       state = false;
     }
   }
+
+  Future<void> getUser() async {
+    state = true;
+    try {
+      final res = await AuthApi().getUser();
+      if (res?.data != null) {
+        _userService.storeUser(res?.data);
+      }
+    } catch (e) {
+      //TODO: Do something with caught error;
+    } finally {
+      state = false;
+    }
+  }
+
+
 }
 
 final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
