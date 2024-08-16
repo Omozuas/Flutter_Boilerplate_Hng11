@@ -39,7 +39,7 @@ class CustomInterceptor extends Interceptor {
         DioException(
           requestOptions: options,
           type: DioExceptionType.cancel,
-          error: 'Access token is required',
+          error: 'Access cannot be used',
         ),
       );
     }
