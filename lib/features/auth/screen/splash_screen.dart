@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
          AuthProvider().login({
            "email" : box.read('email'),
            "password" : box.read('password')
-         }, context,fromLoginScreen: false);
+         }, context, fromLoginScreen: false);
         }
        else{
           context.go(AppRoute.login);
