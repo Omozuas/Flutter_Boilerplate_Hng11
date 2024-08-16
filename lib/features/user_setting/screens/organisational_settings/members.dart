@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/invite_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_search_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -211,30 +212,35 @@ class _MembersSettingsState extends State<MembersSettings> {
               Row(
                 children: [
                   SizedBox(
-                    height: 40,
-                    width: 250,
-                    child: TextField(
-                      style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: const Color(0xff525252)),
-                      decoration: InputDecoration(
-                        hintText: 'Search by name or email',
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 5, 8),
-                          child: Icon(Icons.search,
-                              color: GlobalColors.gray200Color),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                            color: Color(0xffCBD5E1),
-                          ),
-                        ),
-                        prefixIconConstraints: const BoxConstraints(),
-                        contentPadding: const EdgeInsets.only(top: 8.0),
-                      ),
+                    height: 40.h,
+                    width: 250.w,
+                    child: CustomSearchField(
+                      hintText: 'Search by name or email',
+                      leading:
+                          Icon(Icons.search, color: GlobalColors.gray200Color),
                     ),
+                    // child: TextField(
+                    //   style: GoogleFonts.inter(
+                    //       fontWeight: FontWeight.w400,
+                    //       fontSize: 15,
+                    //       color: const Color(0xff525252)),
+                    //   decoration: InputDecoration(
+                    //     hintText: 'Search by name or email',
+                    //     prefixIcon: Padding(
+                    //       padding: const EdgeInsets.fromLTRB(8, 8, 5, 8),
+                    //       child: Icon(Icons.search,
+                    //           color: GlobalColors.gray200Color),
+                    //     ),
+                    //     border: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //       borderSide: const BorderSide(
+                    //         color: Color(0xffCBD5E1),
+                    //       ),
+                    //     ),
+                    //     prefixIconConstraints: const BoxConstraints(),
+                    //     contentPadding: const EdgeInsets.only(top: 8.0),
+                    //   ),
+                    // ),
                   ),
                   SizedBox(width: 13.w),
                   Expanded(
