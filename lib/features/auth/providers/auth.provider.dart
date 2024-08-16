@@ -82,6 +82,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
@@ -98,23 +99,28 @@ class AuthState {
   final bool googleButtonLoading;
   final bool checkBoxState;
   final User? user;
+  final List<Organisation> organisations;
 
   AuthState(
       {required this.normalButtonLoading,
       required this.googleButtonLoading,
       required this.checkBoxState,
-      this.user});
+      this.user,
+      this.organisations = const []});
 
   AuthState copyWith(
       {bool? normalButtonLoading,
       bool? googleButtonLoading,
       bool? checkBoxState,
+      List<Organisation>? organisations,
       User? user}) {
     return AuthState(
-        normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
-        googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
-        checkBoxState: checkBoxState ?? this.checkBoxState,
-        user: user ?? this.user);
+      normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
+      googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
+      checkBoxState: checkBoxState ?? this.checkBoxState,
+      user: user ?? this.user,
+      organisations: organisations ?? this.organisations,
+    );
   }
 }
 
@@ -143,6 +149,14 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(user: u);
   }
 
+  set setOrganizations(List<Organisation> organisations) {
+    state = state.copyWith(organisations: organisations);
+  }
+
+  set addOrganisation(Organisation org) {
+    state = state.copyWith(organisations: state.organisations..add(org));
+  }
+
   Future<void> registerSingleUser(
       Map<String, dynamic> data, BuildContext context) async {
     setNormalButtonLoading = true;
@@ -153,6 +167,13 @@ class AuthProvider extends StateNotifier<AuthState> {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
+        setOrganizations = (userRegData.data?['organisations'] as List?)
+                ?.map<Organisation>(
+                  (e) => Organisation.fromJson(e),
+                )
+                .toList() ??
+            [];
+
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
@@ -189,6 +210,12 @@ class AuthProvider extends StateNotifier<AuthState> {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
+        setOrganizations = (userRegData.data?['organisations'] as List?)
+                ?.map<Organisation>(
+                  (e) => Organisation.fromJson(e),
+                )
+                .toList() ??
+            [];
 
         if (context.mounted) {
           context.go(AppRoute.home);
@@ -213,6 +240,12 @@ class AuthProvider extends StateNotifier<AuthState> {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
+        setOrganizations = (userRegData.data?['organisations'] as List?)
+                ?.map<Organisation>(
+                  (e) => Organisation.fromJson(e),
+                )
+                .toList() ??
+            [];
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
@@ -232,4 +265,3 @@ final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
 
 //final checkBoxState = StateProvider<bool>((ref) => false);
 // final loadingGoogleButton = StateProvider<bool>((ref) => false);
-

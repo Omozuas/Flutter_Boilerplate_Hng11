@@ -48,10 +48,7 @@ class ProductApi implements ProductsApiContract {
       final result =
           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
 
-      log('API DATA ${result?.data}');
-
       final jsonList = result?.data['data'] as List;
-      log('Json: $jsonList');
       return jsonList
           .map(
             (e) => Product.fromJson(e),
