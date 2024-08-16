@@ -39,8 +39,9 @@ class ProductCardListWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (ctx, index) {
                 return SizedBox(
-                    width: GlobalScreenSize.getScreenWidth(context) * 0.88,
-                    child: const ProductCardWiget());
+                  width: GlobalScreenSize.getScreenWidth(context) * 0.88,
+                  child: const ProductCardWiget(),
+                );
               },
               separatorBuilder: (BuildContext context, int index) => SizedBox(
                 width: 16.w,

@@ -1,6 +1,7 @@
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/product_endpoints.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
@@ -32,7 +33,7 @@ class ProductApi implements ProductsApiContract {
   }
 
   @override
-  Future getAllProducts({required String orgId}) async {
+  Future<List<Product>> getAllProducts({required String orgId}) async {
     try {
       final result =
           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
@@ -78,8 +79,6 @@ class ProductApi implements ProductsApiContract {
     }
     return null;
   }
-
-//You can start creating product listing functions now
 }
 
 abstract class ProductsApiContract {
@@ -91,3 +90,7 @@ abstract class ProductsApiContract {
   Future deleteProduct({required String id});
   Future getProduct({required String id});
 }
+
+final productApiProvider = Provider<ProductApi>(
+  (ref) => ProductApi(),
+);

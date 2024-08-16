@@ -97,7 +97,9 @@ import '../../../services/service_locator.dart';
 
 class AuthProvider extends StateNotifier<bool> {
   GetStorage box = locator<GetStorage>();
-  AuthProvider() : super(false);
+  AuthProvider(this.ref) : super(false);
+
+  final Ref ref;
 
   Future<void> registerSingleUser(
       Map<String, dynamic> data, BuildContext context) async {
@@ -151,7 +153,7 @@ class AuthProvider extends StateNotifier<bool> {
           UserRegData userRegData = UserRegData.fromJson(res.data);
           if (context.mounted) {
             context.go(AppRoute.home);
-            box.write('accessToken', userRegData.accessToken );
+            box.write('accessToken', userRegData.accessToken);
           }
         }
       }
@@ -170,6 +172,7 @@ class AuthProvider extends StateNotifier<bool> {
       if (res != null) {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
+
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
@@ -184,7 +187,7 @@ class AuthProvider extends StateNotifier<bool> {
 }
 
 final authProvider = StateNotifierProvider<AuthProvider, bool>((ref) {
-  return AuthProvider();
+  return AuthProvider(ref);
 });
 
 final checkBoxProvider = StateProvider<bool>((ref) => false);
