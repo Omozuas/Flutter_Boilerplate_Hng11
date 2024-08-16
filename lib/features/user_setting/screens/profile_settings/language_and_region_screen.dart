@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
 
@@ -60,6 +61,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         leading: GestureDetector(
           onTap: () {
             ///tODO: Perform onTap function for this icon
+            context.pop();
           },
           child: const Icon(Icons.chevron_left),
         ),

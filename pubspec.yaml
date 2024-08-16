@@ -124,6 +124,7 @@ flutter:
     - assets/images/png/
     - assets/images/png/product_listing/
     - assets/images/svg/product_listing/
+    - assets/images/svg/account_settings/
     - assets/images/svg/
     - .env
 

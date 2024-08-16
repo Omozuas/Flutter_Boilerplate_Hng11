@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../utils/widgets/custom_search_field.dart';
 
@@ -19,9 +20,17 @@ class _RoleScreenState extends State<RoleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            context.pop();
+          },
+          child: const Icon(Icons.arrow_back_ios_new),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
+          padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 10.h),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,12 +69,7 @@ class _RoleScreenState extends State<RoleScreen> {
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CreateRole(),
-                          ),
-                        );
+                        context.push(AppRoute.createRole);
                       },
                       label: Text(
                         'Create Role',
