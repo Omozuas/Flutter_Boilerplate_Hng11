@@ -7,6 +7,8 @@ import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:one_context/one_context.dart';
 
+import 'user.service.dart';
+
 class CustomInterceptor extends Interceptor {
   GetStorage box = locator<GetStorage>();
 
@@ -18,12 +20,18 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-
+    UserService _user = locator<UserService>();
+    String? userToken = _user.userAccessToken;
+    // log('Endpoint >> ${options.path}');
+    // log('Request body >> ${options.data}');
+    // if (userToken != null) {
+    //   options.headers["Authorization"] = "Bearer $userToken";
+    // }
     log('Endpoint >> ${options.path}');
     log('Request body >> ${options.data}');
 
-    if (box.read('accessToken') != null) {
-      options.headers["Authorization"] = "Bearer ${box.read('accessToken')}";
+    if (userToken != null) {
+      options.headers["Authorization"] = "Bearer $userToken";
     }
     else if (options.path == 'auth/login'
         || options.path == '/auth/google?mobile=true'
