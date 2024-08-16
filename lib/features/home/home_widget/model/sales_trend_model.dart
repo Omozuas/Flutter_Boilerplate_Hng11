@@ -1,49 +1,17 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-part 'dashboard_model.g.dart';
+import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
+part 'sales_trend_model.g.dart';
+
+List<GetSalesTrend> getSalesTrendListFromStringtoJson(String str) =>
+    List<GetSalesTrend>.from(
+        json.decode(str).map((x) => GetSalesTrend.fromJson(x)));
+
+String getSalesTrendListFromJsontoString(List<GetSalesTrend> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class DashBoardModel {
-  @JsonKey(name: "revenue")
-  num? revenue;
-  @JsonKey(name: "subscriptions")
-  int? subscriptions;
-  @JsonKey(name: "sales")
-  int? sales;
-  @JsonKey(name: "activeSubscription")
-  int? activeSubscription;
-  @JsonKey(name: "monthSales")
-  List<MonthSale>? monthSales;
-
-  DashBoardModel({
-    this.revenue,
-    this.subscriptions,
-    this.sales,
-    this.activeSubscription,
-    this.monthSales,
-  });
-
-  DashBoardModel copyWith({
-    int? revenue,
-    int? subscriptions,
-    int? sales,
-    int? activeSubscription,
-    List<MonthSale>? monthSales,
-  }) =>
-      DashBoardModel(
-        revenue: revenue ?? this.revenue,
-        subscriptions: subscriptions ?? this.subscriptions,
-        sales: sales ?? this.sales,
-        activeSubscription: activeSubscription ?? this.activeSubscription,
-        monthSales: monthSales ?? this.monthSales,
-      );
-
-  factory DashBoardModel.fromJson(Map<String, dynamic> json) => _$DashBoardModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DashBoardModelToJson(this);
-}
-
-@JsonSerializable()
-class MonthSale {
+class GetSalesTrend {
   @JsonKey(name: "id")
   String? id;
   @JsonKey(name: "user_id")
@@ -59,7 +27,7 @@ class MonthSale {
   @JsonKey(name: "partners")
   String? partners;
   @JsonKey(name: "amount")
-  num? amount;
+  int? amount;
   @JsonKey(name: "reference")
   String? reference;
   @JsonKey(name: "created_at")
@@ -69,7 +37,7 @@ class MonthSale {
   @JsonKey(name: "modified_at")
   DateTime? modifiedAt;
 
-  MonthSale({
+  GetSalesTrend({
     this.id,
     this.userId,
     this.productId,
@@ -84,7 +52,7 @@ class MonthSale {
     this.modifiedAt,
   });
 
-  MonthSale copyWith({
+  GetSalesTrend copyWith({
     String? id,
     String? userId,
     String? productId,
@@ -98,7 +66,7 @@ class MonthSale {
     DateTime? paidAt,
     DateTime? modifiedAt,
   }) =>
-      MonthSale(
+      GetSalesTrend(
         id: id ?? this.id,
         userId: userId ?? this.userId,
         productId: productId ?? this.productId,
@@ -113,7 +81,7 @@ class MonthSale {
         modifiedAt: modifiedAt ?? this.modifiedAt,
       );
 
-  factory MonthSale.fromJson(Map<String, dynamic> json) => _$MonthSaleFromJson(json);
+  factory GetSalesTrend.fromJson(Map<String, dynamic> json) => _$GetSalesTrendFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MonthSaleToJson(this);
+  Map<String, dynamic> toJson() => _$GetSalesTrendToJson(this);
 }
