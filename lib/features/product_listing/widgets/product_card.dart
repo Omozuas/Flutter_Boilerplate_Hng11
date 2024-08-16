@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
@@ -31,94 +29,36 @@ class ProductCardWiget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: GlobalScreenSize.getScreenWidth(context) * 0.52,
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Product 1",
-                          style: CustomTextStyles.productTextTitleBlack,
-                        ),
-                        Text(
-                          "P001",
-                          style: CustomTextStyles.productTextBodyBlack,
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Text(
-                      "\$19.00",
-                      style: CustomTextStyles.productTextBody2Black,
-                    )
-                  ],
-                ),
+              Text(
+                "Product 1",
+                style: CustomTextStyles.productTextTitleBlack,
+              ),
+              Text(
+                "P001",
+                style: CustomTextStyles.productTextBodyBlack,
               ),
               SizedBox(
-                height: 8.h,
+                height: 6.h,
               ),
-              Container(
-                height: 0.5,
-                width: GlobalScreenSize.getScreenWidth(context) * 0.52,
-                color: GlobalColors.productBorderColor,
+              Text(
+                "Status:",
+                style: CustomTextStyles.productTextBody2Black,
               ),
-              SizedBox(
-                height: 8.h,
+              Row(
+                children: [
+                  Assets.images.svg.productListing.active.svg(),
+                  Text(
+                    "In stock",
+                    style: CustomTextStyles.productTextBody4Black,
+                  ),
+                ],
               ),
-              SizedBox(
-                width: GlobalScreenSize.getScreenWidth(context) * 0.52,
-                child: Row(
-                  children: [
-                    Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Status:",
-                          style: CustomTextStyles.productTextBody2Black,
-                        ),
-                        Row(
-                          children: [
-                            Assets.images.svg.productListing.active.svg(),
-                            Text(
-                              "In stock",
-                              style: CustomTextStyles.productTextBody4Black,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {
-                        context.push('${AppRoute.products}/sdfsdf');
-                      },
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Ink(
-                          height:
-                              GlobalScreenSize.getScreenHeight(context) * 0.045,
-                          width:
-                              GlobalScreenSize.getScreenWidth(context) * 0.25,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: GlobalColors.orange,
-                              ),
-                              borderRadius: BorderRadius.circular(8.r)),
-                          child: Center(
-                            child: Text(
-                              'Add to Cart',
-                              style: CustomTextStyles.bodyTextOrange,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              )
             ],
+          ),
+          const Spacer(),
+          Text(
+            "\$19.00",
+            style: CustomTextStyles.productTextBody2Black,
           )
         ],
       ),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product_detail_model.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/style.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/checkout_and_cart_action.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_name_and_price_section.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_rating_and_review_section.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_variation_section.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
@@ -35,7 +33,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Product Details",
+          "Product Description",
           style: CustomTextStyles.titleTextBlack,
         ),
         centerTitle: true,
@@ -82,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 horizontal: 16.w,
               ),
               decoration: BoxDecoration(
-                color: DetailColors.zinc50,
+                color: GlobalColors.zinc50,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Column(
@@ -99,7 +97,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   Text(
                     product.description,
                     style: TextStyle(
-                      color: DetailColors.mutedText,
+                      color: GlobalColors.mutedTextColor,
                       fontSize: 14.sp,
                     ),
                   )
@@ -107,10 +105,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
             Divider(color: GlobalColors.dividerColor),
-            const ProductRatingAndReviewSection(),
             CustomDropdownButton(
               borderRadius: 0,
-              valueStyle: const TextStyle(color: DetailColors.mutedText),
+              valueStyle: TextStyle(color: GlobalColors.mutedTextColor),
               placeholder: "Delivery Address",
               items: const ["Ibadan", 'Eko', "Uyo"],
               borderColor: GlobalColors.borderColor,
@@ -118,7 +115,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               containerColor: Colors.white,
               textPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 24.w),
               width: double.infinity,
-              textColor: DetailColors.mutedText,
+              textColor: GlobalColors.mutedTextColor,
             ),
             const CheckoutAndCartActions()
           ],

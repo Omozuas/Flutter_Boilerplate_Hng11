@@ -32,6 +32,8 @@ class CustomInterceptor extends Interceptor {
             (context)=>const LoginScreen()
         ));
       }
+
+      //when token is expired has been handled in the error handle as when status code is 401.
     }
     super.onRequest(options, handler);
   }
