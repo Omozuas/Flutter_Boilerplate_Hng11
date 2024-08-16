@@ -1,18 +1,25 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../services/service_locator.dart';
+
 class LoginScreen extends ConsumerWidget {
+ static GetStorage box = locator<GetStorage>();
   const LoginScreen({super.key});
 
   static final TextEditingController _emailController = TextEditingController();
@@ -24,8 +31,10 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isChecked = ref.watch(checkBoxProvider);
-    final loading = ref.watch(authProvider);
+    // final isChecked = ref.watch(checkBoxState);
+    final authStateProvider = ref.watch(authProvider);
+    //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
@@ -41,20 +50,19 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 Text(
                   "Login",
-                  style: GoogleFonts.inter(
-                      color: const Color(0xFF141414),
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w600),
+                  style: CustomTextStyle.semiBold(
+                    fontSize: 24.sp,
+                    color: GlobalColors.iconColor,
+                  ),
                 ),
                 SizedBox(
                   height: 8.h,
                 ),
                 Text(
                   "Welcome back, please enter your details",
-                  style: GoogleFonts.inter(
-                      color: GlobalColors.darkOne,
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w400),
+                  style: CustomTextStyle.regular(
+                    color: GlobalColors.darkOne,
+                  ),
                 ),
                 SizedBox(
                   height: 28.h,
@@ -64,7 +72,9 @@ class LoginScreen extends ConsumerWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
+                      backgroundColor: authStateProvider.normalButtonLoading ?
+                          Colors.grey.withOpacity(0.2) :
+                      Colors.white,
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       side: const BorderSide(color: Colors.grey),
                       shape: const RoundedRectangleBorder(
@@ -74,7 +84,7 @@ class LoginScreen extends ConsumerWidget {
                     onPressed: () {
                       ref.read(authProvider.notifier).googleSignin(context);
                     },
-                    child: loading
+                    child: authStateProvider.googleButtonLoading
                         ? SizedBox(
                             width: 16.w,
                             height: 16.w,
@@ -98,10 +108,9 @@ class LoginScreen extends ConsumerWidget {
                     const Spacer(),
                     Text(
                       "or continue with",
-                      style: GoogleFonts.inter(
-                          color: GlobalColors.darkOne,
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400),
+                      style: CustomTextStyle.regular(
+                        color: GlobalColors.darkOne,
+                      ),
                     ),
                     const Spacer(),
                     SizedBox(width: 105.w, child: const Divider()),
@@ -120,12 +129,10 @@ class LoginScreen extends ConsumerWidget {
                 SizedBox(
                   height: 16.h,
                 ),
-                CustomTextField(
+                PasswordTextField(
                   label: "Password",
-                  obscureText: true,
                   controller: _passwordController,
                   hintText: "Enter your password",
-                  suffixIcon: const Icon(Icons.visibility_off),
                 ),
                 SizedBox(
                   height: 16.h,
@@ -137,14 +144,14 @@ class LoginScreen extends ConsumerWidget {
                         padding: EdgeInsets.zero,
                         child: GestureDetector(
                           onTap: () {
-                            ref.read(checkBoxProvider.notifier).state =
-                                !ref.read(checkBoxProvider.notifier).state;
+                            ref.read(authProvider.notifier).setCheckBoxState =
+                                !authStateProvider.checkBoxState;
                           },
                           child: Icon(
-                            isChecked
+                            authStateProvider.checkBoxState
                                 ? Icons.check_box
                                 : Icons.check_box_outline_blank,
-                            color: isChecked
+                            color: authStateProvider.checkBoxState
                                 ? GlobalColors.orange
                                 : GlobalColors.darkOne,
                           ),
@@ -154,10 +161,10 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     Text(
                       "Remember Me",
-                      style: GoogleFonts.inter(
-                          color: const Color(0XFF0A0A0A),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500),
+                      style: CustomTextStyle.medium(
+                        color: GlobalColors.black,
+                        fontSize: 14.sp,
+                      ),
                     ),
                     const Spacer(),
                     GestureDetector(
@@ -172,44 +179,59 @@ class LoginScreen extends ConsumerWidget {
                       },
                       child: Text(
                         "Forgot Password?",
-                        style: GoogleFonts.inter(
-                            color: GlobalColors.orange,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                        style: CustomTextStyle.regular(
+                          color: GlobalColors.orange,
+                          fontSize: 14.sp,
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(
                   height: 32.h,
                 ),
                 CustomButton(
-                    loading: loading,
+                    loading: authStateProvider.normalButtonLoading,
                     onTap: () async {
                       if (_formKey.currentState?.validate() ?? false) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          },
+                        );
                         ref.read(authProvider.notifier).login({
                           'email': _emailController.text,
                           'password': _passwordController.text,
                         }, context);
+                        Navigator.of(context).pop();
                       }
+                       Navigator.of(context).pop();
                     },
                     borderColor: GlobalColors.borderColor,
                     text: "Login",
                     height: 48.h,
-                    containerColor: GlobalColors.orange,
+                    fontWeight: FontWeight.bold,
+                    containerColor:
+                    authStateProvider.googleButtonLoading ?
+                    Colors.grey.withOpacity(0.2) :
+                    GlobalColors.orange,
                     width: 342.w,
                     textColor: Colors.white),
                 SizedBox(
                   height: 8.h,
                 ),
-                CustomButton(
-                    onTap: () {},
-                    borderColor: GlobalColors.borderColor,
-                    text: "Use Magic Link instead",
-                    height: 48.h,
-                    containerColor: Colors.white,
-                    width: 342.w,
-                    textColor: GlobalColors.darkOne),
+                // CustomButton(
+                //     onTap: () {},
+                //     borderColor: GlobalColors.borderColor,
+                //     text: "Use Magic Link instead",
+                //     height: 48.h,
+                //     containerColor: Colors.white,
+                //     width: 342.w,
+                //     textColor: GlobalColors.darkOne),
                 const SizedBox(
                   height: 23.5,
                 ),
@@ -226,12 +248,13 @@ class LoginScreen extends ConsumerWidget {
                                 fontWeight: FontWeight.bold),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          CompanySignUpScreen()),
-                                );
+                                context.go(AppRoute.singleUserSignUp);
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const SingleUserSignUpScreen()),
+                                // );
                               }),
                       ],
                     ),
@@ -242,37 +265,35 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 SizedBox(
                   width: 342.w,
-                  height: 48.h,
+                  // height: 35.h,
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       text: 'By logging in, you agree with our ',
-                      style: GoogleFonts.inter(
-                          color: GlobalColors.bgsurface700,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400),
+                      style: CustomTextStyle.regular(
+                        color: GlobalColors.bgsurface700,
+                        fontSize: 14.sp,
+                      ),
+                      // GoogleFonts.inter(
+                      //   color: GlobalColors.bgsurface700,
+                      //   fontSize: 14.sp,
+                      //   fontWeight: FontWeight.w400,
+
                       children: [
                         TextSpan(
-                          text: 'Terms & \nUse ',
-                          style: GoogleFonts.inter(
-                              fontSize: 14.sp,
-                              color: GlobalColors.orange,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        TextSpan(
-                          text: 'and ',
-                          style: GoogleFonts.inter(
-                            color: GlobalColors.black,
+                          text: 'Terms & Use ',
+                          style: CustomTextStyle.regular(
                             fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
+                            color: GlobalColors.orange,
                           ),
                         ),
+                        TextSpan(text: 'and '),
                         TextSpan(
-                          text: 'Privacy Policy.',
-                          style: GoogleFonts.inter(
-                              fontSize: 14.sp,
-                              color: GlobalColors.orange,
-                              fontWeight: FontWeight.w400),
+                          text: '\nPrivacy Policy.',
+                          style: CustomTextStyle.regular(
+                            fontSize: 14.sp,
+                            color: GlobalColors.orange,
+                          ),
                         ),
                       ],
                     ),

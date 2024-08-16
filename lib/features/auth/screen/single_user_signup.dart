@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +23,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loading = ref.watch(authProvider);
+    final authProviderState = ref.watch(authProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -65,7 +66,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     onPressed: () {
                       ref.read(authProvider.notifier).googleSignin(context);
                     },
-                    child: loading
+                    child: authProviderState.googleButtonLoading
                         ? SizedBox(
                             width: 16.w,
                             height: 16.w,
@@ -112,7 +113,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     focusedBorderColor: GlobalColors.orange,
                     validator: Validators.emailValidator,
                   ),
-                  CustomTextField(
+                  PasswordTextField(
                     label: 'Password',
                     controller: SingleUserSignUpScreen.passwordController,
                     hintText: 'Create your password',
@@ -123,16 +124,27 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   SizedBox(height: 10.h),
                   CustomButton(
                     text: 'Create Account',
-                    loading: loading,
+                    loading: authProviderState.normalButtonLoading,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          },
+                        );
                         ref.read(authProvider.notifier).registerSingleUser({
                           'email': emailController.text,
                           'first_name': firstNameController.text,
                           'last_name': lastNameController.text,
                           'password': passwordController.text,
                         }, context);
+                        Navigator.of(context).pop();
                       }
+                      Navigator.of(context).pop();
                     },
                     textColor: GlobalColors.white,
                     borderColor: GlobalColors.orange,
