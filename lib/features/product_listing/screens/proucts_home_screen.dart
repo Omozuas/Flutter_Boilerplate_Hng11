@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
-import '../widgets/product_card.dart';
 
 class ProductHomeScreen extends StatelessWidget {
   const ProductHomeScreen({super.key});

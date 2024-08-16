@@ -53,7 +53,7 @@ class DashBoardState {
 }
 
 class DashBoardProvider extends StateNotifier<DashBoardState> {
-  GetStorage _storageService = locator<GetStorage>();
+  final GetStorage _storageService = locator<GetStorage>();
   UserService userService = locator<UserService>();
 
   DashBoardProvider() : super(DashBoardState(
@@ -78,7 +78,6 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
   }
 
   getAllCached() async {
-    print(_getMonthAbbreviation(_subtractMonths(5)));
     data= [];
     await getCachedDashboardData();
     await getCachedSalesTrend();
@@ -122,7 +121,7 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
 
     // Handle cases where the resulting month has fewer days than the current day
     while (newDate.month != newMonth) {
-      newDate = newDate.subtract(Duration(days: 1));
+      newDate = newDate.subtract(const Duration(days: 1));
     }
 
     return newDate;

@@ -4,7 +4,7 @@ import 'package:flutter_shimmer/flutter_shimmer.dart';
 
 
 class Skeleton extends StatefulWidget {
-  const Skeleton({Key? key, this.height, this.width, this.color=Colors.grey}) : super(key: key);
+  const Skeleton({super.key, this.height, this.width, this.color=Colors.grey});
 
   final double? height, width;
   final Color? color;
@@ -21,13 +21,14 @@ class _SkeletonState extends State<Skeleton>with SingleTickerProviderStateMixin 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: Duration(seconds: 1), vsync: this)..repeat();
+    _animationController = AnimationController(duration: const Duration(seconds: 1), vsync: this)..repeat();
     _animation =
         Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(curve: Curves.easeInOutSine, parent: _animationController));
   }
   // ****************************init*************************
 
   // *****************************dispose************************
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
@@ -52,8 +53,8 @@ class _SkeletonState extends State<Skeleton>with SingleTickerProviderStateMixin 
 }
 
 class ShimmerCard extends StatefulWidget {
-  const ShimmerCard({Key? key,
-  }) : super(key: key);
+  const ShimmerCard({super.key,
+  });
 
   @override
   State<ShimmerCard> createState() => _ShimmerCardState();
@@ -67,13 +68,14 @@ class _ShimmerCardState extends State<ShimmerCard>with SingleTickerProviderState
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: Duration(seconds: 1), vsync: this)..repeat();
+    _animationController = AnimationController(duration: const Duration(seconds: 1), vsync: this)..repeat();
     _animation =
         Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(curve: Curves.easeInOutSine, parent: _animationController));
   }
   // ****************************init*************************
 
   // *****************************dispose************************
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
@@ -87,10 +89,10 @@ class _ShimmerCardState extends State<ShimmerCard>with SingleTickerProviderState
     print(darkModeOn);
     return AnimatedBuilder(animation: _animation,
         builder: (BuildContext context, Widget? child){
-          return  Container(
+          return  SizedBox(
             height: size.height,
             width: size.width,
-            child: Skeleton(),
+            child: const Skeleton(),
           );
         }
     );

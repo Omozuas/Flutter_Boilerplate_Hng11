@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../common_models/get_user_response.dart';
 import '../../models/company_user.dart';
