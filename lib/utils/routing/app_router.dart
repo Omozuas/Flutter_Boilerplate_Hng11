@@ -7,10 +7,10 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dar
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/proucts_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members.dart';
@@ -28,8 +28,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    // initialLocation: AppRoute.splash,
-    initialLocation: AppRoute.home,
+    initialLocation: AppRoute.splash,
     routes: [
       ConsumerGoRoute(
         path: AppRoute.splash,
@@ -147,7 +146,7 @@ class AppRouter {
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
-              builder: (context, state, ref) => const ProductHomeScreen(),
+              builder: (context, state, ref) => const HomeScreen(),
             ),
           ]),
           StatefulShellBranch(routes: [
@@ -191,7 +190,7 @@ class AppRoute {
   static const String cart = '/cart';
 
   static const String settings = '/settings';
-  //
+
   static const String products = '/products';
 
   static const String home = '/home';

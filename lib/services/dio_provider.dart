@@ -118,8 +118,8 @@ class DioProvider {
     return ResponseModel.fromJson(response.data);
   }
 
-  Future<ResponseModel?> get(String path, {Map<String, dynamic>? query}) async {
-    var response = await _dio.get(path, queryParameters: query);
+  Future<ResponseModel?> get(String path, {Map<String, dynamic>? query, Options? options}) async {
+    var response = await _dio.get(path, queryParameters: query, options: options);
     return ResponseModel.fromJson(response.data);
   }
 

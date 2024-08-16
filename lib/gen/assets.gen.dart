@@ -12,16 +12,43 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/search_icon.png
+  AssetGenImage get searchIcon =>
+      const AssetGenImage('assets/icons/search_icon.png');
+
+  /// File path: assets/icons/verified.svg
+  SvgGenImage get verified => const SvgGenImage('assets/icons/verified.svg');
+
+  /// List of all assets
+  List<dynamic> get values => [searchIcon, verified];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/Instagram (2).png
+  AssetGenImage get instagram2 =>
+      const AssetGenImage('assets/images/Instagram (2).png');
+
+  /// File path: assets/images/X logo.png
+  AssetGenImage get xLogo => const AssetGenImage('assets/images/X logo.png');
 
   /// File path: assets/images/atlassian.png
   AssetGenImage get atlassian =>
       const AssetGenImage('assets/images/atlassian.png');
 
+  /// File path: assets/images/avatar.png
+  AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.png');
+
   /// File path: assets/images/chat_slack.png
   AssetGenImage get chatSlack =>
       const AssetGenImage('assets/images/chat_slack.png');
+
+  /// File path: assets/images/data.png
+  AssetGenImage get data => const AssetGenImage('assets/images/data.png');
 
   /// File path: assets/images/drive_google_google drive_icons.png
   AssetGenImage get driveGoogleGoogleDriveIcons =>
@@ -33,6 +60,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/empty_avatar.png
   AssetGenImage get emptyAvatar =>
       const AssetGenImage('assets/images/empty_avatar.png');
+
+  /// File path: assets/images/fe_instagram.png
+  AssetGenImage get feInstagram =>
+      const AssetGenImage('assets/images/fe_instagram.png');
 
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
@@ -59,6 +90,12 @@ class $AssetsImagesGen {
   AssetGenImage get microsoftOfficeOffice365Teams => const AssetGenImage(
       'assets/images/microsoft_office_office 365_teams.png');
 
+  /// File path: assets/images/money.png
+  AssetGenImage get money => const AssetGenImage('assets/images/money.png');
+
+  /// File path: assets/images/notify.png
+  AssetGenImage get notify => const AssetGenImage('assets/images/notify.png');
+
   /// File path: assets/images/notion.png
   AssetGenImage get notion => const AssetGenImage('assets/images/notion.png');
 
@@ -66,8 +103,21 @@ class $AssetsImagesGen {
   AssetGenImage get onedrive =>
       const AssetGenImage('assets/images/onedrive.png');
 
+  /// File path: assets/images/org.png
+  AssetGenImage get org => const AssetGenImage('assets/images/org.png');
+
+  /// File path: assets/images/people.png
+  AssetGenImage get people => const AssetGenImage('assets/images/people.png');
+
+  /// File path: assets/images/personsettings.png
+  AssetGenImage get personsettings =>
+      const AssetGenImage('assets/images/personsettings.png');
+
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+
+  /// File path: assets/images/search.png
+  AssetGenImage get search => const AssetGenImage('assets/images/search.png');
 
   /// Directory path: assets/images/svg
   $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
@@ -75,13 +125,24 @@ class $AssetsImagesGen {
   /// File path: assets/images/trello.png
   AssetGenImage get trello => const AssetGenImage('assets/images/trello.png');
 
+  /// File path: assets/images/wallet.png
+  AssetGenImage get wallet => const AssetGenImage('assets/images/wallet.png');
+
+  /// File path: assets/images/world.png
+  AssetGenImage get world => const AssetGenImage('assets/images/world.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+        instagram2,
+        xLogo,
         atlassian,
+        avatar,
         chatSlack,
+        data,
         driveGoogleGoogleDriveIcons,
         dropbox,
         emptyAvatar,
+        feInstagram,
         google,
         googleIcon,
         hngBoilerplateLogo,
@@ -89,9 +150,17 @@ class $AssetsImagesGen {
         logo,
         microsoftOffice,
         microsoftOfficeOffice365Teams,
+        money,
+        notify,
         notion,
         onedrive,
-        trello
+        org,
+        people,
+        personsettings,
+        search,
+        trello,
+        wallet,
+        world
       ];
 }
 
@@ -105,6 +174,10 @@ class $AssetsImagesPngGen {
 
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
+
+  /// Directory path: assets/images/svg/account_settings
+  $AssetsImagesSvgAccountSettingsGen get accountSettings =>
+      const $AssetsImagesSvgAccountSettingsGen();
 
   /// Directory path: assets/images/svg/product_listing
   $AssetsImagesSvgProductListingGen get productListing =>
@@ -122,8 +195,31 @@ class $AssetsImagesPngProductListingGen {
   AssetGenImage get product =>
       const AssetGenImage('assets/images/png/product_listing/product.png');
 
+  /// File path: assets/images/png/product_listing/profile.png
+  AssetGenImage get profile =>
+      const AssetGenImage('assets/images/png/product_listing/profile.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [iphone, product];
+  List<AssetGenImage> get values => [iphone, product, profile];
+}
+
+class $AssetsImagesSvgAccountSettingsGen {
+  const $AssetsImagesSvgAccountSettingsGen();
+
+  /// File path: assets/images/svg/account_settings/instagram.svg
+  SvgGenImage get instagram =>
+      const SvgGenImage('assets/images/svg/account_settings/instagram.svg');
+
+  /// File path: assets/images/svg/account_settings/linkedin.svg
+  SvgGenImage get linkedin =>
+      const SvgGenImage('assets/images/svg/account_settings/linkedin.svg');
+
+  /// File path: assets/images/svg/account_settings/x_logo.svg
+  SvgGenImage get xLogo =>
+      const SvgGenImage('assets/images/svg/account_settings/x_logo.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [instagram, linkedin, xLogo];
 }
 
 class $AssetsImagesSvgProductListingGen {
@@ -145,6 +241,10 @@ class $AssetsImagesSvgProductListingGen {
   SvgGenImage get listIcon =>
       const SvgGenImage('assets/images/svg/product_listing/list_icon.svg');
 
+  /// File path: assets/images/svg/product_listing/notification.svg
+  SvgGenImage get notification =>
+      const SvgGenImage('assets/images/svg/product_listing/notification.svg');
+
   /// File path: assets/images/svg/product_listing/search_icon.svg
   SvgGenImage get searchIcon =>
       const SvgGenImage('assets/images/svg/product_listing/search_icon.svg');
@@ -154,14 +254,22 @@ class $AssetsImagesSvgProductListingGen {
       const SvgGenImage('assets/images/svg/product_listing/sort_icon.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [active, filterButton, gridIcon, listIcon, searchIcon, sortIcon];
+  List<SvgGenImage> get values => [
+        active,
+        filterButton,
+        gridIcon,
+        listIcon,
+        notification,
+        searchIcon,
+        sortIcon
+      ];
 }
 
 class Assets {
   Assets._();
 
   static const String aEnv = '.env';
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 
   /// List of all assets

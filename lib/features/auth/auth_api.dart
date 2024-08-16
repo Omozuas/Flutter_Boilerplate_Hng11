@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../common_models/get_user_response.dart';
 import '../../models/company_user.dart';
 import '../../services/response_model.dart';
 
@@ -62,7 +64,21 @@ class AuthApi {
         String accessToken = response.data['access_token'];
         box.write('accessToken', accessToken);
       }
+      log('${response?.data}');
       return response;
+    } catch (e) {
+      debugPrint('Error during login: ${e.toString()}');
+      return null;
+    }
+  }
+
+  Future<GetUserData?> getUser() async {
+    try {
+      final response = await dioProvider.get(
+        'auth/@me',
+      );
+      debugPrint(response?.data.toString());
+      return GetUserData.fromJson(jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
       debugPrint('Error during login: ${e.toString()}');
       return null;
@@ -85,11 +101,11 @@ class AuthApi {
   }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
-Future<Company> registerCompany(Company company) async {
-  DioProvider dioProvider = locator<DioProvider>();
-  // An authenticated user is required for this request to be completed based on the api.
-  // tODO: Remove access token in place of currently signed user's token.
-  // box.write('accessToken','accessToken');
+  Future<Company> registerCompany(Company company) async {
+    DioProvider dioProvider = locator<DioProvider>();
+    // An authenticated user is required for this request to be completed based on the api.
+    // tODO: Remove access token in place of currently signed user's token.
+    // box.write('accessToken','accessToken');
 
     var registeredCompany = Company.initial();
     try {
