@@ -151,20 +151,6 @@ class _MembersSettingsState extends State<MembersSettings> {
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
-              // Add buttons for demonstration
-              // ElevatedButton(
-              //   onPressed: () {
-              //     showDialog(
-              //       context: context,
-              //       builder: (context) => const DeleteMemberDialog(),
-              //     );
-              //   },
-              //   child: const Text('Show Delete Member Dialog'),
-              // ),
-              // ElevatedButton(
-              //   onPressed: () => showCustomToast(context),
-              //   child: const Text('Show Custom Toast'),
-              // ),
               SizedBox(
                 height: 10.h,
               ),
@@ -219,28 +205,6 @@ class _MembersSettingsState extends State<MembersSettings> {
                       leading:
                           Icon(Icons.search, color: GlobalColors.gray200Color),
                     ),
-                    // child: TextField(
-                    //   style: GoogleFonts.inter(
-                    //       fontWeight: FontWeight.w400,
-                    //       fontSize: 15,
-                    //       color: const Color(0xff525252)),
-                    //   decoration: InputDecoration(
-                    //     hintText: 'Search by name or email',
-                    //     prefixIcon: Padding(
-                    //       padding: const EdgeInsets.fromLTRB(8, 8, 5, 8),
-                    //       child: Icon(Icons.search,
-                    //           color: GlobalColors.gray200Color),
-                    //     ),
-                    //     border: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       borderSide: const BorderSide(
-                    //         color: Color(0xffCBD5E1),
-                    //       ),
-                    //     ),
-                    //     prefixIconConstraints: const BoxConstraints(),
-                    //     contentPadding: const EdgeInsets.only(top: 8.0),
-                    //   ),
-                    // ),
                   ),
                   SizedBox(width: 13.w),
                   Expanded(
@@ -258,23 +222,6 @@ class _MembersSettingsState extends State<MembersSettings> {
                         width: 100.w,
                         textColor: const Color(0xff0F172A)),
                   )
-                  // DropdownButton<String>(
-                  //   dropdownColor: GlobalColors.white,
-                  //   iconEnabledColor: GlobalColors.gray200Color,
-                  //   value: 'All',
-                  //   onChanged: (String? newValue) {},
-                  //   items: <String>[
-                  //     'All',
-                  //     'Members',
-                  //     'Suspended',
-                  //     'Left workspace'
-                  //   ].map<DropdownMenuItem<String>>((String value) {
-                  //     return DropdownMenuItem<String>(
-                  //       value: value,
-                  //       child: Text(value),
-                  //     );
-                  //   }).toList(),
-                  // ),
                 ],
               ),
               SizedBox(height: 10.w),
