@@ -29,7 +29,8 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   static final GoRouter router = GoRouter(
 
-    initialLocation: AppRoute.settings,
+    // initialLocation: AppRoute.splash,
+    initialLocation: AppRoute.home,
     routes: [
       ConsumerGoRoute(
         path: AppRoute.splash,
@@ -191,7 +192,7 @@ class AppRoute {
   static const String cart = '/cart';
 
   static const String settings = '/settings';
-
+  //
   static const String products = '/products';
 
   static const String home = '/home';
