@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
@@ -29,10 +28,9 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   // final isChecked = ref.watch(checkBoxState);
+    // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
-  //  final loadingGoogle = ref.watch(loadingGoogleButton);
-
+    //  final loadingGoogle = ref.watch(loadingGoogleButton);
 
     return SafeArea(
         child: Scaffold(
@@ -172,7 +170,6 @@ class LoginScreen extends ConsumerWidget {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -198,11 +195,22 @@ class LoginScreen extends ConsumerWidget {
                     loading: authStateProvider.normalButtonLoading,
                     onTap: () async {
                       if (_formKey.currentState?.validate() ?? false) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          },
+                        );
                         ref.read(authProvider.notifier).login({
                           'email': _emailController.text,
                           'password': _passwordController.text,
                         }, context);
+                        Navigator.of(context).pop();
                       }
+                       Navigator.of(context).pop();
                     },
                     borderColor: GlobalColors.borderColor,
                     text: "Login",
