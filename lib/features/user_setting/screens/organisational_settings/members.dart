@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/invite_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -37,31 +36,28 @@ class _MembersSettingsState extends State<MembersSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Members',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Text(
-                    'Members',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 8.h),
               Text(
                 "Manage who has access to this workspace",
                 style: TextStyle(
@@ -89,15 +85,15 @@ class _MembersSettingsState extends State<MembersSettings> {
                 title: Text(
                   'Invite Link',
                   style: GoogleFonts.inter(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xff525252),
+                    color: const Color.fromARGB(255, 48, 47, 47),
                   ),
                 ),
                 subtitle: Text(
                   'This provides a unique URL that allows anyone to join your workspace',
                   style: GoogleFonts.inter(
-                    fontSize: 12,
+                    fontSize: 12.5.sp,
                     fontWeight: FontWeight.w400,
                     color: const Color(0xff525252),
                   ),
@@ -178,7 +174,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                     'Manage Members',
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w700,
-                        fontSize: 14,
+                        fontSize: 15,
                         color: const Color(0xff0A0A0A)),
                   ),
                   const Spacer(),
@@ -202,48 +198,17 @@ class _MembersSettingsState extends State<MembersSettings> {
                 height: 10.h,
               ),
               Text(
-                'On the Free plan all members in a workspace are administrators. Upgrade to a paid plan to add the ability to assign or remove administrator roles.',
+                'On the Free plan all members in a workspace are administrators. ',
                 style: GoogleFonts.inter(
-                  fontSize: 12,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  color: const Color(0xff525252),
+                  color: const Color.fromARGB(255, 51, 50, 50),
                 ),
               ),
               SizedBox(
                 height: 5.h,
               ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return const SubscriptionsScreen();
-                      }));
-                    },
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Go to Plans',
-                          style: GoogleFonts.inter(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xffF97316),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.arrow_forward,
-                          size: 16,
-                          color: Color(0xffF97316),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
+
               Row(
                 children: [
                   SizedBox(

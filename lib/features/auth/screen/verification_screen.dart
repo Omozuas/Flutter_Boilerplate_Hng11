@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../utils/global_colors.dart';
-import '../../../utils/widgets/custom_button.dart';
-import 'login_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String email;
@@ -44,12 +44,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void _handleVerify() {
     final code = _codeControllers.map((c) => c.text).join();
     if (code == '123456') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const VerificationSuccessScreen(),
-        ),
-      );
+      context.push(AppRoute.verificationSuccess);
     } else {
       setState(() {
         _isCodeValid = false;
@@ -66,7 +61,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 
   void _handleChangeEmail() {
-    Navigator.popUntil(context, ModalRoute.withName('/'));
+    context.go(AppRoute.forgotPassword);
   }
 
   @override
@@ -80,7 +75,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.chevron_left, size: 24),
+          icon: Icon(Icons.chevron_left, size: 30.sp),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -119,31 +114,35 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     return SizedBox(
                       width: 40.w,
                       height: 40.h,
-                      child: TextField(
-                        controller: _codeControllers[index],
-                        maxLength: 1,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: _isCodeValid ? Colors.orange : Colors.red,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: TextField(
+                          controller: _codeControllers[index],
+                          maxLength: 1,
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color:
+                                    _isCodeValid ? Colors.orange : Colors.red,
+                              ),
                             ),
+                            counterText: '',
                           ),
-                          counterText: '',
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            if (value.length == 1 && index < 5) {
+                              FocusScope.of(context).nextFocus();
+                            } else if (value.isEmpty && index > 0) {
+                              FocusScope.of(context).previousFocus();
+                            }
+                            setState(() {
+                              _isCodeComplete = _codeControllers.every(
+                                (controller) => controller.text.isNotEmpty,
+                              );
+                            });
+                          },
                         ),
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          if (value.length == 1 && index < 5) {
-                            FocusScope.of(context).nextFocus();
-                          } else if (value.isEmpty && index > 0) {
-                            FocusScope.of(context).previousFocus();
-                          }
-                          setState(() {
-                            _isCodeComplete = _codeControllers.every(
-                              (controller) => controller.text.isNotEmpty,
-                            );
-                          });
-                        },
                       ),
                     );
                   }),
@@ -234,114 +233,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
               ),
             ),
-        ],
-      ),
-    );
-  }
-}
-
-class VerificationSuccessScreen extends StatelessWidget {
-  const VerificationSuccessScreen({super.key});
-
-  Future<void> _showLoadingIndicator(BuildContext context) async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return const AlertDialog(
-          content: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 20),
-              Text('Processing...'),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.sp),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 80), // Space for Snackbar
-                Text(
-                  'Verification Successful',
-                  style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
-                ),
-                SizedBox(height: 16.sp),
-                const Text(
-                  'Your verification was successful, you can now proceed to reset your password.',
-                  style: TextStyle(fontSize: 13),
-                ),
-                SizedBox(height: 24.sp),
-                CustomButton(
-                  onTap: () async {
-                    // Show loading indicator
-                    await _showLoadingIndicator(context);
-
-                    // Simulate network request
-                    await Future.delayed(const Duration(seconds: 2));
-                    if (context.mounted)
-                    // Hide loading indicator
-                    {
-                      Navigator.of(context).pop(); // Close the loading dialog
-
-                      // Proceed to reset password screen or other actions
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      );
-                    }
-                  },
-                  borderColor: GlobalColors.borderColor,
-                  text: "Continue to Login",
-                  height: 48.h,
-                  containerColor: GlobalColors.orange,
-                  width: 342.w,
-                  textColor: Colors.white,
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-              child: Row(
-                children: [
-                  const Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 8.sp),
-                  const Expanded(
-                    child: Text(
-                      'Successfully Verified',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );

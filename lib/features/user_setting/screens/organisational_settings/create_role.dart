@@ -19,33 +19,27 @@ class _CreateRoleState extends State<CreateRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text('Create Role',
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+              )),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 30.h),
+        padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Text(
-                  'Create Role',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8.h),
             Text(
               "Custom roles let you group permissions and assign them to principals in your organization. You can manually select permissions or import permissions from another role.",
               style: TextStyle(
-                fontSize: 12.sp,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
                 color: GlobalColors.darkOne,
               ),
@@ -87,10 +81,7 @@ class _CreateRoleState extends State<CreateRole> {
               alignment: Alignment.centerRight,
               child: CustomButton(
                 onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => const AddPermissionsModalSheet(),
-                  );
+                  displayBottomsheet(context);
                 },
                 borderColor: GlobalColors.orange,
                 text: "Add Premissions",
@@ -105,58 +96,51 @@ class _CreateRoleState extends State<CreateRole> {
       ),
     );
   }
-}
 
-class AddPermissionsModalSheet extends StatelessWidget {
-  const AddPermissionsModalSheet({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 20.h),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(8.r),
-          topRight: Radius.circular(8.r),
-        ),
-        color: GlobalColors.white,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
+  void displayBottomsheet(BuildContext context) {
+    showBottomSheet(
+        backgroundColor: GlobalColors.whiteColor,
+        enableDrag: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 20.h),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Add Permissions',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.sp,
-                    color: GlobalColors.darkTwo,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Add Permissions',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.sp,
+                          color: GlobalColors.darkTwo,
+                        ),
+                      ),
+                      Text(
+                        'See the list of permissions for this role.',
+                        style: TextStyle(
+                          color: GlobalColors.darkOne,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Text(
-                  'See the list of permissions for this role.',
-                  style: TextStyle(
-                    color: GlobalColors.darkOne,
-                  ),
+                SizedBox(
+                  height: 10.h,
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Divider(
-            color: GlobalColors.lightGray,
-          ),
-          Expanded(
-            child: ListView(
-              children: [
+                Divider(
+                  color: GlobalColors.lightGray,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
                 PermissionsListTile(
                     isPermitted: true,
                     permissionTitle: 'Can view transactions'),
@@ -173,25 +157,25 @@ class AddPermissionsModalSheet extends StatelessWidget {
                 PermissionsListTile(
                     isPermitted: true,
                     permissionTitle: 'Can blacklist/whitelist users'),
+                SizedBox(
+                  height: 25.h,
+                ),
+                Center(
+                  child: CustomButton(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    borderColor: GlobalColors.lightGray,
+                    text: "Save Preferences",
+                    height: 40.h,
+                    containerColor: GlobalColors.lightGray,
+                    width: 150.w,
+                    textColor: GlobalColors.darkTwo,
+                  ),
+                ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 25.h,
-          ),
-          Center(
-            child: CustomButton(
-              onTap: () {},
-              borderColor: GlobalColors.lightGray,
-              text: "Save Preferences",
-              height: 40.h,
-              containerColor: GlobalColors.lightGray,
-              width: 150.w,
-              textColor: GlobalColors.darkTwo,
-            ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
