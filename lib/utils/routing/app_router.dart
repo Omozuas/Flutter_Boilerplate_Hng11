@@ -125,7 +125,9 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.editProfileScreen,
         builder: (context, state, ref) {
+
           final user = ref.watch(profileProvider).user.sureValue;
+
           return EditProfileScreen(user: user);
         },
       ),

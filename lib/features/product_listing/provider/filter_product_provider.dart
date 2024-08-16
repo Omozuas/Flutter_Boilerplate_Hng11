@@ -1,5 +1,5 @@
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter/filter_api_service.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter/filter_product_model.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/filter_api_service.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/filter_product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final productProvider = StateNotifierProvider<ProductNotifier, List<Product>>((ref) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter_product_bottomsheet.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,7 +87,22 @@ class ProductScreen extends ConsumerWidget {
                               )),
                         ),
                       ),
-                      Assets.images.svg.productListing.filterButton.svg(),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const FilterBottomSheet();
+                            },
+                          );
+                        },
+                        child:
+                            Assets.images.svg.productListing.filterButton.svg(
+                          height:
+                              GlobalScreenSize.getScreenHeight(context) * 0.052,
+                          width: GlobalScreenSize.getScreenWidth(context) * 0.7,
+                        ),
+                      ),
                     ],
                   ),
                 ),
