@@ -56,10 +56,15 @@ dependencies:
   vector_graphics: any
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
+
   json_annotation: ^4.9.0
   freezed_annotation: ^2.4.4
   syncfusion_flutter_charts: ^26.2.9
   riverpod_annotation: ^2.3.5
+
+
+  image_picker: ^1.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
