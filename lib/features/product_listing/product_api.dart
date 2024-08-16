@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/product_endpoints.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
+import 'models/product.models.dart';
 
 class ProductApi implements ProductsApiContract {
   //Inject the DioProvider Dependency
@@ -32,7 +36,7 @@ class ProductApi implements ProductsApiContract {
   }
 
   @override
-  Future getAllProducts({required String orgId}) async {
+  Future getAllUserProducts({required String orgId}) async {
     try {
       final result =
           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
@@ -45,6 +49,22 @@ class ProductApi implements ProductsApiContract {
           )
           .toList();
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<ProductData>?> getAllProducts({int? page, int? pageSize}) async {
+    try {
+      final result = await dioProvider.get(
+        userProductsEndpoint,
+        query: {
+          "PageSize": pageSize?? 10000,
+          "PageNumber": page ?? 1
+        });
+      return GetAllProductsResponse.fromJson(jsonDecode(jsonEncode(result?.data))).data??[];
+    } catch (e) {
+      debugPrint('Error during get product: ${e.toString()}');
       rethrow;
     }
   }
@@ -83,7 +103,8 @@ class ProductApi implements ProductsApiContract {
 }
 
 abstract class ProductsApiContract {
-  Future getAllProducts({required String orgId});
+  Future getAllProducts({int? page, int? pageSize});
+  Future getAllUserProducts({required String orgId});
 
   Future createProduct({required covariant dynamic product});
   Future updateProduct(

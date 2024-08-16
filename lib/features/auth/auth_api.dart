@@ -14,7 +14,6 @@ import '../../services/response_model.dart';
 class AuthApi {
   DioProvider dioProvider = locator<DioProvider>();
   GetStorage box = locator<GetStorage>();
-  UserService _userService = locator<UserService>();
 
   /// Ensure you call updateAccessToken after login and registration success.
 
