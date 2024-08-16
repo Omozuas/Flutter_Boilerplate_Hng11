@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/global_colors.dart';
@@ -15,7 +14,8 @@ class CustomTextField extends StatelessWidget {
   final double? borderRadius;
   final bool showCounter;
 
-  CustomTextField({
+  const CustomTextField({
+    super.key,
     this.hintText,
     this.hintTextStyle,
     required this.controller,
@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
           borderSide: BorderSide(
-            color: Color.fromRGBO(203, 213, 225, 1),
+            color: const Color.fromRGBO(203, 213, 225, 1),
             width: 1.w,
           ),
         ),
@@ -79,7 +79,7 @@ class ProductNameFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     // final productNameController = TextEditingController();
 
-    return Container(
+    return SizedBox(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
@@ -103,7 +103,7 @@ class DescriptionFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final productDescriptionController = TextEditingController();
-    return Container(
+    return SizedBox(
       height: 80.h,
       width: 379.w,
       child: CustomTextField(
@@ -124,7 +124,7 @@ class ProductPriceFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final productPriceController = TextEditingController();
-    return Container(
+    return SizedBox(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
@@ -150,7 +150,7 @@ class ProductQuantityFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final productQuantityController = TextEditingController();
-    return Container(
+    return SizedBox(
       height: 40.h,
       width: 379.w,
       child: CustomTextField(
