@@ -7,6 +7,7 @@ class GetUserData {
 
   GetUserData.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ?  AuthUser.fromJson(json['data']) : null;
+    data = json['data'] != null ? AuthUser.fromJson(json['data']) : null;
     message = json['message'];
     statusCode = json['status_code'];
   }
@@ -18,6 +19,8 @@ class GetUserData {
     }
     data['message'] =message;
     data['status_code'] =statusCode;
+    data['message'] = message;
+    data['status_code'] = statusCode;
     return data;
   }
 }
@@ -33,12 +36,12 @@ class AuthUser {
 
   AuthUser(
       {this.fullname,
-        this.id,
-        this.email,
-        this.profile,
-        this.avatarUrl,
-        this.organisations,
-        this.blogs});
+      this.id,
+      this.email,
+      this.profile,
+      this.avatarUrl,
+      this.organisations,
+      this.blogs});
 
   AuthUser.fromJson(Map<String, dynamic> json) {
     fullname = json['fullname'];
@@ -55,7 +58,7 @@ class AuthUser {
     if (json['blogs'] != null) {
       blogs = <Null>[];
       json['blogs'].forEach((v) {
-        // blogs!.add( Null.fromJson(v));
+        // blogs!.add(new Null.fromJson(v));
       });
     }
   }
@@ -71,6 +74,8 @@ class AuthUser {
       data['organisations'] =
           this.organisations!.map((v) => v.toJson()).toList();
     }
+    if (blogs != null) {
+      // data['blogs'] = this.blogs!.map((v) => v.toJson()).toList();
     if (this.blogs != null) {
       // data['blogs'] =blogs!.map((v) => v.toJson()).toList();
     }
@@ -97,20 +102,20 @@ class Organisations {
 
   Organisations(
       {this.id,
-        this.name,
-        this.description,
-        this.slug,
-        this.email,
-        this.industry,
-        this.type,
-        this.country,
-        this.address,
-        this.state,
-        this.createdAt,
-        this.updatedAt,
-        this.ownerId,
-        this.isActive,
-        this.usersRoles});
+      this.name,
+      this.description,
+      this.slug,
+      this.email,
+      this.industry,
+      this.type,
+      this.country,
+      this.address,
+      this.state,
+      this.createdAt,
+      this.updatedAt,
+      this.ownerId,
+      this.isActive,
+      this.usersRoles});
 
   Organisations.fromJson(Map<String, dynamic> json) {
     id = json['id'];

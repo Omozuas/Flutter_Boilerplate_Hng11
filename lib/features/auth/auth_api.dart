@@ -77,7 +77,7 @@ class AuthApi {
   Future<GetUserData?> getUser() async {
     try {
       final response = await dioProvider.get(
-          'auth/@me',
+        'auth/@me',
       );
       debugPrint(response?.data.toString());
       return GetUserData.fromJson(jsonDecode(jsonEncode(response?.data)));
