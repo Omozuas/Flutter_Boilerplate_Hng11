@@ -24,13 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
         context.go(AppRoute.singleUserSignUp);
       } else {
         if(box.read('rememberMe') != null && box.read('rememberMe')){
-        //  AuthProvider().s
+         AuthProvider().login({
+           "email" : box.read('email'),
+           "password" : box.read('password')
+         }, context,fromLoginScreen: false);
         }
        else{
           context.go(AppRoute.login);
         }
-
-        /// tODO: Implement a logic to get user details with saved token
       }
     });
     super.initState();
@@ -60,6 +61,14 @@ class _SplashScreenState extends State<SplashScreen> {
               color: GlobalColors.darkOne,
             ),
           ),
+          SizedBox(height: 50.h,),
+          SizedBox(
+            height: 20.h,
+            width: 20.h,
+            child: CircularProgressIndicator.adaptive(
+              strokeWidth: 2.w,
+            ),
+          )
           // SizedBox(
           //   height: 60.h,
           // ),

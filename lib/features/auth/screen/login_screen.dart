@@ -72,7 +72,9 @@ class LoginScreen extends ConsumerWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
+                      backgroundColor: authStateProvider.normalButtonLoading ?
+                          Colors.grey.withOpacity(0.2) :
+                      Colors.white,
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       side: const BorderSide(color: Colors.grey),
                       shape: const RoundedRectangleBorder(
@@ -205,7 +207,11 @@ class LoginScreen extends ConsumerWidget {
                     borderColor: GlobalColors.borderColor,
                     text: "Login",
                     height: 48.h,
-                    containerColor: GlobalColors.orange,
+                    fontWeight: FontWeight.bold,
+                    containerColor:
+                    authStateProvider.googleButtonLoading ?
+                    Colors.grey.withOpacity(0.2) :
+                    GlobalColors.orange,
                     width: 342.w,
                     textColor: Colors.white),
                 SizedBox(
