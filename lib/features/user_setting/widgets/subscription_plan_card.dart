@@ -17,7 +17,7 @@ class PlanCard extends StatefulWidget {
   final bool isItCurrentPlan;
 
   const PlanCard({
-    Key? key,
+    super.key,
     required this.planCardPlan,
     required this.planCardPrice,
     required this.planCardDescription,
@@ -28,7 +28,7 @@ class PlanCard extends StatefulWidget {
     this.bulletDescription5,
     this.bulletDescription6,
     this.onTap, required this.isItCurrentPlan,
-  }) : super(key: key);
+  });
 
   @override
   State<PlanCard> createState() => _PlanCardState();
