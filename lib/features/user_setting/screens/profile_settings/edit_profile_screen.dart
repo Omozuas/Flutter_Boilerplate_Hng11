@@ -256,9 +256,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       linkedInLink: _linkedInController.text,
     );
     try {
-      await ref
-          .read(profileProvider.notifier)
-          .updateProfile(email: user.email, profile: profile, image: pickedImage);
+      await ref.read(profileProvider.notifier).updateProfile(
+          email: user.email, profile: profile, image: pickedImage);
 
       final pUpdater = ref.read(profileProvider).profileUpdater;
       if (pUpdater.hasError) throw pUpdater.error!;
