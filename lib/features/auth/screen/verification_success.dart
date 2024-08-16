@@ -37,7 +37,7 @@ class VerificationSuccessScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 80), // Space for Snackbar
+                 SizedBox(height: 80.h),
                 Text(
                   'Verification Successful',
                   style:

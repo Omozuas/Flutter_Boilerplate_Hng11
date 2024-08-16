@@ -84,6 +84,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
+<<<<<<< HEAD
         body: SingleChildScrollView(
           child: Stack(
             children: [
@@ -96,6 +97,84 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       'Verification Code',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+=======
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16.sp),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Verification Code',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+                SizedBox(height: 16.h),
+                RichText(
+                  text: TextSpan(
+                    text:
+                        'Confirm the email sent to ${widget.email} and enter the verification code. Code expires in ',
+                    style: TextStyle(color: GlobalColors.darkOne),
+                    children: [
+                      TextSpan(
+                        text: '00:$_countdown s',
+                        style: TextStyle(
+                          color: GlobalColors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(6, (index) {
+                    return SizedBox(
+                      width: 40.w,
+                      height: 40.h,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: TextField(
+                          controller: _codeControllers[index],
+                          maxLength: 1,
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.zero,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color:
+                                    _isCodeValid ? Colors.orange : Colors.red,
+                              ),
+                            ),
+                            counterText: '',
+                          ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            if (value.length == 1 && index < 5) {
+                              FocusScope.of(context).nextFocus();
+                            } else if (value.isEmpty && index > 0) {
+                              FocusScope.of(context).previousFocus();
+                            }
+                            setState(() {
+                              _isCodeComplete = _codeControllers.every(
+                                (controller) => controller.text.isNotEmpty,
+                              );
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+                SizedBox(height: 16.sp),
+                ElevatedButton(
+                  onPressed: _isCodeComplete ? _handleVerify : null,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+>>>>>>> 1968a69cbc0280e5fa85c6c55a94dce2ac97fdf3
                     ),
                     SizedBox(height: 16.h),
                     RichText(
