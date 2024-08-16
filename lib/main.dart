@@ -9,6 +9,21 @@ import 'package:one_context/one_context.dart';
 
 void main() async {
   await initializeApp();
+
+  // Make app always in portrait
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
+
+  // Change status bar theme based on theme of app
+  SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+  ));
+
   runApp(const ProviderScope(child: MyApp()));
 }
 

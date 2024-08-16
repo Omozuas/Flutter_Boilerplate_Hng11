@@ -125,9 +125,7 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.editProfileScreen,
         builder: (context, state, ref) {
-
           final user = ref.watch(profileProvider).user.sureValue;
-
           return EditProfileScreen(user: user);
         },
       ),
@@ -192,7 +190,7 @@ class AppRoute {
   static const String cart = '/cart';
 
   static const String settings = '/settings';
-  //
+
   static const String products = '/products';
 
   static const String home = '/home';

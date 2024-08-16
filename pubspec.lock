@@ -518,6 +518,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.9.3"
+  flutter_shimmer:
+    dependency: "direct main"
+    description:
+      name: flutter_shimmer
+      sha256: bf621e55378183883ac495f62123a9e3f3e29664e1c992413a1caeedbf7d4140
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   flutter_svg:
     dependency: "direct main"
     description:
