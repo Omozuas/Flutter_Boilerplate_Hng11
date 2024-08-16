@@ -74,16 +74,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
 
   @override
   Widget build(BuildContext context) {
-    Color getColor() {
-      if (hasUppercase && hasNumber && hasMinLength) {
-        return const Color(0xff6dc347);
-      }
-      if (hasUppercase || hasNumber || hasMinLength) {
-        return const Color.fromARGB(255, 196, 255, 59);
-      }
-      return const Color(0xffdc2626);
-    }
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -118,6 +108,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
               SizedBox(
                 height: 32.h,
               ),
+              // Form section starts here
               Form(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,6 +235,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         ],
                       ),
                     ),
+                    // Password strength and criteria section starts here
                     if (isPasswordFieldFocused) ...[
                       Padding(
                         padding: const EdgeInsets.only(bottom: 24),
@@ -339,6 +331,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         ),
                       ),
                     ],
+                    // Password strength and criteria section ends here
                     Padding(
                       padding: const EdgeInsets.only(bottom: 24),
                       child: Column(
@@ -411,6 +404,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         ],
                       ),
                     ),
+                    // Button section starts here.
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -472,13 +466,26 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         ),
                       ],
                     ),
+                    // Button section ends here.
                   ],
                 ),
               ),
+              // Form section starts here
             ],
           ),
         ),
       ),
     );
+  }
+
+  // Color changes for password strength
+  Color getColor() {
+    if (hasUppercase && hasNumber && hasMinLength) {
+      return const Color(0xff6dc347);
+    }
+    if (hasUppercase || hasNumber || hasMinLength) {
+      return const Color.fromARGB(255, 196, 255, 59);
+    }
+    return const Color(0xffdc2626);
   }
 }
