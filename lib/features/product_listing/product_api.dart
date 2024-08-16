@@ -1,3 +1,4 @@
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/product_endpoints.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 
@@ -9,34 +10,66 @@ class ProductApi implements ProductsApiContract {
   DioProvider dioProvider = locator<DioProvider>();
 
   @override
-  Future createProduct({required Map product}) async {}
+  Future createProduct({required Map product}) async {
+    try {
+      await dioProvider.post(
+          productsForOrganisationEndpoint(
+            orgId: 'sdfsdf',
+          ),
+          data: product);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   @override
   Future deleteProduct({required String id}) async {
-    return null;
+    try {
+      await dioProvider.delete('$userProductsEndpoint/$id');
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future getAllProducts() {
-    // TODO: implement getAllProducts
-    throw UnimplementedError();
+  Future getAllProducts({required String orgId}) async {
+    try {
+      final result =
+          await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
+
+      final jsonList = result?.data['data'] as List;
+
+      return jsonList
+          .map(
+            (e) => Product.fromJson(e),
+          )
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future updateProduct({required String id, required product}) {
-    // TODO: implement updateProduct
-    throw UnimplementedError();
+  Future<void> updateProduct({required String id, required Map product}) async {
+    try {
+      await dioProvider.putUpdate(
+        productsByIdEndpoint(id: id),
+        data: product,
+      );
+    } catch (e) {
+      ErrorHandlers.allErrorHandler(e);
+    }
   }
 
   @override
-  Future<ProductModel?> getProduct({required String id}) async {
+  Future<Product?> getProduct({required String id}) async {
     try {
       final result = await dioProvider.get(productsByIdEndpoint(id: id));
 
       final data = result?.data['data'];
 
       if (data != null) {
-        return ProductModel.fromJson(data);
+        return Product.fromJson(data);
       } else {
         return null;
       }
@@ -50,7 +83,7 @@ class ProductApi implements ProductsApiContract {
 }
 
 abstract class ProductsApiContract {
-  Future getAllProducts();
+  Future getAllProducts({required String orgId});
 
   Future createProduct({required covariant dynamic product});
   Future updateProduct(
