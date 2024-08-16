@@ -47,6 +47,31 @@ class HomeScreen extends ConsumerWidget {
                         backgroundImage:
                             const AssetImage('assets/images/logo.png'),
                       ),
+                      SizedBox(
+                        width: GlobalScreenSize.getScreenWidth(context) * 0.020,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome Back!',
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: GlobalColors.gray500Color),
+                          ),
+                          SizedBox(
+                            height: GlobalScreenSize.getScreenHeight(context) *
+                                0.0002,
+                          ),
+                          Text(
+                            'Admin',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                       const Spacer(),
                       Padding(
                         padding: EdgeInsets.only(right: 8.0.w),
@@ -60,8 +85,11 @@ class HomeScreen extends ConsumerWidget {
                               top: 5.h,
                               right: 10.w,
                               child: Badge(
+                                largeSize: 12.spMin,
+                                // smallSize: 4,
                                 isLabelVisible: true,
-                                label: const Text('5'),
+                                label: Text('5',
+                                    style: TextStyle(fontSize: 10.sp)),
                                 textColor: GlobalColors.white,
                                 backgroundColor: GlobalColors.red,
                                 textStyle: const TextStyle(
@@ -229,7 +257,7 @@ class HomeScreen extends ConsumerWidget {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
-                      width: 0.7, 
+                      width: 0.7,
                     ),
                     ColumnSeries<SalesData, String>(
                       dataSource: data,
@@ -241,7 +269,7 @@ class HomeScreen extends ConsumerWidget {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
-                      width: 0.7, 
+                      width: 0.7,
                     ),
                   ],
                 ),
@@ -256,9 +284,10 @@ class HomeScreen extends ConsumerWidget {
                     children: [
                       Row(
                         children: [
-                          const Text(
+                          Text(
                             'Recent Sales',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16.sp),
                           ),
                           const Spacer(),
                           TextButton(
