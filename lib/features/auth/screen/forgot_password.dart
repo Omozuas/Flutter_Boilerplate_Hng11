@@ -19,26 +19,20 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
 
-  /// When you are ready to handle send, uncomment this function
-  // void _handleSend() {
-  //   final email = _emailController.text;
-  //   // Validate email format
-  //   if (email.isEmpty || !email.contains('@')) {
-  //     setState(() {});
-  //     return;
-  //   }
-  //
-  //   // Simulate email check
-  //   if (email == 'test@example.com') {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) => VerificationScreen(email: email)),
-  //     );
-  //   } else {
-  //     setState(() {});
-  //   }
-  // }
+  void _handleSend() {
+    final email = _emailController.text;
+    if (email.isEmpty || !email.contains('@')) {
+      setState(() {});
+      return;
+    }
+  
+    // Simulate email check
+    if (email == 'test@example.com') {
+      context.push(AppRoute.verificationScreen);
+    } else {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
