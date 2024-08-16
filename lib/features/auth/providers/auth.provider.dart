@@ -1,84 +1,4 @@
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import '../../../utils/validator.dart';
-//
-// class SignupFormState {
-//   final String firstName;
-//   final String lastName;
-//   final String email;
-//   final String password;
-//   final String? firstNameError;
-//   final String? lastNameError;
-//   final String? emailError;
-//   final String? passwordError;
-//
-//   const SignupFormState({
-//     this.firstName = '',
-//     this.lastName = '',
-//     this.email = '',
-//     this.password = '',
-//     this.firstNameError,
-//     this.lastNameError,
-//     this.emailError,
-//     this.passwordError,
-//   });
-//
-//   SignupFormState copyWith({
-//     String? firstName,
-//     String? lastName,
-//     String? email,
-//     String? password,
-//     String? firstNameError,
-//     String? lastNameError,
-//     String? emailError,
-//     String? passwordError,
-//   }) {
-//     return SignupFormState(
-//       firstName: firstName ?? this.firstName,
-//       lastName: lastName ?? this.lastName,
-//       email: email ?? this.email,
-//       password: password ?? this.password,
-//       firstNameError: firstNameError ?? this.firstNameError,
-//       lastNameError: lastNameError ?? this.lastNameError,
-//       emailError: emailError ?? this.emailError,
-//       passwordError: passwordError ?? this.passwordError,
-//     );
-//   }
-// }
-//
-// class SignupFormController extends StateNotifier<SignupFormState> {
-//   SignupFormController() : super(const SignupFormState());
-//
-//   void updateFirstName(String value) {
-//     state = state.copyWith(firstName: value, firstNameError: null);
-//   }
-//
-//   void updateLastName(String value) {
-//     state = state.copyWith(lastName: value, lastNameError: null);
-//   }
-//
-//   void updateEmail(String value) {
-//     state = state.copyWith(email: value, emailError: null);
-//   }
-//
-//   void updatePassword(String value) {
-//     state = state.copyWith(password: value, passwordError: null);
-//   }
-//
-//   void validate() {
-//     state = state.copyWith(
-//       firstNameError: Validators.nameValidator(state.firstName),
-//       lastNameError: Validators.nameValidator(state.lastName),
-//       emailError: Validators.emailValidator(state.email),
-//       passwordError: Validators.passwordValidator(state.password),
-//     );
-//   }
-// }
-//
-// final signupFormProvider =
-//     StateNotifierProvider<SignupFormController, SignupFormState>(
-//         (ref) => SignupFormController());
-//
-//
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
@@ -119,8 +39,8 @@ class AuthState {
 }
 
 class AuthProvider extends StateNotifier<AuthState> {
-  GetStorage box = locator<GetStorage>();
 
+  GetStorage box = locator<GetStorage>();
   AuthProvider()
       : super(AuthState(
             normalButtonLoading: false,
@@ -156,6 +76,9 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          box.write('email', data['email']);
+          box.write('password', data['password']);
+
         }
       }
     } catch (e) {
@@ -204,7 +127,8 @@ class AuthProvider extends StateNotifier<AuthState> {
     }
   }
 
-  Future<void> login(Map<String, dynamic> data, BuildContext context) async {
+  Future<void> login(Map<String, dynamic> data, BuildContext context,
+      {bool fromLoginScreen = true}) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().loginUser(data);
@@ -216,6 +140,17 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          box.write('email', data['email']);
+          box.write('password', data['password']);
+          if(fromLoginScreen)
+         {
+           if(state.checkBoxState){
+             box.write('rememberMe', true);
+           }
+           else{
+             box.write('rememberMe', false);
+           }
+         }
         }
       }
     } catch (e) {

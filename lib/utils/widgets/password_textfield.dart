@@ -83,7 +83,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           TextFormField(
             controller: widget.controller,
             keyboardType: widget.keyboardType,
-            obscureText: obscureText,
+            obscureText: !obscureText,
             maxLines: widget.maxLines ?? 1,
             validator: widget.validator,
             focusNode: widget.focusNode,

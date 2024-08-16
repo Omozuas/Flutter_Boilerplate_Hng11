@@ -127,13 +127,24 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     loading: authProviderState.normalButtonLoading,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          },
+                        );
                         ref.read(authProvider.notifier).registerSingleUser({
                           'email': emailController.text,
                           'first_name': firstNameController.text,
                           'last_name': lastNameController.text,
                           'password': passwordController.text,
                         }, context);
+                        Navigator.of(context).pop();
                       }
+                      Navigator.of(context).pop();
                     },
                     textColor: GlobalColors.white,
                     borderColor: GlobalColors.orange,
