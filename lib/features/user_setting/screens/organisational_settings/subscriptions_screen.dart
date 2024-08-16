@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscription_checkout.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
