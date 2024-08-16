@@ -55,7 +55,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void _handleVerify() {
     final code = _codeControllers.map((c) => c.text).join();
     if (code == '123456') {
-      context.push(AppRoute.verificationSuccess);
+      context.push(AppRoute.resetPassword);
     } else {
       setState(() {
         _isCodeValid = false;
