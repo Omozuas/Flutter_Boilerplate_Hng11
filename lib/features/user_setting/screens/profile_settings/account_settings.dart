@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(profileProvider.notifier).getUser();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final user = ref.watch(profileProvider).user.sureValue;
+
     return Scaffold(
       appBar: AppBar(
         title: const Align(
@@ -31,35 +50,30 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage(
-                      'assets/images/avatar.png', // Replace with your actual image link or asset
-                    ),
-                  ),
-                  SizedBox(width: 10),
+                  const ProfileAvatar(),
+                  const SizedBox(width: 10),
                   Padding(
-                    padding: EdgeInsets.only(top: 19.0),
+                    padding: const EdgeInsets.only(top: 19.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'DesignKid',
-                          style: TextStyle(
+                          user?.fullname ?? '',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             color: Color(0xff0A0A0A),
                           ),
                         ),
-                        SizedBox(height: 3),
+                        const SizedBox(height: 3),
                         Text(
-                          'engr.emmysammy1234@gmail.com',
-                          style: TextStyle(
+                          user?.email ?? '',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                             color: Color(0xff525252),
@@ -76,6 +90,7 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 10.0),
                   const Text(
                     'Profile Settings',
                     style: TextStyle(
