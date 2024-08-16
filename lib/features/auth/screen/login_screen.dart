@@ -176,8 +176,7 @@ class LoginScreen extends ConsumerWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordScreen()),
+                                builder: (context) => ForgotPasswordScreen()),
                           );
                           //:TODO add function for forgot password
                         },
