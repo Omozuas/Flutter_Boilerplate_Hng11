@@ -164,7 +164,7 @@ class ProductHomeScreen extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 return InkWell(
                     onTap: () => context.push('${AppRoute.products}/sdfsdf'),
-                    child: const ProductCardWiget());
+                    child: const SizedBox());
               },
               separatorBuilder: (BuildContext context, int index) => SizedBox(
                 height: 16.h,
