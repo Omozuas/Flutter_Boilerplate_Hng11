@@ -182,7 +182,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return const InviteDialog();
+                              return InviteDialog();
                             });
                       },
                       borderColor: const Color(0xffF97316),
