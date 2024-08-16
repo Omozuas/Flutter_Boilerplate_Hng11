@@ -26,6 +26,8 @@ import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart'
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/product_listing/screens/add_product_screen.dart';
+
 class AppRouter {
   static final GoRouter router = GoRouter(
 
@@ -41,6 +43,11 @@ class AppRouter {
         path: AppRoute.companySignUp,
         builder: (context, state, ref) {
           return CompanySignUpScreen();
+        },
+      ),ConsumerGoRoute(
+        path: AppRoute.addProducts,
+        builder: (context, state, ref) {
+          return const AddProductScreen();
         },
       ),
       ConsumerGoRoute(
@@ -82,7 +89,7 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
-        path: '${AppRoute.products}/:id',
+      path: '${AppRoute.productsDetails}/:id',
         builder: (context, state, ref) {
           return const ProductDetailsScreen();
         },
@@ -193,6 +200,8 @@ class AppRoute {
   static const String settings = '/settings';
 
   static const String products = '/products';
+  static const String productsDetails = '/productsDetails';
+  static const String addProducts = '/addProducts';
 
   static const String home = '/home';
 
