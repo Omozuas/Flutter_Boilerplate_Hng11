@@ -79,7 +79,7 @@ class AuthApi {
       final response = await dioProvider.get(
           'auth/@me',
       );
-      print(response?.data);
+      debugPrint(response?.data.toString());
       return GetUserData.fromJson(jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
       debugPrint('Error during login: ${e.toString()}');
