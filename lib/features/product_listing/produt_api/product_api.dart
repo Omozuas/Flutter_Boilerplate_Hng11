@@ -1,10 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'dart:developer';
+
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/product_endpoints.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../services/dio_provider.dart';
+import '../../../services/service_locator.dart';
+
+part 'product_api.g.dart';
+
+@Riverpod(keepAlive: true)
+ProductApi productApi(ProductApiRef ref) {
+  return ProductApi();
+}
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
 import 'models/product.models.dart';
@@ -36,35 +48,22 @@ class ProductApi implements ProductsApiContract {
   }
 
   @override
-  Future getAllUserProducts({required String orgId}) async {
+  Future<List<Product>> getAllProducts({required String orgId}) async {
     try {
+      log('API CALLED');
       final result =
           await dioProvider.get(productsForOrganisationEndpoint(orgId: orgId));
 
-      final jsonList = result?.data['data'] as List;
+      log('API DATA ${result?.data}');
 
+      final jsonList = result?.data['data'] as List;
+      log('Json: $jsonList');
       return jsonList
           .map(
             (e) => Product.fromJson(e),
           )
           .toList();
     } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<ProductData>?> getAllProducts({int? page, int? pageSize}) async {
-    try {
-      final result = await dioProvider.get(
-        userProductsEndpoint,
-        query: {
-          "PageSize": pageSize?? 10000,
-          "PageNumber": page ?? 1
-        });
-      return GetAllProductsResponse.fromJson(jsonDecode(jsonEncode(result?.data))).data??[];
-    } catch (e) {
-      debugPrint('Error during get product: ${e.toString()}');
       rethrow;
     }
   }

@@ -5,17 +5,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
 @freezed
 class Product with _$Product {
+  @JsonSerializable(explicitToJson: true)
   const factory Product({
     String? id,
     String? name,
     String? description,
     int? price,
     String? category,
-    @JsonKey(name: 'created_at') 
-    @JsonKey(name: 'created_at') 
+    @JsonKey(name: 'created_at')
+    @JsonKey(name: 'created_at')
     DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? image,

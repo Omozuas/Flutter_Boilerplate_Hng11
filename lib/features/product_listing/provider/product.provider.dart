@@ -1,12 +1,29 @@
+import 'dart:developer';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/product_api.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../services/dio_provider.dart';
-import '../../../services/service_locator.dart';
-import '../../../services/user.service.dart';
-import '../models/product.models.dart';
-import '../product_api.dart';
+part 'product.provider.g.dart';
+
+@Riverpod(keepAlive: true)
+class ProductList extends _$ProductList {
+  @override
+  Future<List<Product>> build() async {
+    final org = ref.watch(getOrganisationProvider);
+    if (org == null || org.organisationId == null) {
+      return Future.error('organisation is not initialized');
+    }
+    final value = ref.watch(getOrganisationProvider);
+
+    log('Organization provider ${value?.name}');
+
+    return ref
+        .watch(productApiProvider)
+        .getAllProducts(orgId: org.organisationId!);
+  }
+}
 
 class ProductState {
   final bool normalButtonLoading;

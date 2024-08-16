@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
@@ -43,7 +45,7 @@ class ProductHomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Assets.images.svg.productListing.notification.svg()
               ],
             ),
@@ -160,7 +162,9 @@ class ProductHomeScreen extends StatelessWidget {
               padding: EdgeInsets.zero,
               itemCount: 10,
               itemBuilder: (ctx, index) {
-                return const ProductCardWiget();
+                return InkWell(
+                    onTap: () => context.push('${AppRoute.products}/sdfsdf'),
+                    child: const ProductCardWiget());
               },
               separatorBuilder: (BuildContext context, int index) => SizedBox(
                 height: 16.h,
