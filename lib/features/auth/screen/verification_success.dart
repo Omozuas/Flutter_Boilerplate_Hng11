@@ -8,24 +8,24 @@ import 'package:go_router/go_router.dart';
 class VerificationSuccessScreen extends StatelessWidget {
   const VerificationSuccessScreen({super.key});
 
-  // Future<void> _showLoadingIndicator(BuildContext context) async {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (context) {
-  //       return const AlertDialog(
-  //         content: Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             CircularProgressIndicator(),
-  //             SizedBox(width: 20),
-  //             Text('Processing...'),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  Future<void> _showLoadingIndicator(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const AlertDialog(
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text('Processing...'),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class VerificationSuccessScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                 SizedBox(height: 80.h),
+                SizedBox(height: 80.h),
                 Text(
                   'Verification Successful',
                   style:
@@ -52,13 +52,13 @@ class VerificationSuccessScreen extends StatelessWidget {
                 CustomButton(
                   onTap: () async {
                     // Show loading indicator
-                 //   await _showLoadingIndicator(context);
+                    await _showLoadingIndicator(context);
 
                     // Simulate network request
-                  //  await Future.delayed(const Duration(seconds: 2));
+                    await Future.delayed(const Duration(seconds: 2));
                     if (context.mounted) {
                       // Hide loading indicator
-                     // Navigator.of(context).pop(); // Close the loading dialog
+                      Navigator.of(context).pop(); // Close the loading dialog
 
                       // Proceed to login screen or other actions
                       context.pushReplacement(AppRoute.resetPassword);

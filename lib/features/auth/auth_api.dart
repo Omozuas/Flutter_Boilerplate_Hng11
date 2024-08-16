@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
@@ -22,15 +23,33 @@ class AuthApi {
   }
 
   // forgot password api
+  // Future<ResponseModel?> forgotPassword({
+  //   required String email,
+  // }) async {
+  //   return await dioProvider.post(
+  //     'auth/{$email}/forgot-password-mobile',
+  //     data: {
+  //       'email': email,
+  //     },
+  //   );
+  // }
+
   Future<ResponseModel?> forgotPassword({
     required String email,
   }) async {
-    return await dioProvider.post(
-      '/auth/forgot-password',
-      data: {
-        'email': email,
-      },
-    );
+    // print('Forgot password request for $email');
+    try {
+      final response = await dioProvider.post(
+        '/auth/$email/forgot-password-mobile', // Correctly format the URL
+        data: {
+          'email': email,
+        },
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error during forgot password request: ${e.toString()}');
+      return null; // Ensure null is returned in case of an error
+    }
   }
 
   // reset password api
@@ -85,11 +104,11 @@ class AuthApi {
   }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
-Future<Company> registerCompany(Company company) async {
-  DioProvider dioProvider = locator<DioProvider>();
-  // An authenticated user is required for this request to be completed based on the api.
-  // tODO: Remove access token in place of currently signed user's token.
-  // box.write('accessToken','accessToken');
+  Future<Company> registerCompany(Company company) async {
+    DioProvider dioProvider = locator<DioProvider>();
+    // An authenticated user is required for this request to be completed based on the api.
+    // tODO: Remove access token in place of currently signed user's token.
+    // box.write('accessToken','accessToken');
 
     var registeredCompany = Company.initial();
     try {

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
+// import 'verification_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -17,34 +19,117 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final AuthApi _authApi = AuthApi();
+  bool isLoading = false;
 
-  /// When you are ready to handle send, uncomment this function
-  // void _handleSend() {
+  // When you are ready to handle send, uncomment this function
+  // void _handleSend() async {
   //   final email = _emailController.text;
   //   // Validate email format
   //   if (email.isEmpty || !email.contains('@')) {
-  //     setState(() {});
+  //     // setState(() {});
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Please enter a valid email address')),
+  //     );
   //     return;
   //   }
-  //
-  //   // Simulate email check
-  //   if (email == 'test@example.com') {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) => VerificationScreen(email: email)),
-  //     );
-  //   } else {
-  //     setState(() {});
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+
+  //   try {
+  //     final response = await _authApi.forgotPassword(email: email);
+  //     if (response?.data?.success == true) {
+  //       if (mounted) {
+  //         context.push(AppRoute.verificationScreen, extra: {'email': email});
+  //       }
+  //     } else {
+  //       if (mounted) {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text(response?.message ?? 'An error occurred')),
+  //         );
+  //       }
+  //     }
+  //   } catch (e) {
+  //     if (mounted) {
+  //       print('An error occurred: $e');
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text('An error occurred: $e')),
+  //       );
+  //     }
+  //   } finally {
+  //     if (mounted) {
+  //       setState(() {
+  //         isLoading = false;
+  //       });
+  //     }
   //   }
+
+  //   // Simulate email check
+  //   // if (email == 'daveohimai@gmail.com') {
+  //   //   Navigator.push(
+  //   //     context,
+  //   //     MaterialPageRoute(
+  //   //         builder: (context) => VerificationScreen(email: email)),
+  //   //   );
+  //   // } else {
+  //   //   setState(() {});
+  //   // }
   // }
+
+  void _handleSend() async {
+    final email = _emailController.text;
+    // print('Sending email to $email');
+    if (email.isEmpty || !email.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid email address')),
+      );
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final response = await _authApi.forgotPassword(email: email);
+      if (response == null) {
+        throw Exception('No response from server');
+      }
+
+      if (response.data.success == true) {
+        if (mounted) {
+          context.push(AppRoute.verificationScreen, extra: {'email': email});
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.message ?? 'An error occurred')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        debugPrint('An error occurred: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An error occurred: $e')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon:  Icon(
+          icon: Icon(
             Icons.chevron_left,
             size: 30.sp,
           ),
@@ -91,7 +176,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             SizedBox(height: 32.sp),
             CustomButton(
                 onTap: () {
-              context.push(AppRoute.verificationScreen);
+                  _handleSend();
+                  context.push(AppRoute.verificationScreen);
                 },
                 borderColor: GlobalColors.borderColor,
                 text: "Send",
@@ -113,8 +199,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                          context.push(AppRoute.login);
-                         // :TODO add function to go login page
+                            context.push(AppRoute.login);
+                            // :TODO add function to go login page
                           }),
                   ],
                 ),
