@@ -22,17 +22,18 @@ class _ProductCategoryState extends State<ProductCategory> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Color.fromRGBO(203, 213, 225, 1), width: 1),
+          border: Border.all(
+              color: const Color.fromRGBO(203, 213, 225, 1), width: 1),
           borderRadius: BorderRadius.circular(6)),
       // unable to reuse created customdropdown, it is overflowing with error
       child: DropdownButton<String>(
-        padding: EdgeInsets.only(left: 8),
-        dropdownColor: Color.fromRGBO(226, 232, 240, 1),
-        hint: Text('Select'),
-        icon: Icon(Icons.arrow_drop_down),
+        padding: const EdgeInsets.only(left: 8),
+        dropdownColor: const Color.fromRGBO(226, 232, 240, 1),
+        hint: const Text('Select'),
+        icon: const Icon(Icons.arrow_drop_down),
         iconSize: 30,
         isExpanded: true,
-        underline: SizedBox(),
+        underline: const SizedBox(),
         style: GoogleFonts.inter(
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,

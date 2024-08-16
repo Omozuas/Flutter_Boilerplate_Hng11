@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
@@ -19,6 +21,34 @@ class ProductHomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 24.h,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                    height: GlobalScreenSize.getScreenHeight(context) * 0.053,
+                    child: Assets.images.png.productListing.profile.image()),
+                SizedBox(
+                  width: 8.h,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Welcome Back!",
+                      style: CustomTextStyles.productSmallBodyTextBlack,
+                    ),
+                    Text(
+                      "DesignKid",
+                      style: CustomTextStyles.productTextBody2Black,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Assets.images.svg.productListing.notification.svg()
+              ],
+            ),
             SizedBox(
               height: 24.h,
             ),
@@ -112,17 +142,16 @@ class ProductHomeScreen extends StatelessWidget {
               height: 24.h,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Available Products",
                   style: CustomTextStyles.titleTextBlack,
                 ),
-                const Spacer(),
-                Assets.images.svg.productListing.listIcon.svg(),
-                SizedBox(
-                  width: 8.w,
-                ),
-                Assets.images.svg.productListing.gridIcon.svg(),
+                Text(
+                  "See more",
+                  style: PlusJakartaTextStyle.bodyTextGrey,
+                )
               ],
             ),
             SizedBox(
@@ -133,7 +162,9 @@ class ProductHomeScreen extends StatelessWidget {
               padding: EdgeInsets.zero,
               itemCount: 10,
               itemBuilder: (ctx, index) {
-                return const ProductCardWiget();
+                return InkWell(
+                    onTap: () => context.push('${AppRoute.products}/sdfsdf'),
+                    child: const ProductCardWiget());
               },
               separatorBuilder: (BuildContext context, int index) => SizedBox(
                 height: 16.h,

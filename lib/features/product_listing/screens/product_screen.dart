@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +17,14 @@ class ProductScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(productListProvider).when(
+          data: (data) => log('$data'),
+          error: (Object error, StackTrace stackTrace) {
+            log('$error');
+          },
+          loading: () => log('list is loading'),
+        );
+
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -35,12 +46,12 @@ class ProductScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const Spacer(),
-              Assets.images.svg.productListing.listIcon.svg(),
-              SizedBox(
-                width: 8.w,
-              ),
-              Assets.images.svg.productListing.gridIcon.svg(),
+              // const Spacer(),
+              // Assets.images.svg.productListing.listIcon.svg(),
+              // SizedBox(
+              //   width: 8.w,
+              // ),
+              // Assets.images.svg.productListing.gridIcon.svg(),
             ],
           ),
         ),

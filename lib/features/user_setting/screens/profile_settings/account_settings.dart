@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -16,19 +18,13 @@ class SettingsScreen extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: 1.0), // Adjust this padding to align with the avatar
             child: Text(
-              'Profile',
+              'Settings',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
       ),
       body: SingleChildScrollView(
@@ -42,8 +38,8 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: NetworkImage(
-                      'https://link_to_image', // Replace with your actual image link or asset
+                    backgroundImage: AssetImage(
+                      'assets/images/avatar.png', // Replace with your actual image link or asset
                     ),
                   ),
                   SizedBox(width: 10),
@@ -80,116 +76,111 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ExpansionTile(
-                    title: const Text(
-                      'Profile Settings',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  const Text(
+                    'Profile Settings',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
-                    tilePadding: EdgeInsets.zero,
-                    expandedAlignment: Alignment.centerLeft,
-                    trailing: const Icon(Icons.expand_more, size: 24),
-                    children: [
-                      SettingsTile(
-                        leadingIcon: Icons.person_outline,
-                        title: 'General',
-                        onTap: () {
-                          // Navigate to General Settings
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.account_circle_outlined,
-                        title: 'Account',
-                        onTap: () {
-                          // Navigate to Account Settings
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.notifications_outlined,
-                        title: 'Notification',
-                        onTap: () {
-                          // Navigate to Notification Settings
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.lock_outline,
-                        title: 'Data and Privacy',
-                        onTap: () {
-                          // Navigate to Data and Privacy Settings
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.language_outlined,
-                        title: 'Language and Region',
-                        onTap: () {
-                          // Navigate to Language and Region Settings
-                        },
-                      ),
-                    ],
                   ),
-                  const SizedBox(height: 16.0),
-                  ExpansionTile(
-                    title: const Text(
-                      'Organizational Settings',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/personsettings.png',
+                    title: 'Account',
+                    onTap: () {
+                      context.push(AppRoute.editProfileScreen);
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/notify.png',
+                    title: 'Notification',
+                    onTap: () {
+                      context.push(AppRoute.notificationScreen);
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/data.png',
+                    title: 'Data and Privacy ',
+                    onTap: () {
+                      context.push(AppRoute.updatePassword);
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/world.png',
+                    title: 'Language and Region',
+                    onTap: () {
+                      // Navigate to Data and Privacy Settings
+                      context.push(AppRoute.languageAndRegionScreen);
+                    },
+                  ),
+                  SizedBox(height: 8.h),
+                  const Divider(),
+                  SizedBox(height: 8.h),
+                  const Text(
+                    'Organizational Settings',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
-                    tilePadding: EdgeInsets.zero,
-                    expandedAlignment: Alignment.centerLeft,
-                    trailing: const Icon(Icons.expand_more, size: 24),
-                    children: [
-                      SettingsTile(
-                        leadingIcon: Icons.business_outlined,
-                        title: 'Manage Organization',
-                        onTap: () {
-                          // Navigate to Manage Organization
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.people_outline,
-                        title: 'Members',
-                        onTap: () {
-                          // Navigate to Members Settings
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MembersSettings(),
-                            ),
-                          );
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.security_outlined,
-                        title: 'Roles and Permissions',
-                        onTap: () {
-                          // Navigate to Roles and Permissions Settings
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const RoleScreen();
-                            },
-                          ));
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.integration_instructions_outlined,
-                        title: 'Integrations',
-                        onTap: () {
-                          // Navigate to Integrations Settings
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: Icons.payment_outlined,
-                        title: 'Payment Information',
-                        onTap: () {
-                          // Navigate to Payment Information Settings
-                        },
-                      ),
-                    ],
                   ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/org.png',
+                    title: 'Manage Organization',
+                    onTap: () {
+                      // Navigate to Manage Organization
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/people.png',
+                    title: 'Members',
+                    onTap: () {
+                      // Navigate to Members Settings
+                      context.push(AppRoute.members);
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/notify.png',
+                    title: 'Roles and Permissions',
+                    onTap: () {
+                      // Navigate to Roles and Permissions Settings
+                      context.push(AppRoute.rolesScreen);
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/money.png',
+                    title: 'Integrations',
+                    onTap: () {
+                      // Navigate to Integrations Settings
+                    },
+                  ),
+                  SettingsTile(
+                    leadingIcon: 'assets/images/wallet.png',
+                    title: 'Payment Information',
+                    onTap: () {
+                      // Navigate to Payment Information Settings
+                      context.push(AppRoute.subscriptionsScreen);
+                    },
+                  ),
+                  SizedBox(height: 8.h),
+                  const Divider(),
+                  SizedBox(height: 8.h),
+                  InkWell(
+                    onTap: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Log Out',
+                          style:
+                              TextStyle(color: GlobalColors.red, fontSize: 14),
+                        ),
+                        Icon(
+                          Icons.logout_outlined,
+                          color: GlobalColors.red,
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
                 ],
               ),
             ),

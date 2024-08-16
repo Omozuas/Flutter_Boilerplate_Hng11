@@ -2,12 +2,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,8 +25,11 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isChecked = ref.watch(checkBoxProvider);
-    final loading = ref.watch(authProvider);
+   // final isChecked = ref.watch(checkBoxState);
+    final authStateProvider = ref.watch(authProvider);
+  //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
+
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
@@ -74,7 +78,7 @@ class LoginScreen extends ConsumerWidget {
                     onPressed: () {
                       ref.read(authProvider.notifier).googleSignin(context);
                     },
-                    child: loading
+                    child: authStateProvider.googleButtonLoading
                         ? SizedBox(
                             width: 16.w,
                             height: 16.w,
@@ -120,9 +124,8 @@ class LoginScreen extends ConsumerWidget {
                 SizedBox(
                   height: 16.h,
                 ),
-                CustomTextField(
+                PasswordTextField(
                   label: "Password",
-                  obscureText: true,
                   controller: _passwordController,
                   hintText: "Enter your password",
                   suffixIcon: const Icon(Icons.visibility_off),
@@ -137,14 +140,14 @@ class LoginScreen extends ConsumerWidget {
                         padding: EdgeInsets.zero,
                         child: GestureDetector(
                           onTap: () {
-                            ref.read(checkBoxProvider.notifier).state =
-                                !ref.read(checkBoxProvider.notifier).state;
+                            ref.read(authProvider.notifier).setCheckBoxState =
+                           !authStateProvider.checkBoxState;
                           },
                           child: Icon(
-                            isChecked
+                            authStateProvider.checkBoxState
                                 ? Icons.check_box
                                 : Icons.check_box_outline_blank,
-                            color: isChecked
+                            color: authStateProvider.checkBoxState
                                 ? GlobalColors.orange
                                 : GlobalColors.darkOne,
                           ),
@@ -162,6 +165,7 @@ class LoginScreen extends ConsumerWidget {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -171,7 +175,7 @@ class LoginScreen extends ConsumerWidget {
                         //:TODO add function for forgot password
                       },
                       child: Text(
-                        "Forgot Password?",
+                        "Forgot Passworud?",
                         style: GoogleFonts.inter(
                             color: GlobalColors.orange,
                             fontSize: 14.sp,
@@ -184,7 +188,7 @@ class LoginScreen extends ConsumerWidget {
                   height: 32.h,
                 ),
                 CustomButton(
-                    loading: loading,
+                    loading: authStateProvider.normalButtonLoading,
                     onTap: () async {
                       if (_formKey.currentState?.validate() ?? false) {
                         ref.read(authProvider.notifier).login({
@@ -202,14 +206,14 @@ class LoginScreen extends ConsumerWidget {
                 SizedBox(
                   height: 8.h,
                 ),
-                CustomButton(
-                    onTap: () {},
-                    borderColor: GlobalColors.borderColor,
-                    text: "Use Magic Link instead",
-                    height: 48.h,
-                    containerColor: Colors.white,
-                    width: 342.w,
-                    textColor: GlobalColors.darkOne),
+                // CustomButton(
+                //     onTap: () {},
+                //     borderColor: GlobalColors.borderColor,
+                //     text: "Use Magic Link instead",
+                //     height: 48.h,
+                //     containerColor: Colors.white,
+                //     width: 342.w,
+                //     textColor: GlobalColors.darkOne),
                 const SizedBox(
                   height: 23.5,
                 ),
@@ -230,7 +234,7 @@ class LoginScreen extends ConsumerWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          CompanySignUpScreen()),
+                                          const SingleUserSignUpScreen()),
                                 );
                               }),
                       ],

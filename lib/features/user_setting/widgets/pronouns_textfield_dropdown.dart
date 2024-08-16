@@ -122,4 +122,11 @@ enum Pronouns {
 
   const Pronouns(this.title);
   final String title;
+
+  factory Pronouns.fromString(String data) {
+    return Pronouns.values.firstWhere(
+      (val) => val.title.toLowerCase() == data.toLowerCase(),
+      orElse: () => Pronouns.others,
+    );
+  }
 }
