@@ -116,7 +116,7 @@ class AuthProvider extends StateNotifier<bool> {
         }
       }
     } catch (e) {
-      //TODO: Do something with caught error;
+      //tODO: Do something with caught error;
     } finally {
       state = false;
     }
@@ -151,7 +151,7 @@ class AuthProvider extends StateNotifier<bool> {
           UserRegData userRegData = UserRegData.fromJson(res.data);
           if (context.mounted) {
             context.go(AppRoute.home);
-            box.write('accessToken', userRegData.accessToken );
+            box.write('accessToken', userRegData.accessToken);
           }
         }
       }
@@ -176,7 +176,7 @@ class AuthProvider extends StateNotifier<bool> {
         }
       }
     } catch (e) {
-      //TODO: Do something with caught error;
+      //tODO: Do something with caught error;
     } finally {
       state = false;
     }
