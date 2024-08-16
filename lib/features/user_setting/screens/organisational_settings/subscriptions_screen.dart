@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscription_checkout.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
+import 'package:go_router/go_router.dart';
 
 enum SubscriptionPlan { free, basic, advanced, premium }
 
@@ -25,8 +26,16 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            context.pop();
+          },
+          child: const Icon(Icons.arrow_back_ios_new),
+        ),
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +52,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 height: 20,
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(color: GlobalColors.containerBgColor),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +88,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 planCardPrice: 0,
                 isItCurrentPlan: true,
                 planCardDescription:
-                "The essential to provide \nyour best work for clients.",
+                    "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "10 Projects",
                 bulletDescription2: "Up to 10 subscribers",
                 bulletDescription3: "Advanced analytics",
@@ -92,7 +102,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 planCardPrice: 20,
                 isItCurrentPlan: false,
                 planCardDescription:
-                "The essential to provide \nyour best work for clients.",
+                    "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "100 Projects",
                 bulletDescription2: "Up to 50 subscribers",
                 bulletDescription3: "Advanced analytics",
@@ -107,7 +117,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 planCardPrice: 50,
                 isItCurrentPlan: false,
                 planCardDescription:
-                "The essential to provide \nyour best work for clients.",
+                    "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "200 Projects",
                 bulletDescription2: "Up to 100 subscribers",
                 bulletDescription3: "Advanced analytics",
@@ -123,7 +133,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 planCardPrice: 100,
                 isItCurrentPlan: false,
                 planCardDescription:
-                "The essential to provide \nyour best work for clients.",
+                    "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "300 Projects",
                 bulletDescription2: "Up to 500 subscribers",
                 bulletDescription3: "Advanced analytics",
