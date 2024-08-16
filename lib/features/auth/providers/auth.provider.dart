@@ -80,7 +80,6 @@
 //
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/user_reg_data.dart';
@@ -100,33 +99,33 @@ class AuthState {
   final bool checkBoxState;
   final User? user;
 
-  AuthState({
-    required this.normalButtonLoading,
-    required this.googleButtonLoading,
-    required this.checkBoxState,
-    this.user
-  });
+  AuthState(
+      {required this.normalButtonLoading,
+      required this.googleButtonLoading,
+      required this.checkBoxState,
+      this.user});
 
-  AuthState copyWith({
-    bool? normalButtonLoading,
-    bool? googleButtonLoading,
-    bool? checkBoxState,
-    User? user
-  }) {
+  AuthState copyWith(
+      {bool? normalButtonLoading,
+      bool? googleButtonLoading,
+      bool? checkBoxState,
+      User? user}) {
     return AuthState(
-      normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
-      googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
-      checkBoxState: checkBoxState ?? this.checkBoxState,
-      user: user ?? this.user
-    );
+        normalButtonLoading: normalButtonLoading ?? this.normalButtonLoading,
+        googleButtonLoading: googleButtonLoading ?? this.googleButtonLoading,
+        checkBoxState: checkBoxState ?? this.checkBoxState,
+        user: user ?? this.user);
   }
 }
 
 class AuthProvider extends StateNotifier<AuthState> {
   GetStorage box = locator<GetStorage>();
 
-  AuthProvider() : super(AuthState(normalButtonLoading: false, googleButtonLoading: false,
-      checkBoxState: false));
+  AuthProvider()
+      : super(AuthState(
+            normalButtonLoading: false,
+            googleButtonLoading: false,
+            checkBoxState: false));
 
   set setNormalButtonLoading(bool value) {
     state = state.copyWith(normalButtonLoading: value);
@@ -140,7 +139,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(checkBoxState: value);
   }
 
-  set setUser(User u){
+  set setUser(User u) {
     state = state.copyWith(user: u);
   }
 
@@ -160,7 +159,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
-      //TODO: Do something with caught error;
+      //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
     }
@@ -169,7 +168,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   Future<void> googleSignin(BuildContext context) async {
     setGoogleButtonLoading = true;
 
-  //  FirebaseAuth auth = FirebaseAuth.instance;
+    //  FirebaseAuth auth = FirebaseAuth.instance;
     final googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -184,7 +183,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       //   idToken: googleAuth.idToken,
       //   accessToken: googleAuth.accessToken,
       // );
-    //  final u = await auth.signInWithCredential(credential);
+      //  final u = await auth.signInWithCredential(credential);
       final res = await AuthApi().googleSignIn(googleAuth.idToken!);
       if (res != null) {
         showSnackBar(res.message.toString());
@@ -193,14 +192,12 @@ class AuthProvider extends StateNotifier<AuthState> {
 
         if (context.mounted) {
           context.go(AppRoute.home);
-          box.write('accessToken', userRegData.accessToken );
+          box.write('accessToken', userRegData.accessToken);
         }
       }
     }
 
-    try {
-
-    } catch (e) {
+    try {} catch (e) {
       rethrow;
     } finally {
       setGoogleButtonLoading = false;
@@ -222,13 +219,12 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
-      //TODO: Do something with caught error;
+      //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
     }
   }
 }
-
 
 final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
   return AuthProvider();
