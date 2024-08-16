@@ -19,33 +19,27 @@ class _CreateRoleState extends State<CreateRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text('Create Role',
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+              )),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 30.h),
+        padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Text(
-                  'Create Role',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8.h),
             Text(
               "Custom roles let you group permissions and assign them to principals in your organization. You can manually select permissions or import permissions from another role.",
               style: TextStyle(
-                fontSize: 12.sp,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w400,
                 color: GlobalColors.darkOne,
               ),
@@ -105,6 +99,8 @@ class _CreateRoleState extends State<CreateRole> {
 
   void displayBottomsheet(BuildContext context) {
     showBottomSheet(
+        backgroundColor: GlobalColors.whiteColor,
+        enableDrag: true,
         context: context,
         builder: (BuildContext context) {
           return Container(
@@ -166,7 +162,9 @@ class _CreateRoleState extends State<CreateRole> {
                 ),
                 Center(
                   child: CustomButton(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     borderColor: GlobalColors.lightGray,
                     text: "Save Preferences",
                     height: 40.h,

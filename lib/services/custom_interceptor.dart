@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/services/error_handlers.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 
 class CustomInterceptor extends Interceptor {
@@ -34,7 +32,7 @@ class CustomInterceptor extends Interceptor {
 
     }
     else{
-      OneContext().push(MaterialPageRoute(builder: (context)=>LoginScreen()));
+      OneContext().push(MaterialPageRoute(builder: (context)=>const LoginScreen()));
       handler.reject(
         DioException(
           requestOptions: options,
