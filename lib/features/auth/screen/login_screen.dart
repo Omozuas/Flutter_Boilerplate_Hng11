@@ -11,9 +11,13 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../services/service_locator.dart';
+
 class LoginScreen extends ConsumerWidget {
+ static GetStorage box = locator<GetStorage>();
   const LoginScreen({super.key});
 
   static final TextEditingController _emailController = TextEditingController();
@@ -68,7 +72,9 @@ class LoginScreen extends ConsumerWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
+                      backgroundColor: authStateProvider.normalButtonLoading ?
+                          Colors.grey.withOpacity(0.2) :
+                      Colors.white,
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       side: const BorderSide(color: Colors.grey),
                       shape: const RoundedRectangleBorder(
@@ -142,6 +148,7 @@ class LoginScreen extends ConsumerWidget {
                           onTap: () {
                             ref.read(authProvider.notifier).setCheckBoxState =
                            !authStateProvider.checkBoxState;
+
                           },
                           child: Icon(
                             authStateProvider.checkBoxState
@@ -200,7 +207,11 @@ class LoginScreen extends ConsumerWidget {
                     borderColor: GlobalColors.borderColor,
                     text: "Login",
                     height: 48.h,
-                    containerColor: GlobalColors.orange,
+                    fontWeight: FontWeight.bold,
+                    containerColor:
+                    authStateProvider.googleButtonLoading ?
+                    Colors.grey.withOpacity(0.2) :
+                    GlobalColors.orange,
                     width: 342.w,
                     textColor: Colors.white),
                 SizedBox(
