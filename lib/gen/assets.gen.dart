@@ -140,8 +140,12 @@ class $AssetsImagesPngProductListingGen {
   AssetGenImage get product =>
       const AssetGenImage('assets/images/png/product_listing/product.png');
 
+  /// File path: assets/images/png/product_listing/profile.png
+  AssetGenImage get profile =>
+      const AssetGenImage('assets/images/png/product_listing/profile.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [iphone, product];
+  List<AssetGenImage> get values => [iphone, product, profile];
 }
 
 class $AssetsImagesSvgProductListingGen {
@@ -163,6 +167,10 @@ class $AssetsImagesSvgProductListingGen {
   SvgGenImage get listIcon =>
       const SvgGenImage('assets/images/svg/product_listing/list_icon.svg');
 
+  /// File path: assets/images/svg/product_listing/notification.svg
+  SvgGenImage get notification =>
+      const SvgGenImage('assets/images/svg/product_listing/notification.svg');
+
   /// File path: assets/images/svg/product_listing/search_icon.svg
   SvgGenImage get searchIcon =>
       const SvgGenImage('assets/images/svg/product_listing/search_icon.svg');
@@ -172,8 +180,15 @@ class $AssetsImagesSvgProductListingGen {
       const SvgGenImage('assets/images/svg/product_listing/sort_icon.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [active, filterButton, gridIcon, listIcon, searchIcon, sortIcon];
+  List<SvgGenImage> get values => [
+        active,
+        filterButton,
+        gridIcon,
+        listIcon,
+        notification,
+        searchIcon,
+        sortIcon
+      ];
 }
 
 class Assets {
