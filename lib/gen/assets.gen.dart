@@ -12,6 +12,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/search_icon.png
+  AssetGenImage get searchIcon =>
+      const AssetGenImage('assets/icons/search_icon.png');
+
+  /// File path: assets/icons/verified.svg
+  SvgGenImage get verified => const SvgGenImage('assets/icons/verified.svg');
+
+  /// List of all assets
+  List<dynamic> get values => [searchIcon, verified];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -69,6 +83,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
 
+  /// File path: assets/images/search.png
+  AssetGenImage get search => const AssetGenImage('assets/images/search.png');
+
   /// Directory path: assets/images/svg
   $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 
@@ -91,6 +108,7 @@ class $AssetsImagesGen {
         microsoftOfficeOffice365Teams,
         notion,
         onedrive,
+        search,
         trello
       ];
 }
@@ -122,8 +140,12 @@ class $AssetsImagesPngProductListingGen {
   AssetGenImage get product =>
       const AssetGenImage('assets/images/png/product_listing/product.png');
 
+  /// File path: assets/images/png/product_listing/profile.png
+  AssetGenImage get profile =>
+      const AssetGenImage('assets/images/png/product_listing/profile.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [iphone, product];
+  List<AssetGenImage> get values => [iphone, product, profile];
 }
 
 class $AssetsImagesSvgProductListingGen {
@@ -145,6 +167,10 @@ class $AssetsImagesSvgProductListingGen {
   SvgGenImage get listIcon =>
       const SvgGenImage('assets/images/svg/product_listing/list_icon.svg');
 
+  /// File path: assets/images/svg/product_listing/notification.svg
+  SvgGenImage get notification =>
+      const SvgGenImage('assets/images/svg/product_listing/notification.svg');
+
   /// File path: assets/images/svg/product_listing/search_icon.svg
   SvgGenImage get searchIcon =>
       const SvgGenImage('assets/images/svg/product_listing/search_icon.svg');
@@ -154,14 +180,22 @@ class $AssetsImagesSvgProductListingGen {
       const SvgGenImage('assets/images/svg/product_listing/sort_icon.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [active, filterButton, gridIcon, listIcon, searchIcon, sortIcon];
+  List<SvgGenImage> get values => [
+        active,
+        filterButton,
+        gridIcon,
+        listIcon,
+        notification,
+        searchIcon,
+        sortIcon
+      ];
 }
 
 class Assets {
   Assets._();
 
   static const String aEnv = '.env';
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 
   /// List of all assets
