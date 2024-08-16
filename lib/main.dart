@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_boilerplate_hng11/services/custom_interceptor.dart';
+import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,9 +25,9 @@ class MyApp extends StatelessWidget {
         ensureScreenSize: true,
         designSize: const Size(390, 844),
         builder: (context, child) => MaterialApp.router(
-          builder: OneContext().builder,
-          key: OneContext().key,
           routerConfig: AppRouter.router,
+          key: OneContext().key ,
+          builder: OneContext().builder,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               textTheme: GoogleFonts.interTextTheme(),

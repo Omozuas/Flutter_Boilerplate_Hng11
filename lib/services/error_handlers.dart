@@ -50,15 +50,14 @@ class ErrorHandlers {
   }
 
   static void _serverErrorHandler(Response response) {
-    log(response.toString());
-    showSnackBar(response.data['message'] ?? response.toString());
+    log('hhhttt${response.statusCode.toString()}');
+
+
+   showSnackBar(response.data['message'].toString());
+    log('hhhttt${response.toString()}');
     switch (response.statusCode) {
-      //case 400:
+      case 400:
       case 401:
-        Navigator.of(OneContext().context!).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-              (Route<dynamic> route) => false,
-        );
 
       // case 403:
       // case 404:

@@ -130,7 +130,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       text: 'Create Account',
                       loading: authProviderState.normalButtonLoading,
                       onTap: () async {
-                        //if (formKey.currentState!.validate()) {
+                        if (formKey.currentState!.validate()) {
                           _handleCreateAccount(ref, context);
                           // ref.read(authProvider.notifier).registerSingleUser({
                           //   'email': emailController.text,
@@ -138,7 +138,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                           //   'last_name': lastNameController.text,
                           //   'password': passwordController.text,
                           // }, context);
-                       // }
+                        }
                       },
                       textColor: GlobalColors.white,
                       borderColor: GlobalColors.orange,

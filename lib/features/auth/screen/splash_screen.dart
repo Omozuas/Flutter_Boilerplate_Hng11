@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
+import 'package:flutter_boilerplate_hng11/main.dart';
+import 'package:flutter_boilerplate_hng11/services/custom_interceptor.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../services/dio_provider.dart';
 import '../../../services/service_locator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,23 +20,29 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   static GetStorage box = locator<GetStorage>();
+
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
+
+    WidgetsBinding.instance.addPostFrameCallback((t){
+
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
       } else {
         if(box.read('rememberMe') != null && box.read('rememberMe')){
-         AuthProvider().login({
-           "email" : box.read('email'),
-           "password" : box.read('password')
-         }, context, fromLoginScreen: false);
+          AuthProvider().login({
+            "email" : box.read('email'),
+            "password" : box.read('password')
+          }, context, fromLoginScreen: false);
         }
-       else{
+        else{
           context.go(AppRoute.login);
         }
       }
-    });
+    }
+
+    );
+
     super.initState();
   }
 
