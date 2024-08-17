@@ -63,6 +63,8 @@ dependencies:
   json_annotation: any
   jwt_decoder: any
   image_picker: ^1.1.2
+  easy_localization: ^3.0.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -135,6 +137,7 @@ flutter:
     - assets/images/svg/account_settings/
     - assets/images/svg/
     - assets/icons/
+    - assets/translations/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

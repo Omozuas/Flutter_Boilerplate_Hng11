@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
@@ -162,6 +163,7 @@ class LoginScreen extends ConsumerWidget {
                       SizedBox(
                         width: 8.w,
                       ),
+                      Text(context.tr('ok')),
                       Text(
                         "Remember Me",
                         style: CustomTextStyle.medium(
