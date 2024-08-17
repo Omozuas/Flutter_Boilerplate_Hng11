@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -63,6 +65,39 @@ class SettingsApi {
         data: {'DisplayPhoto': File(image.path)},
       );
       return response?.data['data']['avatar_url'] ?? '';
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<NotificationModel> getNotification(String userId) async {
+    try {
+      final response = await dio.get('/settings/notification-settings/$userId');
+      return NotificationModel.fromMap(response?.data['data']);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<NotificationModel> updateNotification(
+      {required NotificationModel notificationModel}) async {
+    try {
+      final response = await dio.post(
+        '/settings/notification-settings',
+        data: notificationModel.toMap(),
+      );
+      return NotificationModel.fromMap(response?.data['data']);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<SubscriptionModel> getsubscription({required String orgId}) async {
+    try {
+      final response = await dio.post(
+        '/subscriptions/user/$orgId',
+      );
+      return subscriptionModelFromJson(response?.data);
     } catch (e) {
       rethrow;
     }
