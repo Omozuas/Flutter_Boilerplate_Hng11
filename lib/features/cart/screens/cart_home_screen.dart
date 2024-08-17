@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/string_extensions.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/cart_utils/cart_functions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -22,38 +24,38 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
 
   final formKey = GlobalKey<FormState>();
 
-  List<CartData> data = [
-    CartData(
-        image:
-            "https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg",
-        name: "Burger",
-        quantity: 1,
-        price: 10,
-        description: "This is a delicious cheese burger"),
-    CartData(
-        image:
-            "https://www.foodiesfeed.com/wp-content/uploads/2023/09/fresh-vegetables.jpg",
-        name: "Fruits",
-        quantity: 1,
-        price: 15,
-        description:
-            "Fruits are good for the health please endevour to eat them"),
-    CartData(
-        image:
-            "https://www.foodiesfeed.com/wp-content/uploads/2023/10/bowl-of-ice-cream-with-chocolate.jpg",
-        name: "Ice cream",
-        quantity: 1,
-        price: 21,
-        description: "A nice bowl of ice cream to cure your cravings"),
-    CartData(
-        image:
-            "https://www.foodiesfeed.com/wp-content/uploads/2023/08/grilled-crispy-pork-with-rice.jpg",
-        name: "Rice and Meat Sauce",
-        quantity: 1,
-        price: 65,
-        description:
-            "Freshly cooked rice and meat source with cucumber and lettus"),
-  ];
+  // List<CartData> data = [
+  //   CartData(
+  //       image:
+  //           "https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg",
+  //       name: "Burger",
+  //       quantity: 1,
+  //       price: 10,
+  //       description: "This is a delicious cheese burger"),
+  //   CartData(
+  //       image:
+  //           "https://www.foodiesfeed.com/wp-content/uploads/2023/09/fresh-vegetables.jpg",
+  //       name: "Fruits",
+  //       quantity: 1,
+  //       price: 15,
+  //       description:
+  //           "Fruits are good for the health please endevour to eat them"),
+  //   CartData(
+  //       image:
+  //           "https://www.foodiesfeed.com/wp-content/uploads/2023/10/bowl-of-ice-cream-with-chocolate.jpg",
+  //       name: "Ice cream",
+  //       quantity: 1,
+  //       price: 21,
+  //       description: "A nice bowl of ice cream to cure your cravings"),
+  //   CartData(
+  //       image:
+  //           "https://www.foodiesfeed.com/wp-content/uploads/2023/08/grilled-crispy-pork-with-rice.jpg",
+  //       name: "Rice and Meat Sauce",
+  //       quantity: 1,
+  //       price: 65,
+  //       description:
+  //           "Freshly cooked rice and meat source with cucumber and lettus"),
+  // ];
 
   num totalPrice = 0;
   num allPrice = 0;
@@ -76,15 +78,15 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
     notifyListeners();
   }
 
-  updateItem(CartData item, int index) async {
+  updateItem(Product item, int index) async {
     products[index] = item;
     getPrice();
     notifyListeners();
   }
 
-  List<CartData> products = [];
+  List<Product> products = [];
 
-  List<CartData> selectedProducts = [];
+  List<Product> selectedProducts = [];
 
   removeItem(int index) {
     setState(() {
@@ -96,7 +98,7 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
     setState(() {});
   }
 
-  selectItem(CartData product) {
+  selectItem(Product product) {
     if (selectedProducts.any((e) => e == product)) {
       selectedProducts.removeWhere((e) => e == product);
     } else {
@@ -105,8 +107,8 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
     setState(() {});
   }
 
-  init() {
-    products = data;
+  init() async {
+    products = await getCartItems();
     getPrice();
   }
 
@@ -160,8 +162,18 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     padding: 16.h.padH,
                     itemBuilder: (_, index) {
-                      CartData product = products[index];
+                      Product product = products[index];
                       int quantity = (product.quantity ?? 0);
+
+                      void updateCartQuantity(Product products, int quantity) {
+                        // Update the cart quantity
+                        final updatedProduct = product.copyWith(cartQuantity: quantity);
+
+                        // Now use the updatedProduct as needed, e.g., saving it back to a list
+                        // productList[index] = updatedProduct;
+
+                        print(updatedProduct.cartQuantity); // This will print the updated quantity
+                      }
 
                       num price = (product.price ?? 0) * quantity;
 
@@ -170,15 +182,16 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
                           // showCustomToast("You can't go below this, delete item if not needed");
                         } else {
                           quantity -= 1;
-                          product.updateQuantity(quantity);
-                          updateItem(product, index);
+                          // product.copyWith(cartQuantity: quantity);
+                          updateCartQuantity(product, index);
+                          updateToCart(product, index);
                         }
                       }
 
                       addQuantity() {
                         quantity += 1;
-                        product.updateQuantity(quantity);
-                        updateItem(product, index);
+                        updateCartQuantity(product, index);
+                        updateToCart(product, index);
                       }
 
                       return CartWidget(
