@@ -18,9 +18,6 @@ class OrderHomeScreen extends StatefulWidget {
 }
 
 class _OrderHomeScreenState extends State<OrderHomeScreen> {
-  TextEditingController promoCodeController = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
 
   List<CartData> data = [
     CartData(
@@ -78,34 +75,17 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
     notifyListeners();
   }
 
-  updateItem(CartData item, int index) async {
-    products[index] = item;
-    getPrice();
-    notifyListeners();
-  }
 
   List<CartData> products = [];
 
   List<CartData> selectedProducts = [];
 
-  removeItem(int index) {
-    setState(() {
-      products.removeAt(index);
-    });
-  }
+  
 
   onChanged(String? val) {
     setState(() {});
   }
 
-  selectItem(CartData product) {
-    if (selectedProducts.any((e) => e == product)) {
-      selectedProducts.removeWhere((e) => e == product);
-    } else {
-      selectedProducts.add(product);
-    }
-    setState(() {});
-  }
 
   init() {
     products = data;
@@ -123,23 +103,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Orders")
-        actions: [
-      PopupMenuButton<String>(
-      child: Container(
-        padding: 10.sp.padA,
-        child: const Icon(Icons.more_vert),
-      ),
-      onSelected: (value) {},
-      itemBuilder: (BuildContext context) {
-        return [
-          const PopupMenuItem<String>(
-            value: 'delete',
-            child: Text("My Cart"),
-          ),
-        ];
-      },
-    )],
+        title: Text("Orders"),
     ),
     body: Column(
     children: [
@@ -161,21 +125,8 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
 
     num price = (product.price ?? 0) * quantity;
 
-    subtractQuantity() {
-    if (quantity == 1) {
-    // showCustomToast("You can't go below this, delete item if not needed");
-    } else {
-    quantity -= 1;
-    product.updateQuantity(quantity);
-    updateItem(product, index);
-    }
-    }
+  
 
-    addQuantity() {
-    quantity += 1;
-    product.updateQuantity(quantity);
-    updateItem(product, index);
-    }
 
     return OrderWidget(
     price: price,
@@ -192,59 +143,9 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
     padding: 16.sp.padA,
     child: Column(
     children: [
-    Row(
-    children: [
-    Expanded(
-    child: CustomTextField(
-    controller: promoCodeController,
-    hintText: "Promo Code",
-    onchanged: onChanged,
-    ),
-    ),
-    16.w.sbW,
-    CustomButton(
-    borderColor: Colors.transparent,
-    text: "Apply",
-    height: 34.h,
-    borderColors: GlobalColors.orange,
-    containerColor:
-    promoCodeController.text.trim().isEmpty
-    ? GlobalColors.orange.withOpacity(0.5)
-        : GlobalColors.orange,
-    width: 133.w,
-    textColor: Colors.white,
-    onTap: getPrice,
-    )
-    ],
-    ),
-    16.h.sbH,
     CartPriceOption(
-    title: "Sub Total",
+    title: "Total Orders",
     value: totalPrice,
-    ),
-    CartPriceOption(
-    title: "Delivery Fee",
-    value: deliveryFee,
-    ),
-    CartPriceOption(
-    title: "Discount",
-    value: discountedPrice,
-    ),
-    16.h.sbH,
-    CustomButton(
-    borderColor: Colors.transparent,
-    text:
-    "Checkout \$1${formatNumber(payPrice, decimalPlaces: 2)}",
-    height: 48.h,
-    containerColor: GlobalColors.orange,
-    borderColors: GlobalColors.orange,
-    width: width(context),
-    fontWeight: FontWeight.w600,
-    textColor: Colors.white,
-    onTap: () {},
-    )
-    ],
-    ),
     ),
     50.h.sbH,
     ],
