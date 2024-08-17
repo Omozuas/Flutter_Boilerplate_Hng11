@@ -60,4 +60,10 @@ class CustomInterceptor extends Interceptor {
     super.onRequest(options, handler);
   }
 
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    log('Res >> $response');
+    super.onResponse(response, handler);
+  }
+
 }

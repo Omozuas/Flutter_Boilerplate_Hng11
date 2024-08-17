@@ -173,11 +173,12 @@ class LoginScreen extends ConsumerWidget {
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ForgotPasswordScreen()),
-                          );
+                          context.push(AppRoute.forgotPassword);
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const ForgotPasswordScreen()),
+                          // );
                           //:TODO add function for forgot password
                         },
                         child: Text(

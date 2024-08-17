@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,7 +53,7 @@ class AuthApi {
       );
       return response;
     } catch (e) {
-      debugPrint('Error In verrifying code: ${e.toString()}');
+      debugPrint('Error In verrifying code: $e');
       return null;
     }
     // return await dioProvider.post(

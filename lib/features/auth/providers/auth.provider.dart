@@ -160,17 +160,17 @@ class AuthProvider extends StateNotifier<AuthState> {
 
   Future<void> forgotPassword(String email, BuildContext context) async {
     try {
-      setNormalButtonLoading = true;
-      final res = await AuthApi().forgotPassword(email: email);
-      if (res != null) {
-        showSnackBar(res.message.toString());
-        setNormalButtonLoading = false;
-        if (context.mounted) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => VerificationScreen(email: email)));
-          // context.go(AppRoute.verificationScreen);
-        }
-      }
+      setNormalButtonLoading = true; context.replace(AppRoute.verificationScreen, extra: email);
+      // final res = await AuthApi().forgotPassword(email: email);
+      // if (res != null) {
+      //   showSnackBar(res.message.toString());
+      //   setNormalButtonLoading = false;
+      //   if (context.mounted) {
+      //     // Navigator.of(context).push(MaterialPageRoute(
+      //     //     builder: (_) => VerificationScreen(email: email)));
+      //      context.push(AppRoute.verificationScreen, extra: email);
+      //   }
+      // }
     } catch (e) {
       //:TODO catch error
     }
@@ -180,24 +180,26 @@ class AuthProvider extends StateNotifier<AuthState> {
       String email, String code, BuildContext context) async {
     try {
       final res = await AuthApi().verifyCode(email: email, code: code);
+
       if (res != null) {
-        debugPrint(res.toString());
+
         showSnackBar(res.message.toString());
 
         if (context.mounted) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (_) => ResetPassword(
-                      email: email,
-                    )),
-          );
-          // context.go(AppRoute.verificationScreen);
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //       builder: (_) => ResetPassword(
+          //             email: email,
+          //           )),
+          // );
+           context.go(AppRoute.resetPassword);
         }
       }
+
     } catch (e) {
       //:TODO catch error
     }
-    //:TODO catch error
+    return;
   }
 
   Future<ResponseModel?> resetPassword(String email, String newPassword,

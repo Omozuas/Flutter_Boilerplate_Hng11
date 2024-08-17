@@ -48,11 +48,11 @@ bool loading = false;
       loading=  true;
     });
     final code = _codeControllers.map((c) => c.text).join();
-    debugPrint(code);
+    debugPrint(code.runtimeType.toString());
     await ref.read(authProvider.notifier).verifyCode(widget.email, code, context);
     if(mounted) {
       setState(() {
-      loading=  true;
+      loading=  false;
     });
     }
     // if (code == '123456') {
@@ -85,6 +85,7 @@ bool loading = false;
 
   @override
   Widget build(BuildContext context) {
+    print(widget.email);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -93,6 +94,7 @@ bool loading = false;
         ),
       ),
       body: Consumer(builder: (context, ref, child) {
+     // loading = false;
         return Stack(
           children: [
             Padding(

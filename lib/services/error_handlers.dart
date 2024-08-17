@@ -6,6 +6,7 @@ import '../utils/widgets/custom_snackbar.dart';
 
 class ErrorHandlers {
   static void allErrorHandler(error) {
+
     if (error is TypeError) {
       log('Check your code for type error : ${error.stackTrace}');
       return;
