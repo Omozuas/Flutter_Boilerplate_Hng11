@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -35,16 +34,16 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   Future<void> _handleResetPassword(WidgetRef ref, BuildContext context) async {
     setState(() {
-      loading=  true;
+      loading = true;
     });
     final newPassword = _newPasswordController.text;
     final confirmNewPassword = _confirmPasswordController.text;
     await ref
         .read(authProvider.notifier)
         .resetPassword(widget.email, newPassword, confirmNewPassword, context);
-    if(mounted){
+    if (mounted) {
       setState(() {
-        loading=  true;
+        loading = false;
       });
     }
   }
@@ -61,6 +60,7 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    //loading = false;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -123,7 +123,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                     onTap: () async {
                       if (_formResetKey.currentState?.validate() ?? false) {
                         _handleResetPassword(ref, context);
-
                       }
                     },
                     borderColor: GlobalColors.borderColor,
@@ -134,37 +133,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                     textColor: Colors.white,
                   ),
                   SizedBox(height: 16.sp),
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Didn\'t receive any code? ',
-                        style: TextStyle(color: GlobalColors.darkOne),
-                        children: [
-                          TextSpan(
-                            text: 'Resend OTP',
-                            style: TextStyle(
-                                color: GlobalColors.orange,
-                                fontWeight: FontWeight.bold),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = _handleResend,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.sp),
-                  Center(
-                    child: TextButton(
-                      onPressed: _handleChangeEmail,
-                      child: const Text(
-                        'Change Email',
-                        style: TextStyle(
-                          color: Colors.orange,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

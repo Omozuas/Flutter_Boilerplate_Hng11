@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 // import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -174,12 +173,6 @@ class LoginScreen extends ConsumerWidget {
                       GestureDetector(
                         onTap: () {
                           context.push(AppRoute.forgotPassword);
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const ForgotPasswordScreen()),
-                          // );
-                          //:TODO add function for forgot password
                         },
                         child: Text(
                           "Forgot Password?",

@@ -20,25 +20,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-
-    WidgetsBinding.instance.addPostFrameCallback((t){
-
+    WidgetsBinding.instance.addPostFrameCallback((t) {
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
       } else {
-        if(box.read('rememberMe') != null && box.read('rememberMe')){
+        if (box.read('rememberMe') != null && box.read('rememberMe')) {
           AuthProvider().login({
-            "email" : box.read('email'),
-            "password" : box.read('password')
+            "email": box.read('email'),
+            "password": box.read('password')
           }, context, fromLoginScreen: false);
-        }
-        else{
+        } else {
           context.go(AppRoute.login);
         }
       }
-    }
-
-    );
+    });
 
     super.initState();
   }
@@ -67,7 +62,9 @@ class _SplashScreenState extends State<SplashScreen> {
               color: GlobalColors.darkOne,
             ),
           ),
-          SizedBox(height: 50.h,),
+          SizedBox(
+            height: 50.h,
+          ),
           SizedBox(
             height: 20.h,
             width: 20.h,

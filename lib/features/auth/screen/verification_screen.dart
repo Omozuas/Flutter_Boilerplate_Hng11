@@ -22,9 +22,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
       List.generate(6, (_) => TextEditingController());
   bool isCodeComplete = false;
   bool _isCodeValid = true;
-  int _countdown = 60;
+  int _countdown = 420;
   late final Timer _timer;
-bool loading = false;
+  bool loading = false;
   @override
   void initState() {
     super.initState();
@@ -43,17 +43,35 @@ bool loading = false;
     });
   }
 
-  void _handleVerify(WidgetRef ref, BuildContext context)async {
+  _restartTimer() {
+    _timer.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_countdown > 0) {
+        setState(() {
+          _countdown--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  void _handleVerify(WidgetRef ref, BuildContext context) async {
     setState(() {
-      loading=  true;
+      loading = true;
     });
     final code = _codeControllers.map((c) => c.text).join();
     debugPrint(code.runtimeType.toString());
-    await ref.read(authProvider.notifier).verifyCode(widget.email, code, context);
-    if(mounted) {
+    final res = await ref
+        .read(authProvider.notifier)
+        .verifyCode(widget.email, code, context);
+    if (res != null && !res) {
+      _isCodeValid = false;
+    }
+    if (mounted) {
       setState(() {
-      loading=  false;
-    });
+        loading = false;
+      });
     }
     // if (code == '123456') {
     //   context.push(AppRoute.verificationSuccess);
@@ -64,17 +82,20 @@ bool loading = false;
     // }
   }
 
-  void _handleResend() {
+  bool codeResent = false;
+  void _handleResend(WidgetRef ref) async {
+    await ref.read(authProvider.notifier).forgotPassword(widget.email, context);
+    codeResent = true;
     setState(() {
-      _countdown = 60;
-      _startTimer();
+      _countdown = 420;
+      _restartTimer();
       _isCodeValid = true;
     });
   }
 
   void _handleChangeEmail() {
-    Navigator.pop(context);
-    // context.go(AppRoute.forgotPassword);
+    _timer.cancel();
+    context.pop();
   }
 
   @override
@@ -85,7 +106,6 @@ bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    print(widget.email);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -94,7 +114,7 @@ bool loading = false;
         ),
       ),
       body: Consumer(builder: (context, ref, child) {
-     // loading = false;
+        // loading = false;
         return Stack(
           children: [
             Padding(
@@ -114,7 +134,7 @@ bool loading = false;
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
-                          text: '00:$_countdown s',
+                          text: '$_countdown s',
                           style: TextStyle(
                             color: GlobalColors.orange,
                             fontWeight: FontWeight.bold,
@@ -211,7 +231,7 @@ bool loading = false;
                                 fontWeight: FontWeight.bold,
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = _handleResend,
+                                ..onTap = () => _handleResend(ref),
                             ),
                           ],
                         ),
@@ -234,37 +254,37 @@ bool loading = false;
                 ],
               ),
             ),
-            if (!_isCodeValid)
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  color: Colors.red,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.error, color: Colors.white),
-                      SizedBox(width: 8.sp),
-                      const Expanded(
-                        child: Text(
-                          'Invalid code, please try again.',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close, color: Colors.white),
-                        onPressed: () {
-                          setState(() {
-                            _isCodeValid = true;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            // if (!_isCodeValid)
+            //   Positioned(
+            //     top: 0,
+            //     left: 0,
+            //     right: 0,
+            //     child: Container(
+            //       color: Colors.red,
+            //       padding:
+            //           EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
+            //       child: Row(
+            //         children: [
+            //           const Icon(Icons.error, color: Colors.white),
+            //           SizedBox(width: 8.sp),
+            //           const Expanded(
+            //             child: Text(
+            //               'Invalid code, please try again.',
+            //               style: TextStyle(color: Colors.white, fontSize: 16),
+            //             ),
+            //           ),
+            //           IconButton(
+            //             icon: const Icon(Icons.close, color: Colors.white),
+            //             onPressed: () {
+            //               setState(() {
+            //                 _isCodeValid = true;
+            //               });
+            //             },
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
           ],
         );
       }),

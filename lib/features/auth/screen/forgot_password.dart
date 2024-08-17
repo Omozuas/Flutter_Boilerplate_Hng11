@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +29,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = ref.watch(authProvider);
+// Future.delayed(Duration.zero,()=>   ref.read(authProvider.notifier).setPasswordButtonLoading = false);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -82,7 +82,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
               ),
               SizedBox(height: 32.sp),
               CustomButton(
-                loading: loading.normalButtonLoading,
+                  loading: loading.passwordButtonLoading,
                   onTap: () async {
                     // _emailKey.currentState!.validate();
                     if (_emailKey.currentState?.validate() ?? false) {

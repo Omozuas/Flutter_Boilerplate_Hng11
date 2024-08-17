@@ -101,7 +101,7 @@ class SettingsDioProvider {
 
   Future multipartPUT(
     String path, {
-    Map? data,
+    Object? data,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
@@ -111,7 +111,7 @@ class SettingsDioProvider {
         queryParameters: queryParameters,
         options: Options(
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/octet-stream',
           },
         ),
       );
@@ -127,7 +127,7 @@ class SettingsDioProvider {
 
   Future multipartPOST(
     String path, {
-    Map? data,
+    Object? data,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
@@ -137,7 +137,7 @@ class SettingsDioProvider {
         queryParameters: queryParameters,
         options: Options(
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/octet-stream',
           },
         ),
       );

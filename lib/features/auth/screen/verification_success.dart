@@ -32,12 +32,11 @@ class VerificationSuccessScreen extends StatelessWidget {
                 SizedBox(height: 24.sp),
                 CustomButton(
                   onTap: () async {
-
-                    BuildContext  c = context;
+                    BuildContext c = context;
 
                     if (c.mounted) {
-                      c.push(AppRoute.login);
-                     // AppRouter.router.p
+                      c.go(AppRoute.login);
+                      // AppRouter.router.p
                     }
                   },
                   borderColor: GlobalColors.borderColor,

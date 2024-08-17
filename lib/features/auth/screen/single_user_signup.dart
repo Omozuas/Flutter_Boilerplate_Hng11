@@ -156,7 +156,10 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Login',
-                              style: TextStyle(color: GlobalColors.orange),
+                              style: TextStyle(
+                                color: GlobalColors.orange,
+                                fontWeight: FontWeight.bold,
+                              ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   context.go(AppRoute.login);

@@ -9,7 +9,22 @@ import 'package:one_context/one_context.dart';
 
 void main() async {
   await initializeApp();
-  runApp(const MyApp());
+
+  // Make app always in portrait
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
+
+  // Change status bar theme based on theme of app
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+  ));
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,9 +37,9 @@ class MyApp extends StatelessWidget {
         ensureScreenSize: true,
         designSize: const Size(390, 844),
         builder: (context, child) => MaterialApp.router(
-          routerConfig: AppRouter.router,
-          key: OneContext().key ,
           builder: OneContext().builder,
+          key: OneContext().key,
+          routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               textTheme: GoogleFonts.interTextTheme(),
