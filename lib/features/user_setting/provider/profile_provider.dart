@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/updatepassword-model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../models/notification_model.dart';
+import '../models/subscription_model.dart';
+import '../models/updatepassword-model.dart';
 import '../models/user_model.dart';
 import '../models/user_profile.dart';
 import '../settings_api.dart';
+import '../widgets/ref_extension.dart';
 
 class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   @override
@@ -97,11 +98,13 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> getNotifications({required String userId}) async {
+  Future<void> getNotifications() async {
     final settingsApi = ref.read(settingsApiProvider);
+    final user = state.user.sureValue;
+    if (user == null) return;
     try {
       state = state.copyWith(notificationFetch: const AsyncLoading());
-      final res = await settingsApi.getNotification(userId);
+      final res = await settingsApi.getNotification(user.id);
       state = state.copyWith(notificationFetch: AsyncData(res));
     } catch (e) {
       state =
@@ -109,9 +112,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> updateNotifications(
-      {required String userId,
-      required NotificationModel notificationModel}) async {
+  Future<void> updateNotifications(NotificationModel notificationModel) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(notificationUpdater: const AsyncLoading());
