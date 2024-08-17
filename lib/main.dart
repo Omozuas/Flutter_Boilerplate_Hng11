@@ -32,21 +32,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      ensureScreenSize: true,
-      designSize: const Size(390, 844),
-      builder: (context, child) => MaterialApp.router(
-        builder: OneContext().builder,
-        key: OneContext().key,
-        routerConfig: AppRouter.router,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            textTheme: GoogleFonts.interTextTheme(),
-            scaffoldBackgroundColor: Colors.white,
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.transparent,
-                scrolledUnderElevation: 0,
-                systemOverlayStyle: SystemUiOverlayStyle.dark)),
+    return ProviderScope(
+      child: ScreenUtilInit(
+        ensureScreenSize: true,
+        designSize: const Size(390, 844),
+        builder: (context, child) => MaterialApp.router(
+          builder: OneContext().builder,
+          key: OneContext().key,
+          routerConfig: AppRouter.router,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              textTheme: GoogleFonts.interTextTheme(),
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  scrolledUnderElevation: 0,
+                  systemOverlayStyle: SystemUiOverlayStyle.dark)),
+        ),
       ),
     );
   }

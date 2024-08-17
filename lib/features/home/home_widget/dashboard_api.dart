@@ -1,9 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
-
-// import 'package:get_storage/get_storage.dart';
-
 import '../../../services/dio_provider.dart';
 import '../../../services/service_locator.dart';
 import 'model/dashboard_model.dart';
@@ -14,11 +11,10 @@ class DashboardApi implements DashboardApiContract {
   //Inject the DioProvider Dependency
   DioProvider dioProvider = locator<DioProvider>();
   final UserService _userService = locator<UserService>();
-  // final GetStorage _storageService = locator<GetStorage>();
+  //final GetStorage _storageService = locator<GetStorage>();
 
   @override
   Future<DashBoardModel> getDashboardData() async {
-    print(_userService.user.id);
     try {
       var response = await dioProvider
           .get("Dashboards", query: {"userId": _userService.user.id});

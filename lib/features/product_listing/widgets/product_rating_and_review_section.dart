@@ -105,8 +105,9 @@ class RatingsValueRow extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
             decoration: BoxDecoration(
-                border: Border.all(color: GlobalColors.orange),
-                borderRadius: BorderRadius.circular(2),),
+              border: Border.all(color: GlobalColors.orange),
+              borderRadius: BorderRadius.circular(2),
+            ),
             child: Text(
               "3.75/5",
               style: CustomTextStyles.bannerbodyTextOrange,

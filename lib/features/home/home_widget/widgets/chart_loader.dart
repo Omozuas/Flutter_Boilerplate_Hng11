@@ -21,7 +21,7 @@ class ChartLoader extends StatelessWidget {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(5, (index){
+                  children: List.generate(5, (index) {
                     return small();
                   }),
                 ),
@@ -29,7 +29,7 @@ class ChartLoader extends StatelessWidget {
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(6, (index){
+                    children: List.generate(6, (index) {
                       return SizedBox(
                         height: 250.h,
                         width: 20.w,
@@ -53,7 +53,7 @@ class ChartLoader extends StatelessWidget {
       width: 50.w,
       child: const ShimmerCard(),
     );
-}
+  }
 }
 
 class ChartEmpty extends StatelessWidget {
@@ -72,7 +72,6 @@ class ChartEmpty extends StatelessWidget {
             "No Sales and Trend yet",
             textAlign: TextAlign.center,
             style: CustomTextStyles.productTextBody3Black,
-
           )
         ],
       ),

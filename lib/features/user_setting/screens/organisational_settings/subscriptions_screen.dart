@@ -56,9 +56,9 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: GlobalColors.borderColor, width: 0.5),
-                  borderRadius: BorderRadius.circular(8)
-                ),
+                    border:
+                        Border.all(color: GlobalColors.borderColor, width: 0.5),
+                    borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,7 +90,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               PlanCard(
                 planCardPlan: SubscriptionPlan.free.name,
                 planCardPrice: 0,
-               isItCurrentPlan: true,
+                isItCurrentPlan: true,
                 planCardDescription:
                     "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "10 Projects",
@@ -104,7 +104,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               PlanCard(
                 planCardPlan: SubscriptionPlan.basic.name,
                 planCardPrice: 20,
-               isItCurrentPlan: false,
+                isItCurrentPlan: false,
                 planCardDescription:
                     "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "100 Projects",
@@ -119,7 +119,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               PlanCard(
                 planCardPlan: SubscriptionPlan.advanced.name,
                 planCardPrice: 50,
-               isItCurrentPlan: false,
+                isItCurrentPlan: false,
                 planCardDescription:
                     "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "200 Projects",
@@ -135,7 +135,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               PlanCard(
                 planCardPlan: SubscriptionPlan.premium.name,
                 planCardPrice: 100,
-               isItCurrentPlan: false,
+                isItCurrentPlan: false,
                 planCardDescription:
                     "The essential to provide \nyour best work for clients.",
                 bulletDescription1: "300 Projects",

@@ -135,7 +135,6 @@ class SettingsDioProvider {
         path,
         data: data,
         queryParameters: queryParameters,
-
         options: Options(
           headers: {
             'Content-Type': 'application/octet-stream',

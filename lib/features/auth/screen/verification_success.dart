@@ -8,25 +8,6 @@ import 'package:go_router/go_router.dart';
 class VerificationSuccessScreen extends StatelessWidget {
   const VerificationSuccessScreen({super.key});
 
-  // Future<void> _showLoadingIndicator(BuildContext context) async {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (context) {
-  //       return const AlertDialog(
-  //         content: Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             CircularProgressIndicator(),
-  //             SizedBox(width: 20),
-  //             Text('Processing...'),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +18,7 @@ class VerificationSuccessScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                 SizedBox(height: 80.h),
+                SizedBox(height: 80.h),
                 Text(
                   'Verification Successful',
                   style:
@@ -45,27 +26,21 @@ class VerificationSuccessScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 16.sp),
                 const Text(
-                  'Your verification was successful, you can now proceed to reset your password.',
+                  'Your verification was successful, you can now proceed to login',
                   style: TextStyle(fontSize: 13),
                 ),
                 SizedBox(height: 24.sp),
                 CustomButton(
                   onTap: () async {
-                    // Show loading indicator
-                 //   await _showLoadingIndicator(context);
+                    BuildContext c = context;
 
-                    // Simulate network request
-                  //  await Future.delayed(const Duration(seconds: 2));
-                    if (context.mounted) {
-                      // Hide loading indicator
-                     // Navigator.of(context).pop(); // Close the loading dialog
-
-                      // Proceed to login screen or other actions
-                      context.pushReplacement(AppRoute.resetPassword);
+                    if (c.mounted) {
+                      c.go(AppRoute.login);
+                      // AppRouter.router.p
                     }
                   },
                   borderColor: GlobalColors.borderColor,
-                  text: "Continue to Reset Password",
+                  text: "Continue to Login",
                   height: 48.h,
                   containerColor: GlobalColors.orange,
                   width: 342.w,
@@ -74,33 +49,33 @@ class VerificationSuccessScreen extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-              child: Row(
-                children: [
-                  const Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 8.sp),
-                  const Expanded(
-                    child: Text(
-                      'Successfully Verified',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     color: Colors.green,
+          //     padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
+          //     child: Row(
+          //       children: [
+          //         const Icon(Icons.check_circle, color: Colors.white),
+          //         SizedBox(width: 8.sp),
+          //         const Expanded(
+          //           child: Text(
+          //             'Successfully Verified',
+          //             style: TextStyle(color: Colors.white, fontSize: 16),
+          //           ),
+          //         ),
+          //         IconButton(
+          //           icon: const Icon(Icons.close, color: Colors.white),
+          //           onPressed: () {
+          //             Navigator.pop(context);
+          //           },
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

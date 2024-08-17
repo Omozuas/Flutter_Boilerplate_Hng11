@@ -17,7 +17,8 @@ class OrganizationOverviewModel {
         overview: overview ?? this.overview,
       );
 
-  factory OrganizationOverviewModel.fromJson(Map<String, dynamic> json) => _$OrganizationOverviewModelFromJson(json);
+  factory OrganizationOverviewModel.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationOverviewModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrganizationOverviewModelToJson(this);
 }
@@ -43,7 +44,8 @@ class Overview {
         revenue: revenue ?? this.revenue,
       );
 
-  factory Overview.fromJson(Map<String, dynamic> json) => _$OverviewFromJson(json);
+  factory Overview.fromJson(Map<String, dynamic> json) =>
+      _$OverviewFromJson(json);
 
   Map<String, dynamic> toJson() => _$OverviewToJson(this);
 }

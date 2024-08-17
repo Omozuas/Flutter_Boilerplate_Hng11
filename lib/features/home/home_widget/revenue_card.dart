@@ -15,7 +15,8 @@ class RevenueCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.value,
-    required this.percentageChange, this.isRevenue = true,
+    required this.percentageChange,
+    this.isRevenue = true,
   });
 
   @override
@@ -40,12 +41,11 @@ class RevenueCard extends StatelessWidget {
                       fontSize: 14.sp,
                       color: GlobalColors.gray500Color),
                 ),
-                isRevenue?
-                Text('\$',
-                    style: CustomTextStyles.productTextBody3Black.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                    )):0.0.sbW,
+                isRevenue
+                    ? Text('\$',
+                        style: CustomTextStyles.productTextBody3Black.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.black))
+                    : 0.0.sbW,
               ],
             ),
             SizedBox(
@@ -53,7 +53,7 @@ class RevenueCard extends StatelessWidget {
             ),
             //Color(0xFF374151)
             Text(
-              "${isRevenue?"\$": ""}$value",
+              "${isRevenue ? "\$" : ""}$value",
               style: CustomTextStyles.productTextBody3Black.copyWith(
                 color: GlobalColors.blackColor,
               ),
@@ -63,8 +63,8 @@ class RevenueCard extends StatelessWidget {
             ),
             Text(
               percentageChange,
-              style: CustomTextStyles.productSmallBodyTextBlack.copyWith(
-                  color: const Color(0xFF525252)),
+              style: CustomTextStyles.productSmallBodyTextBlack
+                  .copyWith(color: const Color(0xFF525252)),
             ),
           ],
         ),

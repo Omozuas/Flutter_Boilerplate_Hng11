@@ -37,7 +37,8 @@ class DashBoardModel {
         monthSales: monthSales ?? this.monthSales,
       );
 
-  factory DashBoardModel.fromJson(Map<String, dynamic> json) => _$DashBoardModelFromJson(json);
+  factory DashBoardModel.fromJson(Map<String, dynamic> json) =>
+      _$DashBoardModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$DashBoardModelToJson(this);
 }
@@ -113,7 +114,8 @@ class MonthSale {
         modifiedAt: modifiedAt ?? this.modifiedAt,
       );
 
-  factory MonthSale.fromJson(Map<String, dynamic> json) => _$MonthSaleFromJson(json);
+  factory MonthSale.fromJson(Map<String, dynamic> json) =>
+      _$MonthSaleFromJson(json);
 
   Map<String, dynamic> toJson() => _$MonthSaleToJson(this);
 }
