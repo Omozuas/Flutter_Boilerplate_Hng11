@@ -9,6 +9,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_succ
 import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
@@ -109,6 +110,12 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
+        path: AppRoute.addProduct,
+        builder: (context, state, ref) {
+          return const AddProductScreen();
+        },
+      ),
+      ConsumerGoRoute(
         path: AppRoute.subscriptionCheckout,
         builder: (context, state, ref) {
           return const SubscriptionCheckout(plan: SubscriptionPlan.free);
@@ -196,6 +203,7 @@ class AppRoute {
   static const String settings = '/settings';
 
   static const String products = '/products';
+  static const String addProduct = '/add-product';
 
   static const String home = '/home';
 

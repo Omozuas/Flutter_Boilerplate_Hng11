@@ -200,19 +200,21 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
                   child: Column(
                     children: [
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: CustomTextField(
                               controller: promoCodeController,
                               hintText: "Promo Code",
                               onchanged: onChanged,
+                              margin: EdgeInsets.zero,
                             ),
                           ),
                           16.w.sbW,
                           CustomButton(
                             borderColor: Colors.transparent,
                             text: "Apply",
-                            height: 34.h,
+                            height: 50.h,
                             borderColors: GlobalColors.orange,
                             containerColor:
                                 promoCodeController.text.trim().isEmpty
@@ -242,7 +244,7 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
                         borderColor: Colors.transparent,
                         text:
                             "Checkout \$1${formatNumber(payPrice, decimalPlaces: 2)}",
-                        height: 48.h,
+                        height: 55.h,
                         containerColor: GlobalColors.orange,
                         borderColors: GlobalColors.orange,
                         width: width(context),

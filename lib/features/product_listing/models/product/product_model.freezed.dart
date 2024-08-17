@@ -24,6 +24,7 @@ mixin _$Product {
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
+  int? get cartQuantity => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   @JsonKey(name: 'created_at')
@@ -54,6 +55,7 @@ abstract class $ProductCopyWith<$Res> {
       String? name,
       String? description,
       int? price,
+      int? cartQuantity,
       String? category,
       @JsonKey(name: 'created_at')
       @JsonKey(name: 'created_at')
@@ -84,6 +86,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? name = freezed,
     Object? description = freezed,
     Object? price = freezed,
+    Object? cartQuantity = freezed,
     Object? category = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -110,6 +113,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cartQuantity: freezed == cartQuantity
+          ? _value.cartQuantity
+          : cartQuantity // ignore: cast_nullable_to_non_nullable
               as int?,
       category: freezed == category
           ? _value.category
@@ -163,6 +170,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? name,
       String? description,
       int? price,
+      int? cartQuantity,
       String? category,
       @JsonKey(name: 'created_at')
       @JsonKey(name: 'created_at')
@@ -191,6 +199,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? description = freezed,
     Object? price = freezed,
+    Object? cartQuantity = freezed,
     Object? category = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -217,6 +226,10 @@ class __$$ProductImplCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cartQuantity: freezed == cartQuantity
+          ? _value.cartQuantity
+          : cartQuantity // ignore: cast_nullable_to_non_nullable
               as int?,
       category: freezed == category
           ? _value.category
@@ -267,6 +280,7 @@ class _$ProductImpl implements _Product {
       this.name,
       this.description,
       this.price,
+      this.cartQuantity,
       this.category,
       @JsonKey(name: 'created_at') @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
@@ -288,6 +302,8 @@ class _$ProductImpl implements _Product {
   final String? description;
   @override
   final int? price;
+  @override
+  final int? cartQuantity;
   @override
   final String? category;
   @override
@@ -314,7 +330,7 @@ class _$ProductImpl implements _Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, description: $description, price: $price, category: $category, createdAt: $createdAt, updatedAt: $updatedAt, image: $image, quantity: $quantity, size: $size, status: $status, costPrice: $costPrice, deleteAt: $deleteAt)';
+    return 'Product(id: $id, name: $name, description: $description, price: $price, cartQuantity: $cartQuantity, category: $category, createdAt: $createdAt, updatedAt: $updatedAt, image: $image, quantity: $quantity, size: $size, status: $status, costPrice: $costPrice, deleteAt: $deleteAt)';
   }
 
   @override
@@ -327,6 +343,8 @@ class _$ProductImpl implements _Product {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.cartQuantity, cartQuantity) ||
+                other.cartQuantity == cartQuantity) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.createdAt, createdAt) ||
@@ -352,6 +370,7 @@ class _$ProductImpl implements _Product {
       name,
       description,
       price,
+      cartQuantity,
       category,
       createdAt,
       updatedAt,
@@ -382,6 +401,7 @@ abstract class _Product implements Product {
       final String? name,
       final String? description,
       final int? price,
+      final int? cartQuantity,
       final String? category,
       @JsonKey(name: 'created_at')
       @JsonKey(name: 'created_at')
@@ -404,6 +424,8 @@ abstract class _Product implements Product {
   String? get description;
   @override
   int? get price;
+  @override
+  int? get cartQuantity;
   @override
   String? get category;
   @override

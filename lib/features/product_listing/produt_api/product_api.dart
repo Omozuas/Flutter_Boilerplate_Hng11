@@ -20,11 +20,12 @@ class ProductApi implements ProductsApiContract {
   DioProvider dioProvider = locator<DioProvider>();
 
   @override
-  Future createProduct({required Map product}) async {
+  Future createProduct({required String orgId, required Map product}) async {
     try {
-      await dioProvider.post(
+      log(product.toString());
+      return  dioProvider.post(
           productsForOrganisationEndpoint(
-            orgId: 'sdfsdf',
+            orgId: orgId,
           ),
           data: product);
     } catch (e) {
@@ -95,7 +96,7 @@ class ProductApi implements ProductsApiContract {
 abstract class ProductsApiContract {
   Future getAllProducts({required String orgId});
 
-  Future createProduct({required covariant dynamic product});
+  Future createProduct({required String orgId, required Map product});
   Future updateProduct(
       {required String id, required covariant dynamic product});
   Future deleteProduct({required String id});

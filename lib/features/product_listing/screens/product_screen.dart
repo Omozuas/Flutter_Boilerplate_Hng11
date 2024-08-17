@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter_product_bottomsheet.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -18,50 +21,51 @@ class ProductScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(productListProvider).when(
       data: (data) {
+        log(data.toString());
         return Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Products",
-                            style: CustomTextStyles.producHeaderBlack,
-                          ),
-                          Text(
-                            "View all products",
-                            style: CustomTextStyles.productSmallBodyTextBlack,
-                          ),
-                        ],
-                      ),
-                      // const Spacer(),
-                      // Assets.images.svg.productListing.listIcon.svg(),
-                      // SizedBox(
-                      //   width: 8.w,
-                      // ),
-                      // Assets.images.svg.productListing.gridIcon.svg(),
-                    ],
-                  ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Products",
+                          style: CustomTextStyles.producHeaderBlack,
+                        ),
+                        Text(
+                          "View all products",
+                          style: CustomTextStyles.productSmallBodyTextBlack,
+                        ),
+                      ],
+                    ),
+                    // const Spacer(),
+                    // Assets.images.svg.productListing.listIcon.svg(),
+                    // SizedBox(
+                    //   width: 8.w,
+                    // ),
+                    // Assets.images.svg.productListing.gridIcon.svg(),
+                  ],
                 ),
-                Divider(
-                  color: GlobalColors.diverColor,
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 23.w, right: 23.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
+              ),
+              Divider(
+                color: GlobalColors.diverColor,
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 23.w, right: 23.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         height: GlobalScreenSize.getScreenHeight(
                               context,
@@ -79,6 +83,7 @@ class ProductScreen extends ConsumerWidget {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Search Product",
+                              contentPadding: const EdgeInsets.only(top: 2),
                               suffixIcon: SvgPicture.asset(
                                 Assets.images.svg.productListing.sortIcon.path,
                                 height: 24.h,
@@ -87,26 +92,28 @@ class ProductScreen extends ConsumerWidget {
                               )),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return const FilterBottomSheet();
-                            },
-                          );
-                        },
-                        child:
-                            Assets.images.svg.productListing.filterButton.svg(
-                          height:
-                              GlobalScreenSize.getScreenHeight(context) * 0.052,
-                          width: GlobalScreenSize.getScreenWidth(context) * 0.7,
-                        ),
+                    ),
+                    10.w.sbW,
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return const FilterBottomSheet();
+                          },
+                        );
+                      },
+                      child: Assets.images.svg.productListing.filterButton.svg(
+                        height:
+                            GlobalScreenSize.getScreenHeight(context) * 0.052,
+                        width: GlobalScreenSize.getScreenWidth(context) * 0.7,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Padding(
+              ),
+              Expanded(
+                child: Padding(
                   padding: EdgeInsets.only(
                     left: 24.h,
                     top: 24.h,
@@ -118,15 +125,19 @@ class ProductScreen extends ConsumerWidget {
                       return data.when(
                         data: (data) {
                           final allKeys = data.keys.toList();
-
+                          log("ALL KEYS: ${allKeys.toString()}");
                           return ListView.separated(
                             itemCount: allKeys.length,
                             padding: EdgeInsets.zero,
                             itemBuilder: (txt, index) {
                               final myKey = allKeys[index];
-                              return ProductCardListWidget(
-                                categoryName: allKeys[index],
-                                products: data[myKey]!,
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: allKeys.last == myKey ? 60 : 0),
+                                child: ProductCardListWidget(
+                                  categoryName: allKeys[index],
+                                  products: data[myKey]!.reversed.toList(),
+                                ),
                               );
                             },
                             separatorBuilder:
@@ -144,9 +155,9 @@ class ProductScreen extends ConsumerWidget {
                       );
                     }),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         );
       },

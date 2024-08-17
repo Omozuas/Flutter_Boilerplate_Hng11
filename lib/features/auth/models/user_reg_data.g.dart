@@ -12,6 +12,7 @@ UserRegData _$UserRegDataFromJson(Map<String, dynamic> json) => UserRegData(
       accessToken: json['access_token'] as String?,
     );
 
+// ignore: unused_element
 Map<String, dynamic> _$UserRegDataToJson(UserRegData instance) =>
     <String, dynamic>{
       'access_token': instance.accessToken,
