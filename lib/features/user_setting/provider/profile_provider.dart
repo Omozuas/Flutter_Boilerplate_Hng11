@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -61,7 +62,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       if (image != null) {
         await settingsApi.updateProfileAvatar(
           email: email,
-          image: image,
+          file: File(image.path),
         );
       }
       await getUser();
@@ -80,7 +81,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       state = state.copyWith(profileAvatarUpdater: const AsyncLoading());
       final res = await settingsApi.updateProfileAvatar(
         email: email,
-        image: image,
+        file: File(image.path),
       );
       await getUser();
       state = state.copyWith(profileAvatarUpdater: AsyncData(res));

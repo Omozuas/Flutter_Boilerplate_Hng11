@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
 import 'models/user_model.dart';
 import 'models/user_profile.dart';
+import 'provider/settings_dio_provider.dart';
 
 class SettingsApi {
   SettingsApi(this.ref);
@@ -54,13 +55,18 @@ class SettingsApi {
   }
 
   Future<String> updateProfileAvatar({
-    required XFile image,
+    required File file,
     required String email,
   }) async {
     try {
-      final response = await dio.multipartPut(
+      final dio = ref.read(settingsDioProvider);
+      final multipart = await MultipartFile.fromFile(
+        file.path,
+        filename: file.path.split('/').last,
+      );
+      final response = await dio.multipartPUT(
         '/profile/$email/picture',
-        data: {'DisplayPhoto': File(image.path)},
+        data: {'DisplayPhoto': multipart},
       );
       return response?.data['data']['avatar_url'] ?? '';
     } catch (e) {
