@@ -242,7 +242,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     final profile = UserProfile(
       userID: user.id,
-      firstname: user.profile?.firstname ?? '',
+      firstname: user.fullname,
       lastname: user.profile?.lastname ?? '',
       phoneNumber: user.profile?.phoneNumber,
       avatarURL: user.profile?.avatarURL,
