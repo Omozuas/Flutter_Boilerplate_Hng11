@@ -30,9 +30,15 @@ class GlobalColors {
   static HexColor red = HexColor('#E00414');
   static HexColor green = HexColor('#10AF20');
   static HexColor white = HexColor('#FFFFFF');
+
+  static HexColor mutedTextColor = HexColor('#71717A');
+  static HexColor zinc50 = HexColor("#FAFAFA");
+  static HexColor dark2 = HexColor("#0A0A0A");
+  static HexColor verified = HexColor("#6DC347");
   static HexColor toastBgSurface = HexColor('#FDE7E7');
   static HexColor toastBgSurface2 = HexColor('##E7F7E9');
   static HexColor integrationTextColor = HexColor('#0A0A0A');
   static HexColor containerBgColor = HexColor('#FFF8F2');
+  static HexColor containerBorderColor = HexColor('#CBD5E1');
   static HexColor btnBgColor = HexColor('#FDEEE3');
 }

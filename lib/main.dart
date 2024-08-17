@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,9 +10,15 @@ import 'package:one_context/one_context.dart';
 import 'services/service_locator.dart';
 
 void main() async {
-  setupLocator();
-  await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  await initializeApp();
+
+  // Change status bar theme based on theme of app
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+  ));
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -41,5 +45,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
   }
 }
