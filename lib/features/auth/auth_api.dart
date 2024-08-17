@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/services/dio_provider.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../common_models/get_user_response.dart';
 import '../../models/company_user.dart';
 import '../../services/response_model.dart';
 
@@ -25,27 +27,57 @@ class AuthApi {
   Future<ResponseModel?> forgotPassword({
     required String email,
   }) async {
-    return await dioProvider.post(
-      '/auth/forgot-password',
-      data: {
-        'email': email,
-      },
-    );
+    try {
+      final response = await dioProvider.post(
+        '/auth/$email/forgot-password-mobile',
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error In Resetting password: ${e.toString()}');
+      return null;
+    }
+    // return await dioProvider.post(
+    //   '/auth/$email/forgot-password',
+    //   data: {
+    //     'email': email,
+    //   },
+    // );
+  }
+
+  Future<ResponseModel?> verifyCode({
+    required String email,
+    required String code,
+  }) async {
+    try {
+      final response = await dioProvider.post(
+        '/auth/$email/$code/verify-code',
+      );
+      return response;
+    } catch (e) {
+      debugPrint('Error In verrifying code: $e');
+      return null;
+    }
+    // return await dioProvider.post(
+    //   '/auth/$email/forgot-password',
+    //   data: {
+    //     'email': email,
+    //   },
+    // );
   }
 
   // reset password api
   Future<ResponseModel?> resetPassword({
     required String email,
-    required String otp,
-    required String newpassword,
+    required String confirmNewPassword,
+    required String newPassword,
   }) async {
     try {
-      final response = await dioProvider.patchUpdate(
-        "/auth/password-reset",
+      final response = await dioProvider.putUpdate(
+        "/auth/reset-password-mobile",
         data: {
-          'email': email,
-          'token': otp,
-          'new_Password': newpassword,
+          "newPassword": newPassword,
+          "confirmNewPassword": confirmNewPassword,
+          "email": email
         },
       );
       return response;
@@ -62,7 +94,21 @@ class AuthApi {
         String accessToken = response.data['access_token'];
         box.write('accessToken', accessToken);
       }
+      log('${response?.data}');
       return response;
+    } catch (e) {
+      debugPrint('Error during login: ${e.toString()}');
+      return null;
+    }
+  }
+
+  Future<GetUserData?> getUser() async {
+    try {
+      final response = await dioProvider.get(
+        'auth/@me',
+      );
+      debugPrint(response?.data.toString());
+      return GetUserData.fromJson(jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
       debugPrint('Error during login: ${e.toString()}');
       return null;
@@ -85,11 +131,11 @@ class AuthApi {
   }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
-Future<Company> registerCompany(Company company) async {
-  DioProvider dioProvider = locator<DioProvider>();
-  // An authenticated user is required for this request to be completed based on the api.
-  // tODO: Remove access token in place of currently signed user's token.
-  // box.write('accessToken','accessToken');
+  Future<Company> registerCompany(Company company) async {
+    DioProvider dioProvider = locator<DioProvider>();
+    // An authenticated user is required for this request to be completed based on the api.
+    // tODO: Remove access token in place of currently signed user's token.
+    // box.write('accessToken','accessToken');
 
     var registeredCompany = Company.initial();
     try {

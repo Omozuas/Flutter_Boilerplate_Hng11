@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,6 +55,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,12 +74,12 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           ),
           widget.label == null
               ? SizedBox(
-            height: 0.h,
-            // child: Text("data"),
-          )
+                  height: 0.h,
+                  // child: Text("data"),
+                )
               : SizedBox(
-            height: 8.h,
-          ),
+                  height: 8.h,
+                ),
           TextFormField(
             controller: widget.controller,
             keyboardType: widget.keyboardType,
@@ -123,15 +123,15 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 ),
               ),
               prefixIcon: widget.prefixIcon,
-              suffixIcon:
-              InkWell(
-                onTap: (){
+              suffixIcon: InkWell(
+                onTap: () {
                   setState(() {
                     obscureText = !obscureText;
                   });
                 },
-                child: !obscureText ?
-                const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                child: !obscureText
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(Icons.visibility),
               ),
             ),
           ),

@@ -17,23 +17,24 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   static GetStorage box = locator<GetStorage>();
+
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
+    WidgetsBinding.instance.addPostFrameCallback((t) {
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
       } else {
-        if(box.read('rememberMe') != null && box.read('rememberMe')){
-         AuthProvider().login({
-           "email" : box.read('email'),
-           "password" : box.read('password')
-         }, context,fromLoginScreen: false);
-        }
-       else{
+        if (box.read('rememberMe') != null && box.read('rememberMe')) {
+          AuthProvider().login({
+            "email": box.read('email'),
+            "password": box.read('password')
+          }, context, fromLoginScreen: false);
+        } else {
           context.go(AppRoute.login);
         }
       }
     });
+
     super.initState();
   }
 
@@ -61,7 +62,9 @@ class _SplashScreenState extends State<SplashScreen> {
               color: GlobalColors.darkOne,
             ),
           ),
-          SizedBox(height: 50.h,),
+          SizedBox(
+            height: 50.h,
+          ),
           SizedBox(
             height: 20.h,
             width: 20.h,
