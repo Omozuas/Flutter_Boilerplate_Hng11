@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../models/notification_model.dart';
+import '../models/subscription_model.dart';
+import '../models/updatepassword-model.dart';
 import '../models/user_model.dart';
 import '../models/user_profile.dart';
 import '../settings_api.dart';
+import '../widgets/ref_extension.dart';
 
 class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   @override
@@ -20,7 +22,8 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         profileAvatarUpdater: AsyncData(null),
         notificationUpdater: AsyncData(null),
         notificationFetch: AsyncData(null),
-        fetchSubcription: AsyncData(null));
+        fetchSubcription: AsyncData(null),
+        updatePassword: AsyncData(null));
   }
 
   Future<void> pickImage(ImageSource? source) async {
@@ -95,11 +98,13 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> getNotifications({required String userId}) async {
+  Future<void> getNotifications() async {
     final settingsApi = ref.read(settingsApiProvider);
+    final user = state.user.sureValue;
+    if (user == null) return;
     try {
       state = state.copyWith(notificationFetch: const AsyncLoading());
-      final res = await settingsApi.getNotification(userId);
+      final res = await settingsApi.getNotification(user.id);
       state = state.copyWith(notificationFetch: AsyncData(res));
     } catch (e) {
       state =
@@ -107,9 +112,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> updateNotifications(
-      {required String userId,
-      required NotificationModel notificationModel}) async {
+  Future<void> updateNotifications(NotificationModel notificationModel) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(notificationUpdater: const AsyncLoading());
@@ -133,6 +136,23 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
           state.copyWith(fetchSubcription: AsyncError(e, StackTrace.current));
     }
   }
+
+  Future<void> updatePassword(
+      {required String newPassword,
+      required String confirmNewPassword,
+      required String oldPassword}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(updatePassword: const AsyncLoading());
+      await settingsApi.updatePassword(
+          newPassword: newPassword,
+          confirmNewPassword: confirmNewPassword,
+          oldPassword: oldPassword);
+      state = state.copyWith(updatePassword: const AsyncData(null));
+    } catch (e) {
+      state = state.copyWith(updatePassword: AsyncError(e, StackTrace.current));
+    }
+  }
 }
 
 final profileProvider =
@@ -147,6 +167,7 @@ class ProfileProviderStates {
   final AsyncValue<NotificationModel?> notificationUpdater;
   final AsyncValue<NotificationModel?> notificationFetch;
   final AsyncValue<SubscriptionModel?> fetchSubcription;
+  final AsyncValue<UpdatePasswordModel?> updatePassword;
 
   const ProfileProviderStates({
     required this.pickedImage,
@@ -156,6 +177,7 @@ class ProfileProviderStates {
     required this.notificationUpdater,
     required this.notificationFetch,
     required this.fetchSubcription,
+    required this.updatePassword,
   });
 
   ProfileProviderStates copyWith(
@@ -165,7 +187,8 @@ class ProfileProviderStates {
       AsyncValue<String?>? profileAvatarUpdater,
       AsyncValue<NotificationModel?>? notificationUpdater,
       AsyncValue<NotificationModel?>? notificationFetch,
-      AsyncValue<SubscriptionModel?>? fetchSubcription}) {
+      AsyncValue<SubscriptionModel?>? fetchSubcription,
+      AsyncValue<UpdatePasswordModel?>? updatePassword}) {
     return ProfileProviderStates(
         pickedImage: pickedImage ?? this.pickedImage,
         user: user ?? this.user,
@@ -173,6 +196,7 @@ class ProfileProviderStates {
         profileAvatarUpdater: profileAvatarUpdater ?? this.profileAvatarUpdater,
         notificationUpdater: notificationUpdater ?? this.notificationUpdater,
         notificationFetch: notificationFetch ?? this.notificationFetch,
-        fetchSubcription: fetchSubcription ?? this.fetchSubcription);
+        fetchSubcription: fetchSubcription ?? this.fetchSubcription,
+        updatePassword: updatePassword ?? this.updatePassword);
   }
 }

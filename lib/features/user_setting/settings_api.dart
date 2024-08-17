@@ -125,7 +125,7 @@ class SettingsApi {
       required String newPassword,
       required String confirmNewPassword}) async {
     try {
-      await dio.putUpdate('/v1/auth/password', data: {
+      await dio.putUpdate('/auth/password', data: {
         "oldPassword": oldPassword,
         "newPassword": newPassword,
         "confirmNewPassword": confirmNewPassword

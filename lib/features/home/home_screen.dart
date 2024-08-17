@@ -156,119 +156,118 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
 
-            // Overview (Bar Chart)
-            dashBoardStateProvider.trendLoading
-                ? const ChartLoader()
-                : dashBoardStateProvider.mapData.isEmpty
-                    ? const ChartEmpty()
-                    : Container(
-                        padding: EdgeInsets.all(24.w),
-                        height: 302.h,
-                        child: SfCartesianChart(
-                          backgroundColor: Colors.white,
-                          plotAreaBorderColor: Colors.transparent,
-                          primaryXAxis: CategoryAxis(
-                            majorGridLines: const MajorGridLines(width: 0),
-                            axisLine: const AxisLine(width: 0),
-                            // Add label style customization
-                            labelStyle: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 12.sp,
-                            ),
+          // Overview (Bar Chart)
+          dashBoardStateProvider.trendLoading
+              ? const ChartLoader()
+              : dashBoardStateProvider.mapData.isEmpty
+                  ? const ChartEmpty()
+                  : Container(
+                      padding: EdgeInsets.all(24.w),
+                      height: 302.h,
+                      child: SfCartesianChart(
+                        backgroundColor: Colors.white,
+                        plotAreaBorderColor: Colors.transparent,
+                        primaryXAxis: CategoryAxis(
+                          majorGridLines: const MajorGridLines(width: 0),
+                          axisLine: const AxisLine(width: 0),
+                          // Add label style customization
+                          labelStyle: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12.sp,
                           ),
-                          primaryYAxis: const NumericAxis(
-                            majorGridLines: MajorGridLines(width: 0),
-                            minorGridLines: MinorGridLines(width: 0),
-                            axisLine: AxisLine(width: 0),
-                            // Add axis label
-                          ),
-                          series: <CartesianSeries>[
-                            ColumnSeries<SalesData, String>(
-                              dataSource: dashBoardStateProvider.mapData,
-                              xValueMapper: (SalesData data, _) => data.month,
-                              yValueMapper: (SalesData data, _) => data.veryGood,
-                              color: const Color(0xFFE0E0E0),
-                              name: 'Very Good',
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              width:
-                                  0.7, // Reduce the bar width to allow overlapping
-                            ),
-                            ColumnSeries<SalesData, String>(
-                              dataSource: dashBoardStateProvider.mapData,
-                              xValueMapper: (SalesData data, _) => data.month,
-                              yValueMapper: (SalesData data, _) => data.good,
-                              color: const Color(0xFFFFC107),
-                              name: 'Good',
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              width:
-                                  0.7, // Reduce the bar width to allow overlapping
-                            ),
-                            ColumnSeries<SalesData, String>(
-                              dataSource: dashBoardStateProvider.mapData,
-                              xValueMapper: (SalesData data, _) => data.month,
-                              yValueMapper: (SalesData data, _) => data.poor,
-                              color: const Color(0xFFC70039),
-                              name: 'Poor',
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              width:
-                                  0.7, // Reduce the bar width to allow overlapping
-                            ),
-                          ],
                         ),
+                        primaryYAxis: const NumericAxis(
+                          majorGridLines: MajorGridLines(width: 0),
+                          minorGridLines: MinorGridLines(width: 0),
+                          axisLine: AxisLine(width: 0),
+                          // Add axis label
+                        ),
+                        series: <CartesianSeries>[
+                          ColumnSeries<SalesData, String>(
+                            dataSource: dashBoardStateProvider.mapData,
+                            xValueMapper: (SalesData data, _) => data.month,
+                            yValueMapper: (SalesData data, _) => data.veryGood,
+                            color: const Color(0xFFE0E0E0),
+                            name: 'Very Good',
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            width:
+                                0.7, // Reduce the bar width to allow overlapping
+                          ),
+                          ColumnSeries<SalesData, String>(
+                            dataSource: dashBoardStateProvider.mapData,
+                            xValueMapper: (SalesData data, _) => data.month,
+                            yValueMapper: (SalesData data, _) => data.good,
+                            color: const Color(0xFFFFC107),
+                            name: 'Good',
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            width:
+                                0.7, // Reduce the bar width to allow overlapping
+                          ),
+                          ColumnSeries<SalesData, String>(
+                            dataSource: dashBoardStateProvider.mapData,
+                            xValueMapper: (SalesData data, _) => data.month,
+                            yValueMapper: (SalesData data, _) => data.poor,
+                            color: const Color(0xFFC70039),
+                            name: 'Poor',
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            width:
+                                0.7, // Reduce the bar width to allow overlapping
+                          ),
+                        ],
                       ),
+                    ),
 
-            // Recent Sales
-            SizedBox(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Text(
-                        'Recent Sales',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'See more',
-                          style: TextStyle(
-                            color: GlobalColors.gray600Color,
-                          ),
+          // Recent Sales
+          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      'Recent Sales',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'See more',
+                        style: TextStyle(
+                          color: GlobalColors.gray600Color,
                         ),
-                      )
-                    ],
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: customers.length,
-                    itemBuilder: (context, index) {
-                      final customer = customers[index];
-                      return CustomerListTile(
-                        customerName: customer['name'] ?? 'Unknown Customer',
-                        email: customer['email'] ?? 'No Email Provided',
-                        amount: customer['amount'] ?? '0.00',
-                      );
-                    },
-                  ),
-                ],
-              ),
+                      ),
+                    )
+                  ],
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: customers.length,
+                  itemBuilder: (context, index) {
+                    final customer = customers[index];
+                    return CustomerListTile(
+                      customerName: customer['name'] ?? 'Unknown Customer',
+                      email: customer['email'] ?? 'No Email Provided',
+                      amount: customer['amount'] ?? '0.00',
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-
-        );
+          ),
+        ],
+      ),
+    );
   }
 }
 
