@@ -74,10 +74,10 @@ class HomeScreen extends ConsumerWidget {
                   onPressed: () {},
                   icon: const Icon(Icons.notifications),
                 ),
-                const Positioned(
-                  top: 0.0,
-                  right: 0.0,
-                  child: Badge(
+                Positioned(
+                  top: 10.0.h,
+                  right: 5.0.w,
+                  child: const Badge(
                     label:
                         Text('5'), // Replace with the actual notification count
                     textColor: Colors.white,

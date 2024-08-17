@@ -23,7 +23,7 @@ class ProductApi implements ProductsApiContract {
   Future createProduct({required String orgId, required Map product}) async {
     try {
       log(product.toString());
-      await dioProvider.post(
+      return  dioProvider.post(
           productsForOrganisationEndpoint(
             orgId: orgId,
           ),

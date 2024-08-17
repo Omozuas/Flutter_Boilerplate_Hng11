@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,16 +82,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           'Edit Profile',
           style: TextStyle(fontSize: 16),
         ),
-        leading: InkWell(
-          onTap: () {
-            ///tODO: Perform onTap function for this icon
-            context.pop();
-          },
-          child: Icon(
-            Icons.chevron_left,
-            size: 35.sp,
-          ),
-        ),
+        leading: const ChevronBackButton(),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -242,8 +234,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     final profile = UserProfile(
       userID: user.id,
-      firstname: user.profile?.firstname ?? '',
-      lastname: user.profile?.lastname ?? '',
+      firstname: user.fullname,
+      lastname: user.profile!.lastname,
       phoneNumber: user.profile?.phoneNumber,
       avatarURL: user.profile?.avatarURL,
       username: _usernameController.text,

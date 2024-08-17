@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -32,13 +33,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
 // Future.delayed(Duration.zero,()=>   ref.read(authProvider.notifier).setPasswordButtonLoading = false);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.chevron_left,
-            size: 30.sp,
-          ),
-          onPressed: () => context.pop(),
-        ),
+        leading: const ChevronBackButton(),
       ),
       body: Form(
         key: _emailKey,

@@ -14,12 +14,14 @@ class ProductCardWiget extends StatelessWidget {
   const ProductCardWiget(
       {super.key,
       required this.productNmae,
-      required this.inStock,
+      required this.status,
       required this.price,
-      required this.image});
+      required this.image,
+      required this.category});
 
   final String productNmae;
-  final bool inStock;
+  final String category;
+  final String status;
   final int price;
 
   final String image;
@@ -36,8 +38,6 @@ class ProductCardWiget extends StatelessWidget {
       child: Row(
         children: [
           Builder(builder: (context) {
-            log(image);
-
             if (image.isNotEmpty) {
               if (image.startsWith('http')) {
                 return Image.network(image);
@@ -71,8 +71,9 @@ class ProductCardWiget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "P001",
+                  category,
                   style: CustomTextStyles.productTextBodyBlack,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(
                   height: 6.h,
@@ -83,7 +84,7 @@ class ProductCardWiget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    if (inStock) ...[
+                    if (status.contains('In stock')) ...[
                       Assets.images.svg.productListing.active.svg(),
                     ] else ...[
                       Container(
@@ -96,7 +97,7 @@ class ProductCardWiget extends StatelessWidget {
                       )
                     ],
                     Text(
-                      inStock ? "In stock" : "Out of stock",
+                      status,
                       style: CustomTextStyles.productTextBody4Black,
                     ),
                   ],
@@ -108,6 +109,7 @@ class ProductCardWiget extends StatelessWidget {
             flex: 2,
             child: Text(
               "\$$price",
+              textAlign: TextAlign.end,
               style: CustomTextStyles.productTextBody2Black,
             ),
           )
