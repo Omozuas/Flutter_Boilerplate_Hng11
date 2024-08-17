@@ -15,12 +15,9 @@ class ProductList extends _$ProductList {
     if (org.organisationId == null) {
       return Future.error('organisation is not initialized');
     }
-    final value = ref.watch(getOrganisationProvider);
-
-    log('Organization provider ${value.name}');
 
     return ref
-        .watch(productApiProvider)
+        .watch(productApiProvider) 
         .getAllProducts(orgId: org.organisationId!);
   }
 }

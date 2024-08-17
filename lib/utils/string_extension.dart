@@ -1,8 +1,10 @@
 extension StringEx on String {
   bool get isValidBase64 {
-    final base64Pattern =
-        RegExp(r'^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$');
-    return base64Pattern.hasMatch(this) && length % 4 == 0;
+    print('Checking Base64 validity for string of length $length');
+    final base64Pattern = RegExp(r'^[A-Za-z0-9+/=]+$');
+    final isMatch = base64Pattern.hasMatch(this);
+    print('Pattern match result: $isMatch, Length mod 4: ${length % 4}');
+    return isMatch && length % 4 == 0;
   }
 
   String get capitalize {
