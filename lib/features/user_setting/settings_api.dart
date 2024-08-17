@@ -1,7 +1,9 @@
 import 'dart:io';
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
@@ -54,13 +56,19 @@ class SettingsApi {
   }
 
   Future<String> updateProfileAvatar({
-    required XFile image,
+    required File file,
     required String email,
   }) async {
     try {
+      final multipart = await MultipartFile.fromFile(
+        file.path,
+        filename: file.path.split('/').last,
+        contentType: MediaType('image', 'png'),
+      );
       final response = await dio.multipartPut(
         '/profile/$email/picture',
-        data: {'DisplayPhoto': File(image.path)},
+        data: {'DisplayPhoto': multipart},
+        options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
       return response?.data['data']['avatar_url'] ?? '';
     } catch (e) {
