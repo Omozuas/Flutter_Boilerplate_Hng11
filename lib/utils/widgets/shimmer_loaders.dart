@@ -94,9 +94,9 @@ class _ShimmerCardState extends State<ShimmerCard>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark;
-    print(darkModeOn);
+    //var brightness = MediaQuery.of(context).platformBrightness;
+    //bool darkModeOn = brightness == Brightness.dark;
+    //print(darkModeOn);
     return AnimatedBuilder(
         animation: _animation,
         builder: (BuildContext context, Widget? child) {

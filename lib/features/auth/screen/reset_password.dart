@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class ResetPassword extends StatefulWidget {
   final String email;
@@ -48,15 +46,6 @@ class _ResetPasswordState extends State<ResetPassword> {
     }
   }
 
-  void _handleResend() {
-    setState(() {
-      _startTimer();
-    });
-  }
-
-  void _handleChangeEmail() {
-    context.go(AppRoute.forgotPassword);
-  }
 
   @override
   Widget build(BuildContext context) {

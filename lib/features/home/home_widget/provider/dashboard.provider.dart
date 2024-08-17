@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/dashboard_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../services/service_locator.dart';
 import '../../../../services/user.service.dart';
@@ -91,41 +90,41 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
   }
 
   List<SalesData> data = [];
-
-  String _getMonthAbbreviation(DateTime date) {
-    // Create a DateFormat instance with the pattern 'MMM'
-    DateFormat formatter = DateFormat('MMM');
-
-    // Format the DateTime object to get the abbreviated month name
-    String month = formatter.format(date);
-
-    return month;
-  }
-
-  DateTime _subtractMonths(int months) {
-    // Get the current date
-    DateTime now = DateTime.now();
-
-    // Subtract the specified number of months from the current date
-    int newMonth = now.month - months;
-    int newYear = now.year;
-
-    // Handle the year adjustment if subtracting months results in a previous year
-    while (newMonth <= 0) {
-      newYear -= 1;
-      newMonth += 12;
-    }
-
-    // Create a new DateTime object with the calculated year, month, and day
-    DateTime newDate = DateTime(newYear, newMonth, now.day);
-
-    // Handle cases where the resulting month has fewer days than the current day
-    while (newDate.month != newMonth) {
-      newDate = newDate.subtract(const Duration(days: 1));
-    }
-
-    return newDate;
-  }
+/// TODO: you can uncomment this line when you are ready to implement ist. It was causing QA to fail because it was not referenced
+  // String _getMonthAbbreviation(DateTime date) {
+  //   // Create a DateFormat instance with the pattern 'MMM'
+  //   DateFormat formatter = DateFormat('MMM');
+  //
+  //   // Format the DateTime object to get the abbreviated month name
+  //   String month = formatter.format(date);
+  //
+  //   return month;
+  // }
+  //
+  // DateTime _subtractMonths(int months) {
+  //   // Get the current date
+  //   DateTime now = DateTime.now();
+  //
+  //   // Subtract the specified number of months from the current date
+  //   int newMonth = now.month - months;
+  //   int newYear = now.year;
+  //
+  //   // Handle the year adjustment if subtracting months results in a previous year
+  //   while (newMonth <= 0) {
+  //     newYear -= 1;
+  //     newMonth += 12;
+  //   }
+  //
+  //   // Create a new DateTime object with the calculated year, month, and day
+  //   DateTime newDate = DateTime(newYear, newMonth, now.day);
+  //
+  //   // Handle cases where the resulting month has fewer days than the current day
+  //   while (newDate.month != newMonth) {
+  //     newDate = newDate.subtract(const Duration(days: 1));
+  //   }
+  //
+  //   return newDate;
+  // }
 
   set setOverViewLoading(bool value) {
     state = state.copyWith(overViewLoading: value);
