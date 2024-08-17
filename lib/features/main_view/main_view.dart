@@ -80,7 +80,7 @@ class _MainViewState extends State<MainView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.cart),
-            label: 'Cart',
+            label: 'Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.settings),
