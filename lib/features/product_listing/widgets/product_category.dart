@@ -23,6 +23,7 @@ class _ProductCategoryState extends State<ProductCategory> {
     'Toys & Games',
     'Automotive & Tools',
     'Furniture & Decor',
+    'Food',
   ];
 
   @override

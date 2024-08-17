@@ -104,8 +104,8 @@ class _MembersSettingsState extends State<MembersSettings> {
                 Row(
                   children: [
                     SizedBox(
-                      height: 80,
-                      width: 350,
+                      height: 80.h,
+                      width: 350.w,
                       child: TextField(
                         readOnly: true,
                         maxLines: null,
@@ -116,24 +116,25 @@ class _MembersSettingsState extends State<MembersSettings> {
                         ),
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15.0, horizontal: 10.0),
-                            suffixIcon: Wrap(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.refresh,
-                                      color: GlobalColors.orange),
-                                  onPressed: () {
-                                    // Logic to refresh the invite link goes here
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.copy,
-                                      color: GlobalColors.orange),
-                                  onPressed: () {
-                                    // Logic to copy the invite link goes here
-                                  },
-                                ),
-                              ],
+                                vertical: 15.0, horizontal: 10.5),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Wrap(
+                                children: [
+                                  InkWell(
+                                      onTap: () {},
+                                      child: Icon(Icons.refresh,
+                                          color: GlobalColors.orange)),
+                                  SizedBox(
+                                    width: 15.w,
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Icon(Icons.copy,
+                                        color: GlobalColors.orange),
+                                  ),
+                                ],
+                              ),
                             ),
                             hintText:
                                 'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
@@ -192,7 +193,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 ),
               ),
               SizedBox(
-                height: 5.h,
+                height: 10.h,
               ),
               Row(
                 children: [
@@ -225,6 +226,8 @@ class _MembersSettingsState extends State<MembersSettings> {
               ),
               SizedBox(height: 10.w),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     '3 active members',
@@ -233,13 +236,13 @@ class _MembersSettingsState extends State<MembersSettings> {
                         fontWeight: FontWeight.w400,
                         color: const Color(0xff525252)),
                   ),
-                  const Spacer(),
                   PopupMenuButton<String>(
                     offset: const Offset(0, 30),
                     padding: EdgeInsets.zero,
                     icon: const Icon(
                       Icons.more_vert_rounded,
-                      size: 35,
+                      size: 25,
+                      color: Color(0xff525252),
                     ),
                     onSelected: (value) {
                       // Handle the selected action here
