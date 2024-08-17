@@ -1,6 +1,7 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
@@ -18,9 +19,9 @@ class ResetPassword extends StatefulWidget {
 
 class _ResetPasswordState extends State<ResetPassword> {
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
 
   @override
   void initState() {
@@ -28,8 +29,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     _startTimer();
   }
 
-  void _startTimer() {
-  }
+  void _startTimer() {}
 
   void _handleResetPassword() {
     if (_formKey.currentState?.validate() ?? false) {
@@ -52,13 +52,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.chevron_left_rounded,
-            size: 30.sp,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
+        leading: const ChevronBackButton(),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.sp),
@@ -81,7 +75,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
               ),
               SizedBox(height: 28.sp),
-
               CustomTextField(
                 label: "New Password",
                 controller: _newPasswordController,
@@ -90,7 +83,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 validator: Validators.passwordValidator,
               ),
               SizedBox(height: 16.sp),
-
               CustomTextField(
                 label: "Confirm Password",
                 controller: _confirmPasswordController,
@@ -107,7 +99,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 },
               ),
               SizedBox(height: 32.sp),
-
               CustomButton(
                 onTap: _handleResetPassword,
                 borderColor: GlobalColors.borderColor,
@@ -118,7 +109,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 textColor: Colors.white,
               ),
               SizedBox(height: 16.sp),
-
               Center(
                 child: RichText(
                   text: TextSpan(
@@ -138,7 +128,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
               ),
               SizedBox(height: 16.sp),
-
               Center(
                 child: TextButton(
                   onPressed: _handleChangeEmail,

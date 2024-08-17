@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             textTheme: GoogleFonts.interTextTheme(),
             scaffoldBackgroundColor: Colors.white,
+            
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.transparent,
                 scrolledUnderElevation: 0,

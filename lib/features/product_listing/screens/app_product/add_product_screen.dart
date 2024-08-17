@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/provider/add_product_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
@@ -165,10 +167,10 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
     final state = ref.watch(addProductProviderProvider);
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         centerTitle: true,
+        leading: const ChevronBackButton(),
         title: Text(
           'Add a Product',
           style: GoogleFonts.inter(
@@ -206,12 +208,12 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                       ),
                       SizedBox(
                         width: 379.w,
-                        height: 66.h,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             compulsoryTitle('Title'),
+                            6.h.sbH,
                             ProductNameFormField(
                               controller: productNameController,
                             )
@@ -228,12 +230,11 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                       ),
                       SizedBox(
                         width: 379.w,
-                        height: 126.h,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              height: 20.h,
                               width: 379.w,
                               child: Text(
                                 'Description',
@@ -245,6 +246,8 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                                 ),
                               ),
                             ),
+                            6.h.sbH,
+
                             DescriptionFormField(
                               controller: productDescriptionController,
                             ),
@@ -254,7 +257,6 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             //   child: const Text('description textfield here'),
                             // ),
                             SizedBox(
-                              height: 20.h,
                               width: 379.w,
                               child: Text(
                                 'Maximum of 72 characters',
@@ -272,89 +274,78 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                       SizedBox(
                         height: 6.h,
                       ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              width: 379.w,
-                              child: Text(
-                                'Category',
-                                style: GoogleFonts.inter(
-                                  color: const Color.fromRGBO(10, 10, 10, 1),
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  height: 20 / 14,
-                                ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 379.w,
+                            child: Text(
+                              'Category',
+                              style: GoogleFonts.inter(
+                                color: const Color.fromRGBO(10, 10, 10, 1),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                height: 20 / 14,
                               ),
                             ),
-                            SizedBox(
-                              height: 40.h,
-                              width: 379.w,
-                              // child: const Text(
-                              //   'Category dropdown here',
-                              // ),
-                              child: ProductCategory(
-                                onCategorySelected: onCategorySelected,
-                              ),
-                            )
-                          ],
-                        ),
+                          ),
+                          6.h.sbH,
+                          SizedBox(
+                            height: 40.h,
+                            width: 379.w,
+                            // child: const Text(
+                            //   'Category dropdown here',
+                            // ),
+                            child: ProductCategory(
+                              onCategorySelected: onCategorySelected,
+                            ),
+                          )
+                        ],
                       ),
                       SizedBox(
                         height: 6.h,
                       ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              width: 379.w,
-                              child: compulsoryTitle('Standard Price'),
-                            ),
-                            ProductPriceFormField(
-                              controller: productPriceController,
-                            ),
-                            // Container(
-                            //   height: 40.h,
-                            //   width: 379.w,
-                            //   child: const Text(
-                            //     'Standard Price textfield here',
-                            //   ),
-                            // )
-                          ],
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 379.w,
+                            child: compulsoryTitle('Standard Price'),
+                          ),
+                          6.h.sbH,
+                          ProductPriceFormField(
+                            controller: productPriceController,
+                          ),
+                          // Container(
+                          //   height: 40.h,
+                          //   width: 379.w,
+                          //   child: const Text(
+                          //     'Standard Price textfield here',
+                          //   ),
+                          // )
+                        ],
                       ),
                       SizedBox(
                         height: 6.h,
                       ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              width: 379.w,
-                              child: compulsoryTitle('Quantity'),
-                            ),
-                            ProductQuantityFormField(
-                              controller: productQuantityController,
-                            )
-                            // Container(
-                            //   height: 40.h,
-                            //   width: 379.w,
-                            //   child: const Text('Quantity textfield here'),
-                            // )
-                          ],
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 379.w,
+                            child: compulsoryTitle('Quantity'),
+                          ),
+                          6.h.sbH,
+
+                          ProductQuantityFormField(
+                            controller: productQuantityController,
+                          )
+                          // Container(
+                          //   height: 40.h,
+                          //   width: 379.w,
+                          //   child: const Text('Quantity textfield here'),
+                          // )
+                        ],
                       ),
                       SizedBox(
                         height: 6.h,

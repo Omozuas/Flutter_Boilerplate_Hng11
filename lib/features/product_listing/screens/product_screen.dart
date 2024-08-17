@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter_product_bottomsheet.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -80,6 +81,7 @@ class ProductScreen extends ConsumerWidget {
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Search Product",
+                                contentPadding: const EdgeInsets.only(top: 2),
                                 suffixIcon: SvgPicture.asset(
                                   Assets
                                       .images.svg.productListing.sortIcon.path,
@@ -90,6 +92,7 @@ class ProductScreen extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      10.w.sbW,
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
