@@ -194,9 +194,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       SizedBox(height: 8.h),
                       InkWell(
                         onTap: () {
-                          stotage.remove('accessToken');
-
-                          context.go(AppRoute.login);
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (context) => LogOutDialog(
+                          //     onTap: () {
+                          //       stotage.remove('accessToken');
+                          //       Navigator.pop(context);
+                                context.go(AppRoute.login);
+                          //     },
+                          //   ),
+                          // );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
