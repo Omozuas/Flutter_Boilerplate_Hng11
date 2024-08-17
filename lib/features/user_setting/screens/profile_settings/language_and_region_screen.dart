@@ -3,7 +3,6 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_but
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
 

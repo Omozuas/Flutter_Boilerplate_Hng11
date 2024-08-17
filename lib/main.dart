@@ -19,7 +19,7 @@ void main() async {
   );
 
   // Change status bar theme based on theme of app
-  SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
   ));
@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             textTheme: GoogleFonts.interTextTheme(),
             scaffoldBackgroundColor: Colors.white,
-            
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.transparent,
                 scrolledUnderElevation: 0,

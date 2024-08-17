@@ -64,8 +64,9 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.verificationScreen,
         builder: (context, state, ref) {
-          return const VerificationScreen(
-            email: '',
+          final email = state.pathParameters['email'];
+          return VerificationScreen(
+            email: email ?? '',
           );
         },
       ),
@@ -78,7 +79,10 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.resetPassword,
         builder: (context, state, ref) {
-          return const ResetPassword();
+          final email = state.pathParameters['email'];
+          return ResetPassword(
+            email: email ?? '',
+          );
         },
       ),
       ConsumerGoRoute(
@@ -191,9 +195,9 @@ class AppRoute {
   static const String singleUserSignUp = '/singleUserSignUp';
   static const String login = '/login';
   static const String forgotPassword = '/forgotPassword';
-  static const String verificationScreen = '/verificationScreen';
+  static const String verificationScreen = '/verificationScreen/:email';
   static const String verificationSuccess = '/verificationSuccess';
-  static const String resetPassword = '/resetPassword';
+  static const String resetPassword = '/resetPassword/:email';
   static const String cart = '/cart';
 
   static const String settings = '/settings';

@@ -12,4 +12,6 @@ class UserRegData {
 
   factory UserRegData.fromJson(Map<String, dynamic> json) =>
       _$UserRegDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserRegDataToJson(this);
 }
