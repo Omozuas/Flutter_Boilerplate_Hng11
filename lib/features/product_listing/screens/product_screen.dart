@@ -111,7 +111,7 @@ class ProductScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Padding(
+         Padding(
                   padding: EdgeInsets.only(
                     left: 24.h,
                     top: 24.h,
