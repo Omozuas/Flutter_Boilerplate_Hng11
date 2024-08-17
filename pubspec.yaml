@@ -48,7 +48,6 @@ dependencies:
   one_context: ^4.0.0
   get_storage: ^2.1.1
   cached_network_image: ^3.4.0
-  intl: ^0.19.0
   flutter_svg: ^2.0.10+1
   back_button_interceptor: ^7.0.3
   file_picker: ^8.1.1
@@ -57,16 +56,20 @@ dependencies:
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   freezed_annotation: ^2.4.4
-  syncfusion_flutter_charts: 
+  # syncfusion_flutter_charts: 
   riverpod_annotation: ^2.3.5
   flutter_shimmer: ^2.1.2
   json_annotation: any
   jwt_decoder: any
   image_picker: ^1.1.2
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -94,7 +97,7 @@ flutter_launcher_icons:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
