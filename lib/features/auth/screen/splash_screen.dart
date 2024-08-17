@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,17 +17,24 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   static GetStorage box = locator<GetStorage>();
+
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
+    WidgetsBinding.instance.addPostFrameCallback((t) {
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
       } else {
-        context.go(AppRoute.login);
-
-        /// tODO: Implement a logic to get user details with saved token
+        if (box.read('rememberMe') != null && box.read('rememberMe')) {
+          AuthProvider().login({
+            "email": box.read('email'),
+            "password": box.read('password')
+          }, context, fromLoginScreen: false);
+        } else {
+          context.go(AppRoute.login);
+        }
       }
     });
+
     super.initState();
   }
 
@@ -54,6 +62,16 @@ class _SplashScreenState extends State<SplashScreen> {
               color: GlobalColors.darkOne,
             ),
           ),
+          SizedBox(
+            height: 50.h,
+          ),
+          SizedBox(
+            height: 20.h,
+            width: 20.h,
+            child: CircularProgressIndicator.adaptive(
+              strokeWidth: 2.w,
+            ),
+          )
           // SizedBox(
           //   height: 60.h,
           // ),

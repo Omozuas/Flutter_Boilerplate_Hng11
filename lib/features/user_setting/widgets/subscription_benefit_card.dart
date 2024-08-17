@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 
@@ -22,23 +21,23 @@ class SubscriptionBenefitsCard extends StatelessWidget {
             children: benefits
                 .map(
                   (benefit) => Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Row(
-                  children: [
-                    Icon(Icons.check_circle, color: GlobalColors.black),
-                    const SizedBox(width: 10),
-                    Text(
-                      benefit,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        height: 17.5 / 14,
-                      ),
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      children: [
+                        Icon(Icons.check_circle, color: GlobalColors.black),
+                        const SizedBox(width: 10),
+                        Text(
+                          benefit,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            height: 17.5 / 14,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            )
+                  ),
+                )
                 .toList(),
           ),
         ),
@@ -46,4 +45,3 @@ class SubscriptionBenefitsCard extends StatelessWidget {
     );
   }
 }
-

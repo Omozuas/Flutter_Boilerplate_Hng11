@@ -100,7 +100,7 @@ class SubscriptionCheckout extends StatelessWidget {
       builder: (context) => SubscriptionDialog(
         title: 'We are sorry to see you go!',
         message:
-        'Are you sure you want to cancel your subscription? By cancelling, you will lose access to all premium features.',
+            'Are you sure you want to cancel your subscription? By cancelling, you will lose access to all premium features.',
         buttonText1: 'Cancel Subscription',
         buttonText2: 'Keep Subscription',
         onTap1: () {
@@ -120,7 +120,7 @@ class SubscriptionCheckout extends StatelessWidget {
       builder: (context) => SubscriptionDialog(
         title: 'Subscription Canceled',
         message:
-        'Your subscription has been successfully canceled. If you change your mind, you can reactivate your subscription anytime.',
+            'Your subscription has been successfully canceled. If you change your mind, you can reactivate your subscription anytime.',
         buttonText1: 'Reactivate Subscription',
         buttonText2: 'Go to Dashboard',
         onTap1: () {
@@ -131,7 +131,7 @@ class SubscriptionCheckout extends StatelessWidget {
         },
         onTap2: () {
           Navigator.pop(context);
-         // context.push(AppRoute.settings);
+          // context.push(AppRoute.settings);
           // Navigator.push(context, MaterialPageRoute(builder: (context){
           //   return SettingsScreen();
           // }));
