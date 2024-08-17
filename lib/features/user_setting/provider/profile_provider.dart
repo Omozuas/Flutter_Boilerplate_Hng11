@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,7 +64,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       if (image != null) {
         await settingsApi.updateProfileAvatar(
           email: email,
-          image: image,
+          file: File(image.path),
         );
       }
       await getUser();
@@ -82,7 +83,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       state = state.copyWith(profileAvatarUpdater: const AsyncLoading());
       final res = await settingsApi.updateProfileAvatar(
         email: email,
-        image: image,
+        file: File(image.path),
       );
       await getUser();
       state = state.copyWith(profileAvatarUpdater: AsyncData(res));
