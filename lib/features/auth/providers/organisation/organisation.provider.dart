@@ -2,6 +2,8 @@
 
 import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'organisation.provider.g.dart';
 
@@ -18,8 +20,13 @@ class GetOrganisation extends _$GetOrganisation {
 
 @Riverpod(keepAlive: true)
 class OrgnaisationIndex extends _$OrgnaisationIndex {
+    GetStorage box = locator<GetStorage>();
+
   @override
   int build() {
+
+    
+
     return 0;
   }
 }

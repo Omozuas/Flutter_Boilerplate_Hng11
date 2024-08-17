@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -16,6 +19,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  GetStorage stotage = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -67,29 +71,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     children: [
                       const ProfileAvatar(),
                       const SizedBox(width: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 19.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              user?.fullname ?? '',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: Color(0xff0A0A0A),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 19.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                user?.profile?.username ?? user?.fullname ?? '',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: Color(0xff0A0A0A),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              user?.email ?? '',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xff525252),
+                              const SizedBox(height: 3),
+                              Text(
+                                user?.email ?? '',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  color: Color(0xff525252),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -189,7 +195,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       const Divider(),
                       SizedBox(height: 8.h),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => LogOutDialog(
+                              onTap: () {
+                                stotage.remove('accessToken');
+                                Navigator.pop(ctx);
+                                context.go(AppRoute.login);
+                              },
+                            ),
+                          );
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

@@ -8,7 +8,7 @@ part of 'dashboard_model.dart';
 
 DashBoardModel _$DashBoardModelFromJson(Map<String, dynamic> json) =>
     DashBoardModel(
-      revenue: (json['revenue'] as num?)?.toInt(),
+      revenue: json['revenue'] as num?,
       subscriptions: (json['subscriptions'] as num?)?.toInt(),
       sales: (json['sales'] as num?)?.toInt(),
       activeSubscription: (json['activeSubscription'] as num?)?.toInt(),
@@ -34,7 +34,7 @@ MonthSale _$MonthSaleFromJson(Map<String, dynamic> json) => MonthSale(
       type: json['type'] as String?,
       status: json['status'] as String?,
       partners: json['partners'] as String?,
-      amount: (json['amount'] as num?)?.toInt(),
+      amount: json['amount'] as num?,
       reference: json['reference'] as String?,
       createdAt: json['created_at'] == null
           ? null

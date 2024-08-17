@@ -160,6 +160,36 @@ class AuthProvider extends StateNotifier<AuthState> {
     }
   }
 
+  Future<bool> loadStoredUser() async {
+    try {
+      final result = await _userService.getStoreUser();
+      if (result != null) {
+        setUser = User(
+          id: result.id,
+          avatarUrl: result.avatarUrl,
+          firstName: result.fullname?.split(' ')[0],
+          isSuperadmin: false,
+        );
+
+        setOrganizations = (result.organisations)
+                ?.map<Organisation>(
+                  (e) => Organisation(
+                    organisationId: e.id,
+                    name: e.name,
+                    isOwner: e.ownerId == result.id,
+                  ),
+                )
+                .toList() ??
+            [];
+
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<void> login(Map<String, dynamic> data, BuildContext context,
       {bool fromLoginScreen = true}) async {
     setNormalButtonLoading = true;
@@ -193,7 +223,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
-      //TODO: Do something with caught error;
+      //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
     }
