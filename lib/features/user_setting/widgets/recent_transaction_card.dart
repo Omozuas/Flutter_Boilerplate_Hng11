@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 
@@ -45,7 +44,9 @@ class RecentTransactionsCard extends StatelessWidget {
                     height: 19.36 / 16,
                     color: GlobalColors.black),
               ),
-              const SizedBox(width: 12,),
+              const SizedBox(
+                width: 12,
+              ),
               Text(
                 transactionDate?.toIso8601String() ?? "Date",
                 style: TextStyle(
@@ -72,7 +73,9 @@ class RecentTransactionsCard extends StatelessWidget {
                     height: 19.36 / 16,
                     color: GlobalColors.black),
               ),
-              const SizedBox(width: 12,),
+              const SizedBox(
+                width: 12,
+              ),
               Text(
                 "Paid",
                 style: TextStyle(
@@ -99,7 +102,9 @@ class RecentTransactionsCard extends StatelessWidget {
                     height: 19.36 / 16,
                     color: GlobalColors.black),
               ),
-              const SizedBox(width: 12,),
+              const SizedBox(
+                width: 12,
+              ),
               Text(
                 "Download",
                 style: TextStyle(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
@@ -27,7 +26,8 @@ class PlanCard extends StatefulWidget {
     this.bulletDescription4,
     this.bulletDescription5,
     this.bulletDescription6,
-    this.onTap, required this.isItCurrentPlan,
+    this.onTap,
+    required this.isItCurrentPlan,
   });
 
   @override
@@ -48,16 +48,14 @@ class _PlanCardState extends State<PlanCard> {
     return GestureDetector(
       onTap: _toggleSelection,
       child: Container(
-        padding: const EdgeInsets.only(left: 40, top: 40, right: 35, bottom: 30),
+        padding:
+            const EdgeInsets.only(left: 40, top: 40, right: 35, bottom: 30),
         decoration: BoxDecoration(
             border: _isSelected
                 ? Border.all(color: GlobalColors.orange, width: 0.5)
                 : Border.all(color: GlobalColors.borderColor, width: 0.5),
             borderRadius: BorderRadius.circular(10),
-            color:
-            GlobalColors.white
-
-        ),
+            color: GlobalColors.white),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -119,16 +117,18 @@ class _PlanCardState extends State<PlanCard> {
               height: 32,
             ),
             CustomButton(
-              onTap: widget.onTap! ,
-              borderColor: _isSelected ? GlobalColors.orange : Colors.transparent,
-              borderColors: _isSelected ? GlobalColors.orange : Colors.transparent,
+              onTap: widget.onTap!,
+              borderColor:
+                  _isSelected ? GlobalColors.orange : Colors.transparent,
+              borderColors:
+                  _isSelected ? GlobalColors.orange : Colors.transparent,
               text: widget.isItCurrentPlan ? "Current Plan" : "Upgrade",
               height: 40,
-              containerColor: _isSelected
-                  ? GlobalColors.orange
-                  : GlobalColors.btnBgColor,
+              containerColor:
+                  _isSelected ? GlobalColors.orange : GlobalColors.btnBgColor,
               width: 180,
-              textColor: _isSelected ? GlobalColors.white : GlobalColors.darkOne,
+              textColor:
+                  _isSelected ? GlobalColors.white : GlobalColors.darkOne,
             ),
           ],
         ),

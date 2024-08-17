@@ -81,7 +81,8 @@ class GetSalesTrend {
         modifiedAt: modifiedAt ?? this.modifiedAt,
       );
 
-  factory GetSalesTrend.fromJson(Map<String, dynamic> json) => _$GetSalesTrendFromJson(json);
+  factory GetSalesTrend.fromJson(Map<String, dynamic> json) =>
+      _$GetSalesTrendFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetSalesTrendToJson(this);
 }

@@ -194,7 +194,6 @@ class _MembersSettingsState extends State<MembersSettings> {
               SizedBox(
                 height: 5.h,
               ),
-
               Row(
                 children: [
                   SizedBox(
