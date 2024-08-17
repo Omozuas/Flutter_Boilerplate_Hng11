@@ -55,6 +55,7 @@ class ProductCardListWidget extends StatelessWidget {
                       productNmae: '${product.name}',
                       inStock: true,
                       price: product.price ?? 0,
+                      image: product.image ?? '',
                     ),
                   ),
                 );

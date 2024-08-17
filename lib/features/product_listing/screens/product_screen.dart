@@ -61,30 +61,33 @@ class ProductScreen extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        height: GlobalScreenSize.getScreenHeight(
-                              context,
-                            ) *
-                            0.052,
-                        width: GlobalScreenSize.getScreenWidth(
-                              context,
-                            ) *
-                            0.7,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            border: Border.all(
-                                color: GlobalColors.searchBorderColor)),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Search Product",
-                              suffixIcon: SvgPicture.asset(
-                                Assets.images.svg.productListing.sortIcon.path,
-                                height: 24.h,
-                                width: 24.w,
-                                fit: BoxFit.scaleDown,
-                              )),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 16, right: 16),
+                          height: GlobalScreenSize.getScreenHeight(
+                                context,
+                              ) *
+                              0.052,
+                          width: GlobalScreenSize.getScreenWidth(
+                                context,
+                              ) *
+                              0.7,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              border: Border.all(
+                                  color: GlobalColors.searchBorderColor)),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Search Product",
+                                suffixIcon: SvgPicture.asset(
+                                  Assets
+                                      .images.svg.productListing.sortIcon.path,
+                                  height: 24.h,
+                                  width: 24.w,
+                                  fit: BoxFit.scaleDown,
+                                )),
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -126,7 +129,7 @@ class ProductScreen extends ConsumerWidget {
                               final myKey = allKeys[index];
                               return ProductCardListWidget(
                                 categoryName: allKeys[index],
-                                products: data[myKey]!,
+                                products: data[myKey]!.reversed.toList(),
                               );
                             },
                             separatorBuilder:

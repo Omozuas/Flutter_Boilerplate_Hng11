@@ -19,7 +19,6 @@ class DashboardApi implements DashboardApiContract {
 
   @override
   Future<DashBoardModel> getDashboardData() async {
-    print(_userService.user.id);
     try {
       var response = await dioProvider.get("Dashboards", query: {
         "userId": _userService.user.id
