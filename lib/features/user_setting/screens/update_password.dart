@@ -1,17 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
+import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UpdatePassword extends StatefulWidget {
+class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
 
   @override
-  State<UpdatePassword> createState() => _UpdatePasswordState();
+  ConsumerState<UpdatePassword> createState() => _UpdatePasswordState();
 }
 
-class _UpdatePasswordState extends State<UpdatePassword> {
+class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   bool oldPasswordVissible = false;
   bool newPasswordVissible = false;
   bool confPasswordVissible = false;
@@ -30,6 +33,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   bool passwordsMatch = true;
+  String? errorMessage;
 
   @override
   void initState() {
@@ -52,6 +56,71 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  void updatePassword() async {
+    final currentPassword = currentPasswordController.text;
+    final newPassword = newPasswordController.text;
+
+    if (newPassword == confirmPasswordController.text) {
+      try {
+        final passwordService = ref.read(passwordServiceProvider);
+        await passwordService.updatePassword(
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        );
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const ProfileDialog(
+              title: "Password Successfully Updated",
+              description:
+                  "Your password has been successfully updated! You can now log in with your new password.",
+            );
+          },
+        );
+        //Handle errors
+      } 
+      on DioException catch (e) {
+      // Handle DioException 
+      if (e.response?.statusCode == 404) {
+        setState(() {
+          errorMessage = 'The requested resource was not found. Please check the URL or contact support.';
+        });
+      } else {
+        setState(() {
+          errorMessage = 'Failed to update password. Please try again.';
+        });
+      }
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ProfileDialog(
+            title: "Error",
+            description: errorMessage!,
+          );
+        },
+      );
+    } catch (e) {
+      // Handle other exceptions
+      setState(() {
+        errorMessage = 'An unexpected error occurred. Please try again.';
+      });
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ProfileDialog(
+            title: "Error",
+            description: errorMessage!,
+          );
+        },
+      );
+    }
+  } else {
+    setState(() {
+      passwordsMatch = false;
+    });
+  }
   }
 
   void checkPasswordStrength(String password) {
@@ -437,15 +506,16 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return const ProfileDialog(
-                                      title: "Password Successfully Updated",
-                                      description:
-                                          "Your password has been successfully updated! You can now log in with your new password.",
-                                    );
-                                  });
+                              updatePassword();
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (context) {
+                              //       return const ProfileDialog(
+                              //         title: "Password Successfully Updated",
+                              //         description:
+                              //             "Your password has been successfully updated! You can now log in with your new password.",
+                              //       );
+                              //     });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: GlobalColors.orange,
