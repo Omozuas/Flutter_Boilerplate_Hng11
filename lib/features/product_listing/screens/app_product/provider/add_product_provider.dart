@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
@@ -71,10 +73,12 @@ class AddProductProvider extends _$AddProductProvider {
     final org = ref.read(getOrganisationProvider);
     try {
       state = AddProductState.isLoading();
-      await ref.read(productApiProvider).createProduct(
+      final result = await ref.read(productApiProvider).createProduct(
             product: data,
             orgId: org.organisationId!,
           );
+
+      log('ADD PRODUCT RESULT $result');
       // ignore: unused_result
       ref.refresh(productListProvider.future);
       onSuccess();

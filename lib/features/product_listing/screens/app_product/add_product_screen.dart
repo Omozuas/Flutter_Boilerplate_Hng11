@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/provider/add_product_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
@@ -163,123 +165,121 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addProductProviderProvider);
+    return LoadingOverlay(
+      isLoading: state.isLoading,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+          centerTitle: true,
+          leading: const ChevronBackButton(),
+          title: Text(
+            'Add a Product',
+            style: GoogleFonts.inter(
+              color: const Color.fromRGBO(10, 10, 10, 1),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              height: 24 / 14,
+            ),
+          ),
+          elevation: 0,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              color: const Color.fromRGBO(222, 222, 222, 1),
+              height: 1.0,
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Container(
+                    // color: Colors.red,
+                    width: 355.w,
+                    // height: 715.h,
+                    margin: EdgeInsets.only(top: 17.h),
+                    child: Column(
+                      children: [
+                        ProductImage(getProductFiles: onFilesSelected),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        SizedBox(
+                          width: 379.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              compulsoryTitle('Title'),
+                              6.h.sbH,
+                              ProductNameFormField(
+                                controller: productNameController,
+                              )
+                              // Container(
+                              //   height: 40.h,
+                              //   width: 379.w,
+                              //   child: const Text('Product textfield here'),
+                              // )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        SizedBox(
+                          width: 379.w,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 379.w,
+                                child: Text(
+                                  'Description',
+                                  style: GoogleFonts.inter(
+                                    color: const Color.fromRGBO(10, 10, 10, 1),
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    height: 14 / 14,
+                                  ),
+                                ),
+                              ),
+                              6.h.sbH,
 
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        centerTitle: true,
-        title: Text(
-          'Add a Product',
-          style: GoogleFonts.inter(
-            color: const Color.fromRGBO(10, 10, 10, 1),
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            height: 24 / 14,
-          ),
-        ),
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: const Color.fromRGBO(222, 222, 222, 1),
-            height: 1.0,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Container(
-                  // color: Colors.red,
-                  width: 355.w,
-                  // height: 715.h,
-                  margin: EdgeInsets.only(top: 17.h),
-                  child: Column(
-                    children: [
-                      ProductImage(getProductFiles: onFilesSelected),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            compulsoryTitle('Title'),
-                            ProductNameFormField(
-                              controller: productNameController,
-                            )
-                            // Container(
-                            //   height: 40.h,
-                            //   width: 379.w,
-                            //   child: const Text('Product textfield here'),
-                            // )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 126.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              width: 379.w,
-                              child: Text(
-                                'Description',
-                                style: GoogleFonts.inter(
-                                  color: const Color.fromRGBO(10, 10, 10, 1),
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  height: 14 / 14,
+                              DescriptionFormField(
+                                controller: productDescriptionController,
+                              ),
+                              // Container(
+                              //   height: 80.h,
+                              //   width: 379.w,
+                              //   child: const Text('description textfield here'),
+                              // ),
+                              SizedBox(
+                                width: 379.w,
+                                child: Text(
+                                  'Maximum of 72 characters',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    height: 20 / 14,
+                                    color:
+                                        const Color.fromRGBO(100, 116, 139, 1),
+                                  ),
                                 ),
                               ),
-                            ),
-                            DescriptionFormField(
-                              controller: productDescriptionController,
-                            ),
-                            // Container(
-                            //   height: 80.h,
-                            //   width: 379.w,
-                            //   child: const Text('description textfield here'),
-                            // ),
-                            SizedBox(
-                              height: 20.h,
-                              width: 379.w,
-                              child: Text(
-                                'Maximum of 72 characters',
-                                style: GoogleFonts.inter(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  height: 20 / 14,
-                                  color: const Color.fromRGBO(100, 116, 139, 1),
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              height: 20.h,
                               width: 379.w,
                               child: Text(
                                 'Category',
@@ -291,6 +291,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                                 ),
                               ),
                             ),
+                            6.h.sbH,
                             SizedBox(
                               height: 40.h,
                               width: 379.w,
@@ -303,21 +304,17 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             )
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              height: 20.h,
                               width: 379.w,
                               child: compulsoryTitle('Standard Price'),
                             ),
+                            6.h.sbH,
                             ProductPriceFormField(
                               controller: productPriceController,
                             ),
@@ -330,21 +327,18 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             // )
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 66.h,
-                        child: Column(
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              height: 20.h,
                               width: 379.w,
                               child: compulsoryTitle('Quantity'),
                             ),
+                            6.h.sbH,
+
                             ProductQuantityFormField(
                               controller: productQuantityController,
                             )
@@ -355,87 +349,86 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             // )
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                      SizedBox(
-                        width: 379.w,
-                        height: 93.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20.h,
-                              width: 379.w,
-                              child: compulsoryTitle('Product Variations'),
-                            ),
-                            ProductVariation(
-                              getProductList: (List<PlatformFile> files) {},
-                            ),
-                            // Container(
-                            //   height: 67.h,
-                            //   width: 368.w,
-                            //   child: const Text(
-                            //       'Product Variations container list here'),
-                            // ),
-                          ],
+                        SizedBox(
+                          height: 6.h,
                         ),
-                      ),
-                      SizedBox(
-                        height: 28.h,
-                      ),
-                    ],
+                        SizedBox(
+                          width: 379.w,
+                          height: 93.h,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                height: 20.h,
+                                width: 379.w,
+                                child: compulsoryTitle('Product Variations'),
+                              ),
+                              ProductVariation(
+                                getProductList: (List<PlatformFile> files) {},
+                              ),
+                              // Container(
+                              //   height: 67.h,
+                              //   width: 368.w,
+                              //   child: const Text(
+                              //       'Product Variations container list here'),
+                              // ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 28.h,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 40.h,
-                  width: 355.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          onTap: state == AddProductState.isLoading()
-                              ? () {}
-                              : () {
-                                  context.pop();
-                                },
-                          borderColor: const Color.fromRGBO(226, 232, 240, 1),
-                          text: 'Cancel',
-                          height: 40.h,
-                          containerColor:
-                              const Color.fromRGBO(255, 255, 255, 1),
-                          width: 172.5.w,
-                          textColor: const Color.fromRGBO(15, 23, 42, 1),
+                  SizedBox(
+                    height: 40.h,
+                    width: 355.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            onTap: state.isLoading
+                                ? () {}
+                                : () {
+                                    context.pop();
+                                  },
+                            borderColor: const Color.fromRGBO(226, 232, 240, 1),
+                            text: 'Cancel',
+                            height: 40.h,
+                            containerColor:
+                                const Color.fromRGBO(255, 255, 255, 1),
+                            width: 172.5.w,
+                            textColor: const Color.fromRGBO(15, 23, 42, 1),
+                          ),
                         ),
-                      ),
-                      // SizedBox(
-                      //   width: 10.w,
-                      // ),
-                      12.w.sbW,
-                      Expanded(
-                        child: CustomButton(
-                          onTap: state == AddProductState.isLoading()
-                              ? () {}
-                              : addProduct,
-                          // () {},
-                          borderColor: const Color.fromRGBO(226, 232, 240, 1),
-                          text: 'Add',
-                          loading: state == AddProductState.isLoading(),
-                          height: 40.h,
-                          containerColor: const Color.fromRGBO(249, 115, 22, 1),
-                          width: 172.5.w,
-                          textColor: const Color.fromRGBO(250, 250, 250, 1),
+                        // SizedBox(
+                        //   width: 10.w,
+                        // ),
+                        12.w.sbW,
+                        Expanded(
+                          child: CustomButton(
+                            onTap: state.isLoading ? () {} : addProduct,
+                            // () {},
+                            borderColor: const Color.fromRGBO(226, 232, 240, 1),
+                            text: 'Add',
+                            loading: state.isLoading,
+                            height: 40.h,
+                            containerColor:
+                                const Color.fromRGBO(249, 115, 22, 1),
+                            width: 172.5.w,
+                            textColor: const Color.fromRGBO(250, 250, 250, 1),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-              ],
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

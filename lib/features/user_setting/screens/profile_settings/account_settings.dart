@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -16,6 +17,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  GetStorage stotage = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -189,7 +191,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       const Divider(),
                       SizedBox(height: 8.h),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          stotage.remove('accessToken');
+
+                          context.go(AppRoute.login);
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
