@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/models/product_detail_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

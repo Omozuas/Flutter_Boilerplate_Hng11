@@ -30,7 +30,8 @@ class ProductCardListWidget extends StatelessWidget {
                 style: PlusJakartaTextStyle.headerText2,
               ),
               Text(
-                "See more",
+                // "See more",
+                '',
                 style: PlusJakartaTextStyle.bodyTextGrey,
               )
             ],

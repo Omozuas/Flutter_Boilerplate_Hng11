@@ -23,7 +23,7 @@ class ProductApi implements ProductsApiContract {
   Future createProduct({required String orgId, required Map product}) async {
     try {
       log(product.toString());
-      return  dioProvider.post(
+      return dioProvider.post(
           productsForOrganisationEndpoint(
             orgId: orgId,
           ),
@@ -36,7 +36,7 @@ class ProductApi implements ProductsApiContract {
   @override
   Future deleteProduct({required String id}) async {
     try {
-      await dioProvider.delete('$userProductsEndpoint/$id');
+      return dioProvider.delete('$userProductsEndpoint/$id');
     } catch (e) {
       rethrow;
     }
