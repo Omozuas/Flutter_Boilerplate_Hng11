@@ -90,7 +90,6 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
   }
 
   List<SalesData> data = [];
-/// TODO: you can uncomment this line when you are ready to implement ist. It was causing QA to fail because it was not referenced
   // String _getMonthAbbreviation(DateTime date) {
   //   // Create a DateFormat instance with the pattern 'MMM'
   //   DateFormat formatter = DateFormat('MMM');

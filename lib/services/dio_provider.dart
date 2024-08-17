@@ -92,17 +92,14 @@ class DioProvider {
 
   Future<ResponseModel?> multipartPut(
     String path, {
+    Options? options,
     required Map<String, dynamic> data,
   }) async {
     final formData = FormData.fromMap(data);
     var response = await _dio.put(
       path,
       data: formData,
-      options: Options(
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      ),
+      options: options,
     );
 
     return ResponseModel.fromJson(response.data);

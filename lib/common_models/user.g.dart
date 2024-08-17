@@ -16,7 +16,6 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       lastName: json['last_name'] as String?,
     );
 
-// ignore: unused_element
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'first_name': instance.firstName,
