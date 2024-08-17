@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
@@ -50,6 +52,19 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       key: _scaffoldkey,
       body: widget.navigationShell,
+      floatingActionButton: widget.navigationShell.currentIndex == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                context.push(AppRoute.addProduct);
+              },
+              backgroundColor: GlobalColors.orange,
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.add,
+                color: GlobalColors.white,
+              ),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCategory extends StatefulWidget {
-  const ProductCategory({super.key});
-
+  const ProductCategory({super.key, required this.onCategorySelected});
+  final Function(String) onCategorySelected;
   @override
   State<ProductCategory> createState() => _ProductCategoryState();
 }
@@ -44,6 +44,7 @@ class _ProductCategoryState extends State<ProductCategory> {
         onChanged: (newValue) {
           setState(() {
             selectedCategory = newValue;
+            widget.onCategorySelected(newValue!);
           });
         },
         items: categoryItems.map((String valueItem) {
