@@ -78,7 +78,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                user?.fullname ?? '',
+                                user?.profile?.username ?? user?.fullname ?? '',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
