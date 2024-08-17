@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
@@ -42,12 +41,20 @@ class ProductCardWiget extends StatelessWidget {
               if (image.startsWith('http')) {
                 return Image.network(image);
               } else if (image.isValidBase64) {
-                return Image.memory(
-                  base64Decode(image),
-                  errorBuilder: (context, error, stackTrace) =>
-                      Assets.images.png.productListing.product.image(
-                          height:
-                              GlobalScreenSize.getScreenHeight(context) * .135),
+                return ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(8.0), // Adjust the radius here
+
+                  child: Image.memory(
+                    width: 104.w,
+                    height: 104.h,
+                    fit: BoxFit.cover,
+                    base64Decode(image),
+                    errorBuilder: (context, error, stackTrace) =>
+                        Assets.images.png.productListing.product.image(
+                            height: GlobalScreenSize.getScreenHeight(context) *
+                                .135),
+                  ),
                 );
               } else {
                 return Assets.images.png.productListing.product.image(

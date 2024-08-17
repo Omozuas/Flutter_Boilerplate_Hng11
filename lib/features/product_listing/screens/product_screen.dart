@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
@@ -21,7 +19,6 @@ class ProductScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(productListProvider).when(
       data: (data) {
-        log(data.toString());
         return Scaffold(
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +122,6 @@ class ProductScreen extends ConsumerWidget {
                       return data.when(
                         data: (data) {
                           final allKeys = data.keys.toList();
-                          log("ALL KEYS: ${allKeys.toString()}");
                           return ListView.separated(
                             itemCount: allKeys.length,
                             padding: EdgeInsets.zero,
