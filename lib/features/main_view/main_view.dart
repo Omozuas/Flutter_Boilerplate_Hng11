@@ -52,7 +52,7 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       key: _scaffoldkey,
       body: widget.navigationShell,
-      floatingActionButton: widget.navigationShell.currentIndex <= 1
+      floatingActionButton: widget.navigationShell.currentIndex == 1
           ? FloatingActionButton(
               onPressed: () {
                 context.push(AppRoute.addProduct);
