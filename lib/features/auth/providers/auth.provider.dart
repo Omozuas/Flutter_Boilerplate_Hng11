@@ -179,6 +179,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     } catch (e) {
@@ -222,6 +224,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     }
@@ -251,8 +255,8 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
-          _userService.storeToken(userRegData.accessToken ?? "");
-          getUser();
+          _userService.storeToken(userRegData.accessToken??"");
+          await getUser();
         }
       }
     } catch (e) {
@@ -283,3 +287,4 @@ final authProvider = StateNotifierProvider<AuthProvider, AuthState>((ref) {
 
 //final checkBoxState = StateProvider<bool>((ref) => false);
 // final loadingGoogleButton = StateProvider<bool>((ref) => false);
+

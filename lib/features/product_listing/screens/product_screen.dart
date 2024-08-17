@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/filter_product_bottomsheet.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,33 +61,51 @@ class ProductScreen extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        height: GlobalScreenSize.getScreenHeight(
-                              context,
-                            ) *
-                            0.052,
-                        width: GlobalScreenSize.getScreenWidth(
-                              context,
-                            ) *
-                            0.7,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            border: Border.all(
-                                color: GlobalColors.searchBorderColor)),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Search Product",
-                              suffixIcon: SvgPicture.asset(
-                                Assets.images.svg.productListing.sortIcon.path,
-                                height: 24.h,
-                                width: 24.w,
-                                fit: BoxFit.scaleDown,
-                              )),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 16, right: 16),
+                          height: GlobalScreenSize.getScreenHeight(
+                                context,
+                              ) *
+                              0.052,
+                          width: GlobalScreenSize.getScreenWidth(
+                                context,
+                              ) *
+                              0.7,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              border: Border.all(
+                                  color: GlobalColors.searchBorderColor)),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Search Product",
+                                suffixIcon: SvgPicture.asset(
+                                  Assets
+                                      .images.svg.productListing.sortIcon.path,
+                                  height: 24.h,
+                                  width: 24.w,
+                                  fit: BoxFit.scaleDown,
+                                )),
+                          ),
                         ),
                       ),
-                      Assets.images.svg.productListing.filterButton.svg(),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const FilterBottomSheet();
+                            },
+                          );
+                        },
+                        child:
+                            Assets.images.svg.productListing.filterButton.svg(
+                          height:
+                              GlobalScreenSize.getScreenHeight(context) * 0.052,
+                          width: GlobalScreenSize.getScreenWidth(context) * 0.7,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -97,17 +116,36 @@ class ProductScreen extends ConsumerWidget {
                   ),
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (txt, index) {
-                        return const ProductCardListWidget();
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(
-                        height: 24.h,
-                      ),
-                      itemCount: 20,
-                    ),
+                    child: Builder(builder: (context) {
+                      final data = ref.watch(productsByCategoryProvider);
+                      return data.when(
+                        data: (data) {
+                          final allKeys = data.keys.toList();
+
+                          return ListView.separated(
+                            itemCount: allKeys.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (txt, index) {
+                              final myKey = allKeys[index];
+                              return ProductCardListWidget(
+                                categoryName: allKeys[index],
+                                products: data[myKey]!,
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) => SizedBox(
+                              height: 24.h,
+                            ),
+                          );
+                        },
+                        error: (error, stackTrace) {
+                          return const SizedBox();
+                        },
+                        loading: () {
+                          return const SizedBox();
+                        },
+                      );
+                    }),
                   ),
                 )
               ],

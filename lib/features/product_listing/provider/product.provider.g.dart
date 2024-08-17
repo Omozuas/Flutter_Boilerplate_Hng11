@@ -6,7 +6,25 @@ part of 'product.provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$productListHash() => r'df2c4ec6950ab094ac45d79cada34547f5f22c1b';
+String _$productsByCategoryHash() =>
+    r'de19701512a50a0ae88bf615249861870d5d0fbe';
+
+/// See also [productsByCategory].
+@ProviderFor(productsByCategory)
+final productsByCategoryProvider =
+    AutoDisposeProvider<AsyncValue<Map<String, List<Product>>>>.internal(
+  productsByCategory,
+  name: r'productsByCategoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$productsByCategoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ProductsByCategoryRef
+    = AutoDisposeProviderRef<AsyncValue<Map<String, List<Product>>>>;
+String _$productListHash() => r'fda930c117a2a1276004646ed1d79c1f4376f633';
 
 /// See also [ProductList].
 @ProviderFor(ProductList)
