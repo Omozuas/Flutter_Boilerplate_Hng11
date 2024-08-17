@@ -91,8 +91,7 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
       backgroundColor: GlobalColors.white,
-      body: 
-      ListView(
+      body: ListView(
         padding: 16.w.padH,
         children: [
           16.h.sbH,
