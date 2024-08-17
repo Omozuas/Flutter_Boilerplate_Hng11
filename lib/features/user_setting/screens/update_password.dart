@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'validator.dart';
 
 class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
@@ -15,11 +17,9 @@ class UpdatePassword extends ConsumerStatefulWidget {
 }
 
 class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
-  bool oldPasswordVissible = false;
   bool newPasswordVissible = false;
   bool confPasswordVissible = false;
 
-  // bool passwordVisible = false;
   String password = '';
   bool hasUppercase = false;
   bool hasNumber = false;
@@ -27,8 +27,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   FocusNode newPasswordFocusNode = FocusNode();
   FocusNode confirmPasswordFocusNode = FocusNode();
   bool isPasswordFieldFocused = false;
-  final TextEditingController currentPasswordController =
-      TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -52,75 +51,79 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   void dispose() {
     newPasswordFocusNode.dispose();
     confirmPasswordFocusNode.dispose();
-    currentPasswordController.dispose();
+    emailController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
 
   void updatePassword() async {
-    final currentPassword = currentPasswordController.text;
+    final email = emailController.text;
     final newPassword = newPasswordController.text;
+    final confirmPassword = confirmPasswordController.text;
 
     if (newPassword == confirmPasswordController.text) {
       try {
         final passwordService = ref.read(passwordServiceProvider);
         await passwordService.updatePassword(
-          currentPassword: currentPassword,
-          newPassword: newPassword,
-        );
+            email: email,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword);
         showDialog(
           context: context,
           builder: (context) {
-            return const ProfileDialog(
-              title: "Password Successfully Updated",
-              description:
-                  "Your password has been successfully updated! You can now log in with your new password.",
-            );
+            return ProfileDialog(
+                title: "Password Successfully Updated",
+                description:
+                    "Your password has been successfully updated! You can now log in with your new password.",
+                onContinue: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen())));
           },
         );
         //Handle errors
-      } 
-      on DioException catch (e) {
-      // Handle DioException 
-      if (e.response?.statusCode == 404) {
+      } on DioException catch (e) {
+        // Handle DioException
+        if (e.response?.statusCode == 404) {
+          setState(() {
+            errorMessage =
+                'The requested resource was not found. Please check the URL or contact support.';
+          });
+        } else {
+          setState(() {
+            errorMessage = 'Failed to update password. Please try again.';
+          });
+        }
+        showDialog(
+          context: context,
+          builder: (context) {
+            return ProfileDialog(
+              title: "Error",
+              description: errorMessage!,
+            );
+          },
+        );
+      } catch (e) {
+        // Handle other exceptions
         setState(() {
-          errorMessage = 'The requested resource was not found. Please check the URL or contact support.';
+          errorMessage = 'An unexpected error occurred. Please try again.';
         });
-      } else {
-        setState(() {
-          errorMessage = 'Failed to update password. Please try again.';
-        });
+        showDialog(
+          context: context,
+          builder: (context) {
+            return ProfileDialog(
+              title: "Error",
+              description: errorMessage!,
+            );
+          },
+        );
       }
-      showDialog(
-        context: context,
-        builder: (context) {
-          return ProfileDialog(
-            title: "Error",
-            description: errorMessage!,
-          );
-        },
-      );
-    } catch (e) {
-      // Handle other exceptions
+    } else {
       setState(() {
-        errorMessage = 'An unexpected error occurred. Please try again.';
+        passwordsMatch = false;
       });
-      showDialog(
-        context: context,
-        builder: (context) {
-          return ProfileDialog(
-            title: "Error",
-            description: errorMessage!,
-          );
-        },
-      );
     }
-  } else {
-    setState(() {
-      passwordsMatch = false;
-    });
-  }
   }
 
   void checkPasswordStrength(String password) {
@@ -190,7 +193,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              "Current Password",
+                              "Email",
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -199,30 +202,15 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             ),
                           ),
                           TextFormField(
-                            controller: currentPasswordController,
-                            obscureText: !oldPasswordVissible,
+                            controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: "Enter current password",
+                              hintText: "example@email.com",
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  oldPasswordVissible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off_outlined,
-                                  color: GlobalColors.iconColor,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      oldPasswordVissible =
-                                          !oldPasswordVissible;
-                                    },
-                                  );
-                                },
-                              ),
+                              suffixIcon: const Icon(Icons.email_outlined),
                               border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(6),
@@ -237,6 +225,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                 ),
                               ),
                             ),
+                            validator: validateEmail,
                           ),
                         ],
                       ),
@@ -261,6 +250,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             controller: newPasswordController,
                             focusNode: newPasswordFocusNode,
                             obscureText: !newPasswordVissible,
+                            validator: validatePassFields,
                             onChanged: (value) {
                               checkPasswordStrength(value);
                               validatePasswords();
@@ -421,6 +411,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             focusNode: confirmPasswordFocusNode,
                             controller: confirmPasswordController,
                             obscureText: !confPasswordVissible,
+                            validator: validatePassFields,
                             onChanged: (value) => validatePasswords(),
                             decoration: InputDecoration(
                               hintText: "Confirm new password",
@@ -507,15 +498,6 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           child: ElevatedButton(
                             onPressed: () {
                               updatePassword();
-                              // showDialog(
-                              //     context: context,
-                              //     builder: (context) {
-                              //       return const ProfileDialog(
-                              //         title: "Password Successfully Updated",
-                              //         description:
-                              //             "Your password has been successfully updated! You can now log in with your new password.",
-                              //       );
-                              //     });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: GlobalColors.orange,

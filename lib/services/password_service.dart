@@ -17,19 +17,17 @@ class PasswordService {
   PasswordService(this._dio);
 
   Future<void> updatePassword({
-    required String currentPassword,
+    required String email,
     required String newPassword,
+    required String confirmPassword,
   }) async {
     try {
-      final response = await _dio.put('auth/password', data: {
-        'current_password': currentPassword,
-        'new_password': newPassword,
+      await _dio.put('auth/reset-password-mobile', data: {
+        'email': email,
+        'newPassword': newPassword,
+        'confirmNewPassword': confirmPassword,
       });
-      // Handle the response as necessary
-     
-      print('Password updated successfully: ${response.data}');
     } catch (e) {
-
       rethrow;
     }
   }
