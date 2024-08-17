@@ -29,133 +29,132 @@ class HomeScreen extends ConsumerWidget {
     ];
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: GlobalColors.white,
-          bottomOpacity: 1,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 50.h,
-                width: 50.w,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
-                        fit: BoxFit.cover)),
-              ),
-              8.sp.sbHW,
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Welcome Back!",
-                    style: CustomTextStyles.productSmallBodyTextBlack
-                        .copyWith(color: const Color(0xFF71717A)),
+      appBar: AppBar(
+        backgroundColor: GlobalColors.white,
+        bottomOpacity: 1,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 50.h,
+              width: 50.w,
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
+                      fit: BoxFit.cover)),
+            ),
+            8.sp.sbHW,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome Back!",
+                  style: CustomTextStyles.productSmallBodyTextBlack
+                      .copyWith(color: const Color(0xFF71717A)),
+                ),
+                Text(
+                  authStateProvider.user?.firstName ?? "",
+                  style: CustomTextStyles.productTextBody2Black
+                      .copyWith(fontWeight: FontWeight.w500),
+                )
+              ],
+            )
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0.w),
+            child: Stack(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.notifications),
+                ),
+                const Positioned(
+                  top: 0.0,
+                  right: 0.0,
+                  child: Badge(
+                    label:
+                        Text('5'), // Replace with the actual notification count
+                    textColor: Colors.white,
+                    backgroundColor: Colors.red,
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    authStateProvider.user?.firstName ?? "",
-                    style: CustomTextStyles.productTextBody2Black
-                        .copyWith(fontWeight: FontWeight.w500),
-                  )
-                ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: GlobalColors.white,
+      body: ListView(
+        padding: 16.w.padH,
+        children: [
+          16.h.sbH,
+          Text(
+            'Dashboard',
+            style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: GlobalScreenSize.getScreenHeight(context) * 0.008,
+          ),
+          Text(
+            'This Month\'s Summary',
+            style: TextStyle(
+              fontSize: 16.sp,
+              color: GlobalColors.gray600Color,
+            ),
+          ),
+          SizedBox(
+            height: GlobalScreenSize.getScreenHeight(context) * 0.020,
+          ),
+          Row(
+            children: [
+              RevenueCard(
+                title: 'Total Revenue',
+                value: dashBoardStateProvider.dashBoardData.revenue == null
+                    ? "0.00"
+                    : formatNumber(
+                        dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                        decimalPlaces: 2),
+                percentageChange: '+15% decrease',
+              ),
+              18.w.sbW,
+              RevenueCard(
+                title: 'Total Revenue',
+                value: dashBoardStateProvider.dashBoardData.subscriptions ==
+                        null
+                    ? "0"
+                    : formatNumber(
+                        dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
+                        decimalPlaces: 0),
+                percentageChange: '+65% decrease',
+                isRevenue: false,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                'Overview',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+              ),
+              const Spacer(),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'See more',
+                  style: TextStyle(
+                    color: GlobalColors.gray600Color,
+                  ),
+                ),
               )
             ],
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 8.0.w),
-              child: Stack(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.notifications),
-                  ),
-                  const Positioned(
-                    top: 0.0,
-                    right: 0.0,
-                    child: Badge(
-                      label: Text(
-                          '5'), // Replace with the actual notification count
-                      textColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      textStyle: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: GlobalColors.white,
-        body: 
-        ListView(
-          padding: 16.w.padH,
-          children: [
-            16.h.sbH,
-            Text(
-              'Dashboard',
-              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: GlobalScreenSize.getScreenHeight(context) * 0.008,
-            ),
-            Text(
-              'This Month\'s Summary',
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: GlobalColors.gray600Color,
-              ),
-            ),
-            SizedBox(
-              height: GlobalScreenSize.getScreenHeight(context) * 0.020,
-            ),
-            Row(
-              children: [
-                RevenueCard(
-                  title: 'Total Revenue',
-                  value: dashBoardStateProvider.dashBoardData.revenue == null
-                      ? "0.00"
-                      : formatNumber(
-                          dashBoardStateProvider.dashBoardData.revenue ?? 0,
-                          decimalPlaces: 2),
-                  percentageChange: '+15% decrease',
-                ),
-                18.w.sbW,
-                RevenueCard(
-                  title: 'Total Revenue',
-                  value: dashBoardStateProvider.dashBoardData.subscriptions ==
-                          null
-                      ? "0"
-                      : formatNumber(
-                          dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
-                          decimalPlaces: 0),
-                  percentageChange: '+65% decrease',
-                  isRevenue: false,
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  'Overview',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'See more',
-                    style: TextStyle(
-                      color: GlobalColors.gray600Color,
-                    ),
-                  ),
-                )
-              ],
-            ),
 
             // Overview (Bar Chart)
             dashBoardStateProvider.trendLoading
