@@ -129,7 +129,7 @@ class ProductScreen extends ConsumerWidget {
                               final myKey = allKeys[index];
                               return ProductCardListWidget(
                                 categoryName: allKeys[index],
-                                products: data[myKey]!,
+                                products: data[myKey]!.reversed.toList(),
                               );
                             },
                             separatorBuilder:
