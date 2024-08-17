@@ -83,7 +83,9 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   }
 
   Future<void> addProduct() async {
-    if (!formKey.currentState!.validate()) {
+    if (!formKey.currentState!.validate() &&
+        selectedFiles.isEmpty &&
+        selectedCategory == null) {
       showEmptyStateSnackbar();
       return;
     }
