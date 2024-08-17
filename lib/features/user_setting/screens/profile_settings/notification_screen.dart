@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_notification_item.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_notification_section.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../utils/widgets/custom_notification_section.dart';
-
-class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({super.key});
-
+class NotificationsScreen extends ConsumerStatefulWidget {
+  const NotificationsScreen({
+    super.key,
+  });
+  // final NotificationModel? notificationModel
   @override
-  State<NotificationsScreen> createState() => _NotificationsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _NotificationsScreenState();
 }
 
-class _NotificationsScreenState extends State<NotificationsScreen> {
+class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
   //List to manage the state of each switch
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // ref.read(profileProvider.notifier).getNotifications(userId: n);
+    });
+  }
+
   List<bool> toggleSwitches = [
     false,
     false,
@@ -33,6 +46,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final asyncUser = ref.watch(profileProvider).notificationUpdater;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColors.white,
