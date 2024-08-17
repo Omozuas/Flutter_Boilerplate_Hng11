@@ -7,8 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
 
-import 'services/service_locator.dart';
-
 void main() async {
   await initializeApp();
 
@@ -45,6 +43,5 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-  }
   }
 }
