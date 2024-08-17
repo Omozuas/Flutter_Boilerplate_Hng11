@@ -19,7 +19,6 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final authStateProvider = ref.watch(authProvider);
 
@@ -33,7 +32,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: GlobalColors.white,
         bottomOpacity: 1,
-        title:  Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -41,30 +40,32 @@ class HomeScreen extends ConsumerWidget {
               height: 50.h,
               width: 50.w,
               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: NetworkImage("https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
-                  fit: BoxFit.cover
-                )
-              ),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
+                      fit: BoxFit.cover)),
             ),
             8.sp.sbHW,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Welcome Back!", style: CustomTextStyles.productSmallBodyTextBlack.copyWith(
-                  color: const Color(0xFF71717A)
-                ),),
-                Text(authStateProvider.user?.firstName??"", style: CustomTextStyles.productTextBody2Black.copyWith(
-                  fontWeight: FontWeight.w500
-                ),)
+                Text(
+                  "Welcome Back!",
+                  style: CustomTextStyles.productSmallBodyTextBlack
+                      .copyWith(color: const Color(0xFF71717A)),
+                ),
+                Text(
+                  authStateProvider.user?.firstName ?? "",
+                  style: CustomTextStyles.productTextBody2Black
+                      .copyWith(fontWeight: FontWeight.w500),
+                )
               ],
             )
           ],
         ),
         actions: [
-
           Padding(
             padding: EdgeInsets.only(right: 8.0.w),
             child: Stack(
@@ -115,19 +116,22 @@ class HomeScreen extends ConsumerWidget {
             children: [
               RevenueCard(
                 title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.revenue == null? "0.00": formatNumber(
-                    dashBoardStateProvider.dashBoardData.revenue ??0,
-                    decimalPlaces: 2
-                ),
+                value: dashBoardStateProvider.dashBoardData.revenue == null
+                    ? "0.00"
+                    : formatNumber(
+                        dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                        decimalPlaces: 2),
                 percentageChange: '+15% decrease',
               ),
               18.w.sbW,
               RevenueCard(
                 title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.subscriptions == null? "0": formatNumber(
-                    dashBoardStateProvider.dashBoardData.subscriptions ??0,
-                    decimalPlaces: 0
-                ),
+                value: dashBoardStateProvider.dashBoardData.subscriptions ==
+                        null
+                    ? "0"
+                    : formatNumber(
+                        dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
+                        decimalPlaces: 0),
                 percentageChange: '+65% decrease',
                 isRevenue: false,
               ),
@@ -137,8 +141,7 @@ class HomeScreen extends ConsumerWidget {
             children: [
               Text(
                 'Overview',
-                style:
-                TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
               ),
               const Spacer(),
               TextButton(
@@ -154,69 +157,74 @@ class HomeScreen extends ConsumerWidget {
           ),
 
           // Overview (Bar Chart)
-          dashBoardStateProvider.trendLoading? const ChartLoader():
-          dashBoardStateProvider.mapData.isEmpty? const ChartEmpty():
-          Container(
-            padding: EdgeInsets.all(24.w),
-            height: 302.h,
-            child: SfCartesianChart(
-              backgroundColor: Colors.white,
-              plotAreaBorderColor: Colors.transparent,
-              primaryXAxis: CategoryAxis(
-                majorGridLines: const MajorGridLines(width: 0),
-                axisLine: const AxisLine(width: 0),
-                // Add label style customization
-                labelStyle: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 12.sp,
-                ),
-              ),
-              primaryYAxis: const NumericAxis(
-                majorGridLines: MajorGridLines(width: 0),
-                minorGridLines: MinorGridLines(width: 0),
-                axisLine: AxisLine(width: 0),
-                // Add axis label
-              ),
-              series: <CartesianSeries>[
-                ColumnSeries<SalesData, String>(
-                  dataSource: dashBoardStateProvider.mapData,
-                  xValueMapper: (SalesData data, _) => data.month,
-                  yValueMapper: (SalesData data, _) => data.veryGood,
-                  color: const Color(0xFFE0E0E0),
-                  name: 'Very Good',
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  width: 0.7, // Reduce the bar width to allow overlapping
-                ),
-                ColumnSeries<SalesData, String>(
-                  dataSource: dashBoardStateProvider.mapData,
-                  xValueMapper: (SalesData data, _) => data.month,
-                  yValueMapper: (SalesData data, _) => data.good,
-                  color: const Color(0xFFFFC107),
-                  name: 'Good',
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  width: 0.7, // Reduce the bar width to allow overlapping
-                ),
-                ColumnSeries<SalesData, String>(
-                  dataSource: dashBoardStateProvider.mapData,
-                  xValueMapper: (SalesData data, _) => data.month,
-                  yValueMapper: (SalesData data, _) => data.poor,
-                  color: const Color(0xFFC70039),
-                  name: 'Poor',
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  width: 0.7, // Reduce the bar width to allow overlapping
-                ),
-              ],
-            ),
-          ),
+          dashBoardStateProvider.trendLoading
+              ? const ChartLoader()
+              : dashBoardStateProvider.mapData.isEmpty
+                  ? const ChartEmpty()
+                  : Container(
+                      padding: EdgeInsets.all(24.w),
+                      height: 302.h,
+                      child: SfCartesianChart(
+                        backgroundColor: Colors.white,
+                        plotAreaBorderColor: Colors.transparent,
+                        primaryXAxis: CategoryAxis(
+                          majorGridLines: const MajorGridLines(width: 0),
+                          axisLine: const AxisLine(width: 0),
+                          // Add label style customization
+                          labelStyle: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                        primaryYAxis: const NumericAxis(
+                          majorGridLines: MajorGridLines(width: 0),
+                          minorGridLines: MinorGridLines(width: 0),
+                          axisLine: AxisLine(width: 0),
+                          // Add axis label
+                        ),
+                        series: <CartesianSeries>[
+                          ColumnSeries<SalesData, String>(
+                            dataSource: dashBoardStateProvider.mapData,
+                            xValueMapper: (SalesData data, _) => data.month,
+                            yValueMapper: (SalesData data, _) => data.veryGood,
+                            color: const Color(0xFFE0E0E0),
+                            name: 'Very Good',
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            width:
+                                0.7, // Reduce the bar width to allow overlapping
+                          ),
+                          ColumnSeries<SalesData, String>(
+                            dataSource: dashBoardStateProvider.mapData,
+                            xValueMapper: (SalesData data, _) => data.month,
+                            yValueMapper: (SalesData data, _) => data.good,
+                            color: const Color(0xFFFFC107),
+                            name: 'Good',
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            width:
+                                0.7, // Reduce the bar width to allow overlapping
+                          ),
+                          ColumnSeries<SalesData, String>(
+                            dataSource: dashBoardStateProvider.mapData,
+                            xValueMapper: (SalesData data, _) => data.month,
+                            yValueMapper: (SalesData data, _) => data.poor,
+                            color: const Color(0xFFC70039),
+                            name: 'Poor',
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            width:
+                                0.7, // Reduce the bar width to allow overlapping
+                          ),
+                        ],
+                      ),
+                    ),
 
           // Recent Sales
           SizedBox(

@@ -6,7 +6,8 @@ class ApiService {
 
   Future<List<Product>> fetchProducts() async {
     try {
-      final response = await _dio.get('https://staging.api-nestjs.boilerplate.hng.tech/api/v1/products');
+      final response = await _dio.get(
+          'https://staging.api-nestjs.boilerplate.hng.tech/api/v1/products');
       final List<dynamic> data = response.data['data'];
       return data.map((productJson) => Product.fromJson(productJson)).toList();
     } catch (e) {

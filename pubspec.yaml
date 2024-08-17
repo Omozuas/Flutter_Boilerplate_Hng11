@@ -61,6 +61,7 @@ dependencies:
   riverpod_annotation: ^2.3.5
   flutter_shimmer: ^2.1.2
   json_annotation: any
+  jwt_decoder: any
   image_picker: ^1.1.2
   cached_memory_image: ^1.5.0
 dev_dependencies:
@@ -82,6 +83,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
+
 
 flutter_launcher_icons:
   android: "launcher_icon"

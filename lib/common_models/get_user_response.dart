@@ -1,5 +1,3 @@
-
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'get_user_response.g.dart';
 
@@ -29,7 +27,8 @@ class GetUserData {
         statusCode: statusCode ?? this.statusCode,
       );
 
-  factory GetUserData.fromJson(Map<String, dynamic> json) => _$GetUserDataFromJson(json);
+  factory GetUserData.fromJson(Map<String, dynamic> json) =>
+      _$GetUserDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetUserDataToJson(this);
 }
@@ -80,7 +79,8 @@ class AuthUser {
         blogs: blogs ?? this.blogs,
       );
 
-  factory AuthUser.fromJson(Map<String, dynamic> json) => _$AuthUserFromJson(json);
+  factory AuthUser.fromJson(Map<String, dynamic> json) =>
+      _$AuthUserFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuthUserToJson(this);
 }
@@ -171,7 +171,8 @@ class Organisation {
         usersRoles: usersRoles ?? this.usersRoles,
       );
 
-  factory Organisation.fromJson(Map<String, dynamic> json) => _$OrganisationFromJson(json);
+  factory Organisation.fromJson(Map<String, dynamic> json) =>
+      _$OrganisationFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrganisationToJson(this);
 }

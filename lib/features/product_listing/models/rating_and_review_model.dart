@@ -1,4 +1,3 @@
-
 class ReviewAndRatingModel {
   const ReviewAndRatingModel({
     required this.author,

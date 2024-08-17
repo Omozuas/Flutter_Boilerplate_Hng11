@@ -75,8 +75,9 @@ class ReviewAndRatingDetail extends StatelessWidget {
                   ),
                 )
               ],
-            ),SizedBox(height: 8.h),
-                        Row(
+            ),
+            SizedBox(height: 8.h),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
@@ -99,9 +100,14 @@ class ReviewAndRatingDetail extends StatelessWidget {
                     )
                   ],
                 ),
-                Row(mainAxisSize: MainAxisSize.min,mainAxisAlignment: MainAxisAlignment.end,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SvgPicture.asset(IconPaths.verified,height: 16,),
+                    SvgPicture.asset(
+                      IconPaths.verified,
+                      height: 16,
+                    ),
                     SizedBox(width: 6.w),
                     Text(
                       "Verified Buyer",

@@ -2,7 +2,8 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/fi
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/filter_product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final productProvider = StateNotifierProvider<ProductNotifier, List<Product>>((ref) {
+final productProvider =
+    StateNotifierProvider<ProductNotifier, List<Product>>((ref) {
   return ProductNotifier(ref.read(apiServiceProvider));
 });
 
@@ -11,7 +12,7 @@ class ProductNotifier extends StateNotifier<List<Product>> {
   List<Product> _allProducts = [];
 
   ProductNotifier(this._apiService) : super([]) {
-    loadProducts();  // Automatically load products when the notifier is initialized
+    loadProducts(); // Automatically load products when the notifier is initialized
   }
 
   Future<void> loadProducts() async {
@@ -29,7 +30,10 @@ class ProductNotifier extends StateNotifier<List<Product>> {
   }
 
   void filterProductsByPriceRange(double minPrice, double maxPrice) {
-    state = _allProducts.where((product) => product.price >= minPrice && product.price <= maxPrice).toList();
+    state = _allProducts
+        .where(
+            (product) => product.price >= minPrice && product.price <= maxPrice)
+        .toList();
   }
 
   void resetFilters() {
@@ -37,7 +41,10 @@ class ProductNotifier extends StateNotifier<List<Product>> {
   }
 
   void searchProducts(String query) {
-    state = _allProducts.where((product) => product.name.toLowerCase().contains(query.toLowerCase())).toList();
+    state = _allProducts
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
   }
 }
 
