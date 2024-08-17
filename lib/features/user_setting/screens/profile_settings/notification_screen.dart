@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
