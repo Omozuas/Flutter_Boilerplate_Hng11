@@ -1,4 +1,6 @@
 import 'dart:io';
+// ignore: depend_on_referenced_packages
+import 'package:http_parser/http_parser.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,7 +9,6 @@ import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
 import 'models/user_model.dart';
 import 'models/user_profile.dart';
-import 'provider/settings_dio_provider.dart';
 
 class SettingsApi {
   SettingsApi(this.ref);
@@ -59,14 +60,15 @@ class SettingsApi {
     required String email,
   }) async {
     try {
-      final dio = ref.read(settingsDioProvider);
       final multipart = await MultipartFile.fromFile(
         file.path,
         filename: file.path.split('/').last,
+        contentType: MediaType('image', 'png'),
       );
-      final response = await dio.multipartPUT(
+      final response = await dio.multipartPut(
         '/profile/$email/picture',
         data: {'DisplayPhoto': multipart},
+        options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
       return response?.data['data']['avatar_url'] ?? '';
     } catch (e) {
