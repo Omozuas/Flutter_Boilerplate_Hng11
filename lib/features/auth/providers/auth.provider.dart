@@ -223,7 +223,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
-      //TODO: Do something with caught error;
+      //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
     }

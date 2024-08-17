@@ -69,29 +69,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     children: [
                       const ProfileAvatar(),
                       const SizedBox(width: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 19.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              user?.fullname ?? '',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: Color(0xff0A0A0A),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 19.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                user?.fullname ?? '',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: Color(0xff0A0A0A),
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              user?.email ?? '',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xff525252),
+                              const SizedBox(height: 3),
+                              Text(
+                                user?.email ?? '',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  color: Color(0xff525252),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -192,9 +194,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       SizedBox(height: 8.h),
                       InkWell(
                         onTap: () {
-                          stotage.remove('accessToken');
-
-                          context.go(AppRoute.login);
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (context) => LogOutDialog(
+                          //     onTap: () {
+                          //       stotage.remove('accessToken');
+                          //       Navigator.pop(context);
+                                context.go(AppRoute.login);
+                          //     },
+                          //   ),
+                          // );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
