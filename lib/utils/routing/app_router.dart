@@ -10,7 +10,8 @@ import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/product_details_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
@@ -88,6 +89,8 @@ class AppRouter {
       ConsumerGoRoute(
         path: '${AppRoute.products}/:id',
         builder: (context, state, ref) {
+          ref.read(productDetailProvider.notifier).productId =
+              state.pathParameters['id']!;
           return const ProductDetailsScreen();
         },
       ),

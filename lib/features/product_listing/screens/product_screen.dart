@@ -159,12 +159,17 @@ class ProductScreen extends ConsumerWidget {
       },
       error: (Object error, StackTrace stackTrace) {
         return Scaffold(
-          body: Center(
-            child: Text(
-              'Something went wrong: $error',
-              style: TextStyle(color: Colors.red, fontSize: 16.sp),
-              textAlign: TextAlign.center,
-            ),
+          body: ListView(
+            children: [
+              (MediaQuery.sizeOf(context).height / 3).sbH,
+              Center(
+                child: Text(
+                  'Something went wrong: $error',
+                  style: TextStyle(color: Colors.red, fontSize: 16.sp),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
           ),
         );
       },
