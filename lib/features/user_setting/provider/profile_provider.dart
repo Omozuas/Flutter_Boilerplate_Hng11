@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,7 +19,8 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         profileUpdater: AsyncData(null),
         profileAvatarUpdater: AsyncData(null),
         notificationUpdater: AsyncData(null),
-        notificationFetch: AsyncData(null));
+        notificationFetch: AsyncData(null),
+        fetchSubcription: AsyncData(null));
   }
 
   Future<void> pickImage(ImageSource? source) async {
@@ -96,12 +98,12 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   Future<void> getNotifications({required String userId}) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
-      state = state.copyWith(user: const AsyncLoading());
+      state = state.copyWith(notificationFetch: const AsyncLoading());
       final res = await settingsApi.getNotification(userId);
       state = state.copyWith(notificationFetch: AsyncData(res));
     } catch (e) {
-      state = state.copyWith(
-          notificationUpdater: AsyncError(e, StackTrace.current));
+      state =
+          state.copyWith(notificationFetch: AsyncError(e, StackTrace.current));
     }
   }
 
@@ -110,13 +112,25 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       required NotificationModel notificationModel}) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
-      state = state.copyWith(user: const AsyncLoading());
-      final res = await settingsApi.updateNotification(
+      state = state.copyWith(notificationUpdater: const AsyncLoading());
+      await settingsApi.updateNotification(
           notificationModel: notificationModel);
-      state = state.copyWith(notificationUpdater: AsyncData(res));
+      state = state.copyWith(notificationUpdater: const AsyncData(null));
     } catch (e) {
       state = state.copyWith(
           notificationUpdater: AsyncError(e, StackTrace.current));
+    }
+  }
+
+  Future<void> getsubscription({required String orgId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(fetchSubcription: const AsyncLoading());
+      final res = await settingsApi.getsubscription(orgId: orgId);
+      state = state.copyWith(fetchSubcription: AsyncData(res));
+    } catch (e) {
+      state =
+          state.copyWith(fetchSubcription: AsyncError(e, StackTrace.current));
     }
   }
 }
@@ -132,6 +146,7 @@ class ProfileProviderStates {
   final AsyncValue<String?> profileAvatarUpdater;
   final AsyncValue<NotificationModel?> notificationUpdater;
   final AsyncValue<NotificationModel?> notificationFetch;
+  final AsyncValue<SubscriptionModel?> fetchSubcription;
 
   const ProfileProviderStates({
     required this.pickedImage,
@@ -140,6 +155,7 @@ class ProfileProviderStates {
     required this.profileAvatarUpdater,
     required this.notificationUpdater,
     required this.notificationFetch,
+    required this.fetchSubcription,
   });
 
   ProfileProviderStates copyWith(
@@ -148,14 +164,15 @@ class ProfileProviderStates {
       AsyncValue<UserProfile?>? profileUpdater,
       AsyncValue<String?>? profileAvatarUpdater,
       AsyncValue<NotificationModel?>? notificationUpdater,
-      AsyncValue<NotificationModel?>? notificationFetch}) {
+      AsyncValue<NotificationModel?>? notificationFetch,
+      AsyncValue<SubscriptionModel?>? fetchSubcription}) {
     return ProfileProviderStates(
-      pickedImage: pickedImage ?? this.pickedImage,
-      user: user ?? this.user,
-      profileUpdater: profileUpdater ?? this.profileUpdater,
-      profileAvatarUpdater: profileAvatarUpdater ?? this.profileAvatarUpdater,
-      notificationUpdater: notificationUpdater ?? this.notificationUpdater,
-      notificationFetch: notificationFetch ?? this.notificationFetch,
-    );
+        pickedImage: pickedImage ?? this.pickedImage,
+        user: user ?? this.user,
+        profileUpdater: profileUpdater ?? this.profileUpdater,
+        profileAvatarUpdater: profileAvatarUpdater ?? this.profileAvatarUpdater,
+        notificationUpdater: notificationUpdater ?? this.notificationUpdater,
+        notificationFetch: notificationFetch ?? this.notificationFetch,
+        fetchSubcription: fetchSubcription ?? this.fetchSubcription);
   }
 }

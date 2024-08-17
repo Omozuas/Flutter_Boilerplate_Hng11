@@ -87,14 +87,14 @@ class SettingsApi {
     }
   }
 
-  Future<NotificationModel> updateNotification(
+  Future<void> updateNotification(
       {required NotificationModel notificationModel}) async {
     try {
-      final response = await dio.post(
+      await dio.post(
         '/settings/notification-settings',
         data: notificationModel.toMap(),
       );
-      return NotificationModel.fromMap(response?.data['data']);
+      return;
     } catch (e) {
       rethrow;
     }
@@ -102,10 +102,19 @@ class SettingsApi {
 
   Future<SubscriptionModel> getsubscription({required String orgId}) async {
     try {
-      final response = await dio.post(
+      final response = await dio.get(
         '/subscriptions/user/$orgId',
       );
       return subscriptionModelFromJson(response?.data['data']);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> postSubscriptionFree({required String orgId}) async {
+    try {
+      await dio.post('/subscriptions/free', data: {'organizationId': orgId});
+      return;
     } catch (e) {
       rethrow;
     }
