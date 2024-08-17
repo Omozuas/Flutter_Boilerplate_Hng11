@@ -119,6 +119,22 @@ class SettingsApi {
       rethrow;
     }
   }
+
+  Future<void> updatePassword(
+      {required String oldPassword,
+      required String newPassword,
+      required String confirmNewPassword}) async {
+    try {
+      await dio.putUpdate('/auth/password', data: {
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+        "confirmNewPassword": confirmNewPassword
+      });
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 final settingsApiProvider = Provider<SettingsApi>((ref) => SettingsApi(ref));

@@ -1,9 +1,18 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
+
+List<Product> getProductListFromStringtoJson(String str) =>
+    List<Product>.from(
+        json.decode(str).map((x) => Product.fromJson(x)));
+
+String getProductListFromJsontoString(List<Product> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @freezed
 class Product with _$Product {
@@ -13,10 +22,9 @@ class Product with _$Product {
     String? name,
     String? description,
     int? price,
+    int? cartQuantity,
     String? category,
-    @JsonKey(name: 'created_at')
-    @JsonKey(name: 'created_at')
-    DateTime? createdAt,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? image,
     int? quantity,
@@ -26,6 +34,5 @@ class Product with _$Product {
     @JsonKey(name: 'delete_at') DateTime? deleteAt,
   }) = _Product;
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 }

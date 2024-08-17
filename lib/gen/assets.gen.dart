@@ -206,6 +206,10 @@ class $AssetsImagesPngProductListingGen {
 class $AssetsImagesSvgAccountSettingsGen {
   const $AssetsImagesSvgAccountSettingsGen();
 
+  /// File path: assets/images/svg/account_settings/empty_avatar.svg
+  SvgGenImage get emptyAvatar =>
+      const SvgGenImage('assets/images/svg/account_settings/empty_avatar.svg');
+
   /// File path: assets/images/svg/account_settings/instagram.svg
   SvgGenImage get instagram =>
       const SvgGenImage('assets/images/svg/account_settings/instagram.svg');
@@ -219,7 +223,7 @@ class $AssetsImagesSvgAccountSettingsGen {
       const SvgGenImage('assets/images/svg/account_settings/x_logo.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [instagram, linkedin, xLogo];
+  List<SvgGenImage> get values => [emptyAvatar, instagram, linkedin, xLogo];
 }
 
 class $AssetsImagesSvgProductListingGen {
