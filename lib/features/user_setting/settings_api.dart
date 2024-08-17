@@ -2,7 +2,7 @@ import 'dart:io';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
-
+import 'package:http_parser/http_parser.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
