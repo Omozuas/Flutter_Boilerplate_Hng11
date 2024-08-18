@@ -1,6 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
@@ -29,6 +34,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(profileProvider).user;
+    UserService _userService = locator<UserService>();
 
     return Scaffold(
       appBar: AppBar(
@@ -76,7 +82,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                user?.fullname ?? '',
+                                user?.profile?.username ?? user?.fullname ?? '',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
@@ -141,6 +147,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           context.push(AppRoute.languageAndRegionScreen);
                         },
                       ),
+                      SettingsTile(
+                        leading: Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                        leadingIcon: 'assets/images/personsettings.png',
+                        title: 'View as Organisation',
+                        onTap: () {},
+                        trailing: Transform.scale(
+                          scale: 0.7,
+                          child: CupertinoSwitch(
+                              value: _userService.isUserOrganization,
+                              onChanged:(v) async {
+                                await _userService.change(v, context);
+                                if(_userService.isUserOrganization){
+                                  context.go(AppRoute.home);
+                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
+                                }else{
+                                  context.go(AppRoute.userHome);
+                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
+                                }
+                              }
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 8.h),
                       const Divider(),
                       SizedBox(height: 8.h),
@@ -194,16 +222,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       SizedBox(height: 8.h),
                       InkWell(
                         onTap: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (context) => LogOutDialog(
-                          //     onTap: () {
-                          //       stotage.remove('accessToken');
-                          //       Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => LogOutDialog(
+                              onTap: () {
+                                UserService _userService = locator<UserService>();
+                                _userService.logout();
+                                stotage.remove('accessToken');
+                                Navigator.pop(ctx);
                                 context.go(AppRoute.login);
-                          //     },
-                          //   ),
-                          // );
+                              },
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

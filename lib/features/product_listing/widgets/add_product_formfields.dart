@@ -8,7 +8,9 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
+  final Function(String?)? onChanged;
   final int? maxLength;
+  final Widget? prefixIcon;
   final int? maxLines;
   final Color? borderColor;
   final double? borderRadius;
@@ -26,6 +28,8 @@ class CustomTextField extends StatelessWidget {
     this.borderColor,
     this.borderRadius,
     this.showCounter = true,
+    this.onChanged,
+    this.prefixIcon,
   });
 
   @override
@@ -37,7 +41,7 @@ class CustomTextField extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               decoration: InputDecoration(
-                labelText: hintText,
+                hintText: hintText,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
                   borderSide: BorderSide(
@@ -64,11 +68,13 @@ class CustomTextField extends StatelessWidget {
                   right: 12,
                   bottom: 10,
                 ),
+                prefixIcon: prefixIcon,
                 alignLabelWithHint: true,
               ),
               keyboardType: keyboardType,
               validator: validator,
               maxLength: maxLength,
+              onChanged: onChanged,
               maxLines: maxLines,
               expands: maxLines == null,
               textAlignVertical: TextAlignVertical.top,

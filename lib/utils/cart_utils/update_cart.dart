@@ -15,9 +15,8 @@ Future<bool> updateToCart(Product product, int quantity)async{
       return false;
     }else{
       if(data.any((cart)=> cart.id == product.id)){
-        data.firstWhere((cart)=> cart.id == product.id).copyWith(
-          cartQuantity: quantity
-        );
+        int index = data.indexWhere((cart)=> cart.id == product.id);
+        data[index] = product;
         storage.write("cart_items", getProductListFromJsontoString(data));
         return true;
       }else{
