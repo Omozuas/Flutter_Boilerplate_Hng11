@@ -197,7 +197,6 @@ class AuthProvider extends StateNotifier<AuthState> {
       final res = await AuthApi().loginUser(data);
 
       if (res != null) {
-        showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
         setOrganizations = (userRegData.data?['organisations'] as List?)

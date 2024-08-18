@@ -3,6 +3,8 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
@@ -200,6 +202,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context: context,
                             builder: (ctx) => LogOutDialog(
                               onTap: () {
+                                UserService _userService = locator<UserService>();
+                                _userService.logout();
                                 stotage.remove('accessToken');
                                 Navigator.pop(ctx);
                                 context.go(AppRoute.login);
