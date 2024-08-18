@@ -30,6 +30,7 @@ class GlobalColors {
   static HexColor red = HexColor('#E00414');
   static HexColor green = HexColor('#10AF20');
   static HexColor white = HexColor('#FFFFFF');
+  static HexColor grays = HexColor('#525252');
 
   static HexColor mutedTextColor = HexColor('#71717A');
   static HexColor zinc50 = HexColor("#FAFAFA");

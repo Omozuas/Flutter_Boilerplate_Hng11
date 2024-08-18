@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_context/one_context.dart';
 
 import '../common_models/get_user_response.dart';
@@ -17,12 +18,9 @@ class UserService {
   bool isUserLoggedIn = false;
   bool isUserOrganization = true;
 
-  change(bool? userType)async{
+  change(bool? userType, BuildContext context)async{
     isUserOrganization = userType??true;
     storageService.write("userType", isUserOrganization);
-    if(isUserOrganization){
-      OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
-    }
   }
 
   storeToken(String? token) async {
@@ -47,6 +45,7 @@ class UserService {
       user = AuthUser();
       isUserLoggedIn = false;
     } else {
+      isUserOrganization = true;
       isUserLoggedIn = true;
       await getStoreUser();
     }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/cart_utils/cart_functions.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
@@ -41,6 +42,37 @@ class CartProvider extends StateNotifier<CartState> {
     getAllCartItems();
   }
 
+  onChanged(String? val){
+
+  }
+
+  num totalPrice = 0;
+  num allPrice = 0;
+  num discountedPrice = 0;
+  num deliveryFee = 1500;
+  num payPrice = 0;
+  TextEditingController promoCodeController = TextEditingController();
+
+  updateItem(Product item, int quanity) async {
+    updateToCart(item, quanity);
+    await getCartItems();
+  }
+
+  removeItem(int index) async {
+    removeCartItemFromDb(index);
+    await getCartItems();
+  }
+
+
+  getPrice() {
+    totalPrice = state.allCart.fold(
+        0, (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)));
+    allPrice = state.allCart.fold(
+        0, (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)));
+    discountedPrice =
+    promoCodeController.text.trim().isEmpty ? 0 : (totalPrice * (5 / 100));
+    payPrice = (totalPrice + deliveryFee) - discountedPrice;
+  }
 
 
   set setCartLoading(bool value) {
@@ -51,12 +83,16 @@ class CartProvider extends StateNotifier<CartState> {
     state = state.copyWith(allCart: value);
   }
 
+  List<Product> cartItems =[];
+
   Future<void> getAllCartItems() async {
     setCartLoading = true;
     try {
       final res = await getCartItems();
       if (res.isNotEmpty) {
         setAllCart = res;
+        cartItems = res;
+        getPrice();
       }
       setAllCart = [];
     } catch (e) {

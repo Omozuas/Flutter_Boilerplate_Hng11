@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signu
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
@@ -27,6 +28,9 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_p
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../features/main_view/user_main_view.dart';
+import '../../features/user_home/screens/user_dashboard_ui.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -155,6 +159,12 @@ class AppRouter {
           return const UpdatePassword();
         },
       ),
+      ConsumerGoRoute(
+        path: AppRoute.userHome,
+        builder: (context, state, ref) {
+          return const UserMainView();
+        },
+      ),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(routes: [
@@ -202,13 +212,17 @@ class AppRoute {
   static const String verificationSuccess = '/verificationSuccess';
   static const String resetPassword = '/resetPassword/:email';
   static const String cart = '/cart';
+  static const String orders = '/orders';
 
   static const String settings = '/settings';
+  static const String userSettings = '/user-settings';
 
   static const String products = '/products';
+  static const String userProducts = '/user-products';
   static const String addProduct = '/add-product';
 
   static const String home = '/home';
+  static const String userHome = '/user-home';
 
   static const String createRole = '/org-settings/create-role';
   static const String members = '/org-settings/members';

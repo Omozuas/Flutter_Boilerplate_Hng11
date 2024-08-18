@@ -21,7 +21,7 @@ class Product with _$Product {
     String? id,
     String? name,
     String? description,
-    int? price,
+    num? price,
     int? cartQuantity,
     String? category,
     @JsonKey(name: 'created_at') DateTime? createdAt,

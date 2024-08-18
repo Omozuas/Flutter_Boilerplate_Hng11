@@ -10,8 +10,10 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../utils/app_images.dart';
 import 'home_widget/widgets/chart_loader.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -66,28 +68,18 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0.w),
-            child: Stack(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications),
-                ),
-                const Positioned(
-                  top: 0.0,
-                  right: 0.0,
-                  child: Badge(
-                    label:
-                        Text('5'), // Replace with the actual notification count
-                    textColor: Colors.white,
-                    backgroundColor: Colors.red,
-                    textStyle: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                AppSvgs.notification,
+                height: 24.h,
+                width: 24.w,
+              ),
+              16.w.sbW
+            ],
+          )
         ],
       ),
       backgroundColor: GlobalColors.white,

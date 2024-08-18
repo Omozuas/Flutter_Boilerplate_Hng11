@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import '../../../services/dio_provider.dart';
 import '../../../services/service_locator.dart';
+import '../../product_listing/models/product/product_model.dart';
+import '../../user_home/model/all_products.dart';
 import 'model/dashboard_model.dart';
 import 'model/organization_overview_model.dart';
 import 'model/sales_trend_model.dart';
@@ -20,6 +23,24 @@ class DashboardApi implements DashboardApiContract {
           .get("Dashboards", query: {"userId": _userService.user.id});
       return DashBoardModel.fromJson(jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future <List<Product>> getAllProducts({int? pageSize, int? page}) async {
+    try {
+      var response = await dioProvider.get(
+        "products",
+        query: {
+          "PageSize": pageSize?? 100000,
+          "PageNumber": page?? 1
+        }
+      );
+      var res = AllProduct.fromJson(jsonDecode(jsonEncode(response?.data))).data??[];
+      return res;
+    } catch (e) {
+      log(e.toString());
       rethrow;
     }
   }
@@ -62,6 +83,7 @@ class DashboardApi implements DashboardApiContract {
 
 abstract class DashboardApiContract {
   Future<DashBoardModel> getDashboardData();
+  Future <List<Product>> getAllProducts({int? pageSize, int? page});
   Future<OrganizationOverviewModel> getOrganizationOverView();
   Future<List<GetSalesTrend>> getSalesTrend(
       {DateTime? startDate, DateTime? endDate});

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
@@ -33,6 +34,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(profileProvider).user;
+    UserService _userService = locator<UserService>();
 
     return Scaffold(
       appBar: AppBar(
@@ -144,6 +146,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           // Navigate to Data and Privacy Settings
                           context.push(AppRoute.languageAndRegionScreen);
                         },
+                      ),
+                      SettingsTile(
+                        leading: Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                        leadingIcon: 'assets/images/personsettings.png',
+                        title: 'View as Organisation',
+                        onTap: () {},
+                        trailing: Transform.scale(
+                          scale: 0.7,
+                          child: CupertinoSwitch(
+                              value: _userService.isUserOrganization,
+                              onChanged:(v) async {
+                                await _userService.change(v, context);
+                                if(_userService.isUserOrganization){
+                                  context.go(AppRoute.home);
+                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
+                                }else{
+                                  context.go(AppRoute.userHome);
+                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
+                                }
+                              }
+                          ),
+                        ),
                       ),
                       SizedBox(height: 8.h),
                       const Divider(),
