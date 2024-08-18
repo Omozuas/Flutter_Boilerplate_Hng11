@@ -15,6 +15,7 @@ Future<bool> updateToCart(Product product, int quantity)async{
       return false;
     }else{
       if(data.any((cart)=> cart.id == product.id)){
+        // ignore: unused_result
         data.firstWhere((cart)=> cart.id == product.id).copyWith(
           cartQuantity: quantity
         );

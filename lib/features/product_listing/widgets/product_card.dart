@@ -39,7 +39,11 @@ class ProductCardWiget extends StatelessWidget {
           Builder(builder: (context) {
             if (image.isNotEmpty) {
               if (image.startsWith('http')) {
-                return Image.network(image);
+                return Image.network(
+                  image,
+                  width: 104.w,
+                  height: 104.h,
+                );
               } else if (image.isValidBase64) {
                 return ClipRRect(
                   borderRadius:
@@ -52,8 +56,8 @@ class ProductCardWiget extends StatelessWidget {
                     base64Decode(image),
                     errorBuilder: (context, error, stackTrace) =>
                         Assets.images.png.productListing.product.image(
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                .135),
+                      height: GlobalScreenSize.getScreenHeight(context) * .135,
+                    ),
                   ),
                 );
               } else {
