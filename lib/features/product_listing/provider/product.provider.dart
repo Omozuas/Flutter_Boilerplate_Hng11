@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
@@ -15,12 +14,9 @@ class ProductList extends _$ProductList {
     if (org.organisationId == null) {
       return Future.error('organisation is not initialized');
     }
-    final value = ref.watch(getOrganisationProvider);
-
-    log('Organization provider ${value.name}');
 
     return ref
-        .watch(productApiProvider)
+        .watch(productApiProvider) 
         .getAllProducts(orgId: org.organisationId!);
   }
 }

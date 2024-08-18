@@ -17,100 +17,99 @@ class ProductScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(productListProvider).when(
-      data: (data) {
-        return Scaffold(
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
-                child: Row(
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Products",
-                          style: CustomTextStyles.producHeaderBlack,
-                        ),
-                        Text(
-                          "View all products",
-                          style: CustomTextStyles.productSmallBodyTextBlack,
-                        ),
-                      ],
+                    Text(
+                      "Products",
+                      style: CustomTextStyles.producHeaderBlack,
                     ),
-                    // const Spacer(),
-                    // Assets.images.svg.productListing.listIcon.svg(),
-                    // SizedBox(
-                    //   width: 8.w,
-                    // ),
-                    // Assets.images.svg.productListing.gridIcon.svg(),
+                    Text(
+                      "View all products",
+                      style: CustomTextStyles.productSmallBodyTextBlack,
+                    ),
                   ],
                 ),
-              ),
-              Divider(
-                color: GlobalColors.diverColor,
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 23.w, right: 23.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        height: GlobalScreenSize.getScreenHeight(
-                              context,
-                            ) *
-                            0.052,
-                        width: GlobalScreenSize.getScreenWidth(
-                              context,
-                            ) *
-                            0.7,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            border: Border.all(
-                                color: GlobalColors.searchBorderColor)),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Search Product",
-                              contentPadding: const EdgeInsets.only(top: 2),
-                              suffixIcon: SvgPicture.asset(
-                                Assets.images.svg.productListing.sortIcon.path,
-                                height: 24.h,
-                                width: 24.w,
-                                fit: BoxFit.scaleDown,
-                              )),
-                        ),
-                      ),
+                // const Spacer(),
+                // Assets.images.svg.productListing.listIcon.svg(),
+                // SizedBox(
+                //   width: 8.w,
+                // ),
+                // Assets.images.svg.productListing.gridIcon.svg(),
+              ],
+            ),
+          ),
+          Divider(
+            color: GlobalColors.diverColor,
+          ),
+          SizedBox(
+            height: 24.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 23.w, right: 23.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    height: GlobalScreenSize.getScreenHeight(
+                          context,
+                        ) *
+                        0.052,
+                    width: GlobalScreenSize.getScreenWidth(
+                          context,
+                        ) *
+                        0.7,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border:
+                            Border.all(color: GlobalColors.searchBorderColor)),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Search Product",
+                          contentPadding: const EdgeInsets.only(top: 2),
+                          suffixIcon: SvgPicture.asset(
+                            Assets.images.svg.productListing.sortIcon.path,
+                            height: 24.h,
+                            width: 24.w,
+                            fit: BoxFit.scaleDown,
+                          )),
                     ),
-                    10.w.sbW,
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return const FilterBottomSheet();
-                          },
-                        );
+                  ),
+                ),
+                10.w.sbW,
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const FilterBottomSheet();
                       },
-                      child: Assets.images.svg.productListing.filterButton.svg(
-                        height:
-                            GlobalScreenSize.getScreenHeight(context) * 0.052,
-                        width: GlobalScreenSize.getScreenWidth(context) * 0.7,
-                      ),
-                    ),
-                  ],
+                    );
+                  },
+                  child: Assets.images.svg.productListing.filterButton.svg(
+                    height: GlobalScreenSize.getScreenHeight(context) * 0.052,
+                    width: GlobalScreenSize.getScreenWidth(context) * 0.7,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
+              ],
+            ),
+          ),
+          Expanded(
+            child: ref.watch(productListProvider).when(
+              data: (data) {
+                return Padding(
                   padding: EdgeInsets.only(
                     left: 24.h,
                     top: 24.h,
@@ -151,35 +150,36 @@ class ProductScreen extends ConsumerWidget {
                       );
                     }),
                   ),
-                ),
-              )
-            ],
+                );
+              },
+              error: (Object error, StackTrace stackTrace) {
+                return RefreshIndicator(
+                  onRefresh: () => ref.refresh(productListProvider.future),
+                  child: ListView(
+                    children: [
+                      (MediaQuery.sizeOf(context).height / 3).sbH,
+                      Center(
+                        child: Text(
+                          'Something went wrong: $error',
+                          style: TextStyle(color: Colors.red, fontSize: 16.sp),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              loading: () {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: GlobalColors.orange,
+                  ),
+                );
+              },
+            ),
           ),
-        );
-      },
-      error: (Object error, StackTrace stackTrace) {
-        return Scaffold(
-          body: ListView(
-            children: [
-              (MediaQuery.sizeOf(context).height / 3).sbH,
-              Center(
-                child: Text(
-                  'Something went wrong: $error',
-                  style: TextStyle(color: Colors.red, fontSize: 16.sp),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-      loading: () {
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

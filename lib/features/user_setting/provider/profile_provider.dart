@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../models/notification_model.dart';
 import '../models/subscription_model.dart';
-import '../models/updatepassword-model.dart';
+import '../models/updatepassword_model.dart';
 import '../models/user_model.dart';
 import '../models/user_profile.dart';
 import '../settings_api.dart';
