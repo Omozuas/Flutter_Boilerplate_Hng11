@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:one_context/one_context.dart';
 import 'validator.dart';
 
 class UpdatePassword extends ConsumerStatefulWidget {
@@ -65,23 +67,28 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
     if (newPassword == confirmPasswordController.text) {
       try {
         final passwordService = ref.read(passwordServiceProvider);
-        await passwordService.updatePassword(
-            email: email,
-            newPassword: newPassword,
-            confirmPassword: confirmPassword);
-        showDialog(
-          context: context,
-          builder: (context) {
-            return ProfileDialog(
-                title: "Password Successfully Updated",
-                description:
-                    "Your password has been successfully updated! You can now log in with your new password.",
-                onContinue: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen())));
+        await passwordService
+            .updatePassword(
+                email: email,
+                newPassword: newPassword,
+                confirmPassword: confirmPassword)
+            .then(
+          (value) {
+            OneContext().showDialog(
+              builder: (ctx) {
+                return ProfileDialog(
+                    title: "Password Successfully Updated",
+                    description:
+                        "Your password has been successfully updated! You can now log in with your new password.",
+                    onContinue: () {
+                      Navigator.pop(ctx);
+                      context.go(AppRoute.login);
+                    });
+              },
+            );
           },
         );
+
         //Handle errors
       } on DioException catch (e) {
         // Handle DioException
@@ -95,8 +102,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
             errorMessage = 'Failed to update password. Please try again.';
           });
         }
-        showDialog(
-          context: context,
+        OneContext().showDialog(
           builder: (context) {
             return ProfileDialog(
               title: "Error",
@@ -109,8 +115,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
         setState(() {
           errorMessage = 'An unexpected error occurred. Please try again.';
         });
-        showDialog(
-          context: context,
+        OneContext().showDialog(
           builder: (context) {
             return ProfileDialog(
               title: "Error",
