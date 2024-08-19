@@ -4,8 +4,10 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'validator.dart';
 
@@ -71,15 +73,15 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
             confirmPassword: confirmPassword);
         showDialog(
           context: context,
-          builder: (context) {
+          builder: (ctx) {
             return ProfileDialog(
                 title: "Password Successfully Updated",
                 description:
                     "Your password has been successfully updated! You can now log in with your new password.",
-                onContinue: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen())));
+                onContinue: () {
+                  Navigator.pop(ctx);
+                  context.go(AppRoute.login);
+                });
           },
         );
         //Handle errors
