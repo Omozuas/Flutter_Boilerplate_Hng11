@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
@@ -16,7 +17,7 @@ class ProductList extends _$ProductList {
     }
 
     return ref
-        .watch(productApiProvider) 
+        .watch(productApiProvider)
         .getAllProducts(orgId: org.organisationId!);
   }
 }
@@ -24,8 +25,18 @@ class ProductList extends _$ProductList {
 @riverpod
 AsyncValue<Map<String, List<Product>>> productsByCategory(
     ProductsByCategoryRef ref) {
+  final queryString = ref.watch(searchInputProvider);
   return ref.watch(productListProvider).whenData(
-        _getProductMapping,
+        (value) => _getProductMapping(
+          value.where(
+            (element) {
+              return element.name
+                      ?.toLowerCase()
+                      .contains(queryString.toLowerCase()) ??
+                  true;
+            },
+          ).toList(),
+        ),
       );
 }
 
@@ -38,4 +49,17 @@ Map<String, List<Product>> _getProductMapping(List<Product> products) {
     categoryMap[category!] = categoryList;
   }
   return categoryMap;
+}
+
+@riverpod
+class SearchInput extends _$SearchInput {
+  @override
+  String build() {
+    return '';
+  }
+
+  void update(String queryString) {
+    log(queryString);
+    state = queryString;
+  }
 }

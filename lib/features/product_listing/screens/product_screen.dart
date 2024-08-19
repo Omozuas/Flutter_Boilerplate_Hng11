@@ -75,6 +75,7 @@ class ProductScreen extends ConsumerWidget {
                         border:
                             Border.all(color: GlobalColors.searchBorderColor)),
                     child: TextFormField(
+                      onChanged: ref.read(searchInputProvider.notifier).update,
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Search Product",
@@ -109,46 +110,49 @@ class ProductScreen extends ConsumerWidget {
           Expanded(
             child: ref.watch(productListProvider).when(
               data: (data) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                    left: 24.h,
-                    top: 24.h,
-                  ),
-                  child: SizedBox(
-                    height: GlobalScreenSize.getScreenHeight(context),
-                    child: Builder(builder: (context) {
-                      final data = ref.watch(productsByCategoryProvider);
-                      return data.when(
-                        data: (data) {
-                          final allKeys = data.keys.toList();
-                          return ListView.separated(
-                            itemCount: allKeys.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (txt, index) {
-                              final myKey = allKeys[index];
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: allKeys.last == myKey ? 60 : 0),
-                                child: ProductCardListWidget(
-                                  categoryName: allKeys[index],
-                                  products: data[myKey]!.reversed.toList(),
-                                ),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                              height: 24.h,
-                            ),
-                          );
-                        },
-                        error: (error, stackTrace) {
-                          return const SizedBox();
-                        },
-                        loading: () {
-                          return const SizedBox();
-                        },
-                      );
-                    }),
+                return RefreshIndicator(
+                  onRefresh: () => ref.refresh(productListProvider.future),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 24.h,
+                      top: 24.h,
+                    ),
+                    child: SizedBox(
+                      height: GlobalScreenSize.getScreenHeight(context),
+                      child: Builder(builder: (context) {
+                        final data = ref.watch(productsByCategoryProvider);
+                        return data.when(
+                          data: (data) {
+                            final allKeys = data.keys.toList();
+                            return ListView.separated(
+                              itemCount: allKeys.length,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (txt, index) {
+                                final myKey = allKeys[index];
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: allKeys.last == myKey ? 60 : 0),
+                                  child: ProductCardListWidget(
+                                    categoryName: allKeys[index],
+                                    products: data[myKey]!.reversed.toList(),
+                                  ),
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) => SizedBox(
+                                height: 24.h,
+                              ),
+                            );
+                          },
+                          error: (error, stackTrace) {
+                            return const SizedBox();
+                          },
+                          loading: () {
+                            return const SizedBox();
+                          },
+                        );
+                      }),
+                    ),
                   ),
                 );
               },
