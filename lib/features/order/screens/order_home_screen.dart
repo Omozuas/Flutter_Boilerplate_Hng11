@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/models/cart_model.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/widgets/cart_price_option.dart';
-import 'package:flutter_boilerplate_hng11/features/order/widgets/order_product_widget.dart';
+import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
+import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../cart/models/cart_model.dart';
 
 class OrderHomeScreen extends StatefulWidget {
   const OrderHomeScreen({super.key});
@@ -46,28 +47,24 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
             "Freshly cooked rice and meat source with cucumber and lettus"),
   ];
 
+  final userData = ["User1", "User2", "User3", "User4"];
+
+  num subTotalPrice = 0;
+  num deliveryFee = 10;
   num totalPrice = 0;
-  num allPrice = 0;
-  num discountedPrice = 0;
-  num deliveryFee = 1500;
-  num payPrice = 0;
 
   notifyListeners() {
     setState(() {});
   }
 
-  // getPrice() {
-  //   totalPrice = products.fold(
-  //       0, (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)));
-  //   allPrice = products.fold(
-  //       0, (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)));
-  //   discountedPrice =
-  //   promoCodeController.text
-  //       .trim()
-  //       .isEmpty ? 0 : (totalPrice * (5 / 100));
-  //   payPrice = (totalPrice + deliveryFee) - discountedPrice;
-  //   notifyListeners();
-  // }
+  getPrice() {
+    subTotalPrice = products.fold(
+      0,
+      (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)),
+    );
+    totalPrice = (subTotalPrice + deliveryFee);
+    notifyListeners();
+  }
 
   List<CartData> products = [];
 
@@ -79,12 +76,12 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
 
   init() {
     products = data;
-    // getPrice();
+    getPrice();
   }
 
   @override
   void initState() {
-    // init();
+    init();
     super.initState();
   }
 
@@ -92,8 +89,14 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Orders"),
+        title: Padding(
+          padding: EdgeInsets.only(left: 8.w),
+          child: Text(
+            "Manage Orders",
+            style: CustomTextStyles.producHeaderBlack,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
       ),
       body: Column(
         children: [
@@ -108,39 +111,24 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                   itemCount: products.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  padding: 16.h.padH,
+                  padding: 8.h.padH,
                   itemBuilder: (_, index) {
                     CartData product = products[index];
                     int quantity = (product.quantity ?? 0);
-                    num price = (product.price ?? 0) * quantity;
 
-                    return OrderWidget(
+                    num price = (product.price ?? 0) * quantity;
+                    
+                    return OrderTile(
+                      product: product,
                       price: price,
+                      userData: userData[index],
                       quantity: quantity,
-                      isLast: product == products.last,
-                      image: product.image ?? "",
-                      name: product.name ?? "",
-                      description: product.description ?? "",
-                      orderBy: "User 1",
-                      orderStatus: "Sent",
                     );
                   },
                 ),
-                Padding(
-                  padding: 16.sp.padA,
-                  child: Column(
-                    children: [
-                      CartPriceOption(
-                        title: "Total Orders",
-                        value: totalPrice,
-                      ),
-                      50.h.sbH,
-                    ],
-                  ),
-                ),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
