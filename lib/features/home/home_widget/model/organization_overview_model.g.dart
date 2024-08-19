@@ -21,8 +21,8 @@ Map<String, dynamic> _$OrganizationOverviewModelToJson(
     };
 
 Overview _$OverviewFromJson(Map<String, dynamic> json) => Overview(
-      month: (json['month'] as num?)?.toInt(),
-      revenue: (json['revenue'] as num?)?.toInt(),
+      month: json['month'] as num?,
+      revenue: json['revenue'] as num?,
     );
 
 Map<String, dynamic> _$OverviewToJson(Overview instance) => <String, dynamic>{

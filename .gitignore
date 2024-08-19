@@ -46,3 +46,5 @@ app.*.map.json
 # all keys are hidden in the .env file
 
 .env
+
+android_old
