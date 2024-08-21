@@ -15,12 +15,11 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-.fvm/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-.vscode/
+#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -42,9 +41,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# all keys are hidden in the .env file
-
-.env
-
-android_old

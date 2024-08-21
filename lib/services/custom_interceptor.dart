@@ -42,7 +42,8 @@ class CustomInterceptor extends Interceptor {
       }
     } else if (options.path.startsWith('auth/') ||
         options.path.startsWith('/auth/')) {
-      // Do nothing (continue login, rest password or sign in as the endpoint is unprotected
+      // Do nothing (continue login, rest password or sign in a
+      // s the endpoint is unprotected
     } else {
       handler.reject(
         DioException(

@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
@@ -15,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_storage/get_storage.dart';
 // import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../services/service_locator.dart';
 import '../widgets/loading_overlay.dart';
 
@@ -35,7 +34,6 @@ class LoginScreen extends ConsumerWidget {
     // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
     //  final loadingGoogle = ref.watch(loadingGoogleButton);
-
     return LoadingOverlay(
       isLoading: authStateProvider.normalButtonLoading ||
           authStateProvider.googleButtonLoading,
@@ -53,7 +51,7 @@ class LoginScreen extends ConsumerWidget {
                     height: 48.h,
                   ),
                   Text(
-                    "Login",
+                    AppLocalizations.of(context)!.login,
                     style: CustomTextStyle.semiBold(
                       fontSize: 24.sp,
                       color: GlobalColors.iconColor,
@@ -63,7 +61,7 @@ class LoginScreen extends ConsumerWidget {
                     height: 8.h,
                   ),
                   Text(
-                    "Welcome back, please enter your details",
+                    AppLocalizations.of(context)!.welcomeBackMessage,
                     style: CustomTextStyle.regular(
                       color: GlobalColors.darkOne,
                     ),
@@ -111,7 +109,7 @@ class LoginScreen extends ConsumerWidget {
                       SizedBox(width: 105.w, child: const Divider()),
                       const Spacer(),
                       Text(
-                        "or continue with",
+                        AppLocalizations.of(context)!.continueWithButton,
                         style: CustomTextStyle.regular(
                           color: GlobalColors.darkOne,
                         ),
@@ -124,19 +122,19 @@ class LoginScreen extends ConsumerWidget {
                     height: 28.h,
                   ),
                   CustomTextField(
-                    label: "Email",
+                    label: AppLocalizations.of(context)!.email,
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    hintText: "Enter your email",
+                    hintText: AppLocalizations.of(context)!.enterEmail,
                     validator: (v) => Validators.emailValidator(v),
                   ),
                   SizedBox(
                     height: 16.h,
                   ),
                   PasswordTextField(
-                    label: "Password",
+                    label: AppLocalizations.of(context)!.password,
                     controller: _passwordController,
-                    hintText: "Enter your password",
+                    hintText: AppLocalizations.of(context)!.password,
                   ),
                   SizedBox(
                     height: 16.h,
@@ -163,9 +161,8 @@ class LoginScreen extends ConsumerWidget {
                       SizedBox(
                         width: 8.w,
                       ),
-                      Text(context.tr('ok')),
                       Text(
-                        "Remember Me",
+                        AppLocalizations.of(context)!.rememberMeCheckbox,
                         style: CustomTextStyle.medium(
                           color: GlobalColors.black,
                           fontSize: 14.sp,
@@ -177,7 +174,7 @@ class LoginScreen extends ConsumerWidget {
                           context.push(AppRoute.forgotPassword);
                         },
                         child: Text(
-                          "Forgot Password?",
+                          AppLocalizations.of(context)!.forgotPasswordLink,
                           style: CustomTextStyle.regular(
                             color: GlobalColors.orange,
                             fontSize: 14.sp,
@@ -193,11 +190,12 @@ class LoginScreen extends ConsumerWidget {
                       loading: authStateProvider.normalButtonLoading,
                       onTap: () async {
                         if (_formKey.currentState?.validate() ?? false) {
+                          box.write('rememberMe', authStateProvider.checkBoxState);
                           _handleLoginAccount(ref, context);
                         }
                       },
                       borderColor: GlobalColors.borderColor,
-                      text: "Login",
+                      text: AppLocalizations.of(context)!.login,
                       height: 48.h,
                       fontWeight: FontWeight.bold,
                       containerColor: authStateProvider.googleButtonLoading
@@ -222,11 +220,11 @@ class LoginScreen extends ConsumerWidget {
                   Center(
                     child: RichText(
                       text: TextSpan(
-                        text: 'Don\'t have an account? ',
+                        text: AppLocalizations.of(context)!.dontHaveAnAccount,
                         style: TextStyle(color: GlobalColors.darkOne),
                         children: [
                           TextSpan(
-                              text: 'Sign Up',
+                              text: AppLocalizations.of(context)!.signUp,
                               style: TextStyle(
                                   color: GlobalColors.orange,
                                   fontWeight: FontWeight.bold),
@@ -253,7 +251,7 @@ class LoginScreen extends ConsumerWidget {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: 'By logging in, you agree with our ',
+                        text: AppLocalizations.of(context)!.termsAndConditionText1,
                         style: CustomTextStyle.regular(
                           color: GlobalColors.bgsurface700,
                           fontSize: 14.sp,
@@ -265,15 +263,15 @@ class LoginScreen extends ConsumerWidget {
 
                         children: [
                           TextSpan(
-                            text: 'Terms & Use ',
+                            text: AppLocalizations.of(context)!.termsAndConditionText2,
                             style: CustomTextStyle.regular(
                               fontSize: 14.sp,
                               color: GlobalColors.orange,
                             ),
                           ),
-                          const TextSpan(text: 'and '),
+                           TextSpan(text: AppLocalizations.of(context)!.termsAndConditionText3),
                           TextSpan(
-                            text: '\nPrivacy Policy.',
+                            text: AppLocalizations.of(context)!.termsAndConditionText4,
                             style: CustomTextStyle.regular(
                               fontSize: 14.sp,
                               color: GlobalColors.orange,
@@ -293,6 +291,7 @@ class LoginScreen extends ConsumerWidget {
   }
 
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
+
     ref.read(authProvider.notifier).login({
       'email': _emailController.text,
       'password': _passwordController.text,
