@@ -6,10 +6,12 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signu
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/product_details_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
@@ -87,6 +89,8 @@ class AppRouter {
       ConsumerGoRoute(
         path: '${AppRoute.products}/:id',
         builder: (context, state, ref) {
+          ref.read(productDetailProvider.notifier).productId =
+              state.pathParameters['id']!;
           return const ProductDetailsScreen();
         },
       ),
@@ -106,6 +110,12 @@ class AppRouter {
         path: AppRoute.rolesScreen,
         builder: (context, state, ref) {
           return const RoleScreen();
+        },
+      ),
+      ConsumerGoRoute(
+        path: AppRoute.addProduct,
+        builder: (context, state, ref) {
+          return const AddProductScreen();
         },
       ),
       ConsumerGoRoute(
@@ -161,9 +171,9 @@ class AppRouter {
           ]),
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
-              path: AppRoute.cart,
+              path: AppRoute.order,
               builder: (context, state, ref) {
-                return const CartHomeScreen();
+                return const OrderHomeScreen();
               },
             ),
           ]),
@@ -191,11 +201,12 @@ class AppRoute {
   static const String verificationScreen = '/verificationScreen/:email';
   static const String verificationSuccess = '/verificationSuccess';
   static const String resetPassword = '/resetPassword/:email';
-  static const String cart = '/cart';
+  static const String order = '/order';
 
   static const String settings = '/settings';
 
   static const String products = '/products';
+  static const String addProduct = '/add-product';
 
   static const String home = '/home';
 

@@ -52,15 +52,17 @@ class CustomTextField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            label ?? "",
-            style: labelStyle ??
-                TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF0F172A),
-                ),
-          ),
+          if (label != null) ...[
+            Text(
+              label ?? "",
+              style: labelStyle ??
+                  TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF0F172A),
+                  ),
+            ),
+          ],
           label == null
               ? SizedBox(
                   height: 0.h,

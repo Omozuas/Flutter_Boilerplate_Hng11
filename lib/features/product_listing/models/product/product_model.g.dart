@@ -12,6 +12,7 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       description: json['description'] as String?,
       price: (json['price'] as num?)?.toInt(),
+      cartQuantity: (json['cartQuantity'] as num?)?.toInt(),
       category: json['category'] as String?,
       createdAt: json['created_at'] == null
           ? null
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'name': instance.name,
       'description': instance.description,
       'price': instance.price,
+      'cartQuantity': instance.cartQuantity,
       'category': instance.category,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),

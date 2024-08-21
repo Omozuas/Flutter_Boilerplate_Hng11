@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/validator.dart';
@@ -52,13 +53,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     //loading = false;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.chevron_left_rounded,
-            size: 30.sp,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
+        leading: const ChevronBackButton(),
       ),
       body: Consumer(
         builder: (context, ref, child) {

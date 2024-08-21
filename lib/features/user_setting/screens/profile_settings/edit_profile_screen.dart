@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,8 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
+import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_social_textfield.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
+import '../../models/custom_api_error.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
@@ -29,6 +32,8 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  late final TextEditingController _firstnameController;
+  late final TextEditingController _lastnameController;
   late final TextEditingController _usernameController;
   late final TextEditingController _jobTitleController;
   late final TextEditingController _departmentController;
@@ -44,6 +49,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     super.initState();
 
     final profile = widget.user?.profile;
+    _firstnameController = TextEditingController(text: fullname.$1);
+    _lastnameController = TextEditingController(text: fullname.$2);
     _usernameController = TextEditingController(text: profile?.username);
     _jobTitleController = TextEditingController(text: profile?.jobTitle);
     _departmentController = TextEditingController(text: profile?.department);
@@ -58,6 +65,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   @override
   void dispose() {
+    _firstnameController.dispose();
+    _lastnameController.dispose();
     _usernameController.dispose();
     _jobTitleController.dispose();
     _departmentController.dispose();
@@ -66,6 +75,25 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _instagramController.dispose();
     _linkedInController.dispose();
     super.dispose();
+  }
+
+  (String, String) get fullname {
+    final user = widget.user;
+    if (user?.profile != null) {
+      final fname = user?.profile?.firstname ?? '';
+      final lname = user?.profile?.lastname ?? '';
+      return (fname, lname);
+    }
+
+    final fullname = widget.user?.fullname.split(' ') ?? [];
+    if (fullname.isEmpty) {
+      return ('', '');
+    }
+    if (fullname.length == 1) {
+      return (fullname.first, '');
+    }
+    final lastname = fullname.sublist(1).join(' ');
+    return (fullname.first, lastname);
   }
 
   @override
@@ -81,16 +109,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           'Edit Profile',
           style: TextStyle(fontSize: 16),
         ),
-        leading: InkWell(
-          onTap: () {
-            ///tODO: Perform onTap function for this icon
-            context.pop();
-          },
-          child: Icon(
-            Icons.chevron_left,
-            size: 35.sp,
-          ),
-        ),
+        leading: const ChevronBackButton(),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -109,7 +128,16 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
-                SizedBox(height: 24.h),
+                CustomTextField(
+                  label: 'First name',
+                  controller: _firstnameController,
+                  hintText: 'Enter firstname',
+                ),
+                CustomTextField(
+                  label: 'Last name',
+                  controller: _lastnameController,
+                  hintText: 'Enter lastname',
+                ),
                 CustomTextField(
                   label: 'Username',
                   controller: _usernameController,
@@ -242,8 +270,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     final profile = UserProfile(
       userID: user.id,
-      firstname: user.fullname,
-      lastname: user.profile!.lastname,
+      firstname:_firstnameController.text,
+      lastname: _lastnameController.text,
       phoneNumber: user.profile?.phoneNumber,
       avatarURL: user.profile?.avatarURL,
       username: _usernameController.text,
@@ -274,8 +302,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       );
       if (!mounted) return;
       context.pop();
-    } catch (e) {
-      // handle error;
+    } on CustomApiError catch (e) {
+      showSnackBar(e.message);
+    }catch(e){
+      showSnackBar('An error occurred');
     }
   }
 }
