@@ -125,11 +125,11 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> getsubscription({required String orgId}) async {
+  Future<void> getsubscriptionOrgId({required String orgId}) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(fetchSubcription: const AsyncLoading());
-      final res = await settingsApi.getsubscription(orgId: orgId);
+      final res = await settingsApi.getsubscriptionOrgId(orgId: orgId);
       state = state.copyWith(fetchSubcription: AsyncData(res));
     } catch (e) {
       state =

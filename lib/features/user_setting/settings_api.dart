@@ -100,10 +100,11 @@ class SettingsApi {
     }
   }
 
-  Future<SubscriptionModel> getsubscription({required String orgId}) async {
+  Future<SubscriptionModel> getsubscriptionOrgId(
+      {required String orgId}) async {
     try {
       final response = await dio.get(
-        '/subscriptions/user/$orgId',
+        '/subscriptions/organization/$orgId',
       );
       return subscriptionModelFromJson(response?.data['data']);
     } catch (e) {
