@@ -90,15 +90,29 @@ class LoginScreen extends ConsumerWidget {
                       child: authStateProvider.googleButtonLoading
                           ? SizedBox(
                               width: 16.w,
-                              height: 16.w,
+                              height: 25.w,
                               child: CircularProgressIndicator.adaptive(
                                 strokeWidth: 2.w,
                               ),
                             )
-                          : Image.asset(
-                              'assets/images/google.png',
-                              fit: BoxFit.contain,
-                              width: 200.w,
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/googleIcon.png',
+                                  fit: BoxFit.contain,
+                                  width: 25.w,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Google",
+                                  style: CustomTextStyle.medium(
+                                      fontSize: 17.sp,
+                                      color: GlobalColors.dark2),
+                                )
+                              ],
                             ),
                     ),
                   ),
