@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "77479405288",
+    "project_id": "hng-boilerplate-fecde",
+    "storage_bucket": "hng-boilerplate-fecde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77479405288:android:8c790791b610373c380b5d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_boilerplate_hng11"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77479405288-1is47ofk71erssirvmfbe3p4bhodgqr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_boilerplate_hng11",
+            "certificate_hash": "cbd88a3982a0a8697567b0cd56126498699ad013"
+          }
+        },
+        {
+          "client_id": "77479405288-2fs1qp6hcac9rsnshadti1eq6cj52n3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPjP0dISaMqd2O55I1G0oYN9diPtfZf2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77479405288-2fs1qp6hcac9rsnshadti1eq6cj52n3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
