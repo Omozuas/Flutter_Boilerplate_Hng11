@@ -53,48 +53,6 @@ class InviteDialogState extends State<InviteDialog> {
             ),
             const SizedBox(height: 16),
 
-            // Invite As Dropdown within TextField
-            DropdownButtonFormField<String>(
-              value: selectedRole,
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedRole = newValue;
-                });
-              },
-              decoration: InputDecoration(
-                labelText: 'Invite As',
-                hintText: 'Select role',
-                labelStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF0F172A),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(
-                    color: GlobalColors.gray200Color,
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(
-                    color: GlobalColors.orange,
-                    width: 1,
-                  ),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 12,
-                ),
-              ),
-              items: <String>['Admin', 'User', 'Guest'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
           ],
         ),
       ),

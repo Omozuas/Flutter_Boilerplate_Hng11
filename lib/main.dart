@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp.router(
-        locale: LocalizationClass.chinese,
+        locale: LocalizationClass.english,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: OneContext().builder,
