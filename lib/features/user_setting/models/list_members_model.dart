@@ -18,6 +18,26 @@ class Members {
     this.updatedAt,
     this.isSuperAdmin,
   });
+  Members copyWith(
+      {String? firstName,
+      String? lastName,
+      String? avatarUrl,
+      String? email,
+      String? phoneNumber,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      bool? isSuperAdmin}) {
+    return Members(
+      firstName: this.firstName,
+      lastName: this.lastName,
+      avatarUrl: this.avatarUrl,
+      email: this.email,
+      phoneNumber: this.phoneNumber,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      isSuperAdmin: this.isSuperAdmin,
+    );
+  }
 
   factory Members.fromJson(Map<String, dynamic> json) => Members(
         firstName: json["first_name"],
