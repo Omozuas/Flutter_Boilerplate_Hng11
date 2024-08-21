@@ -134,7 +134,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
         final googleAuth = await googleUser.authentication;
-        print(googleAuth.idToken);
+        // print(googleAuth.idToken);
         final res = await AuthApi().googleSignIn(googleAuth.idToken??'');
         if (res != null) {
           showSnackBar(res.message.toString());

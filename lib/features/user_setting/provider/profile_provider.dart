@@ -23,6 +23,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         notificationUpdater: AsyncData(null),
         notificationFetch: AsyncData(null),
         fetchSubcription: AsyncData(null),
+        inviteLink: AsyncData(null),
         updatePassword: AsyncData(null));
   }
 
@@ -153,6 +154,30 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       state = state.copyWith(updatePassword: AsyncError(e, StackTrace.current));
     }
   }
+
+  Future<void> generateInviteLink({required String orgId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(inviteLink: const AsyncLoading());
+      final inviteLink = await settingsApi.generateInviteLink(orgId: orgId);
+      state = state.copyWith(inviteLink: AsyncData(inviteLink));
+    } catch (e) {
+      state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));
+    }
+  }
+
+  // Method to send the invite link to the specified email
+  Future<void> sendInviteLink({required String email}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    final inviteLink = state.inviteLink.sureValue;
+    if (inviteLink == null) return;
+
+    try {
+      await settingsApi.sendInviteLink(email: email, inviteLink: inviteLink);
+    } catch (e) {
+      state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));
+    }
+  }
 }
 
 final profileProvider =
@@ -168,6 +193,7 @@ class ProfileProviderStates {
   final AsyncValue<NotificationModel?> notificationFetch;
   final AsyncValue<SubscriptionModel?> fetchSubcription;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
+  final AsyncValue<String?> inviteLink;
 
   const ProfileProviderStates({
     required this.pickedImage,
@@ -178,6 +204,7 @@ class ProfileProviderStates {
     required this.notificationFetch,
     required this.fetchSubcription,
     required this.updatePassword,
+    required this.inviteLink,
   });
 
   ProfileProviderStates copyWith(
@@ -188,6 +215,7 @@ class ProfileProviderStates {
       AsyncValue<NotificationModel?>? notificationUpdater,
       AsyncValue<NotificationModel?>? notificationFetch,
       AsyncValue<SubscriptionModel?>? fetchSubcription,
+        AsyncValue<String?>? inviteLink,
       AsyncValue<UpdatePasswordModel?>? updatePassword}) {
     return ProfileProviderStates(
         pickedImage: pickedImage ?? this.pickedImage,
@@ -197,6 +225,7 @@ class ProfileProviderStates {
         notificationUpdater: notificationUpdater ?? this.notificationUpdater,
         notificationFetch: notificationFetch ?? this.notificationFetch,
         fetchSubcription: fetchSubcription ?? this.fetchSubcription,
+        inviteLink: inviteLink ?? this.inviteLink,
         updatePassword: updatePassword ?? this.updatePassword);
   }
 }
