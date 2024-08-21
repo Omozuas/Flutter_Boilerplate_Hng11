@@ -18,7 +18,7 @@ class MembersSettings extends StatefulWidget {
 }
 
 class _MembersSettingsState extends State<MembersSettings> {
-  bool isInviteLinkActive = false;
+  // bool isInviteLinkActive = false;
 
   void showCustomToast(BuildContext context) {
     CustomToast.show(

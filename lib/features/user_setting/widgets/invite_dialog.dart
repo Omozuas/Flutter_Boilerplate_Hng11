@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/invite_dialog_header.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart'; // Ensure this is imported
 
 class InviteDialog extends StatefulWidget {
   final String? title;
@@ -42,7 +43,6 @@ class InviteDialogState extends State<InviteDialog> {
             ),
             const Divider(),
             const SizedBox(height: 16),
-
             // Email TextField
             CustomTextField(
               label: 'Email',
@@ -52,7 +52,18 @@ class InviteDialogState extends State<InviteDialog> {
               focusedBorderColor: GlobalColors.orange, // Match focused color
             ),
             const SizedBox(height: 16),
-
+            // Invite Button
+            Center(
+              child: CustomButton(
+                onTap: widget.onInvite ?? () {},
+                borderColor: const Color(0xffF97316),
+                text: 'Invite',
+                height: 31.0, // Adjusted for height
+                containerColor: const Color(0xffF97316),
+                width: 105.0, // Adjusted for width
+                textColor: const Color(0xffFFFFFF),
+              ),
+            ),
           ],
         ),
       ),
