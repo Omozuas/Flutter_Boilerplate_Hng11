@@ -75,8 +75,8 @@ class AuthApi {
       final response = await dioProvider.putUpdate(
         "/auth/reset-password-mobile",
         data: {
-          "newPassword": newPassword,
-          "confirmNewPassword": confirmNewPassword,
+          "new_password": newPassword,
+          "confirm_new_password": confirmNewPassword,
           "email": email
         },
       );
