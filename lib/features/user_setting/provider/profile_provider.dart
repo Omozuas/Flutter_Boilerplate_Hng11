@@ -23,6 +23,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         notificationUpdater: AsyncData(null),
         notificationFetch: AsyncData(null),
         fetchSubcription: AsyncData(null),
+        fetchSubcriptionbyUserId: AsyncData(null),
         updatePassword: AsyncData(null));
   }
 
@@ -137,6 +138,19 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
+
+   Future<void> getSubscriptionUserId({required String userId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(fetchSubcriptionbyUserId: const AsyncLoading());
+      final res = await settingsApi.getSubscriptionUserId(userId: userId);
+      state = state.copyWith(fetchSubcriptionbyUserId: AsyncData(res));
+    } catch (e) {
+      state =
+          state.copyWith(fetchSubcriptionbyUserId: AsyncError(e, StackTrace.current));
+    }
+  }
+
   Future<void> updatePassword(
       {required String newPassword,
       required String confirmNewPassword,
@@ -167,6 +181,7 @@ class ProfileProviderStates {
   final AsyncValue<NotificationModel?> notificationUpdater;
   final AsyncValue<NotificationModel?> notificationFetch;
   final AsyncValue<SubscriptionModel?> fetchSubcription;
+  final AsyncValue<SubscriptionModel?> fetchSubcriptionbyUserId;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
 
   const ProfileProviderStates({
@@ -177,6 +192,7 @@ class ProfileProviderStates {
     required this.notificationUpdater,
     required this.notificationFetch,
     required this.fetchSubcription,
+    required this.fetchSubcriptionbyUserId,
     required this.updatePassword,
   });
 
@@ -188,6 +204,7 @@ class ProfileProviderStates {
       AsyncValue<NotificationModel?>? notificationUpdater,
       AsyncValue<NotificationModel?>? notificationFetch,
       AsyncValue<SubscriptionModel?>? fetchSubcription,
+        AsyncValue<SubscriptionModel?>? fetchSubcriptionbyUserId,
       AsyncValue<UpdatePasswordModel?>? updatePassword}) {
     return ProfileProviderStates(
         pickedImage: pickedImage ?? this.pickedImage,
@@ -197,6 +214,7 @@ class ProfileProviderStates {
         notificationUpdater: notificationUpdater ?? this.notificationUpdater,
         notificationFetch: notificationFetch ?? this.notificationFetch,
         fetchSubcription: fetchSubcription ?? this.fetchSubcription,
+        fetchSubcriptionbyUserId: fetchSubcriptionbyUserId ?? this.fetchSubcriptionbyUserId,
         updatePassword: updatePassword ?? this.updatePassword);
   }
 }
