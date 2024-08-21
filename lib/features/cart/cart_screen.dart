@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -8,7 +9,7 @@ class CartScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
       body: Center(
-        child: Text('CartScreen'),
+        child: Text(StringManager.cartScreen),
       ),
     );
   }

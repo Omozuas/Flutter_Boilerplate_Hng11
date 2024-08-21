@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/global_colors.dart';
@@ -24,7 +25,7 @@ class RegularSignUpScreen extends ConsumerWidget {
   static final lastNameFocusNode = FocusNode();
   static final emailFocusNode = FocusNode();
   static final passwordFocusNode = FocusNode();
-static     final authApiProvider = Provider((ref) => AuthApi());
+  static final authApiProvider = Provider((ref) => AuthApi());
   static final isLoadingProvider = StateProvider<bool>((ref) => false);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,8 +33,6 @@ static     final authApiProvider = Provider((ref) => AuthApi());
     final showSocialButtons = ref.watch(showSocialButtonsProvider);
     final socialButtonsController =
         ref.read(showSocialButtonsProvider.notifier);
-
-
 
     // Add listeners to hide social buttons when focusing on any TextField
     firstNameFocusNode.addListener(() {
@@ -94,7 +93,7 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    'Sign up',
+                    StringManager.signUp,
                     style: TextStyle(
                       fontSize: 28.w,
                       fontWeight: FontWeight.bold,
@@ -102,7 +101,7 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                   ),
                   SizedBox(height: 10.h),
                   const Text(
-                    'Create an account to get started with us.',
+                    StringManager.createAnAccount,
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.grey,
@@ -143,16 +142,16 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                         const Expanded(child: Divider()),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: const Text('Or'),
+                          child: const Text(StringManager.or),
                         ),
                         const Expanded(child: Divider()),
                       ],
                     ),
                   if (showSocialButtons) SizedBox(height: 10.h),
                   CustomTextField(
-                    label: 'First Name',
+                    label: StringManager.firstName,
                     controller: firstNameController,
-                    hintText: 'Enter your first name',
+                    hintText: StringManager.enterFirstName,
                     borderColor: formState.firstNameError != null
                         ? Colors.red
                         : GlobalColors.borderColor,
@@ -161,9 +160,9 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                     focusNode: firstNameFocusNode,
                   ),
                   CustomTextField(
-                    label: 'Last Name',
+                    label: StringManager.lastName,
                     controller: lastNameController,
-                    hintText: 'Enter your last name',
+                    hintText: StringManager.enterLastName,
                     borderColor: formState.lastNameError != null
                         ? Colors.red
                         : GlobalColors.borderColor,
@@ -172,9 +171,9 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                     focusNode: lastNameFocusNode,
                   ),
                   CustomTextField(
-                    label: 'Email',
+                    label: StringManager.email,
                     controller: emailController,
-                    hintText: 'Enter your email',
+                    hintText: StringManager.enterEmail,
                     borderColor: formState.emailError != null
                         ? Colors.red
                         : GlobalColors.borderColor,
@@ -183,9 +182,9 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                     focusNode: emailFocusNode,
                   ),
                   CustomTextField(
-                    label: 'Password',
+                    label: StringManager.password,
                     controller: passwordController,
-                    hintText: 'Create your password',
+                    hintText: StringManager.createPassword,
                     obscureText: true,
                     borderColor: formState.passwordError != null
                         ? Colors.red
@@ -196,7 +195,7 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                   ),
                   SizedBox(height: 10.h),
                   CustomButton(
-                    text: 'Create Account',
+                    text: StringManager.createAnAccount,
                     loading: isLoading,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
@@ -214,31 +213,29 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                             );
 
                             if (response != null) {
-                              if(context.mounted) {
+                              if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Registration successful')),
-                              );
+                                  const SnackBar(
+                                      content: Text(StringManager.registrationSuccessful)),
+                                );
                               }
                               // Navigate to the next screen or perform any other action
-                            }
-                            else {
-                              if(context.mounted)
-                              {
+                            } else {
+                              if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text(
-                                          'Registration failed. Please try again.')),
+                                          StringManager.registrationFailed)),
                                 );
                               }
                             }
                           } catch (e) {
-                            if(context.mounted) {
+                            if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(
-                                      'An error occurred: ${e.toString()}')),
-                            );
+                                SnackBar(
+                                    content: Text(
+                                        'An error occurred: ${e.toString()}')),
+                              );
                             }
                           } finally {
                             ref.read(isLoadingProvider.notifier).state = false;
@@ -256,11 +253,11 @@ static     final authApiProvider = Provider((ref) => AuthApi());
                   Center(
                     child: RichText(
                       text: TextSpan(
-                        text: 'Already Have An Account? ',
+                        text: StringManager.alreadyHaveAnAccount,
                         style: TextStyle(color: GlobalColors.black),
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'Login',
+                            text: StringManager.alreadyHaveAnAccount,
                             style: TextStyle(color: GlobalColors.orange),
                             recognizer: TapGestureRecognizer()..onTap = () {},
                           ),

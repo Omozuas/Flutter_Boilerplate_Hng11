@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                     },
                   ),
                   Text(
-                    'Members',
+                    StringManager.members,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -60,7 +61,7 @@ class _MembersSettingsState extends State<MembersSettings> {
               ),
               SizedBox(height: 8.h),
               Text(
-                "Manage who has access to this workspace",
+                StringManager.manageAccessToWorkspace,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
@@ -78,9 +79,9 @@ class _MembersSettingsState extends State<MembersSettings> {
                     isInviteLinkActive = value;
                   });
                 },
-                title: const Text('Invite Link'),
+                title: const Text(StringManager.inviteLink),
                 subtitle: Text(
-                  'This provides a unique URL that allows anyone to join your workspace',
+                  StringManager.inviteLinkDescr,
                   style: TextStyle(fontSize: 12.sp),
                 ),
               ),
@@ -96,11 +97,11 @@ class _MembersSettingsState extends State<MembersSettings> {
                     builder: (context) => const DeleteMemberDialog(),
                   );
                 },
-                child: const Text('Show Delete Member Dialog'),
+                child: const Text(StringManager.showDeleteMemberDialog),
               ),
               ElevatedButton(
                 onPressed: () => showCustomToast(context),
-                child: const Text('Show Custom Toast'),
+                child: const Text(StringManager.showCustomToast),
               ),
               SizedBox(
                 height: 10.h,
@@ -151,8 +152,8 @@ class _MembersSettingsState extends State<MembersSettings> {
                   ),
                   Flexible(
                     child: CustomDropdownButton(
-                        initialValue: 'Admin',
-                        items: const ['Admin', 'User', 'Guest'],
+                        initialValue: StringManager.admin,
+                        items: const [StringManager.admin, StringManager.user, StringManager.guest],
                         borderColor: Colors.transparent,
                         height: 40.h,
                         containerColor: Colors.transparent,
@@ -201,8 +202,8 @@ class _MembersSettingsState extends State<MembersSettings> {
                   ),
                   Flexible(
                     child: CustomDropdownButton(
-                        initialValue: 'Admin',
-                        items: const ['Admin', 'User', 'Guest'],
+                        initialValue: StringManager.admin,
+                        items: const [StringManager.admin, StringManager.user, StringManager.guest],
                         borderColor: Colors.transparent,
                         height: 40.h,
                         containerColor: Colors.transparent,
@@ -251,8 +252,8 @@ class _MembersSettingsState extends State<MembersSettings> {
                   ),
                   Flexible(
                     child: CustomDropdownButton(
-                        initialValue: 'Admin',
-                        items: const ['Admin', 'User', 'Guest'],
+                        initialValue: StringManager.admin,
+                        items: const [StringManager.admin, StringManager.user, StringManager.guest],
                         borderColor: Colors.transparent,
                         height: 40.h,
                         containerColor: Colors.transparent,
@@ -268,7 +269,7 @@ class _MembersSettingsState extends State<MembersSettings> {
               Row(
                 children: [
                   Text(
-                    'Export Members List',
+                    StringManager.exportMembersList,
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w700,
                         fontSize: 14,
@@ -278,7 +279,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                   CustomButton(
                       onTap: () {},
                       borderColor: const Color(0xffF97316),
-                      text: 'Export CSV',
+                      text: StringManager.exportCsv,
                       height: 31.h,
                       containerColor: const Color(0xffF97316),
                       width: 91.h,
@@ -289,7 +290,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 height: 10.h,
               ),
               Text(
-                'Export a CSV with information of all members of your team',
+               StringManager.exportCsvWithInfo,
                 style: GoogleFonts.inter(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,

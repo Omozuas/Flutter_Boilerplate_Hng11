@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/empty_avatar_tile.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/pronouns_textfield_dropdown.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_expansion_tile.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_social_textfield.dart';
@@ -52,7 +53,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         surfaceTintColor: Colors.white,
         backgroundColor: Colors.white,
         centerTitle: false,
-        title: const Text('Edit'),
+        title: const Text(StringManager.edit),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -68,12 +69,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 SizedBox(height: 14.h),
                 CustomExpansionTile(
-                  title: 'Personal Details',
+                  title: StringManager.personalDetails,
                   content: [
                     CustomTextField(
-                      label: 'Username',
+                      label: StringManager.username,
                       controller: _usernameController,
-                      hintText: 'Enter username',
+                      hintText: StringManager.enterUsername,
                     ),
                     PronounsTextfieldDropdown(
                       initialValue: _pronouns,
@@ -82,24 +83,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       },
                     ),
                     CustomTextField(
-                      label: 'Your job title',
+                      label: StringManager.yourJobTitle,
                       controller: _jobTitleController,
-                      hintText: 'Enter job title',
+                      hintText: StringManager.enterJobTitle,
                     ),
                     CustomTextField(
-                      label: 'Department or team',
+                      label: StringManager.departmentOrTeam,
                       controller: _departmentController,
-                      hintText: 'Enter a department or team',
+                      hintText: StringManager.enterDepartmentOrTeam,
                     ),
                     CustomTextField(
-                      label: 'Email',
+                      label: StringManager.email,
                       controller: _emailController,
-                      hintText: 'Enter email address',
+                      hintText: StringManager.enterEmailAddress,
                     ),
                   ],
                 ),
                 CustomExpansionTile(
-                  title: 'Bio',
+                  title: StringManager.bio,
                   content: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,11 +108,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         CustomTextField(
                           label: '',
                           controller: _emailController,
-                          hintText: 'Type your messsage here',
+                          hintText: StringManager.typeYourMessageHere,
                           maxLines: 3,
                         ),
                         Text(
-                          'Maximum of 64 characters',
+                          StringManager.maximumOf64Character,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             color: const Color(0xFF64748B),
@@ -122,21 +123,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ],
                 ),
                 CustomExpansionTile(
-                  title: 'Connect Socials',
+                  title: StringManager.connectSocials,
                   content: [
                     SocialMediaInput(
                       controller: _xController,
-                      hintText: 'Add X link',
+                      hintText: '${StringManager.add} X ${StringManager.link}',
                       prefixIcon: Image.asset('assets/images/X logo.png'),
                     ),
                     SocialMediaInput(
                       controller: _instagramController,
-                      hintText: 'Add Instagram link',
+                      hintText: '${StringManager.add} Instagram ${StringManager.link}',
                       prefixIcon: Image.asset('assets/images/instagram.png'),
                     ),
                     SocialMediaInput(
                       controller: _linkedInController,
-                      hintText: 'Add Linkedin link',
+                      hintText: '${StringManager.add} Linkedin ${StringManager.link}',
                       prefixIcon: Image.asset('assets/images/linkedin.png'),
                     ),
                   ],
@@ -148,7 +149,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Expanded(
                         child: CustomButton(
                           borderColor: GlobalColors.lightGray,
-                          text: 'Cancel',
+                          text: StringManager.cancel,
                           height: 40.h,
                           containerColor: Colors.white,
                           width: 50.w,
@@ -160,7 +161,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Expanded(
                         child: CustomButton(
                           borderColor: Colors.transparent,
-                          text: 'Save Changes',
+                          text: StringManager.saveChanges,
                           height: 40.h,
                           containerColor: GlobalColors.orange,
                           width: 50.w,

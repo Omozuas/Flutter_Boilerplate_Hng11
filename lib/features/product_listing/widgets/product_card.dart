@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../gen/assets.gen.dart';
@@ -103,7 +104,7 @@ class ProductCardWiget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8.r)),
                               child: Center(
                                 child: Text(
-                                  'Add to Cart',
+                                 StringManager.addToCart,
                                   style: CustomTextStyles.bodyTextOrange,
                                 ),
                               ),

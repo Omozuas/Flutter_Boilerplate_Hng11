@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -57,19 +58,19 @@ class _MainViewState extends State<MainView> {
             icon: Icon(
               NavBar.home,
             ),
-            label: 'Home',
+            label: StringManager.home,
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.products),
-            label: 'Products',
+            label: StringManager.products,
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.cart),
-            label: 'Cart',
+            label: StringManager.cart,
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.settings),
-            label: 'Settings',
+            label: StringManager.settings,
           ),
         ],
         currentIndex: _bottomBarIndex.value,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +22,7 @@ class EmptyAvatarTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Upload your photo',
+                 StringManager.uploadYourPhoto,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
@@ -29,7 +30,7 @@ class EmptyAvatarTile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Photos help your teammates recognize you',
+                 StringManager.photoPurpose,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,

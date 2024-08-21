@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../localization/strings.dart';
+
 class PronounsTextfieldDropdown extends StatefulWidget {
   const PronounsTextfieldDropdown({
     super.key,
@@ -38,7 +40,7 @@ class _PronounsTextfieldDropdownState extends State<PronounsTextfieldDropdown> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Text(
-          'Pronouns',
+          StringManager.pronouns,
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
@@ -64,7 +66,7 @@ class _PronounsTextfieldDropdownState extends State<PronounsTextfieldDropdown> {
             isExpanded: true,
             value: _value,
             hint: const Text(
-              'Select',
+            StringManager.select,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -116,9 +118,9 @@ class _PronounsTextfieldDropdownState extends State<PronounsTextfieldDropdown> {
 }
 
 enum Pronouns {
-  hehim('He/Him'),
-  sheher('She/Her'),
-  others('Others');
+  hehim(StringManager.heHimPronouns),
+  sheher(StringManager.sheHerPronouns),
+  others(StringManager.otherPronouns);
 
   const Pronouns(this.title);
   final String title;

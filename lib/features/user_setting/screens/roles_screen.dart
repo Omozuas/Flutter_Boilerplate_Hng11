@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -23,7 +24,7 @@ class _RoleScreenState extends State<RoleScreen> {
             children: [
               SearchBar(
                 leading: const Icon(Icons.search_outlined),
-                hintText: 'Search',
+                hintText: StringManager.search ,
                 backgroundColor:
                     const WidgetStatePropertyAll(Colors.transparent),
                 elevation: const WidgetStatePropertyAll(0),
@@ -42,7 +43,7 @@ class _RoleScreenState extends State<RoleScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Roles',
+                        StringManager.roles,
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall
@@ -50,7 +51,7 @@ class _RoleScreenState extends State<RoleScreen> {
                                 fontSize: 24.sp, fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        'Manage user roles for members',
+                       StringManager.manageUserRoles,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               fontSize: 12.sp,
                               color: GlobalColors.darkOne,
@@ -61,7 +62,7 @@ class _RoleScreenState extends State<RoleScreen> {
                   ElevatedButton.icon(
                     onPressed: () {},
                     label: Text(
-                      'Create Role',
+                      StringManager.createRole,
                       style:
                           TextStyle(color: GlobalColors.white, fontSize: 12.sp),
                     ),
@@ -94,19 +95,19 @@ class _RoleScreenState extends State<RoleScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RoleOptionWidget(
-                      title: 'Administrator',
-                      subtitle: 'Full control and full permissions.',
+                      title:  StringManager.administrator,
+                      subtitle:  StringManager.fullControl,
                       isSelected: true,
                     ),
                     RoleOptionWidget(
-                      title: 'Guest',
-                      subtitle: 'Full control and limited permissions.',
+                      title:  StringManager.guest,
+                      subtitle:  StringManager.limitedPermission,
                       isSelected: false,
                     ),
                     Divider(),
                     RoleOptionWidget(
-                      title: 'User',
-                      subtitle: 'Limited control and limited permissions.',
+                      title: StringManager.user,
+                      subtitle:  StringManager.limitedControlAndLimitedPermissions,
                       isSelected: false,
                     ),
                   ],
@@ -134,7 +135,7 @@ class _RoleScreenState extends State<RoleScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Permissions',
+                             StringManager.permissions,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
@@ -144,7 +145,7 @@ class _RoleScreenState extends State<RoleScreen> {
                                 ),
                           ),
                           Text(
-                            'See the list of permissions for this role.',
+                            StringManager.listOfPermissions,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                             ),
@@ -155,20 +156,20 @@ class _RoleScreenState extends State<RoleScreen> {
                     const Divider(),
                     PermissionsListTile(
                         isPermitted: true,
-                        permissionTitle: 'Can view transactions'),
+                        permissionTitle:  StringManager.canViewTransactions),
                     PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can view refunds'),
+                        isPermitted: true, permissionTitle:  StringManager.canViewRefunds),
                     PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can log refunds'),
+                        isPermitted: true, permissionTitle:  StringManager.canLogRefunds),
                     PermissionsListTile(
-                        isPermitted: false, permissionTitle: 'Can view users'),
+                        isPermitted: false, permissionTitle:  StringManager.canViewUsers),
                     PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can create users'),
+                        isPermitted: true, permissionTitle: StringManager.canCreateUsers),
                     PermissionsListTile(
-                        isPermitted: true, permissionTitle: 'Can edit users'),
+                        isPermitted: true, permissionTitle:  StringManager.canEditUsers),
                     PermissionsListTile(
                         isPermitted: true,
-                        permissionTitle: 'Can blacklist/whitelist users'),
+                        permissionTitle:  StringManager.canBlacklist),
                   ],
                 ),
               ),

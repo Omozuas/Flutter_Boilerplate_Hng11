@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_notification_item
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../localization/strings.dart';
 import '../../../utils/widgets/custom_notification_section.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           child: const Icon(Icons.chevron_left),
         ),
         title: Text(
-          'Language & Region',
+            StringManager.languageAndRegion,
           style:
               GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
         ),
@@ -57,12 +58,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             Column(
               children: [
                 CustomNotificationSection(
-                  sectionTitle: 'Notifications Alert',
+                  sectionTitle: StringManager.notificationAlert,
                   notificationTiles: [
                     SettingsOption(
-                      title: 'Mobile push notifications',
+                      title: StringManager.mobilePushNotification,
                       description:
-                          'Receive push notifications on mentions and comments via your mobile app',
+                          StringManager.receivePushNotification,
                       value: toggleSwitches[0],
                       onChanged: (newValue) {
                         setState(() {
@@ -73,12 +74,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   ],
                 ),
                 CustomNotificationSection(
-                    sectionTitle: 'Email Notifications',
+                    sectionTitle: StringManager.emailNotification,
                     notificationTiles: [
                       SettingsOption(
-                        title: 'Activity in your workspace',
+                        title: StringManager.activityInYourWorkspace,
                         description:
-                            'Receive emails when you get comments, mentions, page invites, reminders, access requests, and property changes',
+                           StringManager.receiveActivityInYourWorkspace,
                         value: toggleSwitches[1],
                         onChanged: (newValue) {
                           setState(() {
@@ -87,9 +88,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Always send email notifications',
+                        title: StringManager.alwaysSendEmail,
                         description:
-                            'Receive emails about activity in your workspace, even when you are active on the app',
+                            StringManager.alwaysSendEmailDescr,
                         value: toggleSwitches[2],
                         onChanged: (newValue) {
                           setState(() {
@@ -98,9 +99,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Mobile push notifications',
+                        title: StringManager.mobilePushNotification,
                         description:
-                            'Receive push notifications on mentions and comments via your mobile app',
+                           StringManager.receivePushNotification,
                         value: toggleSwitches[3],
                         onChanged: (newValue) {
                           setState(() {
@@ -109,9 +110,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Email digests',
+                        title: StringManager.emailDigests,
                         description:
-                            'Receive email digest every 8 hours for changes to pages you are subscribed to  ',
+                            StringManager.receiveEmailDigests,
                         value: toggleSwitches[4],
                         onChanged: (newValue) {
                           setState(() {
@@ -120,9 +121,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Announcement and update emails',
+                        title: StringManager.announcement,
                         description:
-                            'Receive occasional emails about product launches and new features from notion',
+                            StringManager.receiveOccassionalEmails,
                         value: toggleSwitches[5],
                         onChanged: (newValue) {
                           setState(() {
@@ -132,12 +133,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       ),
                     ]),
                 CustomNotificationSection(
-                    sectionTitle: 'Slack Notifications',
+                    sectionTitle: StringManager.slackNotifications,
                     notificationTiles: [
                       SettingsOption(
-                        title: 'Activity in your workspace',
+                        title: StringManager.activityInYourWorkspace,
                         description:
-                            'Receive emails when you get comments, mentions, page invites, reminders, access requests, and property changes',
+                            StringManager.receiveActivityInYourWorkspace,
                         value: toggleSwitches[6],
                         onChanged: (newValue) {
                           setState(() {
@@ -146,9 +147,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Always send email notifications',
+                        title: StringManager.alwaysSendEmail,
                         description:
-                            'Receive emails about activity in your workspace, even when you are active on the app',
+                           StringManager.alwaysSendEmailDescr,
                         value: toggleSwitches[7],
                         onChanged: (newValue) {
                           setState(() {
@@ -157,9 +158,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Mobile push notifications',
+                        title: StringManager.mobilePushNotification,
                         description:
-                            'Receive push notifications on mentions and comments via your mobile app',
+                          StringManager.receivePushNotification,
                         value: toggleSwitches[8],
                         onChanged: (newValue) {
                           setState(() {
@@ -168,9 +169,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Email digests',
+                        title: StringManager.emailDigests,
                         description:
-                            'Receive email digest every 8 hours for changes to pages you are subscribed to  ',
+                          StringManager.receiveEmailDigests,
                         value: toggleSwitches[9],
                         onChanged: (newValue) {
                           setState(() {
@@ -179,9 +180,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         },
                       ),
                       SettingsOption(
-                        title: 'Announcement and update emails',
+                        title: StringManager.announcement,
                         description:
-                            'Receive occasional emails about product launches and new features from notion',
+                            StringManager.receiveOccassionalEmails,
                         value: toggleSwitches[10],
                         onChanged: (newValue) {
                           setState(() {
@@ -200,16 +201,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       showDialog(
                           context: (context),
                           builder: (BuildContext context) => ProfileDialog(
-                                title: 'Notification Updated',
+                                title:StringManager.notificationUpdated,
                                 description:
-                                    'Notification preferences updated successfully. Remember, you can always adjust these settings again later',
+                                   StringManager.notificationUpdatedSuccessfully,
                                 onContinue: () {
                                   Navigator.pop(context);
                                 },
                               ));
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: 'Save Changes',
+                    text: StringManager.saveChanges,
                     height: 40.h,
                     containerColor: GlobalColors.orange,
                     width: 139.h,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = 'Settings have been saved successfully.';
+        feedBackMessage = StringManager.settingsSavedSuccessfully;
         feedBackMessageColor = GlobalColors.greenColor;
       } else {
         feedBackMessage = null;
@@ -41,7 +42,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
         feedBackMessage =
-            'You have unsaved changes. Are you sure you want to leave without saving?';
+            StringManager.unsavedChangesWarning;
         feedBackMessageColor = GlobalColors.lightOrangeColor;
       });
     } else {
@@ -64,7 +65,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
           child: const Icon(Icons.chevron_left),
         ),
         title: Text(
-          'Language & Region',
+         StringManager.languageAndRegion,
           style:
               GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
         ),
@@ -75,7 +76,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Customise your language and region preferences',
+             StringManager.customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400, fontSize: 12.sp),
             ),
@@ -106,7 +107,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedLanguage == null)
               Text(
-                'There was a problem updating your language. Please try again.',
+               StringManager.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -136,7 +137,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedRegion == null)
               Text(
-                'There was a problem updating your region. Please try again.',
+               StringManager.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -161,7 +162,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedTimeZone == null)
               Text(
-                'There was a problem updating your timezone. Please try again.',
+              StringManager.timezoneUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -176,7 +177,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 CustomButton(
                     onTap: validateSelections,
                     borderColor: Colors.transparent,
-                    text: 'Save',
+                    text: StringManager.save,
                     height: 40.sp,
                     containerColor: GlobalColors.orange,
                     width: 65.sp,
@@ -185,7 +186,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
-                    text: 'Cancel',
+                    text: StringManager.cancel,
                     height: 40.sp,
                     containerColor: GlobalColors.whiteColor,
                     width: 65.sp,

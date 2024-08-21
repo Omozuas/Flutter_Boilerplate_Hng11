@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/check
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_name_and_price_section.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_rating_and_review_section.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_variation_section.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -111,7 +112,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             CustomDropdownButton(
               borderRadius: 0,
               valueStyle: const TextStyle(color: DetailColors.mutedText),
-              placeholder: "Delivery Address",
+              placeholder: StringManager.deliveryAddress,
               items: const ["Ibadan", 'Eko', "Uyo"],
               borderColor: GlobalColors.borderColor,
               height: 64,

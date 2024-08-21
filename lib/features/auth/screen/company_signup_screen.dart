@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
@@ -60,7 +61,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Sign up',
+                            StringManager.signUp,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
@@ -68,7 +69,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           Text(
-                            'Create an account to get started with us.',
+                            StringManager.createAnAccount,
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 13.sp,
@@ -77,12 +78,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 20.sp),
                           CustomTextField(
-                            label: 'Company\'s Name',
+                            label: StringManager.companyName,
                             controller: _companyNameController,
-                            hintText: 'Enter company\'s name',
+                            hintText: StringManager.enterCompanyName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter name';
+                                return StringManager.pleaseEnterName;
                               }
 
                               return null;
@@ -95,13 +96,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           CustomTextField(
-                            label: 'Company\'s Email Address',
+                            label: StringManager.companyEmail,
                             controller: _companyEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            hintText: 'Enter company\'s email address',
+                            hintText: StringManager.enterCompanyEmail,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter valid email';
+                                return StringManager.pleaseEnterValidEmail;
                               }
 
                               return null;
@@ -114,7 +115,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'Select Industry',
+                            StringManager.selectIndustry,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -124,8 +125,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              StringManager.agricultureIndustry,
+                              StringManager.developmentIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyIndustryController.text = value ?? '';
@@ -138,7 +139,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            'Organization Type',
+                            StringManager.organizationType,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -148,8 +149,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              StringManager.agricultureIndustry,
+                              StringManager.developmentIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyTypeController.text = value ?? '';
@@ -171,7 +172,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Company Address',
+                            StringManager.companyAddress,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
@@ -180,7 +181,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'Select country',
+                            StringManager.selectCountry,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -190,8 +191,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              StringManager.agricultureIndustry,
+                              StringManager.developmentIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyCountryController.text = value ?? '';
@@ -204,7 +205,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            'Select state',
+                            StringManager.selectState,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -214,8 +215,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              StringManager.agricultureIndustry,
+                              StringManager.developmentIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyStateController.text = value ?? '';
@@ -228,12 +229,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           CustomTextField(
-                            label: 'Address',
+                            label: StringManager.address,
                             controller: _companyAddressController,
-                            hintText: 'Enter company address',
+                            hintText: StringManager.enterCompanyAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter valid address';
+                                return StringManager.pleaseEnterValidAddress;
                               }
 
                               return null;
@@ -246,7 +247,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'LGA',
+                            StringManager.lga,
                             style: TextStyle(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -256,8 +257,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
                             items: const [
-                              'Agriculture',
-                              'Development',
+                              StringManager.agricultureIndustry,
+                              StringManager.developmentIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyLgaController.text = value ?? '';
@@ -279,19 +280,18 @@ class CompanySignUpScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomButton(
-                            onTap: () async{
-
+                            onTap: () async {
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
                                 //Submission async function here
-                                ref.read(loadingProvider.notifier).state = false;
-
+                                ref.read(loadingProvider.notifier).state =
+                                    false;
                               }
                             },
                             loading: isLoading,
                             borderColor: GlobalColors.orange,
-                            text: 'Create Account',
+                            text: StringManager.createAccount,
                             height: 40.sp,
                             containerColor: GlobalColors.orange,
                             width: double.infinity,
@@ -302,7 +302,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Already Have An Account?',
+                                StringManager.alreadyHaveAnAccount,
                                 style: TextStyle(
                                   color: GlobalColors.darkOne,
                                   fontSize: 13.sp,
@@ -313,7 +313,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                               GestureDetector(
                                 onTap: () {},
                                 child: Text(
-                                  'Login',
+                                  StringManager.login,
                                   style: TextStyle(
                                     color: GlobalColors.orange,
                                     fontSize: 13.sp,

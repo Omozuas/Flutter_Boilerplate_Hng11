@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/invite_dialog_header.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 
+import '../../../localization/strings.dart';
+
 class InviteDialog extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final String? title;
@@ -64,7 +66,7 @@ class InviteDialog extends StatelessWidget {
                   vertical: 12,
                 ),
               ),
-              items: <String>['Admin', 'User', 'Guest'].map((String value) {
+              items: <String>[StringManager.admin, StringManager.user, StringManager.guest].map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),

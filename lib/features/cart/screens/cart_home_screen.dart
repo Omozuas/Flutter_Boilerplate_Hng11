@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/string_extensions.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -133,7 +134,7 @@ class _CartHomeScreenState extends State<CartHomeScreen> {
               return [
                 const PopupMenuItem<String>(
                   value: 'delete',
-                  child: Text("My Cart"),
+                  child: Text(StringManager.myCart),
                 ),
               ];
             },

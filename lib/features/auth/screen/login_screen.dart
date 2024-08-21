@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -23,14 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   String? validateEmail(String? value, TextEditingController emailController) {
     if (value == null || value.isEmpty) {
-      return 'This field is required';
+      return StringManager.fieldRequired;
     }
     if (value == emailController.text) {
       // Email validation regex
       final emailRegex =
           RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
       if (!emailRegex.hasMatch(value)) {
-        return 'Please enter a valid email address';
+        return StringManager.pleaseEnterValidEmail;
       }
       return null; // Valid email
     }
@@ -130,14 +131,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "Enter your email",
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'This field is required';
+                      return StringManager.fieldRequired;
                     }
                     if (value == _emailController.text) {
                       // Email validation regex
                       final emailRegex = RegExp(
                           r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                       if (!emailRegex.hasMatch(value)) {
-                        return 'Please enter a valid email address';
+                        return StringManager.pleaseEnterValidEmail;
                       }
 
                       return null;
@@ -255,11 +256,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(
                   child: RichText(
                     text: TextSpan(
-                      text: 'Don\'t have an account? ',
+                      text: StringManager.dontHaveAnAccount,
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
-                            text: 'Sign Up',
+                            text: StringManager.signUp,
                             style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold),
@@ -279,21 +280,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 48.h,
                   child: RichText(
                     text: TextSpan(
-                      text: 'By logging in, you agree with our ',
+                      text: StringManager.termsAndConditionText1,
                       style: GoogleFonts.inter(
                           color: GlobalColors.bgsurface700,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400),
                       children: [
                         TextSpan(
-                          text: 'Terms & \nUse ',
+                          text: StringManager.termsAndConditionText2,
                           style: GoogleFonts.inter(
                               fontSize: 16.sp,
                               color: GlobalColors.orange,
                               fontWeight: FontWeight.w400),
                         ),
                         TextSpan(
-                          text: 'and ',
+                          text: StringManager.termsAndConditionText3,
                           style: GoogleFonts.inter(
                             color: GlobalColors.black,
                             fontSize: 16.sp,
@@ -301,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         TextSpan(
-                          text: 'Privacy Policy.',
+                          text: StringManager.termsAndConditionText4,
                           style: GoogleFonts.inter(
                               fontSize: 16.sp,
                               color: GlobalColors.orange,

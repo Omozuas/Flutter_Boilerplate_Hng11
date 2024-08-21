@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/roles_screen.dart';
+import 'package:flutter_boilerplate_hng11/localization/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -82,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   ExpansionTile(
                     title: const Text(
-                      'Profile Settings',
+                     StringManager.profileSettings,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -94,35 +95,35 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       SettingsTile(
                         leadingIcon: Icons.person_outline,
-                        title: 'General',
+                        title: StringManager.general,
                         onTap: () {
                           // Navigate to General Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: Icons.account_circle_outlined,
-                        title: 'Account',
+                        title: StringManager.account,
                         onTap: () {
                           // Navigate to Account Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: Icons.notifications_outlined,
-                        title: 'Notification',
+                        title: StringManager.notification,
                         onTap: () {
                           // Navigate to Notification Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: Icons.lock_outline,
-                        title: 'Data and Privacy',
+                        title: StringManager.dataAndPrivacy,
                         onTap: () {
                           // Navigate to Data and Privacy Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: Icons.language_outlined,
-                        title: 'Language and Region',
+                        title: StringManager.languageAndRegion,
                         onTap: () {
                           // Navigate to Language and Region Settings
                         },
@@ -132,7 +133,7 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   ExpansionTile(
                     title: const Text(
-                      'Organizational Settings',
+                      StringManager.organizationSettings,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -144,14 +145,14 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       SettingsTile(
                         leadingIcon: Icons.business_outlined,
-                        title: 'Manage Organization',
+                        title:   StringManager.manageOrganization,
                         onTap: () {
                           // Navigate to Manage Organization
                         },
                       ),
                       SettingsTile(
                         leadingIcon: Icons.people_outline,
-                        title: 'Members',
+                        title:   StringManager.members,
                         onTap: () {
                           // Navigate to Members Settings
                           Navigator.push(
@@ -164,7 +165,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       SettingsTile(
                         leadingIcon: Icons.security_outlined,
-                        title: 'Roles and Permissions',
+                        title:   StringManager.rolesAndPermissions,
                         onTap: () {
                           // Navigate to Roles and Permissions Settings
                           Navigator.push(context, MaterialPageRoute(
@@ -176,14 +177,14 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       SettingsTile(
                         leadingIcon: Icons.integration_instructions_outlined,
-                        title: 'Integrations',
+                        title:   StringManager.integrations,
                         onTap: () {
                           // Navigate to Integrations Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: Icons.payment_outlined,
-                        title: 'Payment Information',
+                        title:   StringManager.paymentInformation,
                         onTap: () {
                           // Navigate to Payment Information Settings
                         },
