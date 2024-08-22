@@ -8,6 +8,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductCardWiget extends StatelessWidget {
   const ProductCardWiget(
@@ -39,7 +40,11 @@ class ProductCardWiget extends StatelessWidget {
           Builder(builder: (context) {
             if (image.isNotEmpty) {
               if (image.startsWith('http')) {
-                return Image.network(image);
+                return Image.network(
+                  image,
+                  width: 104.w,
+                  height: 104.h,
+                );
               } else if (image.isValidBase64) {
                 return ClipRRect(
                   borderRadius:
@@ -52,8 +57,8 @@ class ProductCardWiget extends StatelessWidget {
                     base64Decode(image),
                     errorBuilder: (context, error, stackTrace) =>
                         Assets.images.png.productListing.product.image(
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                .135),
+                      height: GlobalScreenSize.getScreenHeight(context) * .135,
+                    ),
                   ),
                 );
               } else {
@@ -86,12 +91,13 @@ class ProductCardWiget extends StatelessWidget {
                   height: 6.h,
                 ),
                 Text(
-                  "Status:",
+                  "${AppLocalizations.of(context)!.statusLabel}:",
                   style: CustomTextStyles.productTextBody2Black,
                 ),
                 Row(
                   children: [
-                    if (status.contains('In stock')) ...[
+                    if (status.contains(
+                        AppLocalizations.of(context)!.inStockLabel)) ...[
                       Assets.images.svg.productListing.active.svg(),
                     ] else ...[
                       Container(

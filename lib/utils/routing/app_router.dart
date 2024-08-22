@@ -181,7 +181,7 @@ class AppRouter {
           ]),
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
-              path: AppRoute.cart,
+              path: AppRoute.order,
               builder: (context, state, ref) {
                 return const OrderHomeScreen();
               },
@@ -213,6 +213,7 @@ class AppRoute {
   static const String resetPassword = '/resetPassword/:email';
   static const String cart = '/cart';
   static const String orders = '/orders';
+  static const String order = '/order';
 
   static const String settings = '/settings';
   static const String userSettings = '/user-settings';
