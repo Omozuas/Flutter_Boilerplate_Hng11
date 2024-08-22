@@ -4,6 +4,9 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/previ
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../utils/custom_text_style.dart';
+import '../../../utils/global_colors.dart';
 import 'breaking_border_container.dart';
 
 class ProductImage extends StatefulWidget {
@@ -57,10 +60,10 @@ class _ProductImageState extends State<ProductImage> {
   Widget build(BuildContext context) {
     return BreakingBorderContainer(
       child: Container(
-        height: 125.h,
+        height: 158.h,
         width: 379.w,
         decoration: BoxDecoration(
-          color: const Color.fromRGBO(239, 239, 239, 1.0),
+          color: GlobalColors.zinc50,
           borderRadius: BorderRadius.circular(6),
         ),
         alignment: Alignment.center,
@@ -81,14 +84,16 @@ class _ProductImageState extends State<ProductImage> {
                         width: 114.w,
                         decoration: BoxDecoration(
                             border: Border.all(
-                                width: 1,
-                                color: const Color.fromRGBO(226, 232, 240, 1)),
-                            color: const Color.fromRGBO(255, 255, 255, 1),
+                              width: 1,
+                              color: GlobalColors.lightGray,
+                              //const Color.fromRGBO(226, 232, 240, 1),
+                            ),
+                            color: GlobalColors.white,
                             borderRadius: BorderRadius.circular(6),
-                            boxShadow: const [
+                            boxShadow: [
                               BoxShadow(
-                                color: Color.fromRGBO(10, 57, 176, 0.12),
-                                offset: Offset(0, 1),
+                                color: GlobalColors.boxShadow,
+                                offset: const Offset(0, 1),
                                 blurRadius: 18,
                                 spreadRadius: 0,
                               )
@@ -96,11 +101,9 @@ class _ProductImageState extends State<ProductImage> {
                         child: Center(
                           child: Text(
                             AppLocalizations.of(context)!.uploadNewButton,
-                            style: GoogleFonts.inter(
-                              color: const Color.fromRGBO(10, 10, 10, 1),
+                            style: CustomTextStyle.medium(
+                              color: GlobalColors.darkTwo,
                               fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              height: 24 / 14,
                             ),
                           ),
                         ),
@@ -112,13 +115,17 @@ class _ProductImageState extends State<ProductImage> {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          'Accepts images, videos or 3D models',
-                          style: GoogleFonts.inter(
-                            color: const Color.fromRGBO(82, 82, 82, 1),
+                          'Upload product Image',
+                          style: CustomTextStyle.medium(
+                            color: GlobalColors.grays,
                             fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            height: 16.94 / 14,
                           ),
+                          // GoogleFonts.inter(
+                          //   color: const Color.fromRGBO(82, 82, 82, 1),
+                          //   fontSize: 14.sp,
+                          //   fontWeight: FontWeight.w400,
+                          //   height: 16.94 / 14,
+                          // ),
                         ),
                       ),
                     )

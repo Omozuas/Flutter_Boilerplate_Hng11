@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/global_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../utils/custom_text_style.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? hintText;
@@ -46,7 +47,7 @@ class CustomTextField extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
                   borderSide: BorderSide(
-                    color: const Color.fromRGBO(203, 213, 225, 1),
+                    color: GlobalColors.containerBorderColor,
                     width: 1.w,
                   ),
                 ),
@@ -58,10 +59,9 @@ class CustomTextField extends StatelessWidget {
                   ),
                 ),
                 counterText: showCounter ? null : '',
-                hintStyle: TextStyle(
+                hintStyle: CustomTextStyle.regular(
+                  color: GlobalColors.lightGrey,
                   fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF94A3B8),
                 ),
                 contentPadding: const EdgeInsets.only(
                   left: 12,
@@ -97,7 +97,7 @@ class ProductNameFormField extends StatelessWidget {
     return SizedBox(
       child: CustomTextField(
         controller: controller,
-        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        borderColor: GlobalColors.containerBorderColor,
         hintText: AppLocalizations.of(context)!.productNameLabel,
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -123,7 +123,7 @@ class DescriptionFormField extends StatelessWidget {
         controller: controller,
         maxLength: 72,
         maxLines: 8,
-        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        borderColor: GlobalColors.containerBorderColor,
         hintText: AppLocalizations.of(context)!.productDescriptionPlaceholder,
         showCounter: false,
       ),
@@ -141,7 +141,7 @@ class ProductPriceFormField extends StatelessWidget {
       child: CustomTextField(
         controller: controller,
         keyboardType: TextInputType.number,
-        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        borderColor: GlobalColors.containerBorderColor,
         hintText: '\$ 0.00',
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -165,7 +165,7 @@ class ProductQuantityFormField extends StatelessWidget {
       child: CustomTextField(
         controller: controller,
         keyboardType: TextInputType.number,
-        borderColor: const Color.fromRGBO(203, 213, 225, 1),
+        borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00 pcs',
         validator: (value) {
           if (value == null || value.isEmpty) {

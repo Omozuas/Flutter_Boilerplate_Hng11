@@ -13,7 +13,9 @@ import '../user_home/screens/user_dashboard_ui.dart';
 import '../user_setting/screens/profile_settings/account_settings.dart';
 
 class UserMainView extends StatefulWidget {
-  const UserMainView({super.key,});
+  const UserMainView({
+    super.key,
+  });
 
   final String name = 'MainView';
 
@@ -29,9 +31,7 @@ class _UserMainViewState extends State<UserMainView> {
   // Method to update value
   void updateIndex(int newValue) {
     _bottomBarIndex.value = newValue;
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -73,28 +73,25 @@ class _UserMainViewState extends State<UserMainView> {
                 icon: NavBar.home,
                 index: 0,
                 isSelected: _bottomBarIndex.value == 0,
-                onTap: updateIndex
-            ),
+                onTap: updateIndex),
             _NavigationBarItem(
                 label: "Products",
                 icon: NavBar.products,
                 index: 1,
                 isSelected: _bottomBarIndex.value == 1,
-                onTap: updateIndex
-            ),
+                onTap: updateIndex),
             _NavigationBarItem(
                 label: "Cart",
-                icon: NavBar.cart,
+                icon: NavBar.order,
                 index: 2,
                 isSelected: _bottomBarIndex.value == 2,
-                onTap: updateIndex
-            ),
+                onTap: updateIndex),
             _NavigationBarItem(
-                label: "Settings",
-                icon: NavBar.settings,
-                index: 3,
-                isSelected: _bottomBarIndex.value == 3,
-                onTap: updateIndex,
+              label: "Settings",
+              icon: NavBar.settings,
+              index: 3,
+              isSelected: _bottomBarIndex.value == 3,
+              onTap: updateIndex,
             ),
           ],
         ),
@@ -110,10 +107,7 @@ class _UserMainViewState extends State<UserMainView> {
     }
     return false;
   }
-
-
 }
-
 
 class _NavigationBarItem extends StatelessWidget {
   _NavigationBarItem({
@@ -132,11 +126,10 @@ class _NavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Expanded(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: (){
+        onTap: () {
           onTap(index);
         },
         child: SizedBox(
@@ -148,11 +141,19 @@ class _NavigationBarItem extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, color: isSelected? Colors.amber[800]: Colors.grey, size: 24.sp,),
-                  SizedBox(height: 5.sp,),
-                  Text(label, style: CustomTextStyles.productSmallBodyTextBlack.copyWith(
-                    color: isSelected? Colors.amber[800]: Colors.grey
-                  ))
+                  Icon(
+                    icon,
+                    color: isSelected ? Colors.amber[800] : Colors.grey,
+                    size: 24.sp,
+                  ),
+                  SizedBox(
+                    height: 5.sp,
+                  ),
+                  Text(label,
+                      style: CustomTextStyles.productSmallBodyTextBlack
+                          .copyWith(
+                              color:
+                                  isSelected ? Colors.amber[800] : Colors.grey))
                 ],
               ),
             ],

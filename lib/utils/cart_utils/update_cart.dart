@@ -6,18 +6,18 @@ import 'package:flutter_boilerplate_hng11/utils/cart_utils/cart_functions.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:get_storage/get_storage.dart';
 
-Future<bool> updateToCart(Product product, int quantity)async{
+Future<bool> updateToCart(Product product, int quantity) async {
   GetStorage storage = locator<GetStorage>();
   var data = await getCartItems();
-  try{
-    if(data.isEmpty){
+  try {
+    if (data.isEmpty) {
       showSnackBar("Cart is empty");
       return false;
     }else{
       if(data.any((cart)=> cart.id == product.id)){
         // ignore: unused_result
         data.firstWhere((cart)=> cart.id == product.id).copyWith(
-          cartQuantity: quantity
+            cartQuantity: quantity
         );
         storage.write("cart_items", getProductListFromJsontoString(data));
         return true;
@@ -25,8 +25,12 @@ Future<bool> updateToCart(Product product, int quantity)async{
         showSnackBar("Item not in cart");
         return false;
       }
+      } else {
+        showSnackBar("Item not in cart");
+        return false;
+      }
     }
-  }catch(err){
+  } catch (err) {
     log(err.toString());
     return false;
   }
