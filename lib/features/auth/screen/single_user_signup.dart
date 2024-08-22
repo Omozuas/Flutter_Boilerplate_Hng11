@@ -11,7 +11,7 @@ import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/auth.provider.dart';
 
 class SingleUserSignUpScreen extends ConsumerWidget {
@@ -43,15 +43,14 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                      'Sign up',
+                AppLocalizations.of(context)!.signUp,
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    const Text(
-                      'Create an account to get started with us.',
+                     Text(AppLocalizations.of(context)!.createAccount,
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Colors.grey,

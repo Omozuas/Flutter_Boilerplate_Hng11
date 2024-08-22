@@ -247,4 +247,6 @@ static const String viewAllProducts = 'View all products';
   static const String profileName = 'Chad Bosewick';
   static const String profileEmail = 'ChadBosew@gmail.com';
 
+  /// TODO: Put every new strings under this todo
+
 }

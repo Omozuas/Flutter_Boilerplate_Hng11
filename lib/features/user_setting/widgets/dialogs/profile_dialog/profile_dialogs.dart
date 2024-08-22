@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileDialog extends StatelessWidget {
   final String? title;
@@ -27,7 +28,7 @@ class ProfileDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title ?? "Profile Updated!",
+              title ?? AppLocalizations.of(context)!.updateProfileButton,
               style: GoogleFonts.inter(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -65,7 +66,7 @@ class ProfileDialog extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Continue',
+                  AppLocalizations.of(context)!.continueButton,
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
