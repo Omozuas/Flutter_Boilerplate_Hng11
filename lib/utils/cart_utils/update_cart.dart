@@ -21,11 +21,7 @@ Future<bool> updateToCart(Product product, int quantity) async {
         );
         storage.write("cart_items", getProductListFromJsontoString(data));
         return true;
-      }else{
-        showSnackBar("Item not in cart");
-        return false;
-      }
-      } else {
+      }else {
         showSnackBar("Item not in cart");
         return false;
       }
