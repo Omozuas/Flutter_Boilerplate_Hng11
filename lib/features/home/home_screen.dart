@@ -68,18 +68,28 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                AppSvgs.notification,
-                height: 24.h,
-                width: 24.w,
-              ),
-              16.w.sbW
-            ],
-          )
+          Padding(
+            padding: EdgeInsets.only(right: 8.0.w),
+            child: Stack(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.notifications),
+                ),
+                const Positioned(
+                  top: 0.0,
+                  right: 0.0,
+                  child: Badge(
+                    label:
+                        Text('5'), // Replace with the actual notification count
+                    textColor: Colors.white,
+                    backgroundColor: Colors.red,
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
       backgroundColor: GlobalColors.white,

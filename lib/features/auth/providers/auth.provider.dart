@@ -123,37 +123,39 @@ class AuthProvider extends StateNotifier<AuthState> {
 
   Future<void> googleSignin(BuildContext context) async {
     setGoogleButtonLoading = true;
-    final googleSignIn = GoogleSignIn(
-      scopes: [
-        'email',
-        'https://www.googleapis.com/auth/userinfo.profile',
-      ],
-    );
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser != null) {
-      final googleAuth = await googleUser.authentication;
-      final res = await AuthApi().googleSignIn(googleAuth.idToken!);
-      if (res != null) {
-        showSnackBar(res.message.toString());
-        UserRegData userRegData = UserRegData.fromJson(res.data);
-        setUser = User.fromJson(userRegData.data?['user']);
-        setOrganizations = (userRegData.data?['organisations'] as List?)
-                ?.map<Organisation>(
-                  (e) => Organisation.fromJson(e),
-                )
-                .toList() ??
-            [];
 
-        if (context.mounted) {
-          context.go(AppRoute.home);
-          box.write('accessToken', userRegData.accessToken);
-          _userService.storeToken(userRegData.accessToken ?? "");
-          await getUser();
+    try {
+      final googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/userinfo.profile',
+        ],
+      );
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+        // print(googleAuth.idToken);
+        final res = await AuthApi().googleSignIn(googleAuth.idToken??'');
+        if (res != null) {
+          showSnackBar(res.message.toString());
+          UserRegData userRegData = UserRegData.fromJson(res.data);
+          setUser = User.fromJson(userRegData.data?['user']);
+          setOrganizations = (userRegData.data?['organisations'] as List?)
+              ?.map<Organisation>(
+                (e) => Organisation.fromJson(e),
+          )
+              .toList() ??
+              [];
+
+          if (context.mounted) {
+            context.go(AppRoute.home);
+            box.write('accessToken', userRegData.accessToken);
+            _userService.storeToken(userRegData.accessToken ?? "");
+            await getUser();
+          }
         }
       }
-    }
-
-    try {} catch (e) {
+    } catch (e) {
       rethrow;
     } finally {
       setGoogleButtonLoading = false;

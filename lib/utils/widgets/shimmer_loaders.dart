@@ -83,9 +83,7 @@ class _ShimmerCardState extends State<ShimmerCard>with SingleTickerProviderState
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark;
+    Size size = MediaQuery.sizeOf(context);
     return AnimatedBuilder(animation: _animation,
         builder: (BuildContext context, Widget? child){
           return  SizedBox(
