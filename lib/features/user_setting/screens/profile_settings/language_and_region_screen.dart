@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../auth/providers/language_provider.dart';
 
 class LanguageAndRegionScreen extends ConsumerStatefulWidget {
@@ -32,11 +33,10 @@ class _LanguageAndRegionScreenState
           selectedTimeZone == null;
 
       if (!showError) {
+        feedBackMessage = AppLocalizations.of(context)!.settings;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
-
-        feedBackMessage = 'Settings have been saved successfully.';
         feedBackMessageColor = GlobalColors.green;
       } else {
         feedBackMessage = null;
@@ -49,8 +49,7 @@ class _LanguageAndRegionScreenState
         selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
-        feedBackMessage =
-            'You have unsaved changes. Are you sure you want to leave without saving?';
+        feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
         feedBackMessageColor = GlobalColors.lightOrangeColor;
       });
     } else {
@@ -94,7 +93,7 @@ class _LanguageAndRegionScreenState
         titleSpacing: -6.sp,
         leading: const ChevronBackButton(),
         title: Text(
-          'Language & Region',
+          AppLocalizations.of(context)!.languageAndRegion,
           style:
               GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
         ),
@@ -105,7 +104,8 @@ class _LanguageAndRegionScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Customise your language and region preferences',
+              AppLocalizations.of(context)!
+                  .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400, fontSize: 12.sp),
             ),
@@ -137,7 +137,7 @@ class _LanguageAndRegionScreenState
             ),
             if (showError && selectedLanguage == null)
               Text(
-                'There was a problem updating your language. Please try again.',
+AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -167,7 +167,7 @@ class _LanguageAndRegionScreenState
             ),
             if (showError && selectedRegion == null)
               Text(
-                'There was a problem updating your region. Please try again.',
+                AppLocalizations.of(context)!.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -192,7 +192,7 @@ class _LanguageAndRegionScreenState
             ),
             if (showError && selectedTimeZone == null)
               Text(
-                'There was a problem updating your timezone. Please try again.',
+                AppLocalizations.of(context)!.timezoneUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -207,7 +207,7 @@ class _LanguageAndRegionScreenState
                 CustomButton(
                     onTap: validateSelections,
                     borderColor: Colors.transparent,
-                    text: 'Save',
+                    text: AppLocalizations.of(context)!.save,
                     height: 40.sp,
                     containerColor: GlobalColors.orange,
                     width: 65.sp,
@@ -216,7 +216,7 @@ class _LanguageAndRegionScreenState
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
-                    text: 'Cancel',
+                    text: AppLocalizations.of(context)!.cancel,
                     height: 40.sp,
                     containerColor: GlobalColors.white,
                     width: 65.sp,
