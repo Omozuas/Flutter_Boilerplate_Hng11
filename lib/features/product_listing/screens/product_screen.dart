@@ -141,7 +141,7 @@ class ProductScreen extends ConsumerWidget {
                               );
                             },
                             separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
+                                (BuildContextsvg context, int index) => SizedBox(
                               height: 24.h,
                             ),
                           );
