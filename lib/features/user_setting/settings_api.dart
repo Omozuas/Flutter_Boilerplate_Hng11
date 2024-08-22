@@ -169,6 +169,27 @@ class SettingsApi {
       rethrow;
     }
   }
+
+  Future<String> initiateSubscription(
+    {
+      required String email,
+      required double amount,
+      required String plan,
+      required String frequency
+    }
+  ) async {
+    try{
+     final response = await dio.post('/transactions/initiate/subscription', data: {
+  "email": email,
+  "amount": amount,
+  "plan": plan,
+  "frequency": frequency
+});
+return response?.data['data']['authorization_url'];
+    }catch (e) {
+      rethrow;
+    }
+  }
 }
 
 final settingsApiProvider = Provider<SettingsApi>((ref) => SettingsApi(ref));
