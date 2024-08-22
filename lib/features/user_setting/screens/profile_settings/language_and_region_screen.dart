@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../auth/providers/language_provider.dart';
 
-class LanguageAndRegionScreen extends StatefulWidget {
+class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
   @override
-  State<LanguageAndRegionScreen> createState() =>
+  ConsumerState<LanguageAndRegionScreen> createState() =>
       _LanguageAndRegionScreenState();
 }
 
-class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
+class _LanguageAndRegionScreenState
+    extends ConsumerState<LanguageAndRegionScreen> {
   String? selectedLanguage;
   String? selectedRegion;
   String? selectedTimeZone;
   String? feedBackMessage;
   bool showError = false;
   Color feedBackMessageColor = Colors.transparent;
+
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
@@ -28,7 +33,10 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = 'Settings have been saved successfully.';
+        feedBackMessage = AppLocalizations.of(context)!.settings;
+        ref
+            .read(languageProvider.notifier)
+            .setLanguage(getLanguageCode(selectedLanguage!));
         feedBackMessageColor = GlobalColors.green;
       } else {
         feedBackMessage = null;
@@ -41,12 +49,37 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
-        feedBackMessage =
-            'You have unsaved changes. Are you sure you want to leave without saving?';
+        feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
         feedBackMessageColor = GlobalColors.lightOrangeColor;
       });
     } else {
       //
+    }
+  }
+
+  String getLanguageCode(String language) {
+    switch (language) {
+      case 'Español (Spanish)':
+        return 'es';
+      case 'Italiano (Italian)':
+        return 'it';
+      case 'Français (French)':
+        return 'fr';
+      case 'Deutsch (German)':
+        return 'de';
+      case '日本語 (Japanese)':
+        return 'ja';
+      case '日本語 (Chinese)':
+        return 'zh';
+      case '한국어 (Korean)':
+        return 'ko';
+      case 'Русский (Russian)':
+        return 'ru';
+      case 'العربية (Arabic)':
+        return 'ar';
+      case 'English':
+      default:
+        return 'en';
     }
   }
 
@@ -60,7 +93,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         titleSpacing: -6.sp,
         leading: const ChevronBackButton(),
         title: Text(
-          'Language & Region',
+          AppLocalizations.of(context)!.languageAndRegion,
           style:
               GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
         ),
@@ -71,7 +104,8 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Customise your language and region preferences',
+              AppLocalizations.of(context)!
+                  .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400, fontSize: 12.sp),
             ),
@@ -84,6 +118,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 'Deutsch (German)',
                 'English',
                 '日本語 (Japanese)',
+                '日本語 (Chinese)',
                 '한국어 (Korean)',
                 'Русский (Russian)',
                 'العربية (Arabic)'
@@ -102,7 +137,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedLanguage == null)
               Text(
-                'There was a problem updating your language. Please try again.',
+AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -132,7 +167,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedRegion == null)
               Text(
-                'There was a problem updating your region. Please try again.',
+                AppLocalizations.of(context)!.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -157,7 +192,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedTimeZone == null)
               Text(
-                'There was a problem updating your timezone. Please try again.',
+                AppLocalizations.of(context)!.timezoneUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -172,7 +207,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 CustomButton(
                     onTap: validateSelections,
                     borderColor: Colors.transparent,
-                    text: 'Save',
+                    text: AppLocalizations.of(context)!.save,
                     height: 40.sp,
                     containerColor: GlobalColors.orange,
                     width: 65.sp,
@@ -181,7 +216,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
-                    text: 'Cancel',
+                    text: AppLocalizations.of(context)!.cancel,
                     height: 40.sp,
                     containerColor: GlobalColors.white,
                     width: 65.sp,
