@@ -3,11 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 import '../cart/screens/cart_home_screen.dart';
@@ -120,13 +117,12 @@ class _UserMainViewState extends State<UserMainView> {
 
 class _NavigationBarItem extends StatelessWidget {
   _NavigationBarItem({
-    Key? key,
     required this.label,
     required this.icon,
     required this.index,
     required this.isSelected,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final String label;
   final IconData icon;

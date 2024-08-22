@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/string_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
-import 'package:flutter_boilerplate_hng11/utils/cart_utils/cart_functions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/widgets/custom_button.dart';
-import '../models/cart_model.dart';
 import '../provider/cart.provider.dart';
 import '../widgets/cart_price_option.dart';
 import '../widgets/cart_product_widget.dart';

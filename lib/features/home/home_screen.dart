@@ -22,6 +22,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
+    final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
 
     final List<Map<String, dynamic>> customers = [
@@ -72,10 +73,13 @@ class HomeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                AppSvgs.notification,
-                height: 24.h,
-                width: 24.w,
+              InkWell(
+                onTap: ()=> dashBoardProviderNotifier.goToNotification(context),
+                child: SvgPicture.asset(
+                  AppSvgs.notification,
+                  height: 24.h,
+                  width: 24.w,
+                ),
               ),
               16.w.sbW
             ],

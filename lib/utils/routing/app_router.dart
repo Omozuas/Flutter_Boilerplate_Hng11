@@ -6,7 +6,6 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signu
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
@@ -30,7 +29,7 @@ import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart'
 import 'package:go_router/go_router.dart';
 
 import '../../features/main_view/user_main_view.dart';
-import '../../features/user_home/screens/user_dashboard_ui.dart';
+import '../../features/notification/screens/notification_home_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -165,6 +164,12 @@ class AppRouter {
           return const UserMainView();
         },
       ),
+      ConsumerGoRoute(
+        path: AppRoute.notification,
+        builder: (context, state, ref) {
+          return const NotificationHomeScreen();
+        },
+      ),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(routes: [
@@ -214,6 +219,7 @@ class AppRoute {
   static const String cart = '/cart';
   static const String orders = '/orders';
   static const String order = '/order';
+  static const String notification = '/notification';
 
   static const String settings = '/settings';
   static const String userSettings = '/user-settings';
