@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_avatar.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MembersSettings extends StatefulWidget {
   const MembersSettings({super.key});
@@ -38,7 +39,7 @@ class _MembersSettingsState extends State<MembersSettings> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Members',
+          AppLocalizations.of(context)!.members,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w700,
@@ -59,7 +60,7 @@ class _MembersSettingsState extends State<MembersSettings> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Manage who has access to this workspace",
+                AppLocalizations.of(context)!.manageAccessToWorkspace,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
@@ -83,7 +84,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 activeColor: GlobalColors.white,
                 activeTrackColor: GlobalColors.orange,
                 title: Text(
-                  'Invite Link',
+                  AppLocalizations.of(context)!.inviteLink,
                   style: GoogleFonts.inter(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
@@ -91,7 +92,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                   ),
                 ),
                 subtitle: Text(
-                  'This provides a unique URL that allows anyone to join your workspace',
+                  AppLocalizations.of(context)!.inviteLinkDescr,
                   style: GoogleFonts.inter(
                     fontSize: 12.5.sp,
                     fontWeight: FontWeight.w400,
@@ -174,7 +175,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                             });
                       },
                       borderColor: const Color(0xffF97316),
-                      text: 'Invite people',
+                      text: AppLocalizations.of(context)!.inviteLink,
                       height: 31.h,
                       containerColor: const Color(0xffF97316),
                       width: 105.h,
@@ -210,9 +211,9 @@ class _MembersSettingsState extends State<MembersSettings> {
                   Expanded(
                     child: CustomDropdownButton(
                         initialValue: 'All',
-                        items: const [
+                        items: [
                           'All',
-                          'Members',
+                          AppLocalizations.of(context)!.members,
                           'Suspended',
                           'Left workspace'
                         ],
@@ -266,7 +267,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                                 bottom: 4.0,
                               ),
                               child: Text(
-                                'Delete member',
+                                AppLocalizations.of(context)!.deleteButton,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.inter(
                                   fontSize: 14,
@@ -304,8 +305,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -336,8 +341,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -368,8 +377,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -384,7 +397,7 @@ class _MembersSettingsState extends State<MembersSettings> {
               Row(
                 children: [
                   Text(
-                    'Export Members List',
+                    AppLocalizations.of(context)!.exportMembersList,
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w700,
                         fontSize: 14,
@@ -394,7 +407,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                   CustomButton(
                       onTap: () {},
                       borderColor: const Color(0xffF97316),
-                      text: 'Export CSV',
+                      text: AppLocalizations.of(context)!.exportCsv,
                       height: 31.h,
                       containerColor: Colors.white,
                       width: 91.h,
@@ -405,7 +418,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 height: 10.h,
               ),
               Text(
-                'Export a CSV with information of all members of your team',
+                AppLocalizations.of(context)!.exportCsvWithInfo,
                 style: GoogleFonts.inter(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
