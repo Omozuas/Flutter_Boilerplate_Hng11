@@ -246,59 +246,7 @@ static const String viewAllProducts = 'View all products';
   static const String threeActiveMember = '3 active members';
   static const String profileName = 'Chad Bosewick';
   static const String profileEmail = 'ChadBosew@gmail.com';
-static const String anErrorOccured =
-      'An error occurred while fetching the current user details';
-  static const String organisationalSettings = 'Organizational Settings';
-  static const String logOut = 'Log Out';
-  static const String addXLink = 'Add X link';
-  static const String addLinkedInLink = 'Add linkedin link';
-  static const String addInstagramLink = 'Add Instagram link';
-  static const String language = 'Language';
-  static const String france = 'France';
-  static const String canada = 'Canada';
-  static const String unitedKingdom = 'United Kingdom';
-  static const String germany = 'Germany';
-  static const String unitedStates = 'United States';
-  static const String japan = 'Japan';
-  static const String southKorea = 'South Korea';
-  static const String russia = 'Russian';
-  static const String unitedArabEmirates = 'United Arab Emirates';
-  static const String region = 'Region';
-  static const String timeZone = 'Time-Zone';
-  static const String passwordSuccessfully = 'Password Successfully Updated';
-  static const String passwordSuccessfullyMessage =
-      'Your password has been successfully updated! You can now log in with your new password.';
-  static const String resourceNotFound =
-      'The requested resource was not found. Please check the URL or contact support.';
-  static const String failedToUpdatePassword =
-      'Failed to update password. Please try again.';
-  static const String errorMessage =
-      'An unexpected error occurred. Please try again.';
-  static const String passwordSetting = 'Password Setting';
-  static const String updatePasswordEnhanced =
-      'Update password for enhanced account security';
-  static const String newPassword = 'New Password';
-  static const String enterNewPassword = 'Enter New Password';
-  static const String passwordMustContain = 'Password must contain';
-  static const String atLeastOneUpercase = 'At least 1 upercase';
-  static const String atLeastOneNumber = 'At least 1 number';
-  static const String atLeastEightCharacters = 'At least 8 characters';
-  static const String confirmNewPassword = 'Confirm new password';
-  static const String passwordDoNotMatch = 'Passwords do not match';
-  static const String update = 'Update';
-  static const String deleteMember = 'Delete Member';
-  static const String deleteUser =
-      'Are you sure you want to delete Chad Bosewick? All data will be permanently removed. This action cannot be undone.';
-  static const String confirmLogOut =
-      'Are you sure you want to logout from this Divice.';
-  static const String selectRole = 'Select role';
-  static const String takeAPicture = 'Take a Picture';
-  static const String pickFromGallery = 'Pick from gallery';
-  static const String recentTransactions = 'Recent Transactions';
-  static const String paid = 'Paid';
-  static const String invoice = 'Invoice';
-  static const String download = 'Download';
-  static const String total = 'Total';
-  static const String currentPlan = 'Current Plan';
-  static const String upgrade = 'Upgrade';
+
+  /// TODO: Put every new strings under this todo
+
 }
