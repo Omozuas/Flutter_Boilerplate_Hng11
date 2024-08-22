@@ -9,14 +9,17 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
+import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_social_textfield.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
+import '../../models/custom_api_error.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
 import '../../widgets/pronouns_textfield_dropdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key, required this.user});
@@ -30,6 +33,8 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  late final TextEditingController _firstnameController;
+  late final TextEditingController _lastnameController;
   late final TextEditingController _usernameController;
   late final TextEditingController _jobTitleController;
   late final TextEditingController _departmentController;
@@ -45,6 +50,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     super.initState();
 
     final profile = widget.user?.profile;
+    _firstnameController = TextEditingController(text: fullname.$1);
+    _lastnameController = TextEditingController(text: fullname.$2);
     _usernameController = TextEditingController(text: profile?.username);
     _jobTitleController = TextEditingController(text: profile?.jobTitle);
     _departmentController = TextEditingController(text: profile?.department);
@@ -59,6 +66,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   @override
   void dispose() {
+    _firstnameController.dispose();
+    _lastnameController.dispose();
     _usernameController.dispose();
     _jobTitleController.dispose();
     _departmentController.dispose();
@@ -67,6 +76,25 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _instagramController.dispose();
     _linkedInController.dispose();
     super.dispose();
+  }
+
+  (String, String) get fullname {
+    final user = widget.user;
+    if (user?.profile != null) {
+      final fname = user?.profile?.firstname ?? '';
+      final lname = user?.profile?.lastname ?? '';
+      return (fname, lname);
+    }
+
+    final fullname = widget.user?.fullname.split(' ') ?? [];
+    if (fullname.isEmpty) {
+      return ('', '');
+    }
+    if (fullname.length == 1) {
+      return (fullname.first, '');
+    }
+    final lastname = fullname.sublist(1).join(' ');
+    return (fullname.first, lastname);
   }
 
   @override
@@ -97,15 +125,24 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 ),
                 SizedBox(height: 28.w),
                 Text(
-                  'Personal Details',
+                  AppLocalizations.of(context)!.personalDetails,
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
-                SizedBox(height: 24.h),
                 CustomTextField(
-                  label: 'Username',
+                  label: AppLocalizations.of(context)!.firstName,
+                  controller: _firstnameController,
+                  hintText: AppLocalizations.of(context)!.enterFirstName,
+                ),
+                CustomTextField(
+                  label: AppLocalizations.of(context)!.lastName,
+                  controller: _lastnameController,
+                  hintText: AppLocalizations.of(context)!.enterLastName,
+                ),
+                CustomTextField(
+                  label: AppLocalizations.of(context)!.username,
                   controller: _usernameController,
-                  hintText: 'Enter username',
+                  hintText: AppLocalizations.of(context)!.enterUsername,
                 ),
                 PronounsTextfieldDropdown(
                   initialValue: _pronouns,
@@ -115,17 +152,17 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 ),
                 SizedBox(height: 16.h),
                 CustomTextField(
-                  label: 'Your job title',
+                  label: AppLocalizations.of(context)!.yourJobTitle,
                   controller: _jobTitleController,
-                  hintText: 'Enter job title',
+                  hintText: AppLocalizations.of(context)!.enterJobTitle,
                 ),
                 CustomTextField(
-                  label: 'Department or team',
+                  label: AppLocalizations.of(context)!.departmentOrTeam,
                   controller: _departmentController,
-                  hintText: 'Enter a department or team',
+                  hintText: AppLocalizations.of(context)!.enterDepartmentOrTeam,
                 ),
                 CustomExpansionTile(
-                  title: 'Bio',
+                  title: AppLocalizations.of(context)!.bio,
                   content: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,11 +170,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       children: [
                         CustomTextField(
                           controller: _bioController,
-                          hintText: 'Type your messsage here',
+                          hintText:
+                              AppLocalizations.of(context)!.typeYourMessageHere,
                           maxLines: 3,
                         ),
                         Text(
-                          'Maximum of 64 characters',
+                          AppLocalizations.of(context)!.maximumOf64Character,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             color: const Color(0xFF64748B),
@@ -148,7 +186,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ],
                 ),
                 CustomExpansionTile(
-                  title: 'Connect Socials',
+                  title: AppLocalizations.of(context)!.connectSocials,
                   content: [
                     SocialMediaInput(
                       controller: _xController,
@@ -183,7 +221,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       Expanded(
                         child: CustomButton(
                           borderColor: GlobalColors.lightGray,
-                          text: 'Cancel',
+                          text: AppLocalizations.of(context)!.cancel,
                           height: 40.h,
                           containerColor: Colors.white,
                           width: 50.w,
@@ -195,7 +233,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       Expanded(
                         child: CustomButton(
                             borderColor: GlobalColors.orange,
-                            text: 'Save Changes',
+                            text: AppLocalizations.of(context)!.saveChanges,
                             height: 40.h,
                             containerColor: GlobalColors.orange,
                             width: 50.w,
@@ -234,8 +272,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     final profile = UserProfile(
       userID: user.id,
-      firstname: user.fullname,
-      lastname: user.profile!.lastname,
+      firstname:_firstnameController.text,
+      lastname: _lastnameController.text,
       phoneNumber: user.profile?.phoneNumber,
       avatarURL: user.profile?.avatarURL,
       username: _usernameController.text,
@@ -266,8 +304,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       );
       if (!mounted) return;
       context.pop();
-    } catch (e) {
-      // handle error;
+    } on CustomApiError catch (e) {
+      showSnackBar(e.message);
+    }catch(e){
+      showSnackBar(AppLocalizations.of(context)!.errorOccurred);
     }
   }
 }

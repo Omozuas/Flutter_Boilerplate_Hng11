@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key, required this.onCategorySelected});
@@ -37,7 +38,7 @@ class _ProductCategoryState extends State<ProductCategory> {
       child: DropdownButton<String>(
         padding: const EdgeInsets.only(left: 8),
         dropdownColor: GlobalColors.deemWhiteColor,
-        hint: const Text('Select'),
+        hint: Text(AppLocalizations.of(context)!.select),
         icon: const Icon(Icons.arrow_drop_down),
         iconSize: 30,
         isExpanded: true,

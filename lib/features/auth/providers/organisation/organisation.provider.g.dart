@@ -22,7 +22,7 @@ final getOrganisationProvider =
 );
 
 typedef _$GetOrganisation = Notifier<Organisation>;
-String _$orgnaisationIndexHash() => r'3c8584ae3e049326c57aa9b23665d830ce7cbeb8';
+String _$orgnaisationIndexHash() => r'1dc6dcf5015dd78cfb1a92ec527e23316c261904';
 
 /// See also [OrgnaisationIndex].
 @ProviderFor(OrgnaisationIndex)

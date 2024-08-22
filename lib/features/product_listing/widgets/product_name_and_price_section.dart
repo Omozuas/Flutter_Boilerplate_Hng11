@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/models/product_detail_model.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +11,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
     required this.product,
   });
 
-  final ProductDetail product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,12 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    product.name,
+                    '${product.name}',
                     style: CustomTextStyles.productTextTitleBlack,
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    product.subname,
+                    '${product.category}',
                     style: TextStyle(
                       color: GlobalColors.dark2,
                     ),
@@ -46,7 +46,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "\$${product.price.toStringAsFixed(2)}",
+                    "\$${product.price}",
                     style: CustomTextStyles.productTextTitleBlack,
                   ),
                   SizedBox(height: 6.h),
@@ -58,7 +58,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        "In Stock",
+                        "${product.status}",
                         style: TextStyle(color: GlobalColors.darkOne),
                       ),
                     ],

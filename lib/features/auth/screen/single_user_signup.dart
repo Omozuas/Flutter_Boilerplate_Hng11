@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,7 @@ import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/auth.provider.dart';
 
 class SingleUserSignUpScreen extends ConsumerWidget {
@@ -42,15 +43,14 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                      'Sign up',
+                AppLocalizations.of(context)!.signUp,
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    const Text(
-                      'Create an account to get started with us.',
+                     Text(AppLocalizations.of(context)!.createAccount,
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Colors.grey,
@@ -73,26 +73,46 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
                               width: 16.w,
-                              height: 16.w,
+                              height: 25.w,
                               child: CircularProgressIndicator.adaptive(
                                 strokeWidth: 2.w,
                               ),
                             )
-                          : Image.asset(
-                              'assets/images/google.png',
-                              fit: BoxFit.contain,
-                              width: 200.w,
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/googleIcon.png',
+                                  fit: BoxFit.contain,
+                                  width: 25.w,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Google",
+                                  style: CustomTextStyle.medium(
+                                      fontSize: 17.sp,
+                                      color: GlobalColors.dark2),
+                                )
+                              ],
                             ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     Row(
-                      children: <Widget>[
-                        const Expanded(child: Divider()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: const Text('Or'),
+                      children: [
+                        SizedBox(width: 105.w, child: const Divider()),
+                        const Spacer(),
+                        Text(
+                          "or continue with",
+                          style: CustomTextStyle.regular(
+                            color: GlobalColors.darkOne,
                         ),
-                        const Expanded(child: Divider()),
+                        ),
+                        const Spacer(),
+                        SizedBox(width: 105.w, child: const Divider()),
                       ],
                     ),
                     SizedBox(height: 10.h),

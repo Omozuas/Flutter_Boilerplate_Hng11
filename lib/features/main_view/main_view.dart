@@ -79,8 +79,8 @@ class _MainViewState extends State<MainView> {
             label: 'Products',
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.cart),
-            label: 'Cart',
+            icon: Icon(NavBar.order),
+            label: 'Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.settings),
