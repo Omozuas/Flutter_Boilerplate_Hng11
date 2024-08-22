@@ -1,11 +1,11 @@
 import 'dart:io';
+
+import 'package:dio/dio.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
-import 'package:http_parser/http_parser.dart';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http_parser/http_parser.dart';
 
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
@@ -102,9 +102,27 @@ class SettingsApi {
 
   Future<SubscriptionModel> getsubscriptionOrgId(
       {required String orgId}) async {
+
     try {
       final response = await dio.get(
         '/subscriptions/organization/$orgId',
+      );
+      return subscriptionModelFromJson(response?.data['data']);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<SubscriptionModel> getSubscriptionUserId(
+      {required String userId}) async {
+    try {
+      final response = await dio.get(
+        '/subscriptions/user/$userId',
+
+    try {
+      final response = await dio.get(
+        '/subscriptions/organization/$orgId',
+
       );
       return subscriptionModelFromJson(response?.data['data']);
     } catch (e) {
