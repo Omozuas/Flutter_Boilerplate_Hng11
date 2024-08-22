@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
+
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/subscription_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/recent_transaction_card.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/subscription_benefit_card.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/subscription_header_card.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SubscriptionCheckout extends StatelessWidget {
   final SubscriptionPlan plan;
@@ -91,11 +94,65 @@ class SubscriptionCheckout extends StatelessWidget {
     }
   }
 
+  void _showCancelSubscriptionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => SubscriptionDialog(
+        title: 'We are sorry to see you go!',
+        message:
+            'Are you sure you want to cancel your subscription? By cancelling, you will lose access to all premium features.',
+        buttonText1: 'Cancel Subscription',
+        buttonText2: 'Keep Subscription',
+        onTap1: () {
+          Navigator.pop(context);
+          _showSubscriptionCanceledDialog(context);
+        },
+        onTap2: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  void _showSubscriptionCanceledDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => SubscriptionDialog(
+        title: 'Subscription Canceled',
+        message:
+            'Your subscription has been successfully canceled. If you change your mind, you can reactivate your subscription anytime.',
+        buttonText1: 'Reactivate Subscription',
+        buttonText2: 'Go to Dashboard',
+        onTap1: () {
+          const CustomToast(
+            message: 'Subscription Reactivated',
+          );
+          Navigator.pop(context);
+        },
+        onTap2: () {
+          Navigator.pop(context);
+          // context.push(AppRoute.settings);
+          // Navigator.push(context, MaterialPageRoute(builder: (context){
+          //   return SettingsScreen();
+          // }));
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            context.pop();
+          },
+          child: const Icon(Icons.arrow_back_ios_new),
+        ),
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,62 +175,32 @@ class SubscriptionCheckout extends StatelessWidget {
               SubscriptionBenefitsCard(
                 benefits: getPlanBenefits(),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               const RecentTransactionsCard(),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               CustomButton(
                 onTap: () {},
                 borderColor: Colors.transparent,
                 text: "Upgrade Subscription",
-                height: 40,
+                height: 40.h,
                 containerColor: GlobalColors.orange,
-                width: 300,
+                width: 350.w,
                 textColor: GlobalColors.white,
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25.h,
               ),
               CustomButton(
-                  onTap: () {
-                    showDialog(
-                              context: context,
-                              builder: (context) =>  SubscriptionDialog(
-                                title: 'We are sorry to see you go!',
-                                message: 'Are you sure you want to cancel your subscription ? By cancelling, you will lose access to all premium features ',
-                                buttonText1: 'Cancel Subscription',
-                                buttonText2: 'Keep Subscription',
-                                onTap1: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) =>  SubscriptionDialog(
-                                      title: 'Subscription Canceled',
-                                      message: 'Your subscription has been successfully canceled. If you change your mind, you can reactivate your subscription anytime',
-                                      buttonText1: 'Reactivate Subscription',
-                                      buttonText2: 'Go to Dashboard',
-                                      onTap1: () {
-                                        const CustomToast(message: 'Subscription Reactivated',);
-                                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                                          return const SettingsScreen();
-                                        }));
-                                      },
-                                      onTap2: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                                          return const SettingsScreen();
-                                        }));
-                                      },),
-                                  );
-
-                                }, onTap2: () {
-                                Navigator.pop(context);
-                              },),
-                            );
-                  },
-                  borderColor: GlobalColors.lightGray,
-                  text: "Cancel Subscription",
-                  height: 40,
-                  containerColor: GlobalColors.white,
-                  width: 300,
-                  textColor: GlobalColors.darkTwo),
+                onTap: () {
+                  _showCancelSubscriptionDialog(context);
+                },
+                borderColor: GlobalColors.lightGray,
+                text: "Cancel Subscription",
+                height: 40.h,
+                containerColor: GlobalColors.white,
+                width: 350.w,
+                textColor: GlobalColors.darkTwo,
+              ),
             ],
           ),
         ),
@@ -181,4 +208,3 @@ class SubscriptionCheckout extends StatelessWidget {
     );
   }
 }
-

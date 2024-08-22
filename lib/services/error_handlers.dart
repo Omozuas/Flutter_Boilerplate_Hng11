@@ -47,15 +47,23 @@ class ErrorHandlers {
   }
 
   static void _serverErrorHandler(Response response) {
-    log(response.toString());
-    showSnackBar(response.data['message'] ?? response.toString());
-    // switch (response.statusCode) {
-    //   case 400:
-    //   case 401:
-    //   case 403:
-    //   case 404:
-    //   case 500:
-    //   default:
-    // }
+    log('hhhttt${response.toString()}');
+
+    if (response.data != null) {
+      showSnackBar(response.data['message'].toString());
+    } else {
+      showSnackBar('Seems something happened');
+    }
+
+    log('hhhttt${response.toString()}');
+    switch (response.statusCode) {
+      case 400:
+      case 401:
+
+      // case 403:
+      // case 404:
+      case 500:
+      default:
+    }
   }
 }

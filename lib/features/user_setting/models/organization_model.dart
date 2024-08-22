@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'Organisation_roles_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/organisation_roles_model.dart';
 
 class OrganizationRoledById {
   final String id;

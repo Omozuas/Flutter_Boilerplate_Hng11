@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,12 +58,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
         backgroundColor: GlobalColors.white,
         surfaceTintColor: Colors.transparent,
         titleSpacing: -6.sp,
-        leading: GestureDetector(
-          onTap: () {
-            ///tODO: Perform onTap function for this icon
-          },
-          child: const Icon(Icons.chevron_left),
-        ),
+        leading: const ChevronBackButton(),
         title: Text(
           'Language & Region',
           style:

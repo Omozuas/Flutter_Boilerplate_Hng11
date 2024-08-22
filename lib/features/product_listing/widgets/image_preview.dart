@@ -86,7 +86,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                     removeFile(result!.files[0]);
                   },
                   child: Icon(
-                    Icons.remove_circle_outline_outlined,
+                    Icons.remove_circle,
                     color: Colors.red.shade300,
                     size: 20,
                   ),
