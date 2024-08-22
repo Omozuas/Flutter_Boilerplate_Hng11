@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/preview_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'breaking_border_container.dart';
 
 class ProductImage extends StatefulWidget {
@@ -95,7 +95,7 @@ class _ProductImageState extends State<ProductImage> {
                             ]),
                         child: Center(
                           child: Text(
-                            'Upload New',
+                            AppLocalizations.of(context)!.uploadNewButton,
                             style: GoogleFonts.inter(
                               color: const Color.fromRGBO(10, 10, 10, 1),
                               fontSize: 14.sp,

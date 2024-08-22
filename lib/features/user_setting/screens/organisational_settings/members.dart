@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_avatar.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MembersSettings extends StatefulWidget {
   const MembersSettings({super.key});
@@ -37,7 +38,7 @@ class _MembersSettingsState extends State<MembersSettings> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Members',
+          AppLocalizations.of(context)!.members,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w700,
@@ -58,7 +59,7 @@ class _MembersSettingsState extends State<MembersSettings> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Manage who has access to this workspace",
+                AppLocalizations.of(context)!.manageAccessToWorkspace,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
@@ -69,6 +70,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
+
               SizedBox(
                 height: 10.h,
               ),
@@ -91,7 +93,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                             });
                       },
                       borderColor: const Color(0xffF97316),
-                      text: 'Invite people',
+                      text: AppLocalizations.of(context)!.inviteLink,
                       height: 31.h,
                       containerColor: const Color(0xffF97316),
                       width: 105.h,
@@ -131,6 +133,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                     ),
                   ),
                   SizedBox(width: 13.w),
+
                 ],
               ),
               SizedBox(height: 10.w),
@@ -173,7 +176,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                                 bottom: 4.0,
                               ),
                               child: Text(
-                                'Delete member',
+                                AppLocalizations.of(context)!.deleteButton,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.inter(
                                   fontSize: 14,
@@ -211,8 +214,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -243,8 +250,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -275,8 +286,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -288,6 +303,7 @@ class _MembersSettingsState extends State<MembersSettings> {
               const SizedBox(
                 height: 20,
               ),
+
             ],
           ),
         ),

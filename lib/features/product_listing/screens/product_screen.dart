@@ -11,6 +11,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductScreen extends ConsumerWidget {
   const ProductScreen({super.key});
@@ -30,7 +31,7 @@ class ProductScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Products",
+                      AppLocalizations.of(context)!.welcomeBackMessage,
                       style: CustomTextStyles.producHeaderBlack,
                     ),
                     Text(
@@ -78,7 +79,8 @@ class ProductScreen extends ConsumerWidget {
                       onChanged: ref.read(searchInputProvider.notifier).update,
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Search Product",
+                          hintText:
+                              AppLocalizations.of(context)!.searchProductButton,
                           contentPadding: const EdgeInsets.only(top: 2),
                           suffixIcon: SvgPicture.asset(
                             Assets.images.svg.productListing.sortIcon.path,
@@ -164,7 +166,7 @@ class ProductScreen extends ConsumerWidget {
                       (MediaQuery.sizeOf(context).height / 3).sbH,
                       Center(
                         child: Text(
-                          'Something went wrong: $error',
+                          '${AppLocalizations.of(context)!.somethingWentWrongMessage} $error',
                           style: TextStyle(color: Colors.red, fontSize: 16.sp),
                           textAlign: TextAlign.center,
                         ),
