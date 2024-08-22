@@ -6,11 +6,13 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signu
 import 'package:flutter_boilerplate_hng11/features/auth/screen/splash_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/screens/cart_home_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_details_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/product_details_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/proucts_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/create_role.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members.dart';
@@ -22,13 +24,12 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/language_and_region_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/notification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_password.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-
     initialLocation: AppRoute.splash,
     routes: [
       ConsumerGoRoute(
@@ -64,8 +65,9 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.verificationScreen,
         builder: (context, state, ref) {
-          return const VerificationScreen(
-            email: '',
+          final email = state.pathParameters['email'];
+          return VerificationScreen(
+            email: email ?? '',
           );
         },
       ),
@@ -78,12 +80,17 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.resetPassword,
         builder: (context, state, ref) {
-          return const ResetPassword();
+          final email = state.pathParameters['email'];
+          return ResetPassword(
+            email: email ?? '',
+          );
         },
       ),
       ConsumerGoRoute(
         path: '${AppRoute.products}/:id',
         builder: (context, state, ref) {
+          ref.read(productDetailProvider.notifier).productId =
+              state.pathParameters['id']!;
           return const ProductDetailsScreen();
         },
       ),
@@ -103,6 +110,12 @@ class AppRouter {
         path: AppRoute.rolesScreen,
         builder: (context, state, ref) {
           return const RoleScreen();
+        },
+      ),
+      ConsumerGoRoute(
+        path: AppRoute.addProduct,
+        builder: (context, state, ref) {
+          return const AddProductScreen();
         },
       ),
       ConsumerGoRoute(
@@ -126,7 +139,7 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.editProfileScreen,
         builder: (context, state, ref) {
-          final user =ref.read(profileProvider).user.requireValue;
+          final user = ref.watch(profileProvider).user.sureValue;
           return EditProfileScreen(user: user);
         },
       ),
@@ -147,7 +160,7 @@ class AppRouter {
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
-              builder: (context, state, ref) => const ProductHomeScreen(),
+              builder: (context, state, ref) => const HomeScreen(),
             ),
           ]),
           StatefulShellBranch(routes: [
@@ -158,9 +171,9 @@ class AppRouter {
           ]),
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
-              path: AppRoute.cart,
+              path: AppRoute.order,
               builder: (context, state, ref) {
-                return const CartHomeScreen();
+                return const OrderHomeScreen();
               },
             ),
           ]),
@@ -185,14 +198,15 @@ class AppRoute {
   static const String singleUserSignUp = '/singleUserSignUp';
   static const String login = '/login';
   static const String forgotPassword = '/forgotPassword';
-  static const String verificationScreen = '/verificationScreen';
+  static const String verificationScreen = '/verificationScreen/:email';
   static const String verificationSuccess = '/verificationSuccess';
-  static const String resetPassword = '/resetPassword';
-  static const String cart = '/cart';
+  static const String resetPassword = '/resetPassword/:email';
+  static const String order = '/order';
 
   static const String settings = '/settings';
 
   static const String products = '/products';
+  static const String addProduct = '/add-product';
 
   static const String home = '/home';
 

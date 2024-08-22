@@ -1,13 +1,13 @@
 class User {
-  final String firstName;
-  final String lastName;
-  final String email;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
   final String? createdAt; // Optional for registration response
 
   User({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
+    this.firstName,
+    this.lastName,
+    this.email,
     this.createdAt,
   });
 

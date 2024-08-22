@@ -18,7 +18,7 @@ class MembersSettings extends StatefulWidget {
 }
 
 class _MembersSettingsState extends State<MembersSettings> {
-  bool isInviteLinkActive = false;
+  // bool isInviteLinkActive = false;
 
   void showCustomToast(BuildContext context) {
     CustomToast.show(
@@ -69,101 +69,6 @@ class _MembersSettingsState extends State<MembersSettings> {
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                value: isInviteLinkActive,
-                onChanged: (bool value) {
-                  setState(() {
-                    isInviteLinkActive = value;
-                  });
-                },
-                inactiveTrackColor: GlobalColors.borderColor,
-                inactiveThumbColor: GlobalColors.white,
-                activeColor: GlobalColors.white,
-                activeTrackColor: GlobalColors.orange,
-                title: Text(
-                  'Invite Link',
-                  style: GoogleFonts.inter(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 48, 47, 47),
-                  ),
-                ),
-                subtitle: Text(
-                  'This provides a unique URL that allows anyone to join your workspace',
-                  style: GoogleFonts.inter(
-                    fontSize: 12.5.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff525252),
-                  ),
-                ),
-              ),
-              if (isInviteLinkActive) ...[
-                SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 80,
-                      width: 350,
-                      child: TextField(
-                        readOnly: true,
-                        maxLines: null,
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                        decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15.0, horizontal: 10.0),
-                            suffixIcon: Wrap(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.refresh,
-                                      color: GlobalColors.orange),
-                                  onPressed: () {
-                                    // Logic to refresh the invite link goes here
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.copy,
-                                      color: GlobalColors.orange),
-                                  onPressed: () {
-                                    // Logic to copy the invite link goes here
-                                  },
-                                ),
-                              ],
-                            ),
-                            hintText:
-                                'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: GlobalColors.borderColor),
-                            )),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-              Divider(
-                color: GlobalColors.borderColor,
-                thickness: 1.h,
-              ),
-              // Add buttons for demonstration
-              // ElevatedButton(
-              //   onPressed: () {
-              //     showDialog(
-              //       context: context,
-              //       builder: (context) => const DeleteMemberDialog(),
-              //     );
-              //   },
-              //   child: const Text('Show Delete Member Dialog'),
-              // ),
-              // ElevatedButton(
-              //   onPressed: () => showCustomToast(context),
-              //   child: const Text('Show Custom Toast'),
-              // ),
               SizedBox(
                 height: 10.h,
               ),
@@ -196,17 +101,6 @@ class _MembersSettingsState extends State<MembersSettings> {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                'On the Free plan all members in a workspace are administrators. ',
-                style: GoogleFonts.inter(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 51, 50, 50),
-                ),
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
 
               Row(
                 children: [
@@ -221,7 +115,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                       decoration: InputDecoration(
                         hintText: 'Search by name or email',
                         prefixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 5, 8),
+                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                           child: Icon(Icons.search,
                               color: GlobalColors.gray200Color),
                         ),
@@ -237,38 +131,6 @@ class _MembersSettingsState extends State<MembersSettings> {
                     ),
                   ),
                   SizedBox(width: 13.w),
-                  Expanded(
-                    child: CustomDropdownButton(
-                        initialValue: 'All',
-                        items: const [
-                          'All',
-                          'Members',
-                          'Suspended',
-                          'Left workspace'
-                        ],
-                        borderColor: const Color(0xffCBD5E1),
-                        height: 40.h,
-                        containerColor: Colors.white,
-                        width: 100.w,
-                        textColor: const Color(0xff0F172A)),
-                  )
-                  // DropdownButton<String>(
-                  //   dropdownColor: GlobalColors.white,
-                  //   iconEnabledColor: GlobalColors.gray200Color,
-                  //   value: 'All',
-                  //   onChanged: (String? newValue) {},
-                  //   items: <String>[
-                  //     'All',
-                  //     'Members',
-                  //     'Suspended',
-                  //     'Left workspace'
-                  //   ].map<DropdownMenuItem<String>>((String value) {
-                  //     return DropdownMenuItem<String>(
-                  //       value: value,
-                  //       child: Text(value),
-                  //     );
-                  //   }).toList(),
-                  // ),
                 ],
               ),
               SizedBox(height: 10.w),
@@ -426,37 +288,6 @@ class _MembersSettingsState extends State<MembersSettings> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Text(
-                    'Export Members List',
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: const Color(0xff0A0A0A)),
-                  ),
-                  const Spacer(),
-                  CustomButton(
-                      onTap: () {},
-                      borderColor: const Color(0xffF97316),
-                      text: 'Export CSV',
-                      height: 31.h,
-                      containerColor: Colors.white,
-                      width: 91.h,
-                      textColor: const Color(0xffF97316))
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                'Export a CSV with information of all members of your team',
-                style: GoogleFonts.inter(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff525252),
-                ),
-              )
             ],
           ),
         ),

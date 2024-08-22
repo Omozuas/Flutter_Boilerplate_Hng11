@@ -16,6 +16,11 @@ class ResponseModel {
     // this.user,
   });
 
+  @override
+  String toString() {
+    return 'ResponseModel(statusCode: $statusCode, status: $status, data: $data, message: $message)';
+  }
+
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
     return ResponseModel(
       statusCode: json['status_code'] ?? 0,

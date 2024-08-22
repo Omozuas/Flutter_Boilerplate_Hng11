@@ -5,7 +5,6 @@ import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:go_router/go_router.dart';
 import '../../../utils/global_colors.dart';
-import '../../../utils/widgets/custom_snackbar.dart';
 
 
 class VerificationSuccessScreen extends StatelessWidget {
@@ -22,6 +21,7 @@ class VerificationSuccessScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 80.h),
+                SizedBox(height: 80.h),
                 Text(
                   'Verification Successful',
                   style: CustomTextStyles.producHeaderBlack, // Updated style
@@ -34,13 +34,11 @@ class VerificationSuccessScreen extends StatelessWidget {
                 SizedBox(height: 24.h),
                 CustomButton(
                   onTap: () async {
-                    // Show a snackbar when the button is tapped
-                    showSnackBar("Redirecting to login...");
+                    BuildContext c = context;
 
-                    // Simulate a delay for the action
-                    await Future.delayed(const Duration(seconds: 2));
-                    if (context.mounted) {
-                      context.pushReplacement(AppRoute.login);
+                    if (c.mounted) {
+                      c.go(AppRoute.login);
+                      // AppRouter.router.p
                     }
                   },
                   borderColor: GlobalColors.borderColor,
@@ -53,33 +51,33 @@ class VerificationSuccessScreen extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.green,
-              padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-              child: Row(
-                children: [
-                  const Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 8.sp),
-                  Expanded(
-                    child: Text(
-                      'Successfully Verified',
-                      style: CustomTextStyles.bannerHeaderTextWhite, // Updated style
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   left: 0,
+          //   right: 0,
+          //   child: Container(
+          //     color: Colors.green,
+          //     padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
+          //     child: Row(
+          //       children: [
+          //         const Icon(Icons.check_circle, color: Colors.white),
+          //         SizedBox(width: 8.sp),
+          //         const Expanded(
+          //           child: Text(
+          //             'Successfully Verified',
+          //             style: TextStyle(color: Colors.white, fontSize: 16),
+          //           ),
+          //         ),
+          //         IconButton(
+          //           icon: const Icon(Icons.close, color: Colors.white),
+          //           onPressed: () {
+          //             Navigator.pop(context);
+          //           },
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
