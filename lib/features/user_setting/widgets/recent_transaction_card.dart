@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecentTransactionsCard extends StatelessWidget {
   final double? transactionPrice;
@@ -66,7 +67,7 @@ class RecentTransactionsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "Status",
+                AppLocalizations.of(context)!.statusLabel,
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 16,

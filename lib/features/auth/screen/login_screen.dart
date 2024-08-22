@@ -238,7 +238,7 @@ class LoginScreen extends ConsumerWidget {
                         style: TextStyle(color: GlobalColors.darkOne),
                         children: [
                           TextSpan(
-                              text: AppLocalizations.of(context)!.signUp,
+                              text: ' ${AppLocalizations.of(context)!.signUp}',
                               style: TextStyle(
                                   color: GlobalColors.orange,
                                   fontWeight: FontWeight.bold),
