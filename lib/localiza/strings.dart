@@ -295,10 +295,10 @@ static const String anErrorOccured =
   static const String takeAPicture = 'Take a Picture';
   static const String pickFromGallery = 'Pick from gallery';
   static const String recentTransactions = 'Recent Transactions';
-  String paid = 'Paid';
-  String invoice = 'Invoice';
-  String download = 'Download';
-  String total = 'Total';
-  String currentPlan = 'Current Plan';
-  String upgrade = 'Upgrade';
+  static const String paid = 'Paid';
+  static const String invoice = 'Invoice';
+  static const String download = 'Download';
+  static const String total = 'Total';
+  static const String currentPlan = 'Current Plan';
+  static const String upgrade = 'Upgrade';
 }
