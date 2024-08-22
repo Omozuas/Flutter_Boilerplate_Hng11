@@ -135,6 +135,22 @@ class SettingsApi {
       rethrow;
     }
   }
+  Future<String> generateInviteLink({required String orgId}) async {
+    try {
+      final response = await dio.post('/invite/generate', data: {'organizationId': orgId});
+      return response?.data['data']['inviteLink'];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> sendInviteLink({required String email, required String inviteLink}) async {
+    try {
+      await dio.post('/invite/send', data: {'email': email, 'inviteLink': inviteLink});
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 final settingsApiProvider = Provider<SettingsApi>((ref) => SettingsApi(ref));

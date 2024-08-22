@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductHomeScreen extends StatelessWidget {
   const ProductHomeScreen({super.key});
@@ -54,7 +55,7 @@ class ProductHomeScreen extends StatelessWidget {
               height: 24.h,
             ),
             Text(
-              "Discover",
+              AppLocalizations.of(context)!.discoverButton,
               style: CustomTextStyles.headerTextBlack,
             ),
             SizedBox(
@@ -74,7 +75,8 @@ class ProductHomeScreen extends StatelessWidget {
                   onChanged: ref.watch(searchInputProvider.notifier).update,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Search Product",
+                      hintText:
+                          AppLocalizations.of(context)!.searchProductButton,
                       suffixIcon: SvgPicture.asset(
                         Assets.images.svg.productListing.searchIcon.path,
                         height: 24.h,
@@ -110,7 +112,7 @@ class ProductHomeScreen extends StatelessWidget {
                       SizedBox(
                         width: GlobalScreenSize.getScreenWidth(context) * 0.4,
                         child: Text(
-                          "Top Boilerplates For You",
+                          AppLocalizations.of(context)!.topBoilerplatesForYou,
                           style: CustomTextStyles.bannerHeaderTextWhite,
                         ),
                       ),
@@ -126,7 +128,7 @@ class ProductHomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12.r)),
                         child: Center(
                           child: Text(
-                            "Up to 50% ",
+                            AppLocalizations.of(context)!.discountLabel,
                             style: CustomTextStyles.bannerbodyTextOrange,
                           ),
                         ),
@@ -149,11 +151,11 @@ class ProductHomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Available Products",
+                  AppLocalizations.of(context)!.availableProducts,
                   style: CustomTextStyles.titleTextBlack,
                 ),
                 Text(
-                  "See more",
+                  AppLocalizations.of(context)!.seeMore,
                   style: PlusJakartaTextStyle.bodyTextGrey,
                 )
               ],
