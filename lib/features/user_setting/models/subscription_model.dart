@@ -64,7 +64,11 @@ class SubscriptionModel {
     );
   }
 
-  factory SubscriptionModel.fromJson(Map<String, dynamic> json) =>
+  factory SubscriptionModel.fromJson(String source) =>
+      SubscriptionModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  String toJson() => json.encode(toMap());
+
+  factory SubscriptionModel.fromMap(Map<String, dynamic> json) =>
       SubscriptionModel(
         id: json["id"],
         userId: json["userId"],
@@ -80,7 +84,7 @@ class SubscriptionModel {
         updatedAt: json["updatedAt"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "id": id,
         "userId": userId,
         "organizationId": organizationId,
@@ -94,4 +98,16 @@ class SubscriptionModel {
         "createdAt": createdAt!.toIso8601String(),
         "updatedAt": updatedAt,
       };
+
+  @override
+  bool operator ==(covariant SubscriptionModel other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode;
+  }
 }

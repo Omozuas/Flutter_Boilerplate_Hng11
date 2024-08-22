@@ -102,6 +102,7 @@ class SettingsApi {
 
   Future<SubscriptionModel> getsubscriptionOrgId(
       {required String orgId}) async {
+
     try {
       final response = await dio.get(
         '/subscriptions/organization/$orgId',
@@ -117,6 +118,11 @@ class SettingsApi {
     try {
       final response = await dio.get(
         '/subscriptions/user/$userId',
+
+    try {
+      final response = await dio.get(
+        '/subscriptions/organization/$orgId',
+
       );
       return subscriptionModelFromJson(response?.data['data']);
     } catch (e) {
