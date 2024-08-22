@@ -12,6 +12,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_notification_sect
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../utils/widgets/custom_snackbar.dart';
 
@@ -93,12 +94,15 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                   Column(
                     children: [
                       CustomNotificationSection(
-                        sectionTitle: 'Notifications Alert',
+                        sectionTitle:
+                            AppLocalizations.of(context)!.notificationAlert,
                         notificationTiles: [
                           SettingsOption(
-                            title: 'Mobile push notifications',
+                            title: AppLocalizations.of(context)!
+                                .mobilePushNotification,
                             description:
-                                'Receive push notifications on mentions and comments via your mobile app',
+                                AppLocalizations.of(context)!
+                                .receivePushNotification,
                             value: mobilePushNotifications,
                             onChanged: (newValue) {
                               setState(() {
@@ -109,12 +113,15 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                         ],
                       ),
                       CustomNotificationSection(
-                          sectionTitle: 'Email Notifications',
+                          sectionTitle:
+                              AppLocalizations.of(context)!.emailNotification,
                           notificationTiles: [
                             SettingsOption(
-                              title: 'Activity in your workspace',
+                              title: AppLocalizations.of(context)!
+                                  .activityInYourWorkspace,
                               description:
-                                  'Receive emails when you get comments, mentions, page invites, reminders, access requests, and property changes',
+                                  AppLocalizations.of(context)!
+                                  .receiveActivityInYourWorkspace,
                               value: emailActivityWorkspace,
                               onChanged: (newValue) {
                                 setState(() {
@@ -123,9 +130,11 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Always send email notifications',
+                              title:
+                                  AppLocalizations.of(context)!.alwaysSendEmail,
                               description:
-                                  'Receive emails about activity in your workspace, even when you are active on the app',
+                                  AppLocalizations.of(context)!
+                                  .alwaysSendEmailDescr,
                               value: sendEmailNotifications,
                               onChanged: (newValue) {
                                 setState(() {
@@ -134,9 +143,11 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Mobile push notifications',
+                              title: AppLocalizations.of(context)!
+                                  .mobilePushNotification,
                               description:
-                                  'Receive push notifications on mentions and comments via your mobile app',
+                                  AppLocalizations.of(context)!
+                                  .receivePushNotification,
                               value: emailPushNotifications,
                               onChanged: (newValue) {
                                 setState(() {
@@ -145,9 +156,10 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Email digests',
+                              title: AppLocalizations.of(context)!.email,
                               description:
-                                  'Receive email digest every 8 hours for changes to pages you are subscribed to  ',
+                                 AppLocalizations.of(context)!
+                                  .receiveEmailDigests,
                               value: emailDigests,
                               onChanged: (newValue) {
                                 setState(() {
@@ -156,9 +168,10 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Announcement and update emails',
+                              title: AppLocalizations.of(context)!.announcement,
                               description:
-                                  'Receive occasional emails about product launches and new features from notion',
+                                  AppLocalizations.of(context)!
+                                  .receiveOccassionalEmails,
                               value: announcementUpdateEmail,
                               onChanged: (newValue) {
                                 setState(() {
@@ -168,12 +181,15 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                             ),
                           ]),
                       CustomNotificationSection(
-                          sectionTitle: 'Slack Notifications',
+                          sectionTitle:
+                              AppLocalizations.of(context)!.slackNotifications,
                           notificationTiles: [
                             SettingsOption(
-                              title: 'Activity in your workspace',
+                              title: AppLocalizations.of(context)!
+                                  .activityInYourWorkspace,
                               description:
-                                  'Receive emails when you get comments, mentions, page invites, reminders, access requests, and property changes',
+                                  AppLocalizations.of(context)!
+                                  .receiveActivityInYourWorkspace,
                               value: slackActivityWorkspace,
                               onChanged: (newValue) {
                                 setState(() {
@@ -182,9 +198,11 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Always send email notifications',
+                              title:
+                                  AppLocalizations.of(context)!.alwaysSendEmail,
                               description:
-                                  'Receive emails about activity in your workspace, even when you are active on the app',
+                                  AppLocalizations.of(context)!
+                                  .alwaysSendEmailDescr,
                               value: sendSlackNotifications,
                               onChanged: (newValue) {
                                 setState(() {
@@ -193,9 +211,11 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Mobile push notifications',
+                              title: AppLocalizations.of(context)!
+                                  .mobilePushNotification,
                               description:
-                                  'Receive push notifications on mentions and comments via your mobile app',
+                                  AppLocalizations.of(context)!
+                                  .receivePushNotification,
                               value: slackPushNotifications,
                               onChanged: (newValue) {
                                 setState(() {
@@ -204,9 +224,10 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Email digests',
+                              title: AppLocalizations.of(context)!.emailDigests,
                               description:
-                                  'Receive email digest every 8 hours for changes to pages you are subscribed to  ',
+                                  AppLocalizations.of(context)!
+                                  .receiveEmailDigests,
                               value: slackDigests,
                               onChanged: (newValue) {
                                 setState(() {
@@ -215,9 +236,10 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                               },
                             ),
                             SettingsOption(
-                              title: 'Announcement and update emails',
+                              title: AppLocalizations.of(context)!.announcement,
                               description:
-                                  'Receive occasional emails about product launches and new features from notion',
+                                 AppLocalizations.of(context)!
+                                  .receiveOccassionalEmails,
                               value: announcementUpdateSlack,
                               onChanged: (newValue) {
                                 setState(() {
@@ -256,7 +278,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         child: CustomButton(
           onTap: _save,
           borderColor: GlobalColors.orange,
-          text: 'Save Changes',
+          text: AppLocalizations.of(context)!.saveChanges,
           height: 40.h,
           containerColor: GlobalColors.orange,
           loading: updateLoading,
@@ -289,9 +311,9 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
       showDialog(
         context: context,
         builder: (ctx) => ProfileDialog(
-          title: 'Notification Updated',
+          title: AppLocalizations.of(context)!.notificationUpdated,
           description:
-              'Notification preferences updated successfully. Remember, you can always adjust these settings again later',
+              AppLocalizations.of(context)!.notificationUpdatedSuccessfully,
           onContinue: () {
             Navigator.pop(ctx);
           },
@@ -300,7 +322,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     } on CustomApiError catch (e) {
       showSnackBar(e.message);
     } catch (e) {
-      showSnackBar('An error occurred');
+      showSnackBar(AppLocalizations.of(context)!.errorOccurred);
     }
   }
 }
