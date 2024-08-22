@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import '../../../auth/providers/language_provider.dart';
 
-class LanguageAndRegionScreen extends StatefulWidget {
+class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
   @override
-  State<LanguageAndRegionScreen> createState() =>
+  ConsumerState<LanguageAndRegionScreen> createState() =>
       _LanguageAndRegionScreenState();
 }
 
-class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
+class _LanguageAndRegionScreenState
+    extends ConsumerState<LanguageAndRegionScreen> {
   String? selectedLanguage;
   String? selectedRegion;
   String? selectedTimeZone;
   String? feedBackMessage;
   bool showError = false;
   Color feedBackMessageColor = Colors.transparent;
+
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
@@ -28,6 +32,10 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
           selectedTimeZone == null;
 
       if (!showError) {
+        ref
+            .read(languageProvider.notifier)
+            .setLanguage(getLanguageCode(selectedLanguage!));
+
         feedBackMessage = 'Settings have been saved successfully.';
         feedBackMessageColor = GlobalColors.green;
       } else {
@@ -47,6 +55,32 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
       });
     } else {
       //
+    }
+  }
+
+  String getLanguageCode(String language) {
+    switch (language) {
+      case 'Español (Spanish)':
+        return 'es';
+      case 'Italiano (Italian)':
+        return 'it';
+      case 'Français (French)':
+        return 'fr';
+      case 'Deutsch (German)':
+        return 'de';
+      case '日本語 (Japanese)':
+        return 'ja';
+      case '日本語 (Chinese)':
+        return 'zh';
+      case '한국어 (Korean)':
+        return 'ko';
+      case 'Русский (Russian)':
+        return 'ru';
+      case 'العربية (Arabic)':
+        return 'ar';
+      case 'English':
+      default:
+        return 'en';
     }
   }
 
@@ -84,6 +118,7 @@ class _LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 'Deutsch (German)',
                 'English',
                 '日本語 (Japanese)',
+                '日本語 (Chinese)',
                 '한국어 (Korean)',
                 'Русский (Russian)',
                 'العربية (Arabic)'
