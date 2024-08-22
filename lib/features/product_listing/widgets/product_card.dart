@@ -8,6 +8,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductCardWiget extends StatelessWidget {
   const ProductCardWiget(
@@ -90,12 +91,13 @@ class ProductCardWiget extends StatelessWidget {
                   height: 6.h,
                 ),
                 Text(
-                  "Status:",
+                  "${AppLocalizations.of(context)!.statusLabel}:",
                   style: CustomTextStyles.productTextBody2Black,
                 ),
                 Row(
                   children: [
-                    if (status.contains('In stock')) ...[
+                    if (status.contains(
+                        AppLocalizations.of(context)!.inStockLabel)) ...[
                       Assets.images.svg.productListing.active.svg(),
                     ] else ...[
                       Container(

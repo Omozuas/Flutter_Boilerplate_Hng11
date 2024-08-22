@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FilterBottomSheet extends StatelessWidget {
   const FilterBottomSheet({super.key});
@@ -23,7 +24,7 @@ class FilterBottomSheet extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Filter by Status',
+              Text(AppLocalizations.of(context)!.filterByStatusLabel,
                   style:
                       TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold)),
               DropdownButton<String>(
@@ -40,7 +41,7 @@ class FilterBottomSheet extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20.h),
-              Text('Filter by Price Range',
+              Text(AppLocalizations.of(context)!.filterByPriceRangeLabel,
                   style:
                       TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold)),
               RangeSlider(
@@ -71,7 +72,7 @@ class FilterBottomSheet extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 borderColor: GlobalColors.orange,
-                text: 'Reset Filters',
+                text: AppLocalizations.of(context)!.resetFiltersButton,
                 height: 40.h,
                 containerColor: GlobalColors.deemWhiteColor,
                 width: 100.w,
