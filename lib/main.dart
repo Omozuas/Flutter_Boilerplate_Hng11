@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_boilerplate_hng11/localiza/localiza_class.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -42,7 +41,7 @@ class MyApp extends ConsumerWidget {
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp.router(
-        locale: LocalizationClass.spanish,
+        locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: OneContext().builder,
