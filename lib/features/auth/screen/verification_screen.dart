@@ -6,6 +6,8 @@ import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
+
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
 
@@ -26,6 +28,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   int _countdown = 420;
   late final Timer _timer;
   bool loading = false;
+  
   @override
   void initState() {
     super.initState();
@@ -120,19 +123,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Verification Code',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  Text(
+                    AppLocalizations.of(context)!.verificationCode,  // Localized
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(height: 16.h),
                   RichText(
                     text: TextSpan(
-                      text:
-                          'Confirm the email sent to ${widget.email} and enter the verification code. Code expires in ',
+                      text: '${AppLocalizations.of(context)!.confirmEmail} ${widget.email} ${AppLocalizations.of(context)!.enterVerificationCode} ',  // Localized
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
-                          text: '$_countdown s',
+                          text: '$_countdown ${AppLocalizations.of(context)!.seconds}',  // Localized
                           style: TextStyle(
                             color: GlobalColors.orange,
                             fontWeight: FontWeight.bold,
@@ -189,7 +191,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       _handleVerify(ref, context);
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: "Continue",
+                    text: AppLocalizations.of(context)!.continueText,  // Localized
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
@@ -219,11 +221,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Center(
                       child: RichText(
                         text: TextSpan(
-                          text: 'Didn\'t receive any code? ',
+                          text: AppLocalizations.of(context)!.didNotReceiveCode,  // Localized
                           style: TextStyle(color: GlobalColors.darkOne),
                           children: [
                             TextSpan(
-                              text: 'Resend OTP',
+                              text: AppLocalizations.of(context)!.resendOtp,  // Localized
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -239,9 +241,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Center(
                       child: TextButton(
                         onPressed: _handleChangeEmail,
-                        child: const Text(
-                          'Change Email',
-                          style: TextStyle(
+                        child: Text(
+                          AppLocalizations.of(context)!.changeEmail,  // Localized
+                          style: const TextStyle(
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
                           ),
