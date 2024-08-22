@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
 
 import '../../../services/service_locator.dart';
 
@@ -22,19 +23,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((t) async {
-      // if (box.read('accessToken') == null) {
-      //   context.go(AppRoute.singleUserSignUp);
-      // } else {
-      //   if (box.read('rememberMe') != null && box.read('rememberMe')) {
-      //     ref.read(authProvider.notifier).login({
-      //       "email": box.read('email'),
-      //       "password": box.read('password')
-      //     }, context, fromLoginScreen: false);
-      //   } else {
-      //     context.go(AppRoute.login);
-      //   }
-      // }
-
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
         return;
@@ -76,7 +64,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             height: 20.h,
           ),
           Text(
-            'HNG Boilerplate',
+            AppLocalizations.of(context)!.appName, 
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24.sp,

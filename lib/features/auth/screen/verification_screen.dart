@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
 
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -124,17 +124,17 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.verificationCode,  // Localized
+                    AppLocalizations.of(context)!.verificationCode,  
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(height: 16.h),
                   RichText(
                     text: TextSpan(
-                      text: '${AppLocalizations.of(context)!.confirmEmail} ${widget.email} ${AppLocalizations.of(context)!.enterVerificationCode} ',  // Localized
+                      text: '${AppLocalizations.of(context)!.confirmEmail} ${widget.email} ${AppLocalizations.of(context)!.enterVerificationCode} ',  
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
-                          text: '$_countdown ${AppLocalizations.of(context)!.seconds}',  // Localized
+                          text: '$_countdown ${AppLocalizations.of(context)!.seconds}',  
                           style: TextStyle(
                             color: GlobalColors.orange,
                             fontWeight: FontWeight.bold,
@@ -191,7 +191,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       _handleVerify(ref, context);
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: AppLocalizations.of(context)!.continueText,  // Localized
+                    text: AppLocalizations.of(context)!.continueText,  
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
@@ -221,11 +221,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Center(
                       child: RichText(
                         text: TextSpan(
-                          text: AppLocalizations.of(context)!.didNotReceiveCode,  // Localized
+                          text: AppLocalizations.of(context)!.didNotReceiveCode,  
                           style: TextStyle(color: GlobalColors.darkOne),
                           children: [
                             TextSpan(
-                              text: AppLocalizations.of(context)!.resendOtp,  // Localized
+                              text: AppLocalizations.of(context)!.resendOtp,  
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -242,7 +242,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       child: TextButton(
                         onPressed: _handleChangeEmail,
                         child: Text(
-                          AppLocalizations.of(context)!.changeEmail,  // Localized
+                          AppLocalizations.of(context)!.changeEmail,  
                           style: const TextStyle(
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
