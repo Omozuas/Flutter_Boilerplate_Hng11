@@ -205,4 +205,46 @@ static const String memberRemovedSuccessfullyMessage = 'Member removed successfu
 static const String inviteToOrganizationButton = 'Invite to your Organization';
 static const String profileUpdatedMessage = 'Profile Updated!';
 static const String profileUpdatedSuccessMessage = 'Your profile has been successfully updated.';
+
+
+static const String viewAllProducts = 'View all products';
+  static const String priceRange = 'Price Range';
+  static const String electronicsAndGadgets = 'Electronics & Gadgets';
+  static const String fashionAndApparel = 'Fashion & Apparel';
+  static const String homeAndLiving = 'Home & Living';
+  static const String healthAndBeauty = 'Health & Beauty';
+  static const String sportsAndOutdoors = 'Sports & Outdoors';
+  static const String booksAndMedia = 'Books & Media';
+  static const String groceriesAndEssentials = 'Groceries & Essentials';
+  static const String toysAndGames = 'Toys & Games';
+  static const String automotiveAndTools = 'Automotive & Tools';
+  static const String furnitureAndDecor = 'Furniture & Decor';
+  static const String authorMercy = 'Mercy';
+  static const String badProduct = 'Bad product';
+  static const String reviewDate = '08-08-2024';
+  static const String reaction = 'Bad';
+  static const String review = '3.75/5';
+  static const String ratings = '(17381 ratings)';
+  static const String reviews = 'See all reviews';
+  static const String reactionString = 'Reaction';
+  static const String by = 'By: ';
+  static const String verifiedBuyer = "Verified Buyer";
+  static const String customRoles =
+      'Custom roles let you group permissions and assign them to principals in your organization. You can manually select permissions or import permissions from another role.';
+  static const String addPermisions = 'Add Permissions';
+  static const String seeTheListOfPermissions =
+      'See the list of permissions for this role.';
+  static const String savePreferences = 'Save Preferences';
+  static const String inviteSentSuccessfully = 'Invite Sent Successfully';
+  static const String manageMembers = 'Manage Members';
+  static const String onTheFreePlan =
+      'On the Free plan all members in a workspace are administrators. ';
+  static const String searchByNameOrEmail = 'Search by name or email';
+  static const String all = 'All';
+  static const String suspended = 'Suspended';
+  static const String leftWorkSpace = 'Left Workspace';
+  static const String threeActiveMember = '3 active members';
+  static const String profileName = 'Chad Bosewick';
+  static const String profileEmail = 'ChadBosew@gmail.com';
+
 }

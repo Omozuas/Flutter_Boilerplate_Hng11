@@ -1,12 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:go_router/go_router.dart';
-import 'package:one_context/one_context.dart';
 
 import '../common_models/get_user_response.dart';
 import 'service_locator.dart';

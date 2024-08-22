@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/global_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../utils/custom_text_style.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -97,10 +98,10 @@ class ProductNameFormField extends StatelessWidget {
       child: CustomTextField(
         controller: controller,
         borderColor: GlobalColors.containerBorderColor,
-        hintText: 'Product name',
+        hintText: AppLocalizations.of(context)!.productNameLabel,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter a product name';
+            return AppLocalizations.of(context)!.productNamePlaceholder;
           }
           return null;
         },
@@ -123,7 +124,7 @@ class DescriptionFormField extends StatelessWidget {
         maxLength: 72,
         maxLines: 8,
         borderColor: GlobalColors.containerBorderColor,
-        hintText: 'Enter product description',
+        hintText: AppLocalizations.of(context)!.productDescriptionPlaceholder,
         showCounter: false,
       ),
     );
@@ -144,7 +145,7 @@ class ProductPriceFormField extends StatelessWidget {
         hintText: '\$ 0.00',
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter a price';
+            return AppLocalizations.of(context)!.pricePlaceholder;
           }
           return null;
         },
@@ -168,7 +169,7 @@ class ProductQuantityFormField extends StatelessWidget {
         hintText: '0.00 pcs',
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter the quantity of product';
+            return AppLocalizations.of(context)!.productQuantityPlaceholder;
           }
           return null;
         },

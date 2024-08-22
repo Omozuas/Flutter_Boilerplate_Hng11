@@ -22,6 +22,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
+    final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
 
     final List<Map<String, dynamic>> customers = [
@@ -68,28 +69,21 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0.w),
-            child: Stack(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: ()=> dashBoardProviderNotifier.goToNotification(context),
+                child: SvgPicture.asset(
+                  AppSvgs.notification,
+                  height: 24.h,
+                  width: 24.w,
                 ),
-                const Positioned(
-                  top: 0.0,
-                  right: 0.0,
-                  child: Badge(
-                    label:
-                        Text('5'), // Replace with the actual notification count
-                    textColor: Colors.white,
-                    backgroundColor: Colors.red,
-                    textStyle: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+              16.w.sbW
+            ],
+          )
         ],
       ),
       backgroundColor: GlobalColors.white,

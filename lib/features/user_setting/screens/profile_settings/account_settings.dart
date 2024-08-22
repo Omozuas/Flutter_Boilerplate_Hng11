@@ -33,7 +33,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(profileProvider).user;
-    UserService _userService = locator<UserService>();
+    UserService userService = locator<UserService>();
 
     return Scaffold(
       appBar: AppBar(
@@ -147,17 +147,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         },
                       ),
                       SettingsTile(
-                        leading: Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                        leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
                         leadingIcon: 'assets/images/personsettings.png',
                         title: 'View as Organisation',
                         onTap: () {},
                         trailing: Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
-                              value: _userService.isUserOrganization,
+                              value: userService.isUserOrganization,
                               onChanged:(v) async {
-                                await _userService.change(v, context);
-                                if(_userService.isUserOrganization){
+                                await userService.change(v, context);
+                                if(userService.isUserOrganization){
                                   context.go(AppRoute.home);
                                   // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
                                 }else{
@@ -225,8 +225,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context: context,
                             builder: (ctx) => LogOutDialog(
                               onTap: () {
-                                UserService _userService = locator<UserService>();
-                                _userService.logout();
+                                UserService userService = locator<UserService>();
+                                userService.logout();
                                 stotage.remove('accessToken');
                                 Navigator.pop(ctx);
                                 context.go(AppRoute.login);

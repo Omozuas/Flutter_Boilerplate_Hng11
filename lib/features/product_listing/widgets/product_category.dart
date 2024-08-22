@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/custom_text_style.dart';
 
@@ -38,13 +39,7 @@ class _ProductCategoryState extends State<ProductCategory> {
       child: DropdownButton<String>(
         padding: const EdgeInsets.only(left: 8),
         dropdownColor: GlobalColors.deemWhiteColor,
-        hint: Text(
-          'Select',
-          style: CustomTextStyle.regular(
-            color: GlobalColors.lightGrey,
-            fontSize: 14.sp,
-          ),
-        ),
+        hint: Text(AppLocalizations.of(context)!.select),
         icon: const Icon(Icons.arrow_drop_down),
         iconSize: 30,
         isExpanded: true,

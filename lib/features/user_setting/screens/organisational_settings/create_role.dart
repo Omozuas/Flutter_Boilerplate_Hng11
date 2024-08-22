@@ -5,7 +5,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_search_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CreateRole extends StatefulWidget {
   const CreateRole({super.key});
 
@@ -20,7 +20,7 @@ class _CreateRoleState extends State<CreateRole> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Create Role',
+          title: Text(AppLocalizations.of(context)!.createRole,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -49,14 +49,14 @@ class _CreateRoleState extends State<CreateRole> {
             ),
             CustomSearchField(
               searchController: searchRolesController,
-              hintText: "Search",
+              hintText: AppLocalizations.of(context)!.search,
               leading: Image.asset("assets/icons/search_icon.png"),
             ),
             SizedBox(
               height: 40.h,
             ),
             Text(
-              "Permissions",
+              AppLocalizations.of(context)!.permissions,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
@@ -143,20 +143,32 @@ class _CreateRoleState extends State<CreateRole> {
                 ),
                 PermissionsListTile(
                     isPermitted: true,
-                    permissionTitle: 'Can view transactions'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can view refunds'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can log refunds'),
-                PermissionsListTile(
-                    isPermitted: false, permissionTitle: 'Can view users'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can create users'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can edit users'),
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canViewTransactions),
                 PermissionsListTile(
                     isPermitted: true,
-                    permissionTitle: 'Can blacklist/whitelist users'),
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canViewRefunds),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canLogRefunds),
+                PermissionsListTile(
+                    isPermitted: false,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canViewUsers),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canCreateUsers),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canEditUsers),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canBlacklist),
                 SizedBox(
                   height: 25.h,
                 ),

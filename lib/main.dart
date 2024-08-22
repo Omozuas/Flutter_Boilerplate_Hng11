@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -66,10 +67,16 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey[800], // Content text style
               ),
             ),
-            appBarTheme: const AppBarTheme(
+
+            appBarTheme: AppBarTheme(
                 backgroundColor: Colors.transparent,
                 scrolledUnderElevation: 0,
-                systemOverlayStyle: SystemUiOverlayStyle.dark)),
+                systemOverlayStyle: SystemUiOverlayStyle.dark,
+              titleTextStyle: CustomTextStyle.semiBold(
+                fontSize: 18.sp,
+                color: Colors.black
+              )
+            )),
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/preview_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/custom_text_style.dart';
 import '../../../utils/global_colors.dart';
@@ -98,7 +100,7 @@ class _ProductImageState extends State<ProductImage> {
                             ]),
                         child: Center(
                           child: Text(
-                            'Upload New',
+                            AppLocalizations.of(context)!.uploadNewButton,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkTwo,
                               fontSize: 14.sp,

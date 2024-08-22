@@ -13,15 +13,15 @@ Future<bool> updateToCart(Product product, int quantity) async {
     if (data.isEmpty) {
       showSnackBar("Cart is empty");
       return false;
-    } else {
-      if (data.any((cart) => cart.id == product.id)) {
+    }else{
+      if(data.any((cart)=> cart.id == product.id)){
         // ignore: unused_result
-        data
-            .firstWhere((cart) => cart.id == product.id)
-            .copyWith(cartQuantity: quantity);
+        data.firstWhere((cart)=> cart.id == product.id).copyWith(
+            cartQuantity: quantity
+        );
         storage.write("cart_items", getProductListFromJsontoString(data));
         return true;
-      } else {
+      }else {
         showSnackBar("Item not in cart");
         return false;
       }
