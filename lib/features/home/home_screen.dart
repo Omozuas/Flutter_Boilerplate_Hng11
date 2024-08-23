@@ -9,10 +9,12 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card
 import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
@@ -172,11 +174,13 @@ class HomeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                onTap: () {},
+                onTap: () {
+                  context.go(AppRoute.products);
+                  context.push(AppRoute.addProduct);
+                },
                 borderColor: GlobalColors.orange,
                 text: StringManager.addAProduct,
                 textStyle: const TextStyle(
-                  fontFamily: 'Inter',
                   fontSize: 14,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
@@ -239,7 +243,7 @@ class HomeScreen extends ConsumerWidget {
                           fontSize: 14.sp,
                         ).copyWith(
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF98A2B3),
+                          color: const Color(0xFF98A2B3),
                         ),
                       ),
                     )
