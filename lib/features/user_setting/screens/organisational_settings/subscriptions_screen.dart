@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../utils/context_extensions.dart';
 import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/routing/app_router.dart';
@@ -31,12 +32,13 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen> {
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(profileProvider).fetchSubcription.isLoading;
-    final currentPlan = ref.watch(profileProvider).fetchSubcription.sureValue?.plan;
+    final currentPlan =
+        ref.watch(profileProvider).fetchSubcription.sureValue?.plan;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Subscription Plan',
+          context.text.subscriptionPlan,
           style: CustomTextStyle.semiBold(
             fontSize: 16,
             color: GlobalColors.iconColor,

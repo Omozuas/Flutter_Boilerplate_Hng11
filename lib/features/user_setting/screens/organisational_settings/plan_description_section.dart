@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../utils/context_extensions.dart';
 import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../models/subscription_model.dart';
@@ -25,7 +26,7 @@ class PlanDescriptionSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-               plan.text,
+                plan.getText(context),
                 style: CustomTextStyle.medium(
                   fontSize: 18.sp,
                   color: GlobalColors.dark2,
@@ -33,7 +34,7 @@ class PlanDescriptionSection extends StatelessWidget {
               ),
               SizedBox(height: 9.h),
               Text(
-                plan.description,
+                plan.getDescription(context),
                 style: CustomTextStyle.regular(
                   fontSize: 14.sp,
                   color: GlobalColors.dark2,
@@ -51,7 +52,7 @@ class PlanDescriptionSection extends StatelessWidget {
               GestureDetector(
                 onTap: context.pop,
                 child: Text(
-                  'Upgrade to access more features',
+                  context.text.upgradeToAccessFeatures,
                   style: CustomTextStyle.regular(
                     fontSize: 14.sp,
                     color: GlobalColors.orange,
@@ -79,7 +80,8 @@ class PlanDescriptionSection extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20.h),
-              for (final descriptions in plan.bulletDescriptions) ...[
+              for (final descriptions
+                  in plan.getBulletDescriptions(context)) ...[
                 Text(
                   '•  $descriptions',
                   style: CustomTextStyle.regular(

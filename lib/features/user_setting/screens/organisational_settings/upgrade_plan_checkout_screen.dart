@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../utils/context_extensions.dart';
 import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../models/subscription_model.dart';
@@ -38,9 +39,9 @@ class _UpgradePlanCheckoutScreenState
         await showDialog(
           context: context,
           builder: (ctx) => ReusableDialogContent(
-            title: 'Transaction Pending',
-            description: 'Your current transaction is awaiting review.',
-            btnText: 'View Subscriptions',
+            title: context.text.transactionPending,
+            description: context.text.transactionAwaitingReview,
+            btnText: context.text.viewSubscriptions,
             onPressed: () => Navigator.pop(ctx),
           ),
         );
@@ -68,7 +69,9 @@ class _UpgradePlanCheckoutScreenState
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          isCurrentPlan ? 'Current Plan' : 'Upgrade to ${widget.plan.text}',
+          isCurrentPlan
+              ? context.text.currentPlan
+              : widget.plan.getUpgradeToText(context),
           style: CustomTextStyle.semiBold(
             fontSize: 16,
             color: GlobalColors.iconColor,

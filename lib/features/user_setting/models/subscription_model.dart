@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+import '../../../utils/context_extensions.dart';
+
 class SubscriptionModel {
   final String id;
   final String userId;
@@ -87,22 +91,27 @@ class SubscriptionModel {
 }
 
 enum SubscriptionPlan {
-  free('Free'),
-  basic('Basic'),
-  advanced('Advanced');
-
-  const SubscriptionPlan(this.text);
-  final String text;
+  free,
+  basic,
+  advanced;
 
   factory SubscriptionPlan.fromString(String data) {
     return SubscriptionPlan.values.firstWhere(
-      (val) => val.text.toLowerCase() == data.toLowerCase(),
+      (val) => val.name.toLowerCase() == data.toLowerCase(),
       orElse: () => SubscriptionPlan.free,
     );
   }
 }
 
 extension SubExtension on SubscriptionPlan {
+  String getText(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => ctx.text.free,
+      SubscriptionPlan.basic => ctx.text.basic,
+      SubscriptionPlan.advanced => ctx.text.advanced,
+    };
+  }
+
   int get amount {
     return switch (this) {
       SubscriptionPlan.free => 0,
@@ -113,147 +122,150 @@ extension SubExtension on SubscriptionPlan {
 
   String get frequency => 'month';
 
-  String get about {
+  String getAbout(BuildContext ctx) {
     return switch (this) {
-      SubscriptionPlan.free =>
-        'The essential to provide\nyour best work for clients.',
-      SubscriptionPlan.basic =>
-        'Ideal for growing needs\nwho want more features.',
-      SubscriptionPlan.advanced =>
-        'Designed for power users\nand maxium functionality',
+      SubscriptionPlan.free => ctx.text.freeSubPlanAbout,
+      SubscriptionPlan.basic => ctx.text.basicSubPlanAbout,
+      SubscriptionPlan.advanced => ctx.text.advancedSubPlanAbout,
     };
   }
 
-  List<String> get bulletDescriptions {
+  List<String> getBulletDescriptions(BuildContext ctx) {
     return switch (this) {
       SubscriptionPlan.free => [
-          '10 projects',
-          'Up to 10 subscribers',
-          'Advanced analytics',
+          ctx.text.freeSubPlanBulletDesc1,
+          ctx.text.freeSubPlanBulletDesc2,
+          ctx.text.freeSubPlanBulletDesc3,
         ],
       SubscriptionPlan.basic => [
-          '100 projects',
-          'Up to 50 subscribers',
-          'Advanced analytics',
-          '24-hour support',
+          ctx.text.basicSubPlanBulletDesc1,
+          ctx.text.basicSubPlanBulletDesc2,
+          ctx.text.basicSubPlanBulletDesc3,
+          ctx.text.basicSubPlanBulletDesc4,
         ],
       SubscriptionPlan.advanced => [
-          '200 projects',
-          'Up to 50 subscribers',
-          'Advanced analytics',
-          '24-hour support',
-          'Marketing advisor',
+          ctx.text.advancedSubPlanBulletDesc1,
+          ctx.text.advancedSubPlanBulletDesc2,
+          ctx.text.advancedSubPlanBulletDesc3,
+          ctx.text.advancedSubPlanBulletDesc4,
+          ctx.text.advancedSubPlanBulletDesc5,
         ],
     };
   }
 
-  String get description {
+  String getDescription(BuildContext ctx) {
     return switch (this) {
-      SubscriptionPlan.free =>
-        'Your account is on a free 90-day trial of our Free plan, through October 27th. Upgrade anytime to stay on this plan when your trial ends.',
-      SubscriptionPlan.basic =>
-        'You\'re currently enjoying the benefits of our Basic plan. Your subscription will auto-renew on the 30th of September 2024',
-      SubscriptionPlan.advanced =>
-        'You\'re currently enjoying the benefits of our Advanced plan. Your subscription will auto-renew on the 30th of September 2024',
+      SubscriptionPlan.free => ctx.text.freeSubPlanDescription,
+      SubscriptionPlan.basic => ctx.text.basicSubPlanDescription,
+      SubscriptionPlan.advanced => ctx.text.advancedSubPlanDescription,
     };
   }
 
-  List<(String, List<(String, Object)>)> get details {
+  String getUpgradeToText(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => ctx.text.currentPlan,
+      SubscriptionPlan.basic => ctx.text.upgradeToBasic,
+      SubscriptionPlan.advanced => ctx.text.upgradeToAdvanced,
+    };
+  }
+
+  List<(String, List<(String, Object)>)> getDetails(BuildContext ctx) {
+    final text = ctx.text;
     return switch (this) {
       SubscriptionPlan.free => [
           (
-            'Project Management',
+            ctx.text.projectManagement,
             [
-              ('Projects', 'Up to 10'),
-              ('File Upload', '10gb'),
-              ('User Account', '1'),
-              ('Teams', '1'),
+              (text.projects, text.upTo10),
+              (text.fileUpload, text.tenGB),
+              (text.userAccount, text.one),
+              (text.teams, text.one),
             ],
           ),
           (
-            'Sharing and collaboration',
+            text.shareAndCollab,
             [
-              ('Integration', true),
-              ('Guest Access', true),
-              ('Page Analysis', true),
-              ('Task Management', true),
+              (text.integration, true),
+              (text.guestAccess, true),
+              (text.pageAnalysis, true),
+              (text.taskManagement, true),
             ],
           ),
           (
-            'Support',
+            text.support,
             [
-              ('Priority Support', true),
-              ('Customer Support', false),
+              (text.prioritySupport, true),
+              (text.customerSupport, false),
             ],
           ),
         ],
       SubscriptionPlan.basic => [
           (
-            'Project Management',
+            text.projectManagement,
             [
-              ('Projects', 'Up to 100'),
-              ('File Upload', '20gb'),
-              ('User Account', '10'),
-              ('Teams', 'Unlimited'),
+              (text.projects, text.upTo100),
+              (text.fileUpload, text.twentyGB),
+              (text.userAccount, text.ten),
+              (text.teams, text.unlimited),
             ],
           ),
           (
-            'Sharing and collaboration',
+            text.shareAndCollab,
             [
-              ('Integration', true),
-              ('Guest Access', true),
-              ('Page Analysis', true),
-              ('Task Management', true),
+              (text.integration, true),
+              (text.guestAccess, true),
+              (text.pageAnalysis, true),
+              (text.taskManagement, true),
             ],
           ),
           (
-            'Management and security',
+            text.managementAndSecurity,
             [
-              ('Team Security', true),
-              ('Data Backup', true),
-              ('HIPAA Compliance', true),
+              (text.teamSecurity, true),
+              (text.dataBackup, true),
+              (text.hIPAACompliance, true),
             ],
           ),
           (
-            'Support',
+            text.support,
             [
-              ('Priority Support', true),
-              ('Customer Support', true),
+              (text.prioritySupport, true),
+              (text.customerSupport, true),
             ],
           ),
         ],
       SubscriptionPlan.advanced => [
           (
-            'Project Management',
+            text.projectManagement,
             [
-              ('Projects', 'Up to 200'),
-              ('File Upload', '50gb'),
-              ('User Account', '50'),
-              ('Teams', 'Unlimited'),
+              (text.projects, text.upTo200),
+              (text.fileUpload, text.fiftyGB),
+              (text.userAccount, text.fifty),
+              (text.teams, text.unlimited),
             ],
           ),
           (
-            'Sharing and collaboration',
+            text.shareAndCollab,
             [
-              ('Integration', true),
-              ('Guest Access', true),
-              ('Page Analysis', true),
-              ('Task Management', true),
+              (text.integration, true),
+              (text.guestAccess, true),
+              (text.pageAnalysis, true),
+              (text.taskManagement, true),
             ],
           ),
           (
-            'Management and security',
+            text.managementAndSecurity,
             [
-              ('Team Security', true),
-              ('Data Backup', true),
-              ('HIPAA Compliance', true),
+              (text.teamSecurity, true),
+              (text.dataBackup, true),
+              (text.hIPAACompliance, true),
             ],
           ),
           (
-            'Support',
+            text.support,
             [
-              ('Priority Support', true),
-              ('Customer Support', true),
+              (text.prioritySupport, true),
+              (text.customerSupport, true),
             ],
           ),
         ],

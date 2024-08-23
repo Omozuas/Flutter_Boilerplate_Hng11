@@ -14,7 +14,7 @@ class PlanDetailsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        for (final details in plan.details) ...[
+        for (final details in plan.getDetails(context)) ...[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 26.sp),
             color: GlobalColors.containerBgColor,

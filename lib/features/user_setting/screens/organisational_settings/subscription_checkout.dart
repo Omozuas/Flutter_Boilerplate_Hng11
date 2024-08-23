@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/subscription_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/recent_transaction_card.dart';

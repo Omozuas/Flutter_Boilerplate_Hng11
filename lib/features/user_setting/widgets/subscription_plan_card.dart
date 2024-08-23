@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/custom_text_style.dart';
+import '../../../utils/context_extensions.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../models/subscription_model.dart';
@@ -42,7 +43,7 @@ class PlanCard extends ConsumerWidget {
           children: [
             const SizedBox(height: 30),
             Text(
-              plan.text,
+              plan.getText(context),
               style: CustomTextStyle.semiBold(
                 fontSize: 21.sp,
                 color: GlobalColors.dark2,
@@ -71,15 +72,16 @@ class PlanCard extends ConsumerWidget {
             ),
             const SizedBox(height: 21),
             Text(
-              plan.about,
+              plan.getAbout(context),
               style: CustomTextStyle.regular(
                 fontSize: 19.sp,
                 color: GlobalColors.darkOne,
               ),
             ),
             const SizedBox(height: 44),
-            if (plan.bulletDescriptions.isNotEmpty)
-              for (final descriptions in plan.bulletDescriptions) ...[
+            if (plan.getBulletDescriptions(context).isNotEmpty)
+              for (final descriptions
+                  in plan.getBulletDescriptions(context)) ...[
                 Text(
                   '•  $descriptions',
                   style: CustomTextStyle.regular(
@@ -98,7 +100,9 @@ class PlanCard extends ConsumerWidget {
                   onButtonTap?.call();
                 },
                 borderColor: btnColor,
-                text: isItCurrentPlan ? 'Current Plan' : 'Upgrade',
+                text: isItCurrentPlan
+                    ? context.text.currentPlan
+                    : context.text.upgrade,
                 height: 53.0,
                 containerColor: btnColor,
                 width: double.infinity,
