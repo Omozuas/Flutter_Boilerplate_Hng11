@@ -263,4 +263,14 @@ class StringManager {
   // TODO: Put every new strings under this todo
   static const String changePassword = 'Change Password';
   static const String createOrganisation = " Create Organisation";
+  static const String errorFetchingLink = "An error occurred while \nfetching the link";
+  static const String copyLink = "Link copied to clipboard";
+  static const String errorFetchingMembers = "An error occurred while \nfetching the organization members";
+  static const String searchByNameOrMail = "Search by name or email";
+  static const String memberProfile = "Member Profile";
+  static const String memberName = "Member's Name";
+  static const String memberBio = "Member's Bio";
+  static const String deleteMember = "Delete Member";
+  static const String removedMember = "Member Removed Successfully";
+
 }

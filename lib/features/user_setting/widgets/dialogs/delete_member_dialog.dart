@@ -22,7 +22,7 @@ class DeleteMemberDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Delete Member",
+              AppLocalizations.of(context)!.deleteMember,
               style: GoogleFonts.inter(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -64,7 +64,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     CustomToast.show(
                       context,
                       CustomToast(
-                        message: "Member removed successfully",
+                        message:AppLocalizations.of(context)!.removeMember,
                         backgroundColor: GlobalColors.toastBgSurface,
                         borderRadius: BorderRadius.circular(12),
                         border:
