@@ -171,14 +171,16 @@ class SettingsApi {
     }
   }
 
-  Future<Members> getOrganisationMembers({required String orgId}) async {
+  Future<List<Members>> getOrganisationMembers({required String orgId}) async {
     try {
-      final response = await dio.get('/members/organization/$orgId');
-      return Members.fromJson(response?.data['data']);
+      final response = await dio.get('organisations/$orgId/users');
+      List<dynamic> usersJson = response?.data['data']['users'];
+      return usersJson.map((json) => Members.fromJson(json)).toList();
     } catch (e) {
       rethrow;
     }
   }
+
 
   Future<String> initiateSubscription({
     required String email,
