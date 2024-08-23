@@ -10,7 +10,7 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_p
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_category.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_images.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_variation.dart';
+// import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_variation.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
