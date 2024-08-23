@@ -24,10 +24,10 @@ void main() async {
   );
 
   // Change status bar theme based on theme of app
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: Colors.transparent,
-  //   statusBarIconBrightness: Brightness.light,
-  // ));
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
 
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -69,7 +69,6 @@ class MyApp extends ConsumerWidget {
                 color: Colors.grey[800], // Content text style
               ),
             ),
-
             appBarTheme: AppBarTheme(
                 backgroundColor: Colors.transparent,
                 scrolledUnderElevation: 0,
