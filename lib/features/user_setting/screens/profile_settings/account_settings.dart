@@ -111,37 +111,37 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 10.0),
-                        const Text(
-                          'Profile Settings',
-                          style: TextStyle(
+                        Text(
+                          context.text.profileSettings,
+                          style:const  TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/personsettings.png',
-                          title: 'Account',
+                          title:context.text.account,
                           onTap: () {
                             context.push(AppRoute.editProfileScreen);
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/notify.png',
-                          title: 'Notification',
+                          title:context.text.notification,
                           onTap: () {
                             context.push(AppRoute.notificationScreen);
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/data.png',
-                          title: 'Data and Privacy ',
+                          title:context.text.dataAndPrivacy,
                           onTap: () {
                             context.push(AppRoute.updatePassword);
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/world.png',
-                          title: 'Language and Region',
+                          title: context.text.languageAndRegion,
                           onTap: () {
                             // Navigate to Data and Privacy Settings
                             context.push(AppRoute.languageAndRegionScreen);
@@ -150,8 +150,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         SizedBox(height: 8.h),
                         const Divider(),
                         SizedBox(height: 8.h),
-                        const Text(
-                          'Organizational Settings',
+                        Text(
+                         context.text.organizationSettings,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -159,14 +159,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/org.png',
-                          title: 'Manage Organization',
+                          title:context.text.manageOrganization,
                           onTap: () {
                             // Navigate to Manage Organization
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/people.png',
-                          title: 'Members',
+                          title:context.text.members,
                           onTap: () {
                             // Navigate to Members Settings
                             context.push(AppRoute.members);
@@ -174,7 +174,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/notify.png',
-                          title: 'Roles and Permissions',
+                          title: context.text.rolesAndPermissions,
                           onTap: () {
                             // Navigate to Roles and Permissions Settings
                             context.push(AppRoute.rolesScreen);
@@ -182,14 +182,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/money.png',
-                          title: 'Integrations',
+                          title:context.text.integrations,
                           onTap: () {
                             // Navigate to Integrations Settings
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/wallet.png',
-                          title: 'Payment Information',
+                          title:context.text.paymentInformation,
                           onTap: () {
                             // Navigate to Payment Information Settings
                             context.push(AppRoute.subscriptionsScreen);
@@ -215,7 +215,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Log Out',
+                               context.text.logOut,
                                 style: TextStyle(
                                     color: GlobalColors.red, fontSize: 14),
                               ),
