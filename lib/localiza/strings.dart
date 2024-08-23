@@ -126,13 +126,13 @@ class StringManager {
   static const String exportCsvWithInfo =
       'Export a CSV with information of all members of your team';
   static const String edit = 'Edit';
- static const String personalDetails = 'Personal Details';
-static const String username = 'Username';
-static const String enterUsername = 'Enter username';
-static const String yourJobTitle = 'Your job title';
-static const String enterJobTitle = 'Enter job title';
-static const String departmentOrTeam = 'Department or team';
-static const String enterDepartmentOrTeam = 'Enter a department or team';
+  static const String personalDetails = 'Personal Details';
+  static const String username = 'Username';
+  static const String enterUsername = 'Enter username';
+  static const String yourJobTitle = 'Your job title';
+  static const String enterJobTitle = 'Enter job title';
+  static const String departmentOrTeam = 'Department or team';
+  static const String enterDepartmentOrTeam = 'Enter a department or team';
 
 static const String enterEmailAddress = 'Enter email address';
 static const String bio = 'Bio';
@@ -212,8 +212,7 @@ static const String inviteToOrganizationButton = 'Invite to your Organization';
 static const String profileUpdatedMessage = 'Profile Updated!';
 static const String profileUpdatedSuccessMessage = 'Your profile has been successfully updated.';
 
-
-static const String viewAllProducts = 'View all products';
+  static const String viewAllProducts = 'View all products';
   static const String priceRange = 'Price Range';
   static const String electronicsAndGadgets = 'Electronics & Gadgets';
   static const String fashionAndApparel = 'Fashion & Apparel';
@@ -252,8 +251,6 @@ static const String viewAllProducts = 'View all products';
   static const String threeActiveMember = '3 active members';
   static const String profileName = 'Chad Bosewick';
   static const String profileEmail = 'ChadBosew@gmail.com';
-
-  /// TODO: Put every new strings under this todo
 
     static const String welcomeBackDashboard = "Welcome Back!";
     static const String noSales = "No sales yet this month";

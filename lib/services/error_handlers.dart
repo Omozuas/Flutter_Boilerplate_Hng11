@@ -51,7 +51,6 @@ class ErrorHandlers {
     log('Server related Error caught ::::::: ${response.toString()}');
 
     if (response.data != null) {
-      print('llhhhhhhh');
       try{
       showSnackBar(response.data['message'].toString());}
           catch (e){   showSnackBar('Seems something happened. ');}

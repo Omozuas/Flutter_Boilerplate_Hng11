@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/notification/model/notification_response.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,9 +16,8 @@ class NotificationHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-   var  notificationStateProvider = ref.watch(notificationProvider);
-   var  notificationProviderController = ref.watch(notificationProvider.notifier);
+    var notificationStateProvider = ref.watch(notificationProvider);
+    //  var  notificationProviderController = ref.watch(notificationProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -34,71 +32,67 @@ class NotificationHomeScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TabBar(
-                padding: 0.w.padA,
-                automaticIndicatorColorAdjustment : false,
-                isScrollable:  true,
-                dividerColor: Colors.transparent,
-                labelPadding: 8.w.padR,
-                tabAlignment: TabAlignment.start,
-                indicator: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 2.h, color: GlobalColors.lightOrange
-                    )
-                  )
-                ),
-                tabs: [
-                  Tab(
-                    icon: Padding(
-                      padding: 16.sp.padH,
-                      child: Row(
-                        children: [
-                          Text(
-                            "General",
-                            style: GoogleFonts.outfit(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w500,
-                                color: GlobalColors.black
+                  padding: 0.w.padA,
+                  automaticIndicatorColorAdjustment: false,
+                  isScrollable: true,
+                  dividerColor: Colors.transparent,
+                  labelPadding: 8.w.padR,
+                  tabAlignment: TabAlignment.start,
+                  indicator: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                              width: 2.h, color: GlobalColors.lightOrange))),
+                  tabs: [
+                    Tab(
+                      icon: Padding(
+                        padding: 16.sp.padH,
+                        child: Row(
+                          children: [
+                            Text(
+                              "General",
+                              style: GoogleFonts.outfit(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: GlobalColors.black),
                             ),
-                          ),
-                          // NotificationCountCard(count: 10,)
-                        ],
+                            // NotificationCountCard(count: 10,)
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                   Tab(
-                    icon: Padding(
-                      padding: 16.sp.padH,
-                      child: Row(
-                        children: [
-                          Text(
-                            "System",
-                            style: GoogleFonts.outfit(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w500,
-                                color: GlobalColors.black
+                    Tab(
+                      icon: Padding(
+                        padding: 16.sp.padH,
+                        child: Row(
+                          children: [
+                            Text(
+                              "System",
+                              style: GoogleFonts.outfit(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: GlobalColors.black),
                             ),
-                          ),
-                          const NotificationCountCard(count: 12,)
-                        ],
+                            const NotificationCountCard(
+                              count: 12,
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ]
-              ),
+                  ]),
               Expanded(
                   child: TabBarView(
-                    children: notificationStateProvider.notifications.isEmpty && notificationStateProvider.overViewLoading?
-                    [
-                      const LoadingNotificationListView(),
-                      const LoadingNotificationListView(),
-                    ]:
-                    [
-                      const NotificationListView(),
-                      const Scaffold(),
-                    ],
-                  )
-              )
+                children: notificationStateProvider.notifications.isEmpty &&
+                        notificationStateProvider.overViewLoading
+                    ? [
+                        const LoadingNotificationListView(),
+                        const LoadingNotificationListView(),
+                      ]
+                    : [
+                        const NotificationListView(),
+                        const Scaffold(),
+                      ],
+              ))
             ],
           ),
         ),
@@ -106,7 +100,3 @@ class NotificationHomeScreen extends ConsumerWidget {
     );
   }
 }
-
-
-
-
