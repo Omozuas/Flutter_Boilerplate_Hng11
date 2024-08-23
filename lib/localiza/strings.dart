@@ -140,6 +140,7 @@ static const String typeYourMessageHere = 'Type your message here';
 static const String connectSocials = 'Connect Socials';
 static const String add = 'Add';
 static const String addAProduct = 'Add a product';
+static const String addAMember = 'Add a member';
 static const String save = 'Save';
 static const String link = 'link';
 static const String cancel = 'Cancel';
@@ -253,5 +254,8 @@ static const String viewAllProducts = 'View all products';
   static const String profileEmail = 'ChadBosew@gmail.com';
 
   /// TODO: Put every new strings under this todo
+
+    static const String welcomeBackDashboard = "Welcome Back!";
+    static const String noSales = "No sales yet this month";
 
 }

@@ -3,21 +3,19 @@ import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.
 import 'package:flutter_boilerplate_hng11/features/cart/utils/string_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_list_tile.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
 import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
-import 'home_widget/model/dashboard_model.dart';
-import 'home_widget/widgets/chart_loader.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -52,7 +50,7 @@ class HomeScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome Back!",
+                  StringManager.welcomeBackDashboard,
                   style: CustomTextStyles.productSmallBodyTextBlack
                       .copyWith(color: const Color(0xFF71717A)),
                 ),
@@ -71,7 +69,8 @@ class HomeScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
-                onTap: ()=> dashBoardProviderNotifier.goToNotification(context),
+                onTap: () =>
+                    dashBoardProviderNotifier.goToNotification(context),
                 child: SvgPicture.asset(
                   AppSvgs.notification,
                   height: 24.h,
@@ -88,134 +87,138 @@ class HomeScreen extends ConsumerWidget {
         padding: 16.w.padH,
         children: [
           16.h.sbH,
+          Text(StringManager.dashboard,
+              style:
+                  CustomTextStyle.bold(fontSize: 24.sp, color: Colors.black)),
           Text(
-            'Dashboard',
-            style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-          ),
-          8.h.sbH,
-          Text(
-            'This Month\'s Summary',
+            StringManager.thisMonthSummary,
             style: TextStyle(
               fontSize: 16.sp,
               color: GlobalColors.gray600Color,
             ),
           ),
-          20.h.sbH,
-          Row(
-            children: [
-              RevenueCard(
-                image: AppSvgs.products,
-                details: '',
-                title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.revenue == null
-                    ? "0.00"
-                    : formatNumber(
-                    dashBoardStateProvider.dashBoardData.revenue ?? 0,
-                    decimalPlaces: 2),
-              ),
-              18.w.sbW,
-              RevenueCard(
-                image: AppSvgs.products,
-                details: '',
-                title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.subscriptions ==
-                    null
-                    ? "0"
-                    : formatNumber(
-                    dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
-                    decimalPlaces: 0),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                'Overview',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'See more',
-                  style: TextStyle(
-                    color: GlobalColors.gray600Color,
-                  ),
+          20.h.sbHW,
+          Container(
+            margin: 16.sp.padB,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    RevenueCard(
+                      title: StringManager.totalMembers,
+                      image: AppSvgs.people,
+                      value: dashBoardStateProvider.dashBoardData.revenue ==
+                              null
+                          ? "0"
+                          : formatNumber(
+                              dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                              decimalPlaces: 0),
+                      details: "+ 23 from last month",
+                    ),
+                    18.w.sbW,
+                    RevenueCard(
+                      title: StringManager.totalProducts,
+                      image: AppSvgs.totalProducts,
+                      value:
+                          dashBoardStateProvider.dashBoardData.subscriptions ==
+                                  null
+                              ? "0"
+                              : formatNumber(
+                                  dashBoardStateProvider
+                                          .dashBoardData.subscriptions ??
+                                      0,
+                                  decimalPlaces: 0),
+                      details: "+ 4 from last month",
+                    ),
+                  ],
                 ),
-              )
-            ],
-          ),
-
-          // Overview (Bar Chart)
-          dashBoardStateProvider.trendLoading
-              ? const ChartLoader()
-              : dashBoardStateProvider.mapData.isEmpty
-              ? const ChartEmpty()
-              : Container(
-            padding: EdgeInsets.all(24.w),
-            height: 302.h,
-            child: SfCartesianChart(
-              backgroundColor: Colors.white,
-              plotAreaBorderColor: Colors.transparent,
-              primaryXAxis: CategoryAxis(
-                majorGridLines: const MajorGridLines(width: 0),
-                axisLine: const AxisLine(width: 0),
-                // Add label style customization
-                labelStyle: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 12.sp,
-                ),
-              ),
-              primaryYAxis: const NumericAxis(
-                majorGridLines: MajorGridLines(width: 0),
-                minorGridLines: MinorGridLines(width: 0),
-                axisLine: AxisLine(width: 0),
-                // Add axis label
-              ),
-              series: <CartesianSeries>[
-                ColumnSeries<SalesData, String>(
-                  dataSource: dashBoardStateProvider.mapData,
-                  xValueMapper: (SalesData data, _) => data.month,
-                  yValueMapper: (SalesData data, _) => data.veryGood,
-                  color: const Color(0xFFE0E0E0),
-                  name: 'Very Good',
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  width:
-                  0.7, // Reduce the bar width to allow overlapping
-                ),
-                ColumnSeries<SalesData, String>(
-                  dataSource: dashBoardStateProvider.mapData,
-                  xValueMapper: (SalesData data, _) => data.month,
-                  yValueMapper: (SalesData data, _) => data.good,
-                  color: const Color(0xFFFFC107),
-                  name: 'Good',
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  width:
-                  0.7, // Reduce the bar width to allow overlapping
-                ),
-                ColumnSeries<SalesData, String>(
-                  dataSource: dashBoardStateProvider.mapData,
-                  xValueMapper: (SalesData data, _) => data.month,
-                  yValueMapper: (SalesData data, _) => data.poor,
-                  color: const Color(0xFFC70039),
-                  name: 'Poor',
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  width:
-                  0.7, // Reduce the bar width to allow overlapping
+                16.w.sbH,
+                Row(
+                  children: [
+                    RevenueCard(
+                      title: StringManager.subscriptions,
+                      image: AppSvgs.allSub,
+                      value: dashBoardStateProvider.dashBoardData.revenue ==
+                              null
+                          ? "0"
+                          : formatNumber(
+                              dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                              decimalPlaces: 0),
+                      details: "+ 2 from last month",
+                    ),
+                    18.w.sbW,
+                    RevenueCard(
+                      title: StringManager.totalProducts,
+                      image: AppSvgs.activeMembers,
+                      value:
+                          dashBoardStateProvider.dashBoardData.subscriptions ==
+                                  null
+                              ? "0"
+                              : formatNumber(
+                                  dashBoardStateProvider
+                                          .dashBoardData.subscriptions ??
+                                      0,
+                                  decimalPlaces: 0),
+                      details: "+ 23 from last month",
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
 
+          // Add a Product & Add a member
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                onTap: () {},
+                borderColor: GlobalColors.orange,
+                text: StringManager.addAProduct,
+                textStyle: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+                height: 46.h,
+                containerColor: GlobalColors.orange,
+                width: 151.w,
+                textColor: Colors.white,
+                icon: SvgPicture.asset(
+                  AppSvgs.products,
+                  height: 20.h,
+                  width: 20.w,
+                  // ignore: deprecated_member_use
+                  color: Colors.white,
+                ),
+              ),
+              16.w.sbW,
+              CustomButton(
+                onTap: () {},
+                borderColor: const Color(0xFFF6F6F6),
+                text: StringManager.addAMember,
+                textStyle: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+                height: 46.h,
+                containerColor: Colors.transparent,
+                width: 151.w,
+                textColor: GlobalColors.black,
+                icon: SvgPicture.asset(
+                  AppSvgs.addUser,
+                  height: 20.h,
+                  width: 20.w,
+                  // ignore: deprecated_member_use
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          16.w.sbH,
           // Recent Sales
           Container(
             padding: 7.sp.padA,
@@ -268,11 +271,14 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 )
                 else
-                Column(
-                  children: List.generate(
-                    dashBoardStateProvider.dashBoardData.monthSales?.length??0,
-                    (index){
-                      MonthSale monthlySale = dashBoardStateProvider.dashBoardData.monthSales?[index]?? MonthSale();
+                  Column(
+                    children: List.generate(
+                        dashBoardStateProvider
+                                .dashBoardData.monthSales?.length ??
+                            0, (index) {
+                      MonthSale monthlySale = dashBoardStateProvider
+                              .dashBoardData.monthSales?[index] ??
+                          MonthSale();
                       return CustomerListTile(
                         customerName:  'Unknown Customer',
                         email: 'No Email Provided',
