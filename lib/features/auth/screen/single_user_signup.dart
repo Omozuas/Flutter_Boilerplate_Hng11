@@ -45,7 +45,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                      localizations.signUp,  // Localized text
+                      AppLocalizations.of(context)!.signUp,
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,
@@ -55,6 +55,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     Text(
                       localizations.createAccount,  // Localized text
                       style: TextStyle(
+
                         fontSize: 16.0,
                         color: Colors.grey,
                       ),
@@ -112,7 +113,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                           localizations.orContinueWith,  
                           style: CustomTextStyle.regular(
                             color: GlobalColors.darkOne,
-                        ),
+                          ),
                         ),
                         const Spacer(),
                         SizedBox(width: 105.w, child: const Divider()),

@@ -184,7 +184,6 @@
   "filterByPriceRangeLabel": "Filtrar por rango de precios",
   "resetFiltersButton": "Restablecer filtros",
   "uploadNewButton": "Subir nuevo",
- "@@locale": "es",
   "acceptsImagesVideosOr3DModels": "Acepta imágenes, videos o modelos 3D",
   "deleteMemberButton": "Eliminar Miembro",
   "memberRemovedSuccessfullyMessage": "Miembro eliminado con éxito",
@@ -277,6 +276,18 @@
   "somethingWentWrongMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
   "updateProfileButton": "Actualizar Perfil",
   "editOrganization": "Editar organización",
+   "changePassword": "Cambiar Contraseña",
+  "createOrganisation": "Crear Organización",
+  "errorFetchingLink": "Ocurrió un error al obtener el enlace.",
+  "copyLink": "Enlace copiado al portapapeles",
+  "searchByNameOrMail": "Buscar por nombre o correo electrónico",
+  "errorFetchingMembers": "Ocurrió un error al \nobtener los miembros de la organización",
+  "memberProfile": "Perfil del miembro",
+  "memberName": "Nombre del miembro",
+  "memberBio": "Biografía del miembro",
+  "editProfile": "Editar perfil",
+  "deleteProfile": "Eliminar perfil",
+  "removeMember": "Miembro eliminado con éxito"
   "country1": "Alemania",
   "country2": "Nigeria",
   "country3": "Canadá",
@@ -319,5 +330,6 @@
     "verificationSuccess": "Verificación exitosa",
     "verificationSuccessDescription": "Su verificación fue exitosa, ahora puede proceder a restablecer su contraseña",
     "continueToLogin": "Continuar para iniciar sesión"
+
 }
 
