@@ -43,15 +43,16 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                AppLocalizations.of(context)!.signUp,
+                      AppLocalizations.of(context)!.signUp,
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 10.h),
-                     Text(AppLocalizations.of(context)!.createAccount,
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.createAccount,
+                      style: const TextStyle(
                         fontSize: 16.0,
                         color: Colors.grey,
                       ),
@@ -109,7 +110,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                           "or continue with",
                           style: CustomTextStyle.regular(
                             color: GlobalColors.darkOne,
-                        ),
+                          ),
                         ),
                         const Spacer(),
                         SizedBox(width: 105.w, child: const Divider()),

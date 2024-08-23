@@ -184,7 +184,6 @@
   "filterByPriceRangeLabel": "Filtrar por rango de precios",
   "resetFiltersButton": "Restablecer filtros",
   "uploadNewButton": "Subir nuevo",
- "@@locale": "es",
   "acceptsImagesVideosOr3DModels": "Acepta imágenes, videos o modelos 3D",
   "deleteMemberButton": "Eliminar Miembro",
   "memberRemovedSuccessfullyMessage": "Miembro eliminado con éxito",
@@ -275,6 +274,8 @@
   "currentPlan": "Plan Actual",
   "upgrade": "Actualizar",
   "somethingWentWrongMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
-  "updateProfileButton": "Actualizar Perfil"
+  "updateProfileButton": "Actualizar Perfil",
+  "changePassword": "Cambiar Contraseña",
+  "createOrganisation": "Crear Organización"
 }
 
