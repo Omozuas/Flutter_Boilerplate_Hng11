@@ -275,6 +275,20 @@
   "currentPlan": "Plan Actual",
   "upgrade": "Actualizar",
   "somethingWentWrongMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
-  "updateProfileButton": "Actualizar Perfil"
+  "updateProfileButton": "Actualizar Perfil",
+  "editOrganization": "Editar organización",
+  "country1": "Alemania",
+  "country2": "Nigeria",
+  "country3": "Canadá",
+  "country4": "Brasil",
+  "country5": "Japón",
+  "state1": "Lagos",
+  "state2": "Florida",
+  "state3": "Texas",
+  "state4": "California",
+  "lga1": "Ikeja",
+  "lga2": "Ciudad de Brisbane",
+  "lga3": "Ciudad de Sídney",
+  "lga4": "Ibadan Norte"
 }
 

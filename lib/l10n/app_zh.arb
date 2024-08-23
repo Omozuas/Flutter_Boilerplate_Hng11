@@ -274,6 +274,20 @@
    "currentPlan": "当前计划",
    "upgrade": "升级",
    "somethingWentWrongMessage": "出了点问题。请再试一次。",
-   "updateProfileButton": "更新个人资料"
+   "updateProfileButton": "更新个人资料",
+    "editOrganization": "编辑组织",
+  "country1": "德国",
+  "country2": "尼日利亚",
+  "country3": "加拿大",
+  "country4": "巴西",
+  "country5": "日本",
+  "state1": "拉各斯",
+  "state2": "佛罗里达",
+  "state3": "德克萨斯",
+  "state4": "加利福尼亚",
+  "lga1": "伊克贾",
+  "lga2": "布里斯班市",
+  "lga3": "悉尼市",
+  "lga4": "伊巴丹北"
 }
 
