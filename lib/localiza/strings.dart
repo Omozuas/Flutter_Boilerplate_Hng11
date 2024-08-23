@@ -139,6 +139,7 @@ class StringManager {
   static const String typeYourMessageHere = 'Type your message here';
   static const String connectSocials = 'Connect Socials';
   static const String add = 'Add';
+
   static const String addAProduct = 'Add a product';
   static const String addAMember = 'Add a member';
   static const String save = 'Save';
@@ -189,6 +190,7 @@ class StringManager {
   static const String dashboard = 'Dashboard';
   static const String thisMonthSummary = 'This Month\'s Summary';
   static const String totalRevenue = 'Total Revenue';
+
   static const String totalMembers = 'Total Members';
   static const String totalProducts = 'Total Products';
   static const String activeMembers = 'Active Members';
@@ -266,6 +268,25 @@ class StringManager {
   static const String profileName = 'Chad Bosewick';
   static const String profileEmail = 'ChadBosew@gmail.com';
 
+  /// TODO: Put every new strings under this todo
+
+  static const String editOrganization = 'Edit Organization';
+
+  static const String country1 = 'Germany';
+  static const String country2 = 'Nigeria';
+  static const String country3 = 'Canada';
+  static const String country4 = 'Brazil';
+  static const String country5 = 'Japan';
+
+  static const String state1 = 'Lagos';
+  static const String state2 = 'Florida';
+  static const String state3 = 'Texas';
+  static const String state4 = 'California';
+
+  static const String lga1 = 'Ikeja';
+  static const String lga2 = 'Brisbane City';
+  static const String lga3 = 'City of Sydney';
+  static const String lga4 = 'Ibadan North';
   static const String welcomeBackDashboard = "Welcome Back!";
   static const String noSales = "No sales yet this month";
   static const String changePassword = 'Change Password';
