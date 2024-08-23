@@ -12,17 +12,18 @@ class NotificationModel {
   final bool? slackNotifications;
   final bool? announcementsUpdateSlack;
 
-  const NotificationModel(
-      {required this.userId,
-      required this.id,
-      required this.mobilePushNotifications,
-      required this.activityWorkspaceEmail,
-      required this.emailNotifications,
-      required this.emailDigests,
-      required this.announcementsUpdateEmails,
-      required this.activityWorkspaceSlack,
-      required this.slackNotifications,
-      required this.announcementsUpdateSlack});
+  const NotificationModel({
+    required this.userId,
+    required this.id,
+    required this.mobilePushNotifications,
+    required this.emailNotifications,
+    this.activityWorkspaceEmail = false,
+    this.emailDigests = false,
+    this.announcementsUpdateEmails = false,
+    this.activityWorkspaceSlack = false,
+    this.slackNotifications = false,
+    this.announcementsUpdateSlack = false,
+  });
 
   NotificationModel copyWith(
       {String? userId,
@@ -54,19 +55,6 @@ class NotificationModel {
   }
 
   factory NotificationModel.fromMap(Map<String, dynamic> map) {
-    // if (map['data'] == false) {
-    //   return const NotificationModel(
-    //       id: '',
-    //       userId: '',
-    //       mobilePushNotifications: false,
-    //       activityWorkspaceEmail: false,
-    //       emailNotifications: false,
-    //       emailDigests: false,
-    //       announcementsUpdateEmails: false,
-    //       activityWorkspaceSlack: false,
-    //       slackNotifications: false,
-    //       announcementsUpdateSlack: false);
-    // }
     return NotificationModel(
         id: map['id'],
         userId: map['user_id'] as String,

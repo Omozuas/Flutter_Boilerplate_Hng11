@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
 // import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -18,7 +19,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../services/service_locator.dart';
 import '../widgets/loading_overlay.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static GetStorage box = locator<GetStorage>();
   const LoginScreen({super.key});
 
@@ -30,7 +31,37 @@ class LoginScreen extends ConsumerWidget {
   static final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+   late TapGestureRecognizer _tapGestureRecognizerForTermsAndConditions;
+   late TapGestureRecognizer _tapGestureRecognizerForPrivacy;
+
+  @override
+  void initState() {
+    super.initState();
+    _tapGestureRecognizerForTermsAndConditions = TapGestureRecognizer()
+      ..onTap = _handlePressForTandC;
+    _tapGestureRecognizerForPrivacy = TapGestureRecognizer()
+      ..onTap = _handlePressForPrivacy;
+  }
+
+  @override
+  void dispose() {
+    _tapGestureRecognizerForTermsAndConditions.dispose();
+    _tapGestureRecognizerForPrivacy.dispose();
+    super.dispose();
+  }
+
+  void _handlePressForTandC() {
+    Navigator.push(context, MaterialPageRoute(builder:(context) => const WebviewPage(url: 'https://staging.nextjs.boilerplate.hng.tech/terms-and-conditions', appBarTitle: 'Terms and Conditions',),));
+  }
+  void _handlePressForPrivacy() {
+    Navigator.push(context, MaterialPageRoute(builder:(context) => const WebviewPage(url: 'https://staging.nextjs.boilerplate.hng.tech/privacy-policy', appBarTitle: 'Privacy Policy',),));
+  }
+@override
+  Widget build(BuildContext context) {
     // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
     //  final loadingGoogle = ref.watch(loadingGoogleButton);
@@ -41,7 +72,7 @@ class LoginScreen extends ConsumerWidget {
           child: Scaffold(
         body: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: LoginScreen._formKey,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
@@ -137,7 +168,7 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   CustomTextField(
                     label: AppLocalizations.of(context)!.email,
-                    controller: _emailController,
+                    controller: LoginScreen._emailController,
                     keyboardType: TextInputType.emailAddress,
                     hintText: AppLocalizations.of(context)!.enterEmail,
                     validator: (v) => Validators.emailValidator(v),
@@ -147,7 +178,7 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   PasswordTextField(
                     label: AppLocalizations.of(context)!.password,
-                    controller: _passwordController,
+                    controller: LoginScreen._passwordController,
                     hintText: AppLocalizations.of(context)!.password,
                   ),
                   SizedBox(
@@ -203,8 +234,8 @@ class LoginScreen extends ConsumerWidget {
                   CustomButton(
                       loading: authStateProvider.normalButtonLoading,
                       onTap: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          box.write('rememberMe', authStateProvider.checkBoxState);
+                        if (LoginScreen._formKey.currentState?.validate() ?? false) {
+                          LoginScreen.box.write('rememberMe', authStateProvider.checkBoxState);
                           _handleLoginAccount(ref, context);
                         }
                       },
@@ -277,6 +308,7 @@ class LoginScreen extends ConsumerWidget {
 
                         children: [
                           TextSpan(
+                            recognizer: _tapGestureRecognizerForTermsAndConditions,
                             text: AppLocalizations.of(context)!.termsAndConditionText2,
                             style: CustomTextStyle.regular(
                               fontSize: 14.sp,
@@ -285,6 +317,7 @@ class LoginScreen extends ConsumerWidget {
                           ),
                            TextSpan(text: AppLocalizations.of(context)!.termsAndConditionText3),
                           TextSpan(
+                            recognizer: _tapGestureRecognizerForPrivacy,
                             text: AppLocalizations.of(context)!.termsAndConditionText4,
                             style: CustomTextStyle.regular(
                               fontSize: 14.sp,
@@ -307,8 +340,8 @@ class LoginScreen extends ConsumerWidget {
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
 
     ref.read(authProvider.notifier).login({
-      'email': _emailController.text,
-      'password': _passwordController.text,
+      'email': LoginScreen._emailController.text,
+      'password': LoginScreen._passwordController.text,
     }, context);
   }
 }

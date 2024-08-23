@@ -6,7 +6,6 @@ import '../utils/widgets/custom_snackbar.dart';
 
 class ErrorHandlers {
   static void allErrorHandler(error) {
-
     if (error is TypeError) {
       log('Check your code for type error : ${error.stackTrace}');
       return;
@@ -48,18 +47,15 @@ class ErrorHandlers {
   }
 
   static void _serverErrorHandler(Response response) {
-    log('Server related Error caught ::::::: ${response.toString()}');
+    log('hhhttt${response.toString()}');
 
     if (response.data != null) {
-      print('llhhhhhhh');
-      try{
-      showSnackBar(response.data['message'].toString());}
-          catch (e){   showSnackBar('Seems something happened. ');}
-
+      showSnackBar(response.data['message'].toString());
     } else {
       showSnackBar('Seems something happened');
     }
 
+    log('hhhttt${response.toString()}');
     switch (response.statusCode) {
       case 400:
       case 401:
