@@ -7,6 +7,7 @@ import 'package:flutter_boilerplate_hng11/utils/validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
