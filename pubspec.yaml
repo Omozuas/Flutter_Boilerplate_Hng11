@@ -1,12 +1,12 @@
 name: flutter_boilerplate_hng11
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.1 <4.0.0'
+  sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
   flutter:
@@ -33,7 +33,7 @@ dependencies:
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   freezed_annotation: ^2.4.4
-  #syncfusion_flutter_charts:
+  syncfusion_flutter_charts:
   riverpod_annotation: ^2.3.5
   flutter_shimmer: ^2.1.2
   json_annotation: any
@@ -51,7 +51,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -68,7 +67,6 @@ dev_dependencies:
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
 
-
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
@@ -79,7 +77,7 @@ flutter:
 
   uses-material-design: true
   fonts:
-    - family:  NavBar
+    - family: NavBar
       fonts:
         - asset: assets/icons/bottom_bar/NavBar.ttf
     - family: Inter
@@ -103,7 +101,6 @@ flutter:
         - asset: assets/fonts/Inter/static/Inter_18pt-Black.ttf
           weight: 900
 
-
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
@@ -114,9 +111,6 @@ flutter:
     - assets/images/svg/account_settings/
     - assets/images/svg/
     - assets/icons/
-
-    
-
 
     - .env
 
@@ -140,7 +134,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
 
 flutter_gen:
   integrations:
