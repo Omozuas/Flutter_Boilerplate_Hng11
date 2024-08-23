@@ -75,7 +75,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   SizedBox(height: 8.sp),
                   Text(
                     localizations.createUniquePassword,
-                    style: TextStyle(
+                    style:const TextStyle(
                         fontWeight: FontWeight.w400, fontSize: 13),
                   ),
                   SizedBox(height: 28.sp),

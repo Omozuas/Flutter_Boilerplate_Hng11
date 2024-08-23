@@ -75,7 +75,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
               Center(
                 child: RichText(
                   text: TextSpan(
-                    text: localizations.rememberPassword + ' ',  
+                    text: localizations.rememberPassword ,  
                     style: TextStyle(color: GlobalColors.darkOne),
                     children: [
                       TextSpan(

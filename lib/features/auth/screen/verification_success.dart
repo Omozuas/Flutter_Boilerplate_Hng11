@@ -30,7 +30,7 @@ class VerificationSuccessScreen extends StatelessWidget {
                 SizedBox(height: 16.sp),
                 Text(
                   localizations.verificationSuccessDescription, 
-                  style: TextStyle(fontSize: 13),
+                  style:const TextStyle(fontSize: 13),
                 ),
                 SizedBox(height: 24.sp),
                 CustomButton(
