@@ -258,7 +258,7 @@ class ProfileProviderStates {
   final AsyncValue<SubscriptionModel?> fetchSubcription;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
   final AsyncValue<String?> inviteLink;
-  final AsyncValue<Members?> organisationMembers;
+  final AsyncValue<List<Members>?> organisationMembers;
   final AsyncValue<String?> initiateSubscription;
 
   const ProfileProviderStates({
@@ -288,7 +288,7 @@ class ProfileProviderStates {
     AsyncValue<SubscriptionModel?>? fetchSubcriptionbyUserId,
     AsyncValue<String?>? inviteLink,
     AsyncValue<UpdatePasswordModel?>? updatePassword,
-    AsyncValue<Members?>? organisationMembers,
+    AsyncValue<List<Members>?>? organisationMembers,
     AsyncValue<String?>? initiateSubscription,
   }) {
     return ProfileProviderStates(

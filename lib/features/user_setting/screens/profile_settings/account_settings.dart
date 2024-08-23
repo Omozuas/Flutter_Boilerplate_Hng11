@@ -113,28 +113,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         const SizedBox(height: 10.0),
                         Text(
                           context.text.profileSettings,
-                          style:const  TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/personsettings.png',
-                          title:context.text.account,
+                          title: context.text.account,
                           onTap: () {
                             context.push(AppRoute.editProfileScreen);
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/notify.png',
-                          title:context.text.notification,
+                          title: context.text.notification,
                           onTap: () {
                             context.push(AppRoute.notificationScreen);
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/data.png',
-                          title:context.text.dataAndPrivacy,
+                          title: context.text.dataAndPrivacy,
                           onTap: () {
                             context.push(AppRoute.updatePassword);
                           },
@@ -151,7 +151,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         const Divider(),
                         SizedBox(height: 8.h),
                         Text(
-                         context.text.organizationSettings,
+                          context.text.organizationSettings,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -159,14 +159,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/org.png',
-                          title:context.text.manageOrganization,
+                          title: context.text.manageOrganization,
                           onTap: () {
                             // Navigate to Manage Organization
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/people.png',
-                          title:context.text.members,
+                          title: context.text.members,
                           onTap: () {
                             // Navigate to Members Settings
                             context.push(AppRoute.members);
@@ -182,14 +182,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/money.png',
-                          title:context.text.integrations,
+                          title: context.text.integrations,
                           onTap: () {
                             // Navigate to Integrations Settings
                           },
                         ),
                         SettingsTile(
                           leadingIcon: 'assets/images/wallet.png',
-                          title:context.text.paymentInformation,
+                          title: context.text.paymentInformation,
                           onTap: () {
                             // Navigate to Payment Information Settings
                             context.push(AppRoute.subscriptionsScreen);
@@ -215,7 +215,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                               context.text.logOut,
+                                context.text.logOut,
                                 style: TextStyle(
                                     color: GlobalColors.red, fontSize: 14),
                               ),
