@@ -1,49 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
+import 'package:flutter_boilerplate_hng11/l10n/app_localizations.dart'; // Import for localization
 
-import '../../../services/service_locator.dart';
-
-class SplashScreen extends ConsumerStatefulWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  ConsumerState<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends ConsumerState<SplashScreen> {
-  static GetStorage box = locator<GetStorage>();
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((t) async {
-      if (box.read('accessToken') == null) {
-        context.go(AppRoute.singleUserSignUp);
-        return;
-      }
-
-      if (box.read('rememberMe') == null || !box.read('rememberMe')) {
-        context.go(AppRoute.login);
-        return;
-      }
-
-      ref.read(authProvider.notifier).loadStoredUser().then(
-        (successful) {
-          if (successful) {
-            context.go(AppRoute.home);
-          } else {
-            context.go(AppRoute.login);
-          }
-        },
-      );
+    Future.delayed(const Duration(seconds: 2), () {
+      context.go(AppRoute.companySignUp);
     });
-
     super.initState();
   }
 
@@ -64,21 +38,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             height: 20.h,
           ),
           Text(
-            AppLocalizations.of(context)!.appName, 
+            AppLocalizations.of(context)!.appTitle, // Localized text
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24.sp,
               color: GlobalColors.darkOne,
-            ),
-          ),
-          SizedBox(
-            height: 50.h,
-          ),
-          SizedBox(
-            height: 20.h,
-            width: 20.h,
-            child: CircularProgressIndicator.adaptive(
-              strokeWidth: 2.w,
             ),
           )
         ],
@@ -86,3 +50,4 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     );
   }
 }
+
