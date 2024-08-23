@@ -111,16 +111,19 @@ class HomeScreen extends ConsumerWidget {
           Row(
             children: [
               RevenueCard(
+                image: AppSvgs.products,
+                details: '',
                 title: 'Total Revenue',
                 value: dashBoardStateProvider.dashBoardData.revenue == null
                     ? "0.00"
                     : formatNumber(
                     dashBoardStateProvider.dashBoardData.revenue ?? 0,
                     decimalPlaces: 2),
-                percentageChange: '+15% decrease',
               ),
               18.w.sbW,
               RevenueCard(
+                image: AppSvgs.products,
+                details: '',
                 title: 'Total Revenue',
                 value: dashBoardStateProvider.dashBoardData.subscriptions ==
                     null
@@ -128,8 +131,6 @@ class HomeScreen extends ConsumerWidget {
                     : formatNumber(
                     dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
                     decimalPlaces: 0),
-                percentageChange: '+65% decrease',
-                isRevenue: false,
               ),
             ],
           ),
