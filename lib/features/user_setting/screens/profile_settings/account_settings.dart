@@ -14,7 +14,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
@@ -228,7 +227,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context: context,
                             builder: (ctx) => LogOutDialog(
                               onTap: () {
-                                UserService userService = locator<UserService>();
+                                UserService userService =
+                                    locator<UserService>();
                                 userService.logout();
                                 stotage.remove('accessToken');
                                 Navigator.pop(ctx);

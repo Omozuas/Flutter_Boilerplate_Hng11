@@ -110,7 +110,7 @@ class _UserMainViewState extends State<UserMainView> {
 }
 
 class _NavigationBarItem extends StatelessWidget {
-  _NavigationBarItem({
+  const _NavigationBarItem({
     required this.label,
     required this.icon,
     required this.index,
@@ -122,7 +122,7 @@ class _NavigationBarItem extends StatelessWidget {
   final IconData icon;
   final int index;
   final bool isSelected;
-  ValueChanged<int> onTap;
+  final ValueChanged<int> onTap;
 
   @override
   Widget build(BuildContext context) {

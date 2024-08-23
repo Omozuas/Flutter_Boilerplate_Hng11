@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import '../../../services/dio_provider.dart';
 import '../../../services/service_locator.dart';
 import 'model/notification_response.dart';

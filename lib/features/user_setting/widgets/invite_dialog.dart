@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart'; // Ensure this is imported
+// Ensure this is imported
 
 class InviteDialog extends StatefulWidget {
   final String? title;

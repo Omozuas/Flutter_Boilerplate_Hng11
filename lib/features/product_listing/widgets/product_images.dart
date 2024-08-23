@@ -2,7 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/preview_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/custom_text_style.dart';
@@ -67,19 +66,16 @@ class _ProductImageState extends State<ProductImage> {
           borderRadius: BorderRadius.circular(6),
         ),
         alignment: Alignment.center,
-        child: result!.files.isEmpty
-            ? SizedBox(
-                height: 58.h,
-                width: 250.w,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: pickFile,
-                      // () {
-                      //   pickFile();
-                      // },
-                      child: Container(
+        child: result?.files.isEmpty ?? true
+            ? InkWell(
+                onTap: pickFile,
+                child: SizedBox(
+                  height: 58.h,
+                  width: 250.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
                         height: 32.h,
                         width: 114.w,
                         decoration: BoxDecoration(
@@ -108,28 +104,28 @@ class _ProductImageState extends State<ProductImage> {
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 17.h,
-                      width: 250.w,
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          'Upload product Image',
-                          style: CustomTextStyle.medium(
-                            color: GlobalColors.grays,
-                            fontSize: 14.sp,
+                      SizedBox(
+                        height: 17.h,
+                        width: 250.w,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'Upload product Image',
+                            style: CustomTextStyle.medium(
+                              color: GlobalColors.grays,
+                              fontSize: 14.sp,
+                            ),
+                            // GoogleFonts.inter(
+                            //   color: const Color.fromRGBO(82, 82, 82, 1),
+                            //   fontSize: 14.sp,
+                            //   fontWeight: FontWeight.w400,
+                            //   height: 16.94 / 14,
+                            // ),
                           ),
-                          // GoogleFonts.inter(
-                          //   color: const Color.fromRGBO(82, 82, 82, 1),
-                          //   fontSize: 14.sp,
-                          //   fontWeight: FontWeight.w400,
-                          //   height: 16.94 / 14,
-                          // ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               )
             : Padding(
@@ -138,10 +134,16 @@ class _ProductImageState extends State<ProductImage> {
                   onTap: () {
                     addFile();
                   },
-                  child: PreviewItem(
-                    previewFile: result!.files.first,
-                    removeItem: () => removeFile(result!.files.first),
-                  ),
+                  child: result == null
+                      ? const SizedBox()
+                      : PreviewItem(
+                          previewFile: result!.files.first,
+                          removeItem: () {
+                            if (result != null) {
+                              removeFile(result!.files.first);
+                            }
+                          },
+                        ),
                 ),
               ),
       ),
