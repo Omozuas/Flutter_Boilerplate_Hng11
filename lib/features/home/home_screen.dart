@@ -3,13 +3,21 @@ import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.
 import 'package:flutter_boilerplate_hng11/features/cart/utils/string_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_list_tile.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
+import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../utils/app_images.dart';
+import '../../utils/custom_text_style.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 //import 'home_widget/widgets/chart_loader.dart';
@@ -20,13 +28,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
+    final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
-
-    final List<Map<String, dynamic>> customers = [
-      {'name': 'Customer 1', 'email': 'customer1@example.com', 'amount': '100'},
-      {'name': 'Customer 2', 'email': 'customer2@example.com', 'amount': '200'},
-      // Add more customers here
-    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +55,7 @@ class HomeScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome Back!",
+                  StringManager.welcomeBackDashboard,
                   style: CustomTextStyles.productSmallBodyTextBlack
                       .copyWith(color: const Color(0xFF71717A)),
                 ),
@@ -66,28 +69,22 @@ class HomeScreen extends ConsumerWidget {
           ],
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0.w),
-            child: Stack(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () =>
+                    dashBoardProviderNotifier.goToNotification(context),
+                child: SvgPicture.asset(
+                  AppSvgs.notification,
+                  height: 24.h,
+                  width: 24.w,
                 ),
-                const Positioned(
-                  top: 0.0,
-                  right: 0.0,
-                  child: Badge(
-                    label:
-                        Text('5'), // Replace with the actual notification count
-                    textColor: Colors.white,
-                    backgroundColor: Colors.red,
-                    textStyle: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+              16.w.sbW
+            ],
+          )
         ],
       ),
       backgroundColor: GlobalColors.white,
@@ -95,173 +92,203 @@ class HomeScreen extends ConsumerWidget {
         padding: 16.w.padH,
         children: [
           16.h.sbH,
+          Text(StringManager.dashboard,
+              style:
+                  CustomTextStyle.bold(fontSize: 24.sp, color: Colors.black)),
           Text(
-            'Dashboard',
-            style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: GlobalScreenSize.getScreenHeight(context) * 0.008,
-          ),
-          Text(
-            'This Month\'s Summary',
+            StringManager.thisMonthSummary,
             style: TextStyle(
               fontSize: 16.sp,
               color: GlobalColors.gray600Color,
             ),
           ),
-          SizedBox(
-            height: GlobalScreenSize.getScreenHeight(context) * 0.020,
-          ),
-          Row(
-            children: [
-              RevenueCard(
-                title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.revenue == null
-                    ? "0.00"
-                    : formatNumber(
-                        dashBoardStateProvider.dashBoardData.revenue ?? 0,
-                        decimalPlaces: 2),
-                percentageChange: '+15% decrease',
-              ),
-              18.w.sbW,
-              RevenueCard(
-                title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.subscriptions ==
-                        null
-                    ? "0"
-                    : formatNumber(
-                        dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
-                        decimalPlaces: 0),
-                percentageChange: '+65% decrease',
-                isRevenue: false,
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                'Overview',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'See more',
-                  style: TextStyle(
-                    color: GlobalColors.gray600Color,
-                  ),
+          20.h.sbHW,
+          Container(
+            margin: 16.sp.padB,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    RevenueCard(
+                      title: StringManager.totalMembers,
+                      image: AppSvgs.people,
+                      value: dashBoardStateProvider.dashBoardData.revenue ==
+                              null
+                          ? "0"
+                          : formatNumber(
+                              dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                              decimalPlaces: 0),
+                      details: "+ 23 from last month",
+                    ),
+                    18.w.sbW,
+                    RevenueCard(
+                      title: StringManager.totalProducts,
+                      image: AppSvgs.totalProducts,
+                      value:
+                          dashBoardStateProvider.dashBoardData.subscriptions ==
+                                  null
+                              ? "0"
+                              : formatNumber(
+                                  dashBoardStateProvider
+                                          .dashBoardData.subscriptions ??
+                                      0,
+                                  decimalPlaces: 0),
+                      details: "+ 4 from last month",
+                    ),
+                  ],
                 ),
-              )
-            ],
+                16.w.sbH,
+                Row(
+                  children: [
+                    RevenueCard(
+                      title: StringManager.subscriptions,
+                      image: AppSvgs.allSub,
+                      value: dashBoardStateProvider.dashBoardData.revenue ==
+                              null
+                          ? "0"
+                          : formatNumber(
+                              dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                              decimalPlaces: 0),
+                      details: "+ 2 from last month",
+                    ),
+                    18.w.sbW,
+                    RevenueCard(
+                      title: StringManager.totalProducts,
+                      image: AppSvgs.activeMembers,
+                      value:
+                          dashBoardStateProvider.dashBoardData.subscriptions ==
+                                  null
+                              ? "0"
+                              : formatNumber(
+                                  dashBoardStateProvider
+                                          .dashBoardData.subscriptions ??
+                                      0,
+                                  decimalPlaces: 0),
+                      details: "+ 23 from last month",
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
 
-          // Overview (Bar Chart)
-          // dashBoardStateProvider.trendLoading
-          //     ? const ChartLoader()
-          //     : dashBoardStateProvider.mapData.isEmpty
-          //         ? const ChartEmpty()
-          //         : Container(
-          //             padding: EdgeInsets.all(24.w),
-          //             height: 302.h,
-          //             child: SfCartesianChart(
-          //               backgroundColor: Colors.white,
-          //               plotAreaBorderColor: Colors.transparent,
-          //               primaryXAxis: CategoryAxis(
-          //                 majorGridLines: const MajorGridLines(width: 0),
-          //                 axisLine: const AxisLine(width: 0),
-          //                 // Add label style customization
-          //                 labelStyle: TextStyle(
-          //                   color: Colors.grey[600],
-          //                   fontSize: 12.sp,
-          //                 ),
-          //               ),
-          //               primaryYAxis: const NumericAxis(
-          //                 majorGridLines: MajorGridLines(width: 0),
-          //                 minorGridLines: MinorGridLines(width: 0),
-          //                 axisLine: AxisLine(width: 0),
-          //                 // Add axis label
-          //               ),
-          //               series: <CartesianSeries>[
-          //                 ColumnSeries<SalesData, String>(
-          //                   dataSource: dashBoardStateProvider.mapData,
-          //                   xValueMapper: (SalesData data, _) => data.month,
-          //                   yValueMapper: (SalesData data, _) => data.veryGood,
-          //                   color: const Color(0xFFE0E0E0),
-          //                   name: 'Very Good',
-          //                   borderRadius: const BorderRadius.only(
-          //                     topLeft: Radius.circular(10),
-          //                     topRight: Radius.circular(10),
-          //                   ),
-          //                   width:
-          //                       0.7, // Reduce the bar width to allow overlapping
-          //                 ),
-          //                 ColumnSeries<SalesData, String>(
-          //                   dataSource: dashBoardStateProvider.mapData,
-          //                   xValueMapper: (SalesData data, _) => data.month,
-          //                   yValueMapper: (SalesData data, _) => data.good,
-          //                   color: const Color(0xFFFFC107),
-          //                   name: 'Good',
-          //                   borderRadius: const BorderRadius.only(
-          //                     topLeft: Radius.circular(10),
-          //                     topRight: Radius.circular(10),
-          //                   ),
-          //                   width:
-          //                       0.7, // Reduce the bar width to allow overlapping
-          //                 ),
-          //                 ColumnSeries<SalesData, String>(
-          //                   dataSource: dashBoardStateProvider.mapData,
-          //                   xValueMapper: (SalesData data, _) => data.month,
-          //                   yValueMapper: (SalesData data, _) => data.poor,
-          //                   color: const Color(0xFFC70039),
-          //                   name: 'Poor',
-          //                   borderRadius: const BorderRadius.only(
-          //                     topLeft: Radius.circular(10),
-          //                     topRight: Radius.circular(10),
-          //                   ),
-          //                   width:
-          //                       0.7, // Reduce the bar width to allow overlapping
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-
+          // Add a Product & Add a member
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                onTap: () {
+                  context.go(AppRoute.products);
+                  context.push(AppRoute.addProduct);
+                },
+                borderColor: GlobalColors.orange,
+                text: StringManager.addAProduct,
+                textStyle: CustomTextStyle.medium(
+                    color: Colors.white, fontSize: 14.sp),
+                height: 46.h,
+                containerColor: GlobalColors.orange,
+                width: 151.w,
+                textColor: Colors.white,
+                icon: SvgPicture.asset(
+                  AppSvgs.products,
+                  height: 20.h,
+                  width: 20.w,
+                  // ignore: deprecated_member_use
+                  color: Colors.white,
+                ),
+              ),
+              16.w.sbW,
+              CustomButton(
+                onTap: () {},
+                borderColor: const Color(0xFFF6F6F6),
+                text: StringManager.addAMember,
+                textStyle: CustomTextStyle.medium(
+                    color: Colors.black, fontSize: 14.sp),
+                height: 46.h,
+                containerColor: Colors.transparent,
+                width: 151.w,
+                textColor: GlobalColors.black,
+                icon: SvgPicture.asset(
+                  AppSvgs.addUser,
+                  height: 20.h,
+                  width: 20.w,
+                  // ignore: deprecated_member_use
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          16.w.sbH,
           // Recent Sales
-          SizedBox(
+          Container(
+            padding: 7.sp.padA,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.r),
+                border:
+                    Border.all(width: 0.50, color: GlobalColors.borderColor)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Recent Sales',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      StringManager.recentSalesTitle,
+                      style: CustomTextStyle.bold(
+                          fontSize: 16.sp, color: GlobalColors.black),
                     ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'See more',
-                        style: TextStyle(
-                          color: GlobalColors.gray600Color,
+                    InkWell(
+                      onTap: () {},
+                      child: Padding(
+                        padding: 8.h.padV,
+                        child: Text(
+                          StringManager.seeMore,
+                          style: CustomTextStyle.regular(
+                            fontSize: 14.sp,
+                          ),
                         ),
                       ),
                     )
                   ],
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: customers.length,
-                  itemBuilder: (context, index) {
-                    final customer = customers[index];
-                    return CustomerListTile(
-                      customerName: customer['name'] ?? 'Unknown Customer',
-                      email: customer['email'] ?? 'No Email Provided',
-                      amount: customer['amount'] ?? '0.00',
-                    );
-                  },
+                Divider(
+                  height: 8.h,
+                  color: GlobalColors.dividerColor,
                 ),
+                if ((dashBoardStateProvider.dashBoardData.monthSales?.length ??
+                        0) ==
+                    0)
+                  SizedBox(
+                    height: 100.h,
+                    width: width(context),
+                    child: Center(
+                      child: Text(
+                        StringManager.noSales,
+                        style: CustomTextStyle.regular(
+                                color: const Color(0xFF98A2B3), fontSize: 16.sp)
+                            .copyWith(
+                          fontFamily: 'Inter',
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  Column(
+                    children: List.generate(
+                        dashBoardStateProvider
+                                .dashBoardData.monthSales?.length ??
+                            0, (index) {
+                      MonthSale monthlySale = dashBoardStateProvider
+                              .dashBoardData.monthSales?[index] ??
+                          MonthSale();
+                      return CustomerListTile(
+                        customerName: 'Unknown Customer',
+                        email: 'No Email Provided',
+                        amount: monthlySale.amount ?? 0,
+                      );
+                    }),
+                  ),
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 class ResponseModel {
   final int statusCode;
-  final String status;
+  final Object status;
   final String? message;
   final dynamic data;
 

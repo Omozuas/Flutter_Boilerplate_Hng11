@@ -170,6 +170,13 @@ class $AssetsImagesPngGen {
   /// Directory path: assets/images/png/product_listing
   $AssetsImagesPngProductListingGen get productListing =>
       const $AssetsImagesPngProductListingGen();
+
+  /// File path: assets/images/png/top_boiler.png
+  AssetGenImage get topBoiler =>
+      const AssetGenImage('assets/images/png/top_boiler.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [topBoiler];
 }
 
 class $AssetsImagesSvgGen {
@@ -179,9 +186,16 @@ class $AssetsImagesSvgGen {
   $AssetsImagesSvgAccountSettingsGen get accountSettings =>
       const $AssetsImagesSvgAccountSettingsGen();
 
+  /// File path: assets/images/svg/notification_icon.svg
+  SvgGenImage get notificationIcon =>
+      const SvgGenImage('assets/images/svg/notification_icon.svg');
+
   /// Directory path: assets/images/svg/product_listing
   $AssetsImagesSvgProductListingGen get productListing =>
       const $AssetsImagesSvgProductListingGen();
+
+  /// List of all assets
+  List<SvgGenImage> get values => [notificationIcon];
 }
 
 class $AssetsImagesPngProductListingGen {

@@ -5,14 +5,14 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class MemberProfileScreen extends StatelessWidget {
   final Members memberDetail;
   final String? memberBio;
 
   const MemberProfileScreen({
     super.key,
-     this.memberBio,required this.memberDetail,
+    this.memberBio,
+    required this.memberDetail,
   });
 
   @override
@@ -28,9 +28,9 @@ class MemberProfileScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
-          'Member Profile',
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          AppLocalizations.of(context)!.memberProfile,
+          style: const TextStyle(color: Colors.black),
         ),
         centerTitle: true,
       ),
@@ -44,14 +44,16 @@ class MemberProfileScreen extends StatelessWidget {
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
               ),
             ),
-            const SizedBox(height: 24,),
+            const SizedBox(
+              height: 24,
+            ),
             // Profile Image with Edit Icon
             Stack(
               children: [
                 CircleAvatar(
                   radius: 80,
-                 backgroundImage:
-                 NetworkImage(memberDetail.avatarUrl ?? "https://github.com/user-attachments/assets/93e38020-8447-4f79-a623-cfea02d6bd4b"),
+                  backgroundImage: NetworkImage(memberDetail.avatarUrl ??
+                      "https://github.com/user-attachments/assets/93e38020-8447-4f79-a623-cfea02d6bd4b"),
                 ),
                 Positioned(
                   bottom: 5,
@@ -70,7 +72,8 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             // Member Name and Email
             Text(
-              memberDetail.firstName ?? "Member Name",
+              memberDetail.firstName ??
+                  AppLocalizations.of(context)!.memberName,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -86,11 +89,11 @@ class MemberProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             // Member Bio
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Member's Bio",
-                style: TextStyle(
+                AppLocalizations.of(context)!.memberBio,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -98,7 +101,8 @@ class MemberProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              memberBio ?? "A brief description about the member which might be long or short as the case maybe, you can choose to be personal funny or official ,your choice.",
+              memberBio ??
+                  "A brief description about the member which might be long or short as the case maybe, you can choose to be personal funny or official ,your choice.",
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black,
@@ -107,9 +111,9 @@ class MemberProfileScreen extends StatelessWidget {
             const Spacer(),
             // Edit and Delete Profile Buttons
             CustomButton(
-              onTap: () { },
+              onTap: () {},
               borderColor: GlobalColors.orange,
-              text: 'Edit Profile',
+              text: AppLocalizations.of(context)!.editProfile,
               height: 50.0,
               containerColor: GlobalColors.orange,
               width: double.infinity,
@@ -118,13 +122,14 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             CustomButton(
               onTap: () {
-                showDialog(context: context,
-                    builder: (context){
-                  return const DeleteMemberDialog();
-                });
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const DeleteMemberDialog();
+                    });
               },
               borderColor: Colors.red,
-              text: 'Delete Profile',
+              text: AppLocalizations.of(context)!.deleteProfile,
               height: 50.0,
               containerColor: GlobalColors.white,
               width: double.infinity,

@@ -86,15 +86,15 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 10.h,
               ),
               Text(
-                "Invite Link",
+                AppLocalizations.of(context)!.inviteLink,
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
                     height: 16.94 / 14,
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-              const Text(
-                  "This provides a unique URL that allows anyone \nto join your workspace "),
+               Text(
+                  AppLocalizations.of(context)!.inviteLinkDescr),
               SizedBox(
                 height: 10.h,
               ),
@@ -114,9 +114,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                         child: CircularProgressIndicator.adaptive(),
                       ),
                       error: (e, st) {
-                        return const Center(
+                        return  Center(
                           child: Text(
-                              'An error occurred while \nfetching the link'),
+                              AppLocalizations.of(context)!.errorFetchingLink),
                         );
                       },),
                     Row(
@@ -138,7 +138,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
                                   Clipboard.setData(ClipboardData(text: link));  // Copy the link
-                                  showCustomToast(context, "Link copied to clipboard");
+                                  showCustomToast(context, AppLocalizations.of(context)!.copyLink);
                                 }
                               });
                             },
@@ -170,7 +170,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 15,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'Search by name or email',
+                    hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                       child:
@@ -200,9 +200,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     child: CircularProgressIndicator.adaptive(),
                   ),
                   error: (e, st) {
-                    return const Center(
+                    return  Center(
                       child: Text(
-                          'An error occurred while \nfetching the organization members'),
+                          AppLocalizations.of(context)!.errorFetchingMembers),
                     );
                   },
                   data: (members) {

@@ -1,45 +1,42 @@
-import 'dart:convert';
+import 'package:flutter/material.dart';
 
-SubscriptionModel subscriptionModelFromJson(String str) =>
-    SubscriptionModel.fromJson(json.decode(str));
-
-String subscriptionModelToJson(SubscriptionModel data) =>
-    json.encode(data.toJson());
+import '../../../utils/context_extensions.dart';
 
 class SubscriptionModel {
-  String? id;
-  String? userId;
-  String? organizationId;
-  String? transactionId;
-  String? plan;
-  String? frequency;
-  bool? isActive;
-  int? amount;
-  DateTime? startDate;
-  DateTime? expiryDate;
-  DateTime? createdAt;
-  dynamic updatedAt;
+  final String id;
+  final String userId;
+  final String organizationId;
+  final String transactionId;
+  final SubscriptionPlan plan;
+  final String frequency;
+  final bool isActive;
+  final int amount;
+  final DateTime? createdAt;
+  final DateTime? startDate;
+  final DateTime? expiryDate;
+  final DateTime? updatedAt;
 
   SubscriptionModel({
-    this.id,
-    this.userId,
-    this.organizationId,
-    this.transactionId,
-    this.plan,
-    this.frequency,
-    this.isActive,
-    this.amount,
-    this.startDate,
-    this.expiryDate,
-    this.createdAt,
-    this.updatedAt,
+    required this.id,
+    required this.userId,
+    required this.organizationId,
+    required this.transactionId,
+    required this.plan,
+    required this.frequency,
+    required this.isActive,
+    required this.amount,
+    required this.startDate,
+    required this.expiryDate,
+    required this.createdAt,
+    required this.updatedAt,
   });
+
   SubscriptionModel copyWith({
     String? id,
     String? userId,
     String? organizationId,
     String? transactionId,
-    String? plan,
+    SubscriptionPlan? plan,
     String? frequency,
     bool? isActive,
     int? amount,
@@ -64,40 +61,21 @@ class SubscriptionModel {
     );
   }
 
-  factory SubscriptionModel.fromJson(String source) =>
-      SubscriptionModel.fromMap(json.decode(source) as Map<String, dynamic>);
-  String toJson() => json.encode(toMap());
-
   factory SubscriptionModel.fromMap(Map<String, dynamic> json) =>
       SubscriptionModel(
-        id: json["id"],
-        userId: json["userId"],
-        organizationId: json["organizationId"],
-        transactionId: json["transactionId"],
-        plan: json["plan"],
-        frequency: json["frequency"],
-        isActive: json["isActive"],
-        amount: json["amount"],
-        startDate: DateTime.parse(json["startDate"]),
-        expiryDate: DateTime.parse(json["expiryDate"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"],
+        id: json["id"] as String,
+        userId: json["userId"] as String,
+        organizationId: json["organizationId"] as String,
+        transactionId: json["transactionId"] as String,
+        plan: SubscriptionPlan.fromString(json["plan"]),
+        frequency: json["frequency"] as String,
+        isActive: json["isActive"] ?? false,
+        amount: int.tryParse(json["amount"].toString()) ?? 0,
+        createdAt: DateTime.tryParse(json["createdAt"] ?? ''),
+        startDate: DateTime.tryParse(json["startDate"] ?? ''),
+        expiryDate: DateTime.tryParse(json["expiryDate"] ?? ''),
+        updatedAt: DateTime.tryParse(json["updatedAt"] ?? ''),
       );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "userId": userId,
-        "organizationId": organizationId,
-        "transactionId": transactionId,
-        "plan": plan,
-        "frequency": frequency,
-        "isActive": isActive,
-        "amount": amount,
-        "startDate": startDate!.toIso8601String(),
-        "expiryDate": expiryDate!.toIso8601String(),
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt,
-      };
 
   @override
   bool operator ==(covariant SubscriptionModel other) {
@@ -109,5 +87,188 @@ class SubscriptionModel {
   @override
   int get hashCode {
     return id.hashCode;
+  }
+}
+
+enum SubscriptionPlan {
+  free,
+  basic,
+  advanced;
+
+  factory SubscriptionPlan.fromString(String data) {
+    return SubscriptionPlan.values.firstWhere(
+      (val) => val.name.toLowerCase() == data.toLowerCase(),
+      orElse: () => SubscriptionPlan.free,
+    );
+  }
+}
+
+extension SubExtension on SubscriptionPlan {
+  String getText(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => ctx.text.free,
+      SubscriptionPlan.basic => ctx.text.basic,
+      SubscriptionPlan.advanced => ctx.text.advanced,
+    };
+  }
+
+  int get amount {
+    return switch (this) {
+      SubscriptionPlan.free => 0,
+      SubscriptionPlan.basic => 20,
+      SubscriptionPlan.advanced => 50,
+    };
+  }
+
+  String get frequency => 'month';
+
+  String getAbout(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => ctx.text.freeSubPlanAbout,
+      SubscriptionPlan.basic => ctx.text.basicSubPlanAbout,
+      SubscriptionPlan.advanced => ctx.text.advancedSubPlanAbout,
+    };
+  }
+
+  List<String> getBulletDescriptions(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => [
+          ctx.text.freeSubPlanBulletDesc1,
+          ctx.text.freeSubPlanBulletDesc2,
+          ctx.text.freeSubPlanBulletDesc3,
+        ],
+      SubscriptionPlan.basic => [
+          ctx.text.basicSubPlanBulletDesc1,
+          ctx.text.basicSubPlanBulletDesc2,
+          ctx.text.basicSubPlanBulletDesc3,
+          ctx.text.basicSubPlanBulletDesc4,
+        ],
+      SubscriptionPlan.advanced => [
+          ctx.text.advancedSubPlanBulletDesc1,
+          ctx.text.advancedSubPlanBulletDesc2,
+          ctx.text.advancedSubPlanBulletDesc3,
+          ctx.text.advancedSubPlanBulletDesc4,
+          ctx.text.advancedSubPlanBulletDesc5,
+        ],
+    };
+  }
+
+  String getDescription(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => ctx.text.freeSubPlanDescription,
+      SubscriptionPlan.basic => ctx.text.basicSubPlanDescription,
+      SubscriptionPlan.advanced => ctx.text.advancedSubPlanDescription,
+    };
+  }
+
+  String getUpgradeToText(BuildContext ctx) {
+    return switch (this) {
+      SubscriptionPlan.free => ctx.text.currentPlan,
+      SubscriptionPlan.basic => ctx.text.upgradeToBasic,
+      SubscriptionPlan.advanced => ctx.text.upgradeToAdvanced,
+    };
+  }
+
+  List<(String, List<(String, Object)>)> getDetails(BuildContext ctx) {
+    final text = ctx.text;
+    return switch (this) {
+      SubscriptionPlan.free => [
+          (
+            ctx.text.projectManagement,
+            [
+              (text.projects, text.upTo10),
+              (text.fileUpload, text.tenGB),
+              (text.userAccount, text.one),
+              (text.teams, text.one),
+            ],
+          ),
+          (
+            text.shareAndCollab,
+            [
+              (text.integration, true),
+              (text.guestAccess, true),
+              (text.pageAnalysis, true),
+              (text.taskManagement, true),
+            ],
+          ),
+          (
+            text.support,
+            [
+              (text.prioritySupport, true),
+              (text.customerSupport, false),
+            ],
+          ),
+        ],
+      SubscriptionPlan.basic => [
+          (
+            text.projectManagement,
+            [
+              (text.projects, text.upTo100),
+              (text.fileUpload, text.twentyGB),
+              (text.userAccount, text.ten),
+              (text.teams, text.unlimited),
+            ],
+          ),
+          (
+            text.shareAndCollab,
+            [
+              (text.integration, true),
+              (text.guestAccess, true),
+              (text.pageAnalysis, true),
+              (text.taskManagement, true),
+            ],
+          ),
+          (
+            text.managementAndSecurity,
+            [
+              (text.teamSecurity, true),
+              (text.dataBackup, true),
+              (text.hIPAACompliance, true),
+            ],
+          ),
+          (
+            text.support,
+            [
+              (text.prioritySupport, true),
+              (text.customerSupport, true),
+            ],
+          ),
+        ],
+      SubscriptionPlan.advanced => [
+          (
+            text.projectManagement,
+            [
+              (text.projects, text.upTo200),
+              (text.fileUpload, text.fiftyGB),
+              (text.userAccount, text.fifty),
+              (text.teams, text.unlimited),
+            ],
+          ),
+          (
+            text.shareAndCollab,
+            [
+              (text.integration, true),
+              (text.guestAccess, true),
+              (text.pageAnalysis, true),
+              (text.taskManagement, true),
+            ],
+          ),
+          (
+            text.managementAndSecurity,
+            [
+              (text.teamSecurity, true),
+              (text.dataBackup, true),
+              (text.hIPAACompliance, true),
+            ],
+          ),
+          (
+            text.support,
+            [
+              (text.prioritySupport, true),
+              (text.customerSupport, true),
+            ],
+          ),
+        ],
+    };
   }
 }

@@ -2,6 +2,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 class GlobalColors {
   static HexColor orange = HexColor('#F97316');
+  static HexColor lightOrange = HexColor('#F7A435');
   static HexColor lightGray = HexColor('#E2E8F0');
   static HexColor borderColor = HexColor('#CBD5E1');
   static HexColor searchBorderColor = HexColor('#E4E4E7');
@@ -28,8 +29,12 @@ class GlobalColors {
   static HexColor diverColor = HexColor('#DEDEDE');
   static HexColor bgsurface700 = HexColor('21202D');
   static HexColor red = HexColor('#E00414');
+  static HexColor hotred = HexColor('#DC2626');
   static HexColor green = HexColor('#10AF20');
   static HexColor white = HexColor('#FFFFFF');
+  static HexColor dialogDesc = HexColor('#64748B');
+  static HexColor grays = HexColor('#525252');
+  static HexColor lightGrey = HexColor('#94A3B8');
 
   static HexColor mutedTextColor = HexColor('#71717A');
   static HexColor zinc50 = HexColor("#FAFAFA");
@@ -41,5 +46,6 @@ class GlobalColors {
   static HexColor containerBgColor = HexColor('#FFF8F2');
   static HexColor containerBorderColor = HexColor('#CBD5E1');
   static HexColor btnBgColor = HexColor('#FDEEE3');
+  static HexColor boxShadow = HexColor('#1F0A39B0');
   static HexColor iconColor2 = HexColor('#5b6380');
 }
