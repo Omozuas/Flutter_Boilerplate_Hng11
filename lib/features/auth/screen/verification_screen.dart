@@ -6,6 +6,8 @@ import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';  // Import localization
+
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
 
@@ -26,6 +28,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   int _countdown = 420;
   late final Timer _timer;
   bool loading = false;
+
   @override
   void initState() {
     super.initState();
@@ -44,7 +47,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     });
   }
 
-  _restartTimer() {
+  void _restartTimer() {
     _timer.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_countdown > 0) {
@@ -62,7 +65,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
       loading = true;
     });
     final code = _codeControllers.map((c) => c.text).join();
-    debugPrint(code.runtimeType.toString());
     final res = await ref
         .read(authProvider.notifier)
         .verifyCode(widget.email, code, context);
@@ -74,13 +76,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
         loading = false;
       });
     }
-    // if (code == '123456') {
-    //   context.push(AppRoute.verificationSuccess);
-    // } else {
-    //   setState(() {
-    //     _isCodeValid = false;
-    //   });
-    // }
   }
 
   bool codeResent = false;
@@ -107,12 +102,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;  // Access localization
+
     return Scaffold(
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-      ),
+      // appBar: AppBar(
+      //   leading: const ChevronBackButton(),
+      //   title: Text(localizations.verificationAppBarTitle),  // Localized AppBar title
+      // ),
       body: Consumer(builder: (context, ref, child) {
-        // loading = false;
         return Stack(
           children: [
             Padding(
@@ -120,15 +117,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Verification Code',
+                  Text(
+                    localizations.verificationCodeTitle,  // Localized title
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(height: 16.h),
                   RichText(
                     text: TextSpan(
-                      text:
-                          'Confirm the email sent to ${widget.email} and enter the verification code. Code expires in ',
+                      text: '${localizations.verificationCodeDescription(widget.email)} ${_countdown.toString()} ',
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
@@ -158,8 +154,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color:
-                                      _isCodeValid ? Colors.orange : Colors.red,
+                                  color: _isCodeValid ? Colors.orange : Colors.red,
                                 ),
                               ),
                               counterText: '',
@@ -189,41 +184,22 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       _handleVerify(ref, context);
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: "Continue",
+                    text: localizations.verify,  // Localized button text
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
                     textColor: Colors.white,
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () async {
-                  //     _handleVerify(ref, context);
-                  //   },
-                  //   // _isCodeComplete ? _handleVerify : null,
-                  //   style: ElevatedButton.styleFrom(
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //     backgroundColor:
-                  //         _isCodeComplete ? Colors.orange : Colors.grey,
-                  //   ),
-                  //   child: const Text(
-                  //     'Verify',
-                  //     style: TextStyle(
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // ),
                   if (!_isCodeValid || _countdown == 0) ...[
                     SizedBox(height: 16.sp),
                     Center(
                       child: RichText(
                         text: TextSpan(
-                          text: 'Didn\'t receive any code? ',
+                          text: localizations.didntReceiveCodeText,  // Localized text
                           style: TextStyle(color: GlobalColors.darkOne),
                           children: [
                             TextSpan(
-                              text: 'Resend OTP',
+                              text: localizations.resendOtpText,  // Localized text
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -239,8 +215,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Center(
                       child: TextButton(
                         onPressed: _handleChangeEmail,
-                        child: const Text(
-                          'Change Email',
+                        child: Text(
+                          localizations.changeEmailText,  // Localized text
                           style: TextStyle(
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
@@ -252,37 +228,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ],
               ),
             ),
-            // if (!_isCodeValid)
-            //   Positioned(
-            //     top: 0,
-            //     left: 0,
-            //     right: 0,
-            //     child: Container(
-            //       color: Colors.red,
-            //       padding:
-            //           EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-            //       child: Row(
-            //         children: [
-            //           const Icon(Icons.error, color: Colors.white),
-            //           SizedBox(width: 8.sp),
-            //           const Expanded(
-            //             child: Text(
-            //               'Invalid code, please try again.',
-            //               style: TextStyle(color: Colors.white, fontSize: 16),
-            //             ),
-            //           ),
-            //           IconButton(
-            //             icon: const Icon(Icons.close, color: Colors.white),
-            //             onPressed: () {
-            //               setState(() {
-            //                 _isCodeValid = true;
-            //               });
-            //             },
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
           ],
         );
       }),
