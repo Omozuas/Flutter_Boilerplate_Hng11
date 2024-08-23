@@ -9,19 +9,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class CartState {
   final bool cartLoading;
   final List<Product> allCart;
+  final num totalPrice;
+  final num allPrice;
+  final num discountedPrice;
+  final num payPrice;
+  final num deliveryFee;
 
   CartState({
     required this.cartLoading,
     required this.allCart,
+    required this.totalPrice,
+    required this.allPrice,
+    required this.discountedPrice,
+    required this.payPrice,
+    required this.deliveryFee,
   });
 
   CartState copyWith({
     bool? cartLoading,
-    List<Product>? allCart
+    List<Product>? allCart,
+    num? totalPrice,
+    num? allPrice,
+    num? discountedPrice,
+    num? payPrice,
+    num? deliveryFee,
   }) {
     return CartState(
     cartLoading: cartLoading ?? this.cartLoading,
     allCart: allCart ?? this.allCart,
+    deliveryFee: deliveryFee ?? this.deliveryFee,
+    payPrice: payPrice ?? this.payPrice,
+    discountedPrice: discountedPrice ?? this.discountedPrice,
+    allPrice: allPrice ?? this.allPrice,
+    totalPrice: totalPrice ?? this.totalPrice,
     );
   }
 }
@@ -37,41 +57,49 @@ class CartProvider extends StateNotifier<CartState> {
       : super(CartState(
     cartLoading: false,
     allCart: [],
-  )) {
-    // Initialize the provider by getting cached data and then fetching fresh data
-    getAllCartItems();
-  }
+    totalPrice: 0,
+    allPrice: 0,
+    discountedPrice: 0,
+    deliveryFee: 1500,
+    payPrice: 0,
+  ));
 
   onChanged(String? val){
 
   }
 
-  num totalPrice = 0;
-  num allPrice = 0;
-  num discountedPrice = 0;
-  num deliveryFee = 1500;
-  num payPrice = 0;
-  TextEditingController promoCodeController = TextEditingController();
 
-  updateItem(Product item, int quanity) async {
-    updateToCart(item, quanity);
-    await getCartItems();
-  }
+  TextEditingController promoCodeController = TextEditingController();
 
   removeItem(int index) async {
     removeCartItemFromDb(index);
     await getCartItems();
   }
 
+  set setTotalPrice(num value) {
+    state = state.copyWith(totalPrice: value);
+  }
+
+  set setAllPrice(num value) {
+    state = state.copyWith(allPrice: value);
+  }
+
+  set setDiscountedPrice(num value) {
+    state = state.copyWith(discountedPrice: value);
+  }
+
+  set setPayPrice(num value) {
+    state = state.copyWith(payPrice: value);
+  }
+
 
   getPrice() {
-    totalPrice = state.allCart.fold(
-        0, (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)));
-    allPrice = state.allCart.fold(
-        0, (sum, item) => sum + ((item.quantity ?? 0) * (item.price ?? 0)));
-    discountedPrice =
-    promoCodeController.text.trim().isEmpty ? 0 : (totalPrice * (5 / 100));
-    payPrice = (totalPrice + deliveryFee) - discountedPrice;
+    setTotalPrice = state.allCart.fold(
+        0, (sum, item) => sum + ((item.cartQuantity ?? 0) * (item.price ?? 0)));
+    setAllPrice = state.allCart.fold(
+        0, (sum, item) => sum + ((item.cartQuantity ?? 0) * (item.price ?? 0)));
+    setDiscountedPrice = promoCodeController.text.trim().isEmpty ? 0 : (state.totalPrice * (5 / 100));
+    setPayPrice = (state.totalPrice + state.deliveryFee) - state.discountedPrice;
   }
 
 
@@ -85,21 +113,27 @@ class CartProvider extends StateNotifier<CartState> {
 
   List<Product> cartItems =[];
 
-  Future<void> getAllCartItems() async {
-    setCartLoading = true;
-    try {
-      final res = await getCartItems();
-      if (res.isNotEmpty) {
-        setAllCart = res;
-        cartItems = res;
-        getPrice();
+  Stream<List<Product>> getAllCartItems() async* {
+    while(true){
+      try {
+        final res = await getCartItems();
+        if (res.isNotEmpty) {
+          setAllCart = res;
+          cartItems = res;
+          getPrice();
+          yield res;
+        }
+        else{
+          setAllCart = [];
+          yield [];
+        }
+
+      } catch (e) {
+        //tODO: Do something with caught error;
       }
-      setAllCart = [];
-    } catch (e) {
-      //tODO: Do something with caught error;
-    } finally {
-      setCartLoading = false;
+      await Future.delayed(const Duration(seconds: 10));
     }
+
   }
 
   Future<void> removeFromCart() async {
@@ -118,12 +152,10 @@ class CartProvider extends StateNotifier<CartState> {
 
   updateCart(Product product, int quantity)async{
     try{
-      var res = await updateToCart(product, quantity);
-      if(res){
-        await getAllCartItems();
-        showSnackBar("${product.name} added to cart");
-      }
-      showSnackBar("Error updating ${product.name} to cart");
+      Product newProduct = product.copyWith(
+        cartQuantity: quantity
+      );
+      var res = await updateToCart(newProduct);
     }catch(e){
       log(e.toString());
       showSnackBar("Error updating ${product.name} to cart");
