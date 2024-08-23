@@ -1,5 +1,6 @@
 class StringManager {
   static const String signUp = 'Sign up';
+  static const String subscriptions = 'Subscriptions';
   static const String createAnAccount =
       'Create an account to get started with us.';
   static const String companyName = 'Company\'s Name';
@@ -138,6 +139,7 @@ static const String bio = 'Bio';
 static const String typeYourMessageHere = 'Type your message here';
 static const String connectSocials = 'Connect Socials';
 static const String add = 'Add';
+static const String addAProduct = 'Add a product';
 static const String save = 'Save';
 static const String link = 'link';
 static const String cancel = 'Cancel';
@@ -179,6 +181,9 @@ static const String variationLabel = 'Variation';
 static const String dashboard = 'Dashboard';
 static const String thisMonthSummary = 'This Month\'s Summary';
 static const String totalRevenue = 'Total Revenue';
+static const String totalMembers = 'Total Members';
+static const String totalProducts = 'Total Products';
+static const String activeMembers = 'Active Members';
 static const String overview = 'Overview';
 static const String seeMore = 'See more';
 static const String veryGood = 'Very Good';
@@ -246,5 +251,7 @@ static const String viewAllProducts = 'View all products';
   static const String threeActiveMember = '3 active members';
   static const String profileName = 'Chad Bosewick';
   static const String profileEmail = 'ChadBosew@gmail.com';
+
+  /// TODO: Put every new strings under this todo
 
 }
