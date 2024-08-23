@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,6 +28,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         fetchSubcriptionbyUserId: AsyncData(null),
 
         inviteLink: AsyncData(null),
+        organisationMembers: AsyncData(null),
         
         initiateSubscription: AsyncData(null),
 
@@ -199,6 +201,18 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
+  // get organisation members
+  Future<void> getOrganisationMembers({required String orgId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(organisationMembers: const AsyncLoading());
+      final organisationMembers = await settingsApi.getOrganisationMembers(orgId: orgId);
+      state = state.copyWith(organisationMembers: AsyncData(organisationMembers));
+    } catch (e) {
+      state = state.copyWith(organisationMembers: AsyncError(e, StackTrace.current));
+    }
+  }
+
   Future<void> initiateSubscription({
     required String email,
       required double amount,
@@ -232,6 +246,7 @@ class ProfileProviderStates {
   final AsyncValue<SubscriptionModel?> fetchSubcriptionbyUserId;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
   final AsyncValue<String?> inviteLink;
+  final AsyncValue<Members?> organisationMembers;
   final AsyncValue<String?> initiateSubscription;
 
   const ProfileProviderStates({
@@ -245,6 +260,7 @@ class ProfileProviderStates {
     required this.fetchSubcriptionbyUserId,
     required this.updatePassword,
     required this.inviteLink,
+    required this.organisationMembers,
     required this.initiateSubscription, 
   });
 
@@ -260,6 +276,8 @@ class ProfileProviderStates {
         AsyncValue<SubscriptionModel?>? fetchSubcriptionbyUserId,
 
         AsyncValue<String?>? inviteLink,
+        AsyncValue<Members?>? organisationMembers,
+
         AsyncValue<String?>? initiateSubscription,
 
       AsyncValue<UpdatePasswordModel?>? updatePassword}) {
@@ -275,6 +293,7 @@ class ProfileProviderStates {
         fetchSubcriptionbyUserId: fetchSubcriptionbyUserId ?? this.fetchSubcriptionbyUserId,
 
         inviteLink: inviteLink ?? this.inviteLink,
+        organisationMembers: organisationMembers ?? this.organisationMembers,
         initiateSubscription: initiateSubscription ?? this.initiateSubscription,
 
         updatePassword: updatePassword ?? this.updatePassword);
