@@ -3,6 +3,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteMemberDialog extends StatelessWidget {
   const DeleteMemberDialog({super.key});
@@ -50,7 +51,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   borderColor: GlobalColors.lightGray,
-                  text: "Cancel",
+                  text: AppLocalizations.of(context)!.cancel,
                   height: 40,
                   containerColor: GlobalColors.white,
                   width: 80,
@@ -72,7 +73,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     );
                   },
                   borderColor: Colors.transparent,
-                  text: "Delete",
+                  text: AppLocalizations.of(context)!.deleteButton,
                   height: 40,
                   containerColor: GlobalColors.red,
                   width: 80,
@@ -134,7 +135,7 @@ class LogOutDialog extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   borderColor: GlobalColors.lightGray,
-                  text: "Cancel",
+                  text: AppLocalizations.of(context)!.cancel,
                   height: 40,
                   containerColor: GlobalColors.white,
                   width: 80,

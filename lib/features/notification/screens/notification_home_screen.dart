@@ -86,23 +86,18 @@ class NotificationHomeScreen extends ConsumerWidget {
                   ),
                 ]
               ),
-              StreamBuilder<List<Notifications>>(
-                stream: notificationProviderController.getNotifications(),
-                builder: (context, snapshot) {
-                  return Expanded(
-                    child: TabBarView(
-                      children: notificationStateProvider.notifications.isEmpty && notificationStateProvider.overViewLoading?
-                      [
-                        const LoadingNotificationListView(),
-                        const LoadingNotificationListView(),
-                      ]:
-                      [
-                        const NotificationListView(),
-                        const Scaffold(),
-                      ],
-                    )
-                  );
-                }
+              Expanded(
+                  child: TabBarView(
+                    children: notificationStateProvider.notifications.isEmpty && notificationStateProvider.overViewLoading?
+                    [
+                      const LoadingNotificationListView(),
+                      const LoadingNotificationListView(),
+                    ]:
+                    [
+                      const NotificationListView(),
+                      const Scaffold(),
+                    ],
+                  )
               )
             ],
           ),

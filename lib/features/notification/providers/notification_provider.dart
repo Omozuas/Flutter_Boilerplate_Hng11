@@ -41,26 +41,34 @@ class NotificationProvider extends StateNotifier<NotificationState> {
         trendLoading: false,
         notifications: []
       )
-  );
+  ) {
+    getNotifications();
+  }
 
   set setNotificationLoading(bool value){
     state = state.copyWith(overViewLoading: value);
+  }
+
+  set setTrendLoading(bool value){
+    state = state.copyWith(trendLoading: value);
   }
 
   set setNotifications(List<Notifications> value){
     state = state.copyWith(notifications: value);
   }
 
-  Stream<List<Notifications>> getNotifications() async* {
-    setNotificationLoading = state.notifications.isEmpty? true: false;
-    while(true){
+  Future<List<Notifications>> getNotifications() async {
+    setNotificationLoading = true;
+    try{
       List<Notifications> res = await NotificationApi().getAllNotifications();
       if(res.isNotEmpty){
         setNotifications = res;
       }
-      yield res;
-      await Future.delayed(const Duration(seconds: 5));
+      setTrendLoading = true;
       setNotificationLoading = false;
+      return res;
+    }catch(err){
+      return [];
     }
   }
 

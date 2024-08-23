@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:one_context/one_context.dart';
 import 'validator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
@@ -118,7 +119,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
         OneContext().showDialog(
           builder: (context) {
             return ProfileDialog(
-              title: "Error",
+              title: AppLocalizations.of(context)!.errorMessage,
               description: errorMessage!,
             );
           },
@@ -198,7 +199,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              "Email",
+                              AppLocalizations.of(context)!.email,
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -487,7 +488,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                               padding: EdgeInsets.symmetric(horizontal: 20.w),
                             ),
                             child: Text(
-                              "Cancel",
+                              AppLocalizations.of(context)!.cancel,
                               style: GoogleFonts.inter(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,

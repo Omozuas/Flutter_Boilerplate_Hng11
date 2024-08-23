@@ -19,6 +19,7 @@ import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
 import '../../widgets/pronouns_textfield_dropdown.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key, required this.user});
@@ -124,24 +125,24 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 ),
                 SizedBox(height: 28.w),
                 Text(
-                  'Personal Details',
+                  AppLocalizations.of(context)!.personalDetails,
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
                 CustomTextField(
-                  label: 'First name',
+                  label: AppLocalizations.of(context)!.firstName,
                   controller: _firstnameController,
-                  hintText: 'Enter firstname',
+                  hintText: AppLocalizations.of(context)!.enterFirstName,
                 ),
                 CustomTextField(
-                  label: 'Last name',
+                  label: AppLocalizations.of(context)!.lastName,
                   controller: _lastnameController,
-                  hintText: 'Enter lastname',
+                  hintText: AppLocalizations.of(context)!.enterLastName,
                 ),
                 CustomTextField(
-                  label: 'Username',
+                  label: AppLocalizations.of(context)!.username,
                   controller: _usernameController,
-                  hintText: 'Enter username',
+                  hintText: AppLocalizations.of(context)!.enterUsername,
                 ),
                 PronounsTextfieldDropdown(
                   initialValue: _pronouns,
@@ -151,17 +152,17 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 ),
                 SizedBox(height: 16.h),
                 CustomTextField(
-                  label: 'Your job title',
+                  label: AppLocalizations.of(context)!.yourJobTitle,
                   controller: _jobTitleController,
-                  hintText: 'Enter job title',
+                  hintText: AppLocalizations.of(context)!.enterJobTitle,
                 ),
                 CustomTextField(
-                  label: 'Department or team',
+                  label: AppLocalizations.of(context)!.departmentOrTeam,
                   controller: _departmentController,
-                  hintText: 'Enter a department or team',
+                  hintText: AppLocalizations.of(context)!.enterDepartmentOrTeam,
                 ),
                 CustomExpansionTile(
-                  title: 'Bio',
+                  title: AppLocalizations.of(context)!.bio,
                   content: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,11 +170,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       children: [
                         CustomTextField(
                           controller: _bioController,
-                          hintText: 'Type your messsage here',
+                          hintText:
+                              AppLocalizations.of(context)!.typeYourMessageHere,
                           maxLines: 3,
                         ),
                         Text(
-                          'Maximum of 64 characters',
+                          AppLocalizations.of(context)!.maximumOf64Character,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             color: const Color(0xFF64748B),
@@ -184,7 +186,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ],
                 ),
                 CustomExpansionTile(
-                  title: 'Connect Socials',
+                  title: AppLocalizations.of(context)!.connectSocials,
                   content: [
                     SocialMediaInput(
                       controller: _xController,
@@ -219,7 +221,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       Expanded(
                         child: CustomButton(
                           borderColor: GlobalColors.lightGray,
-                          text: 'Cancel',
+                          text: AppLocalizations.of(context)!.cancel,
                           height: 40.h,
                           containerColor: Colors.white,
                           width: 50.w,
@@ -231,7 +233,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       Expanded(
                         child: CustomButton(
                             borderColor: GlobalColors.orange,
-                            text: 'Save Changes',
+                            text: AppLocalizations.of(context)!.saveChanges,
                             height: 40.h,
                             containerColor: GlobalColors.orange,
                             width: 50.w,
@@ -305,7 +307,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     } on CustomApiError catch (e) {
       showSnackBar(e.message);
     }catch(e){
-      showSnackBar('An error occurred');
+      showSnackBar(AppLocalizations.of(context)!.errorOccurred);
     }
   }
 }

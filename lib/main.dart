@@ -9,7 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'localiza/localiza_class.dart';
+import 'features/auth/providers/language_provider.dart';
+// import 'localiza/localiza_class.dart';
 
 void main() async {
   await initializeApp();
@@ -22,25 +23,29 @@ void main() async {
     ],
   );
 
-  // Change status bar theme based on theme of app
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: Colors.transparent,
-  //   statusBarIconBrightness: Brightness.light,
-  // ));
+
+// Ensures status bar and system navigation controls blends with the app
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
+  ));
 
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(languageProvider);
     return ScreenUtilInit(
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp.router(
-        locale: LocalizationClass.english,
+        locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: OneContext().builder,
@@ -67,7 +72,6 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey[800], // Content text style
               ),
             ),
-
             appBarTheme: AppBarTheme(
                 backgroundColor: Colors.transparent,
                 scrolledUnderElevation: 0,
