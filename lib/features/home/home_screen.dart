@@ -220,50 +220,56 @@ class HomeScreen extends ConsumerWidget {
           ),
           16.w.sbH,
           // Recent Sales
-          SizedBox(
+          Container(
+            padding: 7.sp.padA,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                12.r
+              ),
+              border: Border.all(
+                width: 0.50, color: GlobalColors.borderColor
+              )
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       StringManager.recentSalesTitle,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: CustomTextStyle.bold(
+                        fontSize: 16.sp,
+                        color: GlobalColors.black
+                      ),
                     ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        StringManager.seeMore,
-                        style: CustomTextStyle.bold(
-                          fontSize: 14.sp,
-                        ).copyWith(
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF98A2B3),
+                    InkWell(
+                      onTap: (){},
+                      child: Padding(
+                        padding: 8.h.padV,
+                        child: Text(
+                          StringManager.seeMore,
+                          style: CustomTextStyle.regular(
+                            fontSize: 14.sp,
+                          ),
                         ),
                       ),
                     )
                   ],
                 ),
-                const Divider(
-                  color: Color(0xFFF6F6F6),
-                  thickness: 1,
+                Divider(
+                  height: 8.h,
+                  color: GlobalColors.dividerColor,
                 ),
-                if ((dashBoardStateProvider.dashBoardData.monthSales?.length ??
-                        0) ==
-                    0)
-                  SizedBox(
-                    height: 100.h,
-                    width: width(context),
-                    child: const Center(
-                      child: Text(StringManager.noSales,
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ),
-                  )
+                if((dashBoardStateProvider.dashBoardData.monthSales?.length??0)==0)
+                SizedBox(
+                  height: 100.h,
+                  width: width(context),
+                  child: const Center(
+                    child: Text("No sales yet this month"),
+                  ),
+                )
                 else
                   Column(
                     children: List.generate(
@@ -274,12 +280,13 @@ class HomeScreen extends ConsumerWidget {
                               .dashBoardData.monthSales?[index] ??
                           MonthSale();
                       return CustomerListTile(
-                        customerName: 'Unknown Customer',
+                        customerName:  'Unknown Customer',
                         email: 'No Email Provided',
-                        amount: monthlySale.amount ?? 0,
+                        amount: monthlySale.amount??0,
                       );
-                    }),
+                    }
                   ),
+                ),
               ],
             ),
           ),

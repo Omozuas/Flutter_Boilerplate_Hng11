@@ -115,7 +115,7 @@ class UserDashBoardScreen extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            'Recent Sales',
+                            "Products",
                             style: CustomTextStyles.titleTextBlack,
                           ),
                           const Spacer(),
@@ -147,7 +147,7 @@ class UserDashBoardScreen extends ConsumerWidget {
                             log("Product: ${product.name}");
                             return Padding(
                               padding: 8.h.padV,
-                              child: GestureDetector(
+                              child: InkWell(
                                 onTap: (){
                                   addItemToCart(product);
                                 },

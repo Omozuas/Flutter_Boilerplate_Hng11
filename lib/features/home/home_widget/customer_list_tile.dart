@@ -22,8 +22,7 @@ class CustomerListTile extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 8.h),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Row(
