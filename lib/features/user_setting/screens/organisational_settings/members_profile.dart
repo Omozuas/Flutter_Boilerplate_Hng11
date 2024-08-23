@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/edit_profile_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class MemberProfileScreen extends StatelessWidget {
-  final String profileImageUrl;
-  final String memberName;
-  final String memberEmail;
-  final String memberBio;
+  final Members memberDetail;
+  final String? memberBio;
 
   const MemberProfileScreen({
     super.key,
-    required this.profileImageUrl,
-    required this.memberName,
-    required this.memberEmail,
-    required this.memberBio,
+     this.memberBio,required this.memberDetail,
   });
 
   @override
@@ -37,25 +36,33 @@ class MemberProfileScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppLocalizations.of(context)!.manageAccessToWorkspace,
+              ),
+            ),
+            const SizedBox(height: 24,),
             // Profile Image with Edit Icon
             Stack(
               children: [
                 CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(profileImageUrl),
+                  radius: 80,
+                 backgroundImage:
+                 NetworkImage(memberDetail.avatarUrl ?? "https://github.com/user-attachments/assets/93e38020-8447-4f79-a623-cfea02d6bd4b"),
                 ),
                 Positioned(
-                  bottom: 0,
-                  right: 0,
+                  bottom: 5,
+                  right: 10,
                   child: CircleAvatar(
                     radius: 15,
                     backgroundColor: GlobalColors.white,
                     child: Icon(
                       Icons.camera_alt,
-                      color: GlobalColors.orange,
+                      color: GlobalColors.iconColor2,
                     ),
                   ),
                 ),
@@ -64,7 +71,7 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             // Member Name and Email
             Text(
-              memberName,
+              memberDetail.firstName ?? "Member Name",
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -72,7 +79,7 @@ class MemberProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              memberEmail,
+              memberDetail.email ?? "member@gmail.com",
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
@@ -92,7 +99,7 @@ class MemberProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              memberBio,
+              memberBio ?? "A brief description about the member which might be long or short as the case maybe, you can choose to be personal funny or official ,your choice.",
               style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black,
@@ -101,9 +108,7 @@ class MemberProfileScreen extends StatelessWidget {
             const Spacer(),
             // Edit and Delete Profile Buttons
             CustomButton(
-              onTap: () {
-                // Handle Edit Profile
-              },
+              onTap: () { },
               borderColor: GlobalColors.orange,
               text: 'Edit Profile',
               height: 50.0,
@@ -114,12 +119,15 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             CustomButton(
               onTap: () {
-                const DeleteMemberDialog();
+                showDialog(context: context,
+                    builder: (context){
+                  return const DeleteMemberDialog();
+                });
               },
               borderColor: Colors.red,
               text: 'Delete Profile',
               height: 50.0,
-              containerColor: Colors.transparent,
+              containerColor: GlobalColors.white,
               width: double.infinity,
               textColor: Colors.red,
             ),
