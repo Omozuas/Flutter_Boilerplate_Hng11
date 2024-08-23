@@ -137,7 +137,7 @@ class _LanguageAndRegionScreenState
             ),
             if (showError && selectedLanguage == null)
               Text(
-AppLocalizations.of(context)!.languageUpdateError,
+                AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -206,7 +206,7 @@ AppLocalizations.of(context)!.languageUpdateError,
               children: [
                 CustomButton(
                     onTap: validateSelections,
-                    borderColor: Colors.transparent,
+                    borderColor: GlobalColors.orange,
                     text: AppLocalizations.of(context)!.save,
                     height: 40.sp,
                     containerColor: GlobalColors.orange,

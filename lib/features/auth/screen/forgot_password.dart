@@ -11,7 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';  
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordScreen extends ConsumerWidget {
   const ForgotPasswordScreen({super.key});
@@ -20,13 +20,15 @@ class ForgotPasswordScreen extends ConsumerWidget {
   static final _emailKey = GlobalKey<FormState>();
 
   void _handleSend(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).forgotPassword(_emailController.text, context);
+    ref
+        .read(authProvider.notifier)
+        .forgotPassword(_emailController.text, context);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = ref.watch(authProvider);
-    final localizations = AppLocalizations.of(context)!;  
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,20 +42,22 @@ class ForgotPasswordScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                localizations.forgotPassword,  
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                localizations.forgotPassword,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
               SizedBox(height: 8.sp),
               Text(
-                localizations.forgotPasswordInstructions,  
-                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+                localizations.forgotPasswordInstructions,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
               ),
               SizedBox(height: 28.sp),
               CustomTextField(
-                label: localizations.email,  
+                label: localizations.email,
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                hintText: localizations.enterYourEmail,  
+                hintText: localizations.enterYourEmail,
                 validator: (v) => Validators.emailValidator(v),
               ),
               SizedBox(height: 32.sp),
@@ -65,7 +69,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                   }
                 },
                 borderColor: GlobalColors.borderColor,
-                text: localizations.send,  
+                text: localizations.send,
                 height: 48.h,
                 containerColor: GlobalColors.orange,
                 width: 342.w,
@@ -75,11 +79,11 @@ class ForgotPasswordScreen extends ConsumerWidget {
               Center(
                 child: RichText(
                   text: TextSpan(
-                    text: localizations.rememberPassword + ' ',  
+                    text: '${localizations.rememberPassword} ',
                     style: TextStyle(color: GlobalColors.darkOne),
                     children: [
                       TextSpan(
-                        text: localizations.login,  
+                        text: localizations.login,
                         style: TextStyle(
                             color: GlobalColors.orange,
                             fontWeight: FontWeight.bold),
