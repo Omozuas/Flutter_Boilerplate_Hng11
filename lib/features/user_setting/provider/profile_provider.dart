@@ -213,6 +213,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
+
   Future<void> initiateSubscription({
     required String email,
       required double amount,
@@ -246,7 +247,7 @@ class ProfileProviderStates {
   final AsyncValue<SubscriptionModel?> fetchSubcriptionbyUserId;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
   final AsyncValue<String?> inviteLink;
-  final AsyncValue<Members?> organisationMembers;
+  final AsyncValue<List<Members>?> organisationMembers;
   final AsyncValue<String?> initiateSubscription;
 
   const ProfileProviderStates({
@@ -276,7 +277,7 @@ class ProfileProviderStates {
         AsyncValue<SubscriptionModel?>? fetchSubcriptionbyUserId,
 
         AsyncValue<String?>? inviteLink,
-        AsyncValue<Members?>? organisationMembers,
+        AsyncValue<List<Members>?>? organisationMembers,
 
         AsyncValue<String?>? initiateSubscription,
 
