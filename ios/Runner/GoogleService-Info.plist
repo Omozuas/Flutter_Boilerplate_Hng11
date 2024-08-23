@@ -20,6 +20,19 @@
 	<string>hng-boilerplate-fecde</string>
 	<key>STORAGE_BUCKET</key>
 	<string>hng-boilerplate-fecde.appspot.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+    	<dict>
+        <key>CFBundleIdentifier</key>
+        <string></string>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string> VALUE OF REVERSED_CLIENT_ID</string>
+        </array>
+    	</dict>
+	</array>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

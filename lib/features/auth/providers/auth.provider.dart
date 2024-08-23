@@ -135,16 +135,16 @@ class AuthProvider extends StateNotifier<AuthState> {
       if (googleUser != null) {
         final googleAuth = await googleUser.authentication;
         // print(googleAuth.idToken);
-        final res = await AuthApi().googleSignIn(googleAuth.idToken??'');
+        final res = await AuthApi().googleSignIn(googleAuth.idToken ?? '');
         if (res != null) {
           showSnackBar(res.message.toString());
           UserRegData userRegData = UserRegData.fromJson(res.data);
           setUser = User.fromJson(userRegData.data?['user']);
           setOrganizations = (userRegData.data?['organisations'] as List?)
-              ?.map<Organisation>(
-                (e) => Organisation.fromJson(e),
-          )
-              .toList() ??
+                  ?.map<Organisation>(
+                    (e) => Organisation.fromJson(e),
+                  )
+                  .toList() ??
               [];
 
           if (context.mounted) {
@@ -156,6 +156,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
+      debugPrint(e.toString());
       rethrow;
     } finally {
       setGoogleButtonLoading = false;
