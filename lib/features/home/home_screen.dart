@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_list_tile.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
+import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../utils/app_images.dart';
+import '../../utils/custom_text_style.dart';
+import 'home_widget/model/dashboard_model.dart';
 import 'home_widget/widgets/chart_loader.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -24,12 +27,6 @@ class HomeScreen extends ConsumerWidget {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
-
-    final List<Map<String, dynamic>> customers = [
-      {'name': 'Customer 1', 'email': 'customer1@example.com', 'amount': '100'},
-      {'name': 'Customer 2', 'email': 'customer2@example.com', 'amount': '200'},
-      // Add more customers here
-    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -231,33 +228,43 @@ class HomeScreen extends ConsumerWidget {
                 Row(
                   children: [
                     const Text(
-                      'Recent Sales',
+                      StringManager.recentSalesTitle,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        'See more',
-                        style: TextStyle(
-                          color: GlobalColors.gray600Color,
+                        StringManager.seeMore,
+                        style: CustomTextStyle.bold(
+                          fontSize: 16.sp,
+                          color: GlobalColors.integrationTextColor
                         ),
                       ),
                     )
                   ],
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: customers.length,
-                  itemBuilder: (context, index) {
-                    final customer = customers[index];
-                    return CustomerListTile(
-                      customerName: customer['name'] ?? 'Unknown Customer',
-                      email: customer['email'] ?? 'No Email Provided',
-                      amount: customer['amount'] ?? '0.00',
-                    );
-                  },
+                if((dashBoardStateProvider.dashBoardData.monthSales?.length??0)==0)
+                SizedBox(
+                  height: 100.h,
+                  width: width(context),
+                  child: const Center(
+                    child: Text("No sales yet this month"),
+                  ),
+                )
+                else
+                Column(
+                  children: List.generate(
+                    dashBoardStateProvider.dashBoardData.monthSales?.length??0,
+                    (index){
+                      MonthSale monthlySale = dashBoardStateProvider.dashBoardData.monthSales?[index]?? MonthSale();
+                      return CustomerListTile(
+                        customerName:  'Unknown Customer',
+                        email: 'No Email Provided',
+                        amount: monthlySale.amount??0,
+                      );
+                    }
+                  ),
                 ),
               ],
             ),

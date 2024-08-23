@@ -9,6 +9,7 @@ import '../../user_home/model/all_products.dart';
 import 'model/dashboard_model.dart';
 import 'model/organization_overview_model.dart';
 import 'model/sales_trend_model.dart';
+import 'model/user_by_id_response.dart';
 
 class DashboardApi implements DashboardApiContract {
   //Inject the DioProvider Dependency
@@ -22,6 +23,16 @@ class DashboardApi implements DashboardApiContract {
       var response = await dioProvider
           .get("Dashboards", query: {"userId": _userService.user.id});
       return DashBoardModel.fromJson(jsonDecode(jsonEncode(response?.data)));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<GetUserByIDResponse> getUserById({required String userId}) async {
+    try {
+      var response = await dioProvider.get("users/$userId");
+      return GetUserByIDResponse.fromJson(jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
       rethrow;
     }
@@ -83,6 +94,7 @@ class DashboardApi implements DashboardApiContract {
 
 abstract class DashboardApiContract {
   Future<DashBoardModel> getDashboardData();
+  Future<GetUserByIDResponse> getUserById({required String userId});
   Future <List<Product>> getAllProducts({int? pageSize, int? page});
   Future<OrganizationOverviewModel> getOrganizationOverView();
   Future<List<GetSalesTrend>> getSalesTrend(

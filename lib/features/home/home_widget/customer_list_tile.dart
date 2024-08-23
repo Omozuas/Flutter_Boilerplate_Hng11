@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/string_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../notification/widgets/profile_picture_notification.dart';
 
 class CustomerListTile extends StatelessWidget {
   final String customerName;
   final String email;
-  final String amount;
+  final num amount;
 
   const CustomerListTile({
     super.key,
@@ -22,17 +25,12 @@ class CustomerListTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 1.0,
-              blurRadius: 3.0,
-              offset: const Offset(0.0, 2.0),
-            )
-          ],
         ),
         child: Row(
           children: [
+            const NotificationProfilePicture(
+              forHome: true,
+            ),
             CircleAvatar(
               backgroundImage: const AssetImage('assets/images/logo.png'),
               radius: 24.w,
@@ -62,7 +60,7 @@ class CustomerListTile extends StatelessWidget {
               ),
             ),
             Text(
-              '\$$amount',
+              formatNumber(amount, decimalPlaces: 2),
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,

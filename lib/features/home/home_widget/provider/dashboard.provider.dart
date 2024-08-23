@@ -13,6 +13,7 @@ import '../../home_screen.dart';
 import '../model/dashboard_model.dart';
 import '../model/organization_overview_model.dart';
 import '../model/sales_trend_model.dart';
+import '../model/user_by_id_response.dart';
 
 class DashBoardState {
   final bool overViewLoading;
@@ -150,6 +151,20 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
 
   set setOrganizationOverView(OrganizationOverviewModel value) {
     state = state.copyWith(organizationOverviewModel: value);
+  }
+
+  Future<GetUserByIDResponse?> getUserByID(String userID)async{
+    try {
+      final res = await DashboardApi().getUserById(userId: userID);
+      if (res.id != null) {
+        return res;
+      }else{
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+      //tODO: Do something with caught error;
+    }
   }
 
   Future<void> getDashboardData() async {

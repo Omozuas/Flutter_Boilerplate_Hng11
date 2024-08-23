@@ -77,7 +77,7 @@ class UserService {
     final box = locator<GetStorage>();
     box.remove('accessToken');
     box.remove('user');
-
+    initializer();
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // await prefs.clear();
     // await storageService.deleteItem(key: DbTable.USER_TABLE_NAME);
