@@ -100,7 +100,7 @@ class InviteDialogState extends State<InviteDialog> {
                   child: Text(value),
                 );
               }).toList(),
-            // Invite Button
+              // Invite Button
 //             Center(
 //               child: CustomButton(
 //                 onTap: widget.onInvite ?? () {},

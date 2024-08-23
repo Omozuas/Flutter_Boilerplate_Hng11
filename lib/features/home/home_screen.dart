@@ -18,6 +18,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
+//import 'package:syncfusion_flutter_charts/charts.dart';
+
+//import 'home_widget/widgets/chart_loader.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
