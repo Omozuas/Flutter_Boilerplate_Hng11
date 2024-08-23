@@ -31,6 +31,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/user_setting/models/subscription_model.dart';
 
+import '../../features/main_view/user_main_view.dart';
+import '../../features/notification/screens/notification_home_screen.dart';
+
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoute.splash,
@@ -165,6 +168,18 @@ class AppRouter {
           return const UpdatePassword();
         },
       ),
+      ConsumerGoRoute(
+        path: AppRoute.userHome,
+        builder: (context, state, ref) {
+          return const UserMainView();
+        },
+      ),
+      ConsumerGoRoute(
+        path: AppRoute.notification,
+        builder: (context, state, ref) {
+          return const NotificationHomeScreen();
+        },
+      ),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(routes: [
@@ -211,14 +226,20 @@ class AppRoute {
   static const String verificationScreen = '/verificationScreen/:email';
   static const String verificationSuccess = '/verificationSuccess';
   static const String resetPassword = '/resetPassword/:email';
+  static const String cart = '/cart';
+  static const String orders = '/orders';
   static const String order = '/order';
+  static const String notification = '/notification';
 
   static const String settings = '/settings';
+  static const String userSettings = '/user-settings';
 
   static const String products = '/products';
+  static const String userProducts = '/user-products';
   static const String addProduct = '/add-product';
 
   static const String home = '/home';
+  static const String userHome = '/user-home';
 
   static const String createRole = '/org-settings/create-role';
   static const String members = '/org-settings/members';
