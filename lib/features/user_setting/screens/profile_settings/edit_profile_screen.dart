@@ -22,7 +22,7 @@ import '../../widgets/pronouns_textfield_dropdown.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
-  const EditProfileScreen({super.key, required this.user});
+  const EditProfileScreen({super.key,  this.user});
   final UserModel? user;
 
   @override
