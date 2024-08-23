@@ -66,7 +66,6 @@ class CartHomeScreen extends ConsumerWidget {
                 int quantity = product.quantity ?? 0;
 
                 void updateCartQuantity(Product product, int quantity) {
-                  final updatedProduct = product.copyWith(cartQuantity: quantity);
                   // Further logic to handle updatedProduct
                 }
 

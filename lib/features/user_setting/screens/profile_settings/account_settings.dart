@@ -14,7 +14,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
@@ -149,7 +148,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         },
                       ),
                       SettingsTile(
-                        leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                        leading: const Icon(CupertinoIcons.profile_circled,
+                            color: Colors.grey),
                         leadingIcon: 'assets/images/personsettings.png',
                         title: 'View as Organisation',
                         onTap: () {},
@@ -157,17 +157,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           scale: 0.7,
                           child: CupertinoSwitch(
                               value: userService.isUserOrganization,
-                              onChanged:(v) async {
-                                await userService.change(v, context);
-                                if(userService.isUserOrganization){
-                                  context.go(AppRoute.home);
-                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
-                                }else{
-                                  context.go(AppRoute.userHome);
-                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
-                                }
-                              }
-                          ),
+                              onChanged: (v) async {
+                                await userService
+                                    .change(v, context)
+                                    .then((value) {
+                                  if (userService.isUserOrganization) {
+                                    context.go(AppRoute.home);
+                                    // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
+                                  } else {
+                                    context.go(AppRoute.userHome);
+                                    // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
+                                  }
+                                });
+                              }),
                         ),
                       ),
                       SizedBox(height: 8.h),
@@ -228,7 +230,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context: context,
                             builder: (ctx) => LogOutDialog(
                               onTap: () {
-                                UserService userService = locator<UserService>();
+                                UserService userService =
+                                    locator<UserService>();
                                 userService.logout();
                                 stotage.remove('accessToken');
                                 Navigator.pop(ctx);
