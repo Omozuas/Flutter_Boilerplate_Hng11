@@ -10,12 +10,12 @@ class MemberProfileScreen extends StatelessWidget {
   final String memberBio;
 
   const MemberProfileScreen({
-    Key? key,
+    super.key,
     required this.profileImageUrl,
     required this.memberName,
     required this.memberEmail,
     required this.memberBio,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +80,9 @@ class MemberProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             // Member Bio
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: const Text(
+              child: Text(
                 "Member's Bio",
                 style: TextStyle(
                   fontSize: 16,
@@ -114,7 +114,7 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             CustomButton(
               onTap: () {
-                DeleteMemberDialog();
+                const DeleteMemberDialog();
               },
               borderColor: Colors.red,
               text: 'Delete Profile',

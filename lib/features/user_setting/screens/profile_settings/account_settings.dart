@@ -11,7 +11,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
@@ -131,7 +130,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/data.png',
-                        title: AppLocalizations.of(context)!.dataAndPrivacy,
+                        title: AppLocalizations.of(context)!.changePassword,
                         onTap: () {
                           context.push(AppRoute.updatePassword);
                         },
@@ -155,6 +154,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                       ),
                       SettingsTile(
+                        leadingIcon: 'assets/images/user_plus.png',
+                        title: AppLocalizations.of(context)!.createOrganisation,
+                        onTap: () {
+                          // Navigate to create organisation screen
+                        },
+                      ),
+                      SettingsTile(
                         leadingIcon: 'assets/images/org.png',
                         title: AppLocalizations.of(context)!.manageOrganization,
                         onTap: () {
@@ -176,13 +182,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         onTap: () {
                           // Navigate to Roles and Permissions Settings
                           context.push(AppRoute.rolesScreen);
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/money.png',
-                        title: AppLocalizations.of(context)!.integrations,
-                        onTap: () {
-                          // Navigate to Integrations Settings
                         },
                       ),
                       SettingsTile(
