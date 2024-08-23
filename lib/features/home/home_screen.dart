@@ -92,9 +92,7 @@ class HomeScreen extends ConsumerWidget {
             'Dashboard',
             style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            height: GlobalScreenSize.getScreenHeight(context) * 0.008,
-          ),
+          8.h.sbH,
           Text(
             'This Month\'s Summary',
             style: TextStyle(
@@ -102,9 +100,7 @@ class HomeScreen extends ConsumerWidget {
               color: GlobalColors.gray600Color,
             ),
           ),
-          SizedBox(
-            height: GlobalScreenSize.getScreenHeight(context) * 0.020,
-          ),
+          20.h.sbH,
           Row(
             children: [
               RevenueCard(
@@ -221,28 +217,47 @@ class HomeScreen extends ConsumerWidget {
           ),
 
           // Recent Sales
-          SizedBox(
+          Container(
+            padding: 7.sp.padA,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(
+                12.r
+              ),
+              border: Border.all(
+                width: 0.50, color: GlobalColors.borderColor
+              )
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       StringManager.recentSalesTitle,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: CustomTextStyle.bold(
+                        fontSize: 16.sp,
+                        color: GlobalColors.black
+                      ),
                     ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        StringManager.seeMore,
-                        style: CustomTextStyle.bold(
-                          fontSize: 16.sp,
-                          color: GlobalColors.integrationTextColor
+                    InkWell(
+                      onTap: (){},
+                      child: Padding(
+                        padding: 8.h.padV,
+                        child: Text(
+                          StringManager.seeMore,
+                          style: CustomTextStyle.regular(
+                            fontSize: 14.sp,
+                          ),
                         ),
                       ),
                     )
                   ],
+                ),
+                Divider(
+                  height: 8.h,
+                  color: GlobalColors.dividerColor,
                 ),
                 if((dashBoardStateProvider.dashBoardData.monthSales?.length??0)==0)
                 SizedBox(

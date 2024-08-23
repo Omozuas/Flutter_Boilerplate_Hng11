@@ -74,7 +74,7 @@ class CartWidget extends StatelessWidget {
                   );
                 } ,
               ),
-              17.w.sbW,
+              0.w.sbW,
               Expanded(
                 child: Padding(
                   padding: 16.h.padV,
@@ -125,12 +125,24 @@ class CartWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: PriceWidget(
-                              value: price,
-                              isBold: true,
-                              size: 18.sp,
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              height: 22.h,
+                              child: FittedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    PriceWidget(
+                                      value: price,
+                                      isBold: true,
+                                      size: 18.sp,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
+                          5.w.sbW,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
