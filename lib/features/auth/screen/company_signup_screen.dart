@@ -9,6 +9,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_boilerplate_hng11/l10n/app_localizations.dart'; // Import the localization
 
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
@@ -16,19 +17,12 @@ class CompanySignUpScreen extends ConsumerWidget {
   final _companyFormKey = GlobalKey<FormState>();
 
   final _companyNameController = TextEditingController();
-
   final _companyEmailController = TextEditingController();
-
   final _companyIndustryController = TextEditingController();
-
   final _companyTypeController = TextEditingController();
-
   final _companyCountryController = TextEditingController();
-
   final _companyStateController = TextEditingController();
-
   final _companyAddressController = TextEditingController();
-
   final _companyLgaController = TextEditingController();
 
   final loadingProvider = StateProvider<bool>((ref) => false);
@@ -42,7 +36,6 @@ class CompanySignUpScreen extends ConsumerWidget {
         appBar: AppBar(
           leading: const ChevronBackButton(),
           backgroundColor: Colors.white,
-          // surfaceTintColor: Colors.white,
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -55,20 +48,20 @@ class CompanySignUpScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Basic Sign Up Section Starts Here
+                    
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Sign up',
+                            AppLocalizations.of(context)!.signUp,
                             style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
                             ),
                           ),
                           Text(
-                            'Create an account to get started with us.',
+                            AppLocalizations.of(context)!.createAccountMessage,
                             style: CustomTextStyle.regular(
                               color: GlobalColors.gray500Color,
                               fontSize: 13.sp,
@@ -76,14 +69,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 20.sp),
                           CustomTextField(
-                            label: 'Company\'s Name',
+                            label: AppLocalizations.of(context)!.companyName,
                             controller: _companyNameController,
-                            hintText: 'Enter company\'s name',
+                            hintText: AppLocalizations.of(context)!.enterCompanyName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter name';
+                                return AppLocalizations.of(context)!.pleaseEnterName;
                               }
-
                               return null;
                             },
                             labelStyle: CustomTextStyle.medium(
@@ -97,19 +89,18 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           CustomTextField(
-                            label: 'Company\'s Email Address',
+                            label: AppLocalizations.of(context)!.companyEmailAddress,
                             controller: _companyEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            hintText: 'Enter company\'s email address',
+                            hintText: AppLocalizations.of(context)!.enterCompanyEmail,
                             validator: (value) {
                               final emailRegex = RegExp(
                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-
                               if (value == null || value.isEmpty) {
-                                return 'Please enter email address';
+                                return AppLocalizations.of(context)!.pleaseEnterEmail;
                               }
                               if (!emailRegex.hasMatch(value)) {
-                                return 'Please enter a valid email address';
+                                return AppLocalizations.of(context)!.pleaseEnterValidEmail;
                               }
                               return null;
                             },
@@ -124,7 +115,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'Select Industry',
+                            AppLocalizations.of(context)!.selectIndustry,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -132,12 +123,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Agriculture',
-                              'Manufacturing',
-                              'Technology',
-                              'Healthcare',
-                              'Education',
+                            items: [
+                              AppLocalizations.of(context)!.agriculture,
+                              AppLocalizations.of(context)!.manufacturing,
+                              AppLocalizations.of(context)!.technology,
+                              AppLocalizations.of(context)!.healthcare,
+                              AppLocalizations.of(context)!.education,
                             ],
                             onChanged: (String? value) {
                               _companyIndustryController.text = value ?? '';
@@ -154,7 +145,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            'Organization Type',
+                            AppLocalizations.of(context)!.organizationType,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -162,10 +153,10 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Sole Proprietorship',
-                              'Partnership',
-                              'Corporation',
+                            items: [
+                              AppLocalizations.of(context)!.soleProprietorship,
+                              AppLocalizations.of(context)!.partnership,
+                              AppLocalizations.of(context)!.corporation,
                             ],
                             onChanged: (String? value) {
                               _companyTypeController.text = value ?? '';
@@ -183,15 +174,15 @@ class CompanySignUpScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    // Basic Sign Up Section Ends Here
+                    
                     SizedBox(height: 30.sp),
-                    // Company Address Section Starts Here
+                  
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Company Address',
+                            AppLocalizations.of(context)!.companyAddress,
                             style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
@@ -199,7 +190,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'Select country',
+                            AppLocalizations.of(context)!.selectCountry,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -207,12 +198,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Germany',
-                              'Nigeria',
-                              'Canada',
-                              'Brazil',
-                              'Japan',
+                            items: [
+                              AppLocalizations.of(context)!.germany,
+                              AppLocalizations.of(context)!.nigeria,
+                              AppLocalizations.of(context)!.canada,
+                              AppLocalizations.of(context)!.brazil,
+                              AppLocalizations.of(context)!.japan,
                             ],
                             onChanged: (String? value) {
                               _companyCountryController.text = value ?? '';
@@ -229,7 +220,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            'Select state',
+                            AppLocalizations.of(context)!.selectState,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -237,11 +228,11 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Lagos',
-                              'Florida',
-                              'Texas',
-                              'California',
+                            items: [
+                              AppLocalizations.of(context)!.lagos,
+                              AppLocalizations.of(context)!.florida,
+                              AppLocalizations.of(context)!.texas,
+                              AppLocalizations.of(context)!.california,
                             ],
                             onChanged: (String? value) {
                               _companyStateController.text = value ?? '';
@@ -258,14 +249,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           CustomTextField(
-                            label: 'Address',
+                            label: AppLocalizations.of(context)!.address,
                             controller: _companyAddressController,
-                            hintText: 'Enter company address',
+                            hintText: AppLocalizations.of(context)!.enterCompanyAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter valid address';
+                                return AppLocalizations.of(context)!.pleaseEnterValidAddress;
                               }
-
                               return null;
                             },
                             labelStyle: CustomTextStyle.medium(
@@ -278,92 +268,56 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 10.sp),
-                          Text(
-                            'LGA',
-                            style: CustomTextStyle.medium(
-                              color: GlobalColors.darkOne,
-                              fontSize: 13.sp,
-                            ),
-                          ),
-                          SizedBox(height: 5.sp),
-                          CustomDropdownButton(
-                            items: const [
-                              'Ikeja',
-                              'Brisbane City',
-                              'City of Sydney',
-                              'Ibadan North',
-                            ],
-                            onChanged: (String? value) {
-                              _companyLgaController.text = value ?? '';
-                            },
-                            valueStyle: CustomTextStyle.medium(
-                              color: GlobalColors.darkOne,
-                              fontSize: 13.sp,
-                            ),
-                            borderColor: GlobalColors.lightGray,
-                            height: 48,
-                            containerColor: GlobalColors.white,
-                            width: double.infinity,
-                            textColor: GlobalColors.darkOne,
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Company Address Section Ends Here
-                    SizedBox(height: 30.sp),
-                    // Action Button Section Starts Here
-                    SizedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomButton(
-                            onTap: () async {
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_companyFormKey.currentState!.validate()) {
-                                ref.read(loadingProvider.notifier).state = true;
-                                //Submission async function here
-                                ref.read(loadingProvider.notifier).state =
-                                    false;
+                          CustomTextField(
+                            label: AppLocalizations.of(context)!.lga,
+                            controller: _companyLgaController,
+                            hintText: AppLocalizations.of(context)!.enterLGA,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return AppLocalizations.of(context)!.pleaseEnterValidLGA;
                               }
+                              return null;
                             },
-                            loading: isLoading,
-                            borderColor: GlobalColors.orange,
-                            text: 'Create Account',
-                            height: 40.sp,
-                            containerColor: GlobalColors.orange,
-                            width: double.infinity,
-                            textColor: GlobalColors.white,
+                            labelStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                           ),
-                          SizedBox(height: 20.sp),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Already Have An Account?',
-                                style: CustomTextStyle.regular(
-                                  color: GlobalColors.darkOne,
-                                  fontSize: 13.sp,
-                                ),
-                              ),
-                              SizedBox(width: 10.sp),
-                              GestureDetector(
-                                onTap: () {
-                                  context.push(AppRoute.login);
-                                },
-                                child: Text(
-                                  'Login',
-                                  style: CustomTextStyle.regular(
-                                    color: GlobalColors.orange,
-                                    fontSize: 13.sp,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
                         ],
                       ),
                     ),
-                    // Action Button Section Ends Here
+                  
+                    SizedBox(height: 35.sp),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        height: 50.h,
+                        color: GlobalColors.primaryGreen,
+                        isLoading: isLoading,
+                        onTap: () async {
+                          if (_companyFormKey.currentState?.validate() ?? false) {
+                            ref.read(loadingProvider.notifier).state = true;
+                            await Future.delayed(const Duration(seconds: 2));
+                            ref.read(loadingProvider.notifier).state = false;
+
+                            if (context.mounted) {
+                              context.go(AppRouter.companyDetailsRoute);
+                            }
+                          }
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.continueText,
+                          style: CustomTextStyle.medium(
+                            color: GlobalColors.white,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

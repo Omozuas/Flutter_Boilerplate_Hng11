@@ -51,33 +51,6 @@ class VerificationSuccessScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Positioned(
-          //   top: 0,
-          //   left: 0,
-          //   right: 0,
-          //   child: Container(
-          //     color: Colors.green,
-          //     padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-          //     child: Row(
-          //       children: [
-          //         const Icon(Icons.check_circle, color: Colors.white),
-          //         SizedBox(width: 8.sp),
-          //         const Expanded(
-          //           child: Text(
-          //             'Successfully Verified',
-          //             style: TextStyle(color: Colors.white, fontSize: 16),
-          //           ),
-          //         ),
-          //         IconButton(
-          //           icon: const Icon(Icons.close, color: Colors.white),
-          //           onPressed: () {
-          //             Navigator.pop(context);
-          //           },
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

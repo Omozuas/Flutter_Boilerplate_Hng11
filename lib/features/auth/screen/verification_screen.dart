@@ -77,13 +77,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
         loading = false;
       });
     }
-    // if (code == '123456') {
-    //   context.push(AppRoute.verificationSuccess);
-    // } else {
-    //   setState(() {
-    //     _isCodeValid = false;
-    //   });
-    // }
   }
 
   bool codeResent = false;
@@ -115,7 +108,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
         leading: const ChevronBackButton(),
       ),
       body: Consumer(builder: (context, ref, child) {
-        // loading = false;
         return Stack(
           children: [
             Padding(
@@ -160,8 +152,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color:
-                                      _isCodeValid ? Colors.orange : Colors.red,
+                                  color: _isCodeValid ? Colors.orange : Colors.red,
                                 ),
                               ),
                               counterText: '',
@@ -197,25 +188,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     width: 342.w,
                     textColor: Colors.white,
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () async {
-                  //     _handleVerify(ref, context);
-                  //   },
-                  //   // _isCodeComplete ? _handleVerify : null,
-                  //   style: ElevatedButton.styleFrom(
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(8),
-                  //     ),
-                  //     backgroundColor:
-                  //         _isCodeComplete ? Colors.orange : Colors.grey,
-                  //   ),
-                  //   child: const Text(
-                  //     'Verify',
-                  //     style: TextStyle(
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // ),
                   if (!_isCodeValid || _countdown == 0) ...[
                     SizedBox(height: 16.sp),
                     Center(
@@ -254,37 +226,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ],
               ),
             ),
-            // if (!_isCodeValid)
-            //   Positioned(
-            //     top: 0,
-            //     left: 0,
-            //     right: 0,
-            //     child: Container(
-            //       color: Colors.red,
-            //       padding:
-            //           EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
-            //       child: Row(
-            //         children: [
-            //           const Icon(Icons.error, color: Colors.white),
-            //           SizedBox(width: 8.sp),
-            //           const Expanded(
-            //             child: Text(
-            //               'Invalid code, please try again.',
-            //               style: TextStyle(color: Colors.white, fontSize: 16),
-            //             ),
-            //           ),
-            //           IconButton(
-            //             icon: const Icon(Icons.close, color: Colors.white),
-            //             onPressed: () {
-            //               setState(() {
-            //                 _isCodeValid = true;
-            //               });
-            //             },
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
           ],
         );
       }),
