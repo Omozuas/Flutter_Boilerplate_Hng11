@@ -155,7 +155,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       // New SettingsTile for "Create Organization"
                       SettingsTile(
-                        leadingIcon: 'assets/images/create_organization.png',
+                        leadingIcon: 'assets/images/org.png',
                         title: AppLocalizations.of(context)!.createOrganisation,
                         onTap: () {
                           // Navigate to Create Organization Screen
@@ -175,20 +175,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           context.push(AppRoute.members);
                         },
                       ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/notify.png',
-                        title: AppLocalizations.of(context)!.rolesAndPermissions,
-                        onTap: () {
-                          context.push(AppRoute.rolesScreen);
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/money.png',
-                        title: AppLocalizations.of(context)!.integrations,
-                        onTap: () {
-                          // Navigate to Integrations Settings
-                        },
-                      ),
+                 
                       SettingsTile(
                         leadingIcon: 'assets/images/wallet.png',
                         title: AppLocalizations.of(context)!.paymentInformation,
