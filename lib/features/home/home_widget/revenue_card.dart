@@ -44,8 +44,8 @@ class RevenueCard extends StatelessWidget {
             Text(
               value,
               style: CustomTextStyle.bold(
-                  fontSize: 18.sp,
-                  color: const Color(0xFF374151)
+                fontSize: 18.sp,
+                color: const Color(0xFF374151),
               ),
             ),
             Column(
@@ -55,16 +55,12 @@ class RevenueCard extends StatelessWidget {
                 Text(
                   title,
                   style: CustomTextStyle.bold(
-                      fontSize: 14.sp,
-                      color: GlobalColors.gray500Color
-                  ),
+                      fontSize: 14.sp, color: GlobalColors.gray500Color),
                 ),
                 Text(
                   details,
                   style: CustomTextStyle.regular(
-                      fontSize: 12.sp,
-                      color: const Color(0xFF71717A)
-                  ),
+                      fontSize: 12.sp, color: const Color(0xFF71717A)),
                 ),
               ],
             ),
