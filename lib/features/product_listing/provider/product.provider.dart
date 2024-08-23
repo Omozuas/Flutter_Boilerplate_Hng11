@@ -15,9 +15,6 @@ class ProductList extends _$ProductList {
     if (org.organisationId == null) {
       return Future.error('organisation is not initialized');
     }
-    final value = ref.watch(getOrganisationProvider);
-
-    log('Organization provider ${value.name}');
 
     return ref
         .watch(productApiProvider)
@@ -28,8 +25,18 @@ class ProductList extends _$ProductList {
 @riverpod
 AsyncValue<Map<String, List<Product>>> productsByCategory(
     ProductsByCategoryRef ref) {
+  final queryString = ref.watch(searchInputProvider);
   return ref.watch(productListProvider).whenData(
-        _getProductMapping,
+        (value) => _getProductMapping(
+          value.where(
+            (element) {
+              return element.name
+                      ?.toLowerCase()
+                      .contains(queryString.toLowerCase()) ??
+                  true;
+            },
+          ).toList(),
+        ),
       );
 }
 
@@ -42,4 +49,17 @@ Map<String, List<Product>> _getProductMapping(List<Product> products) {
     categoryMap[category!] = categoryList;
   }
   return categoryMap;
+}
+
+@riverpod
+class SearchInput extends _$SearchInput {
+  @override
+  String build() {
+    return '';
+  }
+
+  void update(String queryString) {
+    log(queryString);
+    state = queryString;
+  }
 }

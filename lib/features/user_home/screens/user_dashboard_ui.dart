@@ -15,7 +15,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../auth/providers/auth.provider.dart';
-import '../../product_listing/models/product/product_model.dart';
 import '../../product_listing/widgets/product_card.dart';
 
 class UserDashBoardScreen extends ConsumerWidget {
@@ -196,7 +195,7 @@ class ProductLoadingWidget extends StatelessWidget {
           width: width(context),
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1.h, color: Color(0xFFF6F6F6)),
+              side: BorderSide(width: 1.h, color: const Color(0xFFF6F6F6)),
               borderRadius: BorderRadius.circular(8.sp),
             ),
           ),

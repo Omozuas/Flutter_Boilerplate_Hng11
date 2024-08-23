@@ -11,6 +11,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductScreen extends ConsumerWidget {
   const ProductScreen({super.key});
@@ -63,8 +64,7 @@ class ProductScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 5),
+                        padding: const EdgeInsets.only(left: 16, right: 16),
                         height: GlobalScreenSize.getScreenHeight(
                               context,
                             ) *
@@ -82,34 +82,31 @@ class ProductScreen extends ConsumerWidget {
                               border: InputBorder.none,
                               hintText: "Search Product",
                               contentPadding: const EdgeInsets.only(top: 2),
-                              suffixIcon: Icon(Icons.search_ou,
-                                  color: GlobalColors.gray200Color,size: 22.h,)
-                              // suffixIcon: SvgPicture.asset(
-                              //   Assets.images.svg.productListing.sortIcon.path,
-                              //   height: 24.h,
-                              //   width: 24.w,
-                              //   fit: BoxFit.scaleDown,
-                              // )
-                              ),
+                              suffixIcon: SvgPicture.asset(
+                                Assets.images.svg.productListing.sortIcon.path,
+                                height: 24.h,
+                                width: 24.w,
+                                fit: BoxFit.scaleDown,
+                              )),
                         ),
                       ),
                     ),
-                    // 10.w.sbW,
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     showModalBottomSheet(
-                    //       context: context,
-                    //       builder: (context) {
-                    //         return const FilterBottomSheet();
-                    //       },
-                    //     );
-                    //   },
-                    //   child: Assets.images.svg.productListing.filterButton.svg(
-                    //     height:
-                    //         GlobalScreenSize.getScreenHeight(context) * 0.052,
-                    //     width: GlobalScreenSize.getScreenWidth(context) * 0.7,
-                    //   ),
-                    // ),
+                    10.w.sbW,
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return const FilterBottomSheet();
+                          },
+                        );
+                      },
+                      child: Assets.images.svg.productListing.filterButton.svg(
+                        height:
+                            GlobalScreenSize.getScreenHeight(context) * 0.052,
+                        width: GlobalScreenSize.getScreenWidth(context) * 0.7,
+                      ),
+                    ),
                   ],
                 ),
               ),

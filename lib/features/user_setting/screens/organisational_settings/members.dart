@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/invite_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_search_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_avatar.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MembersSettings extends StatefulWidget {
   const MembersSettings({super.key});
@@ -19,7 +19,7 @@ class MembersSettings extends StatefulWidget {
 }
 
 class _MembersSettingsState extends State<MembersSettings> {
-  bool isInviteLinkActive = false;
+  // bool isInviteLinkActive = false;
 
   void showCustomToast(BuildContext context) {
     CustomToast.show(
@@ -38,7 +38,7 @@ class _MembersSettingsState extends State<MembersSettings> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Members',
+          AppLocalizations.of(context)!.members,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w700,
@@ -59,7 +59,7 @@ class _MembersSettingsState extends State<MembersSettings> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Manage who has access to this workspace",
+                AppLocalizations.of(context)!.manageAccessToWorkspace,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
@@ -70,88 +70,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                value: isInviteLinkActive,
-                onChanged: (bool value) {
-                  setState(() {
-                    isInviteLinkActive = value;
-                  });
-                },
-                inactiveTrackColor: GlobalColors.borderColor,
-                inactiveThumbColor: GlobalColors.white,
-                activeColor: GlobalColors.white,
-                activeTrackColor: GlobalColors.orange,
-                title: Text(
-                  'Invite Link',
-                  style: GoogleFonts.inter(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 48, 47, 47),
-                  ),
-                ),
-                subtitle: Text(
-                  'This provides a unique URL that allows anyone to join your workspace',
-                  style: GoogleFonts.inter(
-                    fontSize: 12.5.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff525252),
-                  ),
-                ),
-              ),
-              if (isInviteLinkActive) ...[
-                SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 80.h,
-                      width: 350.w,
-                      child: TextField(
-                        readOnly: true,
-                        maxLines: null,
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                        decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15.0, horizontal: 10.5),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Wrap(
-                                children: [
-                                  InkWell(
-                                      onTap: () {},
-                                      child: Icon(Icons.refresh,
-                                          color: GlobalColors.orange)),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Icon(Icons.copy,
-                                        color: GlobalColors.orange),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            hintText:
-                                'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: GlobalColors.borderColor),
-                            )),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-              Divider(
-                color: GlobalColors.borderColor,
-                thickness: 1.h,
-              ),
+
               SizedBox(
                 height: 10.h,
               ),
@@ -174,7 +93,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                             });
                       },
                       borderColor: const Color(0xffF97316),
-                      text: 'Invite people',
+                      text: AppLocalizations.of(context)!.inviteLink,
                       height: 31.h,
                       containerColor: const Color(0xffF97316),
                       width: 105.h,
@@ -184,50 +103,41 @@ class _MembersSettingsState extends State<MembersSettings> {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                'On the Free plan all members in a workspace are administrators. ',
-                style: GoogleFonts.inter(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 51, 50, 50),
-                ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
+
               Row(
                 children: [
                   SizedBox(
-                    height: 40.h,
-                    width: 250.w,
-                    child: CustomSearchField(
-                      hintText: 'Search by name or email',
-                      leading:
-                          Icon(Icons.search, color: GlobalColors.gray200Color),
+                    height: 40,
+                    width: 250,
+                    child: TextField(
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: const Color(0xff525252)),
+                      decoration: InputDecoration(
+                        hintText: 'Search by name or email',
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                          child: Icon(Icons.search,
+                              color: GlobalColors.gray200Color),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(
+                            color: Color(0xffCBD5E1),
+                          ),
+                        ),
+                        prefixIconConstraints: const BoxConstraints(),
+                        contentPadding: const EdgeInsets.only(top: 8.0),
+                      ),
                     ),
                   ),
                   SizedBox(width: 13.w),
-                  Expanded(
-                    child: CustomDropdownButton(
-                        initialValue: 'All',
-                        items: const [
-                          'All',
-                          'Members',
-                          'Suspended',
-                          'Left workspace'
-                        ],
-                        borderColor: const Color(0xffCBD5E1),
-                        height: 40.h,
-                        containerColor: Colors.white,
-                        width: 100.w,
-                        textColor: const Color(0xff0F172A)),
-                  )
+
                 ],
               ),
               SizedBox(height: 10.w),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     '3 active members',
@@ -236,13 +146,13 @@ class _MembersSettingsState extends State<MembersSettings> {
                         fontWeight: FontWeight.w400,
                         color: const Color(0xff525252)),
                   ),
+                  const Spacer(),
                   PopupMenuButton<String>(
                     offset: const Offset(0, 30),
                     padding: EdgeInsets.zero,
                     icon: const Icon(
                       Icons.more_vert_rounded,
-                      size: 25,
-                      color: Color(0xff525252),
+                      size: 35,
                     ),
                     onSelected: (value) {
                       // Handle the selected action here
@@ -266,7 +176,7 @@ class _MembersSettingsState extends State<MembersSettings> {
                                 bottom: 4.0,
                               ),
                               child: Text(
-                                'Delete member',
+                                AppLocalizations.of(context)!.deleteButton,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.inter(
                                   fontSize: 14,
@@ -304,8 +214,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -336,8 +250,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -368,8 +286,12 @@ class _MembersSettingsState extends State<MembersSettings> {
                       profileEmail: 'ChadBoseW@gmail.com'),
                   const Spacer(),
                   CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
+                      initialValue: AppLocalizations.of(context)!.admin,
+                      items: [
+                        AppLocalizations.of(context)!.admin,
+                        AppLocalizations.of(context)!.user,
+                        AppLocalizations.of(context)!.guest
+                      ],
                       borderColor: Colors.transparent,
                       height: 40.h,
                       containerColor: Colors.white,
@@ -381,37 +303,7 @@ class _MembersSettingsState extends State<MembersSettings> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Text(
-                    'Export Members List',
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: const Color(0xff0A0A0A)),
-                  ),
-                  const Spacer(),
-                  CustomButton(
-                      onTap: () {},
-                      borderColor: const Color(0xffF97316),
-                      text: 'Export CSV',
-                      height: 31.h,
-                      containerColor: Colors.white,
-                      width: 91.h,
-                      textColor: const Color(0xffF97316))
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                'Export a CSV with information of all members of your team',
-                style: GoogleFonts.inter(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff525252),
-                ),
-              )
+
             ],
           ),
         ),

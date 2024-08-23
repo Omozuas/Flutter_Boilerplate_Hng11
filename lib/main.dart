@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -7,6 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'features/auth/providers/language_provider.dart';
+// import 'localiza/localiza_class.dart';
 
 void main() async {
   await initializeApp();
@@ -31,15 +35,19 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(languageProvider);
     return ScreenUtilInit(
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp.router(
+        locale: locale,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         builder: OneContext().builder,
         key: OneContext().key,
         routerConfig: AppRouter.router,
@@ -64,10 +72,15 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey[800], // Content text style
               ),
             ),
-            appBarTheme: const AppBarTheme(
+            appBarTheme: AppBarTheme(
                 backgroundColor: Colors.transparent,
                 scrolledUnderElevation: 0,
-                systemOverlayStyle: SystemUiOverlayStyle.dark)),
+                systemOverlayStyle: SystemUiOverlayStyle.dark,
+              titleTextStyle: CustomTextStyle.semiBold(
+                fontSize: 18.sp,
+                color: Colors.black
+              )
+            )),
       ),
     );
   }

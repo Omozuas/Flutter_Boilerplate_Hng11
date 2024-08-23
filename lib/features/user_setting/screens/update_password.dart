@@ -1,22 +1,28 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
+import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:one_context/one_context.dart';
+import 'validator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UpdatePassword extends StatefulWidget {
+class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
 
   @override
-  State<UpdatePassword> createState() => _UpdatePasswordState();
+  ConsumerState<UpdatePassword> createState() => _UpdatePasswordState();
 }
 
-class _UpdatePasswordState extends State<UpdatePassword> {
-  bool oldPasswordVissible = false;
+class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   bool newPasswordVissible = false;
   bool confPasswordVissible = false;
 
-  // bool passwordVisible = false;
   String password = '';
   bool hasUppercase = false;
   bool hasNumber = false;
@@ -24,12 +30,12 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   FocusNode newPasswordFocusNode = FocusNode();
   FocusNode confirmPasswordFocusNode = FocusNode();
   bool isPasswordFieldFocused = false;
-  final TextEditingController currentPasswordController =
-      TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   bool passwordsMatch = true;
+  String? errorMessage;
 
   @override
   void initState() {
@@ -48,10 +54,82 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   void dispose() {
     newPasswordFocusNode.dispose();
     confirmPasswordFocusNode.dispose();
-    currentPasswordController.dispose();
+    emailController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  void updatePassword() async {
+    final email = emailController.text;
+    final newPassword = newPasswordController.text;
+    final confirmPassword = confirmPasswordController.text;
+
+    if (newPassword == confirmPasswordController.text) {
+      try {
+        final passwordService = ref.read(passwordServiceProvider);
+        await passwordService
+            .updatePassword(
+                email: email,
+                newPassword: newPassword,
+                confirmPassword: confirmPassword)
+            .then(
+          (value) {
+            OneContext().showDialog(
+              builder: (ctx) {
+                return ProfileDialog(
+                    title: "Password Successfully Updated",
+                    description:
+                        "Your password has been successfully updated! You can now log in with your new password.",
+                    onContinue: () {
+                      Navigator.pop(ctx);
+                      context.go(AppRoute.login);
+                    });
+              },
+            );
+          },
+        );
+
+        //Handle errors
+      } on DioException catch (e) {
+        // Handle DioException
+        if (e.response?.statusCode == 404) {
+          setState(() {
+            errorMessage =
+                'The requested resource was not found. Please check the URL or contact support.';
+          });
+        } else {
+          setState(() {
+            errorMessage = 'Failed to update password. Please try again.';
+          });
+        }
+        OneContext().showDialog(
+          builder: (context) {
+            return ProfileDialog(
+              title: "Error",
+              description: errorMessage!,
+            );
+          },
+        );
+      } catch (e) {
+        // Handle other exceptions
+        setState(() {
+          errorMessage = 'An unexpected error occurred. Please try again.';
+        });
+        OneContext().showDialog(
+          builder: (context) {
+            return ProfileDialog(
+              title: AppLocalizations.of(context)!.errorMessage,
+              description: errorMessage!,
+            );
+          },
+        );
+      }
+    } else {
+      setState(() {
+        passwordsMatch = false;
+      });
+    }
   }
 
   void checkPasswordStrength(String password) {
@@ -121,7 +199,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              "Current Password",
+                              AppLocalizations.of(context)!.email,
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -130,30 +208,15 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             ),
                           ),
                           TextFormField(
-                            controller: currentPasswordController,
-                            obscureText: !oldPasswordVissible,
+                            controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: "Enter current password",
+                              hintText: "example@email.com",
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  oldPasswordVissible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off_outlined,
-                                  color: GlobalColors.iconColor,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      oldPasswordVissible =
-                                          !oldPasswordVissible;
-                                    },
-                                  );
-                                },
-                              ),
+                              suffixIcon: const Icon(Icons.email_outlined),
                               border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(6),
@@ -168,6 +231,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                 ),
                               ),
                             ),
+                            validator: validateEmail,
                           ),
                         ],
                       ),
@@ -192,6 +256,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             controller: newPasswordController,
                             focusNode: newPasswordFocusNode,
                             obscureText: !newPasswordVissible,
+                            validator: validatePassFields,
                             onChanged: (value) {
                               checkPasswordStrength(value);
                               validatePasswords();
@@ -352,6 +417,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             focusNode: confirmPasswordFocusNode,
                             controller: confirmPasswordController,
                             obscureText: !confPasswordVissible,
+                            validator: validatePassFields,
                             onChanged: (value) => validatePasswords(),
                             decoration: InputDecoration(
                               hintText: "Confirm new password",
@@ -422,7 +488,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                               padding: EdgeInsets.symmetric(horizontal: 20.w),
                             ),
                             child: Text(
-                              "Cancel",
+                              AppLocalizations.of(context)!.cancel,
                               style: GoogleFonts.inter(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -437,15 +503,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return const ProfileDialog(
-                                      title: "Password Successfully Updated",
-                                      description:
-                                          "Your password has been successfully updated! You can now log in with your new password.",
-                                    );
-                                  });
+                              updatePassword();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: GlobalColors.orange,

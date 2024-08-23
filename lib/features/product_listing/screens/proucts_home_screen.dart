@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductHomeScreen extends StatelessWidget {
   const ProductHomeScreen({super.key});
@@ -52,33 +55,37 @@ class ProductHomeScreen extends StatelessWidget {
               height: 24.h,
             ),
             Text(
-              "Discover",
+              AppLocalizations.of(context)!.discoverButton,
               style: CustomTextStyles.headerTextBlack,
             ),
             SizedBox(
               height: 16.h,
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              height: GlobalScreenSize.getScreenHeight(
-                    context,
-                  ) *
-                  0.052,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: GlobalColors.searchBorderColor)),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search Product",
-                    suffixIcon: SvgPicture.asset(
-                      Assets.images.svg.productListing.searchIcon.path,
-                      height: 24.h,
-                      width: 24.w,
-                      fit: BoxFit.scaleDown,
-                    )),
-              ),
-            ),
+            Consumer(builder: (context, ref, child) {
+              return Container(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                height: GlobalScreenSize.getScreenHeight(
+                      context,
+                    ) *
+                    0.052,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(color: GlobalColors.searchBorderColor)),
+                child: TextFormField(
+                  onChanged: ref.watch(searchInputProvider.notifier).update,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText:
+                          AppLocalizations.of(context)!.searchProductButton,
+                      suffixIcon: SvgPicture.asset(
+                        Assets.images.svg.productListing.searchIcon.path,
+                        height: 24.h,
+                        width: 24.w,
+                        fit: BoxFit.scaleDown,
+                      )),
+                ),
+              );
+            }),
             SizedBox(
               height: 20.h,
             ),
@@ -105,7 +112,7 @@ class ProductHomeScreen extends StatelessWidget {
                       SizedBox(
                         width: GlobalScreenSize.getScreenWidth(context) * 0.4,
                         child: Text(
-                          "Top Boilerplates For You",
+                          AppLocalizations.of(context)!.topBoilerplatesForYou,
                           style: CustomTextStyles.bannerHeaderTextWhite,
                         ),
                       ),
@@ -121,7 +128,7 @@ class ProductHomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12.r)),
                         child: Center(
                           child: Text(
-                            "Up to 50% ",
+                            AppLocalizations.of(context)!.discountLabel,
                             style: CustomTextStyles.bannerbodyTextOrange,
                           ),
                         ),
@@ -144,11 +151,11 @@ class ProductHomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Available Products",
+                  AppLocalizations.of(context)!.availableProducts,
                   style: CustomTextStyles.titleTextBlack,
                 ),
                 Text(
-                  "See more",
+                  AppLocalizations.of(context)!.seeMore,
                   style: PlusJakartaTextStyle.bodyTextGrey,
                 )
               ],

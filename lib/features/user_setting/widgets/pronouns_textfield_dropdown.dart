@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PronounsTextfieldDropdown extends StatefulWidget {
   const PronounsTextfieldDropdown({
@@ -37,9 +38,9 @@ class _PronounsTextfieldDropdownState extends State<PronounsTextfieldDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          'Pronouns',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.pronouns,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: Color(0xFF0F172A),
@@ -63,9 +64,9 @@ class _PronounsTextfieldDropdownState extends State<PronounsTextfieldDropdown> {
             elevation: 2,
             isExpanded: true,
             value: _value,
-            hint: const Text(
-              'Select',
-              style: TextStyle(
+            hint: Text(
+              AppLocalizations.of(context)!.select,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF0F172A),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
@@ -13,6 +12,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -34,18 +35,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(profileProvider).user;
-    UserService _userService = locator<UserService>();
+    UserService userService = locator<UserService>();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Align(
+        title: Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
                 left: 1.0), // Adjust this padding to align with the avatar
             child: Text(
-              'Settings',
-              style: TextStyle(
+              AppLocalizations.of(context)!.settings,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -111,54 +112,54 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10.0),
-                      const Text(
-                        'Profile Settings',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.profileSettings,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/personsettings.png',
-                        title: 'Account',
+                        title: AppLocalizations.of(context)!.account,
                         onTap: () {
                           context.push(AppRoute.editProfileScreen);
                         },
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/notify.png',
-                        title: 'Notification',
+                        title: AppLocalizations.of(context)!.notification,
                         onTap: () {
                           context.push(AppRoute.notificationScreen);
                         },
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/data.png',
-                        title: 'Data and Privacy ',
+                        title: AppLocalizations.of(context)!.dataAndPrivacy,
                         onTap: () {
                           context.push(AppRoute.updatePassword);
                         },
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/world.png',
-                        title: 'Language and Region',
+                        title: AppLocalizations.of(context)!.languageAndRegion,
                         onTap: () {
                           // Navigate to Data and Privacy Settings
                           context.push(AppRoute.languageAndRegionScreen);
                         },
                       ),
                       SettingsTile(
-                        leading: Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                        leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
                         leadingIcon: 'assets/images/personsettings.png',
                         title: 'View as Organisation',
                         onTap: () {},
                         trailing: Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
-                              value: _userService.isUserOrganization,
+                              value: userService.isUserOrganization,
                               onChanged:(v) async {
-                                await _userService.change(v, context);
-                                if(_userService.isUserOrganization){
+                                await userService.change(v, context);
+                                if(userService.isUserOrganization){
                                   context.go(AppRoute.home);
                                   // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
                                 }else{
@@ -181,14 +182,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/org.png',
-                        title: 'Manage Organization',
+                        title: AppLocalizations.of(context)!.manageOrganization,
                         onTap: () {
                           // Navigate to Manage Organization
                         },
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/people.png',
-                        title: 'Members',
+                        title: AppLocalizations.of(context)!.members,
                         onTap: () {
                           // Navigate to Members Settings
                           context.push(AppRoute.members);
@@ -196,7 +197,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/notify.png',
-                        title: 'Roles and Permissions',
+                        title:
+                            AppLocalizations.of(context)!.rolesAndPermissions,
                         onTap: () {
                           // Navigate to Roles and Permissions Settings
                           context.push(AppRoute.rolesScreen);
@@ -204,14 +206,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/money.png',
-                        title: 'Integrations',
+                        title: AppLocalizations.of(context)!.integrations,
                         onTap: () {
                           // Navigate to Integrations Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/wallet.png',
-                        title: 'Payment Information',
+                        title: AppLocalizations.of(context)!.paymentInformation,
                         onTap: () {
                           // Navigate to Payment Information Settings
                           context.push(AppRoute.subscriptionsScreen);
@@ -226,8 +228,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context: context,
                             builder: (ctx) => LogOutDialog(
                               onTap: () {
-                                UserService _userService = locator<UserService>();
-                                _userService.logout();
+                                UserService userService = locator<UserService>();
+                                userService.logout();
                                 stotage.remove('accessToken');
                                 Navigator.pop(ctx);
                                 context.go(AppRoute.login);

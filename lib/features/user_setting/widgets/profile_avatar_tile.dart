@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../utils/global_colors.dart';
 import '../provider/profile_provider.dart';
 import 'profile_avatar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileAvatarTile extends ConsumerWidget {
   const ProfileAvatarTile({super.key, this.onTap});
@@ -29,7 +30,7 @@ class ProfileAvatarTile extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Upload your photo',
+                  AppLocalizations.of(context)!.uploadYourPhoto,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
@@ -37,7 +38,7 @@ class ProfileAvatarTile extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  'Photos help your teammates recognize you',
+                  AppLocalizations.of(context)!.photoPurpose,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
