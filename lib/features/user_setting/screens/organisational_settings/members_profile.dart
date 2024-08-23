@@ -28,8 +28,8 @@ class MemberProfileScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
-          'Member Profile',
+        title:  Text(
+          AppLocalizations.of(context)!.memberProfile,
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -70,7 +70,7 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             // Member Name and Email
             Text(
-              memberDetail.firstName ?? "Member Name",
+              memberDetail.firstName ?? AppLocalizations.of(context)!.memberName,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -86,11 +86,11 @@ class MemberProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             // Member Bio
-            const Align(
+             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Member's Bio",
-                style: TextStyle(
+                AppLocalizations.of(context)!.memberBio,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -109,7 +109,7 @@ class MemberProfileScreen extends StatelessWidget {
             CustomButton(
               onTap: () { },
               borderColor: GlobalColors.orange,
-              text: 'Edit Profile',
+              text: AppLocalizations.of(context)!.editProfile,
               height: 50.0,
               containerColor: GlobalColors.orange,
               width: double.infinity,
@@ -124,7 +124,7 @@ class MemberProfileScreen extends StatelessWidget {
                 });
               },
               borderColor: Colors.red,
-              text: 'Delete Profile',
+              text: AppLocalizations.of(context)!.deleteProfile,
               height: 50.0,
               containerColor: GlobalColors.white,
               width: double.infinity,
