@@ -7,12 +7,13 @@ import '../../../utils/custom_text_style.dart';
 class CustomTextField extends StatelessWidget {
   final String? hintText;
   final TextStyle? hintTextStyle;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
   final Function(String?)? onChanged;
   final int? maxLength;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final int? maxLines;
   final Color? borderColor;
   final double? borderRadius;
@@ -22,13 +23,14 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.hintText,
     this.hintTextStyle,
-    required this.controller,
+     this.controller,
     this.validator,
     this.keyboardType,
     this.maxLength,
     this.maxLines,
     this.borderColor,
     this.borderRadius,
+    this.suffixIcon,
     this.showCounter = true,
     this.onChanged,
     this.prefixIcon,
@@ -44,6 +46,7 @@ class CustomTextField extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 hintText: hintText,
+                suffixIcon: suffixIcon,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
                   borderSide: BorderSide(

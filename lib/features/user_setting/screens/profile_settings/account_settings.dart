@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -35,7 +33,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(profileProvider).user;
-    UserService userService = locator<UserService>();
+    // UserService userService = locator<UserService>();
 
     return Scaffold(
       appBar: AppBar(
@@ -148,28 +146,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           context.push(AppRoute.languageAndRegionScreen);
                         },
                       ),
-                      SettingsTile(
-                        leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
-                        leadingIcon: 'assets/images/personsettings.png',
-                        title: 'View as Organisation',
-                        onTap: () {},
-                        trailing: Transform.scale(
-                          scale: 0.7,
-                          child: CupertinoSwitch(
-                              value: userService.isUserOrganization,
-                              onChanged:(v) async {
-                                await userService.change(v, context);
-                                if(userService.isUserOrganization){
-                                  context.go(AppRoute.home);
-                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
-                                }else{
-                                  context.go(AppRoute.userHome);
-                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
-                                }
-                              }
-                          ),
-                        ),
-                      ),
+                      // SettingsTile(
+                      //   leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                      //   leadingIcon: 'assets/images/personsettings.png',
+                      //   title: 'View as Organisation',
+                      //   onTap: () {},
+                      //   trailing: Transform.scale(
+                      //     scale: 0.7,
+                      //     child: CupertinoSwitch(
+                      //         value: userService.isUserOrganization,
+                      //         onChanged:(v) async {
+                      //           await userService.change(v, context);
+                      //           if(userService.isUserOrganization){
+                      //             context.go(AppRoute.home);
+                      //             // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
+                      //           }else{
+                      //             context.go(AppRoute.userHome);
+                      //             // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
+                      //           }
+                      //         }
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(height: 8.h),
                       const Divider(),
                       SizedBox(height: 8.h),
@@ -228,7 +226,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context: context,
                             builder: (ctx) => LogOutDialog(
                               onTap: () {
-                                UserService userService = locator<UserService>();
+                                UserService userService =
+                                    locator<UserService>();
                                 userService.logout();
                                 stotage.remove('accessToken');
                                 Navigator.pop(ctx);

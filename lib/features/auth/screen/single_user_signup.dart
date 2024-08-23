@@ -51,7 +51,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     ),
                     SizedBox(height: 10.h),
                      Text(AppLocalizations.of(context)!.createAccount,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         color: Colors.grey,
                       ),
