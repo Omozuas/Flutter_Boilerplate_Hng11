@@ -28,12 +28,6 @@ class HomeScreen extends ConsumerWidget {
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
 
-    final List<Map<String, dynamic>> customers = [
-      {'name': 'Customer 1', 'email': 'customer1@example.com', 'amount': '100'},
-      {'name': 'Customer 2', 'email': 'customer2@example.com', 'amount': '200'},
-      // Add more customers here
-    ];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GlobalColors.white,
@@ -250,6 +244,15 @@ class HomeScreen extends ConsumerWidget {
                     )
                   ],
                 ),
+                if((dashBoardStateProvider.dashBoardData.monthSales?.length??0)==0)
+                SizedBox(
+                  height: 100.h,
+                  width: width(context),
+                  child: const Center(
+                    child: Text("No sales yet this month"),
+                  ),
+                )
+                else
                 Column(
                   children: List.generate(
                     dashBoardStateProvider.dashBoardData.monthSales?.length??0,
@@ -258,7 +261,7 @@ class HomeScreen extends ConsumerWidget {
                       return CustomerListTile(
                         customerName:  'Unknown Customer',
                         email: 'No Email Provided',
-                        amount: formatNumber(monthlySale.amount?? 0),
+                        amount: monthlySale.amount??0,
                       );
                     }
                   ),
