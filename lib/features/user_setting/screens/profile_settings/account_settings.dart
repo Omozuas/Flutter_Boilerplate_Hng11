@@ -158,6 +158,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         title: AppLocalizations.of(context)!.createOrganisation,
                         onTap: () {
                           // Navigate to create organisation screen
+                          context.push(AppRoute.companySignUp);
                         },
                       ),
                       SettingsTile(
@@ -173,15 +174,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         onTap: () {
                           // Navigate to Members Settings
                           context.push(AppRoute.members);
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/notify.png',
-                        title:
-                            AppLocalizations.of(context)!.rolesAndPermissions,
-                        onTap: () {
-                          // Navigate to Roles and Permissions Settings
-                          context.push(AppRoute.rolesScreen);
                         },
                       ),
                       SettingsTile(
