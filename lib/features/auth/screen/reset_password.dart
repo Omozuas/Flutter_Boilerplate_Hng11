@@ -7,30 +7,26 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResetPassword extends StatefulWidget {
   final String email;
   const ResetPassword({super.key, required this.email});
-
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
 }
-
 class _ResetPasswordState extends State<ResetPassword> {
   bool loading = false;
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
   final _formResetKey = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
     _startTimer();
   }
-
   void _startTimer() {}
-
   Future<void> _handleResetPassword(WidgetRef ref, BuildContext context) async {
     setState(() {
       loading = true;
@@ -46,11 +42,8 @@ class _ResetPasswordState extends State<ResetPassword> {
       });
     }
   }
-
-
   @override
   Widget build(BuildContext context) {
-    //loading = false;
     return Scaffold(
       appBar: AppBar(
         leading: const ChevronBackButton(),
@@ -65,7 +58,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Reset Password',
+                    AppLocalizations.of(context)!.resetPasswordTitle,
                     style: TextStyle(
                       color: GlobalColors.darkOne,
                       fontSize: 24.sp,
@@ -73,30 +66,33 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ),
                   ),
                   SizedBox(height: 8.sp),
-                  const Text(
-                    'Create a unique password. Your password should be easy to remember.',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+                  Text(
+                    AppLocalizations.of(context)!.resetPasswordDescription,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13.sp,
+                    ),
                   ),
                   SizedBox(height: 28.sp),
                   PasswordTextField(
-                    label: "New Password",
+                    label: AppLocalizations.of(context)!.newPassword,
                     controller: _newPasswordController,
                     obscureText: true,
-                    hintText: "Enter new password",
+                    hintText: AppLocalizations.of(context)!.enterNewPassword,
                     validator: Validators.passwordValidator,
                   ),
                   SizedBox(height: 16.sp),
                   PasswordTextField(
-                    label: "Confirm Password",
+                    label: AppLocalizations.of(context)!.confirmPassword,
                     controller: _confirmPasswordController,
                     obscureText: true,
-                    hintText: "Confirm new password",
+                    hintText: AppLocalizations.of(context)!.confirmNewPassword,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return AppLocalizations.of(context)!.fieldRequired;
                       }
                       if (value != _newPasswordController.text) {
-                        return 'Passwords do not match';
+                        return AppLocalizations.of(context)!.passwordsDoNotMatch;
                       }
                       return null;
                     },
@@ -110,7 +106,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       }
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: "Continue",
+                    text: AppLocalizations.of(context)!.continueButton,
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
