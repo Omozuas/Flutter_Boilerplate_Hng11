@@ -19,10 +19,13 @@ void main() async {
     ],
   );
 
-  // Change status bar theme based on theme of app
+
+// Ensures status bar and system navigation controls blends with the app
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
   ));
 
   runApp(const ProviderScope(child: MyApp()));
