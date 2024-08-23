@@ -250,22 +250,18 @@ class HomeScreen extends ConsumerWidget {
                     )
                   ],
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: dashBoardStateProvider.dashBoardData.monthSales?.length,
-                  itemBuilder: (context, index) {
-                    var data = dashBoardProviderNotifier.getUserByID(
-                        dashBoardStateProvider.dashBoardData.monthSales?[index].userId??""
-                    );
-
-                    MonthSale monthlySale = dashBoardStateProvider.dashBoardData.monthSales?[index]?? MonthSale();
-                    return CustomerListTile(
-                      customerName:  'Unknown Customer',
-                      email: 'No Email Provided',
-                      amount: formatNumber(monthlySale.amount?? 0),
-                    );
-                  },
+                Column(
+                  children: List.generate(
+                    dashBoardStateProvider.dashBoardData.monthSales?.length??0,
+                    (index){
+                      MonthSale monthlySale = dashBoardStateProvider.dashBoardData.monthSales?[index]?? MonthSale();
+                      return CustomerListTile(
+                        customerName:  'Unknown Customer',
+                        email: 'No Email Provided',
+                        amount: formatNumber(monthlySale.amount?? 0),
+                      );
+                    }
+                  ),
                 ),
               ],
             ),
