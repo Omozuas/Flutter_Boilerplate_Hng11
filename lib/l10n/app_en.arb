@@ -349,5 +349,15 @@
   "free": "Free",
   "basic": "Basic",
   "advanced": "Advanced",
-  "upgradeToAccessFeatures": "Upgrade to access more features"
+  "upgradeToAccessFeatures": "Upgrade to access more features",
+  "errorFetchingLink": "An error occurred while fetching the link",
+  "copyLink": "Link copied to clipboard",
+  "searchByNameOrMail": "Search by name or email",
+  "errorFetchingMembers": "An error occurred while \nfetching the organization members",
+  "memberProfile": "Member Profile",
+  "memberName": "Member's name",
+  "memberBio": "Member's bio",
+  "editProfile": "Edit Profile",
+  "deleteProfile": "Delete Profile",
+  "removeMember": "Member is removed successfully"
 }
