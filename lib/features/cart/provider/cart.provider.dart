@@ -155,7 +155,7 @@ class CartProvider extends StateNotifier<CartState> {
       Product newProduct = product.copyWith(
         cartQuantity: quantity
       );
-      var res = await updateToCart(newProduct);
+       await updateToCart(newProduct);
     }catch(e){
       log(e.toString());
       showSnackBar("Error updating ${product.name} to cart");
