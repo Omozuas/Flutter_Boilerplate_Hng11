@@ -18,8 +18,10 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin;
   final int? maxLines;
   final String? Function(String?)? validator;
+  final Function(String?)? onchanged;
   final Color? borderColor;
   final Color? focusedBorderColor;
+  final FocusNode? focusNode;
 
   const CustomTextField({
     super.key,
@@ -39,6 +41,8 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.borderColor,
     this.focusedBorderColor,
+    this.focusNode,
+    this.onchanged,
   });
 
   @override
@@ -48,15 +52,17 @@ class CustomTextField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            label ?? "",
-            style: labelStyle ??
-                TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF0F172A),
-                ),
-          ),
+          if (label != null) ...[
+            Text(
+              label ?? "",
+              style: labelStyle ??
+                  TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF0F172A),
+                  ),
+            ),
+          ],
           label == null
               ? SizedBox(
                   height: 0.h,
@@ -71,6 +77,9 @@ class CustomTextField extends StatelessWidget {
             obscureText: obscureText ?? false,
             maxLines: maxLines ?? 1,
             validator: validator,
+            focusNode: focusNode,
+            onChanged: onchanged,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               contentPadding: padding ??
                   EdgeInsets.symmetric(
