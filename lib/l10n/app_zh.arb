@@ -288,6 +288,35 @@
   "lga1": "伊克贾",
   "lga2": "布里斯班市",
   "lga3": "悉尼市",
-  "lga4": "伊巴丹北"
+  "lga4": "伊巴丹北",
+   "forgotPassword": "忘记密码",
+    "forgotPasswordInstructions": "输入您创建帐户时使用的电子邮件地址，以接收重置密码的说明",
+    "enterYourEmail": "电子邮件地址",
+    "send": "发送",
+    "rememberPassword": "记住您的密码吗？",
+    "resetPassword": "重置密码",
+    "createUniquePassword": "创建一个唯一的密码，您的密码应易于记忆。",
+    "confirmPassword": "确认密码",
+    "passwordsDoNotMatch": "密码不匹配",
+    "continueText": "继续",
+    "orContinueWith": "或继续使用",
+    "createAccountButton": "创建帐户",
+    "alreadyHaveAccount": "已经有一个帐户？",
+    "verificationCodeTitle": "验证码",
+    "verificationCodeDescription": "确认发送到 {email} 的电子邮件并输入验证码。代码将在以下时间过期",
+    "@verificationCodeDescription": {
+      "placeholders": {
+        "email": {
+          "type": "String"
+        }
+      }
+    },
+    "verify": "验证",
+    "didntReceiveCodeText": "没有收到验证码？",
+    "resendOtpText": "重新发送验证码",
+    "changeEmailText": "更改电子邮件",
+    "verificationSuccess": "验证成功",
+    "verificationSuccessDescription": "您的验证成功，您现在可以继续重置密码",
+    "continueToLogin": "继续登录"
 }
 

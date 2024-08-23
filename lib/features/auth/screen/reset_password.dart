@@ -12,21 +12,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ResetPassword extends StatefulWidget {
   final String email;
   const ResetPassword({super.key, required this.email});
+
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
 }
+
 class _ResetPasswordState extends State<ResetPassword> {
   bool loading = false;
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-  TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final _formResetKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
     _startTimer();
   }
+
   void _startTimer() {}
+
   Future<void> _handleResetPassword(WidgetRef ref, BuildContext context) async {
     setState(() {
       loading = true;
@@ -42,8 +46,11 @@ class _ResetPasswordState extends State<ResetPassword> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         leading: const ChevronBackButton(),
@@ -58,7 +65,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.resetPasswordTitle,
+                    localizations.resetPassword,
                     style: TextStyle(
                       color: GlobalColors.darkOne,
                       fontSize: 24.sp,
@@ -67,32 +74,30 @@ class _ResetPasswordState extends State<ResetPassword> {
                   ),
                   SizedBox(height: 8.sp),
                   Text(
-                    AppLocalizations.of(context)!.resetPasswordDescription,
+                    localizations.createUniquePassword,
                     style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13.sp,
-                    ),
+                        fontWeight: FontWeight.w400, fontSize: 13),
                   ),
                   SizedBox(height: 28.sp),
                   PasswordTextField(
-                    label: AppLocalizations.of(context)!.newPassword,
+                    label: localizations.newPassword,
                     controller: _newPasswordController,
                     obscureText: true,
-                    hintText: AppLocalizations.of(context)!.enterNewPassword,
+                    hintText: localizations.enterNewPassword,
                     validator: Validators.passwordValidator,
                   ),
                   SizedBox(height: 16.sp),
                   PasswordTextField(
-                    label: AppLocalizations.of(context)!.confirmPassword,
+                    label: localizations.confirmPassword,  // Localized label
                     controller: _confirmPasswordController,
                     obscureText: true,
-                    hintText: AppLocalizations.of(context)!.confirmNewPassword,
+                    hintText: localizations.confirmNewPassword,  // Localized hint
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppLocalizations.of(context)!.fieldRequired;
+                        return localizations.fieldRequired;
                       }
                       if (value != _newPasswordController.text) {
-                        return AppLocalizations.of(context)!.passwordsDoNotMatch;
+                        return localizations.passwordsDoNotMatch;
                       }
                       return null;
                     },
@@ -106,7 +111,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       }
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: AppLocalizations.of(context)!.continueButton,
+                    text: localizations.continueText,  // Localized button text
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,

@@ -288,6 +288,38 @@
   "lga1": "Ikeja",
   "lga2": "Brisbane City",
   "lga3": "City of Sydney",
-  "lga4": "Ibadan North"
+  "lga4": "Ibadan North",
+
+
+  "forgotPassword" : "Forgot Password",
+  "forgotPasswordInstructions" : "Enter the email address you used to create the account to receive instructions on how to reset your password",
+  "enterYourEmail" : "Email address",
+  "send" : "Send",
+  "rememberPassword" : "Remember your Password?",
+  "resetPassword" : "Reset Password",
+  "createUniquePassword" : "Create a unique password, your password should be easy to remember.",
+  "confirmPassword" : "Confirm Password",
+  "passwordsDoNotMatch" : "Passwords do not match",
+  "continueText" : "Continue",
+  "orContinueWith" : "or continue with",
+  "createAccountButton" : "Create Account",
+  "alreadyHaveAccount" : "Already Have An Account?",
+  "verificationCodeTitle" : "Verification Code",
+  "verificationCodeDescription" : "Confirm the email sent to {email} and enter the verification code. Code expires in",
+  "@verificationCodeDescription" : {
+  "placeholders": {
+        "email": {
+          "type": "String"
+        }
+      }
+  },
+ "verify" : "Verify",
+ "didntReceiveCodeText" : "Didn’t receive any code?",
+ "resendOtpText" : "Resend OTP",
+ "changeEmailText" : "Change email",
+ "verificationSuccess" : "Verification Successful",
+ "verificationSuccessDescription" : "Your verification was successful, you can now proceed to reset your password",
+ "continueToLogin" : "Continue to Login"
+
 }
 
