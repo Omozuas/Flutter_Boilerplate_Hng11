@@ -20,6 +20,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   GetStorage stotage = GetStorage();
+
   @override
   void initState() {
     super.initState();
@@ -130,7 +131,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/data.png',
-                        title: AppLocalizations.of(context)!.changePassword,
+                        title: AppLocalizations.of(context)!.dataAndPrivacy,
                         onTap: () {
                           context.push(AppRoute.updatePassword);
                         },
@@ -139,7 +140,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         leadingIcon: 'assets/images/world.png',
                         title: AppLocalizations.of(context)!.languageAndRegion,
                         onTap: () {
-                          // Navigate to Data and Privacy Settings
                           context.push(AppRoute.languageAndRegionScreen);
                         },
                       ),
@@ -153,12 +153,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      // New SettingsTile for "Create Organization"
                       SettingsTile(
-                        leadingIcon: 'assets/images/user_plus.png',
+                        leadingIcon: 'assets/images/create_organization.png',
                         title: AppLocalizations.of(context)!.createOrganisation,
                         onTap: () {
-                          // Navigate to create organisation screen
-                          context.push(AppRoute.companySignUp);
+                          // Navigate to Create Organization Screen
                         },
                       ),
                       SettingsTile(
@@ -172,15 +172,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         leadingIcon: 'assets/images/people.png',
                         title: AppLocalizations.of(context)!.members,
                         onTap: () {
-                          // Navigate to Members Settings
                           context.push(AppRoute.members);
+                        },
+                      ),
+                      SettingsTile(
+                        leadingIcon: 'assets/images/notify.png',
+                        title: AppLocalizations.of(context)!.rolesAndPermissions,
+                        onTap: () {
+                          context.push(AppRoute.rolesScreen);
+                        },
+                      ),
+                      SettingsTile(
+                        leadingIcon: 'assets/images/money.png',
+                        title: AppLocalizations.of(context)!.integrations,
+                        onTap: () {
+                          // Navigate to Integrations Settings
                         },
                       ),
                       SettingsTile(
                         leadingIcon: 'assets/images/wallet.png',
                         title: AppLocalizations.of(context)!.paymentInformation,
                         onTap: () {
-                          // Navigate to Payment Information Settings
                           context.push(AppRoute.subscriptionsScreen);
                         },
                       ),
