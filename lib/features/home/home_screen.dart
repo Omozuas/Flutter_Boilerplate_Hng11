@@ -111,31 +111,32 @@ class HomeScreen extends ConsumerWidget {
           SizedBox(
             height: GlobalScreenSize.getScreenHeight(context) * 0.020,
           ),
-          // Row(
-          //   children: [
-          //     RevenueCard(
-          //       title: 'Total Revenue',
-          //       value: dashBoardStateProvider.dashBoardData.revenue == null
-          //           ? "0.00"
-          //           : formatNumber(
-          //           dashBoardStateProvider.dashBoardData.revenue ?? 0,
-          //           decimalPlaces: 2),
-          //       percentageChange: '+15% decrease',
-          //     ),
-          //     18.w.sbW,
-          //     RevenueCard(
-          //       title: 'Total Revenue',
-          //       value: dashBoardStateProvider.dashBoardData.subscriptions ==
-          //           null
-          //           ? "0"
-          //           : formatNumber(
-          //           dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
-          //           decimalPlaces: 0),
-          //       percentageChange: '+65% decrease',
-          //       isRevenue: false,
-          //     ),
-          //   ],
-          // ),
+          Row(
+            children: [
+              RevenueCard(
+                image: AppSvgs.products,
+                details: '',
+                title: 'Total Revenue',
+                value: dashBoardStateProvider.dashBoardData.revenue == null
+                    ? "0.00"
+                    : formatNumber(
+                    dashBoardStateProvider.dashBoardData.revenue ?? 0,
+                    decimalPlaces: 2),
+              ),
+              18.w.sbW,
+              RevenueCard(
+                image: AppSvgs.products,
+                details: '',
+                title: 'Total Revenue',
+                value: dashBoardStateProvider.dashBoardData.subscriptions ==
+                    null
+                    ? "0"
+                    : formatNumber(
+                    dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
+                    decimalPlaces: 0),
+              ),
+            ],
+          ),
           Row(
             children: [
               Text(
