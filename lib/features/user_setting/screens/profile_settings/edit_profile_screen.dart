@@ -122,59 +122,54 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 ),
                 // SizedBox(height: 16.h),
                 CustomExpansionTile(
+                  space: 0,
+                  horizontalTitlePadding: EdgeInsets.zero,
+                  horizontalChildrenPadding: EdgeInsets.zero,
+                  verticalChildrenPadding: EdgeInsets.zero,
+                  verticalTitlePadding: EdgeInsets.zero,
                   title: AppLocalizations.of(context)!.bio,
                   content: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CustomTextField(
-                          controller: _bioController,
-                          hintText:
-                              AppLocalizations.of(context)!.typeYourMessageHere,
-                          maxLines: 3,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.maximumOf64Character,
-                          style: GoogleFonts.inter(
-                            fontSize: 14.sp,
-                            color: const Color(0xFF64748B),
-                          ),
-                        ),
-                      ],
+                    CustomTextField(
+                      controller: _bioController,
+                      hintText:
+                          AppLocalizations.of(context)!.typeYourMessageHere,
+                      maxLines: 3,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.maximumOf64Character,
+                      style: GoogleFonts.inter(
+                        fontSize: 14.sp,
+                        color: const Color(0xFF64748B),
+                      ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(18.sp),
-                  child: Column(
-                    children: [
-                      CustomButton(
-                        borderColor: GlobalColors.orange,
-                        text: AppLocalizations.of(context)!.saveChanges,
-                        height: 40.h,
-                        containerColor: GlobalColors.orange,
-                        width: double.infinity,
-                        textColor: const Color(0xFFFAFAFA),
-                        loading: isLoading,
-                        onTap: () {
-                          if (isLoading) return;
-                          update(widget.user);
-                        },
-                      ),
-                      SizedBox(height: 16.h),
-                      CustomButton(
-                        borderColor: GlobalColors.lightGray,
-                        text: AppLocalizations.of(context)!.cancel,
-                        height: 40.h,
-                        containerColor: Colors.white,
-                        width: double.infinity,
-                        textColor: const Color(0xFF0F172A),
-                        onTap: context.pop,
-                      ),
-                    ],
-                  ),
+                CustomButton(
+                  borderColor: GlobalColors.orange,
+                  text: AppLocalizations.of(context)!.saveChanges,
+                  height: 40.h,
+                  containerColor: GlobalColors.orange,
+                  width: double.infinity,
+                  textColor: const Color(0xFFFAFAFA),
+                  loading: isLoading,
+                  onTap: () {
+                    if (isLoading) return;
+                    update(widget.user);
+                  },
                 ),
+                SizedBox(height: 16.h),
+                CustomButton(
+                  borderColor: GlobalColors.lightGray,
+                  text: AppLocalizations.of(context)!.cancel,
+                  height: 40.h,
+                  containerColor: Colors.white,
+                  width: double.infinity,
+                  textColor: const Color(0xFF0F172A),
+                  onTap: context.pop,
+                ),
+                SizedBox(
+                  height: 10.h,
+                )
               ],
             ),
           ),
