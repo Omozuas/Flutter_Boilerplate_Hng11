@@ -21,37 +21,37 @@ class GetUserByIDResponse {
     id = json['id'];
     email = json['email'];
     profile =
-    json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
+    json['profile'] != null ? Profile.fromJson(json['profile']) : null;
     avatarUrl = json['avatar_url'];
     if (json['organisations'] != null) {
       organisations = <Organisations>[];
       json['organisations'].forEach((v) {
-        organisations!.add(new Organisations.fromJson(v));
+        organisations!.add(Organisations.fromJson(v));
       });
     }
     if (json['blogs'] != null) {
       blogs = <Blogs>[];
       json['blogs'].forEach((v) {
-        blogs!.add(new Blogs.fromJson(v));
+        blogs!.add(Blogs.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fullname'] = this.fullname;
-    data['id'] = this.id;
-    data['email'] = this.email;
-    if (this.profile != null) {
-      data['profile'] = this.profile!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['fullname'] = fullname;
+    data['id'] = id;
+    data['email'] = email;
+    if (profile != null) {
+      data['profile'] = profile!.toJson();
     }
-    data['avatar_url'] = this.avatarUrl;
-    if (this.organisations != null) {
+    data['avatar_url'] = avatarUrl;
+    if (organisations != null) {
       data['organisations'] =
-          this.organisations!.map((v) => v.toJson()).toList();
+          organisations!.map((v) => v.toJson()).toList();
     }
-    if (this.blogs != null) {
-      data['blogs'] = this.blogs!.map((v) => v.toJson()).toList();
+    if (blogs != null) {
+      data['blogs'] = blogs!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -107,21 +107,21 @@ class Organisations {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['slug'] = this.slug;
-    data['email'] = this.email;
-    data['industry'] = this.industry;
-    data['type'] = this.type;
-    data['country'] = this.country;
-    data['address'] = this.address;
-    data['state'] = this.state;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['owner_id'] = this.ownerId;
-    data['is_active'] = this.isActive;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['slug'] = slug;
+    data['email'] = email;
+    data['industry'] = industry;
+    data['type'] = type;
+    data['country'] = country;
+    data['address'] = address;
+    data['state'] = state;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['owner_id'] = ownerId;
+    data['is_active'] = isActive;
     return data;
   }
 }
@@ -159,31 +159,31 @@ class Blogs {
     updatedDate = json['updatedDate'];
     authorId = json['authorId'];
     author =
-    json['author'] != null ? new Author.fromJson(json['author']) : null;
+    json['author'] != null ? Author.fromJson(json['author']) : null;
     category = json['category'];
     if (json['comments'] != null) {
       comments = <Comments>[];
       json['comments'].forEach((v) {
-        comments!.add(new Comments.fromJson(v));
+        comments!.add(Comments.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['imageUrl'] = this.imageUrl;
-    data['content'] = this.content;
-    data['publishedDate'] = this.publishedDate;
-    data['updatedDate'] = this.updatedDate;
-    data['authorId'] = this.authorId;
-    if (this.author != null) {
-      data['author'] = this.author!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['imageUrl'] = imageUrl;
+    data['content'] = content;
+    data['publishedDate'] = publishedDate;
+    data['updatedDate'] = updatedDate;
+    data['authorId'] = authorId;
+    if (author != null) {
+      data['author'] = author!.toJson();
     }
-    data['category'] = this.category;
-    if (this.comments != null) {
-      data['comments'] = this.comments!.map((v) => v.toJson()).toList();
+    data['category'] = category;
+    if (comments != null) {
+      data['comments'] = comments!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -253,93 +253,93 @@ class Author {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     profile =
-    json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
+    json['profile'] != null ? Profile.fromJson(json['profile']) : null;
     isSuperAdmin = json['isSuperAdmin'];
     if (json['organizations'] != null) {
       organizations = <Organizations>[];
       json['organizations'].forEach((v) {
-        organizations!.add(new Organizations.fromJson(v));
+        organizations!.add(Organizations.fromJson(v));
       });
     }
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
+        products!.add(Products.fromJson(v));
       });
     }
     if (json['transactions'] != null) {
       transactions = <Transactions>[];
       json['transactions'].forEach((v) {
-        transactions!.add(new Transactions.fromJson(v));
+        transactions!.add(Transactions.fromJson(v));
       });
     }
     if (json['subscriptions'] != null) {
       subscriptions = <Subscriptions>[];
       json['subscriptions'].forEach((v) {
-        subscriptions!.add(new Subscriptions.fromJson(v));
+        subscriptions!.add(Subscriptions.fromJson(v));
       });
     }
     blogs = json['blogs'].cast<String>();
     if (json['usersRoles'] != null) {
       usersRoles = <UsersRoles>[];
       json['usersRoles'].forEach((v) {
-        usersRoles!.add(new UsersRoles.fromJson(v));
+        usersRoles!.add(UsersRoles.fromJson(v));
       });
     }
     if (json['lastLogins'] != null) {
       lastLogins = <LastLogins>[];
       json['lastLogins'].forEach((v) {
-        lastLogins!.add(new LastLogins.fromJson(v));
+        lastLogins!.add(LastLogins.fromJson(v));
       });
     }
     timezoneId = json['timezoneId'];
     timezone = json['timezone'] != null
-        ? new Timezone.fromJson(json['timezone'])
+        ? Timezone.fromJson(json['timezone'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['avatarUrl'] = this.avatarUrl;
-    data['email'] = this.email;
-    data['phoneNumber'] = this.phoneNumber;
-    data['password'] = this.password;
-    data['passwordSalt'] = this.passwordSalt;
-    data['passwordResetToken'] = this.passwordResetToken;
-    data['passwordResetTokenTime'] = this.passwordResetTokenTime;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.profile != null) {
-      data['profile'] = this.profile!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['avatarUrl'] = avatarUrl;
+    data['email'] = email;
+    data['phoneNumber'] = phoneNumber;
+    data['password'] = password;
+    data['passwordSalt'] = passwordSalt;
+    data['passwordResetToken'] = passwordResetToken;
+    data['passwordResetTokenTime'] = passwordResetTokenTime;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    if (profile != null) {
+      data['profile'] = profile!.toJson();
     }
-    data['isSuperAdmin'] = this.isSuperAdmin;
-    if (this.organizations != null) {
+    data['isSuperAdmin'] = isSuperAdmin;
+    if (organizations != null) {
       data['organizations'] =
-          this.organizations!.map((v) => v.toJson()).toList();
+          organizations!.map((v) => v.toJson()).toList();
     }
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    if (products != null) {
+      data['products'] = products!.map((v) => v.toJson()).toList();
     }
-    if (this.transactions != null) {
-      data['transactions'] = this.transactions!.map((v) => v.toJson()).toList();
+    if (transactions != null) {
+      data['transactions'] = transactions!.map((v) => v.toJson()).toList();
     }
-    if (this.subscriptions != null) {
+    if (subscriptions != null) {
       data['subscriptions'] =
-          this.subscriptions!.map((v) => v.toJson()).toList();
+          subscriptions!.map((v) => v.toJson()).toList();
     }
-    data['blogs'] = this.blogs;
-    if (this.usersRoles != null) {
-      data['usersRoles'] = this.usersRoles!.map((v) => v.toJson()).toList();
+    data['blogs'] = blogs;
+    if (usersRoles != null) {
+      data['usersRoles'] = usersRoles!.map((v) => v.toJson()).toList();
     }
-    if (this.lastLogins != null) {
-      data['lastLogins'] = this.lastLogins!.map((v) => v.toJson()).toList();
+    if (lastLogins != null) {
+      data['lastLogins'] = lastLogins!.map((v) => v.toJson()).toList();
     }
-    data['timezoneId'] = this.timezoneId;
-    if (this.timezone != null) {
-      data['timezone'] = this.timezone!.toJson();
+    data['timezoneId'] = timezoneId;
+    if (timezone != null) {
+      data['timezone'] = timezone!.toJson();
     }
     return data;
   }
@@ -401,23 +401,23 @@ class Profile {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['phoneNumber'] = this.phoneNumber;
-    data['avatarUrl'] = this.avatarUrl;
-    data['userId'] = this.userId;
-    data['user'] = this.user;
-    data['username'] = this.username;
-    data['pronoun'] = this.pronoun;
-    data['jobTitle'] = this.jobTitle;
-    data['bio'] = this.bio;
-    data['department'] = this.department;
-    data['facebookLink'] = this.facebookLink;
-    data['twitterLink'] = this.twitterLink;
-    data['linkedinLink'] = this.linkedinLink;
-    data['instagramLink'] = this.instagramLink;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['phoneNumber'] = phoneNumber;
+    data['avatarUrl'] = avatarUrl;
+    data['userId'] = userId;
+    data['user'] = user;
+    data['username'] = username;
+    data['pronoun'] = pronoun;
+    data['jobTitle'] = jobTitle;
+    data['bio'] = bio;
+    data['department'] = department;
+    data['facebookLink'] = facebookLink;
+    data['twitterLink'] = twitterLink;
+    data['linkedinLink'] = linkedinLink;
+    data['instagramLink'] = instagramLink;
     return data;
   }
 }
@@ -482,41 +482,41 @@ class Organizations {
     if (json['usersRoles'] != null) {
       usersRoles = <UsersRoles>[];
       json['usersRoles'].forEach((v) {
-        usersRoles!.add(new UsersRoles.fromJson(v));
+        usersRoles!.add(UsersRoles.fromJson(v));
       });
     }
     if (json['subscriptions'] != null) {
       subscriptions = <Subscriptions>[];
       json['subscriptions'].forEach((v) {
-        subscriptions!.add(new Subscriptions.fromJson(v));
+        subscriptions!.add(Subscriptions.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['slug'] = this.slug;
-    data['email'] = this.email;
-    data['industry'] = this.industry;
-    data['type'] = this.type;
-    data['country'] = this.country;
-    data['address'] = this.address;
-    data['state'] = this.state;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['ownerId'] = this.ownerId;
-    data['isActive'] = this.isActive;
-    data['inviteToken'] = this.inviteToken;
-    data['users'] = this.users;
-    if (this.usersRoles != null) {
-      data['usersRoles'] = this.usersRoles!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['slug'] = slug;
+    data['email'] = email;
+    data['industry'] = industry;
+    data['type'] = type;
+    data['country'] = country;
+    data['address'] = address;
+    data['state'] = state;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['ownerId'] = ownerId;
+    data['isActive'] = isActive;
+    data['inviteToken'] = inviteToken;
+    data['users'] = users;
+    if (usersRoles != null) {
+      data['usersRoles'] = usersRoles!.map((v) => v.toJson()).toList();
     }
-    if (this.subscriptions != null) {
+    if (subscriptions != null) {
       data['subscriptions'] =
-          this.subscriptions!.map((v) => v.toJson()).toList();
+          subscriptions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -546,21 +546,21 @@ class UsersRoles {
     roleId = json['roleId'];
     organizationId = json['organizationId'];
     user = json['user'];
-    role = json['role'] != null ? new Role.fromJson(json['role']) : null;
+    role = json['role'] != null ? Role.fromJson(json['role']) : null;
     orgainzation = json['orgainzation'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['roleId'] = this.roleId;
-    data['organizationId'] = this.organizationId;
-    data['user'] = this.user;
-    if (this.role != null) {
-      data['role'] = this.role!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['userId'] = userId;
+    data['roleId'] = roleId;
+    data['organizationId'] = organizationId;
+    data['user'] = user;
+    if (role != null) {
+      data['role'] = role!.toJson();
     }
-    data['orgainzation'] = this.orgainzation;
+    data['orgainzation'] = orgainzation;
     return data;
   }
 }
@@ -601,26 +601,26 @@ class Role {
     if (json['permissions'] != null) {
       permissions = <Permissions>[];
       json['permissions'].forEach((v) {
-        permissions!.add(new Permissions.fromJson(v));
+        permissions!.add(Permissions.fromJson(v));
       });
     }
     usersRoles = json['usersRoles'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['isActive'] = this.isActive;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['organizationId'] = this.organizationId;
-    data['organisation'] = this.organisation;
-    if (this.permissions != null) {
-      data['permissions'] = this.permissions!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['isActive'] = isActive;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['organizationId'] = organizationId;
+    data['organisation'] = organisation;
+    if (permissions != null) {
+      data['permissions'] = permissions!.map((v) => v.toJson()).toList();
     }
-    data['usersRoles'] = this.usersRoles;
+    data['usersRoles'] = usersRoles;
     return data;
   }
 }
@@ -654,14 +654,14 @@ class Permissions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['isActive'] = this.isActive;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['roles'] = this.roles;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['isActive'] = isActive;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['roles'] = roles;
     return data;
   }
 }
@@ -714,7 +714,7 @@ class Subscriptions {
     transaction = json['transaction'];
     billingPlanId = json['billingPlanId'];
     billingPlan = json['billingPlan'] != null
-        ? new BillingPlan.fromJson(json['billingPlan'])
+        ? BillingPlan.fromJson(json['billingPlan'])
         : null;
     plan = json['plan'];
     frequency = json['frequency'];
@@ -727,26 +727,26 @@ class Subscriptions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['user'] = this.user;
-    data['organizationId'] = this.organizationId;
-    data['organization'] = this.organization;
-    data['transactionId'] = this.transactionId;
-    data['transaction'] = this.transaction;
-    data['billingPlanId'] = this.billingPlanId;
-    if (this.billingPlan != null) {
-      data['billingPlan'] = this.billingPlan!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['userId'] = userId;
+    data['user'] = user;
+    data['organizationId'] = organizationId;
+    data['organization'] = organization;
+    data['transactionId'] = transactionId;
+    data['transaction'] = transaction;
+    data['billingPlanId'] = billingPlanId;
+    if (billingPlan != null) {
+      data['billingPlan'] = billingPlan!.toJson();
     }
-    data['plan'] = this.plan;
-    data['frequency'] = this.frequency;
-    data['isActive'] = this.isActive;
-    data['amount'] = this.amount;
-    data['startDate'] = this.startDate;
-    data['expiryDate'] = this.expiryDate;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
+    data['plan'] = plan;
+    data['frequency'] = frequency;
+    data['isActive'] = isActive;
+    data['amount'] = amount;
+    data['startDate'] = startDate;
+    data['expiryDate'] = expiryDate;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
     return data;
   }
 }
@@ -783,15 +783,15 @@ class BillingPlan {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['frequency'] = this.frequency;
-    data['isActive'] = this.isActive;
-    data['amount'] = this.amount;
-    data['description'] = this.description;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['frequency'] = frequency;
+    data['isActive'] = isActive;
+    data['amount'] = amount;
+    data['description'] = description;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
     return data;
   }
 }
@@ -849,40 +849,40 @@ class Products {
     quantity = json['quantity'];
     organizationId = json['organizationId'];
     organization = json['organization'] != null
-        ? new Organizations.fromJson(json['organization'])
+        ? Organizations.fromJson(json['organization'])
         : null;
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     if (json['transactions'] != null) {
       transactions = <Transactions>[];
       json['transactions'].forEach((v) {
-        transactions!.add(new Transactions.fromJson(v));
+        transactions!.add(Transactions.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['category'] = this.category;
-    data['price'] = this.price;
-    data['available'] = this.available;
-    data['userId'] = this.userId;
-    data['user'] = this.user;
-    data['status'] = this.status;
-    data['imageUrl'] = this.imageUrl;
-    data['size'] = this.size;
-    data['quantity'] = this.quantity;
-    data['organizationId'] = this.organizationId;
-    if (this.organization != null) {
-      data['organization'] = this.organization!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['category'] = category;
+    data['price'] = price;
+    data['available'] = available;
+    data['userId'] = userId;
+    data['user'] = user;
+    data['status'] = status;
+    data['imageUrl'] = imageUrl;
+    data['size'] = size;
+    data['quantity'] = quantity;
+    data['organizationId'] = organizationId;
+    if (organization != null) {
+      data['organization'] = organization!.toJson();
     }
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.transactions != null) {
-      data['transactions'] = this.transactions!.map((v) => v.toJson()).toList();
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    if (transactions != null) {
+      data['transactions'] = transactions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -930,7 +930,7 @@ class Transactions {
     product = json['product'];
     subscriptionId = json['subscriptionId'];
     subscription = json['subscription'] != null
-        ? new Subscriptions.fromJson(json['subscription'])
+        ? Subscriptions.fromJson(json['subscription'])
         : null;
     type = json['type'];
     status = json['status'];
@@ -943,24 +943,24 @@ class Transactions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['user'] = this.user;
-    data['productId'] = this.productId;
-    data['product'] = this.product;
-    data['subscriptionId'] = this.subscriptionId;
-    if (this.subscription != null) {
-      data['subscription'] = this.subscription!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['userId'] = userId;
+    data['user'] = user;
+    data['productId'] = productId;
+    data['product'] = product;
+    data['subscriptionId'] = subscriptionId;
+    if (subscription != null) {
+      data['subscription'] = subscription!.toJson();
     }
-    data['type'] = this.type;
-    data['status'] = this.status;
-    data['partners'] = this.partners;
-    data['amount'] = this.amount;
-    data['reference'] = this.reference;
-    data['createdAt'] = this.createdAt;
-    data['paidAt'] = this.paidAt;
-    data['modifiedAt'] = this.modifiedAt;
+    data['type'] = type;
+    data['status'] = status;
+    data['partners'] = partners;
+    data['amount'] = amount;
+    data['reference'] = reference;
+    data['createdAt'] = createdAt;
+    data['paidAt'] = paidAt;
+    data['modifiedAt'] = modifiedAt;
     return data;
   }
 }
@@ -991,13 +991,13 @@ class LastLogins {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['user'] = this.user;
-    data['loginTime'] = this.loginTime;
-    data['logoutTime'] = this.logoutTime;
-    data['ipAddress'] = this.ipAddress;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['userId'] = userId;
+    data['user'] = user;
+    data['loginTime'] = loginTime;
+    data['logoutTime'] = logoutTime;
+    data['ipAddress'] = ipAddress;
     return data;
   }
 }
@@ -1018,11 +1018,11 @@ class Timezone {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['timezoneValue'] = this.timezoneValue;
-    data['gmtOffset'] = this.gmtOffset;
-    data['description'] = this.description;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['timezoneValue'] = timezoneValue;
+    data['gmtOffset'] = gmtOffset;
+    data['description'] = description;
     return data;
   }
 }
@@ -1052,21 +1052,21 @@ class Comments {
     blog = json['blog'];
     authorId = json['authorId'];
     author =
-    json['author'] != null ? new Author.fromJson(json['author']) : null;
+    json['author'] != null ? Author.fromJson(json['author']) : null;
     createdAt = json['createdAt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['content'] = this.content;
-    data['blogId'] = this.blogId;
-    data['blog'] = this.blog;
-    data['authorId'] = this.authorId;
-    if (this.author != null) {
-      data['author'] = this.author!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['content'] = content;
+    data['blogId'] = blogId;
+    data['blog'] = blog;
+    data['authorId'] = authorId;
+    if (author != null) {
+      data['author'] = author!.toJson();
     }
-    data['createdAt'] = this.createdAt;
+    data['createdAt'] = createdAt;
     return data;
   }
 }

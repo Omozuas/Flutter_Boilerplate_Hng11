@@ -1,27 +1,63 @@
 class Members {
-  String id;
-  String name;
-  dynamic phoneNumber;
-  String email;
+  String? firstName;
+  String? lastName;
+  String? avatarUrl;
+  String? email;
+  String? phoneNumber;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  bool? isSuperAdmin;
 
   Members({
-    required this.id,
-    required this.name,
+    this.firstName,
+    this.lastName,
+    this.avatarUrl,
+    this.email,
     this.phoneNumber,
-    required this.email,
+    this.createdAt,
+    this.updatedAt,
+    this.isSuperAdmin,
   });
+  Members copyWith(
+      {String? firstName,
+      String? lastName,
+      String? avatarUrl,
+      String? email,
+      String? phoneNumber,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      bool? isSuperAdmin}) {
+    return Members(
+      firstName: this.firstName,
+      lastName: this.lastName,
+      avatarUrl: this.avatarUrl,
+      email: this.email,
+      phoneNumber: this.phoneNumber,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      isSuperAdmin: this.isSuperAdmin,
+    );
+  }
 
   factory Members.fromJson(Map<String, dynamic> json) => Members(
-        id: json["id"],
-        name: json["name"],
-        phoneNumber: json["phone_number"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        avatarUrl: json["avatar_url"],
         email: json["email"],
+        phoneNumber: json["phone_number"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        isSuperAdmin: json["is_super_admin"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "phone_number": phoneNumber,
+        "first_name": firstName,
+        "last_name": lastName,
+        "avatar_url": avatarUrl,
         "email": email,
+        "phone_number": phoneNumber,
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
+        "is_super_admin": isSuperAdmin,
       };
 }
