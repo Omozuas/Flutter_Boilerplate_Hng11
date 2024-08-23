@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
@@ -165,6 +166,15 @@ class SettingsApi {
     try {
       await dio.post('/invite/send',
           data: {'email': email, 'inviteLink': inviteLink});
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Members> getOrganisationMembers({required String orgId}) async {
+    try {
+      final response = await dio.get('/members/organization/$orgId');
+      return Members.fromJson(response?.data['data']);
     } catch (e) {
       rethrow;
     }
