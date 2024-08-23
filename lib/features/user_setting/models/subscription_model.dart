@@ -164,7 +164,7 @@ extension SubExtension on SubscriptionPlan {
           (
             'Project Management',
             [
-              ('Projects', 'Up to 5'),
+              ('Projects', 'Up to 10'),
               ('File Upload', '10gb'),
               ('User Account', '1'),
               ('Teams', '1'),
@@ -191,7 +191,7 @@ extension SubExtension on SubscriptionPlan {
           (
             'Project Management',
             [
-              ('Projects', 'Up to 5'),
+              ('Projects', 'Up to 100'),
               ('File Upload', '20gb'),
               ('User Account', '10'),
               ('Teams', 'Unlimited'),
@@ -226,7 +226,7 @@ extension SubExtension on SubscriptionPlan {
           (
             'Project Management',
             [
-              ('Projects', 'Up to 5'),
+              ('Projects', 'Up to 200'),
               ('File Upload', '50gb'),
               ('User Account', '50'),
               ('Teams', 'Unlimited'),

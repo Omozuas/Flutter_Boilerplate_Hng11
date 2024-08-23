@@ -31,52 +31,50 @@ class PlanDetailsSection extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(color: GlobalColors.containerBorderColor),
             ),
-            child: Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (_, i) => const Divider(),
-                itemCount: details.$2.length,
-                itemBuilder: (_, i) {
-                  final item = details.$2[i];
-                  final text = item.$1;
-                  final answer = item.$2;
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 14.sp, vertical: 26.sp),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+            child: ListView.separated(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (_, i) => const Divider(),
+              itemCount: details.$2.length,
+              itemBuilder: (_, i) {
+                final item = details.$2[i];
+                final text = item.$1;
+                final answer = item.$2;
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 14.sp, vertical: 26.sp),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          text,
+                          style: CustomTextStyle.regular(
+                            fontSize: 16,
+                            color: GlobalColors.dark2,
+                          ),
+                        ),
+                      ),
+                      if (answer is bool)
+                        const Expanded(
+                          child: Icon(Icons.check),
+                        ),
+                      if (answer is String)
                         Expanded(
                           child: Text(
-                            text,
+                            answer,
+                            textAlign: TextAlign.center,
                             style: CustomTextStyle.regular(
                               fontSize: 16,
                               color: GlobalColors.dark2,
                             ),
                           ),
                         ),
-                        if (answer is bool)
-                          const Expanded(
-                            child: Icon(Icons.check),
-                          ),
-                        if (answer is String)
-                          Expanded(
-                            child: Text(
-                              answer,
-                              textAlign: TextAlign.center,
-                              style: CustomTextStyle.regular(
-                                fontSize: 16,
-                                color: GlobalColors.dark2,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(height: 15.h),
