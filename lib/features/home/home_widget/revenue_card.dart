@@ -52,7 +52,7 @@ class RevenueCard extends StatelessWidget {
                 Text(
                   title,
                   style: CustomTextStyle.bold(
-                      fontSize: 14.sp, color: GlobalColors.gray500Color),
+                      fontSize: 17.sp, color: GlobalColors.gray500Color),
                 ),
                 Text(
                   details,
