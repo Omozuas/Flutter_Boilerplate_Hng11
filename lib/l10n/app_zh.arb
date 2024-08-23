@@ -274,6 +274,8 @@
    "currentPlan": "当前计划",
    "upgrade": "升级",
    "somethingWentWrongMessage": "出了点问题。请再试一次。",
-   "updateProfileButton": "更新个人资料"
+   "updateProfileButton": "更新个人资料",
+   "changePassword": "更改密码",
+   "createOrganisation": "创建组织"
 }
 

@@ -273,7 +273,9 @@
       "total": "Total",
       "currentPlan": "Current Plan",
       "upgrade": "Upgrade",
-"somethingWentWrongMessage": "Something went wrong. Please try again.",
-"updateProfileButton": "Update Profile"
+      "somethingWentWrongMessage": "Something went wrong. Please try again.",
+      "updateProfileButton": "Update Profile",
+      "changePassword": "Change Password",
+      "createOrganisation": "Create Organisation"
 }
 
