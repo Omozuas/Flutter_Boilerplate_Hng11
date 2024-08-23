@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
-import 'home_widget/widgets/chart_loader.dart';
+//import 'home_widget/widgets/chart_loader.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
