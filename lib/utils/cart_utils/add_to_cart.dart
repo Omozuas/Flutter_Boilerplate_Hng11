@@ -12,6 +12,7 @@ Future<bool> addItemToCart(Product product)async{
   try{
     if(data.isEmpty){
       storage.write("cart_items", getProductListFromJsontoString([product.copyWith(cartQuantity: 1)]));
+      showSnackBar("${product.name} added to cart");
       return true;
     }else{
       if(data.any((cart)=> cart.id == product.id)){
@@ -19,6 +20,7 @@ Future<bool> addItemToCart(Product product)async{
         return false;
       }else{
         storage.write("cart_items", getProductListFromJsontoString([...data, product.copyWith(cartQuantity: 1)]));
+        showSnackBar("${product.name} added to cart");
         return true;
       }
     }

@@ -148,28 +148,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           context.push(AppRoute.languageAndRegionScreen);
                         },
                       ),
-                      SettingsTile(
-                        leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
-                        leadingIcon: 'assets/images/personsettings.png',
-                        title: 'View as Organisation',
-                        onTap: () {},
-                        trailing: Transform.scale(
-                          scale: 0.7,
-                          child: CupertinoSwitch(
-                              value: userService.isUserOrganization,
-                              onChanged:(v) async {
-                                await userService.change(v, context);
-                                if(userService.isUserOrganization){
-                                  context.go(AppRoute.home);
-                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
-                                }else{
-                                  context.go(AppRoute.userHome);
-                                  // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
-                                }
-                              }
-                          ),
-                        ),
-                      ),
+                      // SettingsTile(
+                      //   leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
+                      //   leadingIcon: 'assets/images/personsettings.png',
+                      //   title: 'View as Organisation',
+                      //   onTap: () {},
+                      //   trailing: Transform.scale(
+                      //     scale: 0.7,
+                      //     child: CupertinoSwitch(
+                      //         value: userService.isUserOrganization,
+                      //         onChanged:(v) async {
+                      //           await userService.change(v, context);
+                      //           if(userService.isUserOrganization){
+                      //             context.go(AppRoute.home);
+                      //             // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
+                      //           }else{
+                      //             context.go(AppRoute.userHome);
+                      //             // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
+                      //           }
+                      //         }
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(height: 8.h),
                       const Divider(),
                       SizedBox(height: 8.h),

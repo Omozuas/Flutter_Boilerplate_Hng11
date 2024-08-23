@@ -6,7 +6,10 @@ import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../gen/assets.gen.dart';
+import '../../../gen/assets.gen.dart';
 import '../../../utils/global_colors.dart';
+import '../../../utils/global_size.dart';
 import '../../product_listing/screens/product_detail/product_details_screen.dart';
 import '../utils/widget_extensions.dart';
 import 'cart_add_remove_button.dart';
@@ -57,7 +60,7 @@ class CartWidget extends StatelessWidget {
                     width: 173.sp,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
-                        image:  image.contains("http")?  DecorationImage(
+                        image:  image.startsWith("http")?  DecorationImage(
                             image: CachedNetworkImageProvider(image)
                             ,
                             fit: BoxFit.cover):null),
@@ -67,9 +70,12 @@ class CartWidget extends StatelessWidget {
                         width: 173.sp,
                         fit: BoxFit.cover,
                         base64Decode(image),
-                        errorBuilder: (context, error, stackTrace) =>
-                        const EmptyImage(),
-                      ): const EmptyImage()
+                          errorBuilder: (context, error, stackTrace) =>
+                              Assets.images.png.productListing.product.image(
+                                height: GlobalScreenSize.getScreenHeight(context) * .135,
+                          )
+                      ): Assets.images.png.productListing.product.image(
+                          height: GlobalScreenSize.getScreenHeight(context) * .135)
                     ),
                   );
                 } ,
