@@ -8,7 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'localiza/localiza_class.dart';
+import 'features/auth/providers/language_provider.dart';
+// import 'localiza/localiza_class.dart';
 
 void main() async {
   await initializeApp();
@@ -30,16 +31,17 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(languageProvider);
     return ScreenUtilInit(
       ensureScreenSize: true,
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp.router(
-        locale: LocalizationClass.english,
+        locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: OneContext().builder,
@@ -47,29 +49,31 @@ class MyApp extends StatelessWidget {
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            textTheme: GoogleFonts.interTextTheme(),
-            scaffoldBackgroundColor: Colors.white,
-            dialogTheme: DialogTheme(
-              backgroundColor:
-                  GlobalColors.deemWhiteColor, // Dialog background color
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0), // Dialog shape
-              ),
-              elevation: 10, // Dialog elevation
-              titleTextStyle: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black, // Title text style
-              ),
-              contentTextStyle: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[800], // Content text style
-              ),
+          textTheme: GoogleFonts.interTextTheme(),
+          scaffoldBackgroundColor: Colors.white,
+          dialogTheme: DialogTheme(
+            backgroundColor:
+                GlobalColors.deemWhiteColor, // Dialog background color
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0), // Dialog shape
             ),
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.transparent,
-                scrolledUnderElevation: 0,
-                systemOverlayStyle: SystemUiOverlayStyle.dark)),
+            elevation: 10, // Dialog elevation
+            titleTextStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black, // Title text style
+            ),
+            contentTextStyle: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[800], // Content text style
+            ),
+          ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ),
+        ),
       ),
     );
   }

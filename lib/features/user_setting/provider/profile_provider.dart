@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,11 +27,9 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       fetchSubcription: AsyncData(null),
       inviteLink: AsyncData(null),
       updatePassword: AsyncData(null),
+      organisationMembers: AsyncData(null),
+      initiateSubscription: AsyncData(null),
     );
-  }
-
-  void selectPlan(SubscriptionPlan plan) {
-    state = state.copyWith(selectedPlan: plan);
   }
 
   Future<void> pickImage(ImageSource? source) async {
@@ -204,6 +203,38 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));
     }
   }
+
+  // get organisation members
+  Future<void> getOrganisationMembers({required String orgId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(organisationMembers: const AsyncLoading());
+      final organisationMembers =
+          await settingsApi.getOrganisationMembers(orgId: orgId);
+      state =
+          state.copyWith(organisationMembers: AsyncData(organisationMembers));
+    } catch (e) {
+      state = state.copyWith(
+          organisationMembers: AsyncError(e, StackTrace.current));
+    }
+  }
+
+  Future<void> initiateSubscription(
+      {required String email,
+      required double amount,
+      required String plan,
+      required String frequency}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(initiateSubscription: const AsyncLoading());
+      final initiateSubscription = await settingsApi.initiateSubscription(
+          email: email, amount: amount, plan: plan, frequency: frequency);
+      state = state.copyWith(inviteLink: AsyncData(initiateSubscription));
+    } catch (e) {
+      state = state.copyWith(
+          initiateSubscription: AsyncError(e, StackTrace.current));
+    }
+  }
 }
 
 final profileProvider =
@@ -221,6 +252,8 @@ class ProfileProviderStates {
   final AsyncValue<SubscriptionModel?> fetchSubcription;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
   final AsyncValue<String?> inviteLink;
+  final AsyncValue<Members?> organisationMembers;
+  final AsyncValue<String?> initiateSubscription;
 
   const ProfileProviderStates({
     required this.selectedPlan,
@@ -233,22 +266,27 @@ class ProfileProviderStates {
     required this.fetchSubcription,
     required this.updatePassword,
     required this.inviteLink,
+    required this.organisationMembers,
+    required this.initiateSubscription,
   });
 
   ProfileProviderStates copyWith({
-    SubscriptionPlan? selectedPlan,
     XFile? pickedImage,
+    SubscriptionPlan? selectedPlan,
     AsyncValue<UserModel?>? user,
     AsyncValue<UserProfile?>? profileUpdater,
     AsyncValue<String?>? profileAvatarUpdater,
     AsyncValue<NotificationModel?>? notificationUpdater,
     AsyncValue<NotificationModel?>? notificationFetch,
     AsyncValue<SubscriptionModel?>? fetchSubcription,
+    AsyncValue<SubscriptionModel?>? fetchSubcriptionbyUserId,
     AsyncValue<String?>? inviteLink,
     AsyncValue<UpdatePasswordModel?>? updatePassword,
+    AsyncValue<Members?>? organisationMembers,
+    AsyncValue<String?>? initiateSubscription,
   }) {
     return ProfileProviderStates(
-        selectedPlan: selectedPlan ?? this.selectedPlan,
+        selectedPlan: selectedPlan ?? selectedPlan,
         pickedImage: pickedImage ?? this.pickedImage,
         user: user ?? this.user,
         profileUpdater: profileUpdater ?? this.profileUpdater,
@@ -257,6 +295,8 @@ class ProfileProviderStates {
         notificationFetch: notificationFetch ?? this.notificationFetch,
         fetchSubcription: fetchSubcription ?? this.fetchSubcription,
         inviteLink: inviteLink ?? this.inviteLink,
+        initiateSubscription: initiateSubscription ?? this.initiateSubscription,
+        organisationMembers: organisationMembers ?? this.organisationMembers,
         updatePassword: updatePassword ?? this.updatePassword);
   }
 }

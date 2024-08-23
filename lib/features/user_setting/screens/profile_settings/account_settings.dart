@@ -3,6 +3,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
@@ -38,13 +39,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Align(
+        title: Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 1.0),
+            padding: const EdgeInsets.only(
+                left: 1.0), // Adjust this padding to align with the avatar
             child: Text(
-              'Settings',
-              style: TextStyle(
+              context.text.settings,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
