@@ -128,13 +128,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           context.push(AppRoute.notificationScreen);
                         },
                       ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/data.png',
-                        title: AppLocalizations.of(context)!.changePassword,
-                        onTap: () {
-                          context.push(AppRoute.updatePassword);
-                        },
-                      ),
+                      // SettingsTile(
+                      //   leadingIcon: 'assets/images/data.png',
+                      //   title: AppLocalizations.of(context)!.changePassword,
+                      //   onTap: () {
+                      //     context.push(AppRoute.updatePassword);
+                      //   },
+                      // ),
                       SettingsTile(
                         leadingIcon: 'assets/images/world.png',
                         title: AppLocalizations.of(context)!.languageAndRegion,
@@ -153,14 +153,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/user_plus.png',
-                        title: AppLocalizations.of(context)!.createOrganisation,
-                        onTap: () {
-                          // Navigate to create organisation screen
-                          context.push(AppRoute.companySignUp);
-                        },
-                      ),
+                      // SettingsTile(
+                      //   leadingIcon: 'assets/images/user_plus.png',
+                      //   title: AppLocalizations.of(context)!.createOrganisation,
+                      //   onTap: () {
+                      //     // Navigate to create organisation screen
+                      //     context.push(AppRoute.companySignUp);
+                      //   },
+                      // ),
                       SettingsTile(
                         leadingIcon: 'assets/images/org.png',
                         title: AppLocalizations.of(context)!.manageOrganization,
