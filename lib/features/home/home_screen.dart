@@ -10,7 +10,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+//import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'home_widget/widgets/chart_loader.dart';
 
@@ -158,74 +158,74 @@ class HomeScreen extends ConsumerWidget {
             ),
 
             // Overview (Bar Chart)
-            dashBoardStateProvider.trendLoading
-                ? const ChartLoader()
-                : dashBoardStateProvider.mapData.isEmpty
-                    ? const ChartEmpty()
-                    : Container(
-                        padding: EdgeInsets.all(24.w),
-                        height: 302.h,
-                        child: SfCartesianChart(
-                          backgroundColor: Colors.white,
-                          plotAreaBorderColor: Colors.transparent,
-                          primaryXAxis: CategoryAxis(
-                            majorGridLines: const MajorGridLines(width: 0),
-                            axisLine: const AxisLine(width: 0),
-                            // Add label style customization
-                            labelStyle: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          primaryYAxis: const NumericAxis(
-                            majorGridLines: MajorGridLines(width: 0),
-                            minorGridLines: MinorGridLines(width: 0),
-                            axisLine: AxisLine(width: 0),
-                            // Add axis label
-                          ),
-                          series: <CartesianSeries>[
-                            ColumnSeries<SalesData, String>(
-                              dataSource: dashBoardStateProvider.mapData,
-                              xValueMapper: (SalesData data, _) => data.month,
-                              yValueMapper: (SalesData data, _) => data.veryGood,
-                              color: const Color(0xFFE0E0E0),
-                              name: 'Very Good',
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              width:
-                                  0.7, // Reduce the bar width to allow overlapping
-                            ),
-                            ColumnSeries<SalesData, String>(
-                              dataSource: dashBoardStateProvider.mapData,
-                              xValueMapper: (SalesData data, _) => data.month,
-                              yValueMapper: (SalesData data, _) => data.good,
-                              color: const Color(0xFFFFC107),
-                              name: 'Good',
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              width:
-                                  0.7, // Reduce the bar width to allow overlapping
-                            ),
-                            ColumnSeries<SalesData, String>(
-                              dataSource: dashBoardStateProvider.mapData,
-                              xValueMapper: (SalesData data, _) => data.month,
-                              yValueMapper: (SalesData data, _) => data.poor,
-                              color: const Color(0xFFC70039),
-                              name: 'Poor',
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              width:
-                                  0.7, // Reduce the bar width to allow overlapping
-                            ),
-                          ],
-                        ),
-                      ),
+            // dashBoardStateProvider.trendLoading
+            //     ? const ChartLoader()
+            //     : dashBoardStateProvider.mapData.isEmpty
+            //         ? const ChartEmpty()
+            //         : Container(
+            //             padding: EdgeInsets.all(24.w),
+            //             height: 302.h,
+            //             child: SfCartesianChart(
+            //               backgroundColor: Colors.white,
+            //               plotAreaBorderColor: Colors.transparent,
+            //               primaryXAxis: CategoryAxis(
+            //                 majorGridLines: const MajorGridLines(width: 0),
+            //                 axisLine: const AxisLine(width: 0),
+            //                 // Add label style customization
+            //                 labelStyle: TextStyle(
+            //                   color: Colors.grey[600],
+            //                   fontSize: 12.sp,
+            //                 ),
+            //               ),
+            //               primaryYAxis: const NumericAxis(
+            //                 majorGridLines: MajorGridLines(width: 0),
+            //                 minorGridLines: MinorGridLines(width: 0),
+            //                 axisLine: AxisLine(width: 0),
+            //                 // Add axis label
+            //               ),
+            //               series: <CartesianSeries>[
+            //                 ColumnSeries<SalesData, String>(
+            //                   dataSource: dashBoardStateProvider.mapData,
+            //                   xValueMapper: (SalesData data, _) => data.month,
+            //                   yValueMapper: (SalesData data, _) => data.veryGood,
+            //                   color: const Color(0xFFE0E0E0),
+            //                   name: 'Very Good',
+            //                   borderRadius: const BorderRadius.only(
+            //                     topLeft: Radius.circular(10),
+            //                     topRight: Radius.circular(10),
+            //                   ),
+            //                   width:
+            //                       0.7, // Reduce the bar width to allow overlapping
+            //                 ),
+            //                 ColumnSeries<SalesData, String>(
+            //                   dataSource: dashBoardStateProvider.mapData,
+            //                   xValueMapper: (SalesData data, _) => data.month,
+            //                   yValueMapper: (SalesData data, _) => data.good,
+            //                   color: const Color(0xFFFFC107),
+            //                   name: 'Good',
+            //                   borderRadius: const BorderRadius.only(
+            //                     topLeft: Radius.circular(10),
+            //                     topRight: Radius.circular(10),
+            //                   ),
+            //                   width:
+            //                       0.7, // Reduce the bar width to allow overlapping
+            //                 ),
+            //                 ColumnSeries<SalesData, String>(
+            //                   dataSource: dashBoardStateProvider.mapData,
+            //                   xValueMapper: (SalesData data, _) => data.month,
+            //                   yValueMapper: (SalesData data, _) => data.poor,
+            //                   color: const Color(0xFFC70039),
+            //                   name: 'Poor',
+            //                   borderRadius: const BorderRadius.only(
+            //                     topLeft: Radius.circular(10),
+            //                     topRight: Radius.circular(10),
+            //                   ),
+            //                   width:
+            //                       0.7, // Reduce the bar width to allow overlapping
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
 
             // Recent Sales
             SizedBox(
@@ -258,26 +258,25 @@ class HomeScreen extends ConsumerWidget {
                       final customer = customers[index];
                       return CustomerListTile(
                         customerName: customer['name'] ?? 'Unknown Customer',
-                        email: customer['email'] ?? 'No Email Provided',
-                        amount: customer['amount'] ?? '0.00',
+                        email: customer['email'] ?? 'Unknown Email',
+                        amount: customer['amount'] ?? 'Unknown Amount',
                       );
                     },
                   ),
                 ],
               ),
-            ),
+            )
           ],
-        ),
-
-        );
+        ));
   }
 }
 
+// The SalesData class represents the data for each bar in the chart
 class SalesData {
-  final String month;
-  final int veryGood;
-  final int good;
-  final int poor;
-
   SalesData(this.month, this.veryGood, this.good, this.poor);
+
+  final String month;
+  final double veryGood;
+  final double good;
+  final double poor;
 }
