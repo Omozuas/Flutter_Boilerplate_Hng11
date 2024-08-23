@@ -102,29 +102,22 @@ class SettingsApi {
 
   Future<SubscriptionModel> getsubscriptionOrgId(
       {required String orgId}) async {
-
     try {
       final response = await dio.get(
         '/subscriptions/organization/$orgId',
       );
-      return subscriptionModelFromJson(response?.data['data']);
+      return SubscriptionModel.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<SubscriptionModel> getSubscriptionUserId(
-      {required String userId}) async {
+  Future<SubscriptionModel> getSubscriptionUserId(String userId) async {
     try {
       final response = await dio.get(
         '/subscriptions/user/$userId',
-
-    try {
-      final response = await dio.get(
-        '/subscriptions/organization/$orgId',
-
       );
-      return subscriptionModelFromJson(response?.data['data']);
+      return  SubscriptionModel.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
@@ -154,18 +147,22 @@ class SettingsApi {
       rethrow;
     }
   }
+
   Future<String> generateInviteLink({required String orgId}) async {
     try {
-      final response = await dio.post('/invite/generate', data: {'organizationId': orgId});
+      final response =
+          await dio.post('/invite/generate', data: {'organizationId': orgId});
       return response?.data['data']['inviteLink'];
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> sendInviteLink({required String email, required String inviteLink}) async {
+  Future<void> sendInviteLink(
+      {required String email, required String inviteLink}) async {
     try {
-      await dio.post('/invite/send', data: {'email': email, 'inviteLink': inviteLink});
+      await dio.post('/invite/send',
+          data: {'email': email, 'inviteLink': inviteLink});
     } catch (e) {
       rethrow;
     }

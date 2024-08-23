@@ -12,6 +12,8 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../models/subscription_model.dart';
+
 class SubscriptionCheckout extends StatelessWidget {
   final SubscriptionPlan plan;
 
@@ -25,8 +27,6 @@ class SubscriptionCheckout extends StatelessWidget {
         return "Basic";
       case SubscriptionPlan.advanced:
         return "Advanced";
-      case SubscriptionPlan.premium:
-        return "Premium";
       default:
         return "";
     }
@@ -40,8 +40,6 @@ class SubscriptionCheckout extends StatelessWidget {
         return "You're currently enjoying the benefits of our Basic plan. Your subscription will auto-renew on the 30th of July 2024";
       case SubscriptionPlan.advanced:
         return "You're currently enjoying the benefits of our Advanced plan. Your subscription will auto-renew on the 30th of July 2024";
-      case SubscriptionPlan.premium:
-        return "You're currently enjoying the benefits of our Premium plan. Your subscription will auto-renew on the 30th of July 2024";
       default:
         return "";
     }
@@ -55,8 +53,6 @@ class SubscriptionCheckout extends StatelessWidget {
         return 20;
       case SubscriptionPlan.advanced:
         return 50;
-      case SubscriptionPlan.premium:
-        return 100;
       default:
         return 0;
     }
@@ -77,14 +73,6 @@ class SubscriptionCheckout extends StatelessWidget {
         return [
           "200 Projects",
           "Up to 100 subscribers",
-          "Advanced analytics",
-          "24-hour support",
-          "Marketing advisor"
-        ];
-      case SubscriptionPlan.premium:
-        return [
-          "300 Projects",
-          "Up to 500 subscribers",
           "Advanced analytics",
           "24-hour support",
           "Marketing advisor"
