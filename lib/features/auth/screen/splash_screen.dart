@@ -34,7 +34,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       //     context.go(AppRoute.login);
       //   }
       // }
-
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
         return;
