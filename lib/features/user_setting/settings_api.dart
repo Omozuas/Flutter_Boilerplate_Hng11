@@ -173,7 +173,7 @@ class SettingsApi {
 
   Future<List<Members>> getOrganisationMembers({required String orgId}) async {
     try {
-      final response = await dio.get('/members/organization/$orgId');
+      final response = await dio.get('organisations/$orgId/users');
       List<dynamic> usersJson = response?.data['data']['users'];
       return usersJson.map((json) => Members.fromJson(json)).toList();
     } catch (e) {
