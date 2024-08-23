@@ -175,12 +175,8 @@ class HomeScreen extends ConsumerWidget {
                 onTap: () {},
                 borderColor: GlobalColors.orange,
                 text: StringManager.addAProduct,
-                textStyle: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
+                textStyle: CustomTextStyle.medium(
+                    color: Colors.white, fontSize: 14.sp),
                 height: 46.h,
                 containerColor: GlobalColors.orange,
                 width: 151.w,
@@ -198,12 +194,8 @@ class HomeScreen extends ConsumerWidget {
                 onTap: () {},
                 borderColor: const Color(0xFFF6F6F6),
                 text: StringManager.addAMember,
-                textStyle: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
+                textStyle: CustomTextStyle.medium(
+                    color: Colors.black, fontSize: 14.sp),
                 height: 46.h,
                 containerColor: Colors.transparent,
                 width: 151.w,
@@ -223,13 +215,9 @@ class HomeScreen extends ConsumerWidget {
           Container(
             padding: 7.sp.padA,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                12.r
-              ),
-              border: Border.all(
-                width: 0.50, color: GlobalColors.borderColor
-              )
-            ),
+                borderRadius: BorderRadius.circular(12.r),
+                border:
+                    Border.all(width: 0.50, color: GlobalColors.borderColor)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -240,12 +228,10 @@ class HomeScreen extends ConsumerWidget {
                     Text(
                       StringManager.recentSalesTitle,
                       style: CustomTextStyle.bold(
-                        fontSize: 16.sp,
-                        color: GlobalColors.black
-                      ),
+                          fontSize: 16.sp, color: GlobalColors.black),
                     ),
                     InkWell(
-                      onTap: (){},
+                      onTap: () {},
                       child: Padding(
                         padding: 8.h.padV,
                         child: Text(
@@ -262,14 +248,23 @@ class HomeScreen extends ConsumerWidget {
                   height: 8.h,
                   color: GlobalColors.dividerColor,
                 ),
-                if((dashBoardStateProvider.dashBoardData.monthSales?.length??0)==0)
-                SizedBox(
-                  height: 100.h,
-                  width: width(context),
-                  child: const Center(
-                    child: Text("No sales yet this month"),
-                  ),
-                )
+                if ((dashBoardStateProvider.dashBoardData.monthSales?.length ??
+                        0) ==
+                    0)
+                  SizedBox(
+                    height: 100.h,
+                    width: width(context),
+                    child: Center(
+                      child: Text(
+                        StringManager.noSales,
+                        style: CustomTextStyle.regular(
+                                color: const Color(0xFF98A2B3), fontSize: 16.sp)
+                            .copyWith(
+                          fontFamily: 'Inter',
+                        ),
+                      ),
+                    ),
+                  )
                 else
                   Column(
                     children: List.generate(
@@ -280,13 +275,12 @@ class HomeScreen extends ConsumerWidget {
                               .dashBoardData.monthSales?[index] ??
                           MonthSale();
                       return CustomerListTile(
-                        customerName:  'Unknown Customer',
+                        customerName: 'Unknown Customer',
                         email: 'No Email Provided',
-                        amount: monthlySale.amount??0,
+                        amount: monthlySale.amount ?? 0,
                       );
-                    }
+                    }),
                   ),
-                ),
               ],
             ),
           ),
