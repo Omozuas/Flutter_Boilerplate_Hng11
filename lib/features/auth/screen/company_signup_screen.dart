@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
-import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
@@ -17,19 +17,12 @@ class CompanySignUpScreen extends ConsumerWidget {
   final _companyFormKey = GlobalKey<FormState>();
 
   final _companyNameController = TextEditingController();
-
   final _companyEmailController = TextEditingController();
-
   final _companyIndustryController = TextEditingController();
-
   final _companyTypeController = TextEditingController();
-
   final _companyCountryController = TextEditingController();
-
   final _companyStateController = TextEditingController();
-
   final _companyAddressController = TextEditingController();
-
   final _companyLgaController = TextEditingController();
 
   final loadingProvider = StateProvider<bool>((ref) => false);
@@ -37,13 +30,14 @@ class CompanySignUpScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isLoading = ref.watch(loadingProvider);
+    final localizations = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: GlobalColors.white,
         appBar: AppBar(
           leading: const ChevronBackButton(),
           backgroundColor: Colors.white,
-          // surfaceTintColor: Colors.white,
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -56,20 +50,19 @@ class CompanySignUpScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Basic Sign Up Section Starts Here
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            StringManager.editOrganization,
+                            localizations.editOrganization,
                             style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
                             ),
                           ),
                           Text(
-                            StringManager.createAnAccount,
+                            localizations.createAnAccount,
                             style: CustomTextStyle.regular(
                               color: GlobalColors.gray500Color,
                               fontSize: 13.sp,
@@ -77,14 +70,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 20.sp),
                           CustomTextField(
-                            label: StringManager.companyName,
+                            label: localizations.companyName,
                             controller: _companyNameController,
-                            hintText: StringManager.enterCompanyName,
+                            hintText: localizations.enterCompanyName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return StringManager.pleaseEnterName;
+                                return localizations.pleaseEnterName;
                               }
-
                               return null;
                             },
                             labelStyle: CustomTextStyle.medium(
@@ -98,19 +90,15 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           CustomTextField(
-                            label: StringManager.companyEmail,
+                            label: localizations.companyEmail,
                             controller: _companyEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            hintText: StringManager.enterCompanyEmail,
+                            hintText: localizations.enterCompanyEmail,
                             validator: (value) {
                               final emailRegex = RegExp(
                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-
-                              if (value == null || value.isEmpty) {
-                                return StringManager.pleaseEnterValidEmail;
-                              }
-                              if (!emailRegex.hasMatch(value)) {
-                                return StringManager.pleaseEnterValidEmail;
+                              if (value == null || value.isEmpty || !emailRegex.hasMatch(value)) {
+                                return localizations.pleaseEnterValidEmail;
                               }
                               return null;
                             },
@@ -125,7 +113,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            StringManager.selectIndustry,
+                            localizations.selectIndustry,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -133,12 +121,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              StringManager.agricultureIndustry,
-                              StringManager.manufacturingIndustry,
-                              StringManager.technologyIndustry,
-                              StringManager.healthcareIndustry,
-                              StringManager.educationIndustry,
+                            items: [
+                              localizations.agricultureIndustry,
+                              localizations.manufacturingIndustry,
+                              localizations.technologyIndustry,
+                              localizations.healthcareIndustry,
+                              localizations.educationIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyIndustryController.text = value ?? '';
@@ -155,7 +143,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            StringManager.organizationType,
+                            localizations.organizationType,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -163,10 +151,10 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              StringManager.soleProprietorship,
-                              StringManager.partnership,
-                              StringManager.corporation,
+                            items: [
+                              localizations.soleProprietorship,
+                              localizations.partnership,
+                              localizations.corporation,
                             ],
                             onChanged: (String? value) {
                               _companyTypeController.text = value ?? '';
@@ -184,15 +172,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    // Basic Sign Up Section Ends Here
                     SizedBox(height: 30.sp),
-                    // Company Address Section Starts Here
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            StringManager.companyAddress,
+                            localizations.companyAddress,
                             style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
@@ -200,7 +186,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            StringManager.selectCountry,
+                            localizations.selectCountry,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -208,12 +194,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              StringManager.country1,
-                              StringManager.country2,
-                              StringManager.country3,
-                              StringManager.country4,
-                              StringManager.country5,
+                            items: [
+                              localizations.country1,
+                              localizations.country2,
+                              localizations.country3,
+                              localizations.country4,
+                              localizations.country5,
                             ],
                             onChanged: (String? value) {
                               _companyCountryController.text = value ?? '';
@@ -230,7 +216,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            StringManager.selectState,
+                            localizations.selectState,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -238,11 +224,11 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              StringManager.state1,
-                              StringManager.state2,
-                              StringManager.state3,
-                              StringManager.state4,
+                            items: [
+                              localizations.state1,
+                              localizations.state2,
+                              localizations.state3,
+                              localizations.state4,
                             ],
                             onChanged: (String? value) {
                               _companyStateController.text = value ?? '';
@@ -259,14 +245,13 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 25.sp),
                           CustomTextField(
-                            label: StringManager.address,
+                            label: localizations.address,
                             controller: _companyAddressController,
-                            hintText: StringManager.enterCompanyAddress,
+                            hintText: localizations.enterCompanyAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return StringManager.pleaseEnterValidAddress;
+                                return localizations.pleaseEnterValidAddress;
                               }
-
                               return null;
                             },
                             labelStyle: CustomTextStyle.medium(
@@ -280,7 +265,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            StringManager.lga,
+                            localizations.lga,
                             style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
@@ -288,11 +273,11 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              StringManager.lga1,
-                              StringManager.lga2,
-                              StringManager.lga3,
-                              StringManager.lga4,
+                            items: [
+                              localizations.lga1,
+                              localizations.lga2,
+                              localizations.lga3,
+                              localizations.lga4,
                             ],
                             onChanged: (String? value) {
                               _companyLgaController.text = value ?? '';
@@ -310,26 +295,22 @@ class CompanySignUpScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    // Company Address Section Ends Here
                     SizedBox(height: 30.sp),
-                    // Action Button Section Starts Here
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomButton(
                             onTap: () async {
-                              // Validate returns true if the form is valid, or false otherwise.
                               if (_companyFormKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
-                                //Submission async function here
-                                ref.read(loadingProvider.notifier).state =
-                                    false;
+                                // Submission async function here
+                                ref.read(loadingProvider.notifier).state = false;
                               }
                             },
                             loading: isLoading,
                             borderColor: GlobalColors.orange,
-                            text: StringManager.createAccount,
+                            text: localizations.createAccount,
                             height: 40.sp,
                             containerColor: GlobalColors.orange,
                             width: double.infinity,
@@ -340,7 +321,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                StringManager.alreadyHaveAnAccount,
+                                localizations.alreadyHaveAnAccount,
                                 style: CustomTextStyle.regular(
                                   color: GlobalColors.darkOne,
                                   fontSize: 13.sp,
@@ -352,7 +333,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                                   context.push(AppRoute.login);
                                 },
                                 child: Text(
-                                  StringManager.login,
+                                  localizations.login,
                                   style: CustomTextStyle.regular(
                                     color: GlobalColors.orange,
                                     fontSize: 13.sp,
@@ -364,7 +345,6 @@ class CompanySignUpScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    // Action Button Section Ends Here
                   ],
                 ),
               ),

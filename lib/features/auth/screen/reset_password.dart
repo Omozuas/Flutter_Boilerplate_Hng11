@@ -7,6 +7,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';  
 
 class ResetPassword extends StatefulWidget {
   final String email;
@@ -19,8 +20,7 @@ class ResetPassword extends StatefulWidget {
 class _ResetPasswordState extends State<ResetPassword> {
   bool loading = false;
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final _formResetKey = GlobalKey<FormState>();
 
   @override
@@ -47,10 +47,10 @@ class _ResetPasswordState extends State<ResetPassword> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    //loading = false;
+    final localizations = AppLocalizations.of(context)!;  
+
     return Scaffold(
       appBar: AppBar(
         leading: const ChevronBackButton(),
@@ -65,7 +65,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Reset Password',
+                    localizations.resetPassword,  
                     style: TextStyle(
                       color: GlobalColors.darkOne,
                       fontSize: 24.sp,
@@ -73,30 +73,31 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ),
                   ),
                   SizedBox(height: 8.sp),
-                  const Text(
-                    'Create a unique password. Your password should be easy to remember.',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+                  Text(
+                    localizations.createUniquePassword, 
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 13),
                   ),
                   SizedBox(height: 28.sp),
                   PasswordTextField(
-                    label: "New Password",
+                    label: localizations.newPassword,  
                     controller: _newPasswordController,
                     obscureText: true,
-                    hintText: "Enter new password",
+                    hintText: localizations.enterNewPassword,  
                     validator: Validators.passwordValidator,
                   ),
                   SizedBox(height: 16.sp),
                   PasswordTextField(
-                    label: "Confirm Password",
+                    label: localizations.confirmPassword,  // Localized label
                     controller: _confirmPasswordController,
                     obscureText: true,
-                    hintText: "Confirm new password",
+                    hintText: localizations.confirmNewPassword,  // Localized hint
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return localizations.fieldRequired;  
                       }
                       if (value != _newPasswordController.text) {
-                        return 'Passwords do not match';
+                        return localizations.passwordsDoNotMatch;  
                       }
                       return null;
                     },
@@ -110,7 +111,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       }
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: "Continue",
+                    text: localizations.continueText,  // Localized button text
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
