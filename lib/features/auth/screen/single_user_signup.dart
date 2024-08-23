@@ -11,7 +11,6 @@ import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
-
 import '../providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/l10n/app_localizations.dart';
 
