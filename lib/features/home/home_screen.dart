@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_list_tile.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
+import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../utils/app_images.dart';
+import '../../utils/custom_text_style.dart';
+import 'home_widget/model/dashboard_model.dart';
 import 'home_widget/widgets/chart_loader.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -108,31 +111,31 @@ class HomeScreen extends ConsumerWidget {
           SizedBox(
             height: GlobalScreenSize.getScreenHeight(context) * 0.020,
           ),
-          Row(
-            children: [
-              RevenueCard(
-                title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.revenue == null
-                    ? "0.00"
-                    : formatNumber(
-                    dashBoardStateProvider.dashBoardData.revenue ?? 0,
-                    decimalPlaces: 2),
-                percentageChange: '+15% decrease',
-              ),
-              18.w.sbW,
-              RevenueCard(
-                title: 'Total Revenue',
-                value: dashBoardStateProvider.dashBoardData.subscriptions ==
-                    null
-                    ? "0"
-                    : formatNumber(
-                    dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
-                    decimalPlaces: 0),
-                percentageChange: '+65% decrease',
-                isRevenue: false,
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     RevenueCard(
+          //       title: 'Total Revenue',
+          //       value: dashBoardStateProvider.dashBoardData.revenue == null
+          //           ? "0.00"
+          //           : formatNumber(
+          //           dashBoardStateProvider.dashBoardData.revenue ?? 0,
+          //           decimalPlaces: 2),
+          //       percentageChange: '+15% decrease',
+          //     ),
+          //     18.w.sbW,
+          //     RevenueCard(
+          //       title: 'Total Revenue',
+          //       value: dashBoardStateProvider.dashBoardData.subscriptions ==
+          //           null
+          //           ? "0"
+          //           : formatNumber(
+          //           dashBoardStateProvider.dashBoardData.subscriptions ?? 0,
+          //           decimalPlaces: 0),
+          //       percentageChange: '+65% decrease',
+          //       isRevenue: false,
+          //     ),
+          //   ],
+          // ),
           Row(
             children: [
               Text(
@@ -230,16 +233,17 @@ class HomeScreen extends ConsumerWidget {
                 Row(
                   children: [
                     const Text(
-                      'Recent Sales',
+                      StringManager.recentSalesTitle,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        'See more',
-                        style: TextStyle(
-                          color: GlobalColors.gray600Color,
+                        StringManager.seeMore,
+                        style: CustomTextStyle.bold(
+                          fontSize: 16.sp,
+                          color: GlobalColors.integrationTextColor
                         ),
                       ),
                     )
@@ -248,13 +252,17 @@ class HomeScreen extends ConsumerWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: customers.length,
+                  itemCount: dashBoardStateProvider.dashBoardData.monthSales?.length,
                   itemBuilder: (context, index) {
-                    final customer = customers[index];
+                    var data = dashBoardProviderNotifier.getUserByID(
+                        dashBoardStateProvider.dashBoardData.monthSales?[index].userId??""
+                    );
+
+                    MonthSale monthlySale = dashBoardStateProvider.dashBoardData.monthSales?[index]?? MonthSale();
                     return CustomerListTile(
-                      customerName: customer['name'] ?? 'Unknown Customer',
-                      email: customer['email'] ?? 'No Email Provided',
-                      amount: customer['amount'] ?? '0.00',
+                      customerName:  'Unknown Customer',
+                      email: 'No Email Provided',
+                      amount: formatNumber(monthlySale.amount?? 0),
                     );
                   },
                 ),
