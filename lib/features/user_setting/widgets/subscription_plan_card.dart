@@ -13,12 +13,14 @@ class PlanCard extends ConsumerWidget {
   final SubscriptionPlan plan;
   final VoidCallback? onButtonTap;
   final bool isItCurrentPlan;
+  final bool isLoading;
 
   const PlanCard({
     super.key,
     required this.plan,
     this.onButtonTap,
     this.isItCurrentPlan = false,
+    this.isLoading = false,
   });
 
   Color get btnColor =>
@@ -96,6 +98,7 @@ class PlanCard extends ConsumerWidget {
               padding: EdgeInsets.only(right: 20.sp),
               child: CustomButton(
                 onTap: () {
+                  if (isLoading) return;
                   ref.read(profileProvider.notifier).selectPlan(plan);
                   onButtonTap?.call();
                 },
@@ -104,6 +107,7 @@ class PlanCard extends ConsumerWidget {
                     ? context.text.currentPlan
                     : context.text.upgrade,
                 height: 53.0,
+                loading: isLoading,
                 containerColor: btnColor,
                 width: double.infinity,
                 textColor: !isItCurrentPlan

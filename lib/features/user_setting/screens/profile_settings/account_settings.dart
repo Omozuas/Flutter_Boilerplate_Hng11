@@ -152,7 +152,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         SizedBox(height: 8.h),
                         Text(
                          context.text.organizationSettings,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),

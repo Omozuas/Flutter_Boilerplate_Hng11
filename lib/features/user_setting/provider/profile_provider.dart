@@ -49,6 +49,10 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     return;
   }
 
+  void selectPlan(SubscriptionPlan plan) {
+    state = state.copyWith(selectedPlan: plan);
+  }
+
   Future<void> getUser() async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
@@ -219,17 +223,19 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> initiateSubscription(
-      {required String email,
-      required double amount,
-      required String plan,
-      required String frequency}) async {
+  Future<void> initiateSubscription({
+    required double amount,
+    required String plan,
+    required String frequency,
+  }) async {
     final settingsApi = ref.read(settingsApiProvider);
+    final email = state.user.sureValue?.email;
+    if (email == null) return;
     try {
       state = state.copyWith(initiateSubscription: const AsyncLoading());
-      final initiateSubscription = await settingsApi.initiateSubscription(
+      final res = await settingsApi.initiateSubscription(
           email: email, amount: amount, plan: plan, frequency: frequency);
-      state = state.copyWith(inviteLink: AsyncData(initiateSubscription));
+      state = state.copyWith(initiateSubscription: AsyncData(res));
     } catch (e) {
       state = state.copyWith(
           initiateSubscription: AsyncError(e, StackTrace.current));

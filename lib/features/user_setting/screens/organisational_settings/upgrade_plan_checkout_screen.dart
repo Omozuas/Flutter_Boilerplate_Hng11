@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../utils/context_extensions.dart';
 import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
+import '../../../../utils/widgets/custom_snackbar.dart';
+import '../../models/custom_api_error.dart';
 import '../../models/subscription_model.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/reusable_dialog_content.dart';
@@ -65,6 +67,8 @@ class _UpgradePlanCheckoutScreenState
     final currentPlan =
         ref.watch(profileProvider).fetchSubcription.sureValue?.plan;
     final isCurrentPlan = currentPlan == widget.plan;
+    final uriLoading =
+        ref.watch(profileProvider).initiateSubscription.isLoading;
 
     return Scaffold(
       appBar: AppBar(
@@ -88,15 +92,38 @@ class _UpgradePlanCheckoutScreenState
                 child: !isCurrentPlan
                     ? PlanCard(
                         plan: widget.plan,
+                        isLoading: uriLoading,
                         onButtonTap: () async {
-                          await browser.open(
-                            url: WebUri('https://www.google.com'),
-                            settings: ChromeSafariBrowserSettings(
-                              showTitle: false,
-                              shareState: CustomTabsShareState.SHARE_STATE_OFF,
-                              barCollapsingEnabled: true,
-                            ),
-                          );
+                          try {
+                            await ref
+                                .read(profileProvider.notifier)
+                                .initiateSubscription(
+                                  amount: widget.plan.amount.toDouble(),
+                                  plan: widget.plan.name,
+                                  frequency: widget.plan.frequency,
+                                );
+                            final uri = ref
+                                .read(profileProvider)
+                                .initiateSubscription
+                                .sureValue;
+                            if (uri == null) return;
+                            await browser.open(
+                              url: WebUri(uri),
+                              settings: ChromeSafariBrowserSettings(
+                                showTitle: false,
+                                shareState:
+                                    CustomTabsShareState.SHARE_STATE_OFF,
+                                barCollapsingEnabled: true,
+                              ),
+                            );
+                          } on CustomApiError catch (e) {
+                            showSnackBar(e.message);
+                          } catch (e) {
+                            if (!context.mounted) return;
+                            showSnackBar(
+                              context.text.errorOccurred,
+                            );
+                          }
                         },
                       )
                     : PlanDescriptionSection(plan: widget.plan),
