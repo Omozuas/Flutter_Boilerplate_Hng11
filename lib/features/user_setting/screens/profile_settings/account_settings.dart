@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
+import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../models/custom_api_error.dart';
@@ -23,7 +24,6 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  GetStorage stotage = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -199,17 +199,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         const Divider(),
                         SizedBox(height: 8.h),
                         InkWell(
-                          onTap: () {
-                            showDialog(
+                          onTap: () async {
+                            await showDialog(
                               context: context,
                               builder: (ctx) => LogOutDialog(
-                                onTap: () {
-                                  stotage.remove('accessToken');
+                                onTap: () async {
+                                  final userService = locator<UserService>();
+                                  await userService.logout();
+                                  if (!ctx.mounted) return;
                                   Navigator.pop(ctx);
-                                  context.go(AppRoute.login);
                                 },
                               ),
                             );
+                            if (!context.mounted) return;
+                            context.go(AppRoute.login);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
