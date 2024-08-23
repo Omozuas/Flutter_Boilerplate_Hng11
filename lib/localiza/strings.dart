@@ -237,6 +237,7 @@ static const String viewAllProducts = 'View all products';
   static const String savePreferences = 'Save Preferences';
   static const String inviteSentSuccessfully = 'Invite Sent Successfully';
   static const String manageMembers = 'Manage Members';
+
   static const String onTheFreePlan =
       'On the Free plan all members in a workspace are administrators. ';
   static const String searchByNameOrEmail = 'Search by name or email';
