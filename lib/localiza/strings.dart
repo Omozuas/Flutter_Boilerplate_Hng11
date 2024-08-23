@@ -125,89 +125,102 @@ class StringManager {
   static const String exportCsvWithInfo =
       'Export a CSV with information of all members of your team';
   static const String edit = 'Edit';
- static const String personalDetails = 'Personal Details';
-static const String username = 'Username';
-static const String enterUsername = 'Enter username';
-static const String yourJobTitle = 'Your job title';
-static const String enterJobTitle = 'Enter job title';
-static const String departmentOrTeam = 'Department or team';
-static const String enterDepartmentOrTeam = 'Enter a department or team';
+  static const String personalDetails = 'Personal Details';
+  static const String username = 'Username';
+  static const String enterUsername = 'Enter username';
+  static const String yourJobTitle = 'Your job title';
+  static const String enterJobTitle = 'Enter job title';
+  static const String departmentOrTeam = 'Department or team';
+  static const String enterDepartmentOrTeam = 'Enter a department or team';
 
-static const String enterEmailAddress = 'Enter email address';
-static const String bio = 'Bio';
-static const String typeYourMessageHere = 'Type your message here';
-static const String connectSocials = 'Connect Socials';
-static const String add = 'Add';
-static const String save = 'Save';
-static const String link = 'link';
-static const String cancel = 'Cancel';
-static const String select = 'Select';
-static const String maximumOf64Character = 'MAximum of 64 characters';
-static const String settingsSavedSuccessfully = 'Settings have been saved successfully.';
-static const String unsavedChangesWarning = 'You have unsaved changes. Are you sure you want to leave without saving?';
-static const String customizeLanguageAndRegionPreferences = 'Customise your language and region preferences';
-static const String languageUpdateError = 'There was a problem updating your language. Please try again.';
-static const String regionUpdateError = 'There was a problem updating your region. Please try again.';
-static const String timezoneUpdateError = 'There was a problem updating your timezone. Please try again.';
-static const String uploadYourPhoto = 'Upload your photo';
-static const String photoPurpose = 'Photos help your teammates recognize you';
-static const String inviteAs = 'Invite as';
-static const String pronouns = 'Pronouns';
-static const String selectPronouns = 'Select';
-static const String heHimPronouns = 'He/Him';
-static const String sheHerPronouns = 'She/Her';
-static const String otherPronouns = 'Others';
-static const String continueButton = 'Continue';
-static const String deleteButton = 'Delete';
-static const String welcomeBackMessage = 'Welcome back, please enter your details';
-static const String googleSignInButton = 'Google';
-static const String continueWithButton = 'or continue with';
-static const String rememberMeCheckbox = 'Remember Me';
-static const String forgotPasswordLink = 'Forgot Password?';
-static const String useMagicLinkButton = 'Use Magic Link instead';
-static const String discoverButton = 'Discover';
-static const String searchProductButton = 'Search Product';
-static const String topBoilerplatesForYou = 'Top Boilerplates For You';
-static const String discountLabel = 'Up to 50% ';
-static const String availableProducts = 'Available Products';
-static const String checkoutButton = 'Checkout';
-static const String addToCartButton = 'Add to Cart';
-static const String statusLabel = 'Status';
-static const String inStockLabel = 'In stock';
-static const String productRatingsAndReviews = 'Product Ratings and Reviews';
-static const String variationLabel = 'Variation';
-static const String dashboard = 'Dashboard';
-static const String thisMonthSummary = 'This Month\'s Summary';
-static const String totalRevenue = 'Total Revenue';
-static const String overview = 'Overview';
-static const String seeMore = 'See more';
-static const String veryGood = 'Very Good';
-static const String good = 'Good';
-static const String poor = 'Poor';
-static const String errorOccurred = 'An Error occurred';
-static const String failedToAddProduct = 'Failed to add product';
-static const String completeFormFill = 'Please complete form fill';
-static const String recentSalesTitle = 'Recent Sales';
-static const String addProductButton = 'Add a product';
-static const String productAddedSuccessfullyMessage = 'Product added successfully';
-static const String productNameLabel = 'Product name';
-static const String productNamePlaceholder = 'Please enter a product name';
-static const String productDescriptionPlaceholder = 'Enter product description';
-static const String pricePlaceholder = 'Please enter a price';
-static const String productQuantityPlaceholder = 'Please enter the quantity of product';
-static const String filterByStatusLabel = 'Filter by status';
-static const String filterByPriceRangeLabel = 'Filter by Price Range';
-static const String resetFiltersButton = 'Reset Filters';
-static const String uploadNewButton = 'Upload New';
-static const String acceptsImagesVideosOr3DModels = 'Accepts images, videos or 3D models';
-static const String deleteMemberButton = 'Delete Member';
-static const String memberRemovedSuccessfullyMessage = 'Member removed successfully';
-static const String inviteToOrganizationButton = 'Invite to your Organization';
-static const String profileUpdatedMessage = 'Profile Updated!';
-static const String profileUpdatedSuccessMessage = 'Your profile has been successfully updated.';
+  static const String enterEmailAddress = 'Enter email address';
+  static const String bio = 'Bio';
+  static const String typeYourMessageHere = 'Type your message here';
+  static const String connectSocials = 'Connect Socials';
+  static const String add = 'Add';
+  static const String save = 'Save';
+  static const String link = 'link';
+  static const String cancel = 'Cancel';
+  static const String select = 'Select';
+  static const String maximumOf64Character = 'MAximum of 64 characters';
+  static const String settingsSavedSuccessfully =
+      'Settings have been saved successfully.';
+  static const String unsavedChangesWarning =
+      'You have unsaved changes. Are you sure you want to leave without saving?';
+  static const String customizeLanguageAndRegionPreferences =
+      'Customise your language and region preferences';
+  static const String languageUpdateError =
+      'There was a problem updating your language. Please try again.';
+  static const String regionUpdateError =
+      'There was a problem updating your region. Please try again.';
+  static const String timezoneUpdateError =
+      'There was a problem updating your timezone. Please try again.';
+  static const String uploadYourPhoto = 'Upload your photo';
+  static const String photoPurpose = 'Photos help your teammates recognize you';
+  static const String inviteAs = 'Invite as';
+  static const String pronouns = 'Pronouns';
+  static const String selectPronouns = 'Select';
+  static const String heHimPronouns = 'He/Him';
+  static const String sheHerPronouns = 'She/Her';
+  static const String otherPronouns = 'Others';
+  static const String continueButton = 'Continue';
+  static const String deleteButton = 'Delete';
+  static const String welcomeBackMessage =
+      'Welcome back, please enter your details';
+  static const String googleSignInButton = 'Google';
+  static const String continueWithButton = 'or continue with';
+  static const String rememberMeCheckbox = 'Remember Me';
+  static const String forgotPasswordLink = 'Forgot Password?';
+  static const String useMagicLinkButton = 'Use Magic Link instead';
+  static const String discoverButton = 'Discover';
+  static const String searchProductButton = 'Search Product';
+  static const String topBoilerplatesForYou = 'Top Boilerplates For You';
+  static const String discountLabel = 'Up to 50% ';
+  static const String availableProducts = 'Available Products';
+  static const String checkoutButton = 'Checkout';
+  static const String addToCartButton = 'Add to Cart';
+  static const String statusLabel = 'Status';
+  static const String inStockLabel = 'In stock';
+  static const String productRatingsAndReviews = 'Product Ratings and Reviews';
+  static const String variationLabel = 'Variation';
+  static const String dashboard = 'Dashboard';
+  static const String thisMonthSummary = 'This Month\'s Summary';
+  static const String totalRevenue = 'Total Revenue';
+  static const String overview = 'Overview';
+  static const String seeMore = 'See more';
+  static const String veryGood = 'Very Good';
+  static const String good = 'Good';
+  static const String poor = 'Poor';
+  static const String errorOccurred = 'An Error occurred';
+  static const String failedToAddProduct = 'Failed to add product';
+  static const String completeFormFill = 'Please complete form fill';
+  static const String recentSalesTitle = 'Recent Sales';
+  static const String addProductButton = 'Add a product';
+  static const String productAddedSuccessfullyMessage =
+      'Product added successfully';
+  static const String productNameLabel = 'Product name';
+  static const String productNamePlaceholder = 'Please enter a product name';
+  static const String productDescriptionPlaceholder =
+      'Enter product description';
+  static const String pricePlaceholder = 'Please enter a price';
+  static const String productQuantityPlaceholder =
+      'Please enter the quantity of product';
+  static const String filterByStatusLabel = 'Filter by status';
+  static const String filterByPriceRangeLabel = 'Filter by Price Range';
+  static const String resetFiltersButton = 'Reset Filters';
+  static const String uploadNewButton = 'Upload New';
+  static const String acceptsImagesVideosOr3DModels =
+      'Accepts images, videos or 3D models';
+  static const String deleteMemberButton = 'Delete Member';
+  static const String memberRemovedSuccessfullyMessage =
+      'Member removed successfully';
+  static const String inviteToOrganizationButton =
+      'Invite to your Organization';
+  static const String profileUpdatedMessage = 'Profile Updated!';
+  static const String profileUpdatedSuccessMessage =
+      'Your profile has been successfully updated.';
 
-
-static const String viewAllProducts = 'View all products';
+  static const String viewAllProducts = 'View all products';
   static const String priceRange = 'Price Range';
   static const String electronicsAndGadgets = 'Electronics & Gadgets';
   static const String fashionAndApparel = 'Fashion & Apparel';
@@ -249,4 +262,21 @@ static const String viewAllProducts = 'View all products';
 
   /// TODO: Put every new strings under this todo
 
+  static const String editOrganization = 'Edit Organization';
+
+  static const String country1 = 'Germany';
+  static const String country2 = 'Nigeria';
+  static const String country3 = 'Canada';
+  static const String country4 = 'Brazil';
+  static const String country5 = 'Japan';
+
+  static const String state1 = 'Lagos';
+  static const String state2 = 'Florida';
+  static const String state3 = 'Texas';
+  static const String state4 = 'California';
+
+  static const String lga1 = 'Ikeja';
+  static const String lga2 = 'Brisbane City';
+  static const String lga3 = 'City of Sydney';
+  static const String lga4 = 'Ibadan North';
 }
