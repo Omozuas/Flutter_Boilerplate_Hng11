@@ -23,12 +23,19 @@ class PasswordService {
     required String token,
   }) async {
     try {
-      await _dio.put('auth/reset-password-mobile', data: {
-        'currentPassword': currentPassword,
-        'newPassword': newPassword,
-        'confirmNewPassword': confirmPassword,
-        'access_token': token
-      });
+      await _dio.put(
+        'auth/password',
+        data: {
+          'old_password': currentPassword,
+          'new_password': newPassword,
+          'confirm_new_password': confirmPassword,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
     } catch (e) {
       rethrow;
     }
