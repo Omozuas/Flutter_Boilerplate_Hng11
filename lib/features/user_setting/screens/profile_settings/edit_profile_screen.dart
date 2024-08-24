@@ -129,20 +129,30 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   verticalTitlePadding: EdgeInsets.zero,
                   title: AppLocalizations.of(context)!.bio,
                   content: [
-                    CustomTextField(
-                      controller: _bioController,
-                      hintText:
-                          AppLocalizations.of(context)!.typeYourMessageHere,
-                      maxLines: 3,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.maximumOf64Character,
-                      style: GoogleFonts.inter(
-                        fontSize: 14.sp,
-                        color: const Color(0xFF64748B),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextField(
+                          controller: _bioController,
+                          hintText:
+                              AppLocalizations.of(context)!.typeYourMessageHere,
+                          maxLines: 3,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.maximumOf64Character,
+                          textAlign: TextAlign.start,
+                          textDirection: TextDirection.rtl,
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            color: const Color(0xFF64748B),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20.h,
                 ),
                 CustomButton(
                   borderColor: GlobalColors.orange,
