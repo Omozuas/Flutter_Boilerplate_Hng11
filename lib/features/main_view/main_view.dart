@@ -88,21 +88,21 @@ class _MainViewState extends State<MainView> {
         type: BottomNavigationBarType.fixed,
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               NavBar.home,
             ),
             label: context.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.products),
+            icon: const Icon(NavBar.products),
             label: context.text.products,
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.order),
+            icon: const Icon(NavBar.order),
             label: context.orders,
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.settings),
+            icon: const Icon(NavBar.settings),
             label: context.text.settings,
           ),
         ],
