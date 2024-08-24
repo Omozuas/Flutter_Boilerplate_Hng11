@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
 import '../models/product/product_model.dart';
+import '../provider/product.provider.dart';
+import '../widgets/add_product_formfields.dart';
 import '../widgets/product_card.dart';
 
-class ProductsByCategory extends StatelessWidget {
+class ProductsByCategory extends ConsumerWidget {
   const ProductsByCategory({super.key});
 
  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     List<Product> products = [
       const Product(
           name: 'Product 1',
@@ -36,19 +39,20 @@ class ProductsByCategory extends StatelessWidget {
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
-          price: 19,
+          price: 5,
           image: 'assets/images/png/product_listing/iphone.png'),
            const Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
-          price: 19,
+          price: 100,
           image: 'assets/images/png/product_listing/iphone.png'),
     ];
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           Padding(
             padding: EdgeInsets.only(
                 left: 10.w, top: 48.h, right: 24.w, bottom: 10.h),
@@ -75,6 +79,19 @@ class ProductsByCategory extends StatelessWidget {
           SizedBox(
             height: 24.h,
           ),
+           Padding(
+            padding: EdgeInsets.only(left: 23.w, right: 23.w),
+            child: CustomTextField(
+              suffixIcon: const Icon(Icons.search),
+              hintText: 'Search Product',
+              onChanged: (value) {
+                if (value != null) {
+                  ref.read(searchInputProvider.notifier).update(value);
+                }
+              },
+            ),
+          ),
+          SizedBox(height: 20.h),
           Expanded(
               child: Padding(
             padding: EdgeInsets.symmetric(
