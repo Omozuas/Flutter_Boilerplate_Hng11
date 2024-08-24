@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+
+import '../global_colors.dart';
 
 class CustomToast extends StatefulWidget {
   final String message;
@@ -19,8 +20,8 @@ class CustomToast extends StatefulWidget {
   CustomToastState createState() => CustomToastState();
 
   static void show(BuildContext context, CustomToast toast) {
-    OverlayState overlayState = Overlay.of(context);
-    OverlayEntry overlayEntry = OverlayEntry(
+    final overlayState = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         top: 50.0,
         left: 20.0,
@@ -31,9 +32,11 @@ class CustomToast extends StatefulWidget {
 
     overlayState.insert(overlayEntry);
 
-    // Auto-dismiss after a few seconds, if required
-    Future.delayed(const Duration(seconds: 3)).then((_) {
-      overlayEntry.remove();
+    // Auto-dismiss after a few seconds
+    Future.delayed(const Duration(seconds: 1)).then((_) {
+      if (overlayEntry.mounted) {
+        overlayEntry.remove();
+      }
     });
   }
 }
@@ -56,7 +59,7 @@ class CustomToastState extends State<CustomToast> {
             Expanded(
               child: Text(
                 widget.message,
-                style: TextStyle(color: GlobalColors.darkOne),
+                style:  TextStyle(color: GlobalColors.darkOne),
               ),
             ),
             IconButton(

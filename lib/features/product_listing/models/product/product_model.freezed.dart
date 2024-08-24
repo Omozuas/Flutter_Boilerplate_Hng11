@@ -23,7 +23,7 @@ mixin _$Product {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
+  num? get price => throw _privateConstructorUsedError;
   int? get cartQuantity => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
@@ -53,7 +53,7 @@ abstract class $ProductCopyWith<$Res> {
       {String? id,
       String? name,
       String? description,
-      int? price,
+      num? price,
       int? cartQuantity,
       String? category,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -110,7 +110,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       cartQuantity: freezed == cartQuantity
           ? _value.cartQuantity
           : cartQuantity // ignore: cast_nullable_to_non_nullable
@@ -166,7 +166,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       {String? id,
       String? name,
       String? description,
-      int? price,
+      num? price,
       int? cartQuantity,
       String? category,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -221,7 +221,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       cartQuantity: freezed == cartQuantity
           ? _value.cartQuantity
           : cartQuantity // ignore: cast_nullable_to_non_nullable
@@ -296,7 +296,7 @@ class _$ProductImpl implements _Product {
   @override
   final String? description;
   @override
-  final int? price;
+  final num? price;
   @override
   final int? cartQuantity;
   @override
@@ -394,7 +394,7 @@ abstract class _Product implements Product {
       {final String? id,
       final String? name,
       final String? description,
-      final int? price,
+      final num? price,
       final int? cartQuantity,
       final String? category,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
@@ -415,7 +415,7 @@ abstract class _Product implements Product {
   @override
   String? get description;
   @override
-  int? get price;
+  num? get price;
   @override
   int? get cartQuantity;
   @override
