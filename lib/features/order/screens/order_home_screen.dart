@@ -117,7 +117,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                     int quantity = (product.quantity ?? 0);
 
                     num price = (product.price ?? 0) * quantity;
-                    
+
                     return OrderTile(
                       product: product,
                       price: price,

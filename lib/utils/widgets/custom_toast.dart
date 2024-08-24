@@ -59,7 +59,7 @@ class CustomToastState extends State<CustomToast> {
             Expanded(
               child: Text(
                 widget.message,
-                style:  TextStyle(color: GlobalColors.darkOne),
+                style: TextStyle(color: GlobalColors.darkOne),
               ),
             ),
             IconButton(

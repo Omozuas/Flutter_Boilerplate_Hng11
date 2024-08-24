@@ -153,12 +153,12 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     state = state.copyWith(organizationOverviewModel: value);
   }
 
-  Future<GetUserByIDResponse?> getUserByID(String userID)async{
+  Future<GetUserByIDResponse?> getUserByID(String userID) async {
     try {
       final res = await DashboardApi().getUserById(userId: userID);
       if (res.id != null) {
         return res;
-      }else{
+      } else {
         return null;
       }
     } catch (e) {
@@ -182,7 +182,7 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     }
   }
 
-  goToNotification(BuildContext context){
+  goToNotification(BuildContext context) {
     context.push(AppRoute.notification);
   }
 
