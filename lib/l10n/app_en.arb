@@ -27,7 +27,7 @@
   "lga": "LGA",
   "createAccount": "Create Account",
   "alreadyHaveAnAccount": "Already have an account",
-  "login": "Login",
+ 
   "fieldRequired": "This field is required",
   "dontHaveAnAccount": "Don't have an account?",
   "termsAndConditionText1": "By logging in, you agree with our ",
@@ -57,7 +57,7 @@
   "profileSettings": "Profile Settings",
   "general": "General",
   "account": "Account",
-  "notification": "Notification",
+
   "dataAndPrivacy": "Data and Privacy",
   "languageAndRegion": "Language and Region",
   "organizationSettings": "Organizational Settings",
@@ -165,7 +165,7 @@
     "thisMonthSummary": "This Month's Summary",
     "totalRevenue": "Total Revenue",
     "overview": "Overview",
-    "seeMore": "See more",
+  
     "veryGood": "Very Good",
     "good": "Good",
     "poor": "Poor",
@@ -188,7 +188,7 @@
       "deleteMemberButton": "Delete Member",
       "memberRemovedSuccessfullyMessage": "Member removed successfully",
       "inviteToOrganizationButton": "Invite to your Organization",
-      "profileUpdatedMessage": "Profile Updated!",
+     
       "profileUpdatedSuccessMessage": "Your profile has been successfully updated.",
       "viewAllProducts": "View all products",
       "priceRange": "Price Range",
@@ -232,7 +232,7 @@
       "addXLink": "Add X link",
       "addLinkedInLink": "Add LinkedIn link",
       "addInstagramLink": "Add Instagram link",
-      "language": "Language",
+    
       "france": "France",
       "canada": "Canada",
       "unitedKingdom": "United Kingdom",
@@ -242,14 +242,13 @@
       "southKorea": "South Korea",
       "russia": "Russia",
       "unitedArabEmirates": "United Arab Emirates",
-      "region": "Region",
-      "timeZone": "Time-Zone",
+    
       "passwordSuccessfully": "Password Successfully Updated",
       "passwordSuccessfullyMessage": "Your password has been successfully updated! You can now log in with your new password.",
       "resourceNotFound": "The requested resource was not found. Please check the URL or contact support.",
       "failedToUpdatePassword": "Failed to update password. Please try again.",
       "errorMessage": "An unexpected error occurred. Please try again.",
-      "passwordSetting": "Password Setting",
+     
       "updatePasswordEnhanced": "Update password for enhanced account security",
       "newPassword": "New Password",
       "enterNewPassword": "Enter New Password",
@@ -404,7 +403,7 @@
   "memberProfile": "Member Profile",
   "memberName": "Member's name",
   "memberBio": "Member's bio",
-  "editProfile": "Edit Profile",
+
   "deleteProfile": "Delete Profile",
   "removeMember": "Member is removed successfully",
   "signUpText": "Sign Up",
