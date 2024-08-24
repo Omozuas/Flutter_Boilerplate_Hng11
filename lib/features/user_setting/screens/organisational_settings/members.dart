@@ -202,6 +202,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
                           height: 24.h,
