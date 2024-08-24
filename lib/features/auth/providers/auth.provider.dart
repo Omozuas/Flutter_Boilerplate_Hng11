@@ -108,8 +108,6 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
-          box.write('email', data['email']);
-          box.write('password', data['password']);
           _userService.storeToken(userRegData.accessToken ?? "");
           await getUser();
         }
@@ -291,7 +289,6 @@ class AuthProvider extends StateNotifier<AuthState> {
           confirmNewPassword: confirmNewPassword,
           newPassword: newPassword);
       if (res != null) {
-        debugPrint(res.toString());
         showSnackBar(res.message.toString());
         if (context.mounted) {
           context.replace(AppRoute.verificationSuccess);

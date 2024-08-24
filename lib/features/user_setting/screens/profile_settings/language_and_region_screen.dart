@@ -112,16 +112,16 @@ class _LanguageAndRegionScreenState
             SizedBox(height: 25.h),
             CustomDropdownButton(
               items: const [
-                'Italiano (Italian)',
+                //'Italiano (Italian)',
                 'Español (Spanish)',
-                'Français (French)',
-                'Deutsch (German)',
+                // 'Français (French)',
+                // 'Deutsch (German)',
                 'English',
-                '日本語 (Japanese)',
+                // '日本語 (Japanese)',
                 '日本語 (Chinese)',
-                '한국어 (Korean)',
-                'Русский (Russian)',
-                'العربية (Arabic)'
+                // '한국어 (Korean)',
+                // 'Русский (Russian)',
+                // 'العربية (Arabic)'
               ],
               borderColor: GlobalColors.borderColor,
               height: 45.h,
