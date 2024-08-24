@@ -160,6 +160,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
+      debugPrint(e.toString());
       rethrow;
     } finally {
       setGoogleButtonLoading = false;
