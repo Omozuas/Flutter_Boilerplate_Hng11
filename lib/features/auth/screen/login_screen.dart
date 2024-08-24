@@ -155,7 +155,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Sign in with Google ",
+                                  "Sign in with Google",
                                   style: CustomTextStyle.medium(
                                       fontSize: 16.sp,
                                       color: GlobalColors.dark2),
