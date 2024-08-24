@@ -143,33 +143,34 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 20.h),
-            CustomDropdownButton(
-              items: const [
-                'France',
-                'Canada',
-                'United Kingdom',
-                'Germany',
-                'United States',
-                'Japan',
-                'South Korea',
-                'Russian',
-                'United Arab Emirates'
-              ],
-              borderColor: GlobalColors.borderColor,
-              height: 50.h,
-              textPadding: const EdgeInsets.only(
-                  left: 10, right: 10, bottom: 10, top: 10),
-              width: double.infinity,
-              containerColor: GlobalColors.white,
-              textColor: GlobalColors.darkOne,
-              placeholder: 'Region',
-              onChanged: (value) {
-                setState(() {
-                  selectedRegion = value;
-                });
-              },
-            ),
+            // SizedBox(height: 20.h),
+            // CustomDropdownButton(
+            //   items: const [
+            //     'France',
+            //     'Canada',
+            //     'United Kingdom',
+            //     'Germany',
+            //     'United States',
+            //     'Japan',
+            //     'South Korea',
+            //     'Russian',
+            //     'United Arab Emirates'
+            //   ],
+            //   borderColor: GlobalColors.borderColor,
+            //   height: 50.h,
+            //   textPadding: const EdgeInsets.only(
+            //       left: 10, right: 10, bottom: 10, top: 10),
+            //   width: double.infinity,
+            //   containerColor: GlobalColors.white,
+            //   textColor: GlobalColors.darkOne,
+            //   placeholder: 'Region',
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selectedRegion = value;
+            //     });
+            //   },
+            // ),
+
             if (showError && selectedRegion == null)
               Text(
                 AppLocalizations.of(context)!.regionUpdateError,
@@ -215,18 +216,22 @@ class _LanguageAndRegionScreenState
                     onTap: validateSelections,
                     borderColor: GlobalColors.orange,
                     text: AppLocalizations.of(context)!.save,
-                    height: 40.h,
+                    // height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 75.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    // width: 80.w,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: AppLocalizations.of(context)!.cancel,
-                    height: 40.h,
+                    // height: 40.h,
                     containerColor: GlobalColors.white,
-                    width: 75.w,
+                    // width: 80.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     textColor: GlobalColors.darkOne),
               ],
             ),
