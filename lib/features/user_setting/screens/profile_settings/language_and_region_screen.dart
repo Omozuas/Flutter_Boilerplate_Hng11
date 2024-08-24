@@ -103,13 +103,14 @@ class _LanguageAndRegionScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15.h),
             Text(
               AppLocalizations.of(context)!
                   .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400, fontSize: 14.sp),
             ),
-            SizedBox(height: 25.h),
+            SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
                 // 'Italiano (Italian)',
