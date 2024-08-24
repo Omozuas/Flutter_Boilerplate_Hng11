@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
+// import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +27,16 @@ class MembersSettings extends ConsumerStatefulWidget {
 }
 
 class _MembersSettingsState extends ConsumerState<MembersSettings> {
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _membersController = TextEditingController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _membersController.dispose();
+    super.dispose();
+  }
+
   List<Members> organisationMembers = [
     Members(),
   ];
@@ -102,17 +113,21 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               SizedBox(
                 height: 12.h,
               ),
-              Text(AppLocalizations.of(context)!.inviteLink,
-                  style: CustomTextStyle.bold(
-                    fontSize: 14.sp,
-                    color: GlobalColors.integrationTextColor,
-                  )
-                  // TextStyle(
-                  //     fontWeight: FontWeight.w700,
-                  //     height: 16.94 / 14,
-                  //     fontSize: 14,
-                  //     color: GlobalColors.integrationTextColor),
-                  ),
+              SizedBox(
+                height: 39.h,
+                width: 270.w,
+                child: Text(AppLocalizations.of(context)!.inviteLink,
+                    style: CustomTextStyle.bold(
+                      fontSize: 14.sp,
+                      color: GlobalColors.integrationTextColor,
+                    )
+                    // TextStyle(
+                    //     fontWeight: FontWeight.w700,
+                    //     height: 16.94 / 14,
+                    //     fontSize: 14,
+                    //     color: GlobalColors.integrationTextColor),
+                    ),
+              ),
               SizedBox(
                 width: 276.w,
                 child: Text(
@@ -129,7 +144,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               Container(
                 height: 61.h,
                 width: double.infinity,
-                // padding: const EdgeInsets.only(top: 8, left: 8),
+                padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
@@ -138,17 +153,31 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
                   children: [
                     SizedBox(
+                      width: 7.w,
+                    ),
+                    SizedBox(
                       height: 39.w,
                       width: 270.w,
                       child: asyncLinkValue.when(
-                        data: (inviteLink) => Text(inviteLink ?? "No link ",
-                            softWrap: true,
-                            style: CustomTextStyle.medium(
-                              fontSize: 10.sp,
-                              color: GlobalColors.dark2,
-                            )),
-                        loading: () => const Center(
-                          child: CircularProgressIndicator.adaptive(),
+                        data: (inviteLink) => Scrollbar(
+                          thumbVisibility: true,
+                          thickness: 2.0.w,
+                          controller: _scrollController,
+                          child: SingleChildScrollView(
+                            controller: _scrollController,
+                            child: Text(inviteLink ?? "No link ",
+                                softWrap: true,
+                                style: CustomTextStyle.medium(
+                                  fontSize: 10.sp,
+                                  color: GlobalColors.dark2,
+                                )),
+                          ),
+                        ),
+                        loading: () => Center(
+                          child: SizedBox(
+                              height: 10.h,
+                              width: 10.h,
+                              child: CircularProgressIndicator.adaptive()),
                         ),
                         error: (e, st) {
                           return Center(
@@ -215,6 +244,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 24,
               ),
               CustomTextField(
+                controller: _membersController,
                 hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                 hintTextStyle: CustomTextStyle.regular(
                   fontSize: 14.sp,
