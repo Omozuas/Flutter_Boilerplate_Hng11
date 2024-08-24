@@ -65,22 +65,15 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   }
 
   Future<void> updateProfile({
-    required String email,
     required UserProfile profile,
     XFile? image,
   }) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(profileUpdater: const AsyncLoading());
-      final res = await settingsApi.updateProfile(
-        email: email,
-        profile: profile,
-      );
+      final res = await settingsApi.updateProfile(profile);
       if (image != null) {
-        await settingsApi.updateProfileAvatar(
-          email: email,
-          file: File(image.path),
-        );
+        await settingsApi.updateProfileAvatar(File(image.path));
       }
       await getUser();
       state = state.copyWith(profileUpdater: AsyncData(res));
@@ -89,17 +82,11 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> updateProfileAvatar({
-    required String email,
-    required XFile image,
-  }) async {
+  Future<void> updateProfileAvatar(XFile image) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(profileAvatarUpdater: const AsyncLoading());
-      final res = await settingsApi.updateProfileAvatar(
-        email: email,
-        file: File(image.path),
-      );
+      final res = await settingsApi.updateProfileAvatar(File(image.path));
       await getUser();
       state = state.copyWith(profileAvatarUpdater: AsyncData(res));
     } catch (e) {
@@ -184,12 +171,16 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> generateInviteLink({required String orgId}) async {
+  Future<void> generateInviteLinkFromCurrentUser() async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
+      final user = await settingsApi.getCurrentUser();
+      if (user.orgId.isEmpty) {
+        throw Exception("User does not have a valid organization ID");
+      }
       state = state.copyWith(inviteLink: const AsyncLoading());
-      final res = await settingsApi.generateInviteLink(orgId: orgId);
-      state = state.copyWith(inviteLink: AsyncData(res));
+      final inviteLink = await settingsApi.generateInviteLink(orgId: user.orgId);
+      state = state.copyWith(inviteLink: AsyncData(inviteLink));
     } catch (e) {
       state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));
     }

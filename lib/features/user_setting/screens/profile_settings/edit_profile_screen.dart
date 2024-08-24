@@ -6,13 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
-import '../../models/custom_api_error.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
@@ -146,9 +144,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
+                SizedBox(height: 24.h),
                 CustomButton(
                   borderColor: GlobalColors.orange,
                   text: AppLocalizations.of(context)!.saveChanges,
@@ -203,8 +199,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       bio: _bioController.text,
     );
     try {
-      await ref.read(profileProvider.notifier).updateProfile(
-          email: user.email, profile: profile, image: pickedImage);
+      await ref
+          .read(profileProvider.notifier)
+          .updateProfile(profile: profile, image: pickedImage);
 
       final pUpdater = ref.read(profileProvider).profileUpdater;
       if (pUpdater.hasError) throw pUpdater.error!;
@@ -221,8 +218,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       );
       if (!mounted) return;
       context.pop();
-    } on CustomApiError catch (e) {
-      showSnackBar(e.message);
     } catch (e) {
       showSnackBar(AppLocalizations.of(context)!.errorOccurred);
     }
