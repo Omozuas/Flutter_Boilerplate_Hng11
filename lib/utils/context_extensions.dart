@@ -3,4 +3,7 @@ import 'package:flutter/material.dart';
 
 extension Translation on BuildContext {
   AppLocalizations get text => AppLocalizations.of(this)!;
+
+  String get signUpText => "Sign Up";
+  String get seeMore => " See more";
 }

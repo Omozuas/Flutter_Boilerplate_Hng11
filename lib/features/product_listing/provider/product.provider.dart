@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/product_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product.provider.g.dart';
@@ -39,6 +40,16 @@ AsyncValue<Map<String, List<Product>>> productsByCategory(
         ),
       );
 }
+
+// final keyProvider = StateProvider<String>((ref) => '');
+
+// @riverpod
+// AsyncValue<List<Product>> productsInCategory(ProductsInCategoryRef ref) {
+//   final key = ref.watch(keyProvider);
+//   return ref.watch(productsByCategoryProvider).whenData(
+//         (value) => value[key]!,
+//       );
+// }
 
 Map<String, List<Product>> _getProductMapping(List<Product> products) {
   final allCategories = products.map((e) => e.category).toSet().toList();

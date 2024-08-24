@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
@@ -17,6 +18,11 @@ class ProductScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.products,
+        subTitle: AppLocalizations.of(context)!.viewAllProducts,
+        onBack: () {},
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

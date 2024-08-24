@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
@@ -88,15 +89,9 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsets.only(left: 8.w),
-          child: Text(
-            "Manage Orders",
-            style: CustomTextStyles.producHeaderBlack,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: 'Orders',
+        onBack: () {},
       ),
       body: Column(
         children: [
@@ -117,7 +112,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                     int quantity = (product.quantity ?? 0);
 
                     num price = (product.price ?? 0) * quantity;
-                    
+
                     return OrderTile(
                       product: product,
                       price: price,
