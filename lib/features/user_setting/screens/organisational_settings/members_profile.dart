@@ -118,7 +118,9 @@ class MemberProfileScreen extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return const DeleteMemberDialog();
+                      return DeleteMemberDialog(
+                        memberName: '${memberDetail.firstName} ${memberDetail.lastName}',
+                      );
                     });
               },
               borderColor: Colors.red,
