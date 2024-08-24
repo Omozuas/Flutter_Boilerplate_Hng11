@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -52,34 +53,23 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.members,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 12,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.members,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
                 style: TextStyle(
-                  fontWeight: FontWeight.w400, fontSize: 12, height: 24/12, color: GlobalColors.darkOne
-                ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    height: 24 / 12,
+                    color: GlobalColors.darkOne),
               ),
               Divider(
                 color: GlobalColors.borderColor,
@@ -96,10 +86,14 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-              Text(AppLocalizations.of(context)!.inviteLinkDescr,
+              Text(
+                AppLocalizations.of(context)!.inviteLinkDescr,
                 style: TextStyle(
-                    fontWeight: FontWeight.w400, fontSize: 12, height: 24/12, color: GlobalColors.darkOne
-                ),),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    height: 24 / 12,
+                    color: GlobalColors.darkOne),
+              ),
               SizedBox(
                 height: 10.h,
               ),
@@ -183,21 +177,24 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 width: double.infinity,
                 child: TextField(
                   style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    height: 16.9/14
-                  ),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      height: 16.9 / 14),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                      child:
-                          Icon(Icons.search_outlined, color: GlobalColors.darkOne, size: 16,),
+                      child: Icon(
+                        Icons.search_outlined,
+                        color: GlobalColors.darkOne,
+                        size: 16,
+                      ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide:  BorderSide(
-                        color: GlobalColors.borderColor, // Not selected (unfocused) color
+                      borderSide: BorderSide(
+                        color: GlobalColors
+                            .borderColor, // Not selected (unfocused) color
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -206,7 +203,6 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                         color: GlobalColors.borderColor,
                       ),
                     ),
-
                     prefixIconConstraints: const BoxConstraints(),
                     contentPadding: const EdgeInsets.only(top: 8.0),
                   ),
