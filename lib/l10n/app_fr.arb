@@ -430,5 +430,21 @@
   "noResultFound": "Aucun résultat trouvé",
     "continueWithGoogle": "Continuer avec Google",
     "description": "Description",
-    "inStock": "En stock"
+    "inStock": "En stock",
+   "orders": "Commandes",
+   "home": "Accueil",
+   "logoutConfirmation": "Êtes-vous sûr de vouloir vous déconnecter de cet appareil ?",
+ "addProductFailure": "Échec de l'ajout du produit :",
+  "productFormIncomplete": "Veuillez compléter le formulaire",
+  "ok": "D'accord",
+  "success": "Succès",
+  "addProductSuccessDescription": "Produit ajouté avec succès",
+  "anErrorOccured": "Une erreur s'est produite",
+  "title": "Titre",
+  "category": "Catégorie",
+  "descriptionFieldHint": "Maximum de 72 caractères",
+  "standardPrice": "Prix standard",
+  "quantity": "Quantité",
+  "cancel": "Annuler",
+  "add": "Ajouter"
 }

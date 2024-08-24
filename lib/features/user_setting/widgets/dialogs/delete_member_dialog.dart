@@ -148,7 +148,7 @@ class LogOutDialog extends StatelessWidget {
                 CustomButton(
                   onTap: onTap,
                   borderColor: Colors.transparent,
-                  text:  AppLocalizations.of(context)!.logOut,
+                  text: AppLocalizations.of(context)!.logOut,
                   height: 40,
                   containerColor: GlobalColors.red,
                   width: 80,

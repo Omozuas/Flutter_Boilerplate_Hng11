@@ -32,8 +32,10 @@ class MemberProfileScreen extends StatelessWidget {
               child: Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
                 style: TextStyle(
-                    fontWeight: FontWeight.w400, fontSize: 12, height: 14.52/12, color: GlobalColors.darkOne
-                ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    height: 14.52 / 12,
+                    color: GlobalColors.darkOne),
               ),
             ),
             const SizedBox(
@@ -97,7 +99,7 @@ class MemberProfileScreen extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                height: 20/14,
+                height: 20 / 14,
                 color: Colors.black,
               ),
             ),
@@ -119,7 +121,8 @@ class MemberProfileScreen extends StatelessWidget {
                     context: context,
                     builder: (context) {
                       return DeleteMemberDialog(
-                        memberName: '${memberDetail.firstName} ${memberDetail.lastName}',
+                        memberName:
+                            '${memberDetail.firstName} ${memberDetail.lastName}',
                       );
                     });
               },

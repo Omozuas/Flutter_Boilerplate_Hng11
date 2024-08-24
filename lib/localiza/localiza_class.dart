@@ -16,7 +16,7 @@ class LocalizationClass {
   static Locale getLocale(String languageCode) {
     switch (languageCode) {
       case 'en':
-      return english;
+        return english;
       case 'es':
         return spanish;
       case 'zh':
