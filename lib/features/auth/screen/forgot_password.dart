@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 hintText: localizations.enterYourEmail,
-                validator: (v) => Validators.emailValidator(v),
+                validator: (v) => Validators.emailValidator(v,context),
               ),
               SizedBox(height: 32.sp),
               CustomButton(
