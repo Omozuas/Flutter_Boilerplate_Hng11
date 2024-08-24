@@ -27,7 +27,7 @@
   "lga": "LGA",
   "createAccount": "Create Account",
   "alreadyHaveAnAccount": "Already have an account",
-  
+  "login": "Login",
   "fieldRequired": "This field is required",
   "dontHaveAnAccount": "Don't have an account?",
   "termsAndConditionText1": "By logging in, you agree with our ",
@@ -50,13 +50,14 @@
   "home": "Home",
   "products": "Products",
   "cart": "Cart",
-  "settings": "Settings",
+  "settings": "Settings have been saved successfully.",
   "deliveryAddress": "Delivery Address",
   "addToCart": "Add to Cart",
   "profile": "Profile",
   "profileSettings": "Profile Settings",
   "general": "General",
   "account": "Account",
+  "notification": "Notification",
   "dataAndPrivacy": "Data and Privacy",
   "languageAndRegion": "Language and Region",
   "organizationSettings": "Organizational Settings",
@@ -164,7 +165,7 @@
     "thisMonthSummary": "This Month's Summary",
     "totalRevenue": "Total Revenue",
     "overview": "Overview",
-    
+    "seeMore": "See more",
     "veryGood": "Very Good",
     "good": "Good",
     "poor": "Poor",
@@ -187,7 +188,7 @@
       "deleteMemberButton": "Delete Member",
       "memberRemovedSuccessfullyMessage": "Member removed successfully",
       "inviteToOrganizationButton": "Invite to your Organization",
-      
+      "profileUpdatedMessage": "Profile Updated!",
       "profileUpdatedSuccessMessage": "Your profile has been successfully updated.",
       "viewAllProducts": "View all products",
       "priceRange": "Price Range",
@@ -231,7 +232,7 @@
       "addXLink": "Add X link",
       "addLinkedInLink": "Add LinkedIn link",
       "addInstagramLink": "Add Instagram link",
-  
+      "language": "Language",
       "france": "France",
       "canada": "Canada",
       "unitedKingdom": "United Kingdom",
@@ -241,14 +242,14 @@
       "southKorea": "South Korea",
       "russia": "Russia",
       "unitedArabEmirates": "United Arab Emirates",
-      
- 
+      "region": "Region",
+      "timeZone": "Time-Zone",
       "passwordSuccessfully": "Password Successfully Updated",
       "passwordSuccessfullyMessage": "Your password has been successfully updated! You can now log in with your new password.",
       "resourceNotFound": "The requested resource was not found. Please check the URL or contact support.",
       "failedToUpdatePassword": "Failed to update password. Please try again.",
       "errorMessage": "An unexpected error occurred. Please try again.",
-    
+      "passwordSetting": "Password Setting",
       "updatePasswordEnhanced": "Update password for enhanced account security",
       "newPassword": "New Password",
       "enterNewPassword": "Enter New Password",
@@ -274,7 +275,7 @@
       "upgrade": "Upgrade",
 
 "editOrganization": "Edit Organization",
-      
+
   "country1": "Germany",
   "country2": "Nigeria",
   "country3": "Canada",
@@ -409,7 +410,7 @@
   "signUpText": "Sign Up",
     "seeMore": " See more",
     "login": "Login",
-    
+    "editProfile": "Edit Profile",
     "profileUpdated": "Profile Updated!",
     "profileUpdatedMessage": "Your profile has been successfully updated.",
     "notification": "Notification",
@@ -435,6 +436,10 @@
     "passwordOneNumber": "Password must contain at least one number",
     "productDescription": "Product Description",
     "addAProduct": "Add a Product",
-    "orderDetails": "Order Details"
+    "orderDetails": "Order Details",
+     "noResultFound": "No result found",
+      "continueWithGoogle": "Continue with Google",
+      "description": "Description",
+      "inStock": "In Stock"
 }
 

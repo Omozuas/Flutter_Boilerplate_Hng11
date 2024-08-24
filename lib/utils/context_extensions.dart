@@ -61,4 +61,5 @@ extension Translation on BuildContext {
   String get productDescription => "Product Description";
   String get addAProduct => "Add a Product";
   String get orderDetails => 'Order Details';
+
 }

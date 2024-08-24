@@ -97,7 +97,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                                 Text(
                                   context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       color: GlobalColors.dark2),
                                 )
                               ],
