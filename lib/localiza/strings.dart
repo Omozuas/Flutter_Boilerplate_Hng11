@@ -305,6 +305,7 @@ extension StringManager on BuildContext {
   static const String memberBio = "Member's Bio";
   static const String deleteMember = "Delete Member";
   static const String removedMember = "Member Removed Successfully";
+  static const String noNotification = "No notifications received";
   // Do not add  to this anymore. Instead add to context_extension
 
 }

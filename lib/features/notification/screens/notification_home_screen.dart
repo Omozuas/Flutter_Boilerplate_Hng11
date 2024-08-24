@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
+import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,7 +57,10 @@ class NotificationHomeScreen extends ConsumerWidget {
                                   fontWeight: FontWeight.w500,
                                   color: GlobalColors.black),
                             ),
-                            // NotificationCountCard(count: 10,)
+                            if(notificationStateProvider.unReadNotificationCount > 0)
+                              NotificationCountCard(
+                                count: notificationStateProvider.unReadNotificationCount,
+                              )
                           ],
                         ),
                       ),
@@ -72,9 +77,10 @@ class NotificationHomeScreen extends ConsumerWidget {
                                   fontWeight: FontWeight.w500,
                                   color: GlobalColors.black),
                             ),
-                            const NotificationCountCard(
-                              count: 12,
-                            )
+                            // if(notificationStateProvider.unReadNotificationCount > 0)
+                            // NotificationCountCard(
+                            //   count: notificationStateProvider.unReadNotificationCount,
+                            // )
                           ],
                         ),
                       ),
@@ -88,14 +94,41 @@ class NotificationHomeScreen extends ConsumerWidget {
                         const LoadingNotificationListView(),
                         const LoadingNotificationListView(),
                       ]
+                    :
+                    notificationStateProvider.notifications.isEmpty &&
+                    !notificationStateProvider.overViewLoading?
+                      [
+                        const EmptyNotification(),
+                        const EmptyNotification(),
+                      ]
                     : [
-                        const NotificationListView(),
+                      NotificationListView(
+                        notifications: notificationStateProvider.notifications,
+                      ),
                         const Scaffold(),
                       ],
               ))
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+
+class EmptyNotification extends StatelessWidget {
+  const EmptyNotification({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        StringManager.noNotification,
+        style: CustomTextStyle.regular(
+          fontSize: 16.sp,
+        ),
+        textAlign: TextAlign.center,
       ),
     );
   }
