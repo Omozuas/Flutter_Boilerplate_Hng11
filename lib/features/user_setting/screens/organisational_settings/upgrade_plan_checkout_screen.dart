@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,6 +73,7 @@ class _UpgradePlanCheckoutScreenState
 
     return Scaffold(
       appBar: AppBar(
+        leading: const ChevronBackButton(),
         title: Text(
           isCurrentPlan
               ? context.text.currentPlan

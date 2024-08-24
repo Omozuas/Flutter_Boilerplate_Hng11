@@ -162,6 +162,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           title: context.text.createOrganisation,
                           onTap: () {
                             // Navigate to Manage Organization
+                            context.push(AppRoute.companySignUp);
                           },
                         ),
                         SettingsTile(
