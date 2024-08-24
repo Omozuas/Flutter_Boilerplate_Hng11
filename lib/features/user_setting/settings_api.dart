@@ -149,10 +149,10 @@ class SettingsApi {
     }
   }
 
-  Future<String> generateInviteLink({required String org_id}) async {
+  Future<String> generateInviteLink({required String orgID}) async {
     try {
       final response =
-      await dio.get('https://staging.api-csharp.boilerplate.hng.tech/api/v1/organisations/$org_id/invites');
+      await dio.get('https://staging.api-csharp.boilerplate.hng.tech/api/v1/organisations/$orgID/invites');
       return response?.data['data']['invite_link'];
     } catch (e) {
       rethrow;
