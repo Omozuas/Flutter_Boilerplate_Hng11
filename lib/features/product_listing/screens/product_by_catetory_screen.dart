@@ -45,7 +45,7 @@ class ProductsByCategory extends ConsumerWidget {
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
-          price: 100,
+          price: 200,
           image: 'assets/images/png/product_listing/iphone.png'),
     ];
     return Scaffold(
