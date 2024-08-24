@@ -26,30 +26,6 @@ class ProductScreen extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-                left: 24.w, top: 48.h, right: 24.w, bottom: 10.h),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.products,
-                      style: CustomTextStyles.producHeaderBlack,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.viewAllProducts,
-                      style: CustomTextStyles.productSmallBodyTextBlack,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            color: GlobalColors.diverColor,
-          ),
           SizedBox(
             height: 24.h,
           ),

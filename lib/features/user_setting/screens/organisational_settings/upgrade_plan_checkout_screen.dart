@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,17 +73,10 @@ class _UpgradePlanCheckoutScreenState
         ref.watch(profileProvider).initiateSubscription.isLoading;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        title: Text(
-          isCurrentPlan
-              ? context.text.currentPlan
-              : widget.plan.getUpgradeToText(context),
-          style: CustomTextStyle.semiBold(
-            fontSize: 16,
-            color: GlobalColors.iconColor,
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: isCurrentPlan
+            ? context.text.currentPlan
+            : widget.plan.getUpgradeToText(context),
       ),
       body: SingleChildScrollView(
         child: Padding(

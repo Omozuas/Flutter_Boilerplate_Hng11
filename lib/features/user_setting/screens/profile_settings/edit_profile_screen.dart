@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,14 +82,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Edit Profile',
-          style: TextStyle(fontSize: 16),
-        ),
-        leading: const ChevronBackButton(),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.editProfile,
       ),
       body: SingleChildScrollView(
         child: Form(

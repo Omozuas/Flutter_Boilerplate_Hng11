@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -20,15 +21,8 @@ class MemberProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColors.white,
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        elevation: 0,
-        leading: const ChevronBackButton(),
-        title: Text(
-          AppLocalizations.of(context)!.memberProfile,
-          style: const TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.memberProfile,
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),

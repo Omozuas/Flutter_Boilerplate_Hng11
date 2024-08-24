@@ -16,11 +16,9 @@ class ChevronBackButton extends StatelessWidget {
       onTap: onBack,
       child: Column(
         children: [
-          if (includeBottomSpace) ...[
-            SizedBox(
-              height: 2.h,
-            ),
-          ],
+          SizedBox(
+            height: 2.h,
+          ),
           Icon(Icons.chevron_left, size: 30.sp),
           if (includeBottomSpace) ...[
             const SizedBox(
