@@ -94,7 +94,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Google", // Localized text
+                                  "Sign up with Google", // Localized text
                                   style: CustomTextStyle.medium(
                                       fontSize: 17.sp,
                                       color: GlobalColors.dark2),

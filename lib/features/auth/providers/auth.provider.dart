@@ -149,11 +149,11 @@ class AuthProvider extends StateNotifier<AuthState> {
           if (context.mounted) {
             context.go(AppRoute.home);
             box.write('accessToken', userRegData.accessToken);
-            if (state.checkBoxState) {
-              box.write('rememberMe', true);
-            } else {
-              box.write('rememberMe', false);
-            }
+            // if (state.checkBoxState) {
+            //   box.write('rememberMe', false);
+            // } else {
+            //   box.write('rememberMe', false);
+            // }
             _userService.storeToken(userRegData.accessToken ?? "");
             await getUser();
           }
