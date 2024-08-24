@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../gen/assets.gen.dart';
 import '../../../utils/global_colors.dart';
+import '../../../utils/global_size.dart';
 import '../utils/widget_extensions.dart';
 import 'cart_add_remove_button.dart';
 import 'price_text_widget.dart';
@@ -46,45 +51,46 @@ class CartWidget extends StatelessWidget {
           width: width(context),
           child: Row(
             children: [
-              Container(
-                height: 131.sp,
-                width: 173.sp,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    image: DecorationImage(
-                        image: CachedNetworkImageProvider(
-                            image
-                        ),
-                        fit: BoxFit.cover
-                    )
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: selectItem,
-                      child: Container(
-                        margin: 16.sp.padA,
-                        padding: 3.sp.padA,
-                        width: 25.sp,
-                        height: 25.sp,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFFFAFAFA),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(width: 1, color: Color(0xFF525252)),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: isSelected? Container(
-                          color: GlobalColors.orange,
-                        ): null,
-                      ),
-                    )
-                  ],
-                ),
+              Builder(
+                builder: (context) {
+                  return Container(
+                    height: 131.sp,
+                    width: 173.sp,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        image: image.startsWith("http")
+                            ? DecorationImage(
+                                image: CachedNetworkImageProvider(image),
+                                fit: BoxFit.cover)
+                            : null),
+                    child: Container(
+                        child: image.contains("http")
+                            ? null
+                            : image.isValidBase64
+                                ? Image.memory(
+                                    height: 131.h,
+                                    width: 173.sp,
+                                    fit: BoxFit.cover,
+                                    base64Decode(image),
+                                    errorBuilder: (context, error,
+                                            stackTrace) =>
+                                        Assets.images.png.productListing.product
+                                            .image(
+                                          height:
+                                              GlobalScreenSize.getScreenHeight(
+                                                      context) *
+                                                  .135,
+                                        ))
+                                : Assets.images.png.productListing.product
+                                    .image(
+                                        height:
+                                            GlobalScreenSize.getScreenHeight(
+                                                    context) *
+                                                .135)),
+                  );
+                },
               ),
-              17.w.sbW,
+              0.w.sbW,
               Expanded(
                 child: Padding(
                   padding: 16.h.padV,
@@ -108,14 +114,12 @@ class CartWidget extends StatelessWidget {
                                   ),
                                 ),
                                 5.h.sbH,
-                                Text(
-                                    description,
+                                Text(description,
                                     maxLines: 2,
                                     style: GoogleFonts.plusJakartaSans(
                                       fontSize: 12.sp,
                                       color: const Color(0xFF6E7079),
-                                    )
-                                )
+                                    ))
                               ],
                             ),
                           ),
@@ -125,7 +129,8 @@ class CartWidget extends StatelessWidget {
                             child: Container(
                               padding: 8.w.padA,
                               child: Icon(
-                                Icons.close, size: 24.sp,
+                                Icons.close,
+                                size: 24.sp,
                                 color: GlobalColors.darkOne,
                               ),
                             ),
@@ -136,17 +141,30 @@ class CartWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: PriceWidget(
-                              value: price,
-                              isBold: true,
-                              size: 18.sp,
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              height: 22.h,
+                              child: FittedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    PriceWidget(
+                                      value: price,
+                                      isBold: true,
+                                      size: 18.sp,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
+                          5.w.sbW,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               NewIconButton(
-                                onPressed: reduceQuantity, isAdd: false,
+                                onPressed: reduceQuantity,
+                                isAdd: false,
                               ),
                               11.w.sbW,
                               Padding(
@@ -155,8 +173,7 @@ class CartWidget extends StatelessWidget {
                                   "$quantity",
                                   style: GoogleFonts.inter(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w600
-                                  ),
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ),
                               11.w.sbW,
@@ -176,9 +193,12 @@ class CartWidget extends StatelessWidget {
           ),
         ),
         16.h.sbH,
-        isLast?
-        0.0.sbH:
-        Divider(color: const Color(0xFFDEDEDE), height: 1.h,),
+        isLast
+            ? 0.0.sbH
+            : Divider(
+                color: const Color(0xFFDEDEDE),
+                height: 1.h,
+              ),
       ],
     );
   }

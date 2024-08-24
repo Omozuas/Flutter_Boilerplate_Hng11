@@ -10,6 +10,9 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: Inter
+  static const String inter = 'Inter';
+
   /// Font family: NavBar
   static const String navBar = 'NavBar';
 }

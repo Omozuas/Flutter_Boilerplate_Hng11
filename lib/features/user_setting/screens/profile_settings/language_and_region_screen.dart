@@ -1,33 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../auth/providers/language_provider.dart';
 
-class LanguageAndRegionScreen extends StatefulWidget {
+
+class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
   @override
-  LanguageAndRegionScreenState createState() => LanguageAndRegionScreenState();
+  ConsumerState<LanguageAndRegionScreen> createState() =>
+      _LanguageAndRegionScreenState();
 }
 
-class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
+class _LanguageAndRegionScreenState
+    extends ConsumerState<LanguageAndRegionScreen> {
   String? selectedLanguage;
   String? selectedRegion;
   String? selectedTimeZone;
   String? feedBackMessage;
   bool showError = false;
   Color feedBackMessageColor = Colors.transparent;
+
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
-          selectedRegion == null ||
+          // selectedRegion == null ||
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = 'Settings have been saved successfully.';
-        feedBackMessageColor = GlobalColors.greenColor;
+        feedBackMessage = context.text.settings;
+        ref
+            .read(languageProvider.notifier)
+            .setLanguage(getLanguageCode(selectedLanguage!));
+        feedBackMessageColor = GlobalColors.green;
       } else {
         feedBackMessage = null;
       }
@@ -36,11 +48,10 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
 
   void unsavedChanges() {
     if (selectedLanguage != null ||
-        selectedRegion != null ||
+        // selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
-        feedBackMessage =
-            'You have unsaved changes. Are you sure you want to leave without saving?';
+        feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
         feedBackMessageColor = GlobalColors.lightOrangeColor;
       });
     } else {
@@ -48,55 +59,72 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
     }
   }
 
+  String getLanguageCode(String language) {
+    switch (language) {
+      case 'Español (Spanish)':
+        return 'es';
+      case 'Italiano (Italian)':
+        return 'it';
+      case 'Français (French)':
+        return 'fr';
+      case 'Deutsch (German)':
+        return 'de';
+      case '日本語 (Japanese)':
+        return 'ja';
+      case '日本語 (Chinese)':
+        return 'zh';
+      case '한국어 (Korean)':
+        return 'ko';
+      case 'Русский (Russian)':
+        return 'ru';
+      case 'العربية (Arabic)':
+        return 'ar';
+      case 'English':
+      default:
+        return 'en';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalColors.whiteColor,
-      appBar: AppBar(
-        backgroundColor: GlobalColors.whiteColor,
-        surfaceTintColor: Colors.transparent,
-        titleSpacing: -6.sp,
-        leading: GestureDetector(
-          onTap: () {
-            //tODO: Perform onTap function for this icon
-          },
-          child: const Icon(Icons.chevron_left),
-        ),
-        title: Text(
-          'Language & Region',
-          style:
-              GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
-        ),
+      backgroundColor: GlobalColors.white,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.languageAndRegion,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15.h),
             Text(
-              'Customise your language and region preferences',
+              AppLocalizations.of(context)!
+                  .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w400, fontSize: 12.sp),
+                  fontWeight: FontWeight.w400, fontSize: 14.sp),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
-                'Italiano (Italian)',
                 'Español (Spanish)',
-                'Français (French)',
-                'Deutsch (German)',
+                 'Français (French)',
+                // 'Deutsch (German)',
                 'English',
-                '日本語 (Japanese)',
-                '한국어 (Korean)',
-                'Русский (Russian)',
-                'العربية (Arabic)'
+                // '日本語 (Japanese)',
+                '日本語 (Chinese)',
+                // '한국어 (Korean)',
+                // 'Русский (Russian)',
+                // 'العربية (Arabic)'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
-              containerColor: GlobalColors.whiteColor,
+              containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Language',
+              placeholder: context.language,
               onChanged: (value) {
                 setState(() {
                   selectedLanguage = value;
@@ -105,10 +133,10 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedLanguage == null)
               Text(
-                'There was a problem updating your language. Please try again.',
+                AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 'France',
@@ -122,11 +150,13 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 'United Arab Emirates'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
-              containerColor: GlobalColors.whiteColor,
+              containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Region',
+              placeholder: context.region,
               onChanged: (value) {
                 setState(() {
                   selectedRegion = value;
@@ -135,10 +165,10 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedRegion == null)
               Text(
-                'There was a problem updating your region. Please try again.',
+                AppLocalizations.of(context)!.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 '(UTC+00:00) Co-ord',
@@ -147,11 +177,13 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
                 // Add other time zones here
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
-              containerColor: GlobalColors.whiteColor,
+              containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Time-Zone',
+              placeholder: context.timeZone,
               onChanged: (value) {
                 setState(() {
                   selectedTimeZone = value;
@@ -160,7 +192,7 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
             ),
             if (showError && selectedTimeZone == null)
               Text(
-                'There was a problem updating your timezone. Please try again.',
+                AppLocalizations.of(context)!.timezoneUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
             SizedBox(height: 10.h),
@@ -174,20 +206,24 @@ class LanguageAndRegionScreenState extends State<LanguageAndRegionScreen> {
               children: [
                 CustomButton(
                     onTap: validateSelections,
-                    borderColor: Colors.transparent,
-                    text: 'Save',
-                    height: 40.sp,
+                    borderColor: GlobalColors.orange,
+                    text: AppLocalizations.of(context)!.save,
+                    // height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 65.sp,
-                    textColor: GlobalColors.whiteColor),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    // width: 80.w,
+                    textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
-                    text: 'Cancel',
-                    height: 40.sp,
-                    containerColor: GlobalColors.whiteColor,
-                    width: 65.sp,
+                    text: AppLocalizations.of(context)!.cancel,
+                    // height: 40.h,
+                    containerColor: GlobalColors.white,
+                    // width: 80.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     textColor: GlobalColors.darkOne),
               ],
             ),

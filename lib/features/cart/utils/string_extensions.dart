@@ -6,7 +6,9 @@ String formatNumber(num number, {int? decimalPlaces, bool? roundUp}) {
   }
 
   if (decimalPlaces != null && decimalPlaces == 0) {
-    return roundUp != null && roundUp ? number.ceil().toString() : number.floor().toString();
+    return roundUp != null && roundUp
+        ? number.ceil().toString()
+        : number.floor().toString();
   }
 
   final formatter = NumberFormat.decimalPattern();
@@ -18,5 +20,6 @@ String formatNumber(num number, {int? decimalPlaces, bool? roundUp}) {
 
   return roundUp != null && roundUp
       ? formatter.format(number)
-      : formatter.format(double.parse(number.toStringAsFixed(decimalPlaces ?? 0)));
+      : formatter
+          .format(double.parse(number.toStringAsFixed(decimalPlaces ?? 0)));
 }
