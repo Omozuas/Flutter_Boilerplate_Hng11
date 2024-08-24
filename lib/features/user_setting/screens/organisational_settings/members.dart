@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -13,6 +11,7 @@ import 'package:flutter/services.dart';
 import '../../../../utils/widgets/custom_avatar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../auth/providers/organisation/organisation.provider.dart';
 import '../../provider/profile_provider.dart';
 
 class MembersSettings extends ConsumerStatefulWidget {
@@ -33,29 +32,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final org = ref.watch(getOrganisationProvider);
-      ref
-          .read(profileProvider.notifier)
-          .getOrganisationMembers(orgId: org.organisationId.toString());
-      Future(() {
-        fetchLinkFromAPI();
-      });
+      ref.read(profileProvider.notifier).getOrganisationMembers();
+      ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
     });
-  }
-
-
-  Future<Object> fetchLinkFromAPI() async {
-    // Trigger the sendInvite method from ProfileProvider
-    await ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
-    final org = ref.watch(getOrganisationProvider);
-    await ref
-        .read(profileProvider.notifier)
-        .generateInviteLink(orgId: org.organisationId.toString());
-
-
-    // Check the inviteResponse state
-    final inviteResponse = ref.read(profileProvider).inviteLink;
-    return inviteResponse;
   }
 
 
@@ -134,10 +113,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     Expanded(
                       child: asyncLinkValue.when(
                         data: (inviteLink) =>
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 9.0),
-                              child: Text(inviteLink ?? "No link ", softWrap: true,),
-                            ),
+                            Text(inviteLink ?? "No link ", softWrap: true,),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
                         ),
@@ -159,7 +135,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                               });
                             },
                             icon: Icon(
-                              Icons.share,
+                              Icons.share_outlined,
                               color: GlobalColors.orange,
                             )),
                         IconButton(
