@@ -111,7 +111,6 @@ flutter:
     - assets/images/svg/account_settings/
     - assets/images/svg/
     - assets/icons/
-    - assets/images/create_organization.png
 
     - .env
 
