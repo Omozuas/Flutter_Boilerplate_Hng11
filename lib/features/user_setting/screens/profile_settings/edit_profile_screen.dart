@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +14,6 @@ import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/custom_api_error.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
@@ -83,14 +85,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        title: Text(
-          context.editProfile,
-          style: CustomTextStyle.regular(fontSize: 16.sp),
-        ),
-        leading: const ChevronBackButton(),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.editProfile,
       ),
       body: SingleChildScrollView(
         child: Form(

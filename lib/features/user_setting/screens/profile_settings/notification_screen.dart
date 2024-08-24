@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_notification_item.dart';
 import '../../../../utils/widgets/custom_notification_section.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/custom_api_error.dart';
 import '../../models/notification_model.dart';
 import '../../provider/profile_provider.dart';
@@ -53,16 +53,8 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         ref.watch(profileProvider).notificationFetch.isLoading;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        surfaceTintColor: Colors.transparent,
-        titleSpacing: -6.sp,
-        leading: const ChevronBackButton(),
-        title: Text(
-          context.notification,
-          style:
-              GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.notification,
       ),
       backgroundColor: GlobalColors.white,
       body: notificationLoading

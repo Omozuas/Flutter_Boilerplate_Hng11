@@ -83,6 +83,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
     //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
     return LoadingOverlay(
       isLoading: authStateProvider.normalButtonLoading ||
           authStateProvider.googleButtonLoading,
