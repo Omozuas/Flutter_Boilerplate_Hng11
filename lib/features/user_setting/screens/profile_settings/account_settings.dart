@@ -110,15 +110,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 15.0.h),
+                        SizedBox(height: 10.0.h),
                         Text(
                           context.text.profileSettings,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            color: GlobalColors.iconColor,
                           ),
                         ),
-                        SizedBox(height: 15.0.h),
+                        SizedBox(height: 5.0.h),
                         SettingsTile(
                           leadingIcon: 'assets/icons/personSetting.svg',
                           title: context.text.account,
@@ -148,22 +149,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context.push(AppRoute.languageAndRegionScreen);
                           },
                         ),
-                        SizedBox(height: 15.h),
+                        SizedBox(height: 5.h),
                         const Divider(),
-                        SizedBox(height: 15.h),
+                        SizedBox(height: 10.h),
                         Text(
                           context.text.organizationSettings,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            color: GlobalColors.iconColor,
                           ),
                         ),
-                        SizedBox(height: 15.h),
+                        SizedBox(height: 10.h),
                         SettingsTile(
                           leadingIcon: 'assets/icons/UserPlus.svg',
                           title: context.text.createOrganisation,
                           onTap: () {
                             // Navigate to Manage Organization
+                            context.push(AppRoute.companySignUp);
                           },
                         ),
                         SettingsTile(
@@ -190,9 +193,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             context.push(AppRoute.subscriptionsScreen);
                           },
                         ),
-                        SizedBox(height: 15.h),
+                        SizedBox(height: 10.h),
                         const Divider(),
-                        SizedBox(height: 15.h),
+                        SizedBox(height: 10.h),
                         InkWell(
                           onTap: () async {
                             await showDialog(

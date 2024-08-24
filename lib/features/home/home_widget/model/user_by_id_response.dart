@@ -9,19 +9,19 @@ class GetUserByIDResponse {
 
   GetUserByIDResponse(
       {this.fullname,
-        this.id,
-        this.email,
-        this.profile,
-        this.avatarUrl,
-        this.organisations,
-        this.blogs});
+      this.id,
+      this.email,
+      this.profile,
+      this.avatarUrl,
+      this.organisations,
+      this.blogs});
 
   GetUserByIDResponse.fromJson(Map<String, dynamic> json) {
     fullname = json['fullname'];
     id = json['id'];
     email = json['email'];
     profile =
-    json['profile'] != null ? Profile.fromJson(json['profile']) : null;
+        json['profile'] != null ? Profile.fromJson(json['profile']) : null;
     avatarUrl = json['avatar_url'];
     if (json['organisations'] != null) {
       organisations = <Organisations>[];
@@ -47,8 +47,7 @@ class GetUserByIDResponse {
     }
     data['avatar_url'] = avatarUrl;
     if (organisations != null) {
-      data['organisations'] =
-          organisations!.map((v) => v.toJson()).toList();
+      data['organisations'] = organisations!.map((v) => v.toJson()).toList();
     }
     if (blogs != null) {
       data['blogs'] = blogs!.map((v) => v.toJson()).toList();
@@ -75,19 +74,19 @@ class Organisations {
 
   Organisations(
       {this.id,
-        this.name,
-        this.description,
-        this.slug,
-        this.email,
-        this.industry,
-        this.type,
-        this.country,
-        this.address,
-        this.state,
-        this.createdAt,
-        this.updatedAt,
-        this.ownerId,
-        this.isActive});
+      this.name,
+      this.description,
+      this.slug,
+      this.email,
+      this.industry,
+      this.type,
+      this.country,
+      this.address,
+      this.state,
+      this.createdAt,
+      this.updatedAt,
+      this.ownerId,
+      this.isActive});
 
   Organisations.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -140,15 +139,15 @@ class Blogs {
 
   Blogs(
       {this.id,
-        this.title,
-        this.imageUrl,
-        this.content,
-        this.publishedDate,
-        this.updatedDate,
-        this.authorId,
-        this.author,
-        this.category,
-        this.comments});
+      this.title,
+      this.imageUrl,
+      this.content,
+      this.publishedDate,
+      this.updatedDate,
+      this.authorId,
+      this.author,
+      this.category,
+      this.comments});
 
   Blogs.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -158,8 +157,7 @@ class Blogs {
     publishedDate = json['publishedDate'];
     updatedDate = json['updatedDate'];
     authorId = json['authorId'];
-    author =
-    json['author'] != null ? Author.fromJson(json['author']) : null;
+    author = json['author'] != null ? Author.fromJson(json['author']) : null;
     category = json['category'];
     if (json['comments'] != null) {
       comments = <Comments>[];
@@ -216,28 +214,28 @@ class Author {
 
   Author(
       {this.id,
-        this.firstName,
-        this.lastName,
-        this.avatarUrl,
-        this.email,
-        this.phoneNumber,
-        this.password,
-        this.passwordSalt,
-        this.passwordResetToken,
-        this.passwordResetTokenTime,
-        this.createdAt,
-        this.updatedAt,
-        this.profile,
-        this.isSuperAdmin,
-        this.organizations,
-        this.products,
-        this.transactions,
-        this.subscriptions,
-        this.blogs,
-        this.usersRoles,
-        this.lastLogins,
-        this.timezoneId,
-        this.timezone});
+      this.firstName,
+      this.lastName,
+      this.avatarUrl,
+      this.email,
+      this.phoneNumber,
+      this.password,
+      this.passwordSalt,
+      this.passwordResetToken,
+      this.passwordResetTokenTime,
+      this.createdAt,
+      this.updatedAt,
+      this.profile,
+      this.isSuperAdmin,
+      this.organizations,
+      this.products,
+      this.transactions,
+      this.subscriptions,
+      this.blogs,
+      this.usersRoles,
+      this.lastLogins,
+      this.timezoneId,
+      this.timezone});
 
   Author.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -253,7 +251,7 @@ class Author {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     profile =
-    json['profile'] != null ? Profile.fromJson(json['profile']) : null;
+        json['profile'] != null ? Profile.fromJson(json['profile']) : null;
     isSuperAdmin = json['isSuperAdmin'];
     if (json['organizations'] != null) {
       organizations = <Organizations>[];
@@ -293,9 +291,8 @@ class Author {
       });
     }
     timezoneId = json['timezoneId'];
-    timezone = json['timezone'] != null
-        ? Timezone.fromJson(json['timezone'])
-        : null;
+    timezone =
+        json['timezone'] != null ? Timezone.fromJson(json['timezone']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -317,8 +314,7 @@ class Author {
     }
     data['isSuperAdmin'] = isSuperAdmin;
     if (organizations != null) {
-      data['organizations'] =
-          organizations!.map((v) => v.toJson()).toList();
+      data['organizations'] = organizations!.map((v) => v.toJson()).toList();
     }
     if (products != null) {
       data['products'] = products!.map((v) => v.toJson()).toList();
@@ -327,8 +323,7 @@ class Author {
       data['transactions'] = transactions!.map((v) => v.toJson()).toList();
     }
     if (subscriptions != null) {
-      data['subscriptions'] =
-          subscriptions!.map((v) => v.toJson()).toList();
+      data['subscriptions'] = subscriptions!.map((v) => v.toJson()).toList();
     }
     data['blogs'] = blogs;
     if (usersRoles != null) {
@@ -365,21 +360,21 @@ class Profile {
 
   Profile(
       {this.id,
-        this.firstName,
-        this.lastName,
-        this.phoneNumber,
-        this.avatarUrl,
-        this.userId,
-        this.user,
-        this.username,
-        this.pronoun,
-        this.jobTitle,
-        this.bio,
-        this.department,
-        this.facebookLink,
-        this.twitterLink,
-        this.linkedinLink,
-        this.instagramLink});
+      this.firstName,
+      this.lastName,
+      this.phoneNumber,
+      this.avatarUrl,
+      this.userId,
+      this.user,
+      this.username,
+      this.pronoun,
+      this.jobTitle,
+      this.bio,
+      this.department,
+      this.facebookLink,
+      this.twitterLink,
+      this.linkedinLink,
+      this.instagramLink});
 
   Profile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -444,23 +439,23 @@ class Organizations {
 
   Organizations(
       {this.id,
-        this.name,
-        this.description,
-        this.slug,
-        this.email,
-        this.industry,
-        this.type,
-        this.country,
-        this.address,
-        this.state,
-        this.createdAt,
-        this.updatedAt,
-        this.ownerId,
-        this.isActive,
-        this.inviteToken,
-        this.users,
-        this.usersRoles,
-        this.subscriptions});
+      this.name,
+      this.description,
+      this.slug,
+      this.email,
+      this.industry,
+      this.type,
+      this.country,
+      this.address,
+      this.state,
+      this.createdAt,
+      this.updatedAt,
+      this.ownerId,
+      this.isActive,
+      this.inviteToken,
+      this.users,
+      this.usersRoles,
+      this.subscriptions});
 
   Organizations.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -515,8 +510,7 @@ class Organizations {
       data['usersRoles'] = usersRoles!.map((v) => v.toJson()).toList();
     }
     if (subscriptions != null) {
-      data['subscriptions'] =
-          subscriptions!.map((v) => v.toJson()).toList();
+      data['subscriptions'] = subscriptions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -533,12 +527,12 @@ class UsersRoles {
 
   UsersRoles(
       {this.id,
-        this.userId,
-        this.roleId,
-        this.organizationId,
-        this.user,
-        this.role,
-        this.orgainzation});
+      this.userId,
+      this.roleId,
+      this.organizationId,
+      this.user,
+      this.role,
+      this.orgainzation});
 
   UsersRoles.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -579,15 +573,15 @@ class Role {
 
   Role(
       {this.id,
-        this.name,
-        this.description,
-        this.isActive,
-        this.createdAt,
-        this.updatedAt,
-        this.organizationId,
-        this.organisation,
-        this.permissions,
-        this.usersRoles});
+      this.name,
+      this.description,
+      this.isActive,
+      this.createdAt,
+      this.updatedAt,
+      this.organizationId,
+      this.organisation,
+      this.permissions,
+      this.usersRoles});
 
   Role.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -636,12 +630,12 @@ class Permissions {
 
   Permissions(
       {this.id,
-        this.name,
-        this.description,
-        this.isActive,
-        this.createdAt,
-        this.updatedAt,
-        this.roles});
+      this.name,
+      this.description,
+      this.isActive,
+      this.createdAt,
+      this.updatedAt,
+      this.roles});
 
   Permissions.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -687,22 +681,22 @@ class Subscriptions {
 
   Subscriptions(
       {this.id,
-        this.userId,
-        this.user,
-        this.organizationId,
-        this.organization,
-        this.transactionId,
-        this.transaction,
-        this.billingPlanId,
-        this.billingPlan,
-        this.plan,
-        this.frequency,
-        this.isActive,
-        this.amount,
-        this.startDate,
-        this.expiryDate,
-        this.createdAt,
-        this.updatedAt});
+      this.userId,
+      this.user,
+      this.organizationId,
+      this.organization,
+      this.transactionId,
+      this.transaction,
+      this.billingPlanId,
+      this.billingPlan,
+      this.plan,
+      this.frequency,
+      this.isActive,
+      this.amount,
+      this.startDate,
+      this.expiryDate,
+      this.createdAt,
+      this.updatedAt});
 
   Subscriptions.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -763,13 +757,13 @@ class BillingPlan {
 
   BillingPlan(
       {this.id,
-        this.name,
-        this.frequency,
-        this.isActive,
-        this.amount,
-        this.description,
-        this.createdAt,
-        this.updatedAt});
+      this.name,
+      this.frequency,
+      this.isActive,
+      this.amount,
+      this.description,
+      this.createdAt,
+      this.updatedAt});
 
   BillingPlan.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -817,22 +811,22 @@ class Products {
 
   Products(
       {this.id,
-        this.name,
-        this.description,
-        this.category,
-        this.price,
-        this.available,
-        this.userId,
-        this.user,
-        this.status,
-        this.imageUrl,
-        this.size,
-        this.quantity,
-        this.organizationId,
-        this.organization,
-        this.createdAt,
-        this.updatedAt,
-        this.transactions});
+      this.name,
+      this.description,
+      this.category,
+      this.price,
+      this.available,
+      this.userId,
+      this.user,
+      this.status,
+      this.imageUrl,
+      this.size,
+      this.quantity,
+      this.organizationId,
+      this.organization,
+      this.createdAt,
+      this.updatedAt,
+      this.transactions});
 
   Products.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -907,20 +901,20 @@ class Transactions {
 
   Transactions(
       {this.id,
-        this.userId,
-        this.user,
-        this.productId,
-        this.product,
-        this.subscriptionId,
-        this.subscription,
-        this.type,
-        this.status,
-        this.partners,
-        this.amount,
-        this.reference,
-        this.createdAt,
-        this.paidAt,
-        this.modifiedAt});
+      this.userId,
+      this.user,
+      this.productId,
+      this.product,
+      this.subscriptionId,
+      this.subscription,
+      this.type,
+      this.status,
+      this.partners,
+      this.amount,
+      this.reference,
+      this.createdAt,
+      this.paidAt,
+      this.modifiedAt});
 
   Transactions.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -975,11 +969,11 @@ class LastLogins {
 
   LastLogins(
       {this.id,
-        this.userId,
-        this.user,
-        this.loginTime,
-        this.logoutTime,
-        this.ipAddress});
+      this.userId,
+      this.user,
+      this.loginTime,
+      this.logoutTime,
+      this.ipAddress});
 
   LastLogins.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -1038,12 +1032,12 @@ class Comments {
 
   Comments(
       {this.id,
-        this.content,
-        this.blogId,
-        this.blog,
-        this.authorId,
-        this.author,
-        this.createdAt});
+      this.content,
+      this.blogId,
+      this.blog,
+      this.authorId,
+      this.author,
+      this.createdAt});
 
   Comments.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -1051,8 +1045,7 @@ class Comments {
     blogId = json['blogId'];
     blog = json['blog'];
     authorId = json['authorId'];
-    author =
-    json['author'] != null ? Author.fromJson(json['author']) : null;
+    author = json['author'] != null ? Author.fromJson(json['author']) : null;
     createdAt = json['createdAt'];
   }
 

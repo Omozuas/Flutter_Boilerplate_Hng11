@@ -34,6 +34,9 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: GlobalColors.dividerColor),
       child: ExpansionTile(
+        backgroundColor: Colors.transparent,
+        collapsedBackgroundColor: Colors.transparent,
+        collapsedTextColor: GlobalColors.dark2,
         tilePadding: EdgeInsets.symmetric(
             horizontal: widget.horizontalTitlePadding?.horizontal ?? 15,
             vertical: widget.verticalChildrenPadding?.vertical ?? 0),

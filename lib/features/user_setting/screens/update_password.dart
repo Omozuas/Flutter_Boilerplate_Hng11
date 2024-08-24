@@ -33,15 +33,16 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   FocusNode newPasswordFocusNode = FocusNode();
   FocusNode confirmPasswordFocusNode = FocusNode();
   bool isPasswordFieldFocused = false;
-  final TextEditingController currentPasswordController = TextEditingController();
+  final TextEditingController currentPasswordController =
+      TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   bool passwordsMatch = true;
   String? errorMessage;
   final userServiceProvider = Provider<UserService>((ref) {
-  return locator<UserService>();
-});
+    return locator<UserService>();
+  });
 
   @override
   void initState() {
@@ -78,11 +79,11 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
         final authToken = await userService.getToken();
         await passwordService
             .updatePassword(
-                currentPassword: currentPassword,
-                newPassword: newPassword,
-                confirmPassword: confirmPassword,
-                token: authToken.toString()
-                )
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+          confirmPassword: confirmPassword,
+          token: authToken.toString(),
+        )
             .then(
           (value) {
             OneContext().showDialog(
@@ -189,7 +190,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Text(
+              Text(
                 AppLocalizations.of(context)!.updatePasswordEnhanced,
                 style: const TextStyle(color: Color(0xff434343), fontSize: 12),
               ),
@@ -225,7 +226,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500),suffixIcon: IconButton(
+                                  fontWeight: FontWeight.w500),
+                              suffixIcon: IconButton(
                                 icon: Icon(
                                   currentPasswordVissible
                                       ? Icons.visibility
@@ -234,8 +236,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      newPasswordVissible =
-                                          !newPasswordVissible;
+                                      currentPasswordVissible =
+                                          !currentPasswordVissible;
                                     },
                                   );
                                 },
@@ -260,7 +262,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -285,7 +287,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                               validatePasswords();
                             },
                             decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.enterNewPassword,
+                              hintText: AppLocalizations.of(context)!
+                                  .enterNewPassword,
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
@@ -376,7 +379,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                     ? Colors.green
                                     : const Color(0xffdc2626)),
                             const SizedBox(width: 8),
-                            Text(AppLocalizations.of(context)!.atLeastOneUpercase,
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .atLeastOneUpercase,
                                 style: GoogleFonts.inter(
                                     fontSize: 14, fontWeight: FontWeight.w400)),
                           ],
@@ -412,7 +417,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                     ? Colors.green
                                     : const Color(0xffdc2626)),
                             const SizedBox(width: 8),
-                            Text(AppLocalizations.of(context)!.atLeastEightCharacters,
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .atLeastEightCharacters,
                                 style: GoogleFonts.inter(
                                     fontSize: 14, fontWeight: FontWeight.w400)),
                           ],
@@ -443,10 +450,12 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             validator: Validators.passwordValidator,
                             onChanged: (value) => validatePasswords(),
                             decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.confirmNewPassword,
+                              hintText: AppLocalizations.of(context)!
+                                  .confirmNewPassword,
                               errorText: passwordsMatch
                                   ? null
-                                  : AppLocalizations.of(context)!.passwordDoNotMatch,
+                                  : AppLocalizations.of(context)!
+                                      .passwordDoNotMatch,
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,

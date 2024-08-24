@@ -1,14 +1,14 @@
 import 'dart:ui';
 
-class LocalizationClass{
-
-
-  static Locale english =  const Locale('en');
-  static Locale chinese = const  Locale('zh');
+class LocalizationClass {
+  static Locale english = const Locale('en');
+  static Locale chinese = const Locale('zh');
   static Locale spanish = const Locale('es');
 
   static List<Locale> locales = [
-    english,chinese,spanish,
+    english,
+    chinese,
+    spanish,
   ];
 
   static Locale getLocale(String languageCode) {
@@ -22,5 +22,4 @@ class LocalizationClass{
         return english;
     }
   }
-
 }

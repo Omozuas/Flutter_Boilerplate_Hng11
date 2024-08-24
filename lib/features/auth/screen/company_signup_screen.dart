@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 class CompanySignUpScreen extends ConsumerWidget {
@@ -97,7 +95,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                             validator: (value) {
                               final emailRegex = RegExp(
                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                              if (value == null || value.isEmpty || !emailRegex.hasMatch(value)) {
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  !emailRegex.hasMatch(value)) {
                                 return localizations.pleaseEnterValidEmail;
                               }
                               return null;
@@ -138,6 +138,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             height: 48,
                             containerColor: GlobalColors.white,
+                            textPadding:
+                                const EdgeInsets.only(left: 10, right: 10),
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -166,6 +168,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             height: 48,
                             containerColor: GlobalColors.white,
+                            textPadding:
+                                const EdgeInsets.only(left: 10, right: 10),
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -211,6 +215,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             height: 48,
                             containerColor: GlobalColors.white,
+                            textPadding:
+                                const EdgeInsets.only(left: 10, right: 10),
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -238,6 +244,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                               fontSize: 13.sp,
                             ),
                             borderColor: GlobalColors.lightGray,
+                            textPadding:
+                                const EdgeInsets.only(left: 10, right: 10),
                             height: 48,
                             containerColor: GlobalColors.white,
                             width: double.infinity,
@@ -290,6 +298,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                             height: 48,
                             containerColor: GlobalColors.white,
                             width: double.infinity,
+                            textPadding:
+                                const EdgeInsets.only(left: 10, right: 10),
                             textColor: GlobalColors.darkOne,
                           ),
                         ],
@@ -305,7 +315,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                               if (_companyFormKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
                                 // Submission async function here
-                                ref.read(loadingProvider.notifier).state = false;
+                                ref.read(loadingProvider.notifier).state =
+                                    false;
                               }
                             },
                             loading: isLoading,
@@ -317,31 +328,6 @@ class CompanySignUpScreen extends ConsumerWidget {
                             textColor: GlobalColors.white,
                           ),
                           SizedBox(height: 20.sp),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                localizations.alreadyHaveAnAccount,
-                                style: CustomTextStyle.regular(
-                                  color: GlobalColors.darkOne,
-                                  fontSize: 13.sp,
-                                ),
-                              ),
-                              SizedBox(width: 10.sp),
-                              GestureDetector(
-                                onTap: () {
-                                  context.push(AppRoute.login);
-                                },
-                                child: Text(
-                                  localizations.login,
-                                  style: CustomTextStyle.regular(
-                                    color: GlobalColors.orange,
-                                    fontSize: 13.sp,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
                         ],
                       ),
                     ),

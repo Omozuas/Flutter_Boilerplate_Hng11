@@ -6,4 +6,10 @@ extension Translation on BuildContext {
 
   String get signUpText => "Sign Up";
   String get seeMore => " See more";
+  /// Create a string getter here and call it in your ui using "context.{your-string-name}
+// E.g
+// String get login => 'Login';
+// In your UI, use this : context.login (importing this context_extension file);
+
+  String get login => 'Login';
 }
