@@ -52,10 +52,10 @@ class OrderDetailScreen extends StatelessWidget {
                     width: double.infinity,
                     height: GlobalScreenSize.getScreenHeight(context) * 0.203,
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.transparent,
                       borderRadius: BorderRadius.circular(12.r),
                       image: DecorationImage(
-                        image: CachedNetworkImageProvider(image),
+                        image: AssetImage(image),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -71,7 +71,7 @@ class OrderDetailScreen extends StatelessWidget {
                         ),
                         10.w.sbHW,
                         Text(
-                          "#99012",
+                          "#${order.number}:",
                           style: CustomTextStyles.productTextTitleBlue,
                         ),
                         const Spacer(),
