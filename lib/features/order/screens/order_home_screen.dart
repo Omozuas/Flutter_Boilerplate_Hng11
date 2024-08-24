@@ -3,7 +3,12 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.d
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
+=========
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
+import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+>>>>>>>>> Temporary merge branch 2
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -47,6 +52,11 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                         ? GlobalColors.verified
                         : GlobalColors.redColor;
 
+<<<<<<<<< Temporary merge branch 1
+                    num price = (product.price ?? 0) * quantity;
+
+=========
+>>>>>>>>> Temporary merge branch 2
                     return OrderTile(
                       order: Order(
                         number: 99012,
