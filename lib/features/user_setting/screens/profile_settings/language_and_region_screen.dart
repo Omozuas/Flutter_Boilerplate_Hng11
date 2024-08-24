@@ -10,7 +10,6 @@ import '../../../../utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../auth/providers/language_provider.dart';
 
-import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
 class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});

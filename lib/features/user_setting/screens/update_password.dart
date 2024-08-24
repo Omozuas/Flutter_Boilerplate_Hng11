@@ -17,7 +17,6 @@ import 'package:one_context/one_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../utils/validator.dart';
 
-import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
 class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
