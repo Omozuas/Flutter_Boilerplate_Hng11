@@ -276,7 +276,7 @@
       "upgrade": "Upgrade",
 
 "editOrganization": "Edit Organization",
-      
+
   "country1": "Germany",
   "country2": "Nigeria",
   "country3": "Canada",
@@ -437,6 +437,10 @@
     "passwordOneNumber": "Password must contain at least one number",
     "productDescription": "Product Description",
     "addAProduct": "Add a Product",
-    "orderDetails": "Order Details"
+    "orderDetails": "Order Details",
+     "noResultFound": "No result found",
+      "continueWithGoogle": "Continue with Google",
+      "description": "Description",
+      "inStock": "In Stock"
 }
 

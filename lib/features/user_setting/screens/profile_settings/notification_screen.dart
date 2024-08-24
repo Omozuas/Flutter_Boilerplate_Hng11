@@ -51,6 +51,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: context.notification,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: notificationLoading

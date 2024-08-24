@@ -11,6 +11,8 @@ import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../widgets/product_loader.dart';
+
 class ProductScreen extends ConsumerWidget {
   const ProductScreen({super.key});
 
@@ -116,11 +118,7 @@ class ProductScreen extends ConsumerWidget {
                 );
               },
               loading: () {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+                return const ProductLoader();
               },
             ),
           ),

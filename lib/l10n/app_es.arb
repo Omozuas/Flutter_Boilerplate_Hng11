@@ -371,6 +371,10 @@
     "passwordOneNumber": "La contraseña debe contener al menos un número",
     "productDescription": "Descripción del producto",
     "addAProduct": "Agregar un producto",
-    "orderDetails": "Detalles del pedido"
+    "orderDetails": "Detalles del pedido",
+    "noResultFound": "No se encontraron resultados",
+      "continueWithGoogle": "Continuar con Google",
+      "description": "Descripción",
+      "inStock": "En stock"
 }
 

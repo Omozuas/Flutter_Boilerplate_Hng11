@@ -302,7 +302,7 @@
    "basic": "基础版",
    "advanced": "高级版",
    "upgradeToAccessFeatures": "升级以访问更多功能",
-  
+
    "errorFetchingLink": "获取链接时发生错误。",
    "copyLink": "链接已复制到剪贴板",
    "searchByNameOrMail": "按姓名或邮箱搜索",
@@ -397,6 +397,10 @@
   "passwordOneNumber": "密码必须包含至少一个数字",
   "productDescription": "产品描述",
   "addAProduct": "添加产品",
-  "orderDetails": "订单详情"
+  "orderDetails": "订单详情",
+  "noResultFound": "未找到结果",
+    "continueWithGoogle": "使用 Google 继续",
+    "description": "描述",
+    "inStock": "有库存"
 }
 

@@ -441,5 +441,9 @@
   "passwordOneNumber": "Le mot de passe doit contenir au moins un chiffre",
   "productDescription": "Description du produit",
   "addAProduct": "Ajouter un produit",
-  "orderDetails": "Détails de la commande"
+  "orderDetails": "Détails de la commande",
+  "noResultFound": "Aucun résultat trouvé",
+    "continueWithGoogle": "Continuer avec Google",
+    "description": "Description",
+    "inStock": "En stock"
 }

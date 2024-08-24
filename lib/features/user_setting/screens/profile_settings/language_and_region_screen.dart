@@ -35,7 +35,7 @@ class _LanguageAndRegionScreenState
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = context.text.settings;
+        feedBackMessage = context.text.settingsSavedSuccessfully;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -90,6 +90,7 @@ class _LanguageAndRegionScreenState
     return Scaffold(
       backgroundColor: GlobalColors.white,
       appBar: CustomAppBar.simpleTitle(
+        showDivider: false,
         titleText: AppLocalizations.of(context)!.languageAndRegion,
       ),
       body: SingleChildScrollView(
@@ -136,33 +137,33 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 20.h),
-            CustomDropdownButton(
-              items: const [
-                'France',
-                'Canada',
-                'United Kingdom',
-                'Germany',
-                'United States',
-                'Japan',
-                'South Korea',
-                'Russian',
-                'United Arab Emirates'
-              ],
-              borderColor: GlobalColors.borderColor,
-              height: 50.h,
-              textPadding: const EdgeInsets.only(
-                  left: 10, right: 10, bottom: 10, top: 10),
-              width: double.infinity,
-              containerColor: GlobalColors.white,
-              textColor: GlobalColors.darkOne,
-              placeholder: context.region,
-              onChanged: (value) {
-                setState(() {
-                  selectedRegion = value;
-                });
-              },
-            ),
+            // SizedBox(height: 20.h),
+            // CustomDropdownButton(
+            //   items: const [
+            //     'France',
+            //     'Canada',
+            //     'United Kingdom',
+            //     'Germany',
+            //     'United States',
+            //     'Japan',
+            //     'South Korea',
+            //     'Russian',
+            //     'United Arab Emirates'
+            //   ],
+            //   borderColor: GlobalColors.borderColor,
+            //   height: 50.h,
+            //   textPadding: const EdgeInsets.only(
+            //       left: 10, right: 10, bottom: 10, top: 10),
+            //   width: double.infinity,
+            //   containerColor: GlobalColors.white,
+            //   textColor: GlobalColors.darkOne,
+            //   placeholder: context.region,
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selectedRegion = value;
+            //     });
+            //   },
+            // ),
             if (showError && selectedRegion == null)
               Text(
                 AppLocalizations.of(context)!.regionUpdateError,
