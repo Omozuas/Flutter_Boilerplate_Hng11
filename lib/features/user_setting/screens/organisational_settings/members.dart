@@ -10,8 +10,6 @@ import 'package:flutter/services.dart';
 
 import '../../../../utils/widgets/custom_avatar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../auth/providers/organisation/organisation.provider.dart';
 import '../../provider/profile_provider.dart';
 
 class MembersSettings extends ConsumerStatefulWidget {
