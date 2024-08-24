@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
@@ -20,18 +21,9 @@ class _CreateRoleState extends State<CreateRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.createRole,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-              )),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.createRole,
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
         child: Column(

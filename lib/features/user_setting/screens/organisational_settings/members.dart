@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,26 +26,58 @@ class MembersSettings extends ConsumerStatefulWidget {
 
 class _MembersSettingsState extends ConsumerState<MembersSettings> {
   List<Members> organisationMembers = [
-    Members(),
+    /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
+    Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
+   
   ];
+  List<Members> filteredMembers = [];
+  TextEditingController searchController = TextEditingController();
   String inviteLink = ''; // Variable to store the invitation link
 
   @override
   void initState() {
     super.initState();
+    filteredMembers = organisationMembers;
+    searchController.addListener(filterMembers);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(profileProvider).organisationMembers;
+      final org = ref.watch(getOrganisationProvider);
+      ref
+          .read(profileProvider.notifier)
+          .getOrganisationMembers(orgId: org.organisationId.toString());
       Future(() {
         fetchLinkFromAPI();
       });
     });
   }
+  void filterMembers() {
+    final filter = searchController.text.toLowerCase();
+    setState(() {
+      filteredMembers = organisationMembers.where((member) {
+        final firstName = (member.firstName ?? '').toLowerCase();
+        final lastName = (member.lastName ?? '').toLowerCase();
+        final email = (member.email ?? '').toLowerCase();
+        return firstName.contains(filter) ||
+            lastName.contains(filter) ||
+            email.contains(filter);
+      }).toList();
+    });
+  }
 
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
   Future<Object> fetchLinkFromAPI() async {
     // Trigger the sendInvite method from ProfileProvider
     await ref
         .read(profileProvider.notifier)
-        .generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
+        .generateInviteLinkFromCurrentUser();
+    // final org = ref.watch(getOrganisationProvider);
+    // await ref
+    //     .read(profileProvider.notifier)
+    //     .generateInviteLink(orgId: org.organisationId.toString());
+
     // Check the inviteResponse state
     final inviteResponse = ref.read(profileProvider).inviteLink;
     return inviteResponse;
@@ -66,15 +100,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.members,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: const ChevronBackButton(),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.members,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
@@ -115,9 +143,12 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   children: [
                     Expanded(
                       child: asyncLinkValue.when(
-                        data: (inviteLink) => Text(
-                          inviteLink ?? "No link ",
-                          softWrap: true,
+                        data: (inviteLink) => Padding(
+                          padding: const EdgeInsets.only(bottom: 9.0),
+                          child: Text(
+                            inviteLink ?? "No link ",
+                            softWrap: true,
+                          ),
                         ),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
@@ -182,6 +213,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
                   ),
+                  controller: searchController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
@@ -209,30 +241,41 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 5,
               ),
               asyncMembersValue.when(
-                  loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
-                  error: (e, st) {
-                    return Center(
-                      child: Text(
-                          AppLocalizations.of(context)!.errorFetchingMembers),
-                    );
-                  },
-                  data: (members) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomAvatar(
-                          memberDetail:
-                              members?[index] ?? organisationMembers[index],
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (e, st) {
+                  return Center(
+                    child: Text(
+                        AppLocalizations.of(context)!.errorFetchingMembers),
+                  );
+                },
+                data: (members) {
+                  if (organisationMembers.isEmpty) {
+                    setState(() {
+                      organisationMembers = members ?? [];
+                      filteredMembers = organisationMembers;
+                    });
+                  }
+
+                  return filteredMembers.isEmpty
+                      ? Center(
+                          child: Text(
+                              '${context.noResultFound} "${searchController.text}"'))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomAvatar(
+                              memberDetail: filteredMembers[index],
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
+                          itemCount: filteredMembers.length,
                         );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const Divider();
-                      },
-                      itemCount: members?.length ?? organisationMembers.length,
-                    );
-                  })
+                },
+              )
             ])),
       ),
     );

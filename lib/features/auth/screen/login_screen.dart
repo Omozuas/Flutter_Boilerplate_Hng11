@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
-
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -83,6 +82,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
     //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
     return LoadingOverlay(
       isLoading: authStateProvider.normalButtonLoading ||
           authStateProvider.googleButtonLoading,
@@ -155,9 +155,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Google",
+                                  context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       color: GlobalColors.dark2),
                                 )
                               ],
@@ -365,7 +365,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
     ref.read(authProvider.notifier).login({
-      'email': LoginScreen._emailController.text,
+
+      'email': LoginScreen._emailController.text.trim().toLowerCase(),
       'password': LoginScreen._passwordController.text,
     }, context);
   }

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -8,37 +8,33 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/progress_colour.dart';
+
+import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../gen/assets.gen.dart';
-import '../../../utils/custom_text_style.dart';
+
 import '../../../utils/widgets/divider.dart';
 import '../../../utils/widgets/list_tile.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   const OrderDetailScreen({
     super.key,
-    required this.name,
+    required this.order,
+    // required this.name,
     required this.image,
-    required this.price,
+    // required this.price,
   });
 
-  final String name;
+  final Order order;
   final String image;
-  final num price;
+  // final num price;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalColors.white,
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        title: Text(
-          context.orderDetails,
-          style:
-              CustomTextStyle.medium(fontSize: 18, color: GlobalColors.black),
-        ),
-        centerTitle: false,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.orderDetails,
       ),
       body: SingleChildScrollView(
         child: Column(

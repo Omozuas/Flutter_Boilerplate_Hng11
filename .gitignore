@@ -30,6 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+.fvm/
 .pubspec.lock
 /ios/
 /linux/
@@ -48,3 +49,5 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+pubspec.lock
+macos

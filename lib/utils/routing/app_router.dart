@@ -10,6 +10,7 @@ import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_by_catetory_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
@@ -180,6 +181,12 @@ class AppRouter {
           return const NotificationHomeScreen();
         },
       ),
+      ConsumerGoRoute(
+        path: AppRoute.productsByCategory,
+        builder: (context, state, ref) {
+          return const ProductsByCategory();
+        },
+      ),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(routes: [
@@ -258,4 +265,5 @@ class AppRoute {
   static const String notificationScreen =
       '/profile-settings/notification_screen';
   static const String updatePassword = '/profile-settings/update_password';
+  static const String productsByCategory = '/products-by-category';
 }
