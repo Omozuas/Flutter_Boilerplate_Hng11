@@ -7,6 +7,7 @@ import '../../../../utils/context_extensions.dart';
 import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/routing/app_router.dart';
+import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/subscription_model.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/ref_extension.dart';
@@ -37,20 +38,17 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: GlobalColors.white,
+        surfaceTintColor: Colors.transparent,
+        titleSpacing: -6.sp,
+        leading: const ChevronBackButton(),
         title: Text(
           context.text.subscriptionPlan,
           style: CustomTextStyle.semiBold(
-            fontSize: 16,
+            fontSize: 16.sp,
             color: GlobalColors.iconColor,
           ),
         ),
-        // leading: InkWell(
-        //   onTap: () {
-        //     // context.pop();
-        //     ref.read(profileProvider.notifier).getSubscription();
-        //   },
-        //   child: const Icon(Icons.arrow_back_ios_new),
-        // ),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator.adaptive())

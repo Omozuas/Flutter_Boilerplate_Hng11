@@ -43,25 +43,16 @@ class SettingsApi {
     }
   }
 
-  Future<UserProfile> updateProfile({
-    required String email,
-    required UserProfile profile,
-  }) async {
+  Future<UserProfile> updateProfile(UserProfile profile) async {
     try {
-      final response = await dio.putUpdate(
-        '/profile/$email',
-        data: profile.toMap(),
-      );
+      final response = await dio.putUpdate('/profile', data: profile.toMap());
       return UserProfile.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<String> updateProfileAvatar({
-    required File file,
-    required String email,
-  }) async {
+  Future<String> updateProfileAvatar(File file) async {
     try {
       final multipart = await MultipartFile.fromFile(
         file.path,
@@ -69,7 +60,7 @@ class SettingsApi {
         contentType: MediaType('image', 'png'),
       );
       final response = await dio.multipartPut(
-        '/profile/$email/picture',
+        '/profile/picture',
         data: {'DisplayPhoto': multipart},
         options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
@@ -151,8 +142,8 @@ class SettingsApi {
 
   Future<String> generateInviteLink({required String orgID}) async {
     try {
-      final response =
-      await dio.get('https://staging.api-csharp.boilerplate.hng.tech/api/v1/organisations/$orgID/invites');
+      final response = await dio.get(
+          'https://staging.api-csharp.boilerplate.hng.tech/api/v1/organisations/$orgID/invites');
       return response?.data['data']['invite_link'];
     } catch (e) {
       rethrow;
