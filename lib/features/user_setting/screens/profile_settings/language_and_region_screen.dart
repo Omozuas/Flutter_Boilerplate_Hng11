@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,11 +30,11 @@ class _LanguageAndRegionScreenState
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
-          selectedRegion == null ||
+          // selectedRegion == null ||
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = AppLocalizations.of(context)!.settings;
+        feedBackMessage = context.text.settingsSavedSuccessfully;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -46,7 +47,7 @@ class _LanguageAndRegionScreenState
 
   void unsavedChanges() {
     if (selectedLanguage != null ||
-        selectedRegion != null ||
+        // selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
         feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
@@ -87,16 +88,9 @@ class _LanguageAndRegionScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColors.white,
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        surfaceTintColor: Colors.transparent,
-        titleSpacing: -6.sp,
-        leading: const ChevronBackButton(),
-        title: Text(
-          AppLocalizations.of(context)!.languageAndRegion,
-          style:
-              GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        showDivider: false,
+        titleText: AppLocalizations.of(context)!.languageAndRegion,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
