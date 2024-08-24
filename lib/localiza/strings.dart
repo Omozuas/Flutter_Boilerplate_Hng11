@@ -270,6 +270,7 @@ class StringManager {
 
   /// TODO: Put every new strings under this todo
 
+
   static const String editOrganization = 'Edit Organization';
 
   static const String country1 = 'Germany';

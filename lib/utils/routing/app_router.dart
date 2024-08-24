@@ -19,6 +19,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisa
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscription_checkout.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/upgrade_plan_checkout_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/edit_profile_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/language_and_region_screen.dart';
@@ -27,6 +28,8 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_p
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
@@ -134,6 +137,13 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
+        path: AppRoute.upgradePlanCheckout,
+        builder: (context, state, ref) {
+          final plan = state.extra as SubscriptionPlan;
+          return UpgradePlanCheckoutScreen(plan: plan);
+        },
+      ),
+      ConsumerGoRoute(
         path: AppRoute.languageAndRegionScreen,
         builder: (context, state, ref) {
           return const LanguageAndRegionScreen();
@@ -238,6 +248,8 @@ class AppRoute {
       '/org-settings/subscription-checkout';
   static const String subscriptionsScreen =
       '/org-settings/subscriptions-screen';
+
+  static const String upgradePlanCheckout = '/upgrade-plan-checkout';
 
   static const String languageAndRegionScreen =
       '/profile-settings/language-and-region-screen';

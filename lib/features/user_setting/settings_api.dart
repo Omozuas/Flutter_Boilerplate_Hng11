@@ -107,20 +107,18 @@ class SettingsApi {
       final response = await dio.get(
         '/subscriptions/organization/$orgId',
       );
-      return subscriptionModelFromJson(response?.data['data']);
+      return SubscriptionModel.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<SubscriptionModel> getSubscriptionUserId(
-      {required String userId}) async {
+  Future<SubscriptionModel> getSubscriptionUserId(String userId) async {
     try {
       final response = await dio.get(
         '/subscriptions/user/$userId',
       );
-
-      return subscriptionModelFromJson(response?.data['data']);
+      return SubscriptionModel.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }

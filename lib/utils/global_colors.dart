@@ -32,6 +32,7 @@ class GlobalColors {
   static HexColor hotred = HexColor('#DC2626');
   static HexColor green = HexColor('#10AF20');
   static HexColor white = HexColor('#FFFFFF');
+  static HexColor dialogDesc = HexColor('#64748B');
   static HexColor grays = HexColor('#525252');
   static HexColor lightGrey = HexColor('#94A3B8');
 

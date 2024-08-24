@@ -276,6 +276,18 @@
   "somethingWentWrongMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
   "updateProfileButton": "Actualizar Perfil",
   "editOrganization": "Editar organización",
+   "changePassword": "Cambiar Contraseña",
+  "createOrganisation": "Crear Organización",
+  "errorFetchingLink": "Ocurrió un error al obtener el enlace.",
+  "copyLink": "Enlace copiado al portapapeles",
+  "searchByNameOrMail": "Buscar por nombre o correo electrónico",
+  "errorFetchingMembers": "Ocurrió un error al \nobtener los miembros de la organización",
+  "memberProfile": "Perfil del miembro",
+  "memberName": "Nombre del miembro",
+  "memberBio": "Biografía del miembro",
+  "editProfile": "Editar perfil",
+  "deleteProfile": "Eliminar perfil",
+  "removeMember": "Miembro eliminado con éxito",
   "country1": "Alemania",
   "country2": "Nigeria",
   "country3": "Canadá",
@@ -330,5 +342,5 @@
   "editProfile": "Editar perfil",
   "deleteProfile": "Eliminar perfil",
   "removeMember": "Miembro eliminado con éxito"
-  }
+}
 
