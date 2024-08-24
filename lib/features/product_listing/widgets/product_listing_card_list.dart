@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_size.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
@@ -21,7 +22,7 @@ class ProductCardListWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 24.w),
+          padding: EdgeInsets.only(left: 24.w, right: 24.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -29,10 +30,13 @@ class ProductCardListWidget extends StatelessWidget {
                 categoryName,
                 style: PlusJakartaTextStyle.headerText2,
               ),
-              Text(
-                // "See more",
-                '',
-                style: PlusJakartaTextStyle.bodyTextGrey,
+              TextButton(
+                onPressed: () => context.push(AppRoute.productsByCategory),
+                child: Text(
+                 context.seeMore,
+                  // '',
+                  style: PlusJakartaTextStyle.bodyTextGrey,
+                ),
               )
             ],
           ),
