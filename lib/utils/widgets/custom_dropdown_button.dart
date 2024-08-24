@@ -63,6 +63,7 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
               value: _selectedItem,
               hint: Text(
                 widget.placeholder,
+                softWrap: true,
                 style: TextStyle(color: widget.textColor),
               ),
               dropdownColor: widget.containerColor,
@@ -79,6 +80,8 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
                     value,
                     style: TextStyle(color: widget.textColor),
                   ),

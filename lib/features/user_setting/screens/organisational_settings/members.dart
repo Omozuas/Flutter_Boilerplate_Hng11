@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -25,14 +26,27 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   List<Members> organisationMembers = [
     Members(),
   ];
+  String inviteLink = ''; // Variable to store the invitation link
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(profileProvider).organisationMembers;
-      ref.read(profileProvider).inviteLink;
+      Future(() {
+        fetchLinkFromAPI();
+      });
     });
+  }
+
+  Future<Object> fetchLinkFromAPI() async {
+    // Trigger the sendInvite method from ProfileProvider
+    await ref
+        .read(profileProvider.notifier)
+        .generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
+    // Check the inviteResponse state
+    final inviteResponse = ref.read(profileProvider).inviteLink;
+    return inviteResponse;
   }
 
   void showCustomToast(BuildContext context, String message) {
@@ -60,15 +74,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
             fontWeight: FontWeight.w700,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 12,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: const ChevronBackButton(),
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
@@ -105,19 +111,24 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     border: Border.all(
                         color: GlobalColors.borderColor, width: 0.7)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
                   children: [
-                    asyncLinkValue.when(
-                      data: (link) => Text(link ?? "No link "),
-                      loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive(),
+                    Expanded(
+                      child: asyncLinkValue.when(
+                        data: (inviteLink) => Text(
+                          inviteLink ?? "No link ",
+                          softWrap: true,
+                        ),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                        error: (e, st) {
+                          return Center(
+                            child: Text(AppLocalizations.of(context)!
+                                .errorFetchingLink),
+                          );
+                        },
                       ),
-                      error: (e, st) {
-                        return Center(
-                          child: Text(
-                              AppLocalizations.of(context)!.errorFetchingLink),
-                        );
-                      },
                     ),
                     Row(
                       children: [
