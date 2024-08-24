@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -118,9 +118,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    localizations.verificationCodeTitle, // Localized title
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 24),
+                    localizations.verificationCodeTitle,  // Localized title
+                    style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(height: 16.h),
                   RichText(
@@ -221,8 +220,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       child: TextButton(
                         onPressed: _handleChangeEmail,
                         child: Text(
-                          localizations.changeEmailText, // Localized text
-                          style: const TextStyle(
+                          localizations.changeEmailText,  // Localized text
+                          style:const TextStyle(
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
                           ),
