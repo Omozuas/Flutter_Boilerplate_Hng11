@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
@@ -166,12 +167,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: const ChevronBackButton(),
         title: Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -267,6 +263,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       controller: newPasswordController,
                       focusNode: newPasswordFocusNode,
                       obscureText: !newPasswordVissible,
+                      borderRadius: 8.r,
                       validator: Validators.passwordValidator,
                       onchanged: (String? value) {
                         checkPasswordStrength(value!);

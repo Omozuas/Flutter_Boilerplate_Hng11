@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,11 +30,11 @@ class _LanguageAndRegionScreenState
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
-          selectedRegion == null ||
+          // selectedRegion == null ||
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = AppLocalizations.of(context)!.settings;
+        feedBackMessage = context.text.settings;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -46,7 +47,7 @@ class _LanguageAndRegionScreenState
 
   void unsavedChanges() {
     if (selectedLanguage != null ||
-        selectedRegion != null ||
+        // selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
         feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
