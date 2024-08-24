@@ -22,7 +22,8 @@ class SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       horizontalTitleGap: 3.w,
-      contentPadding: EdgeInsets.all(0.h),
+      minTileHeight: 50.h,
+      contentPadding: EdgeInsets.zero,
       leading: leading ??
           SvgPicture.asset(
             leadingIcon,
@@ -33,8 +34,10 @@ class SettingsTile extends StatelessWidget {
           ),
       title: Text(
         title,
-        style: CustomTextStyles.productTextBody2Black
-            .copyWith(fontWeight: FontWeight.w400),
+        style: CustomTextStyles.productTextBody2Black.copyWith(
+          fontWeight: FontWeight.w400,
+          color: GlobalColors.darkOne,
+        ),
       ),
       trailing: trailing ??
           const Icon(

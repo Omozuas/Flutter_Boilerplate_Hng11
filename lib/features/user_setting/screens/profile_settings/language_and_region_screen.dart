@@ -107,9 +107,9 @@ class _LanguageAndRegionScreenState
               AppLocalizations.of(context)!
                   .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w400, fontSize: 12.sp),
+                  fontWeight: FontWeight.w400, fontSize: 14.sp),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 25.h),
             CustomDropdownButton(
               items: const [
                 'Italiano (Italian)',
@@ -124,7 +124,8 @@ class _LanguageAndRegionScreenState
                 'العربية (Arabic)'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 45.h,
+              textPadding: const EdgeInsets.only(left: 10, right: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -140,7 +141,7 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 'France',
@@ -154,7 +155,8 @@ class _LanguageAndRegionScreenState
                 'United Arab Emirates'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 45.h,
+              textPadding: const EdgeInsets.only(left: 10, right: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -170,7 +172,7 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 '(UTC+00:00) Co-ord',
@@ -179,7 +181,8 @@ class _LanguageAndRegionScreenState
                 // Add other time zones here
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 45.h,
+              textPadding: const EdgeInsets.only(left: 10, right: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,

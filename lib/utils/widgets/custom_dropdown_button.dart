@@ -57,7 +57,7 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
         ),
         child: DropdownButtonHideUnderline(
           child: Padding(
-            padding: widget.textPadding ?? const EdgeInsets.all(8.0),
+            padding: widget.textPadding ?? EdgeInsets.zero,
             child: DropdownButton<String>(
               style: widget.valueStyle,
               value: _selectedItem,
