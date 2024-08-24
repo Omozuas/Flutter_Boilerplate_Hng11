@@ -103,16 +103,16 @@ class _LanguageAndRegionScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15.h),
             Text(
               AppLocalizations.of(context)!
                   .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400, fontSize: 14.sp),
             ),
-            SizedBox(height: 25.h),
+            SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
-                //'Italiano (Italian)',
                 'Español (Spanish)',
                 // 'Français (French)',
                 // 'Deutsch (German)',
@@ -124,8 +124,9 @@ class _LanguageAndRegionScreenState
                 // 'العربية (Arabic)'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 45.h,
-              textPadding: const EdgeInsets.only(left: 10, right: 10),
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -155,8 +156,9 @@ class _LanguageAndRegionScreenState
                 'United Arab Emirates'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 45.h,
-              textPadding: const EdgeInsets.only(left: 10, right: 10),
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -181,8 +183,9 @@ class _LanguageAndRegionScreenState
                 // Add other time zones here
               ],
               borderColor: GlobalColors.borderColor,
-              height: 45.h,
-              textPadding: const EdgeInsets.only(left: 10, right: 10),
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -213,7 +216,7 @@ class _LanguageAndRegionScreenState
                     text: AppLocalizations.of(context)!.save,
                     height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 65.w,
+                    width: 75.w,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
@@ -222,7 +225,7 @@ class _LanguageAndRegionScreenState
                     text: AppLocalizations.of(context)!.cancel,
                     height: 40.h,
                     containerColor: GlobalColors.white,
-                    width: 65.w,
+                    width: 75.w,
                     textColor: GlobalColors.darkOne),
               ],
             ),

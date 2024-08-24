@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -44,13 +45,7 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen> {
             color: GlobalColors.iconColor,
           ),
         ),
-        // leading: InkWell(
-        //   onTap: () {
-        //     // context.pop();
-        //     ref.read(profileProvider.notifier).getSubscription();
-        //   },
-        //   child: const Icon(Icons.arrow_back_ios_new),
-        // ),
+        leading: const ChevronBackButton(),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator.adaptive())
