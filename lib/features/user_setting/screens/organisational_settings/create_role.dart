@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.d
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_search_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CreateRole extends StatefulWidget {
   const CreateRole({super.key});
 

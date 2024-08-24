@@ -98,8 +98,7 @@ class DioProvider {
     final formData = FormData.fromMap(data);
     var response = await _dio.put(
       path,
-      data:
-      formData,
+      data: formData,
       options: options,
     );
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,19 +9,17 @@ import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
-import '../../../../utils/widgets/custom_social_textfield.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
+import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/custom_api_error.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
-import '../../widgets/pronouns_textfield_dropdown.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
-  const EditProfileScreen({super.key,  this.user});
+  const EditProfileScreen({super.key, this.user});
   final UserModel? user;
 
   @override
@@ -36,14 +33,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   late final TextEditingController _firstnameController;
   late final TextEditingController _lastnameController;
   late final TextEditingController _usernameController;
-  late final TextEditingController _jobTitleController;
-  late final TextEditingController _departmentController;
   late final TextEditingController _bioController;
-  late final TextEditingController _xController;
-  late final TextEditingController _instagramController;
-  late final TextEditingController _linkedInController;
-
-  Pronouns? _pronouns;
 
   @override
   void initState() {
@@ -53,15 +43,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _firstnameController = TextEditingController(text: fullname.$1);
     _lastnameController = TextEditingController(text: fullname.$2);
     _usernameController = TextEditingController(text: profile?.username);
-    _jobTitleController = TextEditingController(text: profile?.jobTitle);
-    _departmentController = TextEditingController(text: profile?.department);
     _bioController = TextEditingController(text: profile?.bio);
-    _xController = TextEditingController(text: profile?.twitterLink);
-    _instagramController = TextEditingController(text: profile?.facebookLink);
-    _linkedInController = TextEditingController(text: profile?.linkedInLink);
-    _pronouns = profile?.pronoun == null
-        ? null
-        : Pronouns.fromString(profile!.pronoun!);
   }
 
   @override
@@ -69,12 +51,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _firstnameController.dispose();
     _lastnameController.dispose();
     _usernameController.dispose();
-    _jobTitleController.dispose();
-    _departmentController.dispose();
     _bioController.dispose();
-    _xController.dispose();
-    _instagramController.dispose();
-    _linkedInController.dispose();
     super.dispose();
   }
 
@@ -120,15 +97,14 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProfileAvatarTile(
-                  onTap: () {},
-                ),
+                ProfileAvatarTile(onTap: () {}),
                 SizedBox(height: 28.w),
                 Text(
                   AppLocalizations.of(context)!.personalDetails,
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
+                SizedBox(height: 24.w),
                 CustomTextField(
                   label: AppLocalizations.of(context)!.firstName,
                   controller: _firstnameController,
@@ -144,29 +120,17 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   controller: _usernameController,
                   hintText: AppLocalizations.of(context)!.enterUsername,
                 ),
-                PronounsTextfieldDropdown(
-                  initialValue: _pronouns,
-                  onChanged: (pronoun) {
-                    _pronouns = pronoun;
-                  },
-                ),
-                SizedBox(height: 16.h),
-                CustomTextField(
-                  label: AppLocalizations.of(context)!.yourJobTitle,
-                  controller: _jobTitleController,
-                  hintText: AppLocalizations.of(context)!.enterJobTitle,
-                ),
-                CustomTextField(
-                  label: AppLocalizations.of(context)!.departmentOrTeam,
-                  controller: _departmentController,
-                  hintText: AppLocalizations.of(context)!.enterDepartmentOrTeam,
-                ),
+                // SizedBox(height: 16.h),
                 CustomExpansionTile(
+                  space: 0,
+                  horizontalTitlePadding: EdgeInsets.zero,
+                  horizontalChildrenPadding: EdgeInsets.zero,
+                  verticalChildrenPadding: EdgeInsets.zero,
+                  verticalTitlePadding: EdgeInsets.zero,
                   title: AppLocalizations.of(context)!.bio,
                   content: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomTextField(
                           controller: _bioController,
@@ -176,6 +140,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         ),
                         Text(
                           AppLocalizations.of(context)!.maximumOf64Character,
+                          textAlign: TextAlign.start,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             color: const Color(0xFF64748B),
@@ -185,68 +151,35 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     ),
                   ],
                 ),
-                CustomExpansionTile(
-                  title: AppLocalizations.of(context)!.connectSocials,
-                  content: [
-                    SocialMediaInput(
-                      controller: _xController,
-                      hintText: 'Add X link',
-                      prefixIcon: SvgPicture.asset(
-                        'assets/images/svg/account_settings/x_logo.svg',
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ),
-                    SocialMediaInput(
-                      controller: _instagramController,
-                      hintText: 'Add Instagram link',
-                      prefixIcon: SvgPicture.asset(
-                        'assets/images/svg/account_settings/instagram.svg',
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ),
-                    SocialMediaInput(
-                      controller: _linkedInController,
-                      hintText: 'Add Linkedin link',
-                      prefixIcon: SvgPicture.asset(
-                        'assets/images/svg/account_settings/linkedin.svg',
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 20.h,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(18.sp),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          borderColor: GlobalColors.lightGray,
-                          text: AppLocalizations.of(context)!.cancel,
-                          height: 40.h,
-                          containerColor: Colors.white,
-                          width: 50.w,
-                          textColor: const Color(0xFF0F172A),
-                          onTap: context.pop,
-                        ),
-                      ),
-                      SizedBox(width: 12.h),
-                      Expanded(
-                        child: CustomButton(
-                            borderColor: GlobalColors.orange,
-                            text: AppLocalizations.of(context)!.saveChanges,
-                            height: 40.h,
-                            containerColor: GlobalColors.orange,
-                            width: 50.w,
-                            textColor: const Color(0xFFFAFAFA),
-                            loading: isLoading,
-                            onTap: () {
-                              if (isLoading) return;
-                              update(widget.user);
-                            }),
-                      ),
-                    ],
-                  ),
+                CustomButton(
+                  borderColor: GlobalColors.orange,
+                  text: AppLocalizations.of(context)!.saveChanges,
+                  height: 40.h,
+                  containerColor: GlobalColors.orange,
+                  width: double.infinity,
+                  textColor: const Color(0xFFFAFAFA),
+                  loading: isLoading,
+                  onTap: () {
+                    if (isLoading) return;
+                    update(widget.user);
+                  },
                 ),
+                SizedBox(height: 16.h),
+                CustomButton(
+                  borderColor: GlobalColors.lightGray,
+                  text: AppLocalizations.of(context)!.cancel,
+                  height: 40.h,
+                  containerColor: Colors.white,
+                  width: double.infinity,
+                  textColor: const Color(0xFF0F172A),
+                  onTap: context.pop,
+                ),
+                SizedBox(
+                  height: 10.h,
+                )
               ],
             ),
           ),
@@ -257,33 +190,22 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   Future<void> update(UserModel? user) async {
     final pickedImage = ref.read(profileProvider).pickedImage;
-    if (_usernameController.text.isEmpty &&
-        _jobTitleController.text.isEmpty &&
-        _departmentController.text.isEmpty &&
+    if (_firstnameController.text.isEmpty &&
+        _lastnameController.text.isEmpty &&
+        _usernameController.text.isEmpty &&
         _bioController.text.isEmpty &&
-        _xController.text.isEmpty &&
-        _pronouns == null &&
-        pickedImage == null &&
-        _instagramController.text.isEmpty &&
-        _linkedInController.text.isEmpty) {
+        pickedImage == null) {
       return;
     }
     if (user == null) return;
 
     final profile = UserProfile(
       userID: user.id,
-      firstname:_firstnameController.text,
+      firstname: _firstnameController.text,
       lastname: _lastnameController.text,
-      phoneNumber: user.profile?.phoneNumber,
       avatarURL: user.profile?.avatarURL,
       username: _usernameController.text,
-      pronoun: _pronouns?.title,
-      jobTitle: _jobTitleController.text,
       bio: _bioController.text,
-      department: _departmentController.text,
-      facebookLink: _instagramController.text,
-      twitterLink: _xController.text,
-      linkedInLink: _linkedInController.text,
     );
     try {
       await ref.read(profileProvider.notifier).updateProfile(
@@ -306,7 +228,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       context.pop();
     } on CustomApiError catch (e) {
       showSnackBar(e.message);
-    }catch(e){
+    } catch (e) {
       showSnackBar(AppLocalizations.of(context)!.errorOccurred);
     }
   }

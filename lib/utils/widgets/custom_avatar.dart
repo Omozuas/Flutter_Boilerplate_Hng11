@@ -29,7 +29,8 @@ class CustomAvatar extends StatelessWidget {
         }));
       },
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,  // Center align image with text
+        crossAxisAlignment:
+            CrossAxisAlignment.center, // Center align image with text
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           CircleAvatar(
@@ -45,22 +46,24 @@ class CustomAvatar extends StatelessWidget {
             children: [
               Text(
                 "${memberDetail.firstName ?? "Member Name"} ${memberDetail.lastName ?? ""}",
-                style: profileNameStyle ?? GoogleFonts.inter(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  height: 16.94 / 14,
-                  color: const Color(0xff525252),
-                ),
+                style: profileNameStyle ??
+                    GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      height: 16.94 / 14,
+                      color: const Color(0xff525252),
+                    ),
               ),
               const SizedBox(height: 3.0),
               Text(
                 memberDetail.email ?? "memberEmail@gmail.com",
-                style: profileEmailStyle ?? GoogleFonts.inter(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  height: 14.52 / 12,
-                  color: const Color(0xff525252),
-                ),
+                style: profileEmailStyle ??
+                    GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      height: 14.52 / 12,
+                      color: const Color(0xff525252),
+                    ),
               ),
             ],
           ),

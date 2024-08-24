@@ -11,17 +11,15 @@ class LoadingNotificationListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: 3,
-        itemBuilder: (_, index){
+        itemBuilder: (_, index) {
           return Container(
             height: 48.h,
             margin: 8.h.padV,
             width: width(context),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
-                child: const ShimmerCard()
-            ),
+                child: const ShimmerCard()),
           );
-        }
-    );
+        });
   }
 }

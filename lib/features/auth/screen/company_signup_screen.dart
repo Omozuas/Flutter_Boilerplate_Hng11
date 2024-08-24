@@ -97,7 +97,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                             validator: (value) {
                               final emailRegex = RegExp(
                                   r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                              if (value == null || value.isEmpty || !emailRegex.hasMatch(value)) {
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  !emailRegex.hasMatch(value)) {
                                 return localizations.pleaseEnterValidEmail;
                               }
                               return null;
@@ -305,7 +307,8 @@ class CompanySignUpScreen extends ConsumerWidget {
                               if (_companyFormKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
                                 // Submission async function here
-                                ref.read(loadingProvider.notifier).state = false;
+                                ref.read(loadingProvider.notifier).state =
+                                    false;
                               }
                             },
                             loading: isLoading,
