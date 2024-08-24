@@ -144,10 +144,8 @@ class SettingsApi {
 
   Future<String> generateInviteLink({required String orgId}) async {
     try {
-      final response = await dio.get(
-        '/organisations/$orgId/invites',
-      );
-      print(response);
+      final response =
+      await dio.get('organisations/$orgId/invites');
       return response?.data['data']['invite_link'];
     } catch (e) {
       rethrow;
