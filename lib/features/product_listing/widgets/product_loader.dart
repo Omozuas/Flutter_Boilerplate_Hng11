@@ -18,7 +18,7 @@ class ProductLoader extends StatelessWidget {
         itemBuilder: (_, index){
           return Container(
             height: GlobalScreenSize.getScreenHeight(context) * .156,
-            margin: 16.w.padH,
+            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             width: GlobalScreenSize.getScreenWidth(context),
             padding: 10.w.padA,
             decoration: BoxDecoration(
@@ -41,6 +41,7 @@ class ProductLoader extends StatelessWidget {
                       height: 104.h,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
