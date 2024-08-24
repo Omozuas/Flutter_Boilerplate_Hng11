@@ -4,6 +4,8 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 
 class OrderTile extends StatelessWidget {
   const OrderTile({super.key, required this.order});
@@ -42,7 +44,7 @@ class OrderTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Order#: ${order.number}',
+                        '${context.orderNumberText} ${order.number}',
                         style: GoogleFonts.inter(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
