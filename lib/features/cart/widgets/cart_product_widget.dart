@@ -52,31 +52,43 @@ class CartWidget extends StatelessWidget {
           child: Row(
             children: [
               Builder(
-                builder:(context){
+                builder: (context) {
                   return Container(
                     height: 131.sp,
                     width: 173.sp,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
-                        image:  image.startsWith("http")?  DecorationImage(
-                            image: CachedNetworkImageProvider(image)
-                            ,
-                            fit: BoxFit.cover):null),
+                        image: image.startsWith("http")
+                            ? DecorationImage(
+                                image: CachedNetworkImageProvider(image),
+                                fit: BoxFit.cover)
+                            : null),
                     child: Container(
-                      child: image.contains("http")? null: image.isValidBase64? Image.memory(
-                        height: 131.h,
-                        width: 173.sp,
-                        fit: BoxFit.cover,
-                        base64Decode(image),
-                          errorBuilder: (context, error, stackTrace) =>
-                              Assets.images.png.productListing.product.image(
-                                height: GlobalScreenSize.getScreenHeight(context) * .135,
-                          )
-                      ): Assets.images.png.productListing.product.image(
-                          height: GlobalScreenSize.getScreenHeight(context) * .135)
-                    ),
+                        child: image.contains("http")
+                            ? null
+                            : image.isValidBase64
+                                ? Image.memory(
+                                    height: 131.h,
+                                    width: 173.sp,
+                                    fit: BoxFit.cover,
+                                    base64Decode(image),
+                                    errorBuilder: (context, error,
+                                            stackTrace) =>
+                                        Assets.images.png.productListing.product
+                                            .image(
+                                          height:
+                                              GlobalScreenSize.getScreenHeight(
+                                                      context) *
+                                                  .135,
+                                        ))
+                                : Assets.images.png.productListing.product
+                                    .image(
+                                        height:
+                                            GlobalScreenSize.getScreenHeight(
+                                                    context) *
+                                                .135)),
                   );
-                } ,
+                },
               ),
               0.w.sbW,
               Expanded(
