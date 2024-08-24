@@ -15,19 +15,21 @@ class CustomButton extends StatelessWidget {
   final Color containerColor, borderColor, textColor;
   final String text;
   final Color? borderColors;
-  final double width, height;
+  final double? width, height;
   final bool loading;
   final Widget? icon;
   final FontWeight? fontWeight;
   final TextStyle? textStyle;
+  final EdgeInsetsGeometry? padding;
   const CustomButton(
       {super.key,
       required this.onTap,
       required this.borderColor,
       required this.text,
-      required this.height,
+      this.height,
       required this.containerColor,
-      required this.width,
+      this.width,
+      this.padding,
       required this.textColor,
       this.loading = false,
       this.fontWeight,
@@ -44,6 +46,7 @@ class CustomButton extends StatelessWidget {
         child: Container(
           width: width,
           height: height,
+          padding: padding,
           decoration: BoxDecoration(
               color: containerColor == Colors.transparent
                   ? Colors.transparent
