@@ -57,8 +57,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  #flutter_gen: ^5.6.0
-  #flutter_gen_runner:   // I had to comment out this as it is conflicting with l10n for localization
+  # flutter_gen: ^5.6.0
+  # flutter_gen_runner:  
   flutter_launcher_icons: ^0.13.1
   build_runner: ^2.4.11
   json_serializable: ^6.8.0

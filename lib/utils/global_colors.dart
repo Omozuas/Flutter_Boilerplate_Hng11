@@ -13,6 +13,7 @@ class GlobalColors {
   static HexColor darkTwo = HexColor('#0F172A');
   static HexColor blackColor = HexColor('#000000');
   static HexColor black200Color = HexColor('#09090B');
+  static HexColor black300Color = HexColor('#020617');
   static HexColor gray200Color = HexColor('#353535');
   static HexColor gray300Color = HexColor('#6E7079');
   static HexColor gray400Color = HexColor('#475467');
@@ -31,12 +32,20 @@ class GlobalColors {
   static HexColor red = HexColor('#E00414');
   static HexColor hotred = HexColor('#DC2626');
   static HexColor green = HexColor('#10AF20');
+  static HexColor green100 = HexColor('#16BA51');
   static HexColor white = HexColor('#FFFFFF');
   static HexColor dialogDesc = HexColor('#64748B');
   static HexColor grays = HexColor('#525252');
+  static HexColor gray200 = HexColor('#D9D9D9');
   static HexColor lightGrey = HexColor('#94A3B8');
+  static HexColor lightGrey200 = HexColor('#DDDDDD');
+  static HexColor lightBlue = HexColor('#ACCCEC');
 
   static HexColor mutedTextColor = HexColor('#71717A');
+  static HexColor blueTextColor = HexColor('#0013C1');
+  static HexColor lightBlueTextColor = HexColor('#1976D2');
+  static HexColor lightBlueTextColor100 = HexColor('#93D1FC');
+  static HexColor greenTextColor = HexColor('#086E31');
   static HexColor zinc50 = HexColor("#FAFAFA");
   static HexColor dark2 = HexColor("#0A0A0A");
   static HexColor verified = HexColor("#6DC347");
