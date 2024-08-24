@@ -116,7 +116,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
     ref.read(addProductProviderProvider.notifier).addProduct(
           data: productData,
           onError: () {
-            failedSnackBar('An Error occured');
+            failedSnackBar(context.anErrorOccured);
           },
           onSuccess: () {
             showSuccessDialog();
@@ -133,7 +133,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   void failedSnackBar(Object e) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Failed to add product: $e'),
+        content: Text('${context.addProductFailure}: $e'),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -141,9 +141,9 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
 
   void showEmptyStateSnackbar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Please Complete form fill'),
-        duration: Duration(seconds: 2),
+      SnackBar(
+        content: Text(context.productFormIncomplete),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -153,14 +153,14 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Success'),
-          content: const Text('Product added successfully'),
+          title: Text(context.success),
+          content: Text(context.addProductSuccessDescription),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Dismiss the dialog
               },
-              child: const Text('OK'),
+              child: Text(context.ok),
             ),
           ],
         );
@@ -198,7 +198,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              compulsoryTitle('Title'),
+                              compulsoryTitle(context.title),
                               6.h.sbH,
                               ProductNameFormField(
                                 controller: productNameController,
@@ -220,7 +220,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             SizedBox(
                               width: 379.w,
                               child: Text(
-                                'Category',
+                                context.category,
                                 style: CustomTextStyle.medium(
                                   color: GlobalColors.dark2,
                                   fontSize: 14.sp,
@@ -252,7 +252,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                               SizedBox(
                                 width: 379.w,
                                 child: Text(
-                                  'Description',
+                                  context.description,
                                   style: CustomTextStyle.medium(
                                     color: GlobalColors.dark2,
                                     fontSize: 14.sp,
@@ -272,7 +272,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                               SizedBox(
                                 width: 379.w,
                                 child: Text(
-                                  'Maximum of 72 characters',
+                                  context.descriptionFieldHint,
                                   style: CustomTextStyle.medium(
                                     color: GlobalColors.lightGrey,
                                     fontSize: 14.sp,
@@ -290,7 +290,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                           children: [
                             SizedBox(
                               width: 379.w,
-                              child: compulsoryTitle('Standard Price'),
+                              child: compulsoryTitle(context.standardPrice),
                             ),
                             6.h.sbH,
                             ProductPriceFormField(
@@ -313,7 +313,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                           children: [
                             SizedBox(
                               width: 379.w,
-                              child: compulsoryTitle('Quantity'),
+                              child: compulsoryTitle(context.quantity),
                             ),
                             6.h.sbH,
 
@@ -373,7 +373,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                                     context.pop();
                                   },
                             borderColor: GlobalColors.lightGray,
-                            text: 'Cancel',
+                            text: context.cancel,
                             height: 40.h,
                             containerColor: GlobalColors.white,
                             width: 172.5.w,
@@ -389,7 +389,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             onTap: state.isLoading ? () {} : addProduct,
                             // () {},
                             borderColor: GlobalColors.white,
-                            text: 'Add',
+                            text: context.add,
                             loading: state.isLoading,
                             height: 40.h,
                             containerColor: GlobalColors.orange,

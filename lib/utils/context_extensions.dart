@@ -20,4 +20,18 @@ extension Translation on BuildContext {
   String get editProfile => 'Edit Profile';
   String get notification => 'Notification';
   String get orderDetails => 'Order Details';
+  String get addProductFailure => 'Failed to add product:';
+  String get productFormIncomplete => 'Please Complete form fill';
+  String get ok => 'Ok';
+  String get success => 'Success';
+  String get addProductSuccessDescription => 'Product added successfully';
+  String get anErrorOccured => 'An Error occured';
+  String get title => 'Title';
+  String get category => 'Category';
+  String get description => 'Description';
+  String get descriptionFieldHint => 'Maximum of 72 characters';
+  String get standardPrice => 'Standard Price';
+  String get quantity => 'Quantity';
+  String get cancel => 'Cancel';
+  String get add => 'Add';
 }
