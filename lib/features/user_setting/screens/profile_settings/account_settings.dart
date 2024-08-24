@@ -55,12 +55,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: SingleChildScrollView(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                    const EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 12),
+                      padding: const EdgeInsets.only(left: 13),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -95,6 +95,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           ),
                         ],
                       ),
+                    ),
+                    SizedBox(
+                      height: 6.h,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
