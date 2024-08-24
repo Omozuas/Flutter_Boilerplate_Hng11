@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../gen/assets.gen.dart';
+
 class OrderTile extends StatelessWidget {
   const OrderTile({super.key, required this.order});
 
@@ -63,8 +65,7 @@ class OrderTile extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(
-                          'assets/images/svg/product_listing/delivery.svg'),
+                      Assets.images.svg.productListing.van.svg(),
                       SizedBox(width: 6.w),
                       Text(
                         order.deliveryText,

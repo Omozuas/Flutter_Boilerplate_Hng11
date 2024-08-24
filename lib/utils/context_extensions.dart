@@ -72,6 +72,7 @@ extension Translation on BuildContext {
   String get quantity => 'Quantity';
   String get cancel => 'Cancel';
   String get add => 'Add';
+  String get noResultFound => 'No Result Found';
 
   ///Auth texts
   String get continueWithGoogle => "Continue with Google";
