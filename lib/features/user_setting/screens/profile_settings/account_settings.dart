@@ -42,6 +42,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: context.text.settings,
+        showDivider: false,
       ),
       body: asyncUser.maybeWhen(
         skipError: true,
