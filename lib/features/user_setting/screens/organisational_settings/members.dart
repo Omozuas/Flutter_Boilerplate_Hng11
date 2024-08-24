@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
-// import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/services.dart';
 
 import '../../../../utils/widgets/custom_avatar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../provider/profile_provider.dart';
 
 class MembersSettings extends ConsumerStatefulWidget {
@@ -30,30 +28,45 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _membersController = TextEditingController();
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    _membersController.dispose();
-    super.dispose();
-  }
-
   List<Members> organisationMembers = [
-    Members(),
+    /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
+    Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
   ];
+  List<Members> filteredMembers = [];
+  TextEditingController searchController = TextEditingController();
   String inviteLink = ''; // Variable to store the invitation link
 
   @override
   void initState() {
     super.initState();
+    filteredMembers = organisationMembers;
+    searchController.addListener(filterMembers);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final org = ref.watch(getOrganisationProvider);
-      ref
-          .read(profileProvider.notifier)
-          .getOrganisationMembers(orgId: org.organisationId.toString());
-      Future(() {
-        fetchLinkFromAPI();
-      });
+      ref.read(profileProvider.notifier).getOrganisationMembers();
+      ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
     });
+  }
+
+  void filterMembers() {
+    final filter = searchController.text.toLowerCase();
+    setState(() {
+      filteredMembers = organisationMembers.where((member) {
+        final firstName = (member.firstName ?? '').toLowerCase();
+        final lastName = (member.lastName ?? '').toLowerCase();
+        final email = (member.email ?? '').toLowerCase();
+        return firstName.contains(filter) ||
+            lastName.contains(filter) ||
+            email.contains(filter);
+      }).toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    _scrollController.dispose();
+    _membersController.dispose();
+    super.dispose();
   }
 
   Future<Object> fetchLinkFromAPI() async {
@@ -77,7 +90,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
       CustomToast(
         message: message,
         backgroundColor: GlobalColors.toastBgSurface2,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: GlobalColors.green, width: 2),
       ),
     );
@@ -116,17 +129,13 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               SizedBox(
                 height: 39.h,
                 width: 270.w,
-                child: Text(AppLocalizations.of(context)!.inviteLink,
-                    style: CustomTextStyle.bold(
-                      fontSize: 14.sp,
-                      color: GlobalColors.integrationTextColor,
-                    )
-                    // TextStyle(
-                    //     fontWeight: FontWeight.w700,
-                    //     height: 16.94 / 14,
-                    //     fontSize: 14,
-                    //     color: GlobalColors.integrationTextColor),
-                    ),
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLink,
+                  style: CustomTextStyle.bold(
+                    fontSize: 14.sp,
+                    color: GlobalColors.integrationTextColor,
+                  ),
+                ),
               ),
               SizedBox(
                 width: 276.w,
@@ -146,7 +155,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 width: double.infinity,
                 padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(4.r),
                     border: Border.all(
                         color: GlobalColors.borderColor, width: 0.7)),
                 child: Row(
@@ -175,9 +184,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                         ),
                         loading: () => Center(
                           child: SizedBox(
-                              height: 10.h,
-                              width: 10.h,
-                              child: CircularProgressIndicator.adaptive()),
+                              height: 15.h,
+                              width: 15.h,
+                              child:
+                                  const CircularProgressIndicator.adaptive()),
                         ),
                         error: (e, st) {
                           return Center(
@@ -234,7 +244,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               Divider(
                 thickness: 1,
@@ -244,7 +254,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 24,
               ),
               CustomTextField(
-                controller: _membersController,
+                controller: searchController,
                 hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                 hintTextStyle: CustomTextStyle.regular(
                   fontSize: 14.sp,
@@ -259,65 +269,49 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fit: BoxFit.contain,
                   ),
                 ),
-
-                // TextField(
-                //   style: GoogleFonts.inter(
-                //     fontWeight: FontWeight.w400,
-                //     fontSize: 15,
-                //   ),
-                //   decoration: InputDecoration(
-                //     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
-                //     prefixIcon: Padding(
-                //       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                //       child: SvgPicture.asset(
-                //         "assets/images/svg/searchIcon.svg",
-                //         fit: BoxFit.contain,
-                //       ),
-                //       // Icon(Icons.search, color: GlobalColors.gray200Color),
-                //     ),
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(8),
-                //       borderSide: BorderSide(
-                //         color: GlobalColors.borderColor,
-                //       ),
-                //     ),
-                //     prefixIconConstraints: const BoxConstraints(),
-                //     contentPadding: const EdgeInsets.only(top: 8.0),
-                //   ),
-                // ),
               ),
               SizedBox(
                 height: 24.h,
               ),
-              // const Divider(),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: 5.h,
               ),
               asyncMembersValue.when(
-                  loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
-                  error: (e, st) {
-                    return Center(
-                      child: Text(
-                          AppLocalizations.of(context)!.errorFetchingMembers),
-                    );
-                  },
-                  data: (members) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomAvatar(
-                          memberDetail:
-                              members?[index] ?? organisationMembers[index],
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (e, st) {
+                  return Center(
+                    child: Text(
+                        AppLocalizations.of(context)!.errorFetchingMembers),
+                  );
+                },
+                data: (members) {
+                  if (organisationMembers.isEmpty) {
+                    setState(() {
+                      organisationMembers = members ?? [];
+                      filteredMembers = organisationMembers;
+                    });
+                  }
+
+                  return filteredMembers.isEmpty
+                      ? Center(
+                          child: Text(
+                              '${context.noResultFound} "${searchController.text}"'))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomAvatar(
+                              memberDetail: filteredMembers[index],
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
+                          itemCount: filteredMembers.length,
                         );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const Divider();
-                      },
-                      itemCount: members?.length ?? organisationMembers.length,
-                    );
-                  })
+                },
+              )
             ])),
       ),
     );
