@@ -7,6 +7,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
@@ -55,7 +56,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 10.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -71,19 +73,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                   user?.profile?.username ??
                                       user?.fullname ??
                                       '',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    color: Color(0xff0A0A0A),
+                                  style: CustomTextStyle.semiBold(
+                                    fontSize: 16.sp,
+                                    color: const Color(0xff0A0A0A),
                                   ),
                                 ),
                                 const SizedBox(height: 3),
                                 Text(
                                   user?.email ?? '',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Color(0xff525252),
+                                  style: CustomTextStyle.regular(
+                                    fontSize: 14.sp,
+                                    color: const Color(0xff525252),
                                   ),
                                 ),
                               ],
@@ -101,9 +101,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         SizedBox(height: 10.0.h),
                         Text(
                           context.text.profileSettings,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          style: CustomTextStyle.semiBold(
+                            fontSize: 16.sp,
                             color: GlobalColors.iconColor,
                           ),
                         ),
@@ -142,9 +141,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         SizedBox(height: 10.h),
                         Text(
                           context.text.organizationSettings,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          style: CustomTextStyle.semiBold(
+                            fontSize: 16.sp,
                             color: GlobalColors.iconColor,
                           ),
                         ),

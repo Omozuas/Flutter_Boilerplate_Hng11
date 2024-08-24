@@ -20,7 +20,8 @@ class CustomAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      splashColor: Colors.transparent,
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return MemberProfileScreen(

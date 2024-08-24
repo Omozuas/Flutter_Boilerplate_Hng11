@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../auth/providers/language_provider.dart';
+
 
 class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
@@ -29,11 +31,11 @@ class _LanguageAndRegionScreenState
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
-          selectedRegion == null ||
+          // selectedRegion == null ||
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = AppLocalizations.of(context)!.settings;
+        feedBackMessage = context.text.settings;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -46,7 +48,7 @@ class _LanguageAndRegionScreenState
 
   void unsavedChanges() {
     if (selectedLanguage != null ||
-        selectedRegion != null ||
+        // selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
         feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
@@ -105,9 +107,8 @@ class _LanguageAndRegionScreenState
             SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
-                // 'Italiano (Italian)',
                 'Español (Spanish)',
-                // 'Français (French)',
+                 'Français (French)',
                 // 'Deutsch (German)',
                 'English',
                 // '日本語 (Japanese)',
@@ -123,7 +124,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Language',
+              placeholder: context.language,
               onChanged: (value) {
                 setState(() {
                   selectedLanguage = value;
@@ -155,7 +156,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Region',
+              placeholder: context.region,
               onChanged: (value) {
                 setState(() {
                   selectedRegion = value;
@@ -182,7 +183,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Time-Zone',
+              placeholder: context.timeZone,
               onChanged: (value) {
                 setState(() {
                   selectedTimeZone = value;
@@ -207,18 +208,22 @@ class _LanguageAndRegionScreenState
                     onTap: validateSelections,
                     borderColor: GlobalColors.orange,
                     text: AppLocalizations.of(context)!.save,
-                    height: 40.h,
+                    // height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 75.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    // width: 80.w,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: AppLocalizations.of(context)!.cancel,
-                    height: 40.h,
+                    // height: 40.h,
                     containerColor: GlobalColors.white,
-                    width: 75.w,
+                    // width: 80.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     textColor: GlobalColors.darkOne),
               ],
             ),
