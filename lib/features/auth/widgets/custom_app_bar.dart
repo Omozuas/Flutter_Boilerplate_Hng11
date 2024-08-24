@@ -13,15 +13,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      titleSpacing: 0,
-      leading: _buildBackButton(context),
-      title: title,
-      bottom: PreferredSize(
-        preferredSize:
-            const Size.fromHeight(1.0), // Adjust the height of the divider
-        child: Divider(
-          color: GlobalColors.diverColor,
+    return Padding(
+      padding: const EdgeInsets.only(top: 4.0),
+      child: AppBar(
+        titleSpacing: 0,
+        leading: _buildBackButton(context),
+        title: title,
+        bottom: PreferredSize(
+          preferredSize:
+              const Size.fromHeight(1.0), // Adjust the height of the divider
+          child: Divider(
+            color: GlobalColors.diverColor,
+          ),
         ),
       ),
     );
@@ -29,19 +32,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget? _buildBackButton(BuildContext context) {
     if (onBack != null) {
-      return ChevronBackButton(onBack: onBack);
+      return ChevronBackButton(
+        onBack: onBack,
+        includeBottomSpace: !singleLine,
+      );
     }
     final canPop = ModalRoute.of(context)?.canPop;
     if (canPop != null && canPop) {
       return ChevronBackButton(
         onBack: () => Navigator.of(context).pop(),
+        includeBottomSpace: !singleLine,
       );
     }
     return null;
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(singleLine ? kToolbarHeight : 75);
+  Size get preferredSize => Size.fromHeight(singleLine ? kToolbarHeight : 75.h);
 
   CustomAppBar.simpleTitle({
     super.key,
@@ -57,7 +64,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: EdgeInsets.only(
         left: onBack != null ? 0 : 24.0.w,
-        top: 5.h,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
