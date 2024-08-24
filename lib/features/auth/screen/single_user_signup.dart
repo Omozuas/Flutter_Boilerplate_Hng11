@@ -140,7 +140,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       controller: SingleUserSignUpScreen.emailController,
                       hintText: localizations.enterEmail,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v)=>Validators.emailValidator(v,context),
+                      validator: (v) => Validators.emailValidator(v, context),
                     ),
                     PasswordTextField(
                       label: localizations.password,
@@ -198,14 +198,16 @@ class SingleUserSignUpScreen extends ConsumerWidget {
   }
 
   void _handleCreateAccount(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).registerSingleUser({
-      'email': emailController.text.trim().toLowerCase(),
-      'first_name': firstNameController.text,
-      'last_name': lastNameController.text,
-      'password': passwordController.text,
-    }, context,
+    ref.read(authProvider.notifier).registerSingleUser(
+        {
+          'email': emailController.text.trim().toLowerCase(),
+          'first_name': firstNameController.text,
+          'last_name': lastNameController.text,
+          'password': passwordController.text,
+        },
+        context,
         [
-         firstNameController,
+          firstNameController,
           lastNameController,
           passwordController,
           emailController

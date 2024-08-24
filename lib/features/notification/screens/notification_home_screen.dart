@@ -57,9 +57,12 @@ class NotificationHomeScreen extends ConsumerWidget {
                                   fontWeight: FontWeight.w500,
                                   color: GlobalColors.black),
                             ),
-                            if(notificationStateProvider.unReadNotificationCount > 0)
+                            if (notificationStateProvider
+                                    .unReadNotificationCount >
+                                0)
                               NotificationCountCard(
-                                count: notificationStateProvider.unReadNotificationCount,
+                                count: notificationStateProvider
+                                    .unReadNotificationCount,
                               )
                           ],
                         ),
@@ -94,19 +97,19 @@ class NotificationHomeScreen extends ConsumerWidget {
                         const LoadingNotificationListView(),
                         const LoadingNotificationListView(),
                       ]
-                    :
-                    notificationStateProvider.notifications.isEmpty &&
-                    !notificationStateProvider.overViewLoading?
-                      [
-                        const EmptyNotification(),
-                        const EmptyNotification(),
-                      ]
-                    : [
-                      NotificationListView(
-                        notifications: notificationStateProvider.notifications,
-                      ),
-                        const Scaffold(),
-                      ],
+                    : notificationStateProvider.notifications.isEmpty &&
+                            !notificationStateProvider.overViewLoading
+                        ? [
+                            const EmptyNotification(),
+                            const EmptyNotification(),
+                          ]
+                        : [
+                            NotificationListView(
+                              notifications:
+                                  notificationStateProvider.notifications,
+                            ),
+                            const Scaffold(),
+                          ],
               ))
             ],
           ),
@@ -115,7 +118,6 @@ class NotificationHomeScreen extends ConsumerWidget {
     );
   }
 }
-
 
 class EmptyNotification extends StatelessWidget {
   const EmptyNotification({super.key});

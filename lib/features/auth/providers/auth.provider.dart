@@ -88,9 +88,8 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(organisations: state.organisations..add(org));
   }
 
-  Future<void> registerSingleUser(
-      Map<String, dynamic> data, BuildContext context,
-      List<TextEditingController> controllers) async {
+  Future<void> registerSingleUser(Map<String, dynamic> data,
+      BuildContext context, List<TextEditingController> controllers) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
@@ -200,7 +199,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 
   Future<void> login(Map<String, dynamic> data, BuildContext context,
-  List<TextEditingController> controllers,
+      List<TextEditingController> controllers,
       {bool fromLoginScreen = true}) async {
     setNormalButtonLoading = true;
     try {
@@ -235,7 +234,6 @@ class AuthProvider extends StateNotifier<AuthState> {
       //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
-
     }
   }
 

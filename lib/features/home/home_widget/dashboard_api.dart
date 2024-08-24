@@ -44,14 +44,14 @@ class DashboardApi implements DashboardApiContract {
   Future<List<Product>> getAllOrgProducts() async {
     try {
       log('API CALLED');
-      final result =
-      await dioProvider.get(productsForOrganisationEndpoint(orgId: _userService.user.organisations?[0].id??""));
+      final result = await dioProvider.get(productsForOrganisationEndpoint(
+          orgId: _userService.user.organisations?[0].id ?? ""));
 
       final jsonList = result?.data['data'] as List;
       return jsonList
           .map(
             (e) => Product.fromJson(e),
-      )
+          )
           .toList();
     } catch (e) {
       rethrow;

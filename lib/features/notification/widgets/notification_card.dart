@@ -34,7 +34,7 @@ class NotificationCard extends StatelessWidget {
                     children: [
                       // Text("New Notif",
                       //     style: CustomTextStyle.bold(color: Colors.black)),
-                      Text(notification.message??"",
+                      Text(notification.message ?? "",
                           style: CustomTextStyle.regular()),
                     ],
                   )

@@ -86,7 +86,7 @@ class _MainViewState extends State<MainView> {
           : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items:  <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: const Icon(
               NavBar.home,

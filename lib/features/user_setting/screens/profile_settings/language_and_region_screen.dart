@@ -10,7 +10,6 @@ import '../../../../utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../auth/providers/language_provider.dart';
 
-
 class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
@@ -109,7 +108,7 @@ class _LanguageAndRegionScreenState
             CustomDropdownButton(
               items: const [
                 'Español (Spanish)',
-                 'Français (French)',
+                'Français (French)',
                 // 'Deutsch (German)',
                 'English',
                 // '日本語 (Japanese)',

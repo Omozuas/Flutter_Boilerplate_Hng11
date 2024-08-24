@@ -22,7 +22,6 @@ class CustomTextField extends StatelessWidget {
   final Color? borderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
-  
 
   const CustomTextField({
     super.key,
@@ -30,7 +29,8 @@ class CustomTextField extends StatelessWidget {
     this.labelStyle,
     required this.controller,
     this.padding,
-    this.hintText, this.errorText,
+    this.hintText,
+    this.errorText,
     this.hintTextStyle,
     this.keyboardType,
     this.obscureText,
@@ -86,7 +86,6 @@ class CustomTextField extends StatelessWidget {
                   EdgeInsets.symmetric(
                     vertical: 8.h,
                     horizontal: 12.w,
-                  
                   ),
               hintText: hintText,
               errorText: errorText,

@@ -10,14 +10,13 @@ class UserModel {
   final UserProfile? profile;
   final String orgId;
 
-  const UserModel({
-    required this.id,
-    required this.fullname,
-    required this.email,
-    required this.avatarURL,
-    required this.profile,
-    required this.orgId
-  });
+  const UserModel(
+      {required this.id,
+      required this.fullname,
+      required this.email,
+      required this.avatarURL,
+      required this.profile,
+      required this.orgId});
 
   UserModel copyWith({
     String? id,
@@ -46,7 +45,8 @@ class UserModel {
       profile: map['profile'] == null
           ? null
           : UserProfile.fromMap(map['profile'] as Map<String, dynamic>),
-      orgId: map['organisations'] != null && (map['organisations'] as List).isNotEmpty
+      orgId: map['organisations'] != null &&
+              (map['organisations'] as List).isNotEmpty
           ? (map['organisations'][0]['id'] as String)
           : '', // Handle the case where there might be no organisations
     );
