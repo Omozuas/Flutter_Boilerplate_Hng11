@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/subscription_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/recent_transaction_card.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../models/subscription_model.dart';
 
@@ -131,12 +131,7 @@ class SubscriptionCheckout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            context.pop();
-          },
-          child: const Icon(Icons.arrow_back_ios_new),
-        ),
+        leading: const ChevronBackButton(),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
