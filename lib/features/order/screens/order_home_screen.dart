@@ -23,6 +23,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
+
         titleText: context.orders,
         onBack: () {
           context.go(AppRoute.home);
