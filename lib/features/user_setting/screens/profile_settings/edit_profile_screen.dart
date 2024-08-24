@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
-import '../../models/custom_api_error.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
+
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key, this.user});
@@ -80,14 +81,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Edit Profile',
-          style: TextStyle(fontSize: 16),
-        ),
-        leading: const ChevronBackButton(),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.editProfile,
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -151,9 +146,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
+                SizedBox(height: 24.h),
                 CustomButton(
                   borderColor: GlobalColors.orange,
                   text: AppLocalizations.of(context)!.saveChanges,
@@ -208,8 +201,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       bio: _bioController.text,
     );
     try {
-      await ref.read(profileProvider.notifier).updateProfile(
-          email: user.email, profile: profile, image: pickedImage);
+      await ref
+          .read(profileProvider.notifier)
+          .updateProfile(profile: profile, image: pickedImage);
 
       final pUpdater = ref.read(profileProvider).profileUpdater;
       if (pUpdater.hasError) throw pUpdater.error!;
@@ -217,8 +211,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       await showDialog(
         context: context,
         builder: (ctx) => ProfileDialog(
-          title: 'Profile Updated!',
-          description: 'Your profile has been successfully updated.',
+          title: context.profileUpdated,
+          description: context.profileUpdatedMessage,
           onContinue: () {
             Navigator.pop(ctx);
           },
@@ -226,8 +220,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       );
       if (!mounted) return;
       context.pop();
-    } on CustomApiError catch (e) {
-      showSnackBar(e.message);
     } catch (e) {
       showSnackBar(AppLocalizations.of(context)!.errorOccurred);
     }

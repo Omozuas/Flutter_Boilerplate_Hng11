@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>77479405288-aeagqg4lmhgqv6sohvhtds41cht6mje6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.77479405288-aeagqg4lmhgqv6sohvhtds41cht6mje6</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>77479405288-1is47ofk71erssirvmfbe3p4bhodgqr2.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBvbGcLGwdGp3nREmL8JwpmyhIBE7BDd3c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>77479405288</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.flutterBoilerplateHng11</string>
+	<key>PROJECT_ID</key>
+	<string>hng-boilerplate-fecde</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hng-boilerplate-fecde.appspot.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+    	<dict>
+        <key>CFBundleIdentifier</key>
+        <string></string>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string> VALUE OF REVERSED_CLIENT_ID</string>
+        </array>
+    	</dict>
+	</array>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:77479405288:ios:12b59f26323e7b0f380b5d</string>
+</dict>
+</plist>

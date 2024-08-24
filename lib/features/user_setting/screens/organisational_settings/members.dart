@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
@@ -34,7 +35,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(profileProvider).organisationMembers;
+      final org = ref.watch(getOrganisationProvider);
+      ref
+          .read(profileProvider.notifier)
+          .getOrganisationMembers(orgId: org.organisationId.toString());
       Future(() {
         fetchLinkFromAPI();
       });
@@ -45,7 +49,12 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     // Trigger the sendInvite method from ProfileProvider
     await ref
         .read(profileProvider.notifier)
-        .generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
+        .generateInviteLinkFromCurrentUser();
+    // final org = ref.watch(getOrganisationProvider);
+    // await ref
+    //     .read(profileProvider.notifier)
+    //     .generateInviteLink(orgId: org.organisationId.toString());
+
     // Check the inviteResponse state
     final inviteResponse = ref.read(profileProvider).inviteLink;
     return inviteResponse;
@@ -68,21 +77,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          AppLocalizations.of(context)!.members,
-          style: CustomTextStyle.bold(
-            fontSize: 16.sp,
-            color: GlobalColors.iconColor,
-          ),
-
-          // const TextStyle(
-          //   fontSize: 16,
-          //   fontWeight: FontWeight.w700,
-          // ),
-        ),
-        leading: const ChevronBackButton(),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.members,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
