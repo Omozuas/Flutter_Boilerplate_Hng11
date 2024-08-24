@@ -45,7 +45,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                      AppLocalizations.of(context)!.signUp,
+                      localizations.signUp, // Localized text
+
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,

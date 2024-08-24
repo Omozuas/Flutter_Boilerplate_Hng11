@@ -13,8 +13,6 @@ class AppSvgs {
   static String allSub = 'assets/images/svg/all_sub.svg';
   static String activeMembers = 'assets/images/svg/active_members.svg';
   static String totalProducts = 'assets/images/svg/total_product.svg';
-
-
 }
 
 //add_user.svg

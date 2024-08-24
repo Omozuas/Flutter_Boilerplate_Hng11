@@ -33,8 +33,7 @@ class CustomButton extends StatelessWidget {
       this.fontWeight,
       this.borderColors,
       this.textStyle,
-      this.icon
-      });
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,9 @@ class CustomButton extends StatelessWidget {
           width: width,
           height: height,
           decoration: BoxDecoration(
-              color: containerColor == Colors.transparent? Colors.transparent: containerColor.withOpacity(loading ? 0.5 : 1),
+              color: containerColor == Colors.transparent
+                  ? Colors.transparent
+                  : containerColor.withOpacity(loading ? 0.5 : 1),
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(6.r),
               border: Border.all(
@@ -62,31 +63,27 @@ class CustomButton extends StatelessWidget {
                       strokeWidth: 2.w,
                     ),
                   )
-                :
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if(icon != null)
-                  Row(
+                : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      icon!,
-                      7.w.sbW
+                      if (icon != null)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [icon!, 7.w.sbW],
+                        ),
+                      Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: textStyle ??
+                            TextStyle(
+                                fontSize: 14,
+                                color: textColor,
+                                fontWeight: fontWeight ?? FontWeight.w500),
+                      ),
                     ],
                   ),
-                Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: textStyle ??
-                      TextStyle(
-                          fontSize: 14,
-                          color: textColor,
-                          fontWeight: fontWeight ?? FontWeight.w500),
-                ),
-              ],
-            ),
           ),
         ),
       ),
