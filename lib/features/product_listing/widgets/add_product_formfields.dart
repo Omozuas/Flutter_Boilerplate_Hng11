@@ -142,7 +142,7 @@ class ProductPriceFormField extends StatelessWidget {
     // final productPriceController = TextEditingController();
     return SizedBox(
       child: CustomTextField(
-        prefixIcon: const Icon(Icons.search),//TODO: Task 1
+       
         controller: controller,
         keyboardType: TextInputType.number,
         borderColor: GlobalColors.containerBorderColor,
