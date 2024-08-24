@@ -27,6 +27,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       appBar: CustomAppBar(
         onBack: () {},
         title: Row(
@@ -48,6 +49,13 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
             )
           ],
         ),
+=======
+      appBar: CustomAppBar.simpleTitle(
+        titleText: 'Orders',
+        onBack: () {
+          context.go()
+        },
+>>>>>>> 1601975 (include routing to home on back for products and orders page)
       ),
       body: Column(
         children: [
