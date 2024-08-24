@@ -40,11 +40,8 @@ extension Translation on BuildContext {
   String get productDescription => text.productDescription;
   String get addAProduct => text.addAProduct;
   String get orderDetails => text.orderDetails;
-
-  ///Auth texts
-  String get continueWithGoogle => "Continue with Google";
-
-  /// Product texts are below
-  String get description => "Description";
-  String get inStock => "In Stock";
+  String get noResultFound => text.noResultFound;
+  String get continueWithGoogle => text.continueWithGoogle;
+  String get description => text.description;
+  String get inStock => text.inStock;
 }

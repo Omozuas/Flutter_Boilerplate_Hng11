@@ -165,7 +165,7 @@
   "thisMonthSummary": "Résumé de ce mois",
   "totalRevenue": "Revenu total",
   "overview": "Aperçu",
- 
+  "seeMore": "Voir plus",
   "veryGood": "Très bien",
   "good": "Bien",
   "poor": "Médiocre",
@@ -188,7 +188,7 @@
   "deleteMemberButton": "Supprimer le membre",
   "memberRemovedSuccessfullyMessage": "Membre supprimé avec succès",
   "inviteToOrganizationButton": "Inviter dans votre organisation",
-
+  "profileUpdatedMessage": "Profil mis à jour !",
   "profileUpdatedSuccessMessage": "Votre profil a été mis à jour avec succès.",
   "viewAllProducts": "Voir tous les produits",
   "priceRange": "Fourchette de prix",
@@ -232,7 +232,7 @@
 "addXLink": "Ajouter un lien X",
 "addLinkedInLink": "Ajouter un lien LinkedIn",
 "addInstagramLink": "Ajouter un lien Instagram",
-
+"language": "Langue",
 "france": "France",
 "canada": "Canada",
 "unitedKingdom": "Royaume-Uni",
@@ -242,13 +242,14 @@
 "southKorea": "Corée du Sud",
 "russia": "Russie",
 "unitedArabEmirates": "Émirats arabes unis",
-
+"region": "Région",
+"timeZone": "Fuseau horaire",
 "passwordSuccessfully": "Mot de passe mis à jour avec succès",
 "passwordSuccessfullyMessage": "Votre mot de passe a été mis à jour avec succès ! Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
 "resourceNotFound": "La ressource demandée n'a pas été trouvée. Veuillez vérifier l'URL ou contacter le support.",
 "failedToUpdatePassword": "Échec de la mise à jour du mot de passe. Veuillez réessayer.",
 "errorMessage": "Une erreur inattendue s'est produite. Veuillez réessayer.",
-
+"passwordSetting": "Paramètres du mot de passe",
 "updatePasswordEnhanced": "Mettez à jour le mot de passe pour une sécurité renforcée du compte",
 "newPassword": "Nouveau mot de passe",
 "enterNewPassword": "Entrez le nouveau mot de passe",
@@ -272,9 +273,21 @@
 "total": "Total",
 "currentPlan": "Plan actuel",
 "upgrade": "Mettre à niveau",
-
+"somethingWentWrongMessage": "Quelque chose s'est mal passé. Veuillez réessayer.",
+"updateProfileButton": "Mettre à jour le profil",
 "editOrganization": "Modifier l'organisation",
-
+"changePassword": "Changer le mot de passe",
+"createOrganisation": "Créer une organisation",
+"errorFetchingLink": "Une erreur s'est produite lors de la récupération du lien",
+"copyLink": "Lien copié dans le presse-papiers",
+"searchByNameOrMail": "Rechercher par nom ou e-mail",
+"errorFetchingMembers": "Une erreur s'est produite lors de la récupération des membres de l'organisation",
+"memberProfile": "Profil du membre",
+"memberName": "Nom du membre",
+"memberBio": "Bio du membre",
+"editProfile": "Modifier le profil",
+"deleteProfile": "Supprimer le profil",
+"removeMember": "Le membre a été supprimé avec succès",
 "country1": "Allemagne",
 "country2": "Nigeria",
 "country3": "Canada",
@@ -401,10 +414,11 @@
 "removeMember": "Le membre a été supprimé avec succès",
 "signUpText": "S'inscrire",
   "seeMore": "Voir plus",
-
+  "login": "Se connecter",
+  "editProfile": "Modifier le profil",
   "profileUpdated": "Profil mis à jour !",
   "profileUpdatedMessage": "Votre profil a été mis à jour avec succès.",
-
+  "notification": "Notification",
   "passwordUpdated": "Mot de passe mis à jour avec succès",
   "passwordUpdatedMessage": "Votre mot de passe a été mis à jour avec succès ! Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
   "passwordUpdatedError": "Échec de la mise à jour du mot de passe. Veuillez réessayer.",
@@ -427,5 +441,9 @@
   "passwordOneNumber": "Le mot de passe doit contenir au moins un chiffre",
   "productDescription": "Description du produit",
   "addAProduct": "Ajouter un produit",
-  "orderDetails": "Détails de la commande"
+  "orderDetails": "Détails de la commande",
+  "noResultFound": "Aucun résultat trouvé",
+    "continueWithGoogle": "Continuer avec Google",
+    "description": "Description",
+    "inStock": "En stock"
 }
