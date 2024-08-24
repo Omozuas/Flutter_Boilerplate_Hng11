@@ -63,7 +63,8 @@ class OrderTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SvgPicture.asset(
-                          'assets/images/svg/product_listing/delivery.svg'),
+                        'assets/images/svg/product_listing/delivery.svg',
+                      ),
                       SizedBox(width: 6.w),
                       Text(
                         order.deliveryText,

@@ -1,29 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
-import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   const OrderDetailScreen({
-    super.key,
-    required this.order,
-    // required this.name,
-    // required this.image,
-    // required this.price,
+    super.key, required this.order,
   });
 
   final Order order;
-  // final String image;
-  // final num price;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.simpleTitle(
-        titleText: context.orderDetails,
+      appBar: AppBar(
+        leading: const ChevronBackButton(),
+        title: const Text('Order Details'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,11 +47,6 @@ class OrderDetailScreen extends StatelessWidget {
                   style:
                       TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),
                 ),
-                // Text(
-                //   '\$${order.toStringAsFixed(2)}',
-                //   style: const TextStyle(
-                //       fontSize: 20.0, fontWeight: FontWeight.w600),
-                // ),
               ],
             ),
             10.h.sbH,
