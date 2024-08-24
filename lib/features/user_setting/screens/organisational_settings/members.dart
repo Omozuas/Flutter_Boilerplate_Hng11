@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -12,7 +10,6 @@ import 'package:flutter/services.dart';
 
 import '../../../../utils/widgets/custom_avatar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../provider/profile_provider.dart';
 
 class MembersSettings extends ConsumerStatefulWidget {
@@ -33,29 +30,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final org = ref.watch(getOrganisationProvider);
-      ref
-          .read(profileProvider.notifier)
-          .getOrganisationMembers(orgId: org.organisationId.toString());
-      Future(() {
-        fetchLinkFromAPI();
-      });
+      ref.read(profileProvider.notifier).getOrganisationMembers();
+      ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
     });
-  }
-
-  Future<Object> fetchLinkFromAPI() async {
-    // Trigger the sendInvite method from ProfileProvider
-    await ref
-        .read(profileProvider.notifier)
-        .generateInviteLinkFromCurrentUser();
-    // final org = ref.watch(getOrganisationProvider);
-    // await ref
-    //     .read(profileProvider.notifier)
-    //     .generateInviteLink(orgId: org.organisationId.toString());
-
-    // Check the inviteResponse state
-    final inviteResponse = ref.read(profileProvider).inviteLink;
-    return inviteResponse;
   }
 
   void showCustomToast(BuildContext context, String message) {
@@ -75,18 +52,34 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
     return Scaffold(
-      appBar: CustomAppBar.simpleTitle(
-        titleText: AppLocalizations.of(context)!.members,
-        // subTitle: AppLocalizations.of(context)!.manageAccessToWorkspace,
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)!.members,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 12,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400, fontSize: 12, height: 24/12, color: GlobalColors.darkOne
+                ),
               ),
               Divider(
                 color: GlobalColors.borderColor,
@@ -103,7 +96,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-              Text(AppLocalizations.of(context)!.inviteLinkDescr),
+              Text(AppLocalizations.of(context)!.inviteLinkDescr,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 12, height: 24/12, color: GlobalColors.darkOne
+                ),),
               SizedBox(
                 height: 10.h,
               ),
@@ -118,12 +114,14 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   children: [
                     Expanded(
                       child: asyncLinkValue.when(
-                        data: (inviteLink) => Padding(
-                          padding: const EdgeInsets.only(bottom: 9.0),
-                          child: Text(
-                            inviteLink ?? "No link ",
-                            softWrap: true,
-                          ),
+                        data: (inviteLink) => Text(
+                          inviteLink ?? "No link ",
+                          softWrap: true,
+                          style: TextStyle(
+                              color: GlobalColors.integrationTextColor,
+                              decoration: TextDecoration.underline,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
                         ),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
@@ -147,7 +145,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                               });
                             },
                             icon: Icon(
-                              Icons.share,
+                              Icons.share_outlined,
                               color: GlobalColors.orange,
                             )),
                         IconButton(
@@ -171,7 +169,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               Divider(
                 thickness: 1,
@@ -186,31 +184,38 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 child: TextField(
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
-                    fontSize: 15,
+                    fontSize: 14,
+                    height: 16.9/14
                   ),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                       child:
-                          Icon(Icons.search, color: GlobalColors.gray200Color),
+                          Icon(Icons.search_outlined, color: GlobalColors.darkOne, size: 16,),
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide:  BorderSide(
+                        color: GlobalColors.borderColor, // Not selected (unfocused) color
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
                         color: GlobalColors.borderColor,
                       ),
                     ),
+
                     prefixIconConstraints: const BoxConstraints(),
                     contentPadding: const EdgeInsets.only(top: 8.0),
                   ),
                 ),
               ),
               SizedBox(height: 10.w),
-              SizedBox(
-                height: 10.h,
+              const SizedBox(
+                height: 24,
               ),
-              const Divider(),
               const SizedBox(
                 height: 5,
               ),
