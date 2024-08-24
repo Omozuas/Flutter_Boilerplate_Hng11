@@ -89,6 +89,7 @@ class _LanguageAndRegionScreenState
       backgroundColor: GlobalColors.white,
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.languageAndRegion,
+        showDivider: false,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
