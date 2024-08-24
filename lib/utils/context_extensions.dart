@@ -3,4 +3,9 @@ import 'package:flutter/material.dart';
 
 extension Translation on BuildContext {
   AppLocalizations get text => AppLocalizations.of(this)!;
+
+  /// Product texts are below
+  String get productDescription => "Product Description";
+  String get description => "Description";
+  String get inStock => "In Stock";
 }
