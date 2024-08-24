@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/models/product_detail_model.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/screens/style.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +11,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
     required this.product,
   });
 
-  final ProductDetail product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +29,14 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    product.name,
+                    '${product.name}',
                     style: CustomTextStyles.productTextTitleBlack,
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    product.subname,
-                    style: const TextStyle(
-                      color: DetailColors.dark2,
+                    '${product.category}',
+                    style: TextStyle(
+                      color: GlobalColors.dark2,
                     ),
                   ),
                 ],
@@ -47,20 +46,20 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "\$${product.price.toStringAsFixed(2)}",
+                    "\$${product.price}",
                     style: CustomTextStyles.productTextTitleBlack,
                   ),
                   SizedBox(height: 6.h),
-                  const Row(
+                  Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 4,
                         backgroundColor: Colors.green,
                       ),
-                      SizedBox(width: 2),
+                      const SizedBox(width: 2),
                       Text(
-                        "In Stock",
-                        style: TextStyle(color: DetailColors.dark1),
+                        "${product.status}",
+                        style: TextStyle(color: GlobalColors.darkOne),
                       ),
                     ],
                   ),
@@ -69,26 +68,6 @@ class ProductNameAndPriceSection extends StatelessWidget {
             ],
           ),
           SizedBox(height: 16.h),
-          Row(children: [
-            ...List.generate(
-              5,
-              (index) => Padding(
-                padding: EdgeInsets.only(right: 8.w),
-                child: Icon(
-                  Icons.star,
-                  size: 16,
-                  color: index < 4
-                      ? GlobalColors.orange
-                      : GlobalColors.borderColor,
-                ),
-              ),
-            ),
-            const SizedBox(width: 4),
-            const Text(
-              "(4.5)",
-              style: TextStyle(color: DetailColors.mutedText),
-            ),
-          ]),
         ],
       ),
     );

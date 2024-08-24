@@ -1,323 +1,342 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
 
-  final _formKey = GlobalKey<FormState>();
+  final _companyFormKey = GlobalKey<FormState>();
 
   final _companyNameController = TextEditingController();
-
   final _companyEmailController = TextEditingController();
-
   final _companyIndustryController = TextEditingController();
-
   final _companyTypeController = TextEditingController();
-
   final _companyCountryController = TextEditingController();
-
   final _companyStateController = TextEditingController();
-
   final _companyAddressController = TextEditingController();
-
   final _companyLgaController = TextEditingController();
 
   final loadingProvider = StateProvider<bool>((ref) => false);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool isLoading = ref.watch(loadingProvider);
+    final localizations = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   leading: Icon(
-        //     Icons.chevron_left_rounded,
-        //     size: 30.sp,
-        //   ),
-        //   backgroundColor: Colors.white,
-        //   // surfaceTintColor: Colors.white,
-        // ),
+        backgroundColor: GlobalColors.white,
+        appBar: AppBar(
+          leading: const ChevronBackButton(),
+          backgroundColor: Colors.white,
+        ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
-              // width: MediaQuery.of(context).size.width * 0.9,
               width: 350.w,
               padding: EdgeInsets.symmetric(vertical: 20.h),
-              color: Colors.white,
+              color: GlobalColors.white,
               child: Form(
-                key: _formKey,
+                key: _companyFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Basic Sign Up Section Starts Here
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Sign up',
-                            style: TextStyle(
+                            localizations.editOrganization,
+                            style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            'Create an account to get started with us.',
-                            style: TextStyle(
-                              color: Colors.grey,
+                            localizations.createAnAccount,
+                            style: CustomTextStyle.regular(
+                              color: GlobalColors.gray500Color,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           SizedBox(height: 20.sp),
                           CustomTextField(
-                            label: 'Company\'s Name',
+                            label: localizations.companyName,
                             controller: _companyNameController,
-                            hintText: 'Enter company\'s name',
+                            hintText: localizations.enterCompanyName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter name';
+                                return localizations.pleaseEnterName;
                               }
-
                               return null;
                             },
-                            labelStyle: TextStyle(
+                            labelStyle: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           CustomTextField(
-                            label: 'Company\'s Email Address',
+                            label: localizations.companyEmail,
                             controller: _companyEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            hintText: 'Enter company\'s email address',
+                            hintText: localizations.enterCompanyEmail,
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter valid email';
+                              final emailRegex = RegExp(
+                                  r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                              if (value == null || value.isEmpty || !emailRegex.hasMatch(value)) {
+                                return localizations.pleaseEnterValidEmail;
                               }
-
                               return null;
                             },
-                            labelStyle: TextStyle(
+                            labelStyle: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'Select Industry',
-                            style: TextStyle(
+                            localizations.selectIndustry,
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Agriculture',
-                              'Development',
+                            items: [
+                              localizations.agricultureIndustry,
+                              localizations.manufacturingIndustry,
+                              localizations.technologyIndustry,
+                              localizations.healthcareIndustry,
+                              localizations.educationIndustry,
                             ],
                             onChanged: (String? value) {
                               _companyIndustryController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            'Organization Type',
-                            style: TextStyle(
+                            localizations.organizationType,
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Agriculture',
-                              'Development',
+                            items: [
+                              localizations.soleProprietorship,
+                              localizations.partnership,
+                              localizations.corporation,
                             ],
                             onChanged: (String? value) {
                               _companyTypeController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                         ],
                       ),
                     ),
-                    // Basic Sign Up Section Ends Here
                     SizedBox(height: 30.sp),
-                    // Company Address Section Starts Here
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Company Address',
-                            style: TextStyle(
+                            localizations.companyAddress,
+                            style: CustomTextStyle.semiBold(
                               color: GlobalColors.darkOne,
                               fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'Select country',
-                            style: TextStyle(
+                            localizations.selectCountry,
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Agriculture',
-                              'Development',
+                            items: [
+                              localizations.country1,
+                              localizations.country2,
+                              localizations.country3,
+                              localizations.country4,
+                              localizations.country5,
                             ],
                             onChanged: (String? value) {
                               _companyCountryController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
                           Text(
-                            'Select state',
-                            style: TextStyle(
+                            localizations.selectState,
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Agriculture',
-                              'Development',
+                            items: [
+                              localizations.state1,
+                              localizations.state2,
+                              localizations.state3,
+                              localizations.state4,
                             ],
                             onChanged: (String? value) {
                               _companyStateController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
                           CustomTextField(
-                            label: 'Address',
+                            label: localizations.address,
                             controller: _companyAddressController,
-                            hintText: 'Enter company address',
+                            hintText: localizations.enterCompanyAddress,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter valid address';
+                                return localizations.pleaseEnterValidAddress;
                               }
-
                               return null;
                             },
-                            labelStyle: TextStyle(
+                            labelStyle: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
+                            ),
+                            hintTextStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
                             ),
                           ),
                           SizedBox(height: 10.sp),
                           Text(
-                            'LGA',
-                            style: TextStyle(
+                            localizations.lga,
+                            style: CustomTextStyle.medium(
                               color: GlobalColors.darkOne,
                               fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButton(
-                            items: const [
-                              'Agriculture',
-                              'Development',
+                            items: [
+                              localizations.lga1,
+                              localizations.lga2,
+                              localizations.lga3,
+                              localizations.lga4,
                             ],
                             onChanged: (String? value) {
                               _companyLgaController.text = value ?? '';
                             },
+                            valueStyle: CustomTextStyle.medium(
+                              color: GlobalColors.darkOne,
+                              fontSize: 13.sp,
+                            ),
                             borderColor: GlobalColors.lightGray,
                             height: 48,
-                            containerColor: Colors.white,
+                            containerColor: GlobalColors.white,
                             width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                         ],
                       ),
                     ),
-                    // Company Address Section Ends Here
                     SizedBox(height: 30.sp),
-                    // Action Button Section Starts Here
                     SizedBox(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomButton(
-                            onTap: () async{
-
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState!.validate()) {
+                            onTap: () async {
+                              if (_companyFormKey.currentState!.validate()) {
                                 ref.read(loadingProvider.notifier).state = true;
-                                //Submission async function here
+                                // Submission async function here
                                 ref.read(loadingProvider.notifier).state = false;
-
                               }
                             },
                             loading: isLoading,
                             borderColor: GlobalColors.orange,
-                            text: 'Create Account',
+                            text: localizations.createAccount,
                             height: 40.sp,
                             containerColor: GlobalColors.orange,
                             width: double.infinity,
-                            textColor: Colors.white,
+                            textColor: GlobalColors.white,
                           ),
                           SizedBox(height: 20.sp),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Already Have An Account?',
-                                style: TextStyle(
+                                localizations.alreadyHaveAnAccount,
+                                style: CustomTextStyle.regular(
                                   color: GlobalColors.darkOne,
                                   fontSize: 13.sp,
-                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               SizedBox(width: 10.sp),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  context.push(AppRoute.login);
+                                },
                                 child: Text(
-                                  'Login',
-                                  style: TextStyle(
+                                  localizations.login,
+                                  style: CustomTextStyle.regular(
                                     color: GlobalColors.orange,
                                     fontSize: 13.sp,
-                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               )
@@ -326,7 +345,6 @@ class CompanySignUpScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    // Action Button Section Ends Here
                   ],
                 ),
               ),

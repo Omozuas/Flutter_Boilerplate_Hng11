@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
@@ -28,13 +30,32 @@ class _MainViewState extends State<MainView> {
       name: widget.name,
       context: context,
     );
+    AppRouter.router.routeInformationProvider.addListener(_watchRoute);
+  }
+
+  void _watchRoute() {
+    if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.home) {
+      _bottomBarIndex.value = 0;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.products) {
+      _bottomBarIndex.value = 1;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.order) {
+      _bottomBarIndex.value = 3;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.settings) {
+      _bottomBarIndex.value = 4;
+    }
   }
 
   @override
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+    AppRouter.router.routeInformationProvider.removeListener(_watchRoute);
   }
+
 
   void goBranch(int index) {
     final currentIndex = _bottomBarIndex.value;
@@ -50,6 +71,19 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       key: _scaffoldkey,
       body: widget.navigationShell,
+      floatingActionButton: widget.navigationShell.currentIndex == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                context.push(AppRoute.addProduct);
+              },
+              backgroundColor: GlobalColors.orange,
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.add,
+                color: GlobalColors.white,
+              ),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -64,8 +98,8 @@ class _MainViewState extends State<MainView> {
             label: 'Products',
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.cart),
-            label: 'Cart',
+            icon: Icon(NavBar.order),
+            label: 'Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.settings),

@@ -67,9 +67,6 @@
 //   }
 // }
 
-
-
-
 // void applyFiltersAndSorting() {
 //     List<Product> filteredProducts = state.products.where((product) {
 //       if (state.selectedCategory != null && product.category != state.selectedCategory) {
@@ -118,8 +115,6 @@
 //     );
 //   }
 
-
-
 // class Product {
 //   final String id;
 //   final String name;
@@ -148,6 +143,3 @@
 //     );
 //   }
 // }
-
-
-
