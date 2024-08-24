@@ -165,6 +165,7 @@
   "thisMonthSummary": "Resumen de este mes",
   "totalRevenue": "Ingresos totales",
   "overview": "Resumen",
+  "seeMore": "Ver más",
   "veryGood": "Muy bueno",
   "good": "Bueno",
   "poor": "Pobre",
@@ -187,7 +188,7 @@
   "deleteMemberButton": "Eliminar Miembro",
   "memberRemovedSuccessfullyMessage": "Miembro eliminado con éxito",
   "inviteToOrganizationButton": "Invitar a tu Organización",
-  
+  "profileUpdatedMessage": "¡Perfil Actualizado!",
   "profileUpdatedSuccessMessage": "Tu perfil ha sido actualizado con éxito.",
   "viewAllProducts": "Ver todos los productos",
   "priceRange": "Rango de precios",
@@ -231,7 +232,7 @@
   "addXLink": "Agregar enlace X",
   "addLinkedInLink": "Agregar enlace de LinkedIn",
   "addInstagramLink": "Agregar enlace de Instagram",
- 
+  "language": "Idioma",
   "france": "Francia",
   "canada": "Canadá",
   "unitedKingdom": "Reino Unido",
@@ -275,6 +276,18 @@
   "somethingWentWrongMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
   "updateProfileButton": "Actualizar Perfil",
   "editOrganization": "Editar organización",
+   "changePassword": "Cambiar Contraseña",
+  "createOrganisation": "Crear Organización",
+  "errorFetchingLink": "Ocurrió un error al obtener el enlace.",
+  "copyLink": "Enlace copiado al portapapeles",
+  "searchByNameOrMail": "Buscar por nombre o correo electrónico",
+  "errorFetchingMembers": "Ocurrió un error al \nobtener los miembros de la organización",
+  "memberProfile": "Perfil del miembro",
+  "memberName": "Nombre del miembro",
+  "memberBio": "Biografía del miembro",
+  "editProfile": "Editar perfil",
+  "deleteProfile": "Eliminar perfil",
+  "removeMember": "Miembro eliminado con éxito",
   "country1": "Alemania",
   "country2": "Nigeria",
   "country3": "Canadá",
@@ -326,27 +339,28 @@
   "memberProfile": "Perfil del miembro",
   "memberName": "Nombre del miembro",
   "memberBio": "Biografía del miembro",
-
+  "editProfile": "Editar perfil",
   "deleteProfile": "Eliminar perfil",
   "removeMember": "Miembro eliminado con éxito",
    "signUpText": "Registrarse",
     "seeMore": "Ver más",
-
+    "login": "Iniciar sesión",
     "editProfile": "Editar perfil",
     "profileUpdated": "¡Perfil actualizado!",
     "profileUpdatedMessage": "Su perfil ha sido actualizado exitosamente.",
-  
+    "notification": "Notificación",
     "passwordUpdated": "Contraseña actualizada con éxito",
     "passwordUpdatedMessage": "¡Su contraseña ha sido actualizada con éxito! Ahora puede iniciar sesión con su nueva contraseña.",
     "passwordUpdatedError": "No se pudo actualizar la contraseña. Inténtelo de nuevo.",
     "passwordUpdated404Error": "El recurso solicitado no se encontró. Verifique la URL o contacte al soporte.",
     "error": "Error",
     "passwordUpdatedCatchError": "Ocurrió un error inesperado. Inténtelo de nuevo.",
-
+    "passwordSetting": "Configuración de la contraseña",
     "currentPassword": "Contraseña actual",
     "enterCurrentPassword": "Ingrese la contraseña actual",
-   
- 
+    "language": "Idioma",
+    "region": "Región",
+    "timeZone": "Zona horaria",
     "nameRequired": "El nombre es obligatorio",
     "nameTwoCharacters": "El nombre debe tener al menos 2 caracteres",
     "emailRequired": "El correo electrónico es obligatorio",
@@ -357,6 +371,10 @@
     "passwordOneNumber": "La contraseña debe contener al menos un número",
     "productDescription": "Descripción del producto",
     "addAProduct": "Agregar un producto",
-    "orderDetails": "Detalles del pedido"
+    "orderDetails": "Detalles del pedido",
+    "noResultFound": "No se encontraron resultados",
+      "continueWithGoogle": "Continuar con Google",
+      "description": "Descripción",
+      "inStock": "En stock"
 }
 
