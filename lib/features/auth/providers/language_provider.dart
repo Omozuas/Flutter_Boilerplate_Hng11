@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
 
 import '../../../localiza/localiza_class.dart';
+import '../../../services/service_locator.dart';
 
 class LanguageNotifier extends StateNotifier<Locale> {
   static const _languageKey = 'language_code';
