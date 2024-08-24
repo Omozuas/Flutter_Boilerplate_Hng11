@@ -214,7 +214,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 24,
               ),
               SizedBox(
-                height: 40,
+                height: 45.h,
                 width: double.infinity,
                 child: TextField(
                   style: GoogleFonts.inter(
@@ -229,7 +229,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       child: Icon(
                         Icons.search_outlined,
                         color: GlobalColors.darkOne,
-                        size: 16,
+                        size: 20,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
