@@ -45,25 +45,16 @@ class SettingsApi {
     }
   }
 
-  Future<UserProfile> updateProfile({
-    required String email,
-    required UserProfile profile,
-  }) async {
+  Future<UserProfile> updateProfile(UserProfile profile) async {
     try {
-      final response = await dio.putUpdate(
-        '/profile',
-        data: profile.toMap(),
-      );
+      final response = await dio.putUpdate('/profile', data: profile.toMap());
       return UserProfile.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<String> updateProfileAvatar({
-    required File file,
-    required String email,
-  }) async {
+  Future<String> updateProfileAvatar(File file) async {
     try {
       final multipart = await MultipartFile.fromFile(
         file.path,
