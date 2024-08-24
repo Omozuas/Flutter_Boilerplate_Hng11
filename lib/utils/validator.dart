@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:one_context/one_context.dart';
 
@@ -12,9 +13,9 @@ class Validators {
     return null;
   }
 
-  static String? emailValidator(String? value) {
+  static String? emailValidator(String? value,BuildContext context) {
     if (value == null || value.isEmpty) {
-      return OneContext().context!.emailRequired;
+      return context.emailRequired;
     }
     final emailRegExp = RegExp(
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');

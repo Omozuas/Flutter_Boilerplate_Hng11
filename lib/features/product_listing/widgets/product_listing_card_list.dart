@@ -30,12 +30,11 @@ class ProductCardListWidget extends StatelessWidget {
                 style: PlusJakartaTextStyle.headerText2,
               ),
               TextButton(
-                onPressed: () => GoRouter.of(context).push(AppRoute.productsByCategory),
-              
+                // onPressed: () => context.push(AppRoute.productsByCategory),
+                onPressed: () {},
                 child: Text(
-                  //TODO: Incorporte app localization
-                  "See more",
-
+                  context.seeMore,
+                  // '',
                   style: PlusJakartaTextStyle.bodyTextGrey,
                 ),
               )
