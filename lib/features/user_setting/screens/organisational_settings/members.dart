@@ -38,32 +38,14 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     });
   }
 
-  Future<void> fetchInviteLink() async {
-    // Call your API to fetch the invite link
-    final link = await fetchLinkFromAPI(); // Fetch the link from your API
-
-    // Check if the fetched link is correct
-    print('Fetched link: $link');
-
-    // Ensure the UI is updated with the fetched link
-    setState(() {
-      // inviteLink = link; // Store the invite link in the state
-    });
-  }
 
   Future<Object> fetchLinkFromAPI() async {
     // Trigger the sendInvite method from ProfileProvider
     await ref.read(profileProvider.notifier).generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
-
     // Check the inviteResponse state
     final inviteResponse = ref.read(profileProvider).inviteLink;
-
-    print('link is equal to : $inviteResponse');
-    // Cast inviteResponse to String, or provide a default link if inviteResponse is null
-    return inviteResponse ?? 'https://default-invite-link.com';
+    return inviteResponse;
   }
-
-
 
 
   void showCustomToast(BuildContext context, String message) {
