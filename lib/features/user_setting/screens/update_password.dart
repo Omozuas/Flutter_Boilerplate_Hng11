@@ -168,6 +168,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
+        showDivider: false,
         titleText: context.passwordSetting,
       ),
       body: SingleChildScrollView(

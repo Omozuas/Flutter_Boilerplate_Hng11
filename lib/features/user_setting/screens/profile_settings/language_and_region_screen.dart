@@ -34,7 +34,7 @@ class _LanguageAndRegionScreenState
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = context.text.settings;
+        feedBackMessage = context.text.settingsSavedSuccessfully;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -89,6 +89,7 @@ class _LanguageAndRegionScreenState
     return Scaffold(
       backgroundColor: GlobalColors.white,
       appBar: CustomAppBar.simpleTitle(
+        showDivider: false,
         titleText: AppLocalizations.of(context)!.languageAndRegion,
       ),
       body: SingleChildScrollView(
