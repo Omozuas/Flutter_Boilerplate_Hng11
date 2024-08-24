@@ -30,8 +30,8 @@ class ProductCardListWidget extends StatelessWidget {
                 categoryName,
                 style: PlusJakartaTextStyle.headerText2,
               ),
-              InkWell(
-                onTap: () => GoRouter.of(context).pushNamed(AppRoute.productsByCategory),
+              TextButton(
+                onPressed: () => GoRouter.of(context).push(AppRoute.productsByCategory),
               
                 child: Text(
                   //TODO: Incorporte app localization

@@ -116,48 +116,55 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   hintText: AppLocalizations.of(context)!.enterUsername,
                 ),
                 // SizedBox(height: 16.h),
-                CustomExpansionTile(
-                  space: 0,
-                  horizontalTitlePadding: EdgeInsets.zero,
-                  horizontalChildrenPadding: EdgeInsets.zero,
-                  verticalChildrenPadding: EdgeInsets.zero,
-                  verticalTitlePadding: EdgeInsets.zero,
-                  title: AppLocalizations.of(context)!.bio,
-                  content: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomTextField(
-                          controller: _bioController,
-                          hintText:
-                              AppLocalizations.of(context)!.typeYourMessageHere,
-                          maxLines: 3,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.maximumOf64Character,
-                          textAlign: TextAlign.start,
-                          textDirection: TextDirection.rtl,
-                          style: GoogleFonts.inter(
-                            fontSize: 14.sp,
-                            color: const Color(0xFF64748B),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 24.h),
-                Text(
+               
+                            Text(
                   AppLocalizations.of(context)!.bio,
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
                 SizedBox(height: 16.w),
-                CustomTextField(
-                  controller: _bioController,
-                  hintText: AppLocalizations.of(context)!.typeYourMessageHere,
-                  maxLines: 3,
+                TextFormField(
+            controller: _bioController,
+           
+            maxLines: 3,
+            
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(
+                    vertical: 8.h,
+                    horizontal: 12.w,
+                  ),
+              hintText: AppLocalizations.of(context)!.typeYourMessageHere,
+              hintStyle: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: const Color(0xFF94A3B8),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular( 6.r),
+                borderSide: BorderSide(
+                  color: GlobalColors.borderColor,
+                  width: 1.w,
                 ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6.r),
+                borderSide: BorderSide(
+                  color:  GlobalColors.borderColor,
+                  width: 1.w,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular( 6.r),
+                borderSide: BorderSide(
+                  color:  GlobalColors.orange,
+                  width: 1.w,
+                ),
+              ),
+            ),
+          ),
+               SizedBox(height: 5.h),
                 Text(
                   AppLocalizations.of(context)!.maximumOf64Character,
                   textAlign: TextAlign.start,
@@ -184,7 +191,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 //   ],
                 // ),
                 SizedBox(
-                  height: 20.h,
+                  height: 26.h,
                 ),
                 CustomButton(
                   borderColor: GlobalColors.orange,
