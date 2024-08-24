@@ -203,10 +203,12 @@ class SingleUserSignUpScreen extends ConsumerWidget {
       'first_name': firstNameController.text,
       'last_name': lastNameController.text,
       'password': passwordController.text,
-    }, context);
-   firstNameController.clear();
-   lastNameController.clear();
-   emailController.clear();
-   passwordController.clear();
+    }, context,
+        [
+         firstNameController,
+          lastNameController,
+          passwordController,
+          emailController
+        ]);
   }
 }

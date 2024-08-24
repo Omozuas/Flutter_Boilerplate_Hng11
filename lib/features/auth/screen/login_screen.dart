@@ -370,9 +370,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
       'email': LoginScreen._emailController.text.trim().toLowerCase(),
       'password': LoginScreen._passwordController.text,
-    }, context);
-    LoginScreen._emailController.clear();
-    LoginScreen._passwordController.clear();
+    }, context,[
+      LoginScreen._emailController,
+      LoginScreen._passwordController
+    ]);
+
   }
 }
 

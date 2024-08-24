@@ -89,7 +89,8 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 
   Future<void> registerSingleUser(
-      Map<String, dynamic> data, BuildContext context) async {
+      Map<String, dynamic> data, BuildContext context,
+      List<TextEditingController> controllers) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
@@ -106,7 +107,10 @@ class AuthProvider extends StateNotifier<AuthState> {
             [];
 
         if (context.mounted) {
-          context.pushReplacement(AppRoute.home);
+          for (var c in controllers) {
+            c.clear;
+          }
+          context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
           _userService.storeToken(userRegData.accessToken ?? "");
           await getUser();
@@ -196,6 +200,7 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 
   Future<void> login(Map<String, dynamic> data, BuildContext context,
+  List<TextEditingController> controllers,
       {bool fromLoginScreen = true}) async {
     setNormalButtonLoading = true;
     try {
@@ -210,6 +215,9 @@ class AuthProvider extends StateNotifier<AuthState> {
                 .toList() ??
             [];
         if (context.mounted) {
+          for (var c in controllers) {
+            c.clear;
+          }
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
           if (fromLoginScreen) {
@@ -221,13 +229,13 @@ class AuthProvider extends StateNotifier<AuthState> {
           }
           _userService.storeToken(userRegData.accessToken ?? "");
           await getUser();
-
         }
       }
     } catch (e) {
       //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
+
     }
   }
 
