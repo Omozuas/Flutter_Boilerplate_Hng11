@@ -26,6 +26,7 @@ class CustomInterceptor extends Interceptor {
     log('Endpoint >> ${options.path}');
     log('Request body >> ${options.data}');
     if (userToken != null) {
+
       final isTokenExpired = JwtDecoder.isExpired(userToken);
       if (isTokenExpired) {
         showSnackBar('Token Expired, kindly login again');
