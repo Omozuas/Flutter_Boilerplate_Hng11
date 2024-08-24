@@ -179,7 +179,6 @@ class SettingsApi {
     }
   }
 
-
   Future<String> initiateSubscription({
     required String email,
     required double amount,

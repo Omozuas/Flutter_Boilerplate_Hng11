@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 
-
-
 class Skeleton extends StatefulWidget {
-  const Skeleton({super.key, this.height, this.width, this.color=Colors.grey});
+  const Skeleton(
+      {super.key, this.height, this.width, this.color = Colors.grey});
 
   final double? height, width;
   final Color? color;
@@ -13,7 +12,8 @@ class Skeleton extends StatefulWidget {
   State<Skeleton> createState() => _SkeletonState();
 }
 
-class _SkeletonState extends State<Skeleton>with SingleTickerProviderStateMixin {
+class _SkeletonState extends State<Skeleton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -21,9 +21,11 @@ class _SkeletonState extends State<Skeleton>with SingleTickerProviderStateMixin 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(seconds: 1), vsync: this)..repeat();
-    _animation =
-        Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(curve: Curves.easeInOutSine, parent: _animationController));
+    _animationController =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this)
+          ..repeat();
+    _animation = Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(
+        curve: Curves.easeInOutSine, parent: _animationController));
   }
   // ****************************init*************************
 
@@ -45,22 +47,28 @@ class _SkeletonState extends State<Skeleton>with SingleTickerProviderStateMixin 
         width: widget.width,
         padding: EdgeInsets.all(defaultPadding / 2),
         decoration: radiusBoxDecoration(
-          colors: [Colors.blueAccent, Colors.deepOrange, Colors.purple, Colors.white],
+          colors: [
+            Colors.blueAccent,
+            Colors.deepOrange,
+            Colors.purple,
+            Colors.white
+          ],
           animation: _animation,
-        )
-    );
+        ));
   }
 }
 
 class ShimmerCard extends StatefulWidget {
-  const ShimmerCard({super.key,
+  const ShimmerCard({
+    super.key,
   });
 
   @override
   State<ShimmerCard> createState() => _ShimmerCardState();
 }
 
-class _ShimmerCardState extends State<ShimmerCard>with SingleTickerProviderStateMixin  {
+class _ShimmerCardState extends State<ShimmerCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -68,9 +76,11 @@ class _ShimmerCardState extends State<ShimmerCard>with SingleTickerProviderState
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(duration: const Duration(seconds: 1), vsync: this)..repeat();
-    _animation =
-        Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(curve: Curves.easeInOutSine, parent: _animationController));
+    _animationController =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this)
+          ..repeat();
+    _animation = Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(
+        curve: Curves.easeInOutSine, parent: _animationController));
   }
   // ****************************init*************************
 
@@ -84,15 +94,14 @@ class _ShimmerCardState extends State<ShimmerCard>with SingleTickerProviderState
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
-    return AnimatedBuilder(animation: _animation,
-        builder: (BuildContext context, Widget? child){
-          return  SizedBox(
+    return AnimatedBuilder(
+        animation: _animation,
+        builder: (BuildContext context, Widget? child) {
+          return SizedBox(
             height: size.height,
             width: size.width,
             child: const Skeleton(),
           );
-        }
-    );
+        });
   }
-
 }

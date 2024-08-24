@@ -12,7 +12,11 @@ class NotificationApi implements NotificationApiContract {
   Future<List<Notifications>> getAllNotifications() async {
     try {
       var response = await dioProvider.get("notifications/GetAll");
-      return NotificationResponse.fromJson(jsonDecode(jsonEncode(response?.data))).data?.notifications??[];
+      return NotificationResponse.fromJson(
+                  jsonDecode(jsonEncode(response?.data)))
+              .data
+              ?.notifications ??
+          [];
     } catch (e) {
       return [];
     }

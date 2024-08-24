@@ -32,23 +32,21 @@ class DashboardApi implements DashboardApiContract {
   Future<GetUserByIDResponse> getUserById({required String userId}) async {
     try {
       var response = await dioProvider.get("users/$userId");
-      return GetUserByIDResponse.fromJson(jsonDecode(jsonEncode(response?.data)));
+      return GetUserByIDResponse.fromJson(
+          jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future <List<Product>> getAllProducts({int? pageSize, int? page}) async {
+  Future<List<Product>> getAllProducts({int? pageSize, int? page}) async {
     try {
-      var response = await dioProvider.get(
-        "products",
-        query: {
-          "PageSize": pageSize?? 100000,
-          "PageNumber": page?? 1
-        }
-      );
-      var res = AllProduct.fromJson(jsonDecode(jsonEncode(response?.data))).data??[];
+      var response = await dioProvider.get("products",
+          query: {"PageSize": pageSize ?? 100000, "PageNumber": page ?? 1});
+      var res =
+          AllProduct.fromJson(jsonDecode(jsonEncode(response?.data))).data ??
+              [];
       return res;
     } catch (e) {
       log(e.toString());
@@ -95,7 +93,7 @@ class DashboardApi implements DashboardApiContract {
 abstract class DashboardApiContract {
   Future<DashBoardModel> getDashboardData();
   Future<GetUserByIDResponse> getUserById({required String userId});
-  Future <List<Product>> getAllProducts({int? pageSize, int? page});
+  Future<List<Product>> getAllProducts({int? pageSize, int? page});
   Future<OrganizationOverviewModel> getOrganizationOverView();
   Future<List<GetSalesTrend>> getSalesTrend(
       {DateTime? startDate, DateTime? endDate});

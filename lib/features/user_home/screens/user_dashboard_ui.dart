@@ -129,40 +129,44 @@ class UserDashBoardScreen extends ConsumerWidget {
                         ],
                       ),
                       0.h.sbH,
-                      dashBoardStateProvider.isLoading && dashboardProvider.displayedProducts.isEmpty
+                      dashBoardStateProvider.isLoading &&
+                              dashboardProvider.displayedProducts.isEmpty
                           ? const ProductLoadingWidget()
-                          : !dashBoardStateProvider.isLoading && dashboardProvider.displayedProducts.isEmpty
-                          ? Center(
-                        child: Text(
-                          "No products available.",
-                          style: CustomTextStyles.productTextBodyBlack,
-                        ),
-                      )
-                          : Column(
-                        children: List.generate(
-                          dashboardProvider.displayedProducts.length,
-                              (index) {
-                            final product =
-                            dashboardProvider.displayedProducts[index];
-                            log("Product: ${product.name}");
-                            return Padding(
-                              padding: 8.h.padV,
-                              child: InkWell(
-                                onTap: (){
-                                  addItemToCart(product);
-                                },
-                                child: ProductCardWiget(
-                                  productNmae: '${product.name}',
-                                  status: '${product.status}'.capitalize,
-                                  category: '${product.category}',
-                                  price: product.price ?? 0,
-                                  image: product.image ?? '',
+                          : !dashBoardStateProvider.isLoading &&
+                                  dashboardProvider.displayedProducts.isEmpty
+                              ? Center(
+                                  child: Text(
+                                    "No products available.",
+                                    style:
+                                        CustomTextStyles.productTextBodyBlack,
+                                  ),
+                                )
+                              : Column(
+                                  children: List.generate(
+                                    dashboardProvider.displayedProducts.length,
+                                    (index) {
+                                      final product = dashboardProvider
+                                          .displayedProducts[index];
+                                      log("Product: ${product.name}");
+                                      return Padding(
+                                        padding: 8.h.padV,
+                                        child: InkWell(
+                                          onTap: () {
+                                            addItemToCart(product);
+                                          },
+                                          child: ProductCardWiget(
+                                            productNmae: '${product.name}',
+                                            status:
+                                                '${product.status}'.capitalize,
+                                            category: '${product.category}',
+                                            price: product.price ?? 0,
+                                            image: product.image ?? '',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
                       50.h.sbH,
                     ],
                   ),
@@ -174,7 +178,6 @@ class UserDashBoardScreen extends ConsumerWidget {
       ),
     );
   }
-
 }
 
 class ProductLoadingWidget extends StatelessWidget {
@@ -185,92 +188,88 @@ class ProductLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 3,
-      itemBuilder: (_, i) {
-        return Container(
-          height: 130.h,
-          padding: 16.sp.padA,
-          width: width(context),
-          decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(width: 1.h, color: const Color(0xFFF6F6F6)),
-              borderRadius: BorderRadius.circular(8.sp),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 3,
+        itemBuilder: (_, i) {
+          return Container(
+            height: 130.h,
+            padding: 16.sp.padA,
+            width: width(context),
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1.h, color: const Color(0xFFF6F6F6)),
+                borderRadius: BorderRadius.circular(8.sp),
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.sp),
-                  child: const Column(
-                    children: [
-                      Expanded(child: ShimmerCard()),
-                    ],
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.sp),
+                    child: const Column(
+                      children: [
+                        Expanded(child: ShimmerCard()),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              16.sp.sbW,
-              Expanded(
-                flex: 2,
-                child: SizedBox(
-                  height: 130.h- 32.sp,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
+                16.sp.sbW,
+                Expanded(
+                    flex: 2,
+                    child: SizedBox(
+                      height: 130.h - 32.sp,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.h),
-                            child: SizedBox(
-                              height: 20.h,
-                              width: 100.w,
-                              child: const ShimmerCard(),
-                            ),
+                          Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.h),
+                                child: SizedBox(
+                                  height: 20.h,
+                                  width: 100.w,
+                                  child: const ShimmerCard(),
+                                ),
+                              ),
+                              10.h.sbH,
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.h),
+                                child: SizedBox(
+                                  height: 16.h,
+                                  child: const ShimmerCard(),
+                                ),
+                              ),
+                            ],
                           ),
-                          10.h.sbH,
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.h),
-                            child: SizedBox(
-                              height: 16.h,
-                              child: const ShimmerCard(),
-                            ),
+                          Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.h),
+                                child: SizedBox(
+                                  height: 20.h,
+                                  width: 100.w,
+                                  child: const ShimmerCard(),
+                                ),
+                              ),
+                              10.h.sbH,
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.h),
+                                child: SizedBox(
+                                  height: 16.h,
+                                  child: const ShimmerCard(),
+                                ),
+                              ),
+                            ],
                           ),
-
                         ],
                       ),
-                      Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.h),
-                            child: SizedBox(
-                              height: 20.h,
-                              width: 100.w,
-                              child: const ShimmerCard(),
-                            ),
-                          ),
-                          10.h.sbH,
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.h),
-                            child: SizedBox(
-                              height: 16.h,
-                              child: const ShimmerCard(),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              )
-            ],
-          ),
-        );
-      }
-    );
+                    ))
+              ],
+            ),
+          );
+        });
   }
 }
