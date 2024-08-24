@@ -317,6 +317,18 @@
     "changeEmailText": "更改电子邮件",
     "verificationSuccess": "验证成功",
     "verificationSuccessDescription": "您的验证成功，您现在可以继续重置密码",
-    "continueToLogin": "继续登录"
+    "continueToLogin": "继续登录",
+   "changePassword": "更改密码",
+   "createOrganisation": "创建组织",
+   "errorFetchingLink": "获取链接时发生错误。",
+   "copyLink": "链接已复制到剪贴板",
+   "searchByNameOrMail": "按姓名或邮箱搜索",
+   "errorFetchingMembers": "获取组织成员时出错",
+   "memberProfile": "成员简介",
+  "memberName":"成员姓名",
+ "memberBio":"成员简介",
+  "editProfile": "编辑资料",
+  "deleteProfile": "删除资料",
+  "removeMember":"成员成功移除"
 }
 

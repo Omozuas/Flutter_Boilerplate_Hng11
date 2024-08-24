@@ -319,7 +319,21 @@
  "changeEmailText" : "Change email",
  "verificationSuccess" : "Verification Successful",
  "verificationSuccessDescription" : "Your verification was successful, you can now proceed to reset your password",
- "continueToLogin" : "Continue to Login"
+ "continueToLogin" : "Continue to Login",
+      "somethingWentWrongMessage": "Something went wrong. Please try again.",
+      "updateProfileButton": "Update Profile",
+      "changePassword": "Change Password",
+      "createOrganisation": "Create Organisation",
+  "errorFetchingLink": "An error occurred while fetching the link",
+  "copyLink": "Link copied to clipboard",
+  "searchByNameOrMail": "Search by name or email",
+  "errorFetchingMembers": "An error occurred while \nfetching the organization members",
+  "memberProfile": "Member Profile",
+  "memberName": "Member's name",
+  "memberBio": "Member's bio",
+  "editProfile": "Edit Profile",
+  "deleteProfile": "Delete Profile",
+  "removeMember": "Member is removed successfully"
 
 }
 

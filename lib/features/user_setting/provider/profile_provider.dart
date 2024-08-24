@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,8 +24,16 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         notificationUpdater: AsyncData(null),
         notificationFetch: AsyncData(null),
         fetchSubcription: AsyncData(null),
+
+        fetchSubcriptionbyUserId: AsyncData(null),
+
         inviteLink: AsyncData(null),
+        organisationMembers: AsyncData(null),
+        
+        initiateSubscription: AsyncData(null),
+
         updatePassword: AsyncData(null));
+
   }
 
   Future<void> pickImage(ImageSource? source) async {
@@ -126,15 +135,28 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     }
   }
 
-  Future<void> getsubscription({required String orgId}) async {
+  Future<void> getsubscriptionOrgId({required String orgId}) async {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(fetchSubcription: const AsyncLoading());
-      final res = await settingsApi.getsubscription(orgId: orgId);
+      final res = await settingsApi.getsubscriptionOrgId(orgId: orgId);
       state = state.copyWith(fetchSubcription: AsyncData(res));
     } catch (e) {
       state =
           state.copyWith(fetchSubcription: AsyncError(e, StackTrace.current));
+    }
+  }
+
+
+   Future<void> getSubscriptionUserId({required String userId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(fetchSubcriptionbyUserId: const AsyncLoading());
+      final res = await settingsApi.getSubscriptionUserId(userId: userId);
+      state = state.copyWith(fetchSubcriptionbyUserId: AsyncData(res));
+    } catch (e) {
+      state =
+          state.copyWith(fetchSubcriptionbyUserId: AsyncError(e, StackTrace.current));
     }
   }
 
@@ -178,6 +200,36 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));
     }
   }
+
+  // get organisation members
+  Future<void> getOrganisationMembers({required String orgId}) async {
+    final settingsApi = ref.read(settingsApiProvider);
+    try {
+      state = state.copyWith(organisationMembers: const AsyncLoading());
+      final organisationMembers = await settingsApi.getOrganisationMembers(orgId: orgId);
+      state = state.copyWith(organisationMembers: AsyncData(organisationMembers));
+    } catch (e) {
+      state = state.copyWith(organisationMembers: AsyncError(e, StackTrace.current));
+    }
+  }
+
+
+  Future<void> initiateSubscription({
+    required String email,
+      required double amount,
+      required String plan,
+      required String frequency}) async {
+          final settingsApi = ref.read(settingsApiProvider);
+        try{
+  state = state.copyWith(initiateSubscription: const AsyncLoading());
+      final initiateSubscription = await settingsApi.initiateSubscription(email: email, amount: amount, plan: plan, frequency: frequency);
+      state = state.copyWith(inviteLink: AsyncData(initiateSubscription));
+   
+        }catch (e) {
+                state = state.copyWith(initiateSubscription: AsyncError(e, StackTrace.current));
+
+        }
+      }
 }
 
 final profileProvider =
@@ -192,8 +244,11 @@ class ProfileProviderStates {
   final AsyncValue<NotificationModel?> notificationUpdater;
   final AsyncValue<NotificationModel?> notificationFetch;
   final AsyncValue<SubscriptionModel?> fetchSubcription;
+  final AsyncValue<SubscriptionModel?> fetchSubcriptionbyUserId;
   final AsyncValue<UpdatePasswordModel?> updatePassword;
   final AsyncValue<String?> inviteLink;
+  final AsyncValue<List<Members>?> organisationMembers;
+  final AsyncValue<String?> initiateSubscription;
 
   const ProfileProviderStates({
     required this.pickedImage,
@@ -203,8 +258,11 @@ class ProfileProviderStates {
     required this.notificationUpdater,
     required this.notificationFetch,
     required this.fetchSubcription,
+    required this.fetchSubcriptionbyUserId,
     required this.updatePassword,
     required this.inviteLink,
+    required this.organisationMembers,
+    required this.initiateSubscription, 
   });
 
   ProfileProviderStates copyWith(
@@ -215,7 +273,14 @@ class ProfileProviderStates {
       AsyncValue<NotificationModel?>? notificationUpdater,
       AsyncValue<NotificationModel?>? notificationFetch,
       AsyncValue<SubscriptionModel?>? fetchSubcription,
+
+        AsyncValue<SubscriptionModel?>? fetchSubcriptionbyUserId,
+
         AsyncValue<String?>? inviteLink,
+        AsyncValue<List<Members>?>? organisationMembers,
+
+        AsyncValue<String?>? initiateSubscription,
+
       AsyncValue<UpdatePasswordModel?>? updatePassword}) {
     return ProfileProviderStates(
         pickedImage: pickedImage ?? this.pickedImage,
@@ -225,7 +290,13 @@ class ProfileProviderStates {
         notificationUpdater: notificationUpdater ?? this.notificationUpdater,
         notificationFetch: notificationFetch ?? this.notificationFetch,
         fetchSubcription: fetchSubcription ?? this.fetchSubcription,
+
+        fetchSubcriptionbyUserId: fetchSubcriptionbyUserId ?? this.fetchSubcriptionbyUserId,
+
         inviteLink: inviteLink ?? this.inviteLink,
+        organisationMembers: organisationMembers ?? this.organisationMembers,
+        initiateSubscription: initiateSubscription ?? this.initiateSubscription,
+
         updatePassword: updatePassword ?? this.updatePassword);
   }
 }
