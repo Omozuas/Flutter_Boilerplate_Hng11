@@ -4,16 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/custom_text_style.dart';
 import '../../cart/utils/widget_extensions.dart';
+import '../model/notification_response.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({super.key});
+  final Notifications notification;
+  const NotificationCard({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: 8.h.padV,
       child: InkWell(
-        onTap: (){},
+        onTap: () {},
         child: SizedBox(
           width: width(context),
           height: 48.h,
@@ -28,27 +30,19 @@ class NotificationCard extends StatelessWidget {
                   13.w.sbW,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                          "data",
-                          style: CustomTextStyle.bold(
-                              color: Colors.black
-                          )
-                      ),
-                      Text(
-                          "Made a new sale today",
-                          style: CustomTextStyle.regular()
-                      ),
+                      // Text("New Notif",
+                      //     style: CustomTextStyle.bold(color: Colors.black)),
+                      Text(notification.message??"",
+                          style: CustomTextStyle.regular()),
                     ],
                   )
                 ],
               ),
               Text(
                 '1m ago.',
-                style: CustomTextStyle.medium(
-                    fontSize: 12
-                ),
+                style: CustomTextStyle.medium(fontSize: 12),
               ),
             ],
           ),

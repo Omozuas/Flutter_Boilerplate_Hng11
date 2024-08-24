@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SettingsTile extends StatelessWidget {
   final String title, leadingIcon;
@@ -21,18 +22,28 @@ class SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       horizontalTitleGap: 3.w,
-      contentPadding: EdgeInsets.all(0.h),
-      leading: leading?? Image.asset(leadingIcon, color: GlobalColors.grays,),
+      minTileHeight: 50.h,
+      contentPadding: EdgeInsets.zero,
+      leading: leading ??
+          SvgPicture.asset(
+            leadingIcon,
+            height: 20.h,
+            width: 20.w,
+            // ignore: deprecated_member_use
+            color: GlobalColors.grays,
+          ),
       title: Text(
         title,
         style: CustomTextStyles.productTextBody2Black.copyWith(
-          fontWeight: FontWeight.w700
+          fontWeight: FontWeight.w400,
+          color: GlobalColors.darkOne,
         ),
       ),
-      trailing: trailing?? const Icon(
-        Icons.arrow_forward_ios,
-        size: 16,
-      ),
+      trailing: trailing ??
+          const Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+          ),
       onTap: onTap,
     );
   }

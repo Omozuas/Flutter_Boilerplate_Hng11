@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,16 +26,61 @@ class MembersSettings extends ConsumerStatefulWidget {
 
 class _MembersSettingsState extends ConsumerState<MembersSettings> {
   List<Members> organisationMembers = [
-    Members(),
+    /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
+    Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
+   
   ];
+  List<Members> filteredMembers = [];
+  TextEditingController searchController = TextEditingController();
+  String inviteLink = ''; // Variable to store the invitation link
 
   @override
   void initState() {
     super.initState();
+    filteredMembers = organisationMembers;
+    searchController.addListener(filterMembers);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(profileProvider).organisationMembers;
-      ref.read(profileProvider).inviteLink;
+      final org = ref.watch(getOrganisationProvider);
+      ref
+          .read(profileProvider.notifier)
+          .getOrganisationMembers(orgId: org.organisationId.toString());
+      Future(() {
+        fetchLinkFromAPI();
+      });
     });
+  }
+  void filterMembers() {
+    final filter = searchController.text.toLowerCase();
+    setState(() {
+      filteredMembers = organisationMembers.where((member) {
+        final firstName = (member.firstName ?? '').toLowerCase();
+        final lastName = (member.lastName ?? '').toLowerCase();
+        final email = (member.email ?? '').toLowerCase();
+        return firstName.contains(filter) ||
+            lastName.contains(filter) ||
+            email.contains(filter);
+      }).toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+  Future<Object> fetchLinkFromAPI() async {
+    // Trigger the sendInvite method from ProfileProvider
+    await ref
+        .read(profileProvider.notifier)
+        .generateInviteLinkFromCurrentUser();
+    // final org = ref.watch(getOrganisationProvider);
+    // await ref
+    //     .read(profileProvider.notifier)
+    //     .generateInviteLink(orgId: org.organisationId.toString());
+
+    // Check the inviteResponse state
+    final inviteResponse = ref.read(profileProvider).inviteLink;
+    return inviteResponse;
   }
 
   void showCustomToast(BuildContext context, String message) {
@@ -52,29 +100,16 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.members,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 12,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.members,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
               ),
@@ -93,8 +128,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-               Text(
-                  AppLocalizations.of(context)!.inviteLinkDescr),
+              Text(AppLocalizations.of(context)!.inviteLinkDescr),
               SizedBox(
                 height: 10.h,
               ),
@@ -105,27 +139,35 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     border: Border.all(
                         color: GlobalColors.borderColor, width: 0.7)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
                   children: [
-                    asyncLinkValue.when(
-                      data: (link) =>
-                          Text(link ?? "No link "),
-                      loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
-                      error: (e, st) {
-                        return  Center(
+                    Expanded(
+                      child: asyncLinkValue.when(
+                        data: (inviteLink) => Padding(
+                          padding: const EdgeInsets.only(bottom: 9.0),
                           child: Text(
-                              AppLocalizations.of(context)!.errorFetchingLink),
-                        );
-                      },),
+                            inviteLink ?? "No link ",
+                            softWrap: true,
+                          ),
+                        ),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                        error: (e, st) {
+                          return Center(
+                            child: Text(AppLocalizations.of(context)!
+                                .errorFetchingLink),
+                          );
+                        },
+                      ),
+                    ),
                     Row(
                       children: [
                         IconButton(
                             onPressed: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
-                                  Share.share(link);  // Share the link
+                                  Share.share(link); // Share the link
                                 }
                               });
                             },
@@ -137,8 +179,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                             onPressed: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
-                                  Clipboard.setData(ClipboardData(text: link));  // Copy the link
-                                  showCustomToast(context, AppLocalizations.of(context)!.copyLink);
+                                  Clipboard.setData(ClipboardData(
+                                      text: link)); // Copy the link
+                                  showCustomToast(context,
+                                      AppLocalizations.of(context)!.copyLink);
                                 }
                               });
                             },
@@ -169,12 +213,13 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
                   ),
+                  controller: searchController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                       child:
-                      Icon(Icons.search, color: GlobalColors.gray200Color),
+                          Icon(Icons.search, color: GlobalColors.gray200Color),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -196,29 +241,41 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 5,
               ),
               asyncMembersValue.when(
-                  loading: () => const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                  error: (e, st) {
-                    return  Center(
-                      child: Text(
-                          AppLocalizations.of(context)!.errorFetchingMembers),
-                    );
-                  },
-                  data: (members) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomAvatar(
-                          memberDetail: members?[index] ?? organisationMembers[index],
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (e, st) {
+                  return Center(
+                    child: Text(
+                        AppLocalizations.of(context)!.errorFetchingMembers),
+                  );
+                },
+                data: (members) {
+                  if (organisationMembers.isEmpty) {
+                    setState(() {
+                      organisationMembers = members ?? [];
+                      filteredMembers = organisationMembers;
+                    });
+                  }
+
+                  return filteredMembers.isEmpty
+                      ? Center(
+                          child: Text(
+                              '${context.noResultFound} "${searchController.text}"'))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomAvatar(
+                              memberDetail: filteredMembers[index],
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
+                          itemCount: filteredMembers.length,
                         );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const Divider();
-                      },
-                      itemCount: members?.length ?? organisationMembers.length,
-                    );
-                  })
+                },
+              )
             ])),
       ),
     );

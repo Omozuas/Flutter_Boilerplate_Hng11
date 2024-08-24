@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../common_models/get_user_response.dart';
 import 'service_locator.dart';
@@ -14,8 +15,8 @@ class UserService {
   bool isUserLoggedIn = false;
   bool isUserOrganization = true;
 
-  change(bool? userType, BuildContext context)async{
-    isUserOrganization = userType??true;
+  change(bool? userType, BuildContext context) async {
+    isUserOrganization = userType ?? true;
     storageService.write("userType", isUserOrganization);
   }
 
@@ -78,6 +79,13 @@ class UserService {
     box.remove('accessToken');
     box.remove('user');
     initializer();
+    final googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+      ],
+    );
+    googleSignIn.signOut();
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // await prefs.clear();
     // await storageService.deleteItem(key: DbTable.USER_TABLE_NAME);

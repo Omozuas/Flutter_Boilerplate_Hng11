@@ -13,13 +13,13 @@ Future<bool> updateToCart(Product product) async {
     if (data.isEmpty) {
       showSnackBar("Cart is empty");
       return false;
-    }else{
-      if(data.any((cart)=> cart.id == product.id)){
-        int index = data.indexWhere((e)=> e.id == product.id);
+    } else {
+      if (data.any((cart) => cart.id == product.id)) {
+        int index = data.indexWhere((e) => e.id == product.id);
         data[index] = product;
         storage.write("cart_items", getProductListFromJsontoString(data));
         return true;
-      }else {
+      } else {
         showSnackBar("Item not in cart");
         return false;
       }

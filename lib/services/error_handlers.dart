@@ -25,7 +25,9 @@ class ErrorHandlers {
         break;
 
       case DioExceptionType.badResponse:
-        _serverErrorHandler(error.response!);
+        {
+          _serverErrorHandler(error.response!);
+        }
         break;
 
       case DioExceptionType.badCertificate:
@@ -47,19 +49,20 @@ class ErrorHandlers {
   }
 
   static void _serverErrorHandler(Response response) {
-    log('Server related Error caught ::::::: ${response.toString()}');
+    log('serverE1${response.data}');
 
     if (response.data != null) {
-      log('llhhhhhhh');
-      try {
-        showSnackBar(response.data['message'].toString());
-      } catch (e) {
-        showSnackBar('Seems something happened. ');
+      try{
+        showSnackBar(response.data['message']);
+      }
+      catch(e){
+        showSnackBar('Seems something happened');
       }
     } else {
       showSnackBar('Seems something happened');
     }
 
+    log('serverE2${response.toString()}');
     switch (response.statusCode) {
       case 400:
       case 401:

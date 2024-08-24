@@ -22,19 +22,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((t) async {
-      // if (box.read('accessToken') == null) {
-      //   context.go(AppRoute.singleUserSignUp);
-      // } else {
-      //   if (box.read('rememberMe') != null && box.read('rememberMe')) {
-      //     ref.read(authProvider.notifier).login({
-      //       "email": box.read('email'),
-      //       "password": box.read('password')
-      //     }, context, fromLoginScreen: false);
-      //   } else {
-      //     context.go(AppRoute.login);
-      //   }
-      // }
-
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
         return;
@@ -48,9 +35,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       ref.read(authProvider.notifier).loadStoredUser().then(
         (successful) {
           if (successful) {
-            context.go(AppRoute.home);
+            if (mounted) {
+              context.go(AppRoute.home);
+            }
           } else {
-            context.go(AppRoute.login);
+            if (mounted) {
+              context.go(AppRoute.login);
+            }
           }
         },
       );
@@ -61,6 +52,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +68,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             height: 20.h,
           ),
           Text(
-            'HNG Boilerplate',
+            'HNG Boilerplate', // Localized app name
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24.sp,

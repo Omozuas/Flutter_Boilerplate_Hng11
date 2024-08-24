@@ -10,6 +10,7 @@ import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_by_catetory_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/product_details_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_screen.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisa
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscription_checkout.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
+
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/edit_profile_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/language_and_region_screen.dart';
@@ -27,6 +29,8 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_p
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
@@ -133,6 +137,13 @@ class AppRouter {
           return const SubscriptionsScreen();
         },
       ),
+      // ConsumerGoRoute(
+      //   path: AppRoute.upgradePlanCheckout,
+      //   builder: (context, state, ref) {
+      //     final plan = state.extra as SubscriptionPlan;
+      //     return UpgradePlanCheckoutScreen(plan: plan);
+      //   },
+      // ),
       ConsumerGoRoute(
         path: AppRoute.languageAndRegionScreen,
         builder: (context, state, ref) {
@@ -168,6 +179,12 @@ class AppRouter {
         path: AppRoute.notification,
         builder: (context, state, ref) {
           return const NotificationHomeScreen();
+        },
+      ),
+      ConsumerGoRoute(
+        path: AppRoute.productsByCategory,
+        builder: (context, state, ref) {
+          return const ProductsByCategory();
         },
       ),
       StatefulShellRoute.indexedStack(
@@ -239,6 +256,8 @@ class AppRoute {
   static const String subscriptionsScreen =
       '/org-settings/subscriptions-screen';
 
+  static const String upgradePlanCheckout = '/upgrade-plan-checkout';
+
   static const String languageAndRegionScreen =
       '/profile-settings/language-and-region-screen';
   static const String editProfileScreen =
@@ -246,4 +265,5 @@ class AppRoute {
   static const String notificationScreen =
       '/profile-settings/notification_screen';
   static const String updatePassword = '/profile-settings/update_password';
+  static const String productsByCategory = '/products-by-category';
 }
