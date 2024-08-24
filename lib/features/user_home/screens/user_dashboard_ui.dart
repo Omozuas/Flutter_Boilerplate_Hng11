@@ -7,6 +7,7 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_p
 import 'package:flutter_boilerplate_hng11/features/user_home/provider/user.home.provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/app_images.dart';
 import 'package:flutter_boilerplate_hng11/utils/cart_utils/cart_functions.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/shimmer_loaders.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,7 +53,7 @@ class UserDashBoardScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Welcome Back!",
+                    context.welcomeBack,
                     style: CustomTextStyles.productSmallBodyTextBlack
                         .copyWith(color: const Color(0xFF71717A)),
                   ),
@@ -88,14 +89,14 @@ class UserDashBoardScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Discover',
+                  context.discover,
                   style: CustomTextStyles.headerTextBlack,
                 ),
                 16.h.sbH,
                 CustomTextField(
                   controller: dashboardProvider.searchController,
                   onChanged: dashboardProvider.searchProduct,
-                  hintText: "Search Product",
+                  hintText: context.searchProduct,
                   prefixIcon: Icon(
                     CupertinoIcons.search,
                     size: 24.sp,
@@ -115,14 +116,14 @@ class UserDashBoardScreen extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            "Products",
+                            context.product,
                             style: CustomTextStyles.titleTextBlack,
                           ),
                           const Spacer(),
                           TextButton(
                             onPressed: () {},
                             child: Text(
-                              'See more',
+                              context.seeMore,
                               style: CustomTextStyles.productTextBodyBlack,
                             ),
                           )
@@ -136,7 +137,7 @@ class UserDashBoardScreen extends ConsumerWidget {
                                   dashboardProvider.displayedProducts.isEmpty
                               ? Center(
                                   child: Text(
-                                    "No products available.",
+                                    context.noProductAvailable,
                                     style:
                                         CustomTextStyles.productTextBodyBlack,
                                   ),
