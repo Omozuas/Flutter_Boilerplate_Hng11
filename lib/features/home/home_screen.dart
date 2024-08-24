@@ -298,11 +298,12 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
+// The SalesData class represents the data for each bar in the chart
 class SalesData {
-  final String month;
-  final int veryGood;
-  final int good;
-  final int poor;
-
   SalesData(this.month, this.veryGood, this.good, this.poor);
+
+  final String month;
+  final double veryGood;
+  final double good;
+  final double poor;
 }

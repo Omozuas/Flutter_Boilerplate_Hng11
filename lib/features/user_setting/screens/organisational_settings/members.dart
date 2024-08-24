@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -8,13 +7,13 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../utils/widgets/custom_avatar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../provider/profile_provider.dart';
 
 class MembersSettings extends ConsumerStatefulWidget {
@@ -29,7 +28,6 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   List<Members> organisationMembers = [
     /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
     Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
-   
   ];
   List<Members> filteredMembers = [];
   TextEditingController searchController = TextEditingController();
@@ -41,15 +39,11 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     filteredMembers = organisationMembers;
     searchController.addListener(filterMembers);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final org = ref.watch(getOrganisationProvider);
-      ref
-          .read(profileProvider.notifier)
-          .getOrganisationMembers(orgId: org.organisationId.toString());
-      Future(() {
-        fetchLinkFromAPI();
-      });
+      ref.read(profileProvider.notifier).getOrganisationMembers();
+      ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
     });
   }
+
   void filterMembers() {
     final filter = searchController.text.toLowerCase();
     setState(() {
@@ -69,6 +63,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     searchController.dispose();
     super.dispose();
   }
+
   Future<Object> fetchLinkFromAPI() async {
     // Trigger the sendInvite method from ProfileProvider
     await ref
@@ -113,6 +108,11 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    height: 24 / 12,
+                    color: GlobalColors.darkOne),
               ),
               Divider(
                 color: GlobalColors.borderColor,
@@ -129,12 +129,20 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-              Text(AppLocalizations.of(context)!.inviteLinkDescr),
+              Text(
+                AppLocalizations.of(context)!.inviteLinkDescr,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    height: 24 / 12,
+                    color: GlobalColors.darkOne),
+              ),
               SizedBox(
                 height: 10.h,
               ),
               Container(
-                padding: const EdgeInsets.only(top: 8, left: 8),
+                padding: const EdgeInsets.only(
+                    top: 10, left: 8, bottom: 10, right: 8),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
@@ -144,12 +152,14 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   children: [
                     Expanded(
                       child: asyncLinkValue.when(
-                        data: (inviteLink) => Padding(
-                          padding: const EdgeInsets.only(bottom: 9.0),
-                          child: Text(
-                            inviteLink ?? "No link ",
-                            softWrap: true,
-                          ),
+                        data: (inviteLink) => Text(
+                          inviteLink ?? "No link ",
+                          softWrap: true,
+                          style: TextStyle(
+                              color: GlobalColors.integrationTextColor,
+                              decoration: TextDecoration.underline,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
                         ),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
@@ -163,21 +173,26 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                            onPressed: () {
+                        GestureDetector(
+                            onTap: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
                                   Share.share(link); // Share the link
                                 }
                               });
                             },
-                            icon: Icon(
-                              Icons.share,
-                              color: GlobalColors.orange,
+                            child: SvgPicture.asset(
+                              'assets/icons/ShareNetwork.svg',
+                              height: 25.h,
+                              width: 25.w,
                             )),
-                        IconButton(
-                            onPressed: () {
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        GestureDetector(
+                            onTap: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
                                   Clipboard.setData(ClipboardData(
@@ -187,9 +202,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                                 }
                               });
                             },
-                            icon: Icon(
-                              Icons.copy,
-                              color: GlobalColors.orange,
+                            child: SvgPicture.asset(
+                              'assets/icons/Copy.svg',
+                              height: 25.h,
+                              width: 25.w,
                             ))
                       ],
                     )
@@ -197,7 +213,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               Divider(
                 thickness: 1,
@@ -207,7 +223,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 24,
               ),
               SizedBox(
-                height: 40,
+                height: 45.h,
                 width: double.infinity,
                 child: TextField(
                   style: GoogleFonts.inter(
@@ -219,10 +235,20 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                      child:
-                          Icon(Icons.search, color: GlobalColors.gray200Color),
+                      child: Icon(
+                        Icons.search_outlined,
+                        color: GlobalColors.darkOne,
+                        size: 20,
+                      ),
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: GlobalColors
+                            .borderColor, // Not selected (unfocused) color
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
                         color: GlobalColors.borderColor,
@@ -234,10 +260,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 ),
               ),
               SizedBox(height: 10.w),
-              SizedBox(
-                height: 10.h,
+              const SizedBox(
+                height: 24,
               ),
-              const Divider(),
               const SizedBox(
                 height: 5,
               ),

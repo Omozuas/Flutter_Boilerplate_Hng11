@@ -59,6 +59,14 @@ extension Translation on BuildContext {
   String get passwordUpperCase => text.passwordUpperCase;
   String get passwordOneNumber => text.passwordOneNumber;
 
+  String get productDescription => text.productDescription;
+  String get addAProduct => text.addAProduct;
+
+  String get noResultFound => text.noResultFound;
+  String get continueWithGoogle => text.continueWithGoogle;
+  String get description => text.description;
+  String get inStock => text.inStock;
+
   String get addProductFailure => 'Failed to add product:';
   String get productFormIncomplete => 'Please Complete form fill';
   String get ok => 'Ok';
@@ -72,16 +80,14 @@ extension Translation on BuildContext {
   String get quantity => 'Quantity';
   String get cancel => 'Cancel';
   String get add => 'Add';
-  String get noResultFound => 'No Result Found';
+
 
   ///Auth texts
-  String get continueWithGoogle => "Continue with Google";
-
-  /// Product texts are below
-  String get description => "Description";
-  String get inStock => "In Stock";
-  String get productDescription => "Product Description";
-  String get addAProduct => "Add a Product";
 
 
+ 
+
+
+  String get logoutConfirmation =>
+      'Are you sure you want to logout from this Device.';
 }
