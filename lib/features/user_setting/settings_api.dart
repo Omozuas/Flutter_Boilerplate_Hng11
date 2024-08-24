@@ -166,7 +166,8 @@ class SettingsApi {
     try {
       final response = await dio.get('/organisations/$orgId/users');
       List<dynamic> usersJson = response?.data['data']['users'];
-      return usersJson.map((json) => Members.fromJson(json)).toList();
+      final members = usersJson.map((json) => Members.fromJson(json)).toList();
+      return members;
     } catch (e) {
       rethrow;
     }

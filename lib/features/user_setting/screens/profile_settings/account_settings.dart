@@ -83,7 +83,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 Text(
                                   user?.email ?? '',
                                   style: CustomTextStyle.regular(
-                                    fontSize: 14.sp,
+                                    fontSize: 12.sp,
                                     color: const Color(0xff525252),
                                   ),
                                 ),
@@ -193,11 +193,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                   await userService.logout();
                                   if (!ctx.mounted) return;
                                   Navigator.pop(ctx);
+                                  if (!context.mounted) return;
+                                  context.go(AppRoute.login);
                                 },
                               ),
                             );
-                            if (!context.mounted) return;
-                            context.go(AppRoute.login);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
