@@ -9,6 +9,8 @@ import '../../../../utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../auth/providers/language_provider.dart';
 
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
@@ -131,7 +133,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Language',
+              placeholder: context.language,
               onChanged: (value) {
                 setState(() {
                   selectedLanguage = value;
@@ -163,7 +165,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Region',
+              placeholder: context.region,
               onChanged: (value) {
                 setState(() {
                   selectedRegion = value;
@@ -190,7 +192,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Time-Zone',
+              placeholder: context.timeZone,
               onChanged: (value) {
                 setState(() {
                   selectedTimeZone = value;
