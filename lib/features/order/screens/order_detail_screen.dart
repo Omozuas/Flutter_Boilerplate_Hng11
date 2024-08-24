@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   const OrderDetailScreen({
     super.key,
-    required this.name,
-    required this.image,
-    required this.price,
+    required this.order,
+    // required this.name,
+    // required this.image,
+    // required this.price,
   });
 
-  final String name;
-  final String image;
-  final num price;
+  final Order order;
+  // final String image;
+  // final num price;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class OrderDetailScreen extends StatelessWidget {
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(12.r),
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(image),
+                  image: CachedNetworkImageProvider(order.image),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -46,20 +48,18 @@ class OrderDetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  name,
+                  order.deliveryText,
                   style:
-                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
-                  // style:
-                  //     TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),
                 ),
-                Text(
-                  '\$${price.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                      fontSize: 20.0, fontWeight: FontWeight.w600),
-                ),
+                // Text(
+                //   '\$${order.toStringAsFixed(2)}',
+                //   style: const TextStyle(
+                //       fontSize: 20.0, fontWeight: FontWeight.w600),
+                // ),
               ],
             ),
-            15.h.sbH,
+            10.h.sbH,
             const Divider(),
             const Text(
               'Order information',
@@ -107,14 +107,14 @@ class OrderDetailScreen extends StatelessWidget {
             ),
             4.h.sbH,
             const Text(
-              'Phone no: +2349012345678',
+              'Phone no: +12345678901',
               style: TextStyle(
                 fontSize: 15.0,
               ),
             ),
             4.h.sbH,
             const Text(
-              'Alternate phone no: +2349012567804',
+              'Alternate phone no: +12378415690',
               style: TextStyle(
                 fontSize: 15.0,
               ),
