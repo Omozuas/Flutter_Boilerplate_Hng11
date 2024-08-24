@@ -17,6 +17,8 @@ import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/ref_extension.dart';
 
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({
     super.key,
@@ -57,7 +59,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         titleSpacing: -6.sp,
         leading: const ChevronBackButton(),
         title: Text(
-          'Notification',
+          context.notification,
           style:
               GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
         ),
