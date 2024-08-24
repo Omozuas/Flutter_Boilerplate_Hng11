@@ -140,11 +140,11 @@ class SettingsApi {
     }
   }
 
-  Future<String> generateInviteLink({required String orgID}) async {
+  Future<String> generateInviteLink({required String orgId}) async {
     try {
-      final response = await dio.get(
-          'https://staging.api-csharp.boilerplate.hng.tech/api/v1/organisations/$orgID/invites');
-      return response?.data['data']['invite_link'];
+      final response =
+          await dio.post('/invite/generate', data: {'organizationId': orgId});
+      return response?.data['data']['inviteLink'];
     } catch (e) {
       rethrow;
     }
@@ -162,7 +162,7 @@ class SettingsApi {
 
   Future<List<Members>> getOrganisationMembers({required String orgId}) async {
     try {
-      final response = await dio.get('organisations/$orgId/users');
+      final response = await dio.get('/organisations/$orgId/users');
       List<dynamic> usersJson = response?.data['data']['users'];
       return usersJson.map((json) => Members.fromJson(json)).toList();
     } catch (e) {
