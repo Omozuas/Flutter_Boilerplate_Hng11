@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/user_model.dart';
 import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
@@ -81,18 +79,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        surfaceTintColor: Colors.transparent,
-        titleSpacing: -6.sp,
-        leading: const ChevronBackButton(),
-        title: Text(
-          context.text.editProfile,
-          style: CustomTextStyle.semiBold(
-            fontSize: 16.sp,
-            color: GlobalColors.iconColor,
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.editProfile,
       ),
       body: SingleChildScrollView(
         child: Form(

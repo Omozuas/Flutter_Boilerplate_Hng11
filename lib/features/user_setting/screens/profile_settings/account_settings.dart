@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
@@ -38,21 +39,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final user = ref.watch(profileProvider).user.sureValue;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 1.0), // Adjust this padding to align with the avatar
-            child: Text(
-              context.text.settings,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.text.settings,
       ),
       body: asyncUser.maybeWhen(
         skipError: true,

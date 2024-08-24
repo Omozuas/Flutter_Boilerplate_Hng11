@@ -3,13 +3,14 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/provider/add_product_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_category.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_images.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
@@ -173,25 +174,8 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
     return LoadingOverlay(
       isLoading: state.isLoading,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: GlobalColors.white,
-          centerTitle: true,
-          leading: const ChevronBackButton(),
-          title: Text(
-            'Add a Product',
-            style: CustomTextStyle.semiBold(
-              color: GlobalColors.blackColor,
-              fontSize: 14.sp,
-            ),
-          ),
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              color: GlobalColors.diverColor,
-              height: 1.0,
-            ),
-          ),
+        appBar: CustomAppBar.simpleTitle(
+          titleText: context.addAProduct,
         ),
         body: SingleChildScrollView(
           child: Center(
