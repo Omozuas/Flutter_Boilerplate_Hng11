@@ -193,11 +193,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                   await userService.logout();
                                   if (!ctx.mounted) return;
                                   Navigator.pop(ctx);
+                                  if (!context.mounted) return;
+                                  context.go(AppRoute.login);
                                 },
                               ),
                             );
-                            // if (!context.mounted) return;
-                            // context.go(AppRoute.login);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
