@@ -171,7 +171,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                           style: TextStyle(color: GlobalColors.black),
                           children: <TextSpan>[
                             TextSpan(
-                              text: localizations.login,
+                              text: " ${localizations.login}",
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
