@@ -37,6 +37,7 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen> {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: context.text.subscriptionPlan,
+        showDivider: false,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator.adaptive())
