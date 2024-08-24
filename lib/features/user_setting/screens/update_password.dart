@@ -17,7 +17,6 @@ import 'package:one_context/one_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../utils/validator.dart';
 
-
 class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
 
@@ -193,28 +192,32 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextField(
-                            label:  context.currentPassword,
-                             controller: currentPasswordController,
-                            obscureText: !currentPasswordVissible,
-                             hintText: context.enterCurrentPassword,
-                              borderRadius: 8.r,
-                              focusedBorderColor: GlobalColors.borderColor,
-                                validator: Validators.passwordValidator,
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  currentPasswordVissible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off_outlined,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      currentPasswordVissible =
-                                          !currentPasswordVissible;
-                                    },
-                                  );
-                                },),
-                           ),
+                      label: context.currentPassword,
+                      controller: currentPasswordController,
+                      obscureText: !currentPasswordVissible,
+                      hintText: context.enterCurrentPassword,
+                      borderRadius: 8.r,
+                      focusedBorderColor: GlobalColors.borderColor,
+                      validator: Validators.passwordValidator,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          currentPasswordVissible
+                              ? Icons.visibility
+                              : Icons.visibility_off_outlined,
+                          color: currentPasswordVissible
+                              ? GlobalColors.dark2
+                              : GlobalColors.borderColor,
+                        ),
+                        onPressed: () {
+                          setState(
+                            () {
+                              currentPasswordVissible =
+                                  !currentPasswordVissible;
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     CustomTextField(
                       label: AppLocalizations.of(context)!.newPassword,
                       controller: newPasswordController,
@@ -233,7 +236,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           newPasswordVissible
                               ? Icons.visibility
                               : Icons.visibility_off_outlined,
-                          color: GlobalColors.borderColor,
+                          color: newPasswordVissible
+                              ? GlobalColors.dark2
+                              : GlobalColors.borderColor,
                         ),
                         onPressed: () {
                           setState(
@@ -348,42 +353,46 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       ),
                     ],
                     // Password strength and criteria section ends here
-                    
-                     CustomTextField(
+
+                    CustomTextField(
                       label: AppLocalizations.of(context)!.confirmNewPassword,
-                       focusNode: confirmPasswordFocusNode,
-                            controller: confirmPasswordController,
-                            obscureText: !confPasswordVissible,
-                            validator: Validators.passwordValidator,
-                            onchanged: (value) => validatePasswords(),
+                      focusNode: confirmPasswordFocusNode,
+                      controller: confirmPasswordController,
+                      obscureText: !confPasswordVissible,
+                      validator: Validators.passwordValidator,
+                      onchanged: (value) => validatePasswords(),
                       borderRadius: 8.r,
-                   hintText: AppLocalizations.of(context)!
-                                  .confirmNewPassword,
-                              errorText: passwordsMatch
-                                  ? null
-                                  : AppLocalizations.of(context)!
-                                      .passwordDoNotMatch,
-                      focusedBorderColor:   passwordsMatch
-                                      ? GlobalColors.borderColor
-                                      : const Color(0xffdc2626),
-                     borderColor: passwordsMatch
-                                      ? GlobalColors.darkOne
-                                      : const Color(0xffE80D0D),
-                       suffixIcon: IconButton(
-                                icon: Icon(
-                                  confPasswordVissible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off_outlined,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      confPasswordVissible =
-                                          !confPasswordVissible;
-                                    },
-                                  );
-                                },
-                              ),
+                      hintText:
+                          AppLocalizations.of(context)!.confirmNewPassword,
+                      errorText: passwordsMatch
+                          ? null
+                          : AppLocalizations.of(context)!.passwordDoNotMatch,
+                      focusedBorderColor: passwordsMatch
+                          ? GlobalColors.borderColor
+                          : const Color(0xffdc2626),
+                      borderColor: passwordsMatch
+                          ? GlobalColors.borderColor
+                          : const Color(0xffE80D0D),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          confPasswordVissible
+                              ? Icons.visibility
+                              : Icons.visibility_off_outlined,
+                          color: confPasswordVissible
+                              ? GlobalColors.dark2
+                              : GlobalColors.borderColor,
+                        ),
+                        onPressed: () {
+                          setState(
+                            () {
+                              confPasswordVissible = !confPasswordVissible;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.h,
                     ), // Button section starts here.
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

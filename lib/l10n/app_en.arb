@@ -258,7 +258,7 @@
       "atLeastEightCharacters": "At least 8 characters",
       "confirmNewPassword": "Confirm new password",
       "passwordDoNotMatch": "Passwords do not match",
-      "update": "Update",
+      "update": "Update password",
       "deleteMember": "Delete Member",
       "deleteUser": "Are you sure you want to delete Chad Bosewick? All data will be permanently removed. This action cannot be undone.",
       "confirmLogOut": "Are you sure you want to logout from this device?",
