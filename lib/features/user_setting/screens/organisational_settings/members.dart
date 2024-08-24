@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/services.dart';
 
@@ -67,45 +69,70 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           AppLocalizations.of(context)!.members,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
+          style: CustomTextStyle.bold(
+            fontSize: 16.sp,
+            color: GlobalColors.iconColor,
           ),
+
+          // const TextStyle(
+          //   fontSize: 16,
+          //   fontWeight: FontWeight.w700,
+          // ),
         ),
         leading: const ChevronBackButton(),
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: CustomTextStyle.regular(
+                  fontSize: 13.sp,
+                  color: GlobalColors.black400,
+                ),
               ),
+              SizedBox(height: 12.h),
               Divider(
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
               SizedBox(
-                height: 10.h,
+                height: 12.h,
               ),
-              Text(
-                AppLocalizations.of(context)!.inviteLink,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    height: 16.94 / 14,
-                    fontSize: 14,
-                    color: GlobalColors.integrationTextColor),
-              ),
-              Text(AppLocalizations.of(context)!.inviteLinkDescr),
+              Text(AppLocalizations.of(context)!.inviteLink,
+                  style: CustomTextStyle.bold(
+                    fontSize: 14.sp,
+                    color: GlobalColors.integrationTextColor,
+                  )
+                  // TextStyle(
+                  //     fontWeight: FontWeight.w700,
+                  //     height: 16.94 / 14,
+                  //     fontSize: 14,
+                  //     color: GlobalColors.integrationTextColor),
+                  ),
               SizedBox(
-                height: 10.h,
+                width: 276.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLinkDescr,
+                  style: CustomTextStyle.regular(
+                    fontSize: 12.sp,
+                    color: GlobalColors.darkOne,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16.h,
               ),
               Container(
-                padding: const EdgeInsets.only(top: 8, left: 8),
+                height: 61.h,
+                width: double.infinity,
+                // padding: const EdgeInsets.only(top: 8, left: 8),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
@@ -113,52 +140,68 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 child: Row(
                   // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
                   children: [
-                    Expanded(
+                    SizedBox(
+                      height: 39.w,
+                      width: 270.w,
                       child: asyncLinkValue.when(
-                        data: (inviteLink) => Text(
-                          inviteLink ?? "No link ",
-                          softWrap: true,
-                        ),
+                        data: (inviteLink) => Text(inviteLink ?? "No link ",
+                            softWrap: true,
+                            style: CustomTextStyle.medium(
+                              fontSize: 10.sp,
+                              color: GlobalColors.dark2,
+                            )),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
                         ),
                         error: (e, st) {
                           return Center(
-                            child: Text(AppLocalizations.of(context)!
-                                .errorFetchingLink),
+                            child: Text(
+                                AppLocalizations.of(context)!.errorFetchingLink,
+                                style: CustomTextStyle.medium(
+                                  fontSize: 10.sp,
+                                  color: GlobalColors.dark2,
+                                )),
                           );
                         },
                       ),
                     ),
                     Row(
                       children: [
-                        IconButton(
-                            onPressed: () {
+                        SizedBox(
+                          height: 24.h,
+                          width: 24.w,
+                          child: InkWell(
+                            onTap: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
                                   Share.share(link); // Share the link
                                 }
                               });
                             },
-                            icon: Icon(
-                              Icons.share,
-                              color: GlobalColors.orange,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              asyncLinkValue.whenData((link) {
-                                if (link != null) {
-                                  Clipboard.setData(ClipboardData(
-                                      text: link)); // Copy the link
-                                  showCustomToast(context,
-                                      AppLocalizations.of(context)!.copyLink);
-                                }
-                              });
-                            },
-                            icon: Icon(
-                              Icons.copy,
-                              color: GlobalColors.orange,
-                            ))
+                            child: SvgPicture.asset(
+                                "assets/images/svg/shareIcon.svg"),
+                          ),
+                        ),
+                        SizedBox(width: 5.5.w),
+                        SizedBox(
+                          height: 24.h,
+                          width: 24.w,
+                          child: InkWell(
+                              onTap: () {
+                                asyncLinkValue.whenData((link) {
+                                  if (link != null) {
+                                    Clipboard.setData(ClipboardData(
+                                        text: link)); // Copy the link
+                                    showCustomToast(context,
+                                        AppLocalizations.of(context)!.copyLink);
+                                  }
+                                });
+                              },
+                              child: SvgPicture.asset(
+                                "assets/images/svg/copyIcon.svg",
+                                fit: BoxFit.contain,
+                              )),
+                        ),
                       ],
                     )
                   ],
@@ -174,37 +217,52 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               const SizedBox(
                 height: 24,
               ),
-              SizedBox(
-                height: 40,
-                width: double.infinity,
-                child: TextField(
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                      child:
-                          Icon(Icons.search, color: GlobalColors.gray200Color),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                        color: GlobalColors.borderColor,
-                      ),
-                    ),
-                    prefixIconConstraints: const BoxConstraints(),
-                    contentPadding: const EdgeInsets.only(top: 8.0),
+              CustomTextField(
+                hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
+                hintTextStyle: CustomTextStyle.regular(
+                  fontSize: 14.sp,
+                  color: GlobalColors.darkOne,
+                ),
+                prefixIcon: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  height: 24.h,
+                  width: 24.w,
+                  child: SvgPicture.asset(
+                    "assets/images/svg/searchIcon.svg",
+                    fit: BoxFit.contain,
                   ),
                 ),
+
+                // TextField(
+                //   style: GoogleFonts.inter(
+                //     fontWeight: FontWeight.w400,
+                //     fontSize: 15,
+                //   ),
+                //   decoration: InputDecoration(
+                //     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
+                //     prefixIcon: Padding(
+                //       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                //       child: SvgPicture.asset(
+                //         "assets/images/svg/searchIcon.svg",
+                //         fit: BoxFit.contain,
+                //       ),
+                //       // Icon(Icons.search, color: GlobalColors.gray200Color),
+                //     ),
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(8),
+                //       borderSide: BorderSide(
+                //         color: GlobalColors.borderColor,
+                //       ),
+                //     ),
+                //     prefixIconConstraints: const BoxConstraints(),
+                //     contentPadding: const EdgeInsets.only(top: 8.0),
+                //   ),
+                // ),
               ),
-              SizedBox(height: 10.w),
               SizedBox(
-                height: 10.h,
+                height: 24.h,
               ),
-              const Divider(),
+              // const Divider(),
               const SizedBox(
                 height: 5,
               ),
