@@ -1,4 +1,6 @@
-class StringManager {
+import 'package:flutter/cupertino.dart';
+
+extension StringManager on BuildContext {
   static const String signUp = 'Sign up';
   static const String subscriptions = 'Subscriptions';
   static const String createAnAccount =

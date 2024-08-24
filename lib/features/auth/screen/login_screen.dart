@@ -2,7 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
-// import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -82,7 +83,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 48.h,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.login,
+                   context.login,
                     style: CustomTextStyle.semiBold(
                       fontSize: 24.sp,
                       color: GlobalColors.iconColor,
