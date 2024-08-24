@@ -285,6 +285,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                 newPasswordVissible
                                     ? Icons.visibility
                                     : Icons.visibility_off_outlined,
+                                color: GlobalColors.borderColor,
                               ),
                               onPressed: () {
                                 setState(
