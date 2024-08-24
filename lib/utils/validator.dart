@@ -40,7 +40,7 @@ class Validators {
     if (!value.contains(RegExp(r'[0-9]'))) {
       return OneContext().context!.passwordOneNumber;
     }
-    // if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    // if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|s<>]'))) {
     //   return 'Password must contain at least one special character';
     // }
     return null;
