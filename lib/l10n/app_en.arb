@@ -50,7 +50,9 @@
   "home": "Home",
   "products": "Products",
   "cart": "Cart",
-  "settings": "Settings have been saved successfully.",
+
+  "settings": "Settings ",
+
   "deliveryAddress": "Delivery Address",
   "addToCart": "Add to Cart",
   "profile": "Profile",
