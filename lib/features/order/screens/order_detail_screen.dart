@@ -11,6 +11,7 @@ import 'package:flutter_boilerplate_hng11/utils/widgets/progress_colour.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../gen/assets.gen.dart';
+import '../../../utils/custom_text_style.dart';
 import '../../../utils/widgets/divider.dart';
 import '../../../utils/widgets/list_tile.dart';
 
@@ -32,8 +33,12 @@ class OrderDetailScreen extends StatelessWidget {
       backgroundColor: GlobalColors.white,
       appBar: AppBar(
         leading: const ChevronBackButton(),
-        title: const Text('Order Details'),
-        centerTitle: true,
+        title: Text(
+          context.orderDetails,
+          style:
+              CustomTextStyle.medium(fontSize: 18, color: GlobalColors.black),
+        ),
+        centerTitle: false,
       ),
       body: SingleChildScrollView(
         child: Column(

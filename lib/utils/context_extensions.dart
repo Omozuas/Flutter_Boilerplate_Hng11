@@ -29,5 +29,6 @@ extension Translation on BuildContext {
   String get shippingCost =>  "Shipping Cost";
   String get tot =>  "Total";
   String get resendInvoice =>  "Resend Invoice";
+  String get orderDetails =>  "Order Details";
 
 }
