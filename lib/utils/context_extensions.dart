@@ -43,4 +43,7 @@ extension Translation on BuildContext {
   String get addAProduct => text.addAProduct;
   String get orderDetails => text.orderDetails;
 
+
+  String get noResultFound => 'No result found';
+
 }
