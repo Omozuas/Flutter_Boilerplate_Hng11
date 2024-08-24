@@ -35,39 +35,34 @@ class CartState {
     num? deliveryFee,
   }) {
     return CartState(
-    cartLoading: cartLoading ?? this.cartLoading,
-    allCart: allCart ?? this.allCart,
-    deliveryFee: deliveryFee ?? this.deliveryFee,
-    payPrice: payPrice ?? this.payPrice,
-    discountedPrice: discountedPrice ?? this.discountedPrice,
-    allPrice: allPrice ?? this.allPrice,
-    totalPrice: totalPrice ?? this.totalPrice,
+      cartLoading: cartLoading ?? this.cartLoading,
+      allCart: allCart ?? this.allCart,
+      deliveryFee: deliveryFee ?? this.deliveryFee,
+      payPrice: payPrice ?? this.payPrice,
+      discountedPrice: discountedPrice ?? this.discountedPrice,
+      allPrice: allPrice ?? this.allPrice,
+      totalPrice: totalPrice ?? this.totalPrice,
     );
   }
 }
 
-final cartProvider =
-StateNotifierProvider<CartProvider, CartState>((ref) {
+final cartProvider = StateNotifierProvider<CartProvider, CartState>((ref) {
   return CartProvider();
 });
 
 class CartProvider extends StateNotifier<CartState> {
-
   CartProvider()
       : super(CartState(
-    cartLoading: false,
-    allCart: [],
-    totalPrice: 0,
-    allPrice: 0,
-    discountedPrice: 0,
-    deliveryFee: 1500,
-    payPrice: 0,
-  ));
+          cartLoading: false,
+          allCart: [],
+          totalPrice: 0,
+          allPrice: 0,
+          discountedPrice: 0,
+          deliveryFee: 1500,
+          payPrice: 0,
+        ));
 
-  onChanged(String? val){
-
-  }
-
+  onChanged(String? val) {}
 
   TextEditingController promoCodeController = TextEditingController();
 
@@ -92,16 +87,17 @@ class CartProvider extends StateNotifier<CartState> {
     state = state.copyWith(payPrice: value);
   }
 
-
   getPrice() {
     setTotalPrice = state.allCart.fold(
         0, (sum, item) => sum + ((item.cartQuantity ?? 0) * (item.price ?? 0)));
     setAllPrice = state.allCart.fold(
         0, (sum, item) => sum + ((item.cartQuantity ?? 0) * (item.price ?? 0)));
-    setDiscountedPrice = promoCodeController.text.trim().isEmpty ? 0 : (state.totalPrice * (5 / 100));
-    setPayPrice = (state.totalPrice + state.deliveryFee) - state.discountedPrice;
+    setDiscountedPrice = promoCodeController.text.trim().isEmpty
+        ? 0
+        : (state.totalPrice * (5 / 100));
+    setPayPrice =
+        (state.totalPrice + state.deliveryFee) - state.discountedPrice;
   }
-
 
   set setCartLoading(bool value) {
     state = state.copyWith(cartLoading: value);
@@ -111,10 +107,10 @@ class CartProvider extends StateNotifier<CartState> {
     state = state.copyWith(allCart: value);
   }
 
-  List<Product> cartItems =[];
+  List<Product> cartItems = [];
 
   Stream<List<Product>> getAllCartItems() async* {
-    while(true){
+    while (true) {
       try {
         final res = await getCartItems();
         if (res.isNotEmpty) {
@@ -122,18 +118,15 @@ class CartProvider extends StateNotifier<CartState> {
           cartItems = res;
           getPrice();
           yield res;
-        }
-        else{
+        } else {
           setAllCart = [];
           yield [];
         }
-
       } catch (e) {
         //tODO: Do something with caught error;
       }
       await Future.delayed(const Duration(seconds: 10));
     }
-
   }
 
   Future<void> removeFromCart() async {
@@ -150,19 +143,13 @@ class CartProvider extends StateNotifier<CartState> {
     }
   }
 
-  updateCart(Product product, int quantity)async{
-    try{
-      Product newProduct = product.copyWith(
-        cartQuantity: quantity
-      );
-       await updateToCart(newProduct);
-    }catch(e){
+  updateCart(Product product, int quantity) async {
+    try {
+      Product newProduct = product.copyWith(cartQuantity: quantity);
+      await updateToCart(newProduct);
+    } catch (e) {
       log(e.toString());
       showSnackBar("Error updating ${product.name} to cart");
-    } finally{
-
-    }
+    } finally {}
   }
-
 }
-

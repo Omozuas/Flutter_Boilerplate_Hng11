@@ -9,6 +9,5 @@ extension Translation on BuildContext {
 // String get login => 'Login';
 // In your UI, use this : context.login (importing this context_extension file);
 
-   String get login => 'Login';
+  String get login => 'Login';
 }
-

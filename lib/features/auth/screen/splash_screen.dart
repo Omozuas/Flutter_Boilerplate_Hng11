@@ -23,7 +23,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((t) async {
-
       if (box.read('accessToken') == null) {
         context.go(AppRoute.singleUserSignUp);
         return;
