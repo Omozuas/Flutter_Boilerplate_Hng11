@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -85,24 +86,24 @@ class _MainViewState extends State<MainView> {
           : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
               NavBar.home,
             ),
-            label: 'Home',
+            label: context.home,
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.products),
-            label: 'Products',
+            label: context.text.products,
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.order),
-            label: 'Orders',
+            label: context.orders,
           ),
           BottomNavigationBarItem(
             icon: Icon(NavBar.settings),
-            label: 'Settings',
+            label: context.text.settings,
           ),
         ],
         currentIndex: _bottomBarIndex.value,

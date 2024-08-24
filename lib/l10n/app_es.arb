@@ -375,6 +375,9 @@
     "noResultFound": "No se encontraron resultados",
       "continueWithGoogle": "Continuar con Google",
       "description": "Descripción",
-      "inStock": "En stock"
+      "inStock": "En stock",
+  "orders": "Pedidos",
+    "home": "Inicio",
+    "logoutConfirmation": "¿Está seguro de que desea cerrar sesión en este dispositivo?"
 }
 

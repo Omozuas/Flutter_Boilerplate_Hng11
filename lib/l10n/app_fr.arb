@@ -445,5 +445,8 @@
   "noResultFound": "Aucun résultat trouvé",
     "continueWithGoogle": "Continuer avec Google",
     "description": "Description",
-    "inStock": "En stock"
+    "inStock": "En stock",
+   "orders": "Commandes",
+   "home": "Accueil",
+   "logoutConfirmation": "Êtes-vous sûr de vouloir vous déconnecter de cet appareil ?"
 }

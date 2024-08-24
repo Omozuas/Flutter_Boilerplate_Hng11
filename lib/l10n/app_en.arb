@@ -440,6 +440,9 @@
      "noResultFound": "No result found",
       "continueWithGoogle": "Continue with Google",
       "description": "Description",
-      "inStock": "In Stock"
+      "inStock": "In Stock",
+      "orders": "Orders",
+        "home": "Home",
+        "logoutConfirmation": "Are you sure you want to logout from this Device?"
 }
 

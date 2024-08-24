@@ -401,6 +401,9 @@
   "noResultFound": "未找到结果",
     "continueWithGoogle": "使用 Google 继续",
     "description": "描述",
-    "inStock": "有库存"
+    "inStock": "有库存",
+  "orders": "订单",
+   "home": "首页",
+   "logoutConfirmation": "您确定要退出此设备吗？"
 }
 
