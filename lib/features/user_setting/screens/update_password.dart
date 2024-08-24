@@ -436,11 +436,13 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 20.w),
                             ),
-                            child: Text(
-                              AppLocalizations.of(context)!.update,
-                              style: CustomTextStyle.medium(
-                                fontSize: 14.sp,
-                                color: const Color(0xffffffff),
+                            child: FittedBox(
+                              child: Text(
+                                AppLocalizations.of(context)!.update,
+                                style: CustomTextStyle.medium(
+                                  fontSize: 14.sp,
+                                  color: const Color(0xffffffff),
+                                ),
                               ),
                             ),
                           ),
