@@ -37,9 +37,6 @@ extension Translation on BuildContext {
   String get passwordEightCharacters => text.passwordEightCharacters;
   String get passwordUpperCase => text.passwordUpperCase;
   String get passwordOneNumber => text.passwordOneNumber;
-  String get productDescription => text.productDescription;
-  String get addAProduct => text.addAProduct;
-  String get orderDetails => text.orderDetails;
 
   String get addProductFailure => 'Failed to add product:';
   String get productFormIncomplete => 'Please Complete form fill';
@@ -49,10 +46,19 @@ extension Translation on BuildContext {
   String get anErrorOccured => 'An Error occured';
   String get title => 'Title';
   String get category => 'Category';
-  String get description => 'Description';
   String get descriptionFieldHint => 'Maximum of 72 characters';
   String get standardPrice => 'Standard Price';
   String get quantity => 'Quantity';
   String get cancel => 'Cancel';
   String get add => 'Add';
+
+  ///Auth texts
+  String get continueWithGoogle => "Continue with Google";
+
+  /// Product texts are below
+  String get description => "Description";
+  String get inStock => "In Stock";
+  String get productDescription => "Product Description";
+  String get addAProduct => "Add a Product";
+  String get orderDetails => 'Order Details';
 }
