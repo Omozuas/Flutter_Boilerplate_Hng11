@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
@@ -94,7 +95,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Sign up with Google", // Localized text
+                                  context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
                                       fontSize: 16.sp,
                                       color: GlobalColors.dark2),

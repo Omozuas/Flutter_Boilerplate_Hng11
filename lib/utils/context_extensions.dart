@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 extension Translation on BuildContext {
   AppLocalizations get text => AppLocalizations.of(this)!;
 
-
-
   /// Create a string getter here and call it in your ui using "context.{your-string-name}
 // E.g
 // String get login => 'Login';
@@ -42,8 +40,8 @@ extension Translation on BuildContext {
   String get productDescription => text.productDescription;
   String get addAProduct => text.addAProduct;
   String get orderDetails => text.orderDetails;
-
-
-  String get noResultFound => 'No result found';
-
+  String get noResultFound => text.noResultFound;
+  String get continueWithGoogle => text.continueWithGoogle;
+  String get description => text.description;
+  String get inStock => text.inStock;
 }

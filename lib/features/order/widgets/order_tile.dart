@@ -1,131 +1,99 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/models/cart_model.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/order/screens/order_detail_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrderTile extends StatelessWidget {
-  const OrderTile({
-    super.key,
-    required this.product,
-    required this.price,
-    required this.userData,
-    required this.quantity,
-  });
+  const OrderTile({super.key, required this.order});
 
-  final CartData product;
-  final num price;
-  final String userData;
-  final int quantity;
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 8.0,
-        top: 16.0,
-        right: 8.0,
-      ),
+      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 16.0),
       child: GestureDetector(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OrderDetailScreen(
-              // name: 'name',
-              name: product.name ?? '',
-              // image: '',
-              image: product.image ?? '',
-              price: price,
-            ),
-          ),
-        ),
-        child: Container(
-          width: double.infinity,
-          height: 100.h,
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Container(
-                  height: 70.sp,
-                  width: 70.sp,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    image: DecorationImage(
-                        // image: CachedNetworkImageProvider(''),
-                        image: CachedNetworkImageProvider(product.image ?? ''),
-                        fit: BoxFit.cover),
-                  ),
+        onTap: () {},
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 107.0,
+              padding: const EdgeInsets.only(
+                left: 20.0,
+                right: 11.0,
+                top: 10.0,
+                bottom: 8.0,
+              ),
+              decoration: BoxDecoration(
+                color: GlobalColors.white,
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(
+                  color: const Color(0xFFF7F7F7),
                 ),
-                15.w.sbW,
-                Expanded(
-                  child: Column(
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment:
-                        MainAxisAlignment.center, // Ensure center alignment
                     children: [
                       Text(
-                        "Order From $userData",
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: GlobalColors.orange,
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          // height: 0,
-                        ),
-                      ),
-                      5.h.sbH,
-                      Text(
-                        // 'hhh',
-                        product.name ?? '',
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: const Color(0xFF0A0A0A),
+                        'Order#: ${order.number}',
+                        style: GoogleFonts.inter(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
+                          color: const Color(0xFF71717A),
                         ),
                       ),
-                      5.h.sbH,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\$${price.toStringAsFixed(2)}",
-                            style: GoogleFonts.inter(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            "Quantity: $quantity",
-                            style: GoogleFonts.plusJakartaSans(
-                              fontSize: 12.sp,
-                              color: const Color(0xFF6E7079),
-                            ),
-                          ),
-                        ],
+                      const SizedBox(height: 5.0),
+                      Text(
+                        '${order.deliveryDate}, ${order.deliveryTime}',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.grey,
+                        ),
                       ),
-                      // Text(
-                      //   "Order time: 12:56 pm",
-                      //   style: GoogleFonts.plusJakartaSans(
-                      //     fontSize: 12.sp,
-                      //     color: const Color(0xFF6E7079),
-                      //     height: 0,
-                      //   ),
-                      // ),
                     ],
                   ),
-                ),
-              ],
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                          'assets/images/svg/product_listing/delivery.svg'),
+                      SizedBox(width: 6.w),
+                      Text(
+                        order.deliveryText,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: order.deliveryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
+            Positioned(
+              top: 16.0,
+              right: 20.0,
+              child: Container(
+                width: 92.0,
+                height: 79.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(
+                    color: const Color.fromRGBO(247, 247, 247, 1),
+                  ),
+                ),
+                child: Image.asset(order.image),
+              ),
+            ),
+          ],
         ),
       ),
     );
