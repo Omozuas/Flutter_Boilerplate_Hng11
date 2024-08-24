@@ -25,15 +25,46 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   List<Members> organisationMembers = [
     Members(),
   ];
+  String inviteLink = ''; // Variable to store the invitation link
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(profileProvider).organisationMembers;
-      ref.read(profileProvider).inviteLink;
+      Future(() {
+        fetchLinkFromAPI();
+      });
     });
   }
+
+  Future<void> fetchInviteLink() async {
+    // Call your API to fetch the invite link
+    final link = await fetchLinkFromAPI(); // Fetch the link from your API
+
+    // Check if the fetched link is correct
+    print('Fetched link: $link');
+
+    // Ensure the UI is updated with the fetched link
+    setState(() {
+      // inviteLink = link; // Store the invite link in the state
+    });
+  }
+
+  Future<Object> fetchLinkFromAPI() async {
+    // Trigger the sendInvite method from ProfileProvider
+    await ref.read(profileProvider.notifier).generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
+
+    // Check the inviteResponse state
+    final inviteResponse = ref.read(profileProvider).inviteLink;
+
+    print('link is equal to : $inviteResponse');
+    // Cast inviteResponse to String, or provide a default link if inviteResponse is null
+    return inviteResponse ?? 'https://default-invite-link.com';
+  }
+
+
+
 
   void showCustomToast(BuildContext context, String message) {
     CustomToast.show(
@@ -105,20 +136,22 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     border: Border.all(
                         color: GlobalColors.borderColor, width: 0.7)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
                   children: [
-                    asyncLinkValue.when(
-                      data: (link) =>
-                          Text(link ?? "No link "),
-                      loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
-                      error: (e, st) {
-                        return  Center(
-                          child: Text(
-                              AppLocalizations.of(context)!.errorFetchingLink),
-                        );
-                      },),
+                    Expanded(
+                      child: asyncLinkValue.when(
+                        data: (inviteLink) =>
+                            Text(inviteLink ?? "No link ", softWrap: true,),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                        error: (e, st) {
+                          return  Center(
+                            child: Text(
+                                AppLocalizations.of(context)!.errorFetchingLink),
+                          );
+                        },),
+                    ),
                     Row(
                       children: [
                         IconButton(
