@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../utils/context_extensions.dart';
+import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_notification_item.dart';
 import '../../../../utils/widgets/custom_notification_section.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../auth/widgets/chevron_back_button.dart';
-import '../../models/custom_api_error.dart';
 import '../../models/notification_model.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
@@ -57,9 +56,11 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         titleSpacing: -6.sp,
         leading: const ChevronBackButton(),
         title: Text(
-          'Notification',
-          style:
-              GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
+          context.text.notification,
+          style: CustomTextStyle.semiBold(
+            fontSize: 16.sp,
+            color: GlobalColors.iconColor,
+          ),
         ),
       ),
       backgroundColor: GlobalColors.white,
@@ -71,14 +72,12 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                 children: [
                   SizedBox(height: 20.h),
                   CustomNotificationSection(
-                    sectionTitle:
-                        AppLocalizations.of(context)!.notificationAlert,
+                    sectionTitle: context.text.notificationAlert,
                     notificationTiles: [
+                      SizedBox(height: 20.h),
                       SettingsOption(
-                        title: AppLocalizations.of(context)!
-                            .mobilePushNotification,
-                        description: AppLocalizations.of(context)!
-                            .receivePushNotification,
+                        title: context.text.mobilePushNotification,
+                        description: context.text.receivePushNotification,
                         value: mobilePushNotifications,
                         onChanged: (newValue) {
                           setState(() {
@@ -90,22 +89,21 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                   ),
                   SizedBox(height: 32.h),
                   CustomNotificationSection(
-                      sectionTitle:
-                          AppLocalizations.of(context)!.emailNotification,
-                      notificationTiles: [
-                        SettingsOption(
-                          title: AppLocalizations.of(context)!
-                              .mobilePushNotification,
-                          description: AppLocalizations.of(context)!
-                              .receivePushNotification,
-                          value: emailPushNotifications,
-                          onChanged: (newValue) {
-                            setState(() {
-                              emailPushNotifications = newValue;
-                            });
-                          },
-                        ),
-                      ]),
+                    sectionTitle: context.text.emailNotification,
+                    notificationTiles: [
+                      SizedBox(height: 20.h),
+                      SettingsOption(
+                        title: context.text.activityInYourWorkspace,
+                        description: context.text.alwaysSendEmailDescr,
+                        value: emailPushNotifications,
+                        onChanged: (newValue) {
+                          setState(() {
+                            emailPushNotifications = newValue;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -114,7 +112,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         child: CustomButton(
           onTap: _save,
           borderColor: GlobalColors.orange,
-          text: AppLocalizations.of(context)!.saveChanges,
+          text: context.text.saveChanges,
           height: 40.h,
           containerColor: GlobalColors.orange,
           loading: updateLoading,
@@ -140,9 +138,8 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
       await showDialog(
         context: context,
         builder: (ctx) => ProfileDialog(
-          title: AppLocalizations.of(context)!.notificationUpdated,
-          description:
-              AppLocalizations.of(context)!.notificationUpdatedSuccessfully,
+          title: context.text.notificationUpdated,
+          description: context.text.notificationUpdatedSuccessfully,
           onContinue: () {
             Navigator.pop(ctx);
           },
@@ -150,10 +147,8 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
       );
       if (!mounted) return;
       context.pop();
-    } on CustomApiError catch (e) {
-      showSnackBar(e.message);
     } catch (e) {
-      showSnackBar(AppLocalizations.of(context)!.errorOccurred);
+      showSnackBar(context.text.errorOccurred);
     }
   }
 }
