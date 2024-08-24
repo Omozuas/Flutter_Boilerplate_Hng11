@@ -200,12 +200,15 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   }
 
   // get organisation members
-  Future<void> getOrganisationMembers({required String orgId}) async {
+  Future<void> getOrganisationMembers() async {
+    final userOrgId = state.user.sureValue?.orgId;
+    if (userOrgId == null)  {}
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(organisationMembers: const AsyncLoading());
       final organisationMembers =
-          await settingsApi.getOrganisationMembers(orgId: orgId);
+          await settingsApi.getOrganisationMembers(orgId: userOrgId!);
+
       state =
           state.copyWith(organisationMembers: AsyncData(organisationMembers));
     } catch (e) {

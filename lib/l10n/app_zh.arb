@@ -57,7 +57,7 @@
   "profileSettings": "个人资料设置",
   "general": "常规",
   "account": "账户",
-
+ 
   "dataAndPrivacy": "数据和隐私",
   "languageAndRegion": "语言和地区",
   "organizationSettings": "组织设置",
@@ -165,7 +165,7 @@
   "thisMonthSummary": "本月摘要",
   "totalRevenue": "总收入",
   "overview": "概述",
-
+ 
   "veryGood": "非常好",
   "good": "好",
   "poor": "差",
@@ -194,12 +194,13 @@
    "southKorea": "韩国",
    "russia": "俄罗斯",
    "unitedArabEmirates": "阿拉伯联合酋长国",
- 
+  
    "passwordSuccessfully": "密码更新成功",
    "passwordSuccessfullyMessage": "您的密码已成功更新！您现在可以使用新密码登录。",
    "resourceNotFound": "未找到请求的资源。请检查网址或联系支持。",
    "failedToUpdatePassword": "密码更新失败。请再试一次。",
    "errorMessage": "发生意外错误。请再试一次。",
+
    "updatePasswordEnhanced": "更新密码以增强账户安全性",
    "newPassword": "新密码",
    "enterNewPassword": "输入新密码",
@@ -299,8 +300,7 @@
    "basic": "基础版",
    "advanced": "高级版",
    "upgradeToAccessFeatures": "升级以访问更多功能",
-  
- 
+
     "editOrganization": "编辑组织",
   "country1": "德国",
   "country2": "尼日利亚",
@@ -385,6 +385,10 @@
   "passwordOneNumber": "密码必须包含至少一个数字",
   "productDescription": "产品描述",
   "addAProduct": "添加产品",
-  "orderDetails": "订单详情"
+  "orderDetails": "订单详情",
+  "noResultFound": "未找到结果",
+    "continueWithGoogle": "使用 Google 继续",
+    "description": "描述",
+    "inStock": "有库存"
 }
 
