@@ -366,6 +366,19 @@
       "inStock": "En stock",
   "orders": "Pedidos",
     "home": "Inicio",
-    "logoutConfirmation": "¿Está seguro de que desea cerrar sesión en este dispositivo?"
+    "logoutConfirmation": "¿Está seguro de que desea cerrar sesión en este dispositivo?",
+ "addProductFailure": "Error al agregar producto:",
+  "productFormIncomplete": "Por favor, complete el formulario",
+  "ok": "Aceptar",
+  "success": "Éxito",
+  "addProductSuccessDescription": "Producto agregado con éxito",
+  "anErrorOccured": "Ocurrió un error",
+  "title": "Título",
+  "category": "Categoría",
+  "descriptionFieldHint": "Máximo de 72 caracteres",
+  "standardPrice": "Precio estándar",
+  "quantity": "Cantidad",
+  "cancel": "Cancelar",
+  "add": "Agregar"
 }
 

@@ -444,6 +444,19 @@
       "inStock": "In Stock",
       "orders": "Orders",
         "home": "Home",
-        "logoutConfirmation": "Are you sure you want to logout from this Device?"
+        "logoutConfirmation": "Are you sure you want to logout from this Device?",
+    "addProductFailure": "Failed to add product:",
+    "productFormIncomplete": "Please Complete form fill",
+    "ok": "Ok",
+    "success": "Success",
+    "addProductSuccessDescription": "Product added successfully",
+    "anErrorOccured": "An Error occurred",
+    "title": "Title",
+    "category": "Category",
+    "descriptionFieldHint": "Maximum of 72 characters",
+    "standardPrice": "Standard Price",
+    "quantity": "Quantity",
+    "cancel": "Cancel",
+    "add": "Add"
 }
 

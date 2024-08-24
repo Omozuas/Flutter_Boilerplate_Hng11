@@ -106,7 +106,7 @@ class AuthProvider extends StateNotifier<AuthState> {
             [];
 
         if (context.mounted) {
-          context.go(AppRoute.home);
+          context.pushReplacement(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
           _userService.storeToken(userRegData.accessToken ?? "");
           await getUser();
@@ -200,7 +200,6 @@ class AuthProvider extends StateNotifier<AuthState> {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().loginUser(data);
-
       if (res != null) {
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
@@ -222,6 +221,7 @@ class AuthProvider extends StateNotifier<AuthState> {
           }
           _userService.storeToken(userRegData.accessToken ?? "");
           await getUser();
+
         }
       }
     } catch (e) {

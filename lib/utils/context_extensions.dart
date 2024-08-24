@@ -37,6 +37,7 @@ extension Translation on BuildContext {
   String get passwordEightCharacters => text.passwordEightCharacters;
   String get passwordUpperCase => text.passwordUpperCase;
   String get passwordOneNumber => text.passwordOneNumber;
+
   String get productDescription => text.productDescription;
   String get addAProduct => text.addAProduct;
   String get orderDetails => text.orderDetails;
@@ -47,4 +48,18 @@ extension Translation on BuildContext {
   String get orders => text.orders;
   String get home => text.home;
   String get logoutConfirmation => text.logoutConfirmation;
+  String get addProductFailure => text.addProductFailure;
+  String get productFormIncomplete => text.productFormIncomplete;
+  String get ok => text.ok;
+  String get success => text.success;
+  String get addProductSuccessDescription => text.addProductSuccessDescription;
+  String get anErrorOccured => text.anErrorOccured;
+  String get title => text.title;
+  String get category => text.category;
+  String get descriptionFieldHint => text.descriptionFieldHint;
+  String get standardPrice => text.standardPrice;
+  String get quantity => text.quantity;
+  String get cancel => text.cancel;
+  String get add => text.add;
+
 }

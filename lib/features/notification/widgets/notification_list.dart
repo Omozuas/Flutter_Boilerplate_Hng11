@@ -1,16 +1,22 @@
+
 import 'package:flutter/material.dart';
 
+import '../model/notification_response.dart';
 import 'notification_card.dart';
 
 class NotificationListView extends StatelessWidget {
-  const NotificationListView({super.key});
+  final List<Notifications> notifications;
+  const NotificationListView({super.key, required this.notifications});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 10,
+        itemCount: notifications.length,
         itemBuilder: (_, index) {
-          return const NotificationCard();
+          Notifications notification = notifications[index];
+          return NotificationCard(
+            notification: notification,
+          );
         });
   }
 }
