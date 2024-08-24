@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -31,7 +33,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(profileProvider).organisationMembers;
+      final org = ref.watch(getOrganisationProvider);
+      ref
+          .read(profileProvider.notifier)
+          .getOrganisationMembers(orgId: org.organisationId.toString());
       Future(() {
         fetchLinkFromAPI();
       });
@@ -42,6 +47,12 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   Future<Object> fetchLinkFromAPI() async {
     // Trigger the sendInvite method from ProfileProvider
     await ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
+    final org = ref.watch(getOrganisationProvider);
+    await ref
+        .read(profileProvider.notifier)
+        .generateInviteLink(orgId: org.organisationId.toString());
+
+
     // Check the inviteResponse state
     final inviteResponse = ref.read(profileProvider).inviteLink;
     return inviteResponse;
