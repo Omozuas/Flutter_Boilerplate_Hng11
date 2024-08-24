@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
-import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,28 +17,9 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        title: Padding(
-          padding: EdgeInsets.zero,
-          child: Text(
-            'Orders',
-            style: GoogleFonts.inter(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 29.25),
-            child: InkWell(
-              onTap: () {},
-              child: SvgPicture.asset('assets/icons/search.svg'),
-            ),
-          ),
-        ],
-        titleSpacing: 0.0,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: 'Orders',
+        onBack: () {},
       ),
       body: Column(
         children: [
@@ -56,14 +36,10 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.only(top: 8.0),
                   itemBuilder: (_, index) {
-                    bool isEstimatedDelivery = index % 4 < 2;
+                    CartData product = products[index];
+                    int quantity = (product.quantity ?? 0);
 
-                    String deliveryText = isEstimatedDelivery
-                        ? 'Estimated Delivery on 26th Aug'
-                        : 'Delivered on 19th Aug';
-                    Color deliveryColor = isEstimatedDelivery
-                        ? GlobalColors.verified
-                        : GlobalColors.redColor;
+                    num price = (product.price ?? 0) * quantity;
 
                     return OrderTile(
                       order: Order(

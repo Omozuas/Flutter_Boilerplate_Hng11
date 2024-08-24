@@ -22,7 +22,6 @@ void main() async {
     ],
   );
 
-
 // Ensures status bar and system navigation controls blends with the app
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white,

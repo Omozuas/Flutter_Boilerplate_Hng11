@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,11 +30,11 @@ class _LanguageAndRegionScreenState
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
-          selectedRegion == null ||
+          // selectedRegion == null ||
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = AppLocalizations.of(context)!.settings;
+        feedBackMessage = context.text.settings;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -46,7 +47,7 @@ class _LanguageAndRegionScreenState
 
   void unsavedChanges() {
     if (selectedLanguage != null ||
-        selectedRegion != null ||
+        // selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
         feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
@@ -87,44 +88,39 @@ class _LanguageAndRegionScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColors.white,
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        surfaceTintColor: Colors.transparent,
-        titleSpacing: -6.sp,
-        leading: const ChevronBackButton(),
-        title: Text(
-          AppLocalizations.of(context)!.languageAndRegion,
-          style:
-              GoogleFonts.inter(fontWeight: FontWeight.w500, fontSize: 16.sp),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.languageAndRegion,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15.h),
             Text(
               AppLocalizations.of(context)!
                   .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w400, fontSize: 12.sp),
+                  fontWeight: FontWeight.w400, fontSize: 14.sp),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
-                'Italiano (Italian)',
+                // 'Italiano (Italian)',
                 'Español (Spanish)',
-                'Français (French)',
-                'Deutsch (German)',
+                // 'Français (French)',
+                // 'Deutsch (German)',
                 'English',
-                '日本語 (Japanese)',
+                // '日本語 (Japanese)',
                 '日本語 (Chinese)',
-                '한국어 (Korean)',
-                'Русский (Russian)',
-                'العربية (Arabic)'
+                // '한국어 (Korean)',
+                // 'Русский (Russian)',
+                // 'العربية (Arabic)'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -137,40 +133,43 @@ class _LanguageAndRegionScreenState
             ),
             if (showError && selectedLanguage == null)
               Text(
-AppLocalizations.of(context)!.languageUpdateError,
+                AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
-            CustomDropdownButton(
-              items: const [
-                'France',
-                'Canada',
-                'United Kingdom',
-                'Germany',
-                'United States',
-                'Japan',
-                'South Korea',
-                'Russian',
-                'United Arab Emirates'
-              ],
-              borderColor: GlobalColors.borderColor,
-              height: 36.sp,
-              width: double.infinity,
-              containerColor: GlobalColors.white,
-              textColor: GlobalColors.darkOne,
-              placeholder: 'Region',
-              onChanged: (value) {
-                setState(() {
-                  selectedRegion = value;
-                });
-              },
-            ),
+            // SizedBox(height: 20.h),
+            // CustomDropdownButton(
+            //   items: const [
+            //     'France',
+            //     'Canada',
+            //     'United Kingdom',
+            //     'Germany',
+            //     'United States',
+            //     'Japan',
+            //     'South Korea',
+            //     'Russian',
+            //     'United Arab Emirates'
+            //   ],
+            //   borderColor: GlobalColors.borderColor,
+            //   height: 50.h,
+            //   textPadding: const EdgeInsets.only(
+            //       left: 10, right: 10, bottom: 10, top: 10),
+            //   width: double.infinity,
+            //   containerColor: GlobalColors.white,
+            //   textColor: GlobalColors.darkOne,
+            //   placeholder: 'Region',
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selectedRegion = value;
+            //     });
+            //   },
+            // ),
+
             if (showError && selectedRegion == null)
               Text(
                 AppLocalizations.of(context)!.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 '(UTC+00:00) Co-ord',
@@ -179,7 +178,9 @@ AppLocalizations.of(context)!.languageUpdateError,
                 // Add other time zones here
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -206,20 +207,24 @@ AppLocalizations.of(context)!.languageUpdateError,
               children: [
                 CustomButton(
                     onTap: validateSelections,
-                    borderColor: Colors.transparent,
+                    borderColor: GlobalColors.orange,
                     text: AppLocalizations.of(context)!.save,
-                    height: 40.sp,
+                    // height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 65.sp,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    // width: 80.w,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: AppLocalizations.of(context)!.cancel,
-                    height: 40.sp,
+                    // height: 40.h,
                     containerColor: GlobalColors.white,
-                    width: 65.sp,
+                    // width: 80.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     textColor: GlobalColors.darkOne),
               ],
             ),

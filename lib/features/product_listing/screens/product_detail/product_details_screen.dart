@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_name_and_price_section.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../utils/Styles/text_styles.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
@@ -24,15 +24,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        backgroundColor: Colors.white,
-        title: Text(
-          "Product Description",
-          style: CustomTextStyles.titleTextBlack,
-        ),
-        centerTitle: true,
-        surfaceTintColor: Colors.white,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.productDescription,
       ),
       body: Consumer(builder: (context, ref, child) {
         final state = ref.watch(productDetailProvider);

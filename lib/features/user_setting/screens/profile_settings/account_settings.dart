@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
-import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../models/custom_api_error.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -21,237 +25,217 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  GetStorage stotage = GetStorage();
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(profileProvider.notifier).getUser();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await handleGetUser();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final asyncUser = ref.watch(profileProvider).user;
-    // UserService userService = locator<UserService>();
+    final user = ref.watch(profileProvider).user.sureValue;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 1.0), // Adjust this padding to align with the avatar
-            child: Text(
-              AppLocalizations.of(context)!.settings,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.text.settings,
       ),
-      body: asyncUser.when(
-        loading: () => const Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
-        error: (e, st) {
-          return const Center(
-            child: Text(
-                'An error occurred while fetching the current user details'),
-          );
-        },
-        data: (user) {
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const ProfileAvatar(),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 19.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      body: asyncUser.maybeWhen(
+        skipError: true,
+        skipLoadingOnReload: true,
+        loading: () =>
+            const Center(child: CircularProgressIndicator.adaptive()),
+        orElse: () {
+          return RefreshIndicator.adaptive(
+            onRefresh: ref.read(profileProvider.notifier).getUser,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 10.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const ProfileAvatar(),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 19.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  user?.profile?.username ??
+                                      user?.fullname ??
+                                      '',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: Color(0xff0A0A0A),
+                                  ),
+                                ),
+                                const SizedBox(height: 3),
+                                Text(
+                                  user?.email ?? '',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0xff525252),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10.0.h),
+                        Text(
+                          context.text.profileSettings,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: GlobalColors.iconColor,
+                          ),
+                        ),
+                        SizedBox(height: 5.0.h),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/personSetting.svg',
+                          title: context.text.account,
+                          onTap: () {
+                            context.push(AppRoute.editProfileScreen);
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/notifybelll.svg',
+                          title: context.text.notification,
+                          onTap: () {
+                            context.push(AppRoute.notificationScreen);
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/db.svg',
+                          title: context.text.changePassword,
+                          onTap: () {
+                            context.push(AppRoute.updatePassword);
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/world.svg',
+                          title: context.text.languageAndRegion,
+                          onTap: () {
+                            // Navigate to Data and Privacy Settings
+                            context.push(AppRoute.languageAndRegionScreen);
+                          },
+                        ),
+                        SizedBox(height: 5.h),
+                        const Divider(),
+                        SizedBox(height: 10.h),
+                        Text(
+                          context.text.organizationSettings,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: GlobalColors.iconColor,
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/UserPlus.svg',
+                          title: context.text.createOrganisation,
+                          onTap: () {
+                            // Navigate to Manage Organization
+                            context.push(AppRoute.companySignUp);
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon:
+                              'assets/icons/fluent_organization-16-regular.svg',
+                          title: context.text.manageOrganization,
+                          onTap: () {
+                            // Navigate to Manage Organization
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/Users.svg',
+                          title: context.text.members,
+                          onTap: () {
+                            // Navigate to Members Settings
+                            context.push(AppRoute.members);
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon: 'assets/icons/wellet.svg',
+                          title: context.text.paymentInformation,
+                          onTap: () {
+                            // Navigate to Payment Information Settings
+                            context.push(AppRoute.subscriptionsScreen);
+                          },
+                        ),
+                        SizedBox(height: 10.h),
+                        const Divider(),
+                        SizedBox(height: 10.h),
+                        InkWell(
+                          onTap: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (ctx) => LogOutDialog(
+                                onTap: () async {
+                                  final userService = locator<UserService>();
+                                  await userService.logout();
+                                  if (!ctx.mounted) return;
+                                  Navigator.pop(ctx);
+                                },
+                              ),
+                            );
+                            if (!context.mounted) return;
+                            context.go(AppRoute.login);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                user?.profile?.username ?? user?.fullname ?? '',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                  color: Color(0xff0A0A0A),
-                                ),
+                                context.text.logOut,
+                                style: TextStyle(
+                                    color: GlobalColors.red, fontSize: 14),
                               ),
-                              const SizedBox(height: 3),
-                              Text(
-                                user?.email ?? '',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Color(0xff525252),
-                                ),
-                              ),
+                              Icon(
+                                Icons.logout_outlined,
+                                color: GlobalColors.red,
+                              )
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 15.h),
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 10.0),
-                      Text(
-                        AppLocalizations.of(context)!.profileSettings,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/personsettings.png',
-                        title: AppLocalizations.of(context)!.account,
-                        onTap: () {
-                          context.push(AppRoute.editProfileScreen);
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/notify.png',
-                        title: AppLocalizations.of(context)!.notification,
-                        onTap: () {
-                          context.push(AppRoute.notificationScreen);
-                        },
-                      ),
-                      // SettingsTile(
-                      //   leadingIcon: 'assets/images/data.png',
-                      //   title: AppLocalizations.of(context)!.changePassword,
-                      //   onTap: () {
-                      //     context.push(AppRoute.updatePassword);
-                      //   },
-                      // ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/world.png',
-                        title: AppLocalizations.of(context)!.languageAndRegion,
-                        onTap: () {
-                          // Navigate to Data and Privacy Settings
-                          context.push(AppRoute.languageAndRegionScreen);
-                        },
-                      ),
-                      // SettingsTile(
-                      //   leading: const Icon(CupertinoIcons.profile_circled, color: Colors.grey),
-                      //   leadingIcon: 'assets/images/personsettings.png',
-                      //   title: 'View as Organisation',
-                      //   onTap: () {},
-                      //   trailing: Transform.scale(
-                      //     scale: 0.7,
-                      //     child: CupertinoSwitch(
-                      //         value: userService.isUserOrganization,
-                      //         onChanged:(v) async {
-                      //           await userService.change(v, context);
-                      //           if(userService.isUserOrganization){
-                      //             context.go(AppRoute.home);
-                      //             // OneContext().pushNamedAndRemoveUntil(AppRoute.home, (val)=> false);
-                      //           }else{
-                      //             context.go(AppRoute.userHome);
-                      //             // OneContext().pushNamedAndRemoveUntil(AppRoute.userHome, (val)=> false);
-                      //           }
-                      //         }
-                      //     ),
-                      //   ),
-                      // ),
-                      SizedBox(height: 8.h),
-                      const Divider(),
-                      SizedBox(height: 8.h),
-                      const Text(
-                        'Organizational Settings',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      // SettingsTile(
-                      //   leadingIcon: 'assets/images/user_plus.png',
-                      //   title: AppLocalizations.of(context)!.createOrganisation,
-                      //   onTap: () {
-                      //     // Navigate to create organisation screen
-                      //     context.push(AppRoute.companySignUp);
-                      //   },
-                      // ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/org.png',
-                        title: AppLocalizations.of(context)!.manageOrganization,
-                        onTap: () {
-                          // Navigate to Manage Organization
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/people.png',
-                        title: AppLocalizations.of(context)!.members,
-                        onTap: () {
-                          // Navigate to Members Settings
-                          context.push(AppRoute.members);
-                        },
-                      ),
-                      SettingsTile(
-                        leadingIcon: 'assets/images/wallet.png',
-                        title: AppLocalizations.of(context)!.paymentInformation,
-                        onTap: () {
-                          // Navigate to Payment Information Settings
-                          context.push(AppRoute.subscriptionsScreen);
-                        },
-                      ),
-                      SizedBox(height: 8.h),
-                      const Divider(),
-                      SizedBox(height: 8.h),
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (ctx) => LogOutDialog(
-                              onTap: () {
-                                UserService userService =
-                                    locator<UserService>();
-                                userService.logout();
-                                stotage.remove('accessToken');
-                                Navigator.pop(ctx);
-                                context.go(AppRoute.login);
-                              },
-                            ),
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Log Out',
-                              style: TextStyle(
-                                  color: GlobalColors.red, fontSize: 14),
-                            ),
-                            Icon(
-                              Icons.logout_outlined,
-                              color: GlobalColors.red,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 10.h),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
       ),
     );
+  }
+
+  Future<void> handleGetUser() async {
+    try {
+      await ref.read(profileProvider.notifier).getUser();
+    } on CustomApiError catch (e) {
+      showSnackBar(e.message);
+    } catch (e) {
+      showSnackBar('An error occurred');
+    }
   }
 }

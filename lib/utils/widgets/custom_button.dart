@@ -15,26 +15,27 @@ class CustomButton extends StatelessWidget {
   final Color containerColor, borderColor, textColor;
   final String text;
   final Color? borderColors;
-  final double width, height;
+  final double? width, height;
   final bool loading;
   final Widget? icon;
   final FontWeight? fontWeight;
   final TextStyle? textStyle;
+  final EdgeInsetsGeometry? padding;
   const CustomButton(
       {super.key,
       required this.onTap,
       required this.borderColor,
       required this.text,
-      required this.height,
+      this.height,
       required this.containerColor,
-      required this.width,
+      this.width,
+      this.padding,
       required this.textColor,
       this.loading = false,
       this.fontWeight,
       this.borderColors,
       this.textStyle,
-      this.icon
-      });
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,11 @@ class CustomButton extends StatelessWidget {
         child: Container(
           width: width,
           height: height,
+          padding: padding,
           decoration: BoxDecoration(
-              color: containerColor == Colors.transparent? Colors.transparent: containerColor.withOpacity(loading ? 0.5 : 1),
+              color: containerColor == Colors.transparent
+                  ? Colors.transparent
+                  : containerColor.withOpacity(loading ? 0.5 : 1),
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(6.r),
               border: Border.all(
@@ -62,31 +66,27 @@ class CustomButton extends StatelessWidget {
                       strokeWidth: 2.w,
                     ),
                   )
-                :
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if(icon != null)
-                  Row(
+                : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      icon!,
-                      7.w.sbW
+                      if (icon != null)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [icon!, 7.w.sbW],
+                        ),
+                      Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: textStyle ??
+                            TextStyle(
+                                fontSize: 14,
+                                color: textColor,
+                                fontWeight: fontWeight ?? FontWeight.w500),
+                      ),
                     ],
                   ),
-                Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: textStyle ??
-                      TextStyle(
-                          fontSize: 14,
-                          color: textColor,
-                          fontWeight: fontWeight ?? FontWeight.w500),
-                ),
-              ],
-            ),
           ),
         ),
       ),

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderDetailScreen extends StatelessWidget {
@@ -20,10 +20,8 @@ class OrderDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        title: const Text('Order Details'),
-        centerTitle: true,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.orderDetails,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
