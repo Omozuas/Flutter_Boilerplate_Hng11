@@ -14,11 +14,10 @@ class DashBoardState {
   final List<Product> allProducts;
   final List<Product> displayedProducts;
 
-  DashBoardState({
-    required this.isLoading,
-    required this.allProducts,
-    required this.displayedProducts
-  });
+  DashBoardState(
+      {required this.isLoading,
+      required this.allProducts,
+      required this.displayedProducts});
 
   DashBoardState copyWith({
     bool? isLoading,
@@ -39,11 +38,11 @@ class UserDashBoardProvider extends StateNotifier<DashBoardState> {
   TextEditingController searchController = TextEditingController();
 
   UserDashBoardProvider()
-    : super(DashBoardState(
-    isLoading: false,
-    allProducts: [],
-    displayedProducts: [],
-  )) {
+      : super(DashBoardState(
+          isLoading: false,
+          allProducts: [],
+          displayedProducts: [],
+        )) {
     // Initialize the provider by getting cached data and then fetching fresh data
     _initializeDashboardData();
   }
@@ -59,22 +58,23 @@ class UserDashBoardProvider extends StateNotifier<DashBoardState> {
   List<Product> products = [];
   List<Product> displayedProducts = [];
 
-  searchProduct(String? val){
-    String value = val??"";
-    if(value.isEmpty){
+  searchProduct(String? val) {
+    String value = val ?? "";
+    if (value.isEmpty) {
       setDisplayProducts = state.allProducts;
       displayedProducts = products;
-    }else if(displayedProducts.isEmpty){
+    } else if (displayedProducts.isEmpty) {
       setDisplayProducts = [];
       displayedProducts = [];
-    }else{
-      setDisplayProducts = state.allProducts.where(
-        (product)=> (product.name??"").toLowerCase().contains(value.toLowerCase())
-      ).toList();
-      displayedProducts = products.where(
-        (product)=> (product.name??"").toLowerCase().contains(value.toLowerCase())
-      ).toList();
-
+    } else {
+      setDisplayProducts = state.allProducts
+          .where((product) =>
+              (product.name ?? "").toLowerCase().contains(value.toLowerCase()))
+          .toList();
+      displayedProducts = products
+          .where((product) =>
+              (product.name ?? "").toLowerCase().contains(value.toLowerCase()))
+          .toList();
     }
     log("state displayed ::: ${state.displayedProducts.length.toString()}");
   }
@@ -95,12 +95,11 @@ class UserDashBoardProvider extends StateNotifier<DashBoardState> {
     state = state.copyWith(displayedProducts: value);
   }
 
-
-
   Future<void> getAllProduct({int? pageSize, int? page}) async {
     setIsLoading = true; // Start loading
     try {
-      final res = await DashboardApi().getAllProducts(pageSize: pageSize, page: page);
+      final res =
+          await DashboardApi().getAllProducts(pageSize: pageSize, page: page);
       log("ALL Products::: ${res.length}");
       if (res.isNotEmpty) {
         setAllProducts = res; // Update state with fetched products
@@ -108,14 +107,12 @@ class UserDashBoardProvider extends StateNotifier<DashBoardState> {
         log("State saved ::: ${state.allProducts.length.toString()}");
         searchProduct(""); // Ensure this updates displayedProducts
       }
-
     } catch (e) {
       log("Error fetching products: $e");
     } finally {
       setIsLoading = false; // Stop loading
     }
   }
-
 
   Future<void> getCachedAllProduct() async {
     // Store(AllProducts)
@@ -134,7 +131,8 @@ class UserDashBoardProvider extends StateNotifier<DashBoardState> {
 
   Future<bool> saveAllProducts(List<Product> value) async {
     try {
-      _storageService.write("all_products", getProductListFromJsontoString(value));
+      _storageService.write(
+          "all_products", getProductListFromJsontoString(value));
       bool res = _storageService.hasData("all_products");
       if (res) {
         return true;
@@ -144,11 +142,10 @@ class UserDashBoardProvider extends StateNotifier<DashBoardState> {
       return false;
     }
   }
-
 }
 
 final userDashBoardProvider =
-StateNotifierProvider<UserDashBoardProvider, DashBoardState>((ref) {
+    StateNotifierProvider<UserDashBoardProvider, DashBoardState>((ref) {
   return UserDashBoardProvider();
 });
 

@@ -1,16 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_name_and_price_section.dart';
+import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../utils/Styles/text_styles.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
@@ -24,15 +25,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        backgroundColor: Colors.white,
-        title: Text(
-          "Product Description",
-          style: CustomTextStyles.titleTextBlack,
-        ),
-        centerTitle: true,
-        surfaceTintColor: Colors.white,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.productDescription,
       ),
       body: Consumer(builder: (context, ref, child) {
         final state = ref.watch(productDetailProvider);
@@ -47,9 +41,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Divider(color: GlobalColors.dividerColor),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24.w,
+                    vertical: 20.h,
+                  ),
                   child: Builder(builder: (context) {
                     final product = state.product!;
                     if (product.image!.isNotEmpty) {
@@ -84,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
                 ProductNameAndPriceSection(product: state.product!),
                 Padding(
-                  padding: EdgeInsets.only(top: 24.h, bottom: 12.h),
+                  padding: EdgeInsets.only(top: 16.h),
                   child: Divider(
                     color: GlobalColors.dividerColor,
                   ),
@@ -96,8 +92,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Container(
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(
-                    horizontal: 24.h,
-                    vertical: 24,
+                    horizontal: 24.w,
+                    vertical: 16.h,
                   ),
                   padding: EdgeInsets.symmetric(
                     vertical: 16.h,
@@ -111,24 +107,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Description",
-                        style: TextStyle(
+                        context.description,
+                        style: CustomTextStyles.productTextBodyBlack.copyWith(
+                          color: GlobalColors.black,
                           fontWeight: FontWeight.w600,
-                          fontSize: 14.sp,
                         ),
                       ),
                       SizedBox(height: 10.h),
                       Text(
                         '${state.product?.description}',
-                        style: TextStyle(
+                        style: CustomTextStyles.productTextBodyBlack.copyWith(
                           color: GlobalColors.mutedTextColor,
-                          fontSize: 14.sp,
                         ),
                       )
                     ],
                   ),
                 ),
-                Divider(color: GlobalColors.dividerColor),
+                // Divider(color: GlobalColors.dividerColor),
                 // CustomDropdownButton(
                 //   borderRadius: 0,
                 //   valueStyle: TextStyle(color: GlobalColors.mutedTextColor),

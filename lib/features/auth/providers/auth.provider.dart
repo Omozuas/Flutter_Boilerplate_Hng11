@@ -108,8 +108,6 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
-          box.write('email', data['email']);
-          box.write('password', data['password']);
           _userService.storeToken(userRegData.accessToken ?? "");
           await getUser();
         }
@@ -134,32 +132,33 @@ class AuthProvider extends StateNotifier<AuthState> {
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
         final googleAuth = await googleUser.authentication;
-
-        
-
-        
-
-        final res = await AuthApi().googleSignIn(googleAuth.idToken??'');
+        final res = await AuthApi().googleSignIn(googleAuth.idToken ?? '');
         if (res != null) {
           showSnackBar(res.message.toString());
           UserRegData userRegData = UserRegData.fromJson(res.data);
           setUser = User.fromJson(userRegData.data?['user']);
           setOrganizations = (userRegData.data?['organisations'] as List?)
-              ?.map<Organisation>(
-                (e) => Organisation.fromJson(e),
-          )
-              .toList() ??
+                  ?.map<Organisation>(
+                    (e) => Organisation.fromJson(e),
+                  )
+                  .toList() ??
               [];
 
           if (context.mounted) {
             context.go(AppRoute.home);
             box.write('accessToken', userRegData.accessToken);
+            if (state.checkBoxState) {
+              box.write('rememberMe', true);
+            } else {
+              box.write('rememberMe', false);
+            }
             _userService.storeToken(userRegData.accessToken ?? "");
             await getUser();
           }
         }
       }
     } catch (e) {
+      debugPrint(e.toString());
       rethrow;
     } finally {
       setGoogleButtonLoading = false;
@@ -214,8 +213,6 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
-          box.write('email', data['email']);
-          box.write('password', data['password']);
           if (fromLoginScreen) {
             if (state.checkBoxState) {
               box.write('rememberMe', true);
@@ -293,7 +290,6 @@ class AuthProvider extends StateNotifier<AuthState> {
           confirmNewPassword: confirmNewPassword,
           newPassword: newPassword);
       if (res != null) {
-        debugPrint(res.toString());
         showSnackBar(res.message.toString());
         if (context.mounted) {
           context.replace(AppRoute.verificationSuccess);

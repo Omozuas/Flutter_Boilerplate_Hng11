@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,14 +21,7 @@ class _RoleScreenState extends State<RoleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            context.pop();
-          },
-          child: const Icon(Icons.arrow_back_ios_new),
-        ),
-      ),
+      appBar: const CustomAppBar.empty(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 10.h),

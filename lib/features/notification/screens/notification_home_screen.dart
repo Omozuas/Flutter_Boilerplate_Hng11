@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,9 +21,8 @@ class NotificationHomeScreen extends ConsumerWidget {
     //  var  notificationProviderController = ref.watch(notificationProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.notification),
-        centerTitle: true,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.notification,
       ),
       body: DefaultTabController(
         length: 2,

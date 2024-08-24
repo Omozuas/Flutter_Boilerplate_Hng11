@@ -22,54 +22,46 @@ class NotificationState {
     return NotificationState(
         overViewLoading: overViewLoading ?? this.overViewLoading,
         trendLoading: trendLoading ?? this.trendLoading,
-        notifications: notifications ?? []
-    );
+        notifications: notifications ?? []);
   }
 }
 
 final notificationProvider =
-StateNotifierProvider<NotificationProvider, NotificationState>((ref) {
+    StateNotifierProvider<NotificationProvider, NotificationState>((ref) {
   return NotificationProvider();
 });
 
 class NotificationProvider extends StateNotifier<NotificationState> {
-
   NotificationProvider()
-      : super(
-      NotificationState(
-        overViewLoading: false,
-        trendLoading: false,
-        notifications: []
-      )
-  ) {
+      : super(NotificationState(
+            overViewLoading: false, trendLoading: false, notifications: [])) {
     getNotifications();
   }
 
-  set setNotificationLoading(bool value){
+  set setNotificationLoading(bool value) {
     state = state.copyWith(overViewLoading: value);
   }
 
-  set setTrendLoading(bool value){
+  set setTrendLoading(bool value) {
     state = state.copyWith(trendLoading: value);
   }
 
-  set setNotifications(List<Notifications> value){
+  set setNotifications(List<Notifications> value) {
     state = state.copyWith(notifications: value);
   }
 
   Future<List<Notifications>> getNotifications() async {
     setNotificationLoading = true;
-    try{
+    try {
       List<Notifications> res = await NotificationApi().getAllNotifications();
-      if(res.isNotEmpty){
+      if (res.isNotEmpty) {
         setNotifications = res;
       }
       setTrendLoading = true;
       setNotificationLoading = false;
       return res;
-    }catch(err){
+    } catch (err) {
       return [];
     }
   }
-
 }

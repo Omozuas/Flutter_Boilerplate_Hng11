@@ -200,7 +200,7 @@ class HomeScreen extends ConsumerWidget {
               16.w.sbW,
               CustomButton(
                 onTap: () {},
-                borderColor: const Color(0xFFF6F6F6),
+                borderColor: const Color(0xFFD3D3D3),
                 text: StringManager.addAMember,
                 textStyle: CustomTextStyle.medium(
                     color: Colors.black, fontSize: 14.sp),

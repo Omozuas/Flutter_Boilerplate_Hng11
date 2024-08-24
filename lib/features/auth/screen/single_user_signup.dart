@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
@@ -45,7 +46,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                      AppLocalizations.of(context)!.signUp,
+                      localizations.signUp, // Localized text
+
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,
@@ -93,7 +95,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Google", // Localized text
+                                  context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
                                       fontSize: 17.sp,
                                       color: GlobalColors.dark2),
@@ -197,7 +199,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
 
   void _handleCreateAccount(WidgetRef ref, BuildContext context) {
     ref.read(authProvider.notifier).registerSingleUser({
-      'email': emailController.text,
+      'email': emailController.text.trim().toLowerCase(),
       'first_name': firstNameController.text,
       'last_name': lastNameController.text,
       'password': passwordController.text,

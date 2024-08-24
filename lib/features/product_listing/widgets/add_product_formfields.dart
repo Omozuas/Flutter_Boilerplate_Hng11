@@ -147,6 +147,13 @@ class ProductPriceFormField extends StatelessWidget {
         keyboardType: TextInputType.number,
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
+         prefixIcon: const Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Icon(
+            Icons.attach_money,
+            //size: 20,
+          ),
+        ),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return AppLocalizations.of(context)!.pricePlaceholder;

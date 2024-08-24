@@ -9,9 +9,8 @@ class NotificationListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: 10,
-        itemBuilder: (_, index){
+        itemBuilder: (_, index) {
           return const NotificationCard();
-        }
-    );
+        });
   }
 }
