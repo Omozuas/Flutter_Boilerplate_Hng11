@@ -83,7 +83,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 Text(
                                   user?.email ?? '',
                                   style: CustomTextStyle.regular(
-                                    fontSize: 14.sp,
+                                    fontSize: 12.sp,
                                     color: const Color(0xff525252),
                                   ),
                                 ),
