@@ -7,7 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteMemberDialog extends StatelessWidget {
-  const DeleteMemberDialog({super.key});
+  final String memberName;
+  const DeleteMemberDialog({super.key, required this.memberName});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class DeleteMemberDialog extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              "Are you sure you want to delete Chad Bosewick? All data will be permanently removed. This action cannot be undone.",
+              "Are you sure you want to delete $memberName? All data will be permanently removed. This action cannot be undone.",
               style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,

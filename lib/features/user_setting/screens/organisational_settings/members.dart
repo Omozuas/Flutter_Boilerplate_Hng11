@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/services.dart';
 
@@ -24,6 +25,9 @@ class MembersSettings extends ConsumerStatefulWidget {
 }
 
 class _MembersSettingsState extends ConsumerState<MembersSettings> {
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _membersController = TextEditingController();
+
   List<Members> organisationMembers = [
     /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
     Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
@@ -60,6 +64,8 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   @override
   void dispose() {
     searchController.dispose();
+    _scrollController.dispose();
+    _membersController.dispose();
     super.dispose();
   }
 
@@ -84,7 +90,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
       CustomToast(
         message: message,
         backgroundColor: GlobalColors.toastBgSurface2,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: GlobalColors.green, width: 2),
       ),
     );
@@ -102,71 +108,95 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    height: 24 / 12,
-                    color: GlobalColors.darkOne),
+                style: CustomTextStyle.regular(
+                  fontSize: 13.sp,
+                  color: GlobalColors.black400,
+                ),
               ),
+              SizedBox(height: 12.h),
               Divider(
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
               SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                AppLocalizations.of(context)!.inviteLink,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    height: 16.94 / 14,
-                    fontSize: 14,
-                    color: GlobalColors.integrationTextColor),
-              ),
-              Text(
-                AppLocalizations.of(context)!.inviteLinkDescr,
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    height: 24 / 12,
-                    color: GlobalColors.darkOne),
+                height: 12.h,
               ),
               SizedBox(
-                height: 10.h,
+                height: 39.h,
+                width: 270.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLink,
+                  style: CustomTextStyle.bold(
+                    fontSize: 14.sp,
+                    color: GlobalColors.integrationTextColor,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 276.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLinkDescr,
+                  style: CustomTextStyle.regular(
+                    fontSize: 12.sp,
+                    color: GlobalColors.darkOne,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16.h,
               ),
               Container(
-                padding: const EdgeInsets.only(
-                    top: 10, left: 8, bottom: 10, right: 8),
+                height: 61.h,
+                width: double.infinity,
+                padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(4.r),
                     border: Border.all(
                         color: GlobalColors.borderColor, width: 0.7)),
                 child: Row(
                   // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
                   children: [
-                    Expanded(
+                    SizedBox(
+                      width: 7.w,
+                    ),
+                    SizedBox(
+                      height: 39.w,
+                      width: 270.w,
                       child: asyncLinkValue.when(
-                        data: (inviteLink) => Text(
-                          inviteLink ?? "No link ",
-                          softWrap: true,
-                          style: TextStyle(
-                              color: GlobalColors.integrationTextColor,
-                              decoration: TextDecoration.underline,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500),
+                        data: (inviteLink) => Scrollbar(
+                          thumbVisibility: true,
+                          thickness: 2.0.w,
+                          controller: _scrollController,
+                          child: SingleChildScrollView(
+                            controller: _scrollController,
+                            child: Text(inviteLink ?? "No link ",
+                                softWrap: true,
+                                style: CustomTextStyle.medium(
+                                  fontSize: 10.sp,
+                                  color: GlobalColors.dark2,
+                                )),
+                          ),
                         ),
-                        loading: () => const Center(
-                          child: CircularProgressIndicator.adaptive(),
+                        loading: () => Center(
+                          child: SizedBox(
+                              height: 15.h,
+                              width: 15.h,
+                              child:
+                                  const CircularProgressIndicator.adaptive()),
                         ),
                         error: (e, st) {
                           return Center(
-                            child: Text(AppLocalizations.of(context)!
-                                .errorFetchingLink),
+                            child: Text(
+                                AppLocalizations.of(context)!.errorFetchingLink,
+                                style: CustomTextStyle.medium(
+                                  fontSize: 10.sp,
+                                  color: GlobalColors.dark2,
+                                )),
                           );
                         },
                       ),
@@ -174,7 +204,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
+                        SizedBox(
+                          height: 24.h,
+                          width: 24.w,
+                          child: InkWell(
                             onTap: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
@@ -183,29 +216,29 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                               });
                             },
                             child: SvgPicture.asset(
-                              'assets/icons/ShareNetwork.svg',
-                              height: 25.h,
-                              width: 25.w,
-                            )),
-                        SizedBox(
-                          width: 5.w,
+                                "assets/images/svg/shareIcon.svg"),
+                          ),
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              asyncLinkValue.whenData((link) {
-                                if (link != null) {
-                                  Clipboard.setData(ClipboardData(
-                                      text: link)); // Copy the link
-                                  showCustomToast(context,
-                                      AppLocalizations.of(context)!.copyLink);
-                                }
-                              });
-                            },
-                            child: SvgPicture.asset(
-                              'assets/icons/Copy.svg',
-                              height: 25.h,
-                              width: 25.w,
-                            ))
+                        SizedBox(width: 5.5.w),
+                        SizedBox(
+                          height: 24.h,
+                          width: 24.w,
+                          child: InkWell(
+                              onTap: () {
+                                asyncLinkValue.whenData((link) {
+                                  if (link != null) {
+                                    Clipboard.setData(ClipboardData(
+                                        text: link)); // Copy the link
+                                    showCustomToast(context,
+                                        AppLocalizations.of(context)!.copyLink);
+                                  }
+                                });
+                              },
+                              child: SvgPicture.asset(
+                                "assets/images/svg/copyIcon.svg",
+                                fit: BoxFit.contain,
+                              )),
+                        ),
                       ],
                     )
                   ],
@@ -221,49 +254,28 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               const SizedBox(
                 height: 24,
               ),
-              SizedBox(
-                height: 45.h,
-                width: double.infinity,
-                child: TextField(
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15,
-                  ),
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                      child: Icon(
-                        Icons.search_outlined,
-                        color: GlobalColors.darkOne,
-                        size: 20,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                        color: GlobalColors
-                            .borderColor, // Not selected (unfocused) color
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                        color: GlobalColors.borderColor,
-                      ),
-                    ),
-                    prefixIconConstraints: const BoxConstraints(),
-                    contentPadding: const EdgeInsets.only(top: 8.0),
+              CustomTextField(
+                controller: searchController,
+                hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
+                hintTextStyle: CustomTextStyle.regular(
+                  fontSize: 14.sp,
+                  color: GlobalColors.darkOne,
+                ),
+                prefixIcon: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  height: 24.h,
+                  width: 24.w,
+                  child: SvgPicture.asset(
+                    "assets/images/svg/searchIcon.svg",
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
-              SizedBox(height: 10.w),
-              const SizedBox(
-                height: 24,
+              SizedBox(
+                height: 24.h,
               ),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: 5.h,
               ),
               asyncMembersValue.when(
                 loading: () => const Center(
