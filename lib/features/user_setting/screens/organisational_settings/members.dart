@@ -77,7 +77,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.members,
-        // subTitle: AppLocalizations.of(context)!.manageAccessToWorkspace,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(

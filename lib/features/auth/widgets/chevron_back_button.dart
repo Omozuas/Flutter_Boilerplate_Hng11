@@ -15,10 +15,15 @@ class ChevronBackButton extends StatelessWidget {
     return InkWell(
       onTap: onBack,
       child: Column(
+        mainAxisAlignment: includeBottomSpace
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 2.h,
-          ),
+          if (includeBottomSpace) ...[
+            SizedBox(
+              height: 2.h,
+            ),
+          ],
           Icon(Icons.chevron_left, size: 30.sp),
           if (includeBottomSpace) ...[
             const SizedBox(
