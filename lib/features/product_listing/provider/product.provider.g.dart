@@ -7,7 +7,7 @@ part of 'product.provider.dart';
 // **************************************************************************
 
 String _$productsByCategoryHash() =>
-    r'de19701512a50a0ae88bf615249861870d5d0fbe';
+    r'60b5db89ebbfdbc9ab53b94ef3809684fe29e717';
 
 /// See also [productsByCategory].
 @ProviderFor(productsByCategory)
@@ -39,7 +39,7 @@ final productListProvider =
 );
 
 typedef _$ProductList = AsyncNotifier<List<Product>>;
-String _$searchInputHash() => r'235a0a7a9976a5e9f45fc9f70349f1d74cd92fc0';
+String _$searchInputHash() => r'7fe9dd60db1196df18c6e98a988f3f13a88ccfc2';
 
 /// See also [SearchInput].
 @ProviderFor(SearchInput)

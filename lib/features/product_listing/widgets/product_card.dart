@@ -22,7 +22,7 @@ class ProductCardWiget extends StatelessWidget {
   final String productNmae;
   final String category;
   final String status;
-  final int price;
+  final num price;
 
   final String image;
   @override

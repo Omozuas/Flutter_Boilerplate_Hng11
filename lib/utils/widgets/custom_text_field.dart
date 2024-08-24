@@ -58,8 +58,8 @@ class CustomTextField extends StatelessWidget {
               style: labelStyle ??
                   TextStyle(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF0F172A),
+                    fontWeight: FontWeight.w500,
+                    color: GlobalColors.darkTwo,
                   ),
             ),
           ],
