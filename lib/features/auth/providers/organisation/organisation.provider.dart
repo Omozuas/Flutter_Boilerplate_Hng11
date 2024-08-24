@@ -20,30 +20,26 @@ class GetOrganisation extends _$GetOrganisation {
 
 @Riverpod(keepAlive: true)
 class OrgnaisationIndex extends _$OrgnaisationIndex {
-    final GetStorage _box = locator<GetStorage>();
-final _indexKey = 'org-index';
+  final GetStorage _box = locator<GetStorage>();
+  final _indexKey = 'org-index';
   @override
   int build() {
-    final value =  _box.read<int>(_indexKey);
+    final value = _box.read<int>(_indexKey);
     return value ?? 0;
   }
-  
-  void updateByIndex(int index){
+
+  void updateByIndex(int index) {
     _box.write(_indexKey, index);
     state = index;
   }
 
-  void updateByOrgId(String orgId){
+  void updateByOrgId(String orgId) {
     // ignore: avoid_manual_providers_as_generated_provider_dependency
-    final targetIndex = ref.read(authProvider).organisations.indexWhere((element) => element.organisationId == orgId,);
-    if(targetIndex > -1){
+    final targetIndex = ref.read(authProvider).organisations.indexWhere(
+          (element) => element.organisationId == orgId,
+        );
+    if (targetIndex > -1) {
       updateByIndex(targetIndex);
     }
-
   }
-
-
-
-  
-
 }
