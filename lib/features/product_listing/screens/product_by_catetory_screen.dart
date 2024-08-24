@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
+import '../../../utils/routing/app_router.dart';
 import '../models/product/product_model.dart';
 import '../provider/product.provider.dart';
 import '../widgets/add_product_formfields.dart';
@@ -49,6 +51,17 @@ class ProductsByCategory extends ConsumerWidget {
           image: 'assets/images/png/product_listing/iphone.png'),
     ];
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                context.push(AppRoute.addProduct);
+              },
+              backgroundColor: GlobalColors.orange,
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.add,
+                color: GlobalColors.white,
+              ),
+            ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

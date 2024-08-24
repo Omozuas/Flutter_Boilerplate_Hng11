@@ -60,6 +60,7 @@ extension Translation on BuildContext {
   String get cancel => 'Cancel';
   String get add => 'Add';
 
+
   String get logoutConfirmation =>
       'Are you sure you want to logout from this Device.';
 }
