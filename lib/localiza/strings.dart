@@ -271,7 +271,7 @@ extension StringManager on BuildContext {
   static const String profileName = 'Chad Bosewick';
   static const String profileEmail = 'ChadBosew@gmail.com';
 
-  /// TODO: Put every new strings under this todo
+  /// tODO: Put every new strings under this todo
 
   static const String editOrganization = 'Edit Organization';
 
