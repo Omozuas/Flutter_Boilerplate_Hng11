@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.hintText,
     this.hintTextStyle,
-     this.controller,
+    this.controller,
     this.validator,
     this.keyboardType,
     this.maxLength,

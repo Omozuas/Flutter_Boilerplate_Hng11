@@ -13,7 +13,7 @@ class NotificationCard extends StatelessWidget {
     return Padding(
       padding: 8.h.padV,
       child: InkWell(
-        onTap: (){},
+        onTap: () {},
         child: SizedBox(
           width: width(context),
           height: 48.h,
@@ -30,25 +30,17 @@ class NotificationCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                          "data",
-                          style: CustomTextStyle.bold(
-                              color: Colors.black
-                          )
-                      ),
-                      Text(
-                          "Made a new sale today",
-                          style: CustomTextStyle.regular()
-                      ),
+                      Text("data",
+                          style: CustomTextStyle.bold(color: Colors.black)),
+                      Text("Made a new sale today",
+                          style: CustomTextStyle.regular()),
                     ],
                   )
                 ],
               ),
               Text(
                 '1m ago.',
-                style: CustomTextStyle.medium(
-                    fontSize: 12
-                ),
+                style: CustomTextStyle.medium(fontSize: 12),
               ),
             ],
           ),

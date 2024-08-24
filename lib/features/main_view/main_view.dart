@@ -56,7 +56,6 @@ class _MainViewState extends State<MainView> {
     AppRouter.router.routeInformationProvider.removeListener(_watchRoute);
   }
 
-
   void goBranch(int index) {
     final currentIndex = _bottomBarIndex.value;
     widget.navigationShell.goBranch(

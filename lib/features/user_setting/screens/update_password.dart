@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_boilerplate_hng11/services/user.service.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,8 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:one_context/one_context.dart';
-import 'validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../utils/validator.dart';
 
 class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
@@ -20,6 +24,7 @@ class UpdatePassword extends ConsumerStatefulWidget {
 }
 
 class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
+  bool currentPasswordVissible = false;
   bool newPasswordVissible = false;
   bool confPasswordVissible = false;
 
@@ -30,12 +35,16 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   FocusNode newPasswordFocusNode = FocusNode();
   FocusNode confirmPasswordFocusNode = FocusNode();
   bool isPasswordFieldFocused = false;
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController currentPasswordController =
+      TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   bool passwordsMatch = true;
   String? errorMessage;
+  final userServiceProvider = Provider<UserService>((ref) {
+    return locator<UserService>();
+  });
 
   @override
   void initState() {
@@ -54,25 +63,29 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   void dispose() {
     newPasswordFocusNode.dispose();
     confirmPasswordFocusNode.dispose();
-    emailController.dispose();
+    currentPasswordController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
 
   void updatePassword() async {
-    final email = emailController.text;
+    final currentPassword = currentPasswordController.text;
     final newPassword = newPasswordController.text;
     final confirmPassword = confirmPasswordController.text;
 
     if (newPassword == confirmPasswordController.text) {
       try {
         final passwordService = ref.read(passwordServiceProvider);
+        final userService = ref.read(userServiceProvider);
+        final authToken = await userService.getToken();
         await passwordService
             .updatePassword(
-                email: email,
-                newPassword: newPassword,
-                confirmPassword: confirmPassword)
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+          confirmPassword: confirmPassword,
+          token: authToken.toString(),
+        )
             .then(
           (value) {
             OneContext().showDialog(
@@ -153,24 +166,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Password Setting',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xff0A0A0A),
-            ),
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.passwordSetting,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -179,9 +176,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Update password for enhanced account security",
-                style: TextStyle(color: Color(0xff434343), fontSize: 12),
+              Text(
+                AppLocalizations.of(context)!.updatePasswordEnhanced,
+                style: const TextStyle(color: Color(0xff434343), fontSize: 12),
               ),
               SizedBox(
                 height: 32.h,
@@ -199,7 +196,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              AppLocalizations.of(context)!.email,
+                              "Current Password",
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -208,15 +205,29 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             ),
                           ),
                           TextFormField(
-                            controller: emailController,
-                            keyboardType: TextInputType.emailAddress,
+                            controller: currentPasswordController,
+                            obscureText: !currentPasswordVissible,
                             decoration: InputDecoration(
-                              hintText: "example@email.com",
+                              hintText: "Enter current password",
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500),
-                              suffixIcon: const Icon(Icons.email_outlined),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  currentPasswordVissible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off_outlined,
+                                ),
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      currentPasswordVissible =
+                                          !currentPasswordVissible;
+                                    },
+                                  );
+                                },
+                              ),
                               border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(6),
@@ -231,20 +242,20 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                 ),
                               ),
                             ),
-                            validator: validateEmail,
+                            validator: Validators.passwordValidator,
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.only(bottom: 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              "New Password",
+                              AppLocalizations.of(context)!.newPassword,
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -256,13 +267,14 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             controller: newPasswordController,
                             focusNode: newPasswordFocusNode,
                             obscureText: !newPasswordVissible,
-                            validator: validatePassFields,
+                            validator: Validators.passwordValidator,
                             onChanged: (value) {
                               checkPasswordStrength(value);
                               validatePasswords();
                             },
                             decoration: InputDecoration(
-                              hintText: "Enter New password",
+                              hintText: AppLocalizations.of(context)!
+                                  .enterNewPassword,
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
@@ -333,7 +345,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 12),
                         child: Text(
-                          "Password must contain:",
+                          AppLocalizations.of(context)!.passwordMustContain,
                           textAlign: TextAlign.start,
                           style: GoogleFonts.inter(
                               fontSize: 13,
@@ -353,7 +365,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                     ? Colors.green
                                     : const Color(0xffdc2626)),
                             const SizedBox(width: 8),
-                            Text("At least 1 uppercase",
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .atLeastOneUpercase,
                                 style: GoogleFonts.inter(
                                     fontSize: 14, fontWeight: FontWeight.w400)),
                           ],
@@ -371,7 +385,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                     ? Colors.green
                                     : const Color(0xffdc2626)),
                             const SizedBox(width: 8),
-                            Text("At least 1 number",
+                            Text(AppLocalizations.of(context)!.atLeastOneNumber,
                                 style: GoogleFonts.inter(
                                     fontSize: 14, fontWeight: FontWeight.w400)),
                           ],
@@ -389,7 +403,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                     ? Colors.green
                                     : const Color(0xffdc2626)),
                             const SizedBox(width: 8),
-                            Text("At least 8 characters",
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .atLeastEightCharacters,
                                 style: GoogleFonts.inter(
                                     fontSize: 14, fontWeight: FontWeight.w400)),
                           ],
@@ -405,7 +421,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              "Confirm New Password",
+                              AppLocalizations.of(context)!.confirmNewPassword,
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -417,13 +433,15 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             focusNode: confirmPasswordFocusNode,
                             controller: confirmPasswordController,
                             obscureText: !confPasswordVissible,
-                            validator: validatePassFields,
+                            validator: Validators.passwordValidator,
                             onChanged: (value) => validatePasswords(),
                             decoration: InputDecoration(
-                              hintText: "Confirm new password",
+                              hintText: AppLocalizations.of(context)!
+                                  .confirmNewPassword,
                               errorText: passwordsMatch
                                   ? null
-                                  : 'Passwords do not match',
+                                  : AppLocalizations.of(context)!
+                                      .passwordDoNotMatch,
                               hintStyle: GoogleFonts.inter(
                                   color: const Color(0xff939393),
                                   fontSize: 14,
@@ -513,7 +531,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                               padding: EdgeInsets.symmetric(horizontal: 20.w),
                             ),
                             child: Text(
-                              "Update",
+                              AppLocalizations.of(context)!.update,
                               style: GoogleFonts.inter(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,

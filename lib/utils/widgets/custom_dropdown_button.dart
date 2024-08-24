@@ -57,12 +57,13 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
         ),
         child: DropdownButtonHideUnderline(
           child: Padding(
-            padding: widget.textPadding ?? const EdgeInsets.all(8.0),
+            padding: widget.textPadding ?? EdgeInsets.zero,
             child: DropdownButton<String>(
               style: widget.valueStyle,
               value: _selectedItem,
               hint: Text(
                 widget.placeholder,
+                softWrap: true,
                 style: TextStyle(color: widget.textColor),
               ),
               dropdownColor: widget.containerColor,
@@ -79,6 +80,8 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
                     value,
                     style: TextStyle(color: widget.textColor),
                   ),

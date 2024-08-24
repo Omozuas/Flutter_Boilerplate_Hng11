@@ -40,6 +40,16 @@ AsyncValue<Map<String, List<Product>>> productsByCategory(
       );
 }
 
+// final keyProvider = StateProvider<String>((ref) => '');
+
+// @riverpod
+// AsyncValue<List<Product>> productsInCategory(ProductsInCategoryRef ref) {
+//   final key = ref.watch(keyProvider);
+//   return ref.watch(productsByCategoryProvider).whenData(
+//         (value) => value[key]!,
+//       );
+// }
+
 Map<String, List<Product>> _getProductMapping(List<Product> products) {
   final allCategories = products.map((e) => e.category).toSet().toList();
   final categoryMap = <String, List<Product>>{};
