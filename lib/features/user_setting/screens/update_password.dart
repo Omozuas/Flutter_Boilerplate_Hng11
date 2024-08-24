@@ -262,41 +262,32 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomTextField(
-                            label: AppLocalizations.of(context)!.newPassword,
-                            controller: newPasswordController,
-                            focusNode: newPasswordFocusNode,
-                            obscureText: !newPasswordVissible,
-                            validator: Validators.passwordValidator,
-                            onchanged: (String? value) {
-                              checkPasswordStrength(value!);
-                              validatePasswords();
+                    CustomTextField(
+                      label: AppLocalizations.of(context)!.newPassword,
+                      controller: newPasswordController,
+                      focusNode: newPasswordFocusNode,
+                      obscureText: !newPasswordVissible,
+                      validator: Validators.passwordValidator,
+                      onchanged: (String? value) {
+                        checkPasswordStrength(value!);
+                        validatePasswords();
+                      },
+                      hintText: AppLocalizations.of(context)!.enterNewPassword,
+                      focusedBorderColor: GlobalColors.borderColor,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          newPasswordVissible
+                              ? Icons.visibility
+                              : Icons.visibility_off_outlined,
+                          color: GlobalColors.borderColor,
+                        ),
+                        onPressed: () {
+                          setState(
+                            () {
+                              newPasswordVissible = !newPasswordVissible;
                             },
-                            hintText:
-                                AppLocalizations.of(context)!.enterNewPassword,
-                            focusedBorderColor: GlobalColors.borderColor,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                newPasswordVissible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off_outlined,
-                                color: GlobalColors.borderColor,
-                              ),
-                              onPressed: () {
-                                setState(
-                                  () {
-                                    newPasswordVissible = !newPasswordVissible;
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                     // Password strength and criteria section starts here
