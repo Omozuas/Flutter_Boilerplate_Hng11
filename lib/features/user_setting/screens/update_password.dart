@@ -1,20 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:one_context/one_context.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../utils/validator.dart';
+
 
 class UpdatePassword extends ConsumerStatefulWidget {
   const UpdatePassword({super.key});
@@ -91,9 +93,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
             OneContext().showDialog(
               builder: (ctx) {
                 return ProfileDialog(
-                    title: "Password Successfully Updated",
-                    description:
-                        "Your password has been successfully updated! You can now log in with your new password.",
+                    title: context.passwordUpdated,
+                    description: context.passwordUpdatedMessage,
                     onContinue: () {
                       Navigator.pop(ctx);
                       context.go(AppRoute.login);
@@ -108,18 +109,17 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
         // Handle DioException
         if (e.response?.statusCode == 404) {
           setState(() {
-            errorMessage =
-                'The requested resource was not found. Please check the URL or contact support.';
+            errorMessage = context.passwordUpdated404Error;
           });
         } else {
           setState(() {
-            errorMessage = 'Failed to update password. Please try again.';
+            errorMessage = context.passwordUpdatedError;
           });
         }
         OneContext().showDialog(
           builder: (context) {
             return ProfileDialog(
-              title: "Error",
+              title: context.error,
               description: errorMessage!,
             );
           },
@@ -127,7 +127,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
       } catch (e) {
         // Handle other exceptions
         setState(() {
-          errorMessage = 'An unexpected error occurred. Please try again.';
+          errorMessage = context.passwordUpdatedCatchError;
         });
         OneContext().showDialog(
           builder: (context) {
@@ -166,19 +166,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Password Setting',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: const Color(0xff0A0A0A),
-            ),
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        showDivider: false,
+        titleText: context.passwordSetting,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -189,7 +179,10 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
             children: [
               Text(
                 AppLocalizations.of(context)!.updatePasswordEnhanced,
-                style: const TextStyle(color: Color(0xff434343), fontSize: 12),
+                style: CustomTextStyle.regular(
+                  color: const Color(0xff434343),
+                  fontSize: 12.sp,
+                ),
               ),
               SizedBox(
                 height: 32.h,
@@ -207,10 +200,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
-                              "Current Password",
-                              style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              context.currentPassword,
+                              style: CustomTextStyle.regular(
+                                fontSize: 16.sp,
                                 color: const Color(0xff434343),
                               ),
                             ),
@@ -219,11 +211,11 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             controller: currentPasswordController,
                             obscureText: !currentPasswordVissible,
                             decoration: InputDecoration(
-                              hintText: "Enter current password",
-                              hintStyle: GoogleFonts.inter(
-                                  color: const Color(0xff939393),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                              hintText: context.enterCurrentPassword,
+                              hintStyle: CustomTextStyle.regular(
+                                color: const Color(0xff939393),
+                                fontSize: 14.sp,
+                              ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   currentPasswordVissible
@@ -258,6 +250,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                         ],
                       ),
                     ),
+
                     CustomTextField(
                       label: AppLocalizations.of(context)!.newPassword,
                       controller: newPasswordController,
@@ -322,10 +315,10 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                         child: Text(
                           AppLocalizations.of(context)!.passwordMustContain,
                           textAlign: TextAlign.start,
-                          style: GoogleFonts.inter(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff434343)),
+                          style: CustomTextStyle.medium(
+                            fontSize: 13.sp,
+                            color: const Color(0xff434343),
+                          ),
                         ),
                       ),
                       Padding(
@@ -343,8 +336,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             Text(
                                 AppLocalizations.of(context)!
                                     .atLeastOneUpercase,
-                                style: GoogleFonts.inter(
-                                    fontSize: 14, fontWeight: FontWeight.w400)),
+                                style: CustomTextStyle.regular(
+                                  fontSize: 14.sp,
+                                )),
                           ],
                         ),
                       ),
@@ -361,8 +355,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                     : const Color(0xffdc2626)),
                             const SizedBox(width: 8),
                             Text(AppLocalizations.of(context)!.atLeastOneNumber,
-                                style: GoogleFonts.inter(
-                                    fontSize: 14, fontWeight: FontWeight.w400)),
+                                style: CustomTextStyle.regular(
+                                  fontSize: 14.sp,
+                                )),
                           ],
                         ),
                       ),
@@ -381,8 +376,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             Text(
                                 AppLocalizations.of(context)!
                                     .atLeastEightCharacters,
-                                style: GoogleFonts.inter(
-                                    fontSize: 14, fontWeight: FontWeight.w400)),
+                                style: CustomTextStyle.regular(
+                                  fontSize: 14.sp,
+                                )),
                           ],
                         ),
                       ),
@@ -397,9 +393,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Text(
                               AppLocalizations.of(context)!.confirmNewPassword,
-                              style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              style: CustomTextStyle.regular(
+                                fontSize: 16.sp,
                                 color: const Color(0xff434343),
                               ),
                             ),
@@ -417,10 +412,10 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                   ? null
                                   : AppLocalizations.of(context)!
                                       .passwordDoNotMatch,
-                              hintStyle: GoogleFonts.inter(
-                                  color: const Color(0xff939393),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                              hintStyle: CustomTextStyle.medium(
+                                color: const Color(0xff939393),
+                                fontSize: 14.sp,
+                              ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   confPasswordVissible
@@ -482,10 +477,11 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             ),
                             child: Text(
                               AppLocalizations.of(context)!.cancel,
-                              style: GoogleFonts.inter(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xff0F172A),
+                              style: CustomTextStyle.medium(
+                                fontSize: 14.sp,
+                                color: const Color(
+                                  0xff0F172A,
+                                ),
                               ),
                             ),
                           ),
@@ -507,9 +503,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             ),
                             child: Text(
                               AppLocalizations.of(context)!.update,
-                              style: GoogleFonts.inter(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                              style: CustomTextStyle.medium(
+                                fontSize: 14.sp,
                                 color: const Color(0xffffffff),
                               ),
                             ),

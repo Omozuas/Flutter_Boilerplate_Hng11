@@ -83,6 +83,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
     //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
     return LoadingOverlay(
       isLoading: authStateProvider.normalButtonLoading ||
           authStateProvider.googleButtonLoading,
@@ -365,7 +366,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
     ref.read(authProvider.notifier).login({
-      'email': LoginScreen._emailController.text,
+
+      'email': LoginScreen._emailController.text.trim().toLowerCase(),
       'password': LoginScreen._passwordController.text,
     }, context);
   }

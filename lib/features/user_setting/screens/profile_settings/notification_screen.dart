@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../utils/context_extensions.dart';
-import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_notification_item.dart';
 import '../../../../utils/widgets/custom_notification_section.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/notification_model.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/ref_extension.dart';
+
 
 class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({
@@ -50,18 +49,9 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         ref.watch(profileProvider).notificationFetch.isLoading;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        surfaceTintColor: Colors.transparent,
-        titleSpacing: -6.sp,
-        leading: const ChevronBackButton(),
-        title: Text(
-          context.text.notification,
-          style: CustomTextStyle.semiBold(
-            fontSize: 16.sp,
-            color: GlobalColors.iconColor,
-          ),
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.notification,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: notificationLoading
