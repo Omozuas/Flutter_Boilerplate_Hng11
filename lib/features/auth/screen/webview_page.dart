@@ -1,10 +1,14 @@
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 =======
+=======
+// import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+>>>>>>> 6e04ab2 (fix: replace all hardcoded strings in add product screen)
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 >>>>>>> bc48ba9 (FIXED IOS RUNNING)
 

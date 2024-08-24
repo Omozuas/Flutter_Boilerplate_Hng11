@@ -29,6 +29,7 @@ extension Translation on BuildContext {
   String get region => text.region;
   String get timeZone => text.timeZone;
 
+<<<<<<< HEAD
   String get nameRequired => text.nameRequired;
   String get nameTwoCharacters => text.nameTwoCharacters;
   String get emailRequired => text.emailRequired;
@@ -53,4 +54,26 @@ extension Translation on BuildContext {
   String get orderText => 'Orders';
 
   String get logoutConfirmation => 'Are you sure you want to logout from this Device.';
+=======
+  String get productDescription => "Product Description";
+  String get addAProduct => "Add a Product";
+  String get passwordSetting => 'Password Setting';
+  String get editProfile => 'Edit Profile';
+  String get notification => 'Notification';
+  String get orderDetails => 'Order Details';
+  String get addProductFailure => 'Failed to add product:';
+  String get productFormIncomplete => 'Please Complete form fill';
+  String get ok => 'Ok';
+  String get success => 'Success';
+  String get addProductSuccessDescription => 'Product added successfully';
+  String get anErrorOccured => 'An Error occured';
+  String get title => 'Title';
+  String get category => 'Category';
+  String get description => 'Description';
+  String get descriptionFieldHint => 'Maximum of 72 characters';
+  String get standardPrice => 'Standard Price';
+  String get quantity => 'Quantity';
+  String get cancel => 'Cancel';
+  String get add => 'Add';
+>>>>>>> 6e04ab2 (fix: replace all hardcoded strings in add product screen)
 }
