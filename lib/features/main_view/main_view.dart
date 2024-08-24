@@ -30,12 +30,30 @@ class _MainViewState extends State<MainView> {
       name: widget.name,
       context: context,
     );
+    AppRouter.router.routeInformationProvider.addListener(_watchRoute);
+  }
+
+  void _watchRoute() {
+    if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.home) {
+      _bottomBarIndex.value = 0;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.products) {
+      _bottomBarIndex.value = 1;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.order) {
+      _bottomBarIndex.value = 3;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.settings) {
+      _bottomBarIndex.value = 4;
+    }
   }
 
   @override
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+    AppRouter.router.routeInformationProvider.removeListener(_watchRoute);
   }
 
   void goBranch(int index) {

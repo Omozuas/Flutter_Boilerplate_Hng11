@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../common_models/get_user_response.dart';
@@ -12,7 +12,12 @@ class UserService {
   AuthUser user = AuthUser();
   GetStorage storageService = locator<GetStorage>();
   bool isUserLoggedIn = false;
-  bool isUserServiceProvider = false;
+  bool isUserOrganization = true;
+
+  change(bool? userType, BuildContext context) async {
+    isUserOrganization = userType ?? true;
+    storageService.write("userType", isUserOrganization);
+  }
 
   storeToken(String? token) async {
     if (token != null) {
@@ -36,6 +41,7 @@ class UserService {
       user = AuthUser();
       isUserLoggedIn = false;
     } else {
+      isUserOrganization = true;
       isUserLoggedIn = true;
       await getStoreUser();
     }
@@ -68,8 +74,10 @@ class UserService {
   }
 
   logout() async {
-    final box = GetStorage();
-    box.erase();
+    final box = locator<GetStorage>();
+    box.remove('accessToken');
+    box.remove('user');
+    initializer();
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // await prefs.clear();
     // await storageService.deleteItem(key: DbTable.USER_TABLE_NAME);

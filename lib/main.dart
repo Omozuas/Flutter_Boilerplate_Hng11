@@ -22,11 +22,13 @@ void main() async {
     ],
   );
 
-  // Change status bar theme based on theme of app
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: Colors.transparent,
-  //   statusBarIconBrightness: Brightness.light,
-  // ));
+// Ensures status bar and system navigation controls blends with the app
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
+  ));
 
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -49,29 +51,31 @@ class MyApp extends ConsumerWidget {
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            textTheme: GoogleFonts.interTextTheme(),
-            scaffoldBackgroundColor: Colors.white,
-            dialogTheme: DialogTheme(
-              backgroundColor:
-                  GlobalColors.deemWhiteColor, // Dialog background color
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0), // Dialog shape
-              ),
-              elevation: 10, // Dialog elevation
-              titleTextStyle: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black, // Title text style
-              ),
-              contentTextStyle: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[800], // Content text style
-              ),
+          textTheme: GoogleFonts.interTextTheme(),
+          scaffoldBackgroundColor: Colors.white,
+          dialogTheme: DialogTheme(
+            backgroundColor:
+                GlobalColors.deemWhiteColor, // Dialog background color
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0), // Dialog shape
             ),
-            appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.transparent,
-                scrolledUnderElevation: 0,
-                systemOverlayStyle: SystemUiOverlayStyle.dark)),
+            elevation: 10, // Dialog elevation
+            titleTextStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black, // Title text style
+            ),
+            contentTextStyle: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[800], // Content text style
+            ),
+          ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ),
+        ),
       ),
     );
   }

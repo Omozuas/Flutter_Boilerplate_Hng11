@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/dashboard_api.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../services/service_locator.dart';
 import '../../../../services/user.service.dart';
@@ -10,6 +13,7 @@ import '../../home_screen.dart';
 import '../model/dashboard_model.dart';
 import '../model/organization_overview_model.dart';
 import '../model/sales_trend_model.dart';
+import '../model/user_by_id_response.dart';
 
 class DashBoardState {
   final bool overViewLoading;
@@ -149,6 +153,20 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     state = state.copyWith(organizationOverviewModel: value);
   }
 
+  Future<GetUserByIDResponse?> getUserByID(String userID) async {
+    try {
+      final res = await DashboardApi().getUserById(userId: userID);
+      if (res.id != null) {
+        return res;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+      //tODO: Do something with caught error;
+    }
+  }
+
   Future<void> getDashboardData() async {
     setRecentSaleLoading = state.dashBoardData.revenue == null ? true : false;
     try {
@@ -162,6 +180,10 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     } finally {
       setRecentSaleLoading = false;
     }
+  }
+
+  goToNotification(BuildContext context) {
+    context.push(AppRoute.notification);
   }
 
   Future<void> getOrganizationOverView() async {
