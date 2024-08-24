@@ -46,4 +46,5 @@ class GlobalColors {
   static HexColor containerBorderColor = HexColor('#CBD5E1');
   static HexColor btnBgColor = HexColor('#FDEEE3');
   static HexColor boxShadow = HexColor('#1F0A39B0');
+  static HexColor iconColor2 = HexColor('#5b6380');
 }

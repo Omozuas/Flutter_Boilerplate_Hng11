@@ -33,7 +33,7 @@ dependencies:
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   freezed_annotation: ^2.4.4
-  syncfusion_flutter_charts: 
+  #syncfusion_flutter_charts:
   riverpod_annotation: ^2.3.5
   flutter_shimmer: ^2.1.2
   json_annotation: any
@@ -45,6 +45,7 @@ dependencies:
 
   http_parser: ^4.0.2
   badges: ^3.1.2
+  share_plus: ^10.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -112,6 +113,10 @@ flutter:
     - assets/images/svg/account_settings/
     - assets/images/svg/
     - assets/icons/
+
+    
+
+
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
