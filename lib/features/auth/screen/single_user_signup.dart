@@ -140,7 +140,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       controller: SingleUserSignUpScreen.emailController,
                       hintText: localizations.enterEmail,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.emailValidator,
+                      validator: (v)=>Validators.emailValidator(v,context),
                     ),
                     PasswordTextField(
                       label: localizations.password,

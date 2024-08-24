@@ -31,9 +31,10 @@ class ProductCardListWidget extends StatelessWidget {
                 style: PlusJakartaTextStyle.headerText2,
               ),
               TextButton(
-                onPressed: () => context.push(AppRoute.productsByCategory),
+                // onPressed: () => context.push(AppRoute.productsByCategory),
+                onPressed: () {},
                 child: Text(
-                 context.seeMore,
+                  context.seeMore,
                   // '',
                   style: PlusJakartaTextStyle.bodyTextGrey,
                 ),
