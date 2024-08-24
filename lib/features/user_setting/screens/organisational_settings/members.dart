@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -38,15 +39,15 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     });
   }
 
-
   Future<Object> fetchLinkFromAPI() async {
     // Trigger the sendInvite method from ProfileProvider
-    await ref.read(profileProvider.notifier).generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
+    await ref
+        .read(profileProvider.notifier)
+        .generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
     // Check the inviteResponse state
     final inviteResponse = ref.read(profileProvider).inviteLink;
     return inviteResponse;
   }
-
 
   void showCustomToast(BuildContext context, String message) {
     CustomToast.show(
@@ -73,21 +74,14 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
             fontWeight: FontWeight.w700,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 12,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: const ChevronBackButton(),
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
               ),
@@ -106,8 +100,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-              Text(
-                  AppLocalizations.of(context)!.inviteLinkDescr),
+              Text(AppLocalizations.of(context)!.inviteLinkDescr),
               SizedBox(
                 height: 10.h,
               ),
@@ -122,17 +115,20 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   children: [
                     Expanded(
                       child: asyncLinkValue.when(
-                        data: (inviteLink) =>
-                            Text(inviteLink ?? "No link ", softWrap: true,),
+                        data: (inviteLink) => Text(
+                          inviteLink ?? "No link ",
+                          softWrap: true,
+                        ),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
                         ),
                         error: (e, st) {
-                          return  Center(
-                            child: Text(
-                                AppLocalizations.of(context)!.errorFetchingLink),
+                          return Center(
+                            child: Text(AppLocalizations.of(context)!
+                                .errorFetchingLink),
                           );
-                        },),
+                        },
+                      ),
                     ),
                     Row(
                       children: [
@@ -140,7 +136,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                             onPressed: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
-                                  Share.share(link);  // Share the link
+                                  Share.share(link); // Share the link
                                 }
                               });
                             },
@@ -152,8 +148,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                             onPressed: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
-                                  Clipboard.setData(ClipboardData(text: link));  // Copy the link
-                                  showCustomToast(context, AppLocalizations.of(context)!.copyLink);
+                                  Clipboard.setData(ClipboardData(
+                                      text: link)); // Copy the link
+                                  showCustomToast(context,
+                                      AppLocalizations.of(context)!.copyLink);
                                 }
                               });
                             },
@@ -189,7 +187,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                       child:
-                      Icon(Icons.search, color: GlobalColors.gray200Color),
+                          Icon(Icons.search, color: GlobalColors.gray200Color),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -212,10 +210,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               ),
               asyncMembersValue.when(
                   loading: () => const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
                   error: (e, st) {
-                    return  Center(
+                    return Center(
                       child: Text(
                           AppLocalizations.of(context)!.errorFetchingMembers),
                     );
@@ -225,7 +223,8 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
                         return CustomAvatar(
-                          memberDetail: members?[index] ?? organisationMembers[index],
+                          memberDetail:
+                              members?[index] ?? organisationMembers[index],
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {

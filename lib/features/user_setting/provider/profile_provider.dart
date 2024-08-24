@@ -188,7 +188,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(inviteLink: const AsyncLoading());
-      final res = await settingsApi.generateInviteLink(orgID: orgId);
+      final res = await settingsApi.generateInviteLink(orgId: orgId);
       state = state.copyWith(inviteLink: AsyncData(res));
     } catch (e) {
       state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));

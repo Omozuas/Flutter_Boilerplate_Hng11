@@ -49,7 +49,7 @@ class SettingsApi {
   }) async {
     try {
       final response = await dio.putUpdate(
-        '/profile/$email',
+        '/profile',
         data: profile.toMap(),
       );
       return UserProfile.fromMap(response?.data['data']);
@@ -69,7 +69,7 @@ class SettingsApi {
         contentType: MediaType('image', 'png'),
       );
       final response = await dio.multipartPut(
-        '/profile/$email/picture',
+        '/profile/picture',
         data: {'DisplayPhoto': multipart},
         options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
@@ -149,11 +149,11 @@ class SettingsApi {
     }
   }
 
-  Future<String> generateInviteLink({required String orgID}) async {
+  Future<String> generateInviteLink({required String orgId}) async {
     try {
       final response =
-      await dio.get('https://staging.api-csharp.boilerplate.hng.tech/api/v1/organisations/$orgID/invites');
-      return response?.data['data']['invite_link'];
+          await dio.post('/invite/generate', data: {'organizationId': orgId});
+      return response?.data['data']['inviteLink'];
     } catch (e) {
       rethrow;
     }
@@ -171,14 +171,13 @@ class SettingsApi {
 
   Future<List<Members>> getOrganisationMembers({required String orgId}) async {
     try {
-      final response = await dio.get('organisations/$orgId/users');
+      final response = await dio.get('/organisations/$orgId/users');
       List<dynamic> usersJson = response?.data['data']['users'];
       return usersJson.map((json) => Members.fromJson(json)).toList();
     } catch (e) {
       rethrow;
     }
   }
-
 
   Future<String> initiateSubscription({
     required String email,
