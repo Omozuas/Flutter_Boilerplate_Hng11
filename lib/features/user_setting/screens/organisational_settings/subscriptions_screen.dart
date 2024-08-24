@@ -8,7 +8,6 @@ import '../../../../utils/context_extensions.dart';
 import '../../../../utils/custom_text_style.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/routing/app_router.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/subscription_model.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/ref_extension.dart';
