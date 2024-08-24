@@ -1,11 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import the localization class
 
 class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});
@@ -49,6 +49,9 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    // Access the localized strings
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       key: _scaffoldkey,
       body: widget.navigationShell,
@@ -67,24 +70,24 @@ class _MainViewState extends State<MainView> {
           : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               NavBar.home,
             ),
-            label: 'Home',
+            label: localizations.home, // Localized label
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.products),
-            label: 'Products',
+            icon: const Icon(NavBar.products),
+            label: localizations.products, // Localized label
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.order),
-            label: 'Orders',
+            icon: const Icon(NavBar.order),
+            label: localizations.orders, // Localized label
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.settings),
-            label: 'Settings',
+            icon: const Icon(NavBar.settings),
+            label: localizations.settings, // Localized label
           ),
         ],
         currentIndex: _bottomBarIndex.value,
