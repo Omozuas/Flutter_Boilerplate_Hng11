@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 extension Translation on BuildContext {
   AppLocalizations get text => AppLocalizations.of(this)!;
+
+  String get signUpText => "Sign Up";
+  String get seeMore => " See more";
+
   /// Create a string getter here and call it in your ui using "context.{your-string-name}
 // E.g
 // String get login => 'Login';
@@ -14,7 +18,12 @@ extension Translation on BuildContext {
   String get continueWithGoogle => "Continue with Google";
   
   /// Product texts are below
-  String get productDescription => "Product Description";
   String get description => "Description";
   String get inStock => "In Stock";
+  String get productDescription => "Product Description";
+  String get addAProduct => "Add a Product";
+  String get passwordSetting => 'Password Setting';
+  String get editProfile => 'Edit Profile';
+  String get notification => 'Notification';
+  String get orderDetails => 'Order Details';
 }
