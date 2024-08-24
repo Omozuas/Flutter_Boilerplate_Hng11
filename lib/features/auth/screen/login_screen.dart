@@ -189,7 +189,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     controller: LoginScreen._emailController,
                     keyboardType: TextInputType.emailAddress,
                     hintText: AppLocalizations.of(context)!.enterEmail,
-                    validator: (v) => Validators.emailValidator(v),
+                    validator: (v) => Validators.emailValidator(v,context),
                   ),
                   SizedBox(
                     height: 16.h,
