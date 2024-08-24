@@ -146,4 +146,7 @@ extension Translation on BuildContext {
   String get cancel => text.cancel;
 
   String get add => text.add;
+
+  String get dummy => 'Dummy';
+
 }
