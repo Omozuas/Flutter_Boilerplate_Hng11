@@ -37,6 +37,7 @@ linux/
 
 # Symbolication related
 app.*.symbols
+linux
 
 # Obfuscation related
 app.*.map.json

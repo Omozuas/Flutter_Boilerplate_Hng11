@@ -201,6 +201,21 @@ class AppRouter {
               builder: (context, state, ref) => const ProductScreen(),
             ),
           ]),
+          // StatefulShellBranch(routes: [
+          //   ConsumerGoRoute(
+          //     path: AppRoute.ordersDetail,
+          //     builder: (context, state, ref) => OrderDetailScreen(
+          //       order: Order(
+          //           number: 00,
+          //           image: 'assets/images/png/product_listing/sport-shoes.png',
+          //           deliveryDate: "20-Aug-2024",
+          //           deliveryTime: "24-Aug-2024",
+          //           deliveryText: "Delivered on 19th August",
+          //           deliveryColor: GlobalColors.green),
+          //       image: "assets/images/png/product_listing/sport-shoes.png",
+          //     ),
+          //   ),
+          // ]),
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.order,
@@ -234,7 +249,7 @@ class AppRoute {
   static const String verificationSuccess = '/verificationSuccess';
   static const String resetPassword = '/resetPassword/:email';
   static const String cart = '/cart';
-  static const String orders = '/orders';
+  static const String ordersDetail = '/ordersDetail';
   static const String order = '/order';
   static const String notification = '/notification';
 

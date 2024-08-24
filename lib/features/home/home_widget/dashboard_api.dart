@@ -5,6 +5,7 @@ import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import '../../../services/dio_provider.dart';
 import '../../../services/service_locator.dart';
 import '../../product_listing/models/product/product_model.dart';
+import '../../product_listing/product_endpoints.dart';
 import '../../user_home/model/all_products.dart';
 import 'model/dashboard_model.dart';
 import 'model/organization_overview_model.dart';
@@ -34,6 +35,24 @@ class DashboardApi implements DashboardApiContract {
       var response = await dioProvider.get("users/$userId");
       return GetUserByIDResponse.fromJson(
           jsonDecode(jsonEncode(response?.data)));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Product>> getAllOrgProducts() async {
+    try {
+      log('API CALLED');
+      final result =
+      await dioProvider.get(productsForOrganisationEndpoint(orgId: _userService.user.organisations?[0].id??""));
+
+      final jsonList = result?.data['data'] as List;
+      return jsonList
+          .map(
+            (e) => Product.fromJson(e),
+      )
+          .toList();
     } catch (e) {
       rethrow;
     }
@@ -92,6 +111,7 @@ class DashboardApi implements DashboardApiContract {
 
 abstract class DashboardApiContract {
   Future<DashBoardModel> getDashboardData();
+  Future<List<Product>> getAllOrgProducts();
   Future<GetUserByIDResponse> getUserById({required String userId});
   Future<List<Product>> getAllProducts({int? pageSize, int? page});
   Future<OrganizationOverviewModel> getOrganizationOverView();

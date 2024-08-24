@@ -9,9 +9,30 @@ extension Translation on BuildContext {
 // String get login => 'Login';
 // In your UI, use this : context.login (importing this context_extension file);
 
+  String get login => 'Login';
+  String get order => 'Order';
+  String get paid => 'Paid';
+  String get packaing => 'Packaging';
+  String get orderCreated => 'Order Created';
+  String get augustDate => 'August 16th, 2024 at 10:30 pm';
+  String get progress =>  "Progress";
+  String get processing =>  'Processing';
+  String get estimate =>   'Estimated Shipping Date: ';
+  String get aug =>  'Aug 20, 2024 ';
+  String get confirmShip =>  "Confirm Shipment";
+  String get cusDetails =>  "Customer Details";
+  String get james =>  "James Hung Ltd";
+  String get shippingDetails =>   "Shipping Details";
+  String get orderSumarry =>   "Order Summary";
+  String get subTotal =>  "Sub Total";
+  String get dis =>  "Discount";
+  String get shippingCost =>  "Shipping Cost";
+  String get tot =>  "Total";
+  String get resendInvoice =>  "Resend Invoice";
+  String get orderDetails =>  "Order Details";
   String get signUpText => text.signUpText;
   String get seeMore => text.seeMore;
-  String get login => text.login;
+
   String get editProfile => text.editProfile;
   String get profileUpdated => text.profileUpdated;
   String get profileUpdatedMessage => text.profileUpdatedMessage;
@@ -40,7 +61,7 @@ extension Translation on BuildContext {
 
   String get productDescription => text.productDescription;
   String get addAProduct => text.addAProduct;
-  String get orderDetails => text.orderDetails;
+
   String get noResultFound => text.noResultFound;
   String get continueWithGoogle => text.continueWithGoogle;
   String get description => text.description;
@@ -59,6 +80,13 @@ extension Translation on BuildContext {
   String get quantity => 'Quantity';
   String get cancel => 'Cancel';
   String get add => 'Add';
+
+
+  ///Auth texts
+
+
+ 
+
 
   String get logoutConfirmation =>
       'Are you sure you want to logout from this Device.';
