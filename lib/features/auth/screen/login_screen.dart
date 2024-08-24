@@ -157,7 +157,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 Text(
                                   context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       color: GlobalColors.dark2),
                                 )
                               ],
@@ -189,7 +189,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     controller: LoginScreen._emailController,
                     keyboardType: TextInputType.emailAddress,
                     hintText: AppLocalizations.of(context)!.enterEmail,
-                    validator: (v) => Validators.emailValidator(v),
+                    validator: (v) => Validators.emailValidator(v,context),
                   ),
                   SizedBox(
                     height: 16.h,

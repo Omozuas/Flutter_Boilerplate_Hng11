@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
@@ -73,6 +74,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     );
                   },
                   borderColor: Colors.transparent,
+                  borderColors: Colors.transparent,
                   text: AppLocalizations.of(context)!.deleteButton,
                   height: 40,
                   containerColor: GlobalColors.red,
@@ -106,7 +108,7 @@ class LogOutDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Logout",
+              AppLocalizations.of(context)!.logOut,
               style: GoogleFonts.inter(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -117,7 +119,7 @@ class LogOutDialog extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              "Are you sure you want to logout from this Divice.",
+              context.logoutConfirmation,
               style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -145,7 +147,7 @@ class LogOutDialog extends StatelessWidget {
                 CustomButton(
                   onTap: onTap,
                   borderColor: Colors.transparent,
-                  text: "Logout",
+                  text:  AppLocalizations.of(context)!.logOut,
                   height: 40,
                   containerColor: GlobalColors.red,
                   width: 80,
