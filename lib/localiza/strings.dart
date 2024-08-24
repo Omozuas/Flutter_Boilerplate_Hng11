@@ -269,7 +269,6 @@ class StringManager {
   static const String profileEmail = 'ChadBosew@gmail.com';
 
 
-
   static const String editOrganization = 'Edit Organization';
 
   static const String country1 = 'Germany';

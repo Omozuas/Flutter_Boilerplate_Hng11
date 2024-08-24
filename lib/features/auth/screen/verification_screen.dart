@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';  // Import localization
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -102,7 +102,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;  // Access localization
+    final localizations = AppLocalizations.of(context)!; // Access localization
 
     return Scaffold(
       // appBar: AppBar(
@@ -118,13 +118,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    localizations.verificationCodeTitle,  // Localized title
-                    style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    localizations.verificationCodeTitle, // Localized title
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(height: 16.h),
                   RichText(
                     text: TextSpan(
-                      text: '${localizations.verificationCodeDescription(widget.email)} ${_countdown.toString()} ',
+                      text:
+                          '${localizations.verificationCodeDescription(widget.email)} ${_countdown.toString()} ',
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
@@ -154,7 +156,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: _isCodeValid ? Colors.orange : Colors.red,
+                                  color:
+                                      _isCodeValid ? Colors.orange : Colors.red,
                                 ),
                               ),
                               counterText: '',
@@ -184,7 +187,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       _handleVerify(ref, context);
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: localizations.verify,  // Localized button text
+                    text: localizations.verify, // Localized button text
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
@@ -195,11 +198,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Center(
                       child: RichText(
                         text: TextSpan(
-                          text: localizations.didntReceiveCodeText,  // Localized text
+                          text: localizations
+                              .didntReceiveCodeText, // Localized text
                           style: TextStyle(color: GlobalColors.darkOne),
                           children: [
                             TextSpan(
-                              text: localizations.resendOtpText,  // Localized text
+                              text:
+                                  localizations.resendOtpText, // Localized text
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -216,8 +221,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       child: TextButton(
                         onPressed: _handleChangeEmail,
                         child: Text(
-                          localizations.changeEmailText,  // Localized text
-                          style:const TextStyle(
+                          localizations.changeEmailText, // Localized text
+                          style: const TextStyle(
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
                           ),

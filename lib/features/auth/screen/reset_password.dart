@@ -20,7 +20,8 @@ class ResetPassword extends StatefulWidget {
 class _ResetPasswordState extends State<ResetPassword> {
   bool loading = false;
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formResetKey = GlobalKey<FormState>();
 
   @override
@@ -75,7 +76,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   SizedBox(height: 8.sp),
                   Text(
                     localizations.createUniquePassword,
-                    style:const TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.w400, fontSize: 13),
                   ),
                   SizedBox(height: 28.sp),
@@ -88,10 +89,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                   ),
                   SizedBox(height: 16.sp),
                   PasswordTextField(
-                    label: localizations.confirmPassword,  // Localized label
+                    label: localizations.confirmPassword, // Localized label
                     controller: _confirmPasswordController,
                     obscureText: true,
-                    hintText: localizations.confirmNewPassword,  // Localized hint
+                    hintText:
+                        localizations.confirmNewPassword, // Localized hint
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return localizations.fieldRequired;
@@ -111,7 +113,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       }
                     },
                     borderColor: GlobalColors.borderColor,
-                    text: localizations.continueText,  // Localized button text
+                    text: localizations.continueText, // Localized button text
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,

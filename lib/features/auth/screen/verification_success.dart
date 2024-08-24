@@ -11,7 +11,7 @@ class VerificationSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!; 
+    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: Stack(
@@ -23,14 +23,14 @@ class VerificationSuccessScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 80.h),
                 Text(
-                  localizations.verificationSuccess, 
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 25.sp),
+                  localizations.verificationSuccess,
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
                 ),
                 SizedBox(height: 16.sp),
                 Text(
-                  localizations.verificationSuccessDescription, 
-                  style:const TextStyle(fontSize: 13),
+                  localizations.verificationSuccessDescription,
+                  style: const TextStyle(fontSize: 13),
                 ),
                 SizedBox(height: 24.sp),
                 CustomButton(

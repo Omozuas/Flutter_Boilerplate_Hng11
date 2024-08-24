@@ -49,7 +49,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
               style: GoogleFonts.inter(
                   fontWeight: FontWeight.w600, fontSize: 18.sp),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8.w),
             Icon(
               _isExpanded
                   ? Icons.keyboard_arrow_down_outlined

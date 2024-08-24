@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
-
 import '../../../services/service_locator.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -36,9 +35,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       ref.read(authProvider.notifier).loadStoredUser().then(
         (successful) {
           if (successful) {
-            context.go(AppRoute.home);
+            if (mounted) {
+              context.go(AppRoute.home);
+            }
           } else {
-            context.go(AppRoute.login);
+            if (mounted) {
+              context.go(AppRoute.login);
+            }
           }
         },
       );
@@ -49,7 +52,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
 
     return Scaffold(
       body: Column(
@@ -66,7 +68,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             height: 20.h,
           ),
           Text(
-             'HNG Boilerplate',  // Localized app name
+            'HNG Boilerplate', // Localized app name
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24.sp,

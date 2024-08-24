@@ -110,7 +110,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 10.0),
+                        SizedBox(height: 15.0.h),
                         Text(
                           context.text.profileSettings,
                           style: const TextStyle(
@@ -118,38 +118,39 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
+                        SizedBox(height: 15.0.h),
                         SettingsTile(
-                          leadingIcon: 'assets/images/personsettings.png',
+                          leadingIcon: 'assets/icons/personSetting.svg',
                           title: context.text.account,
                           onTap: () {
                             context.push(AppRoute.editProfileScreen);
                           },
                         ),
                         SettingsTile(
-                          leadingIcon: 'assets/images/notify.png',
+                          leadingIcon: 'assets/icons/notifybelll.svg',
                           title: context.text.notification,
                           onTap: () {
                             context.push(AppRoute.notificationScreen);
                           },
                         ),
                         SettingsTile(
-                          leadingIcon: 'assets/images/data.png',
-                          title: context.text.dataAndPrivacy,
+                          leadingIcon: 'assets/icons/db.svg',
+                          title: context.text.changePassword,
                           onTap: () {
                             context.push(AppRoute.updatePassword);
                           },
                         ),
                         SettingsTile(
-                          leadingIcon: 'assets/images/world.png',
+                          leadingIcon: 'assets/icons/world.svg',
                           title: context.text.languageAndRegion,
                           onTap: () {
                             // Navigate to Data and Privacy Settings
                             context.push(AppRoute.languageAndRegionScreen);
                           },
                         ),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 15.h),
                         const Divider(),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 15.h),
                         Text(
                           context.text.organizationSettings,
                           style: const TextStyle(
@@ -157,15 +158,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
+                        SizedBox(height: 15.h),
                         SettingsTile(
-                          leadingIcon: 'assets/images/org.png',
+                          leadingIcon: 'assets/icons/UserPlus.svg',
+                          title: context.text.createOrganisation,
+                          onTap: () {
+                            // Navigate to Manage Organization
+                          },
+                        ),
+                        SettingsTile(
+                          leadingIcon:
+                              'assets/icons/fluent_organization-16-regular.svg',
                           title: context.text.manageOrganization,
                           onTap: () {
                             // Navigate to Manage Organization
                           },
                         ),
                         SettingsTile(
-                          leadingIcon: 'assets/images/people.png',
+                          leadingIcon: 'assets/icons/Users.svg',
                           title: context.text.members,
                           onTap: () {
                             // Navigate to Members Settings
@@ -173,31 +183,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           },
                         ),
                         SettingsTile(
-                          leadingIcon: 'assets/images/notify.png',
-                          title: context.text.rolesAndPermissions,
-                          onTap: () {
-                            // Navigate to Roles and Permissions Settings
-                            context.push(AppRoute.rolesScreen);
-                          },
-                        ),
-                        SettingsTile(
-                          leadingIcon: 'assets/images/money.png',
-                          title: context.text.integrations,
-                          onTap: () {
-                            // Navigate to Integrations Settings
-                          },
-                        ),
-                        SettingsTile(
-                          leadingIcon: 'assets/images/wallet.png',
+                          leadingIcon: 'assets/icons/wellet.svg',
                           title: context.text.paymentInformation,
                           onTap: () {
                             // Navigate to Payment Information Settings
                             context.push(AppRoute.subscriptionsScreen);
                           },
                         ),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 15.h),
                         const Divider(),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 15.h),
                         InkWell(
                           onTap: () async {
                             await showDialog(
@@ -229,7 +224,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10.h),
+                        SizedBox(height: 15.h),
                       ],
                     ),
                   ),
