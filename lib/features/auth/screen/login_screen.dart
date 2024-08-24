@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
-
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -156,7 +155,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Google",
+                                  context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
                                       fontSize: 17.sp,
                                       color: GlobalColors.dark2),

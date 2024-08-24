@@ -14,6 +14,12 @@ extension Translation on BuildContext {
 
   String get login => 'Login';
 
+  ///Auth texts
+  String get continueWithGoogle => "Continue with Google";
+  
+  /// Product texts are below
+  String get description => "Description";
+  String get inStock => "In Stock";
   String get productDescription => "Product Description";
   String get addAProduct => "Add a Product";
   String get passwordSetting => 'Password Setting';
