@@ -38,6 +38,9 @@ class MemberProfileScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 12, height: 14.52/12, color: GlobalColors.darkOne
+                ),
               ),
             ),
             const SizedBox(
@@ -68,8 +71,7 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             // Member Name and Email
             Text(
-              memberDetail.firstName ??
-                  AppLocalizations.of(context)!.memberName,
+              '${memberDetail.firstName ?? AppLocalizations.of(context)!.memberName} ${memberDetail.lastName ?? ''}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -101,6 +103,8 @@ class MemberProfileScreen extends StatelessWidget {
                   "A brief description about the member which might be long or short as the case maybe, you can choose to be personal funny or official ,your choice.",
               style: const TextStyle(
                 fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 20/14,
                 color: Colors.black,
               ),
             ),

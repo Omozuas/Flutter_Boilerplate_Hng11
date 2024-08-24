@@ -35,7 +35,6 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
     });
   }
 
-
   void showCustomToast(BuildContext context, String message) {
     CustomToast.show(
       context,
@@ -78,6 +77,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400, fontSize: 12, height: 24/12, color: GlobalColors.darkOne
+                ),
               ),
               Divider(
                 color: GlobalColors.borderColor,
@@ -94,8 +96,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     fontSize: 14,
                     color: GlobalColors.integrationTextColor),
               ),
-              Text(
-                  AppLocalizations.of(context)!.inviteLinkDescr),
+              Text(AppLocalizations.of(context)!.inviteLinkDescr,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 12, height: 24/12, color: GlobalColors.darkOne
+                ),),
               SizedBox(
                 height: 10.h,
               ),
@@ -110,17 +114,25 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   children: [
                     Expanded(
                       child: asyncLinkValue.when(
-                        data: (inviteLink) =>
-                            Text(inviteLink ?? "No link ", softWrap: true,),
+                        data: (inviteLink) => Text(
+                          inviteLink ?? "No link ",
+                          softWrap: true,
+                          style: TextStyle(
+                              color: GlobalColors.integrationTextColor,
+                              decoration: TextDecoration.underline,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
+                        ),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
                         ),
                         error: (e, st) {
-                          return  Center(
-                            child: Text(
-                                AppLocalizations.of(context)!.errorFetchingLink),
+                          return Center(
+                            child: Text(AppLocalizations.of(context)!
+                                .errorFetchingLink),
                           );
-                        },),
+                        },
+                      ),
                     ),
                     Row(
                       children: [
@@ -128,7 +140,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                             onPressed: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
-                                  Share.share(link);  // Share the link
+                                  Share.share(link); // Share the link
                                 }
                               });
                             },
@@ -140,8 +152,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                             onPressed: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
-                                  Clipboard.setData(ClipboardData(text: link));  // Copy the link
-                                  showCustomToast(context, AppLocalizations.of(context)!.copyLink);
+                                  Clipboard.setData(ClipboardData(
+                                      text: link)); // Copy the link
+                                  showCustomToast(context,
+                                      AppLocalizations.of(context)!.copyLink);
                                 }
                               });
                             },
@@ -155,7 +169,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               Divider(
                 thickness: 1,
@@ -170,40 +184,47 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 child: TextField(
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
-                    fontSize: 15,
+                    fontSize: 14,
+                    height: 16.9/14
                   ),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
                     prefixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                       child:
-                      Icon(Icons.search, color: GlobalColors.gray200Color),
+                          Icon(Icons.search_outlined, color: GlobalColors.darkOne, size: 16,),
                     ),
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide:  BorderSide(
+                        color: GlobalColors.borderColor, // Not selected (unfocused) color
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
                         color: GlobalColors.borderColor,
                       ),
                     ),
+
                     prefixIconConstraints: const BoxConstraints(),
                     contentPadding: const EdgeInsets.only(top: 8.0),
                   ),
                 ),
               ),
               SizedBox(height: 10.w),
-              SizedBox(
-                height: 10.h,
+              const SizedBox(
+                height: 24,
               ),
-              const Divider(),
               const SizedBox(
                 height: 5,
               ),
               asyncMembersValue.when(
                   loading: () => const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
                   error: (e, st) {
-                    return  Center(
+                    return Center(
                       child: Text(
                           AppLocalizations.of(context)!.errorFetchingMembers),
                     );
@@ -213,7 +234,8 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
                         return CustomAvatar(
-                          memberDetail: members?[index] ?? organisationMembers[index],
+                          memberDetail:
+                              members?[index] ?? organisationMembers[index],
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
