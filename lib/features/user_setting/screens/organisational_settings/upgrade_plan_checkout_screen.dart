@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,8 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../utils/context_extensions.dart';
-import '../../../../utils/custom_text_style.dart';
-import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../models/custom_api_error.dart';
 import '../../models/subscription_model.dart';

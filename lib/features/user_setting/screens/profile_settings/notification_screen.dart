@@ -5,14 +5,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
 import '../../../../utils/widgets/custom_notification_item.dart';
 import '../../../../utils/widgets/custom_notification_section.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
-import '../../../auth/widgets/chevron_back_button.dart';
 import '../../models/custom_api_error.dart';
 import '../../models/notification_model.dart';
 import '../../provider/profile_provider.dart';
