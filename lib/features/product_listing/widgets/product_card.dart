@@ -1,120 +1,137 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductCardWiget extends StatelessWidget {
-  const ProductCardWiget({super.key});
+  const ProductCardWiget(
+      {super.key,
+      required this.productNmae,
+      required this.status,
+      required this.price,
+      required this.image,
+      required this.category});
 
+  final String productNmae;
+  final String category;
+  final String status;
+  final num price;
+
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(
-              height: GlobalScreenSize.getScreenHeight(context) * .156,
-              width: GlobalScreenSize.getScreenWidth(context),
-              padding: EdgeInsets.only(
-                  top: 14.h, bottom: 14.h, right: 10.w, left: 8.5.w),
-              decoration: BoxDecoration(
-                  border: Border.all(color: GlobalColors.productBorderColor),
-                  borderRadius: BorderRadius.circular(8.r)),
-              child: Row(
-                children: [
-                  Assets.images.png.productListing.product.image(
-                      height: GlobalScreenSize.getScreenHeight(context) * .135),
-                  SizedBox(
-                    width: 14.w,
+      height: GlobalScreenSize.getScreenHeight(context) * .156,
+      width: GlobalScreenSize.getScreenWidth(context),
+      padding:
+          EdgeInsets.only(top: 14.h, bottom: 14.h, right: 10.w, left: 8.5.w),
+      decoration: BoxDecoration(
+          border: Border.all(color: GlobalColors.productBorderColor),
+          borderRadius: BorderRadius.circular(8.r)),
+      child: Row(
+        children: [
+          Builder(builder: (context) {
+            if (image.isNotEmpty) {
+              if (image.startsWith('http')) {
+                return Image.network(
+                  image,
+                  width: 104.w,
+                  height: 104.h,
+                );
+              } else if (image.isValidBase64) {
+                return ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(8.0), // Adjust the radius here
+
+                  child: Image.memory(
+                    width: 104.w,
+                    height: 104.h,
+                    fit: BoxFit.cover,
+                    base64Decode(image),
+                    errorBuilder: (context, error, stackTrace) =>
+                        Assets.images.png.productListing.product.image(
+                      height: GlobalScreenSize.getScreenHeight(context) * .135,
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: GlobalScreenSize.getScreenWidth(context) * 0.52,
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Product 1",
-                                  style: CustomTextStyles.productTextTitleBlack,
-                                ),
-                                Text(
-                                  "P001",
-                                  style: CustomTextStyles.productTextBodyBlack,
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Text(
-                              "\$19.00",
-                              style: CustomTextStyles.productTextBody2Black,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
+                );
+              } else {
+                return Assets.images.png.productListing.product.image(
+                    height: GlobalScreenSize.getScreenHeight(context) * .135);
+              }
+            }
+            return Assets.images.png.productListing.product.image(
+                height: GlobalScreenSize.getScreenHeight(context) * .135);
+          }),
+          SizedBox(
+            width: 14.w,
+          ),
+          Expanded(
+            flex: 4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  productNmae,
+                  style: CustomTextStyles.productTextTitleBlack,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  category,
+                  style: CustomTextStyles.productTextBodyBlack,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  height: 6.h,
+                ),
+                Text(
+                  "${AppLocalizations.of(context)!.statusLabel}:",
+                  style: CustomTextStyles.productTextBody2Black,
+                ),
+                Row(
+                  children: [
+                    if (status.contains(
+                        AppLocalizations.of(context)!.inStockLabel)) ...[
+                      Assets.images.svg.productListing.active.svg(),
+                    ] else ...[
                       Container(
-                        height: 0.5,
-                        width: GlobalScreenSize.getScreenWidth(context) * 0.52,
-                        color: GlobalColors.productBorderColor,
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      SizedBox(
-                        width: GlobalScreenSize.getScreenWidth(context) * 0.52,
-                        child: Row(
-                          children: [
-                            Column(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Status:",
-                                  style: CustomTextStyles.productTextBody2Black,
-                                ),
-                                Row(
-                                  children: [
-                                    Assets.images.svg.productListing.active
-                                        .svg(),
-                                    Text(
-                                      "In stock",
-                                      style: CustomTextStyles
-                                          .productTextBody4Black,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Container(
-                              height:
-                                  GlobalScreenSize.getScreenHeight(context) *
-                                      0.045,
-                              width: GlobalScreenSize.getScreenWidth(context) *
-                                  0.25,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: GlobalColors.orange,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.r)),
-                              child: Center(
-                                child: Text(
-                                  'Add to Cart',
-                                  style: CustomTextStyles.bodyTextOrange,
-                                ),
-                              ),
-                            )
-                          ],
+                        width: 1,
+                        height: 1,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
                         ),
                       )
                     ],
-                  )
-                ],
+                    Text(
+                      status,
+                      style: CustomTextStyles.productTextBody4Black,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                "\$$price",
+                textAlign: TextAlign.end,
+                style: CustomTextStyles.productTextBody2Black,
+                overflow: TextOverflow.ellipsis,
               ),
-            );
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

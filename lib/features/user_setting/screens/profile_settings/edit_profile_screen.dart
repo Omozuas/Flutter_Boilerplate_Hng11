@@ -1,117 +1,142 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/empty_avatar_tile.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/pronouns_textfield_dropdown.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_expansion_tile.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_social_textfield.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../utils/global_colors.dart';
+import '../../../../utils/widgets/custom_button.dart';
+import '../../../../utils/widgets/custom_expansion_tile.dart';
+import '../../../../utils/widgets/custom_snackbar.dart';
+import '../../../../utils/widgets/custom_text_field.dart';
+import '../../models/user_model.dart';
+import '../../models/user_profile.dart';
+import '../../provider/profile_provider.dart';
+import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
+import '../../widgets/profile_avatar_tile.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+
+class EditProfileScreen extends ConsumerStatefulWidget {
+  const EditProfileScreen({super.key, this.user});
+  final UserModel? user;
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _EditProfileScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final _usernameController = TextEditingController();
-  final _jobTitleController = TextEditingController();
-  final _departmentController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _bioController = TextEditingController();
-  final _xController = TextEditingController();
-  final _instagramController = TextEditingController();
-  final _linkedInController = TextEditingController();
+  late final TextEditingController _firstnameController;
+  late final TextEditingController _lastnameController;
+  late final TextEditingController _usernameController;
+  late final TextEditingController _bioController;
 
-  Pronouns? _pronouns;
+  @override
+  void initState() {
+    super.initState();
+
+    final profile = widget.user?.profile;
+    _firstnameController = TextEditingController(text: fullname.$1);
+    _lastnameController = TextEditingController(text: fullname.$2);
+    _usernameController = TextEditingController(text: profile?.username);
+    _bioController = TextEditingController(text: profile?.bio);
+  }
 
   @override
   void dispose() {
+    _firstnameController.dispose();
+    _lastnameController.dispose();
     _usernameController.dispose();
-    _jobTitleController.dispose();
-    _departmentController.dispose();
-    _emailController.dispose();
     _bioController.dispose();
-    _xController.dispose();
-    _instagramController.dispose();
-    _linkedInController.dispose();
     super.dispose();
+  }
+
+  (String, String) get fullname {
+    final user = widget.user;
+    if (user?.profile != null) {
+      final fname = user?.profile?.firstname ?? '';
+      final lname = user?.profile?.lastname ?? '';
+      return (fname, lname);
+    }
+
+    final fullname = widget.user?.fullname.split(' ') ?? [];
+    if (fullname.isEmpty) {
+      return ('', '');
+    }
+    if (fullname.length == 1) {
+      return (fullname.first, '');
+    }
+    final lastname = fullname.sublist(1).join(' ');
+    return (fullname.first, lastname);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(profileProvider).profileUpdater.isLoading;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
-        centerTitle: false,
-        title: const Text('Edit'),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.editProfile,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.only(left: 24.w, right: 24.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: EmptyAvatarTile(
-                    onTap: () {},
-                  ),
+                ProfileAvatarTile(onTap: () {}),
+                SizedBox(height: 28.w),
+                Text(
+                  AppLocalizations.of(context)!.personalDetails,
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
-                SizedBox(height: 14.h),
-                CustomExpansionTile(
-                  title: 'Personal Details',
-                  content: [
-                    CustomTextField(
-                      label: 'Username',
-                      controller: _usernameController,
-                      hintText: 'Enter username',
-                    ),
-                    PronounsTextfieldDropdown(
-                      initialValue: _pronouns,
-                      onChanged: (pronoun) {
-                        _pronouns = pronoun;
-                      },
-                    ),
-                    CustomTextField(
-                      label: 'Your job title',
-                      controller: _jobTitleController,
-                      hintText: 'Enter job title',
-                    ),
-                    CustomTextField(
-                      label: 'Department or team',
-                      controller: _departmentController,
-                      hintText: 'Enter a department or team',
-                    ),
-                    CustomTextField(
-                      label: 'Email',
-                      controller: _emailController,
-                      hintText: 'Enter email address',
-                    ),
-                  ],
+                SizedBox(height: 24.w),
+                CustomTextField(
+                  label: AppLocalizations.of(context)!.firstName,
+                  controller: _firstnameController,
+                  hintText: AppLocalizations.of(context)!.enterFirstName,
                 ),
+                CustomTextField(
+                  label: AppLocalizations.of(context)!.lastName,
+                  controller: _lastnameController,
+                  hintText: AppLocalizations.of(context)!.enterLastName,
+                ),
+                CustomTextField(
+                  label: AppLocalizations.of(context)!.username,
+                  controller: _usernameController,
+                  hintText: AppLocalizations.of(context)!.enterUsername,
+                ),
+                // SizedBox(height: 16.h),
                 CustomExpansionTile(
-                  title: 'Bio',
+                  space: 0,
+                  horizontalTitlePadding: EdgeInsets.zero,
+                  horizontalChildrenPadding: EdgeInsets.zero,
+                  verticalChildrenPadding: EdgeInsets.zero,
+                  verticalTitlePadding: EdgeInsets.zero,
+                  title: AppLocalizations.of(context)!.bio,
                   content: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextField(
-                          label: '',
-                          controller: _emailController,
-                          hintText: 'Type your messsage here',
+                          controller: _bioController,
+                          hintText:
+                              AppLocalizations.of(context)!.typeYourMessageHere,
                           maxLines: 3,
                         ),
                         Text(
-                          'Maximum of 64 characters',
+                          AppLocalizations.of(context)!.maximumOf64Character,
+                          textAlign: TextAlign.start,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             color: const Color(0xFF64748B),
@@ -121,61 +146,82 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ],
                 ),
-                CustomExpansionTile(
-                  title: 'Connect Socials',
-                  content: [
-                    SocialMediaInput(
-                      controller: _xController,
-                      hintText: 'Add X link',
-                      prefixIcon: Image.asset('assets/images/X logo.png'),
-                    ),
-                    SocialMediaInput(
-                      controller: _instagramController,
-                      hintText: 'Add Instagram link',
-                      prefixIcon: Image.asset('assets/images/instagram.png'),
-                    ),
-                    SocialMediaInput(
-                      controller: _linkedInController,
-                      hintText: 'Add Linkedin link',
-                      prefixIcon: Image.asset('assets/images/linkedin.png'),
-                    ),
-                  ],
+                SizedBox(height: 24.h),
+                CustomButton(
+                  borderColor: GlobalColors.orange,
+                  text: AppLocalizations.of(context)!.saveChanges,
+                  height: 40.h,
+                  containerColor: GlobalColors.orange,
+                  width: double.infinity,
+                  textColor: const Color(0xFFFAFAFA),
+                  loading: isLoading,
+                  onTap: () {
+                    if (isLoading) return;
+                    update(widget.user);
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.all(18.sp),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          borderColor: GlobalColors.lightGray,
-                          text: 'Cancel',
-                          height: 40.h,
-                          containerColor: Colors.white,
-                          width: 50.w,
-                          textColor: const Color(0xFF0F172A),
-                          onTap: () {},
-                        ),
-                      ),
-                      SizedBox(width: 12.h),
-                      Expanded(
-                        child: CustomButton(
-                          borderColor: Colors.transparent,
-                          text: 'Save Changes',
-                          height: 40.h,
-                          containerColor: GlobalColors.orange,
-                          width: 50.w,
-                          textColor: const Color(0xFFFAFAFA),
-                          onTap: () {},
-                        ),
-                      ),
-                    ],
-                  ),
+                SizedBox(height: 16.h),
+                CustomButton(
+                  borderColor: GlobalColors.lightGray,
+                  text: AppLocalizations.of(context)!.cancel,
+                  height: 40.h,
+                  containerColor: Colors.white,
+                  width: double.infinity,
+                  textColor: const Color(0xFF0F172A),
+                  onTap: context.pop,
                 ),
+                SizedBox(
+                  height: 10.h,
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> update(UserModel? user) async {
+    final pickedImage = ref.read(profileProvider).pickedImage;
+    if (_firstnameController.text.isEmpty &&
+        _lastnameController.text.isEmpty &&
+        _usernameController.text.isEmpty &&
+        _bioController.text.isEmpty &&
+        pickedImage == null) {
+      return;
+    }
+    if (user == null) return;
+
+    final profile = UserProfile(
+      userID: user.id,
+      firstname: _firstnameController.text,
+      lastname: _lastnameController.text,
+      avatarURL: user.profile?.avatarURL,
+      username: _usernameController.text,
+      bio: _bioController.text,
+    );
+    try {
+      await ref
+          .read(profileProvider.notifier)
+          .updateProfile(profile: profile, image: pickedImage);
+
+      final pUpdater = ref.read(profileProvider).profileUpdater;
+      if (pUpdater.hasError) throw pUpdater.error!;
+      if (!mounted) return;
+      await showDialog(
+        context: context,
+        builder: (ctx) => ProfileDialog(
+          title: context.profileUpdated,
+          description: context.profileUpdatedMessage,
+          onContinue: () {
+            Navigator.pop(ctx);
+          },
+        ),
+      );
+      if (!mounted) return;
+      context.pop();
+    } catch (e) {
+      showSnackBar(AppLocalizations.of(context)!.errorOccurred);
+    }
   }
 }
