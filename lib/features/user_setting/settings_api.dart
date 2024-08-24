@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_memb
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http_parser/http_parser.dart';
 
 import '../../services/dio_provider.dart';
@@ -14,6 +15,7 @@ import 'models/user_model.dart';
 import 'models/user_profile.dart';
 
 class SettingsApi {
+  GetStorage storage = GetStorage();
   SettingsApi(this.ref);
   final Ref ref;
 
@@ -151,9 +153,11 @@ class SettingsApi {
 
   Future<String> generateInviteLink({required String orgId}) async {
     try {
-      final response =
-          await dio.post('/invite/generate', data: {'organizationId': orgId});
-      return response?.data['data']['inviteLink'];
+      final response = await dio.get(
+        '/organisations/$orgId/invites',
+      );
+      print(response);
+      return response?.data['data']['invite_link'];
     } catch (e) {
       rethrow;
     }

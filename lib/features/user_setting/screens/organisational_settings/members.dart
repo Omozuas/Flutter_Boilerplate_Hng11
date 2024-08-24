@@ -41,11 +41,15 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
 
   Future<Object> fetchLinkFromAPI() async {
     // Trigger the sendInvite method from ProfileProvider
+
     await ref
         .read(profileProvider.notifier)
-        .generateInviteLink(orgId: '84118dd3-5a3b-4a32-8b45-6e5f0e5050ee');
+        .generateInviteLink(orgId: '34fd38e0-66be-484c-9818-c4b101de462f');
+
     // Check the inviteResponse state
     final inviteResponse = ref.read(profileProvider).inviteLink;
+
+    // print({'id': id});
     return inviteResponse;
   }
 
