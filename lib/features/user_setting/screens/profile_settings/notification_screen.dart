@@ -14,6 +14,7 @@ import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/ref_extension.dart';
 
+
 class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({
     super.key,

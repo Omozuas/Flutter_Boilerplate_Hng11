@@ -10,6 +10,7 @@ import '../../../../utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../auth/providers/language_provider.dart';
 
+
 class LanguageAndRegionScreen extends ConsumerStatefulWidget {
   const LanguageAndRegionScreen({super.key});
 
@@ -106,9 +107,8 @@ class _LanguageAndRegionScreenState
             SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
-                // 'Italiano (Italian)',
                 'Español (Spanish)',
-                // 'Français (French)',
+                 'Français (French)',
                 // 'Deutsch (German)',
                 'English',
                 // '日本語 (Japanese)',
@@ -124,7 +124,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Language',
+              placeholder: context.language,
               onChanged: (value) {
                 setState(() {
                   selectedLanguage = value;
@@ -136,34 +136,33 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            // SizedBox(height: 20.h),
-            // CustomDropdownButton(
-            //   items: const [
-            //     'France',
-            //     'Canada',
-            //     'United Kingdom',
-            //     'Germany',
-            //     'United States',
-            //     'Japan',
-            //     'South Korea',
-            //     'Russian',
-            //     'United Arab Emirates'
-            //   ],
-            //   borderColor: GlobalColors.borderColor,
-            //   height: 50.h,
-            //   textPadding: const EdgeInsets.only(
-            //       left: 10, right: 10, bottom: 10, top: 10),
-            //   width: double.infinity,
-            //   containerColor: GlobalColors.white,
-            //   textColor: GlobalColors.darkOne,
-            //   placeholder: 'Region',
-            //   onChanged: (value) {
-            //     setState(() {
-            //       selectedRegion = value;
-            //     });
-            //   },
-            // ),
-
+            SizedBox(height: 20.h),
+            CustomDropdownButton(
+              items: const [
+                'France',
+                'Canada',
+                'United Kingdom',
+                'Germany',
+                'United States',
+                'Japan',
+                'South Korea',
+                'Russian',
+                'United Arab Emirates'
+              ],
+              borderColor: GlobalColors.borderColor,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
+              width: double.infinity,
+              containerColor: GlobalColors.white,
+              textColor: GlobalColors.darkOne,
+              placeholder: context.region,
+              onChanged: (value) {
+                setState(() {
+                  selectedRegion = value;
+                });
+              },
+            ),
             if (showError && selectedRegion == null)
               Text(
                 AppLocalizations.of(context)!.regionUpdateError,
@@ -184,7 +183,7 @@ class _LanguageAndRegionScreenState
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
-              placeholder: 'Time-Zone',
+              placeholder: context.timeZone,
               onChanged: (value) {
                 setState(() {
                   selectedTimeZone = value;
