@@ -77,7 +77,6 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
         final passwordService = ref.read(passwordServiceProvider);
         final userService = ref.read(userServiceProvider);
         final authToken = await userService.getToken();
-        print(authToken);
         await passwordService
             .updatePassword(
           currentPassword: currentPassword,
