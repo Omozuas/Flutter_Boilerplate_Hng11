@@ -60,7 +60,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 13),
+                      padding: const EdgeInsets.only(left: 12.5),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
