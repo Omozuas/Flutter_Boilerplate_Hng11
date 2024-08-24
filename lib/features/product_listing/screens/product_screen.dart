@@ -3,8 +3,10 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.d
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
@@ -20,7 +22,9 @@ class ProductScreen extends ConsumerWidget {
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.products,
         subTitle: AppLocalizations.of(context)!.viewAllProducts,
-        onBack: () {},
+        onBack: () {
+          context.go(AppRoute.home);
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

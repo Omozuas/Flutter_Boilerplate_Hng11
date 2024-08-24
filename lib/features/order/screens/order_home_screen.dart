@@ -23,7 +23,9 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: 'Orders',
-        onBack: () {},
+        onBack: () {
+          context.go()
+        },
       ),
       body: Column(
         children: [
