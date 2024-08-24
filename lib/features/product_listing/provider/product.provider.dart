@@ -30,10 +30,14 @@ AsyncValue<Map<String, List<Product>>> productsByCategory(
         (value) => _getProductMapping(
           value.where(
             (element) {
-              return element.name
-                      ?.toLowerCase()
-                      .contains(queryString.toLowerCase()) ??
-                  true;
+              return (element.name
+                          ?.toLowerCase()
+                          .contains(queryString.toLowerCase()) ??
+                      true) ||
+                  (element.category
+                          ?.toLowerCase()
+                          .contains(queryString.toLowerCase()) ??
+                      true);
             },
           ).toList(),
         ),
