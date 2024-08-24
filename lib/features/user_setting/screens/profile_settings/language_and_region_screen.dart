@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,11 +32,11 @@ class _LanguageAndRegionScreenState
   void validateSelections() {
     setState(() {
       showError = selectedLanguage == null ||
-          selectedRegion == null ||
+          // selectedRegion == null ||
           selectedTimeZone == null;
 
       if (!showError) {
-        feedBackMessage = AppLocalizations.of(context)!.settings;
+        feedBackMessage = context.text.settings;
         ref
             .read(languageProvider.notifier)
             .setLanguage(getLanguageCode(selectedLanguage!));
@@ -48,7 +49,7 @@ class _LanguageAndRegionScreenState
 
   void unsavedChanges() {
     if (selectedLanguage != null ||
-        selectedRegion != null ||
+        // selectedRegion != null ||
         selectedTimeZone != null && feedBackMessage == null) {
       setState(() {
         feedBackMessage = AppLocalizations.of(context)!.unsavedChangesWarning;
@@ -108,7 +109,7 @@ class _LanguageAndRegionScreenState
             CustomDropdownButton(
               items: const [
                 'Español (Spanish)',
-                // 'Français (French)',
+                 'Français (French)',
                 // 'Deutsch (German)',
                 'English',
                 // '日本語 (Japanese)',
@@ -208,18 +209,22 @@ class _LanguageAndRegionScreenState
                     onTap: validateSelections,
                     borderColor: GlobalColors.orange,
                     text: AppLocalizations.of(context)!.save,
-                    height: 40.h,
+                    // height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 75.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    // width: 80.w,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: AppLocalizations.of(context)!.cancel,
-                    height: 40.h,
+                    // height: 40.h,
                     containerColor: GlobalColors.white,
-                    width: 75.w,
+                    // width: 80.w,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     textColor: GlobalColors.darkOne),
               ],
             ),
