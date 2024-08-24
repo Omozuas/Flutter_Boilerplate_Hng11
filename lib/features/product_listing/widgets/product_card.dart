@@ -119,11 +119,15 @@ class ProductCardWiget extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
-            child: Text(
-              "\$$price",
-              textAlign: TextAlign.end,
-              style: CustomTextStyles.productTextBody2Black,
+            flex: 4,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                "\$$price",
+                textAlign: TextAlign.end,
+                style: CustomTextStyles.productTextBody2Black,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           )
         ],
