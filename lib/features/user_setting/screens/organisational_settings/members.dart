@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/services.dart';
@@ -139,7 +140,8 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                 height: 10.h,
               ),
               Container(
-                padding: const EdgeInsets.only(top: 8, left: 8),
+                padding: const EdgeInsets.only(
+                    top: 10, left: 8, bottom: 10, right: 8),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
@@ -170,21 +172,26 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                            onPressed: () {
+                        GestureDetector(
+                            onTap: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
                                   Share.share(link); // Share the link
                                 }
                               });
                             },
-                            icon: Icon(
-                              Icons.share_outlined,
-                              color: GlobalColors.orange,
+                            child: SvgPicture.asset(
+                              'assets/icons/ShareNetwork.svg',
+                              height: 25.h,
+                              width: 25.w,
                             )),
-                        IconButton(
-                            onPressed: () {
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        GestureDetector(
+                            onTap: () {
                               asyncLinkValue.whenData((link) {
                                 if (link != null) {
                                   Clipboard.setData(ClipboardData(
@@ -194,9 +201,10 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                                 }
                               });
                             },
-                            icon: Icon(
-                              Icons.copy,
-                              color: GlobalColors.orange,
+                            child: SvgPicture.asset(
+                              'assets/icons/Copy.svg',
+                              height: 25.h,
+                              width: 25.w,
                             ))
                       ],
                     )

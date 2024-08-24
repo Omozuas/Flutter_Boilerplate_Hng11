@@ -196,8 +196,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 },
                               ),
                             );
-                            if (!context.mounted) return;
-                            context.go(AppRoute.login);
+                            // if (!context.mounted) return;
+                            // context.go(AppRoute.login);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
