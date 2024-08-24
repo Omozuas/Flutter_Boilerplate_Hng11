@@ -192,30 +192,14 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              context.currentPassword,
-                              style: CustomTextStyle.regular(
-                                fontSize: 16.sp,
-                                color: const Color(0xff434343),
-                              ),
-                            ),
-                          ),
-                          TextFormField(
-                            controller: currentPasswordController,
+                    CustomTextField(
+                            label:  context.currentPassword,
+                             controller: currentPasswordController,
                             obscureText: !currentPasswordVissible,
-                            decoration: InputDecoration(
-                              hintText: context.enterCurrentPassword,
-                              hintStyle: CustomTextStyle.regular(
-                                color: const Color(0xff939393),
-                                fontSize: 14.sp,
-                              ),
+                             hintText: context.enterCurrentPassword,
+                              borderRadius: 8.r,
+                              focusedBorderColor: GlobalColors.borderColor,
+                                validator: Validators.passwordValidator,
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   currentPasswordVissible
@@ -229,28 +213,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                           !currentPasswordVissible;
                                     },
                                   );
-                                },
-                              ),
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xffCBD5E1),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: GlobalColors.darkOne,
-                                ),
-                              ),
-                            ),
-                            validator: Validators.passwordValidator,
-                          ),
-                        ],
-                      ),
-                    ),
-
+                                },),
+                           ),
                     CustomTextField(
                       label: AppLocalizations.of(context)!.newPassword,
                       controller: newPasswordController,
@@ -384,39 +348,28 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       ),
                     ],
                     // Password strength and criteria section ends here
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              AppLocalizations.of(context)!.confirmNewPassword,
-                              style: CustomTextStyle.regular(
-                                fontSize: 16.sp,
-                                color: const Color(0xff434343),
-                              ),
-                            ),
-                          ),
-                          TextFormField(
-                            focusNode: confirmPasswordFocusNode,
+                    
+                     CustomTextField(
+                      label: AppLocalizations.of(context)!.confirmNewPassword,
+                       focusNode: confirmPasswordFocusNode,
                             controller: confirmPasswordController,
                             obscureText: !confPasswordVissible,
                             validator: Validators.passwordValidator,
-                            onChanged: (value) => validatePasswords(),
-                            decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!
+                            onchanged: (value) => validatePasswords(),
+                      borderRadius: 8.r,
+                   hintText: AppLocalizations.of(context)!
                                   .confirmNewPassword,
                               errorText: passwordsMatch
                                   ? null
                                   : AppLocalizations.of(context)!
                                       .passwordDoNotMatch,
-                              hintStyle: CustomTextStyle.medium(
-                                color: const Color(0xff939393),
-                                fontSize: 14.sp,
-                              ),
-                              suffixIcon: IconButton(
+                      focusedBorderColor:   passwordsMatch
+                                      ? GlobalColors.borderColor
+                                      : const Color(0xffdc2626),
+                     borderColor: passwordsMatch
+                                      ? GlobalColors.darkOne
+                                      : const Color(0xffE80D0D),
+                       suffixIcon: IconButton(
                                 icon: Icon(
                                   confPasswordVissible
                                       ? Icons.visibility
@@ -431,34 +384,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                                   );
                                 },
                               ),
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xffCBD5E1),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: passwordsMatch
-                                      ? GlobalColors.darkOne
-                                      : const Color(0xffdc2626),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: passwordsMatch
-                                      ? GlobalColors.darkOne
-                                      : const Color(0xffE80D0D),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Button section starts here.
+                    ), // Button section starts here.
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
