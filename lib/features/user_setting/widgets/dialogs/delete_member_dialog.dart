@@ -73,6 +73,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     );
                   },
                   borderColor: Colors.transparent,
+                  borderColors: Colors.transparent,
                   text: AppLocalizations.of(context)!.deleteButton,
                   height: 40,
                   containerColor: GlobalColors.red,
