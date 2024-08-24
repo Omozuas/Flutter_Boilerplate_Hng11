@@ -45,9 +45,14 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    "\$${product.price}",
-                    style: CustomTextStyles.productTextTitleBlack,
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: FittedBox(
+                      child: Text(
+                        "\$${product.price}",
+                        style: CustomTextStyles.productTextTitleBlack,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 6.h),
                   Row(
