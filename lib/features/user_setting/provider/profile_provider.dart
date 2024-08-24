@@ -208,7 +208,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
       state = state.copyWith(organisationMembers: const AsyncLoading());
       final organisationMembers =
           await settingsApi.getOrganisationMembers(orgId: userOrgId!);
-      print(organisationMembers);
+
       state =
           state.copyWith(organisationMembers: AsyncData(organisationMembers));
     } catch (e) {
