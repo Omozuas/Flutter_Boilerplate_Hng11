@@ -5,7 +5,7 @@ import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
- 
+
 class ProductRatingAndReviewSection extends StatefulWidget {
   const ProductRatingAndReviewSection({super.key});
 

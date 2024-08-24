@@ -64,7 +64,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     CustomToast.show(
                       context,
                       CustomToast(
-                        message:AppLocalizations.of(context)!.removeMember,
+                        message: AppLocalizations.of(context)!.removeMember,
                         backgroundColor: GlobalColors.toastBgSurface,
                         borderRadius: BorderRadius.circular(12),
                         border:
@@ -73,6 +73,7 @@ class DeleteMemberDialog extends StatelessWidget {
                     );
                   },
                   borderColor: Colors.transparent,
+                  borderColors: Colors.transparent,
                   text: AppLocalizations.of(context)!.deleteButton,
                   height: 40,
                   containerColor: GlobalColors.red,

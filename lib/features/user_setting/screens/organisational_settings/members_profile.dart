@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -19,20 +20,8 @@ class MemberProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColors.white,
-      appBar: AppBar(
-        backgroundColor: GlobalColors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          AppLocalizations.of(context)!.memberProfile,
-          style: const TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.memberProfile,
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
@@ -42,6 +31,9 @@ class MemberProfileScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 12, height: 14.52/12, color: GlobalColors.darkOne
+                ),
               ),
             ),
             const SizedBox(
@@ -72,8 +64,7 @@ class MemberProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             // Member Name and Email
             Text(
-              memberDetail.firstName ??
-                  AppLocalizations.of(context)!.memberName,
+              '${memberDetail.firstName ?? AppLocalizations.of(context)!.memberName} ${memberDetail.lastName ?? ''}',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -105,6 +96,8 @@ class MemberProfileScreen extends StatelessWidget {
                   "A brief description about the member which might be long or short as the case maybe, you can choose to be personal funny or official ,your choice.",
               style: const TextStyle(
                 fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 20/14,
                 color: Colors.black,
               ),
             ),

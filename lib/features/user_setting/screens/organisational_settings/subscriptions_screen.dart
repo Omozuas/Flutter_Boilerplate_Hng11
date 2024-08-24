@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../utils/context_extensions.dart';
-import '../../../../utils/custom_text_style.dart';
-import '../../../../utils/global_colors.dart';
 import '../../../../utils/routing/app_router.dart';
 import '../../models/subscription_model.dart';
 import '../../provider/profile_provider.dart';
@@ -36,21 +35,9 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen> {
         ref.watch(profileProvider).fetchSubcription.sureValue?.plan;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          context.text.subscriptionPlan,
-          style: CustomTextStyle.semiBold(
-            fontSize: 16,
-            color: GlobalColors.iconColor,
-          ),
-        ),
-        // leading: InkWell(
-        //   onTap: () {
-        //     // context.pop();
-        //     ref.read(profileProvider.notifier).getSubscription();
-        //   },
-        //   child: const Icon(Icons.arrow_back_ios_new),
-        // ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.text.subscriptionPlan,
+        showDivider: false,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator.adaptive())

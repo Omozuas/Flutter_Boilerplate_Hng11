@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
-// import 'package:flutter_boilerplate_hng11/features/auth/screen/single_user_signup.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -35,8 +35,8 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-   late TapGestureRecognizer _tapGestureRecognizerForTermsAndConditions;
-   late TapGestureRecognizer _tapGestureRecognizerForPrivacy;
+  late TapGestureRecognizer _tapGestureRecognizerForTermsAndConditions;
+  late TapGestureRecognizer _tapGestureRecognizerForPrivacy;
 
   @override
   void initState() {
@@ -55,16 +55,34 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void _handlePressForTandC() {
-    Navigator.push(context, MaterialPageRoute(builder:(context) => const WebviewPage(url: 'https://staging.nextjs.boilerplate.hng.tech/terms-and-conditions', appBarTitle: 'Terms and Conditions',),));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WebviewPage(
+            url:
+                'https://staging.nextjs.boilerplate.hng.tech/terms-and-conditions',
+            appBarTitle: 'Terms and Conditions',
+          ),
+        ));
   }
+
   void _handlePressForPrivacy() {
-    Navigator.push(context, MaterialPageRoute(builder:(context) => const WebviewPage(url: 'https://staging.nextjs.boilerplate.hng.tech/privacy-policy', appBarTitle: 'Privacy Policy',),));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WebviewPage(
+            url: 'https://staging.nextjs.boilerplate.hng.tech/privacy-policy',
+            appBarTitle: 'Privacy Policy',
+          ),
+        ));
   }
-@override
+
+  @override
   Widget build(BuildContext context) {
     // final isChecked = ref.watch(checkBoxState);
     final authStateProvider = ref.watch(authProvider);
     //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
     return LoadingOverlay(
       isLoading: authStateProvider.normalButtonLoading ||
           authStateProvider.googleButtonLoading,
@@ -82,7 +100,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 48.h,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.login,
+                    context.login,
                     style: CustomTextStyle.semiBold(
                       fontSize: 24.sp,
                       color: GlobalColors.iconColor,
@@ -137,7 +155,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Google",
+                                  context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
                                       fontSize: 17.sp,
                                       color: GlobalColors.dark2),
@@ -234,8 +252,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   CustomButton(
                       loading: authStateProvider.normalButtonLoading,
                       onTap: () async {
-                        if (LoginScreen._formKey.currentState?.validate() ?? false) {
-                          LoginScreen.box.write('rememberMe', authStateProvider.checkBoxState);
+                        if (LoginScreen._formKey.currentState?.validate() ??
+                            false) {
+                          LoginScreen.box.write(
+                              'rememberMe', authStateProvider.checkBoxState);
                           _handleLoginAccount(ref, context);
                         }
                       },
@@ -296,7 +316,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: AppLocalizations.of(context)!.termsAndConditionText1,
+                        text: AppLocalizations.of(context)!
+                            .termsAndConditionText1,
                         style: CustomTextStyle.regular(
                           color: GlobalColors.bgsurface700,
                           fontSize: 14.sp,
@@ -308,17 +329,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                         children: [
                           TextSpan(
-                            recognizer: _tapGestureRecognizerForTermsAndConditions,
-                            text: AppLocalizations.of(context)!.termsAndConditionText2,
+                            recognizer:
+                                _tapGestureRecognizerForTermsAndConditions,
+                            text: AppLocalizations.of(context)!
+                                .termsAndConditionText2,
                             style: CustomTextStyle.regular(
                               fontSize: 14.sp,
                               color: GlobalColors.orange,
                             ),
                           ),
-                           TextSpan(text: AppLocalizations.of(context)!.termsAndConditionText3),
+                          TextSpan(
+                              text: AppLocalizations.of(context)!
+                                  .termsAndConditionText3),
                           TextSpan(
                             recognizer: _tapGestureRecognizerForPrivacy,
-                            text: AppLocalizations.of(context)!.termsAndConditionText4,
+                            text: AppLocalizations.of(context)!
+                                .termsAndConditionText4,
                             style: CustomTextStyle.regular(
                               fontSize: 14.sp,
                               color: GlobalColors.orange,
@@ -338,9 +364,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
-
     ref.read(authProvider.notifier).login({
-      'email': LoginScreen._emailController.text,
+
+      'email': LoginScreen._emailController.text.trim().toLowerCase(),
       'password': LoginScreen._passwordController.text,
     }, context);
   }

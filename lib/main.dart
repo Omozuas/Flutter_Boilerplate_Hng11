@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/initializations.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_context/one_context.dart';
@@ -12,6 +13,7 @@ import 'features/auth/providers/language_provider.dart';
 // import 'localiza/localiza_class.dart';
 
 void main() async {
+  await GetStorage.init();
   await initializeApp();
 
   // Make app always in portrait
@@ -21,7 +23,6 @@ void main() async {
       DeviceOrientation.portraitDown,
     ],
   );
-
 
 // Ensures status bar and system navigation controls blends with the app
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

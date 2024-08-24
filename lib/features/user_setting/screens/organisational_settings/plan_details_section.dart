@@ -42,8 +42,8 @@ class PlanDetailsSection extends StatelessWidget {
                 final text = item.$1;
                 final answer = item.$2;
                 return Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 14.sp, vertical: 26.sp),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 14.sp, vertical: 26.sp),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
