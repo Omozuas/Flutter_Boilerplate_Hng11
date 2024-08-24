@@ -214,6 +214,35 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                         SizedBox(
                           height: 6.h,
                         ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 379.w,
+                              child: Text(
+                                'Category',
+                                style: CustomTextStyle.medium(
+                                  color: GlobalColors.dark2,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ),
+                            6.h.sbH,
+                            SizedBox(
+                              height: 40.h,
+                              width: 379.w,
+                              // child: const Text(
+                              //   'Category dropdown here',
+                              // ),
+                              child: ProductCategory(
+                                onCategorySelected: onCategorySelected,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
                         SizedBox(
                           width: 379.w,
                           child: Column(
@@ -252,35 +281,6 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 6.h,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 379.w,
-                              child: Text(
-                                'Category',
-                                style: CustomTextStyle.medium(
-                                  color: GlobalColors.dark2,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                            6.h.sbH,
-                            SizedBox(
-                              height: 40.h,
-                              width: 379.w,
-                              // child: const Text(
-                              //   'Category dropdown here',
-                              // ),
-                              child: ProductCategory(
-                                onCategorySelected: onCategorySelected,
-                              ),
-                            )
-                          ],
                         ),
                         SizedBox(
                           height: 6.h,
