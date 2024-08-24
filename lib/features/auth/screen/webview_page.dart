@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
@@ -57,6 +58,7 @@ class _WebviewPageState extends State<WebviewPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.appBarTitle),
+          leading: const ChevronBackButton(),
         ),
         body: SafeArea(
             child: Column(children: <Widget>[
