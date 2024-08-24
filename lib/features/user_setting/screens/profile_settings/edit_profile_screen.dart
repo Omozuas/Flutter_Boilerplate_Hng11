@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,7 @@ import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
+
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key, this.user});
@@ -209,8 +211,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       await showDialog(
         context: context,
         builder: (ctx) => ProfileDialog(
-          title: 'Profile Updated!',
-          description: 'Your profile has been successfully updated.',
+          title: context.profileUpdated,
+          description: context.profileUpdatedMessage,
           onContinue: () {
             Navigator.pop(ctx);
           },

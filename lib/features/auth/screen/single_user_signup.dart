@@ -198,7 +198,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
 
   void _handleCreateAccount(WidgetRef ref, BuildContext context) {
     ref.read(authProvider.notifier).registerSingleUser({
-      'email': emailController.text,
+      'email': emailController.text.trim().toLowerCase(),
       'first_name': firstNameController.text,
       'last_name': lastNameController.text,
       'password': passwordController.text,
