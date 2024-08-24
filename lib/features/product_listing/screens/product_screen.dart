@@ -74,23 +74,27 @@ class ProductScreen extends ConsumerWidget {
                       return data.when(
                         data: (data) {
                           final allKeys = data.keys.toList();
-                          return ListView.separated(
-                            itemCount: allKeys.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (txt, index) {
-                              final myKey = allKeys[index];
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: allKeys.last == myKey ? 60 : 0),
-                                child: ProductCardListWidget(
-                                  categoryName: allKeys[index],
-                                  products: data[myKey]!.reversed.toList(),
-                                ),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                              height: 24.h,
+                          return RefreshIndicator.adaptive(
+                            onRefresh: () =>
+                                ref.refresh(productListProvider.future),
+                            child: ListView.separated(
+                              itemCount: allKeys.length,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (txt, index) {
+                                final myKey = allKeys[index];
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: allKeys.last == myKey ? 60 : 0),
+                                  child: ProductCardListWidget(
+                                    categoryName: allKeys[index],
+                                    products: data[myKey]!.reversed.toList(),
+                                  ),
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) => SizedBox(
+                                height: 24.h,
+                              ),
                             ),
                           );
                         },
