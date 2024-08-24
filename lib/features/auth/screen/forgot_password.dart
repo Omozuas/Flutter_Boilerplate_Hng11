@@ -29,7 +29,6 @@ class ForgotPasswordScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = ref.watch(authProvider);
     final localizations = AppLocalizations.of(context)!;
-
     return Scaffold(
       appBar: const CustomAppBar.empty(),
       body: Form(
@@ -87,7 +86,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                             fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            context.push(AppRoute.login);
+                            context.go(AppRoute.login);
                           },
                       ),
                     ],
