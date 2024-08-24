@@ -340,7 +340,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
 
     ref.read(authProvider.notifier).login({
-      'email': LoginScreen._emailController.text,
+
+      'email': LoginScreen._emailController.text.trim().toLowerCase(),
       'password': LoginScreen._passwordController.text,
     }, context);
   }
