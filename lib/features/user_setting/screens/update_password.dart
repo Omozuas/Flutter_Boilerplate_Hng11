@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -266,61 +267,32 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              AppLocalizations.of(context)!.newPassword,
-                              style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xff434343),
-                              ),
-                            ),
-                          ),
-                          TextFormField(
+                          CustomTextField(
+                            label: AppLocalizations.of(context)!.newPassword,
                             controller: newPasswordController,
                             focusNode: newPasswordFocusNode,
                             obscureText: !newPasswordVissible,
                             validator: Validators.passwordValidator,
-                            onChanged: (value) {
-                              checkPasswordStrength(value);
+                            onchanged: (String? value) {
+                              checkPasswordStrength(value!);
                               validatePasswords();
                             },
-                            decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!
-                                  .enterNewPassword,
-                              hintStyle: GoogleFonts.inter(
-                                  color: const Color(0xff939393),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  newPasswordVissible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off_outlined,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      newPasswordVissible =
-                                          !newPasswordVissible;
-                                    },
-                                  );
-                                },
+                            hintText:
+                                AppLocalizations.of(context)!.enterNewPassword,
+                            focusedBorderColor: GlobalColors.borderColor,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                newPasswordVissible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off_outlined,
                               ),
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xffCBD5E1),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: GlobalColors.darkOne,
-                                ),
-                              ),
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    newPasswordVissible = !newPasswordVissible;
+                                  },
+                                );
+                              },
                             ),
                           ),
                         ],
