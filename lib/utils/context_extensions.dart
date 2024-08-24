@@ -44,4 +44,5 @@ extension Translation on BuildContext {
   String get continueWithGoogle => text.continueWithGoogle;
   String get description => text.description;
   String get inStock => text.inStock;
+  String get logoutConfirmation => 'Are you sure you want to logout from this Device.';
 }
