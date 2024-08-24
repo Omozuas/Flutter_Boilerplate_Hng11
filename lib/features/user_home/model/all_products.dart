@@ -28,7 +28,8 @@ class AllProduct {
         data: data ?? this.data,
       );
 
-  factory AllProduct.fromJson(Map<String, dynamic> json) => _$AllProductFromJson(json);
+  factory AllProduct.fromJson(Map<String, dynamic> json) =>
+      _$AllProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$AllProductToJson(this);
 }
@@ -74,8 +75,8 @@ class Metadata {
         hasNext: hasNext ?? this.hasNext,
       );
 
-  factory Metadata.fromJson(Map<String, dynamic> json) => _$MetadataFromJson(json);
+  factory Metadata.fromJson(Map<String, dynamic> json) =>
+      _$MetadataFromJson(json);
 
   Map<String, dynamic> toJson() => _$MetadataToJson(this);
 }
-

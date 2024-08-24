@@ -14,8 +14,8 @@ class UserService {
   bool isUserLoggedIn = false;
   bool isUserOrganization = true;
 
-  change(bool? userType, BuildContext context)async{
-    isUserOrganization = userType??true;
+  change(bool? userType, BuildContext context) async {
+    isUserOrganization = userType ?? true;
     storageService.write("userType", isUserOrganization);
   }
 

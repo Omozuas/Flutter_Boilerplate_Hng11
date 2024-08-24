@@ -13,21 +13,14 @@ class NotificationCountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: 15.w.padL,
-      padding: EdgeInsets.symmetric(
-          horizontal: 5.w,
-          vertical: 3.h
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
       decoration: BoxDecoration(
           color: GlobalColors.lightOrange,
-          borderRadius: BorderRadius.circular(2.r)
-      ),
+          borderRadius: BorderRadius.circular(2.r)),
       child: Text(
         count.toString(),
         style: GoogleFonts.outfit(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w700,
-            color: Colors.white
-        ),
+            fontSize: 12.sp, fontWeight: FontWeight.w700, color: Colors.white),
       ),
     );
   }

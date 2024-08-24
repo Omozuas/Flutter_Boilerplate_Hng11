@@ -103,28 +103,31 @@ class _LanguageAndRegionScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 15.h),
             Text(
               AppLocalizations.of(context)!
                   .customizeLanguageAndRegionPreferences,
               style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w400, fontSize: 12.sp),
+                  fontWeight: FontWeight.w400, fontSize: 14.sp),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 30.h),
             CustomDropdownButton(
               items: const [
-                'Italiano (Italian)',
+                // 'Italiano (Italian)',
                 'Español (Spanish)',
-                'Français (French)',
-                'Deutsch (German)',
+                // 'Français (French)',
+                // 'Deutsch (German)',
                 'English',
-                '日本語 (Japanese)',
+                // '日本語 (Japanese)',
                 '日本語 (Chinese)',
-                '한국어 (Korean)',
-                'Русский (Russian)',
-                'العربية (Arabic)'
+                // '한국어 (Korean)',
+                // 'Русский (Russian)',
+                // 'العربية (Arabic)'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -140,7 +143,7 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.languageUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 'France',
@@ -154,7 +157,9 @@ class _LanguageAndRegionScreenState
                 'United Arab Emirates'
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -170,7 +175,7 @@ class _LanguageAndRegionScreenState
                 AppLocalizations.of(context)!.regionUpdateError,
                 style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
                 '(UTC+00:00) Co-ord',
@@ -179,7 +184,9 @@ class _LanguageAndRegionScreenState
                 // Add other time zones here
               ],
               borderColor: GlobalColors.borderColor,
-              height: 36.sp,
+              height: 50.h,
+              textPadding: const EdgeInsets.only(
+                  left: 10, right: 10, bottom: 10, top: 10),
               width: double.infinity,
               containerColor: GlobalColors.white,
               textColor: GlobalColors.darkOne,
@@ -208,18 +215,18 @@ class _LanguageAndRegionScreenState
                     onTap: validateSelections,
                     borderColor: GlobalColors.orange,
                     text: AppLocalizations.of(context)!.save,
-                    height: 40.sp,
+                    height: 40.h,
                     containerColor: GlobalColors.orange,
-                    width: 65.sp,
+                    width: 75.w,
                     textColor: GlobalColors.white),
                 SizedBox(width: 10.h),
                 CustomButton(
                     onTap: unsavedChanges,
                     borderColor: GlobalColors.borderColor,
                     text: AppLocalizations.of(context)!.cancel,
-                    height: 40.sp,
+                    height: 40.h,
                     containerColor: GlobalColors.white,
-                    width: 65.sp,
+                    width: 75.w,
                     textColor: GlobalColors.darkOne),
               ],
             ),

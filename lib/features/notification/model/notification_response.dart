@@ -6,7 +6,8 @@ class NotificationResponse {
   NotificationResponse({this.data, this.message, this.statusCode});
 
   NotificationResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? NotificationData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? NotificationData.fromJson(json['data']) : null;
     message = json['message'];
     statusCode = json['status_code'];
   }
@@ -29,8 +30,8 @@ class NotificationData {
 
   NotificationData(
       {this.totalNotificationCount,
-        this.totalUnreadNotificationCount,
-        this.notifications});
+      this.totalUnreadNotificationCount,
+      this.notifications});
 
   NotificationData.fromJson(Map<String, dynamic> json) {
     totalNotificationCount = json['total_notification_count'];
@@ -48,8 +49,7 @@ class NotificationData {
     data['total_notification_count'] = totalNotificationCount;
     data['total_unread_notification_count'] = totalUnreadNotificationCount;
     if (notifications != null) {
-      data['notifications'] =
-          notifications!.map((v) => v.toJson()).toList();
+      data['notifications'] = notifications!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -65,11 +65,11 @@ class Notifications {
 
   Notifications(
       {this.id,
-        this.userId,
-        this.isRead,
-        this.message,
-        this.createdAt,
-        this.updatedAt});
+      this.userId,
+      this.isRead,
+      this.message,
+      this.createdAt,
+      this.updatedAt});
 
   Notifications.fromJson(Map<String, dynamic> json) {
     id = json['id'];

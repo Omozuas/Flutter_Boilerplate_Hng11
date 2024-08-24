@@ -134,7 +134,6 @@ class AuthProvider extends StateNotifier<AuthState> {
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
         final googleAuth = await googleUser.authentication;
-        // print(googleAuth.idToken);
         final res = await AuthApi().googleSignIn(googleAuth.idToken ?? '');
         if (res != null) {
           showSnackBar(res.message.toString());
@@ -150,6 +149,11 @@ class AuthProvider extends StateNotifier<AuthState> {
           if (context.mounted) {
             context.go(AppRoute.home);
             box.write('accessToken', userRegData.accessToken);
+            if (state.checkBoxState) {
+              box.write('rememberMe', true);
+            } else {
+              box.write('rememberMe', false);
+            }
             _userService.storeToken(userRegData.accessToken ?? "");
             await getUser();
           }
@@ -211,8 +215,6 @@ class AuthProvider extends StateNotifier<AuthState> {
         if (context.mounted) {
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
-          box.write('email', data['email']);
-          box.write('password', data['password']);
           if (fromLoginScreen) {
             if (state.checkBoxState) {
               box.write('rememberMe', true);
