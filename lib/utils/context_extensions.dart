@@ -147,32 +147,50 @@ extension Translation on BuildContext {
 
   String get somethingWentWrong =>
       'Something went wrong. \nPlease pull to refresh';
-  String get descriptionPlaceholder => "Please enter description";
+  String get descriptionPlaceholder => text.descriptionPlaceholder;
 
-  String get welcomeBack => 'Welcome Back!';
+  String get welcomeBack => text.welcomeBack;
 
-  String get discover => 'Discover';
-  String get searchProduct => "Search Product";
-  String get product => "Products";
-  String get noProductAvailable => "No products available.";
-  String get plusTwentyThree => "+ 23 from last month";
-  String get plusFourFromLastMonth => "+ 4 from last month";
-  String get plusTwoFromLastMonth => "+ 2 from last month";
-  String get unknownCustomer => 'Unknown Customer';
-  String get noEmailProvided => 'No Email Provided';
-  String get dashboard => 'Dashboard';
-  String get thisMonthSummary => 'This Month\'s Summary';
-  String get noSales => "No sales yet this month";
-  String get recentSalesTitle => 'Recent Sales';
-  String get addAMember => 'Add a member';
-  String get totalProducts => 'Total Products';
-  String get subscriptions => 'Subscriptions';
-  String get totalMembers => 'Total Members';
+  String get discover => text.discover;
+
+  String get searchProduct => text.searchProduct;
+
+  String get product => text.product;
+
+  String get noProductAvailable => text.noProductAvailable;
+
+  String get plusTwentyThree => text.plusTwentyThree;
+
+  String get plusFourFromLastMonth => text.plusFourFromLastMonth;
+
+  String get plusTwoFromLastMonth => text.plusTwoFromLastMonth;
+
+  String get unknownCustomer => text.unknownCustomer;
+
+  String get noEmailProvided => text.noEmailProvided;
+
+  String get dashboard => text.dashboard;
+
+  String get thisMonthSummary => text.thisMonthSummary;
+
+  String get noSales => text.noSales;
+
+  String get recentSalesTitle => text.recentSalesTitle;
+
+  String get addAMember => text.addAMember;
+
+  String get totalProducts => text.totalProducts;
+
+  String get subscriptions => text.subscriptions;
+
+  String get totalMembers => text.totalMembers;
+
+  String get selectIsRequired => text.selectIsRequired;
+
   String get deliveryText => 'Estimated Delivery on 26th Aug';
   String get deliveryDateText => 'Delivered on 19th Aug';
   String get deliveryDate => '20-Aug-2024';
   String get deliveryTime => '7:41 PM';
   String get orderNumberText => 'Order#:';
   String get orderText => 'Orders';
-
 }
