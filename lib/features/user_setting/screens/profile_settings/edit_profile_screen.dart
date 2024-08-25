@@ -139,7 +139,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               hintStyle: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color: const Color(0xFF94A3B8),
+                color:  Color(0xFF94A3B8),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular( 6.r),
@@ -174,22 +174,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     color: const Color(0xFF64748B),
                   ),
                 ),
-                // CustomExpansionTile(
-                //   space: 0,
-                //   horizontalTitlePadding: EdgeInsets.zero,
-                //   horizontalChildrenPadding: EdgeInsets.zero,
-                //   verticalChildrenPadding: EdgeInsets.zero,
-                //   verticalTitlePadding: EdgeInsets.zero,
-                //   title: AppLocalizations.of(context)!.bio,
-                //   content: [
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-
-                //       ],
-                //     ),
-                //   ],
-                // ),
+                
                 SizedBox(
                   height: 26.h,
                 ),
@@ -199,7 +184,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   height: 40.h,
                   containerColor: GlobalColors.orange,
                   width: double.infinity,
-                  textColor: const Color(0xFFFAFAFA),
+                  textColor:  Color(0xFFFAFAFA),
                   loading: isLoading,
                   onTap: () {
                     if (isLoading) return;

@@ -14,36 +14,40 @@ import '../widgets/add_product_formfields.dart';
 import '../widgets/product_card.dart';
 
 class ProductsByCategory extends ConsumerWidget {
-  const ProductsByCategory({super.key});
+   ProductsByCategory({super.key});
 
  @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<Product> products = [
-      const Product(
+     Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 19,
           image: 'assets/images/png/product_listing/iphone.png'),
-           const Product(
+          
+           Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 19,
           image: 'assets/images/png/product_listing/iphone.png'),
-           const Product(
+          
+           Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 19,
           image: 'assets/images/png/product_listing/iphone.png'),
-           const Product(
+          
+           Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 5,
           image: 'assets/images/png/product_listing/iphone.png'),
-           const Product(
+          
+           Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
@@ -56,7 +60,8 @@ class ProductsByCategory extends ConsumerWidget {
                 context.push(AppRoute.addProduct);
               },
               backgroundColor: GlobalColors.orange,
-              shape: const CircleBorder(),
+              shape:
+               CircleBorder(),
               child: Icon(
                 Icons.add,
                 color: GlobalColors.white,
@@ -73,7 +78,8 @@ class ProductsByCategory extends ConsumerWidget {
               children: [
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                    icon:
+                     Icon(Icons.arrow_back_ios_new_rounded)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -95,7 +101,8 @@ class ProductsByCategory extends ConsumerWidget {
            Padding(
             padding: EdgeInsets.only(left: 23.w, right: 23.w),
             child: CustomTextField(
-              suffixIcon: const Icon(Icons.search),
+              suffixIcon:
+               Icon(Icons.search),
               hintText: 'Search Product',
               onChanged: (value) {
                 if (value != null) {
@@ -119,7 +126,8 @@ class ProductsByCategory extends ConsumerWidget {
                   itemBuilder: (txt, index) {
                     final product = products[index];
                     return Padding(
-                        padding: const EdgeInsets.only(bottom: 0),
+                        padding:
+                         EdgeInsets.only(bottom: 0),
                         child: ProductCardWiget(
                           productNmae: '${product.name}',
                           status: '${product.status}'.capitalize,

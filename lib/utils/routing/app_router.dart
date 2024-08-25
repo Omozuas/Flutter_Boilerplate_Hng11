@@ -187,7 +187,7 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.productsByCategory,
         builder: (context, state, ref) {
-          return const ProductsByCategory();
+          return  ProductsByCategory();
         },
       ),
       StatefulShellRoute.indexedStack(
