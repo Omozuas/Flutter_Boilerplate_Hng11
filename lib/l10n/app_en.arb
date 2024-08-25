@@ -185,6 +185,7 @@
     "filterByStatusLabel": "Filter by status",
     "filterByPriceRangeLabel": "Filter by Price Range",
     "resetFiltersButton": "Reset Filters",
+    "seeMore":"See More",
     "uploadNewButton": "Upload New",
      "acceptsImagesVideosOr3DModels": "Accepts images, videos or 3D models",
       "deleteMemberButton": "Delete Member",
