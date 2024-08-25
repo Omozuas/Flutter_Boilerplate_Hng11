@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 extension Translation on BuildContext {
   AppLocalizations get text => AppLocalizations.of(this)!;
 
-  /// Create a string getter here and call it in your ui using "context.{your-string-name}
-// E.g
-// String get login => 'Login';
-// In your UI, use this : context.login (importing this context_extension file);
-
   String get signUpText => text.signUpText;
   String get seeMore => text.seeMore;
   String get login => text.login;
@@ -29,7 +24,6 @@ extension Translation on BuildContext {
   String get region => text.region;
   String get timeZone => text.timeZone;
 
-<<<<<<< HEAD
   String get nameRequired => text.nameRequired;
   String get nameTwoCharacters => text.nameTwoCharacters;
   String get emailRequired => text.emailRequired;
@@ -52,15 +46,8 @@ extension Translation on BuildContext {
   String get deliveryTime => '7:41 PM';
   String get orderNumberText => 'Order#:';
   String get orderText => 'Orders';
-
   String get logoutConfirmation => 'Are you sure you want to logout from this Device.';
-=======
-  String get productDescription => "Product Description";
-  String get addAProduct => "Add a Product";
-  String get passwordSetting => 'Password Setting';
-  String get editProfile => 'Edit Profile';
-  String get notification => 'Notification';
-  String get orderDetails => 'Order Details';
+
   String get addProductFailure => 'Failed to add product:';
   String get productFormIncomplete => 'Please Complete form fill';
   String get ok => 'Ok';
@@ -69,11 +56,29 @@ extension Translation on BuildContext {
   String get anErrorOccured => 'An Error occured';
   String get title => 'Title';
   String get category => 'Category';
-  String get description => 'Description';
   String get descriptionFieldHint => 'Maximum of 72 characters';
   String get standardPrice => 'Standard Price';
   String get quantity => 'Quantity';
   String get cancel => 'Cancel';
   String get add => 'Add';
->>>>>>> 6e04ab2 (fix: replace all hardcoded strings in add product screen)
+
+  String get order => 'Order';
+  String get paid => 'Paid';
+  String get packaing => 'Packaging';
+  String get orderCreated => 'Order Created';
+  String get augustDate => 'August 16th, 2024 at 10:30 pm';
+  String get progress => "Progress";
+  String get processing => 'Processing';
+  String get estimate => 'Estimated Shipping Date: ';
+  String get aug => 'Aug 20, 2024 ';
+  String get confirmShip => "Confirm Shipment";
+  String get cusDetails => "Customer Details";
+  String get james => "James Hung Ltd";
+  String get shippingDetails => "Shipping Details";
+  String get orderSumarry => "Order Summary";
+  String get subTotal => "Sub Total";
+  String get dis => "Discount";
+  String get shippingCost => "Shipping Cost";
+  String get tot => "Total";
+  String get resendInvoice => "Resend Invoice";
 }
