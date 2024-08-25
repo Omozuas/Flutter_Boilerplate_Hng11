@@ -64,7 +64,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ProfileAvatar(),
+                          ProfileAvatar(
+                            user: locator<UserService>().user,
+                          ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Padding(

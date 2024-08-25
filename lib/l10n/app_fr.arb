@@ -467,5 +467,26 @@
     "shippingCost": "Frais d'expédition",
     "tot": "Total",
     "resendInvoice": "Renvoyer la facture",
-    "orderDetails": "Détails de la commande"
+    "orderDetails": "Détails de la commande",
+  "descriptionPlaceholder": "Veuillez entrer une description",
+    "welcomeBack": "Bon retour!",
+    "discover": "Découvrir",
+    "searchProduct": "Rechercher un produit",
+    "product": "Produits",
+    "noProductAvailable": "Aucun produit disponible.",
+    "plusTwentyThree": "+ 23 depuis le mois dernier",
+    "plusFourFromLastMonth": "+ 4 depuis le mois dernier",
+    "plusTwoFromLastMonth": "+ 2 depuis le mois dernier",
+    "unknownCustomer": "Client inconnu",
+    "noEmailProvided": "Aucun email fourni",
+    "dashboard": "Tableau de bord",
+    "thisMonthSummary": "Résumé de ce mois",
+    "noSales": "Pas de ventes ce mois-ci",
+    "recentSalesTitle": "Ventes récentes",
+    "addAMember": "Ajouter un membre",
+    "totalProducts": "Total des produits",
+    "subscriptions": "Abonnements",
+    "totalMembers": "Nombre total de membres",
+    "selectIsRequired": "Sélectionnez une valeur valide"
+
 }

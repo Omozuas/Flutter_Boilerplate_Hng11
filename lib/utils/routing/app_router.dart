@@ -8,6 +8,8 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_scre
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
+import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
+import 'package:flutter_boilerplate_hng11/features/order/screens/order_detail_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_by_catetory_screen.dart';
@@ -20,6 +22,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisa
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscription_checkout.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/upgrade_plan_checkout_screen.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/edit_profile_screen.dart';
@@ -27,16 +30,14 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/notification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_password.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/order/models/order.dart';
-import '../../features/order/screens/order_detail_screen.dart';
 import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
-import '../global_colors.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -140,13 +141,13 @@ class AppRouter {
           return const SubscriptionsScreen();
         },
       ),
-      // ConsumerGoRoute(
-      //   path: AppRoute.upgradePlanCheckout,
-      //   builder: (context, state, ref) {
-      //     final plan = state.extra as SubscriptionPlan;
-      //     return UpgradePlanCheckoutScreen(plan: plan);
-      //   },
-      // ),
+      ConsumerGoRoute(
+        path: AppRoute.upgradePlanCheckout,
+        builder: (context, state, ref) {
+          final plan = state.extra as SubscriptionPlan;
+          return UpgradePlanCheckoutScreen(plan: plan);
+        },
+      ),
       ConsumerGoRoute(
         path: AppRoute.languageAndRegionScreen,
         builder: (context, state, ref) {
@@ -219,6 +220,21 @@ class AppRouter {
               builder: (context, state, ref) => const ProductScreen(),
             ),
           ]),
+          // StatefulShellBranch(routes: [
+          //   ConsumerGoRoute(
+          //     path: AppRoute.orderDetails,
+          //     builder: (context, state, ref) => OrderDetailScreen(
+          //       order: Order(
+          //           number: 00,
+          //           image: 'assets/images/png/product_listing/sport-shoes.png',
+          //           deliveryDate: "20-Aug-2024",
+          //           deliveryTime: "24-Aug-2024",
+          //           deliveryText: "Delivered on 19th August",
+          //           deliveryColor: GlobalColors.green),
+          //       image: "assets/images/png/product_listing/sport-shoes.png",
+          //     ),
+          //   ),
+          // ]),
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.order,
@@ -252,7 +268,7 @@ class AppRoute {
   static const String verificationSuccess = '/verificationSuccess';
   static const String resetPassword = '/resetPassword/:email';
   static const String cart = '/cart';
-  static const String orders = '/orders';
+  static const String ordersDetail = '/ordersDetail';
   static const String order = '/order';
   static const String orderDetails = '/orderDetails';
   static const String notification = '/notification';

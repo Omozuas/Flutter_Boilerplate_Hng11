@@ -53,6 +53,9 @@ class MyApp extends ConsumerWidget {
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          progressIndicatorTheme: ProgressIndicatorThemeData(
+            color: GlobalColors.orange, // Set the color for CircularProgressIndicator here
+          ),
           primaryColor: GlobalColors.orange, // gobal primary color
           textTheme: GoogleFonts.interTextTheme(),
           scaffoldBackgroundColor: Colors.white,
@@ -63,7 +66,8 @@ class MyApp extends ConsumerWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0), // Dialog shape
             ),
-            elevation: 10, // Dialog elevation
+            elevation: 10,
+            // Dialog elevation
             titleTextStyle: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -74,9 +78,7 @@ class MyApp extends ConsumerWidget {
               color: Colors.grey[800], // Content text style
             ),
           ),
-          progressIndicatorTheme: ProgressIndicatorThemeData(
-            color: GlobalColors.orange, //progress indicator color
-          ),
+         
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,

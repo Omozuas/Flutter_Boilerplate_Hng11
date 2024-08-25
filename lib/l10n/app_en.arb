@@ -27,7 +27,7 @@
   "lga": "LGA",
   "createAccount": "Create Account",
   "alreadyHaveAnAccount": "Already have an account",
- 
+
   "fieldRequired": "This field is required",
   "dontHaveAnAccount": "Don't have an account?",
   "termsAndConditionText1": "By logging in, you agree with our ",
@@ -171,7 +171,7 @@
     "veryGood": "Very Good",
     "good": "Good",
     "poor": "Poor",
-    "errorOccurred": "An Error occurred",
+    "errorOccurred": "An error occurred",
     "failedToAddProduct": "Failed to add product",
     "completeFormFill": "Please complete form fill",
     "recentSalesTitle": "Recent Sales",
@@ -407,7 +407,6 @@
   "memberProfile": "Member Profile",
   "memberName": "Member's name",
   "memberBio": "Member's bio",
-
   "deleteProfile": "Delete Profile",
   "removeMember": "Member is removed successfully",
   "signUpText": "Sign Up",
@@ -452,7 +451,7 @@
     "ok": "Ok",
     "success": "Success",
     "addProductSuccessDescription": "Product added successfully",
-    "anErrorOccured": "An Error occurred",
+    "anErrorOccured": "An error occurred",
     "title": "Title",
     "category": "Category",
     "descriptionFieldHint": "Maximum of 72 characters",
@@ -479,6 +478,26 @@
    "shippingCost": "Shipping Cost",
    "tot": "Total",
    "resendInvoice": "Resend Invoice",
-   "orderDetails": "Order Details"
+   "orderDetails": "Order Details",
+     "descriptionPlaceholder": "Please enter description",
+     "welcomeBack": "Welcome Back!",
+     "discover": "Discover",
+     "searchProduct": "Search Product",
+     "product": "Products",
+     "noProductAvailable": "No products available.",
+     "plusTwentyThree": "+ 23 from last month",
+     "plusFourFromLastMonth": "+ 4 from last month",
+     "plusTwoFromLastMonth": "+ 2 from last month",
+     "unknownCustomer": "Unknown Customer",
+     "noEmailProvided": "No Email Provided",
+     "dashboard": "Dashboard",
+     "thisMonthSummary": "This Month's Summary",
+     "noSales": "No sales yet this month",
+     "recentSalesTitle": "Recent Sales",
+     "addAMember": "Add a member",
+     "totalProducts": "Total Products",
+     "subscriptions": "Subscriptions",
+     "totalMembers": "Total Members",
+    "selectIsRequired": "Select a valid value"
 }
 
