@@ -21,7 +21,7 @@ class OrderTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 16.0),
       child: GestureDetector(
         onTap: () {
-          context.push(AppRoute.addProduct);
+          context.push(AppRoute.orderDetails);
         },
         child: Stack(
           children: [
