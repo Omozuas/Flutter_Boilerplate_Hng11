@@ -477,6 +477,7 @@
    "shippingCost": "Shipping Cost",
    "tot": "Total",
    "resendInvoice": "Resend Invoice",
-   "orderDetails": "Order Details"
+   "orderDetails": "Order Details",
+   "wrongCurrentPassword": "Check current password"
 }
 

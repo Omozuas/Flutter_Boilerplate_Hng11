@@ -9,7 +9,6 @@ extension Translation on BuildContext {
 // String get login => 'Login';
 // In your UI, use this : context.login (importing this context_extension file);
 
-
   String get order => text.order;
 
   String get paid => text.paid;
@@ -69,6 +68,10 @@ extension Translation on BuildContext {
   String get passwordUpdatedError => text.passwordUpdatedError;
 
   String get passwordUpdated404Error => text.passwordUpdated404Error;
+
+  String get passwordDoNotMatch => text.passwordDoNotMatch;
+
+  String get wrongCurrentPassword => text.wrongCurrentPassword;
 
   String get error => text.error;
 
@@ -145,6 +148,4 @@ extension Translation on BuildContext {
   String get cancel => text.cancel;
 
   String get add => text.add;
-
-
 }

@@ -399,6 +399,7 @@
     "shippingCost": "Costo de envío",
     "tot": "Total",
     "resendInvoice": "Reenviar factura",
-    "orderDetails": "Detalles del pedido"
+    "orderDetails": "Detalles del pedido",
+    "wrongCurrentPassword": "Verifique la contraseña actual"
 }
 

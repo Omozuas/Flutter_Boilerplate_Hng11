@@ -466,5 +466,6 @@
     "shippingCost": "Frais d'expédition",
     "tot": "Total",
     "resendInvoice": "Renvoyer la facture",
-    "orderDetails": "Détails de la commande"
+    "orderDetails": "Détails de la commande",
+    "wrongCurrentPassword": "Vérifiez le mot de passe actuel"
 }

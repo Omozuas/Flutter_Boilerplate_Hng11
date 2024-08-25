@@ -423,6 +423,7 @@
      "dis": "折扣",
      "shippingCost": "运费",
      "tot": "总计",
-     "resendInvoice": "重新发送发票"
+     "resendInvoice": "重新发送发票",
+     "wrongCurrentPassword": "检查当前密码"
 }
 

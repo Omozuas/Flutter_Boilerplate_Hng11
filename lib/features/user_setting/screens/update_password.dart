@@ -70,100 +70,9 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
     super.dispose();
   }
 
-  void updatePassword() async {
-    final currentPassword = currentPasswordController.text;
-    final newPassword = newPasswordController.text;
-    final confirmPassword = confirmPasswordController.text;
-
-    if (newPassword == confirmPasswordController.text) {
-      try {
-        final passwordService = ref.read(passwordServiceProvider);
-        final userService = ref.read(userServiceProvider);
-        final authToken = await userService.getToken();
-        await passwordService
-            .updatePassword(
-          currentPassword: currentPassword,
-          newPassword: newPassword,
-          confirmPassword: confirmPassword,
-          token: authToken.toString(),
-        )
-            .then(
-          (value) {
-            OneContext().showDialog(
-              builder: (ctx) {
-                return ProfileDialog(
-                    title: context.passwordUpdated,
-                    description: context.passwordUpdatedMessage,
-                    onContinue: () {
-                      Navigator.pop(ctx);
-                      context.go(AppRoute.login);
-                    });
-              },
-            );
-          },
-        );
-
-        //Handle errors
-      } on DioException catch (e) {
-        // Handle DioException
-        if (e.response?.statusCode == 404) {
-          setState(() {
-            errorMessage = context.passwordUpdated404Error;
-          });
-        } else {
-          setState(() {
-            errorMessage = context.passwordUpdatedError;
-          });
-        }
-        OneContext().showDialog(
-          builder: (context) {
-            return ProfileDialog(
-              title: context.error,
-              description: errorMessage!,
-            );
-          },
-        );
-      } catch (e) {
-        // Handle other exceptions
-        setState(() {
-          errorMessage = context.passwordUpdatedCatchError;
-        });
-        OneContext().showDialog(
-          builder: (context) {
-            return ProfileDialog(
-              title: AppLocalizations.of(context)!.errorMessage,
-              description: errorMessage!,
-            );
-          },
-        );
-      }
-    } else {
-      setState(() {
-        passwordsMatch = false;
-      });
-    }
-  }
-
-  void checkPasswordStrength(String password) {
-    setState(() {
-      this.password = password;
-      hasUppercase = password.contains(RegExp(r'[A-Z]'));
-      hasNumber = password.contains(RegExp(r'[0-9]'));
-      hasMinLength = password.length >= 8;
-    });
-  }
-
-  void validatePasswords() {
-    if (confirmPasswordFocusNode.hasFocus) {
-      setState(() {
-        passwordsMatch =
-            newPasswordController.text == confirmPasswordController.text;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         showDivider: false,
@@ -188,6 +97,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
               ),
               // Form section starts here
               Form(
+                key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -198,7 +108,13 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       hintText: context.enterCurrentPassword,
                       borderRadius: 8.r,
                       focusedBorderColor: GlobalColors.borderColor,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalizations.of(context)!
+                              .enterCurrentPassword;
+                        }
+                        return Validators.passwordValidator(value, context);
+                      },
                       suffixIcon: IconButton(
                         icon: Icon(
                           currentPasswordVissible
@@ -224,7 +140,12 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       focusNode: newPasswordFocusNode,
                       obscureText: !newPasswordVissible,
                       borderRadius: 8.r,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalizations.of(context)!.enterNewPassword;
+                        }
+                        return Validators.passwordValidator(value, context);
+                      },
                       onchanged: (String? value) {
                         checkPasswordStrength(value!);
                         validatePasswords();
@@ -359,7 +280,12 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       focusNode: confirmPasswordFocusNode,
                       controller: confirmPasswordController,
                       obscureText: !confPasswordVissible,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalizations.of(context)!.enterNewPassword;
+                        }
+                        return Validators.passwordValidator(value, context);
+                      },
                       onchanged: (value) => validatePasswords(),
                       borderRadius: 8.r,
                       hintText:
@@ -427,7 +353,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              updatePassword();
+                              updatePassword(context);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: GlobalColors.orange,
@@ -453,12 +379,203 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                   ],
                 ),
               ),
-              // Form section starts here
+              // Form section ends here
             ],
           ),
         ),
       ),
     );
+  }
+
+  final passwordErrorProvider = StateProvider<String?>((ref) => null);
+  final passwordsMatchProvider = StateProvider<bool>((ref) => true);
+
+  void updatePassword(BuildContext context) async {
+    final currentPass = currentPasswordController.text;
+    final newPassword = newPasswordController.text;
+    final confirmPassword = confirmPasswordController.text;
+
+    final passwordsMatch = ref.read(passwordsMatchProvider.notifier);
+    final passwordError = ref.read(passwordErrorProvider.notifier);
+
+    // Check if the newPassword matches confirmPassword
+    if (newPassword != confirmPassword) {
+      passwordsMatch.state = false;
+      OneContext().showDialog(
+        builder: (ctx) {
+          return ProfileDialog(
+            title: context.error,
+            description: context.passwordDoNotMatch,
+          );
+        },
+      );
+      return;
+    }
+
+    passwordsMatch.state = true;
+
+    try {
+      final passwordService = ref.read(passwordServiceProvider);
+      final userService = ref.read(userServiceProvider);
+      final authToken = await userService.getToken();
+
+      await passwordService
+          .updatePassword(
+        currentPassword: currentPass,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+        token: authToken.toString(),
+      )
+          .then(
+        (value) {
+          OneContext().showDialog(
+            barrierDismissible: false,
+            builder: (ctx) {
+              return ProfileDialog(
+                  title: context.passwordUpdated,
+                  description: context.passwordUpdatedMessage,
+                  onContinue: () async {
+                    final userService = locator<UserService>();
+                    await userService.logout();
+                    if (!ctx.mounted) return;
+                    Navigator.pop(ctx);
+                    if (!context.mounted) return;
+                    ctx.go(AppRoute.login);
+                  });
+            },
+          );
+        },
+      );
+    } on DioException catch (e) {
+      String errorMessage;
+       if (e.response?.statusCode == 401) {
+        errorMessage = context.wrongCurrentPassword;
+      } 
+      else if (e.response?.statusCode == 404) {
+        errorMessage = context.passwordUpdated404Error;
+      } else {
+        errorMessage = context.passwordUpdatedError;
+      }
+      passwordError.state = errorMessage;
+      OneContext().showDialog(
+        builder: (context) {
+          return ProfileDialog(
+            title: context.error,
+            description: errorMessage,
+          );
+        },
+      );
+    } catch (e) {
+      final errorMessage = context.passwordUpdatedCatchError;
+      passwordError.state = errorMessage;
+      OneContext().showDialog(
+        builder: (context) {
+          return ProfileDialog(
+            title: AppLocalizations.of(context)!.errorMessage,
+            description: errorMessage,
+          );
+        },
+      );
+    }
+  }
+
+  //Update password function
+  // void updatePassword() async {
+  //   final currentPassword = currentPasswordController.text;
+  //   final newPassword = newPasswordController.text;
+  //   final confirmPassword = confirmPasswordController.text;
+
+  //   if (newPassword == confirmPasswordController.text) {
+  //     try {
+  //       final passwordService = ref.read(passwordServiceProvider);
+  //       final userService = ref.read(userServiceProvider);
+  //       final authToken = await userService.getToken();
+  //       await passwordService
+  //           .updatePassword(
+  //         currentPassword: currentPassword,
+  //         newPassword: newPassword,
+  //         confirmPassword: confirmPassword,
+  //         token: authToken.toString(),
+  //       )
+  //           .then(
+  //         (value) {
+  //           OneContext().showDialog(
+  //             builder: (ctx) {
+  //               return ProfileDialog(
+  //                   title: context.passwordUpdated,
+  //                   description: context.passwordUpdatedMessage,
+  //                   onContinue: () async {
+  //                     final userService = locator<UserService>();
+  //                     await userService.logout();
+  //                     if (!ctx.mounted) return;
+  //                     Navigator.pop(ctx);
+  //                     if (!context.mounted) return;
+  //                     ctx.go(AppRoute.login);
+  //                   });
+  //             },
+  //           );
+  //         },
+  //       );
+
+  //       //Handle errors
+  //     } on DioException catch (e) {
+  //       // Handle DioException
+  //       if (e.response?.statusCode == 404) {
+  //         setState(() {
+  //           errorMessage = context.passwordUpdated404Error;
+  //         });
+  //       } else {
+  //         setState(() {
+  //           errorMessage = context.passwordUpdatedError;
+  //         });
+  //       }
+  //       OneContext().showDialog(
+  //         builder: (context) {
+  //           return ProfileDialog(
+  //             title: context.error,
+  //             description: errorMessage!,
+  //           );
+  //         },
+  //       );
+  //     } catch (e) {
+  //       // Handle other exceptions
+  //       setState(() {
+  //         errorMessage = context.passwordUpdatedCatchError;
+  //       });
+  //       OneContext().showDialog(
+  //         builder: (context) {
+  //           return ProfileDialog(
+  //             title: AppLocalizations.of(context)!.errorMessage,
+  //             description: errorMessage!,
+  //           );
+  //         },
+  //       );
+  //     }
+  //   } else {
+  //     setState(() {
+  //       passwordsMatch = false;
+  //     });
+  //   }
+  // }
+
+//Password strength criteria
+  void checkPasswordStrength(String password) {
+    setState(() {
+      this.password = password;
+      hasUppercase = password.contains(RegExp(r'[A-Z]'));
+      hasNumber = password.contains(RegExp(r'[0-9]'));
+      hasMinLength = password.length >= 8;
+    });
+  }
+
+// Check if new password and confirm password fields match
+  void validatePasswords() {
+    if (confirmPasswordFocusNode.hasFocus) {
+      setState(() {
+        passwordsMatch =
+            newPasswordController.text == confirmPasswordController.text;
+      });
+    }
   }
 
   // Color changes for password strength
