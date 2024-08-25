@@ -15,11 +15,22 @@ import 'package:vector_graphics/vector_graphics.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Copy.svg
+  SvgGenImage get copy => const SvgGenImage('assets/icons/Copy.svg');
+
+  /// File path: assets/icons/ShareNetwork.svg
+  SvgGenImage get shareNetwork =>
+      const SvgGenImage('assets/icons/ShareNetwork.svg');
+
   /// File path: assets/icons/UserPlus.svg
   SvgGenImage get userPlus => const SvgGenImage('assets/icons/UserPlus.svg');
 
   /// File path: assets/icons/Users.svg
   SvgGenImage get users => const SvgGenImage('assets/icons/Users.svg');
+
+  /// File path: assets/icons/chevron_left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/icons/chevron_left.svg');
 
   /// File path: assets/icons/db.svg
   SvgGenImage get db => const SvgGenImage('assets/icons/db.svg');
@@ -32,9 +43,15 @@ class $AssetsIconsGen {
   SvgGenImage get notifybelll =>
       const SvgGenImage('assets/icons/notifybelll.svg');
 
+  /// File path: assets/icons/org.svg
+  SvgGenImage get org => const SvgGenImage('assets/icons/org.svg');
+
   /// File path: assets/icons/personSetting.svg
   SvgGenImage get personSetting =>
       const SvgGenImage('assets/icons/personSetting.svg');
+
+  /// File path: assets/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
   /// File path: assets/icons/search_icon.png
   AssetGenImage get searchIcon =>
@@ -51,12 +68,17 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        copy,
+        shareNetwork,
         userPlus,
         users,
+        chevronLeft,
         db,
         fluentOrganization16Regular,
         notifybelll,
+        org,
         personSetting,
+        search,
         searchIcon,
         verified,
         wellet,
@@ -142,7 +164,10 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/onedrive.png');
 
   /// File path: assets/images/org.png
-  AssetGenImage get org => const AssetGenImage('assets/images/org.png');
+  AssetGenImage get orgPng => const AssetGenImage('assets/images/org.png');
+
+  /// File path: assets/images/org.svg
+  SvgGenImage get orgSvg => const SvgGenImage('assets/images/org.svg');
 
   /// File path: assets/images/people.png
   AssetGenImage get people => const AssetGenImage('assets/images/people.png');
@@ -174,7 +199,7 @@ class $AssetsImagesGen {
   AssetGenImage get world => const AssetGenImage('assets/images/world.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         instagram2,
         xLogo,
         atlassian,
@@ -196,7 +221,8 @@ class $AssetsImagesGen {
         notify,
         notion,
         onedrive,
-        org,
+        orgPng,
+        orgSvg,
         people,
         personsettings,
         search,
@@ -304,8 +330,12 @@ class $AssetsImagesPngProductListingGen {
   AssetGenImage get profile =>
       const AssetGenImage('assets/images/png/product_listing/profile.png');
 
+  /// File path: assets/images/png/product_listing/sport-shoes.png
+  AssetGenImage get sportShoes =>
+      const AssetGenImage('assets/images/png/product_listing/sport-shoes.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [iphone, product, profile];
+  List<AssetGenImage> get values => [iphone, product, profile, sportShoes];
 }
 
 class $AssetsImagesSvgAccountSettingsGen {
@@ -323,12 +353,17 @@ class $AssetsImagesSvgAccountSettingsGen {
   SvgGenImage get linkedin =>
       const SvgGenImage('assets/images/svg/account_settings/linkedin.svg');
 
+  /// File path: assets/images/svg/account_settings/org.svg
+  SvgGenImage get org =>
+      const SvgGenImage('assets/images/svg/account_settings/org.svg');
+
   /// File path: assets/images/svg/account_settings/x_logo.svg
   SvgGenImage get xLogo =>
       const SvgGenImage('assets/images/svg/account_settings/x_logo.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [emptyAvatar, instagram, linkedin, xLogo];
+  List<SvgGenImage> get values =>
+      [emptyAvatar, instagram, linkedin, org, xLogo];
 }
 
 class $AssetsImagesSvgProductListingGen {
@@ -337,6 +372,10 @@ class $AssetsImagesSvgProductListingGen {
   /// File path: assets/images/svg/product_listing/active.svg
   SvgGenImage get active =>
       const SvgGenImage('assets/images/svg/product_listing/active.svg');
+
+  /// File path: assets/images/svg/product_listing/delivery.svg
+  SvgGenImage get delivery =>
+      const SvgGenImage('assets/images/svg/product_listing/delivery.svg');
 
   /// File path: assets/images/svg/product_listing/filter_button.svg
   SvgGenImage get filterButton =>
@@ -373,6 +412,7 @@ class $AssetsImagesSvgProductListingGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         active,
+        delivery,
         filterButton,
         gridIcon,
         listIcon,

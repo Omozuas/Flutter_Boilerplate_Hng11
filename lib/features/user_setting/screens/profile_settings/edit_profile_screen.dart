@@ -182,23 +182,29 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   Future<void> update(UserModel? user) async {
     final pickedImage = ref.read(profileProvider).pickedImage;
+    UserProfile? profile;
+
     if (_firstnameController.text.isEmpty &&
         _lastnameController.text.isEmpty &&
         _usernameController.text.isEmpty &&
         _bioController.text.isEmpty &&
         pickedImage == null) {
-      return;
+      profile = null;
+    } else {
+      if (user == null) {
+        profile = null;
+      } else {
+        profile = UserProfile(
+          userID: user.id,
+          firstname: _firstnameController.text,
+          lastname: _lastnameController.text,
+          avatarURL: user.profile?.avatarURL,
+          username: _usernameController.text,
+          bio: _bioController.text,
+        );
+      }
     }
-    if (user == null) return;
 
-    final profile = UserProfile(
-      userID: user.id,
-      firstname: _firstnameController.text,
-      lastname: _lastnameController.text,
-      avatarURL: user.profile?.avatarURL,
-      username: _usernameController.text,
-      bio: _bioController.text,
-    );
     try {
       await ref
           .read(profileProvider.notifier)
