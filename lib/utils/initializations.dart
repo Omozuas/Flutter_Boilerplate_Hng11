@@ -20,8 +20,7 @@ initializeApp() async {
       appId: dotenv.env['appId']!,
       messagingSenderId: dotenv.env['messagingSenderId']!,
       projectId: dotenv.env['projectId']!,
-    )
-    );
+    ));
   } else if (Platform.isIOS) {
     await Firebase.initializeApp();
   }

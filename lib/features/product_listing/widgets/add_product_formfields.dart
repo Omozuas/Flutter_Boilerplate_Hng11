@@ -146,6 +146,7 @@ class ProductPriceFormField extends StatelessWidget {
     // final productPriceController = TextEditingController();
     return SizedBox(
       child: CustomTextField(
+       
         controller: controller,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -153,7 +154,14 @@ class ProductPriceFormField extends StatelessWidget {
           DecimalTextInputFormatter(decimalRange: 2),
         ],
         borderColor: GlobalColors.containerBorderColor,
-        hintText: '\$ 0.00',
+        hintText: '0.00',
+         prefixIcon: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Icon(
+            Icons.attach_money,
+            //size: 20,
+          ),
+        ),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter a value';
@@ -175,8 +183,6 @@ class ProductPriceFormField extends StatelessWidget {
     );
   }
 }
-
-
 
 class ProductQuantityFormField extends StatelessWidget {
   const ProductQuantityFormField({super.key, required this.controller});
@@ -201,7 +207,6 @@ class ProductQuantityFormField extends StatelessWidget {
     );
   }
 }
-
 
 class DecimalTextInputFormatter extends TextInputFormatter {
   final int decimalRange;

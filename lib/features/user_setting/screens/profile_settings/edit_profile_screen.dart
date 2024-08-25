@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
-import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
 import '../../models/user_model.dart';
@@ -17,7 +16,6 @@ import '../../models/user_profile.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
-
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key, this.user});
@@ -116,44 +114,75 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   hintText: AppLocalizations.of(context)!.enterUsername,
                 ),
                 // SizedBox(height: 16.h),
-                CustomExpansionTile(
-                  space: 0,
-                  horizontalTitlePadding: EdgeInsets.zero,
-                  horizontalChildrenPadding: EdgeInsets.zero,
-                  verticalChildrenPadding: EdgeInsets.zero,
-                  verticalTitlePadding: EdgeInsets.zero,
-                  title: AppLocalizations.of(context)!.bio,
-                  content: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomTextField(
-                          controller: _bioController,
-                          hintText:
-                              AppLocalizations.of(context)!.typeYourMessageHere,
-                          maxLines: 3,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.maximumOf64Character,
-                          textAlign: TextAlign.start,
-                          textDirection: TextDirection.rtl,
-                          style: GoogleFonts.inter(
-                            fontSize: 14.sp,
-                            color: const Color(0xFF64748B),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+               
+                            Text(
+                  AppLocalizations.of(context)!.bio,
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600, fontSize: 18.spMin),
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 16.w),
+                TextFormField(
+            controller: _bioController,
+           
+            maxLines: 3,
+            
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding:
+                  EdgeInsets.symmetric(
+                    vertical: 8.h,
+                    horizontal: 12.w,
+                  ),
+              hintText: AppLocalizations.of(context)!.typeYourMessageHere,
+              hintStyle: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color:  const Color(0xFF94A3B8),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular( 6.r),
+                borderSide: BorderSide(
+                  color: GlobalColors.borderColor,
+                  width: 1.w,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6.r),
+                borderSide: BorderSide(
+                  color:  GlobalColors.borderColor,
+                  width: 1.w,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular( 6.r),
+                borderSide: BorderSide(
+                  color:  GlobalColors.orange,
+                  width: 1.w,
+                ),
+              ),
+            ),
+          ),
+               SizedBox(height: 5.h),
+                Text(
+                  AppLocalizations.of(context)!.maximumOf64Character,
+                  textAlign: TextAlign.start,
+                  textDirection: TextDirection.rtl,
+                  style: GoogleFonts.inter(
+                    fontSize: 14.sp,
+                    color: const Color(0xFF64748B),
+                  ),
+                ),
+                
+                SizedBox(
+                  height: 26.h,
+                ),
                 CustomButton(
                   borderColor: GlobalColors.orange,
                   text: AppLocalizations.of(context)!.saveChanges,
                   height: 40.h,
                   containerColor: GlobalColors.orange,
                   width: double.infinity,
-                  textColor: const Color(0xFFFAFAFA),
+                  textColor:  const Color(0xFFFAFAFA),
                   loading: isLoading,
                   onTap: () {
                     if (isLoading) return;

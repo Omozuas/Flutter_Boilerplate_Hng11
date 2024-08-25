@@ -4,7 +4,11 @@ import '../Styles/text_styles.dart';
 import '../global_size.dart';
 
 class CustomTiles {
-  Widget textTile(BuildContext context, String title, String description, ) {
+  Widget textTile(
+    BuildContext context,
+    String title,
+    String description,
+  ) {
     return SizedBox(
       width: GlobalScreenSize.getScreenWidth(context),
       child: Row(
@@ -22,7 +26,12 @@ class CustomTiles {
       ),
     );
   }
- Widget textTile2(BuildContext context, String title, String description, ) {
+
+  Widget textTile2(
+    BuildContext context,
+    String title,
+    String description,
+  ) {
     return SizedBox(
       width: GlobalScreenSize.getScreenWidth(context),
       child: Row(
