@@ -6,19 +6,20 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
+import '../user_setting/widgets/profile_avatar.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 //import 'home_widget/widgets/chart_loader.dart';
@@ -40,15 +41,9 @@ class HomeScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 50.h,
-              width: 50.w,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
-                      fit: BoxFit.cover)),
+            ProfileAvatar(
+              size: 50.w,
+              user: locator<UserService>().user,
             ),
             8.sp.sbHW,
             Column(
@@ -173,10 +168,7 @@ class HomeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                onTap: () {
-                  context.go(AppRoute.products);
-                  context.push(AppRoute.addProduct);
-                },
+                onTap: ()=> dashBoardProviderNotifier.goToProduct(context),
                 borderColor: GlobalColors.orange,
                 text: context.addAProduct,
                 textStyle: CustomTextStyle.medium(

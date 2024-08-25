@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
@@ -213,23 +214,29 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   Future<void> update(UserModel? user) async {
     final pickedImage = ref.read(profileProvider).pickedImage;
+    UserProfile? profile;
+
     if (_firstnameController.text.isEmpty &&
         _lastnameController.text.isEmpty &&
         _usernameController.text.isEmpty &&
         _bioController.text.isEmpty &&
         pickedImage == null) {
-      return;
+      profile = null;
+    } else {
+      if (user == null) {
+        profile = null;
+      } else {
+        profile = UserProfile(
+          userID: user.id,
+          firstname: _firstnameController.text,
+          lastname: _lastnameController.text,
+          avatarURL: user.profile?.avatarURL,
+          username: _usernameController.text,
+          bio: _bioController.text,
+        );
+      }
     }
-    if (user == null) return;
 
-    final profile = UserProfile(
-      userID: user.id,
-      firstname: _firstnameController.text,
-      lastname: _lastnameController.text,
-      avatarURL: user.profile?.avatarURL,
-      username: _usernameController.text,
-      bio: _bioController.text,
-    );
     try {
       await ref
           .read(profileProvider.notifier)
@@ -238,6 +245,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       final pUpdater = ref.read(profileProvider).profileUpdater;
       if (pUpdater.hasError) throw pUpdater.error!;
       if (!mounted) return;
+      ref.read(authProvider.notifier).getUser();
       await showDialog(
         context: context,
         builder: (ctx) => ProfileDialog(

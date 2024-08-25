@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class GetUserByIDResponse {
   String? fullname;
   String? id;
@@ -789,6 +791,12 @@ class BillingPlan {
     return data;
   }
 }
+
+List<Products> getProductAllListFromStringtoJson(String str) =>
+    List<Products>.from(json.decode(str).map((x) => Products.fromJson(x)));
+
+String getProductAllListFromJsontoString(List<Products> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Products {
   String? id;

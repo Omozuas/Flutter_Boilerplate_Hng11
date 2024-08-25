@@ -22,6 +22,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisa
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscription_checkout.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/subscriptions_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/upgrade_plan_checkout_screen.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/account_settings.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/edit_profile_screen.dart';
@@ -140,13 +141,13 @@ class AppRouter {
           return const SubscriptionsScreen();
         },
       ),
-      // ConsumerGoRoute(
-      //   path: AppRoute.upgradePlanCheckout,
-      //   builder: (context, state, ref) {
-      //     final plan = state.extra as SubscriptionPlan;
-      //     return UpgradePlanCheckoutScreen(plan: plan);
-      //   },
-      // ),
+      ConsumerGoRoute(
+        path: AppRoute.upgradePlanCheckout,
+        builder: (context, state, ref) {
+          final plan = state.extra as SubscriptionPlan;
+          return UpgradePlanCheckoutScreen(plan: plan);
+        },
+      ),
       ConsumerGoRoute(
         path: AppRoute.languageAndRegionScreen,
         builder: (context, state, ref) {

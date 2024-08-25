@@ -200,8 +200,11 @@ class ProductQuantityFormField extends StatelessWidget {
       child: CustomTextField(
         controller: controller,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*')),
+        ],
         borderColor: GlobalColors.containerBorderColor,
-        hintText: '0.00 pcs',
+        hintText: '2 pcs',
         validator: (value) {
           if (value == null || value.isEmpty) {
             return AppLocalizations.of(context)!.productQuantityPlaceholder;
