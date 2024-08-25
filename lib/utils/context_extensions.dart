@@ -183,4 +183,6 @@ extension Translation on BuildContext {
 
   String get totalMembers => text.totalMembers;
 
+  String get selectIsRequired => text.selectIsRequired;
+
 }

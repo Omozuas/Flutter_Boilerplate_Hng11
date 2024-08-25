@@ -486,5 +486,7 @@
     "addAMember": "Ajouter un membre",
     "totalProducts": "Total des produits",
     "subscriptions": "Abonnements",
-    "totalMembers": "Nombre total de membres"
+    "totalMembers": "Nombre total de membres",
+    "selectIsRequired": "Sélectionnez une valeur valide"
+
 }

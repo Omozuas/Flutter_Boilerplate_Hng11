@@ -444,6 +444,8 @@
      "addAMember": "添加成员",
      "totalProducts": "总产品",
      "subscriptions": "订阅",
-     "totalMembers": "总会员"
+     "totalMembers": "总会员",
+     "selectIsRequired": "请选择一个有效的值"
+
 }
 

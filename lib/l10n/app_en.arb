@@ -497,6 +497,7 @@
      "addAMember": "Add a member",
      "totalProducts": "Total Products",
      "subscriptions": "Subscriptions",
-     "totalMembers": "Total Members"
+     "totalMembers": "Total Members",
+    "selectIsRequired": "Select a valid value"
 }
 
