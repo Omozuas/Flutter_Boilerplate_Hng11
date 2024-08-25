@@ -270,7 +270,7 @@ class AppRoute {
   static const String verificationSuccess = '/verificationSuccess';
   static const String resetPassword = '/resetPassword/:email';
   static const String cart = '/cart';
-  static const String orders = '/orders';
+  static const String ordersDetail = '/ordersDetail';
   static const String order = '/order';
   static const String orderDetails = '/orderDetails';
   static const String notification = '/notification';
