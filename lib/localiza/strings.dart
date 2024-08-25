@@ -210,6 +210,7 @@ extension StringManager on BuildContext {
       'Product added successfully';
   static const String productNameLabel = 'Product name';
   static const String productNamePlaceholder = 'Please enter a product name';
+  static const String descriptionPlaceholder = 'Please enter description';
   static const String productDescriptionPlaceholder =
       'Enter product description';
   static const String pricePlaceholder = 'Please enter a price';

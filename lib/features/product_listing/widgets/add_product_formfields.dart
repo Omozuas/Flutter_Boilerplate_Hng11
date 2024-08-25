@@ -133,6 +133,12 @@ class DescriptionFormField extends StatelessWidget {
         borderColor: GlobalColors.containerBorderColor,
         hintText: AppLocalizations.of(context)!.productDescriptionPlaceholder,
         showCounter: false,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return AppLocalizations.of(context)!.descriptionPlaceholder;
+          }
+          return null;
+        },
       ),
     );
   }
@@ -146,7 +152,6 @@ class ProductPriceFormField extends StatelessWidget {
     // final productPriceController = TextEditingController();
     return SizedBox(
       child: CustomTextField(
-       
         controller: controller,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -155,7 +160,7 @@ class ProductPriceFormField extends StatelessWidget {
         ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
-         prefixIcon: const Padding(
+        prefixIcon: const Padding(
           padding: EdgeInsets.all(12.0),
           child: Icon(
             Icons.attach_money,
