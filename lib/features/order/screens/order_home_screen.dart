@@ -53,7 +53,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                         : GlobalColors.redColor;
 
                     return InkWell(
-                      onTap: () =>  context.push(AppRoute.ordersDetail),
+                      onTap: () => context.push(AppRoute.orderDetails),
                       child: OrderTile(
                         order: Order(
                           number: 99012,
