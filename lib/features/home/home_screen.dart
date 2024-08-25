@@ -6,6 +6,8 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -23,11 +25,25 @@ import '../../utils/custom_text_style.dart';
 
 //import 'home_widget/widgets/chart_loader.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.watch(profileProvider.notifier).getUser();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
@@ -40,16 +56,7 @@ class HomeScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 50.h,
-              width: 50.w,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
-                      fit: BoxFit.cover)),
-            ),
+            const ProfileAvatar(radius: 27.0),
             8.sp.sbHW,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
