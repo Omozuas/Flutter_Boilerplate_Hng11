@@ -8,46 +8,43 @@ import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
 import '../../../utils/routing/app_router.dart';
+import '../../auth/widgets/custom_app_bar.dart';
 import '../models/product/product_model.dart';
 import '../provider/product.provider.dart';
 import '../widgets/add_product_formfields.dart';
 import '../widgets/product_card.dart';
 
 class ProductsByCategory extends ConsumerWidget {
-   const ProductsByCategory({super.key});
+  const ProductsByCategory({super.key});
 
- @override
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<Product> products = [
-     const Product(
+      const Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 19,
           image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
+      const Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 19,
           image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
+      const Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 19,
           image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
+      const Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
           price: 5,
           image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
+      const Product(
           name: 'Product 1',
           status: 'In Stock',
           category: 'P001',
@@ -55,54 +52,59 @@ class ProductsByCategory extends ConsumerWidget {
           image: 'assets/images/png/product_listing/iphone.png'),
     ];
     return Scaffold(
+      appBar: CustomAppBar.simpleTitle(
+        titleText: 'Breakfast',
+        onBack: () {
+          context.go(AppRoute.products);
+        },
+      ),
       floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                context.push(AppRoute.addProduct);
-              },
-              backgroundColor: GlobalColors.orange,
-              shape:
-               const CircleBorder(),
-              child: Icon(
-                Icons.add,
-                color: GlobalColors.white,
-              ),
-            ),
+        onPressed: () {
+          context.push(AppRoute.addProduct);
+        },
+        backgroundColor: GlobalColors.orange,
+        shape: const CircleBorder(),
+        child: Icon(
+          Icons.add,
+          color: GlobalColors.white,
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
+          // Padding(
+          //   padding: EdgeInsets.only(
+          //       left: 10.w, top: 48.h, right: 24.w, bottom: 10.h),
+          //   child: Row(
+          //     children: [
+          //       IconButton(
+          //           onPressed: () {
+          //             context.go(AppRoute.products);
+          //           },
+          //           icon:
+          //            const Icon(Icons.arrow_back_ios_new_rounded)),
+          //       Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             'Breakfast',
+          //             style: CustomTextStyles.producHeaderBlack,
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Divider(
+          //   color: GlobalColors.diverColor,
+          // ),
+          // SizedBox(
+          //   height: 24.h,
+          // ),
           Padding(
-            padding: EdgeInsets.only(
-                left: 10.w, top: 48.h, right: 24.w, bottom: 10.h),
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon:
-                     const Icon(Icons.arrow_back_ios_new_rounded)),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Breakfast',
-                      style: CustomTextStyles.producHeaderBlack,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            color: GlobalColors.diverColor,
-          ),
-          SizedBox(
-            height: 24.h,
-          ),
-           Padding(
             padding: EdgeInsets.only(left: 23.w, right: 23.w),
             child: CustomTextField(
-              suffixIcon:
-               const Icon(Icons.search),
+              suffixIcon: const Icon(Icons.search),
               hintText: 'Search Product',
               onChanged: (value) {
                 if (value != null) {
@@ -126,8 +128,7 @@ class ProductsByCategory extends ConsumerWidget {
                   itemBuilder: (txt, index) {
                     final product = products[index];
                     return Padding(
-                        padding:
-                         const EdgeInsets.only(bottom: 0),
+                        padding: const EdgeInsets.only(bottom: 0),
                         child: ProductCardWiget(
                           productNmae: '${product.name}',
                           status: '${product.status}'.capitalize,

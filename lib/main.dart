@@ -53,11 +53,13 @@ class MyApp extends ConsumerWidget {
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primaryColor: GlobalColors.orange, // gobal primary color
           textTheme: GoogleFonts.interTextTheme(),
           scaffoldBackgroundColor: Colors.white,
           dialogTheme: DialogTheme(
             backgroundColor:
                 GlobalColors.deemWhiteColor, // Dialog background color
+
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0), // Dialog shape
             ),
@@ -72,10 +74,19 @@ class MyApp extends ConsumerWidget {
               color: Colors.grey[800], // Content text style
             ),
           ),
+          progressIndicatorTheme: ProgressIndicatorThemeData(
+            color: GlobalColors.orange, //progress indicator color
+          ),
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,
             systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: WidgetStateProperty.all(GlobalColors
+                  .orange), // Set the global color for the TextButton texts
+            ),
           ),
         ),
       ),
