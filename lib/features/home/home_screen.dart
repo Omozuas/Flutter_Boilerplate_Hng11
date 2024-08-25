@@ -68,7 +68,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: Center(
                       child: Text(
                         // ignore: unnecessary_null_comparison
-                        asyncUser.value!.fullname == null
+                        asyncUser.value == null
                             ? 'AN'
                             : initials(asyncUser.value),
                         style: const TextStyle(
