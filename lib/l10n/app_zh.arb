@@ -389,6 +389,22 @@
   "noResultFound": "未找到结果",
     "continueWithGoogle": "使用 Google 继续",
     "description": "描述",
-    "inStock": "有库存"
+    "inStock": "有库存",
+  "orders": "订单",
+   "home": "首页",
+   "logoutConfirmation": "您确定要退出此设备吗？",
+ "addProductFailure": "添加产品失败：",
+   "productFormIncomplete": "请完成表单填写",
+   "ok": "好的",
+   "success": "成功",
+   "addProductSuccessDescription": "产品添加成功",
+   "anErrorOccured": "发生了一个错误",
+   "title": "标题",
+   "category": "类别",
+   "descriptionFieldHint": "最多72个字符",
+   "standardPrice": "标准价格",
+   "quantity": "数量",
+   "cancel": "取消",
+   "add": "添加"
 }
 
