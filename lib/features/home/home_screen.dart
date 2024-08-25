@@ -8,10 +8,8 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/das
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
