@@ -18,7 +18,6 @@ import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import '../../widgets/profile_avatar_tile.dart';
 
-
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key, this.user});
   final UserModel? user;
@@ -83,6 +82,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       backgroundColor: Colors.white,
       appBar: CustomAppBar.simpleTitle(
         titleText: context.editProfile,
+        showDivider: false,
       ),
       body: SingleChildScrollView(
         child: Form(
