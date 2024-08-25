@@ -73,14 +73,16 @@ class AddProductProvider extends _$AddProductProvider {
     final org = ref.read(getOrganisationProvider);
     try {
       state = AddProductState.isLoading();
-      final result = await ref.read(productApiProvider).createProduct(
+      final product = await ref.read(productApiProvider).createProduct(
             product: data,
             orgId: org.organisationId!,
           );
 
-      log('ADD PRODUCT RESULT $result');
-      // ignore: unused_result
-      ref.refresh(productListProvider.future);
+      if (product != null) {
+        log('ADD PRODUCT RESULT $product');
+        ref.read(productListProvider.notifier).addProduct(product);
+      }
+
       onSuccess();
       state = AddProductState.isSuccess();
     } catch (e) {

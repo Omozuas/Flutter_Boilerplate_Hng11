@@ -9,7 +9,6 @@ extension Translation on BuildContext {
 // String get login => 'Login';
 // In your UI, use this : context.login (importing this context_extension file);
 
-
   String get order => text.order;
 
   String get paid => text.paid;
@@ -146,7 +145,29 @@ extension Translation on BuildContext {
 
   String get add => text.add;
 
+  String get somethingWentWrong =>
+      'Something went wrong. \nPlease pull to refresh';
+  String get descriptionPlaceholder => "Please enter description";
 
+  String get welcomeBack => 'Welcome Back!';
+
+  String get discover => 'Discover';
+  String get searchProduct => "Search Product";
+  String get product => "Products";
+  String get noProductAvailable => "No products available.";
+  String get plusTwentyThree => "+ 23 from last month";
+  String get plusFourFromLastMonth => "+ 4 from last month";
+  String get plusTwoFromLastMonth => "+ 2 from last month";
+  String get unknownCustomer => 'Unknown Customer';
+  String get noEmailProvided => 'No Email Provided';
+  String get dashboard => 'Dashboard';
+  String get thisMonthSummary => 'This Month\'s Summary';
+  String get noSales => "No sales yet this month";
+  String get recentSalesTitle => 'Recent Sales';
+  String get addAMember => 'Add a member';
+  String get totalProducts => 'Total Products';
+  String get subscriptions => 'Subscriptions';
+  String get totalMembers => 'Total Members';
   String get deliveryText => 'Estimated Delivery on 26th Aug';
   String get deliveryDateText => 'Delivered on 19th Aug';
   String get deliveryDate => '20-Aug-2024';
