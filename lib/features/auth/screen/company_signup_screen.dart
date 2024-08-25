@@ -121,6 +121,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButtonFormField(
+                            placeholder: localizations.selectPronouns,
                             items: [
                               localizations.agricultureIndustry,
                               localizations.manufacturingIndustry,
@@ -144,7 +145,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             containerColor: GlobalColors.white,
                             textPadding:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                EdgeInsets.only(left: 10.w, right: 10.w),
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
@@ -157,6 +158,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButtonFormField(
+                            placeholder: localizations.selectPronouns,
                             items: [
                               localizations.soleProprietorship,
                               localizations.partnership,
@@ -178,7 +180,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             containerColor: GlobalColors.white,
                             textPadding:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                EdgeInsets.only(left: 10.w, right: 10.w),
                             textColor: GlobalColors.darkOne,
                           ),
                         ],
@@ -206,6 +208,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButtonFormField(
+                            placeholder: localizations.selectPronouns,
                             items: [
                               localizations.country1,
                               localizations.country2,
@@ -229,7 +232,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             containerColor: GlobalColors.white,
                             textPadding:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                EdgeInsets.only(left: 10.w, right: 10.w),
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
@@ -242,6 +245,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButtonFormField(
+                            placeholder: localizations.selectPronouns,
                             items: [
                               localizations.state1,
                               localizations.state2,
@@ -263,7 +267,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                             borderColor: GlobalColors.lightGray,
                             textPadding:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                EdgeInsets.only(left: 10.w, right: 10.w),
                             containerColor: GlobalColors.white,
                             textColor: GlobalColors.darkOne,
                           ),
@@ -297,6 +301,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                           ),
                           SizedBox(height: 5.sp),
                           CustomDropdownButtonFormField(
+                            placeholder: localizations.selectPronouns,
                             items: [
                               localizations.lga1,
                               localizations.lga2,
@@ -319,7 +324,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             containerColor: GlobalColors.white,
                             textPadding:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                EdgeInsets.only(left: 10.w, right: 10.w),
                             textColor: GlobalColors.darkOne,
                           ),
                         ],
