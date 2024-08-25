@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_button.dart';
-import '../../../../utils/widgets/custom_expansion_tile.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
 import '../../../../utils/widgets/custom_text_field.dart';
 import '../../models/user_model.dart';
@@ -139,7 +138,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               hintStyle: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color:  Color(0xFF94A3B8),
+                color:  const Color(0xFF94A3B8),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular( 6.r),
@@ -184,7 +183,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   height: 40.h,
                   containerColor: GlobalColors.orange,
                   width: double.infinity,
-                  textColor:  Color(0xFFFAFAFA),
+                  textColor:  const Color(0xFFFAFAFA),
                   loading: isLoading,
                   onTap: () {
                     if (isLoading) return;

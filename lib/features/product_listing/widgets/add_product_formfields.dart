@@ -148,7 +148,7 @@ class ProductPriceFormField extends StatelessWidget {
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
          prefixIcon: const Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(12.0),
           child: Icon(
             Icons.attach_money,
             //size: 20,

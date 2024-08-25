@@ -10,7 +10,7 @@ import '../../../utils/Styles/text_styles.dart';
 import 'product_card.dart';
 
 class ProductCardListWidget extends StatelessWidget {
-   ProductCardListWidget(
+   const ProductCardListWidget(
       {super.key, required this.categoryName, required this.products});
 
   final String categoryName;

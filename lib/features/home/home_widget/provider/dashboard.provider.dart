@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../services/service_locator.dart';
 import '../../../../services/user.service.dart';
-import '../../../product_listing/models/filter_product_model.dart';
 import '../../home_screen.dart';
 import '../model/dashboard_model.dart';
 import '../model/organization_overview_model.dart';
@@ -167,10 +166,8 @@ class DashBoardProvider extends StateNotifier<DashBoardState> with WidgetsBindin
       } else {
         setAllProductCount = 0;
       }
-      print(res.length);
-      print(res.length);
-      print(res.length);
-      print(res.length);
+      debugPrint(res.length.toString());
+    
     } catch (e) {
       setAllProductCount = 0;
       rethrow;

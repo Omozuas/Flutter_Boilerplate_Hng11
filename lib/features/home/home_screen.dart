@@ -156,8 +156,7 @@ class HomeScreen extends ConsumerWidget {
                       title: StringManager.totalProducts,
                       image: AppSvgs.activeMembers,
                       value: formatNumber(
-                          dashBoardStateProvider.productCount ??
-                              0,
+                          dashBoardStateProvider.productCount,
                           decimalPlaces: 0),
                       details: "",
                     ),
