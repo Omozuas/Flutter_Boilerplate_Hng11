@@ -33,13 +33,10 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/order/models/order.dart';
-import '../../features/order/screens/order_detail_screen.dart';
 import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
-import '../global_colors.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
