@@ -82,56 +82,7 @@ class OrderTile extends StatelessWidget {
                   ],
                 ),
               ),
-<<<<<<< HEAD
               Container(
-=======
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Order#: ${order.number}',
-                        style: GoogleFonts.inter(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF71717A),
-                        ),
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        '${order.deliveryDate}, ${order.deliveryTime}',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Assets.images.svg.productListing.van.svg(),
-                      SizedBox(width: 6.w),
-                      Text(
-                        order.deliveryText,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: order.deliveryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 16.0,
-              right: 20.0,
-              child: Container(
->>>>>>> c2fee19 (fixed)
                 width: 92.0,
                 height: 79.0,
                 decoration: BoxDecoration(
