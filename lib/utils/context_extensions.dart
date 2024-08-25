@@ -147,8 +147,6 @@ extension Translation on BuildContext {
   String get add => text.add;
 
 
-  String get logoutConfirmation =>
-      'Are you sure you want to logout from this Device.';
   String get deliveryText => 'Estimated Delivery on 26th Aug';
   String get deliveryDateText => 'Delivered on 19th Aug';
   String get deliveryDate => '20-Aug-2024';
