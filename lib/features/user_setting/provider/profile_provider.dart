@@ -65,10 +65,16 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   }
 
   Future<void> updateProfile({
-    required UserProfile profile,
+    required UserProfile? profile,
     XFile? image,
   }) async {
     final settingsApi = ref.read(settingsApiProvider);
+    if (profile == null) {
+      state = state.copyWith(
+        profileUpdater: AsyncError('An error occurred', StackTrace.current),
+      );
+      return;
+    }
     try {
       state = state.copyWith(profileUpdater: const AsyncLoading());
       final res = await settingsApi.updateProfile(profile);
@@ -98,7 +104,12 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   Future<void> getNotifications() async {
     final settingsApi = ref.read(settingsApiProvider);
     final user = state.user.sureValue;
-    if (user == null) return;
+    if (user == null) {
+      state = state.copyWith(
+        notificationFetch: AsyncError('An error occurred', StackTrace.current),
+      );
+      return;
+    }
     try {
       state = state.copyWith(notificationFetch: const AsyncLoading());
       final res = await settingsApi.getNotification(user.id);
@@ -140,7 +151,12 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   Future<void> getSubscription() async {
     final settingsApi = ref.read(settingsApiProvider);
     final user = state.user.sureValue;
-    if (user == null) return;
+    if (user == null) {
+      state = state.copyWith(
+        fetchSubcription: AsyncError('An error occurred', StackTrace.current),
+      );
+      return;
+    }
     try {
       state = state.copyWith(fetchSubcription: const AsyncLoading());
       final res = await settingsApi.getSubscriptionUserId(user.id);
@@ -191,7 +207,13 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   Future<void> sendInviteLink({required String email}) async {
     final settingsApi = ref.read(settingsApiProvider);
     final inviteLink = state.inviteLink.sureValue;
-    if (inviteLink == null) return;
+
+    if (inviteLink == null) {
+      state = state.copyWith(
+        inviteLink: AsyncError('An error occurred', StackTrace.current),
+      );
+      return;
+    }
 
     try {
       await settingsApi.sendInviteLink(email: email, inviteLink: inviteLink);
@@ -203,12 +225,19 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   // get organisation members
   Future<void> getOrganisationMembers() async {
     final userOrgId = state.user.sureValue?.orgId;
-    if (userOrgId == null) {}
     final settingsApi = ref.read(settingsApiProvider);
+
+    if (userOrgId == null) {
+      state = state.copyWith(
+        organisationMembers:
+            AsyncError('An error occurred', StackTrace.current),
+      );
+      return;
+    }
     try {
       state = state.copyWith(organisationMembers: const AsyncLoading());
       final organisationMembers =
-          await settingsApi.getOrganisationMembers(orgId: userOrgId!);
+          await settingsApi.getOrganisationMembers(orgId: userOrgId);
 
       state =
           state.copyWith(organisationMembers: AsyncData(organisationMembers));
@@ -225,7 +254,14 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   }) async {
     final settingsApi = ref.read(settingsApiProvider);
     final email = state.user.sureValue?.email;
-    if (email == null) return;
+
+    if (email == null) {
+      state = state.copyWith(
+        initiateSubscription:
+            AsyncError('An error occurred', StackTrace.current),
+      );
+      return;
+    }
     try {
       state = state.copyWith(initiateSubscription: const AsyncLoading());
       final res = await settingsApi.initiateSubscription(
