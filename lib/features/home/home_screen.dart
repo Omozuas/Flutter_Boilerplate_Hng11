@@ -6,8 +6,13 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
+
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -47,6 +52,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
+    final asyncUser = ref.watch(profileProvider).user;
 
     return Scaffold(
       appBar: AppBar(
@@ -56,8 +62,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const ProfileAvatar(radius: 27.0),
-            8.sp.sbHW,
+
+            authStateProvider.user!.avatarUrl == null
+                ? CircleAvatar(
+                    radius: 28,
+                    child: Center(
+                      child: Text(
+                        asyncUser.value!.fullname.isEmpty
+                            ? 'AN'
+                            : initials(asyncUser.value),
+                        style: const TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: 50.h,
+                    width: 50.w,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "${authStateProvider.user!.avatarUrl}"),
+                            fit: BoxFit.cover)),
+                  ),
+            6.sp.sbHW,
+
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,44 +209,52 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomButton(
-                onTap: () {
-                  context.go(AppRoute.products);
-                  context.push(AppRoute.addProduct);
-                },
-                borderColor: GlobalColors.orange,
-                text: context.addAProduct,
-                textStyle: CustomTextStyle.medium(
-                    color: Colors.white, fontSize: 14.sp),
-                height: 46.h,
-                containerColor: GlobalColors.orange,
-                width: 151.w,
-                textColor: Colors.white,
-                icon: SvgPicture.asset(
-                  AppSvgs.products,
-                  height: 20.h,
-                  width: 20.w,
-                  // ignore: deprecated_member_use
-                  color: Colors.white,
+              Flexible(
+                child: CustomButton(
+                  onTap: () {
+                    context.go(AppRoute.products);
+                    context.push(AppRoute.addProduct);
+                  },
+                  borderColor: GlobalColors.orange,
+                  text: context.addAProduct,
+                  textStyle: CustomTextStyle.medium(
+                      color: Colors.white, fontSize: 14.sp),
+                  // height: 46.h,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  containerColor: GlobalColors.orange,
+                  // width: 151.w,
+                  textColor: Colors.white,
+                  icon: SvgPicture.asset(
+                    AppSvgs.products,
+                    height: 20.h,
+                    width: 20.w,
+                    // ignore: deprecated_member_use
+                    color: Colors.white,
+                  ),
                 ),
               ),
-              16.w.sbW,
-              CustomButton(
-                onTap: () {},
-                borderColor: const Color(0xFFD3D3D3),
-                text: context.addAMember,
-                textStyle: CustomTextStyle.medium(
-                    color: Colors.black, fontSize: 14.sp),
-                height: 46.h,
-                containerColor: Colors.transparent,
-                width: 151.w,
-                textColor: GlobalColors.black,
-                icon: SvgPicture.asset(
-                  AppSvgs.addUser,
-                  height: 20.h,
-                  width: 20.w,
-                  // ignore: deprecated_member_use
-                  color: Colors.black,
+              10.w.sbW,
+              Flexible(
+                child: CustomButton(
+                  onTap: () {},
+                  borderColor: const Color(0xFFD3D3D3),
+                  text: context.addAMember,
+                  textStyle: CustomTextStyle.medium(
+                      color: Colors.black, fontSize: 14.sp),
+                  // height: 46.h,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  containerColor: Colors.transparent,
+                  // width: 151.w,
+                  textColor: GlobalColors.black,
+                  icon: SvgPicture.asset(
+                    AppSvgs.addUser,
+                    height: 20.h,
+                    width: 20.w,
+                    // ignore: deprecated_member_use
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -298,6 +336,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
     );
+  }
+
+  String initials([UserModel? user]) {
+    try {
+      var initials = 'AN';
+      if (user == null) return initials;
+      if (user.fullname.isEmpty) return initials;
+
+      final u = user.fullname.split(' ');
+      if (u.length == 1) return u.first;
+      return '${u[0][0]}${u[1][0]}';
+    } catch (e) {
+      return 'AN';
+    }
   }
 }
 

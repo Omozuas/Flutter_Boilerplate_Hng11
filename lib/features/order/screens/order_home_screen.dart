@@ -10,7 +10,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../utils/routing/app_router.dart';
 
-
 class OrderHomeScreen extends StatefulWidget {
   const OrderHomeScreen({super.key});
 
@@ -23,7 +22,6 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
-
         titleText: context.orders,
         onBack: () {
           context.go(AppRoute.home);
@@ -38,7 +36,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                   itemCount: 8,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 3.0),
                   itemBuilder: (_, index) {
                     bool isEstimatedDelivery = index % 4 < 2;
 
@@ -50,7 +48,6 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                         : GlobalColors.redColor;
 
                     return InkWell(
-
                       onTap: () => context.push(AppRoute.orderDetails),
 
                       // onTap: () =>  context.push(AppRoute.ordersDetail),
