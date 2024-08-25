@@ -6,8 +6,9 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
-import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
+//import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
@@ -55,7 +56,7 @@ class HomeScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  StringManager.welcomeBackDashboard,
+                  context.welcomeBack,
                   style: CustomTextStyles.productSmallBodyTextBlack
                       .copyWith(color: const Color(0xFF71717A)),
                 ),
@@ -92,11 +93,11 @@ class HomeScreen extends ConsumerWidget {
         padding: 16.w.padH,
         children: [
           16.h.sbH,
-          Text(StringManager.dashboard,
+          Text(context.dashboard,
               style:
                   CustomTextStyle.bold(fontSize: 24.sp, color: Colors.black)),
           Text(
-            StringManager.thisMonthSummary,
+            context.thisMonthSummary,
             style: TextStyle(
               fontSize: 16.sp,
               color: GlobalColors.gray600Color,
@@ -110,7 +111,7 @@ class HomeScreen extends ConsumerWidget {
                 Row(
                   children: [
                     RevenueCard(
-                      title: StringManager.totalMembers,
+                      title: context.totalMembers,
                       image: AppSvgs.people,
                       value: dashBoardStateProvider.dashBoardData.revenue ==
                               null
@@ -118,30 +119,31 @@ class HomeScreen extends ConsumerWidget {
                           : formatNumber(
                               dashBoardStateProvider.dashBoardData.revenue ?? 0,
                               decimalPlaces: 0),
-                      details: "+ 23 from last month",
+                      details: context.plusTwentyThree,
                     ),
                     18.w.sbW,
                     RevenueCard(
-                      title: StringManager.totalProducts,
-                      image: AppSvgs.totalProducts,
-                      value:
-                          dashBoardStateProvider.dashBoardData.subscriptions ==
-                                  null
-                              ? "0"
-                              : formatNumber(
-                                  dashBoardStateProvider
-                                          .dashBoardData.subscriptions ??
-                                      0,
-                                  decimalPlaces: 0),
-                      details: "+ 4 from last month",
-                    ),
+                        title: context.totalProducts,
+                        image: AppSvgs.totalProducts,
+                        value: dashBoardStateProvider
+                                    .dashBoardData.subscriptions ==
+                                null
+                            ? "0"
+                            : formatNumber(
+                                dashBoardStateProvider
+                                        .dashBoardData.subscriptions ??
+                                    0,
+                                decimalPlaces: 0),
+                        details: context.plusFourFromLastMonth
+                        //"+ 4 from last month",
+                        ),
                   ],
                 ),
                 16.w.sbH,
                 Row(
                   children: [
                     RevenueCard(
-                      title: StringManager.subscriptions,
+                      title: context.subscriptions,
                       image: AppSvgs.allSub,
                       value: dashBoardStateProvider.dashBoardData.revenue ==
                               null
@@ -149,11 +151,12 @@ class HomeScreen extends ConsumerWidget {
                           : formatNumber(
                               dashBoardStateProvider.dashBoardData.revenue ?? 0,
                               decimalPlaces: 0),
-                      details: "+ 2 from last month",
+                      details: context.plusTwoFromLastMonth,
+                      //"+ 2 from last month",
                     ),
                     18.w.sbW,
                     RevenueCard(
-                      title: StringManager.totalProducts,
+                      title: context.totalProducts,
                       image: AppSvgs.activeMembers,
                       value: formatNumber(dashBoardStateProvider.productCount,
                           decimalPlaces: 0),
@@ -175,7 +178,7 @@ class HomeScreen extends ConsumerWidget {
                   context.push(AppRoute.addProduct);
                 },
                 borderColor: GlobalColors.orange,
-                text: StringManager.addAProduct,
+                text: context.addAProduct,
                 textStyle: CustomTextStyle.medium(
                     color: Colors.white, fontSize: 14.sp),
                 height: 46.h,
@@ -194,7 +197,7 @@ class HomeScreen extends ConsumerWidget {
               CustomButton(
                 onTap: () {},
                 borderColor: const Color(0xFFD3D3D3),
-                text: StringManager.addAMember,
+                text: context.addAMember,
                 textStyle: CustomTextStyle.medium(
                     color: Colors.black, fontSize: 14.sp),
                 height: 46.h,
@@ -227,7 +230,7 @@ class HomeScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      StringManager.recentSalesTitle,
+                      context.recentSalesTitle,
                       style: CustomTextStyle.bold(
                           fontSize: 16.sp, color: GlobalColors.black),
                     ),
@@ -236,7 +239,7 @@ class HomeScreen extends ConsumerWidget {
                       child: Padding(
                         padding: 8.h.padV,
                         child: Text(
-                          StringManager.seeMore,
+                          context.seeMore,
                           style: CustomTextStyle.regular(
                             fontSize: 14.sp,
                           ),
@@ -257,7 +260,7 @@ class HomeScreen extends ConsumerWidget {
                     width: width(context),
                     child: Center(
                       child: Text(
-                        StringManager.noSales,
+                        context.noSales,
                         style: CustomTextStyle.regular(
                                 color: const Color(0xFF98A2B3), fontSize: 16.sp)
                             .copyWith(
@@ -276,8 +279,8 @@ class HomeScreen extends ConsumerWidget {
                               .dashBoardData.monthSales?[index] ??
                           MonthSale();
                       return CustomerListTile(
-                        customerName: 'Unknown Customer',
-                        email: 'No Email Provided',
+                        customerName: context.unknownCustomer,
+                        email: context.noEmailProvided,
                         amount: monthlySale.amount ?? 0,
                       );
                     }),

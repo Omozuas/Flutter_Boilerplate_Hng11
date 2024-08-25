@@ -177,6 +177,7 @@
   "productAddedSuccessfullyMessage": "产品添加成功",
   "productNameLabel": "产品名称",
   "productNamePlaceholder": "请输入产品名称",
+  "descriptionPlaceholder": "请输入描述",
   "productDescriptionPlaceholder": "输入产品描述",
   "pricePlaceholder": "请输入价格",
   "productQuantityPlaceholder": "请输入产品数量",

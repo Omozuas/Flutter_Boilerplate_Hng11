@@ -30,11 +30,14 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    '${product.name}',
-                    style: CustomTextStyles.productTextTitleBlack.copyWith(
-                      color: GlobalColors.dark2,
-                      fontWeight: FontWeight.w600,
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '${product.name}',
+                      style: CustomTextStyles.productTextTitleBlack.copyWith(
+                        color: GlobalColors.dark2,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   SizedBox(height: 6.h),
@@ -50,12 +53,14 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    "\$${product.price}.00",
-                    style: CustomTextStyles.productTextTitleBlack.copyWith(
-                      color: GlobalColors.black,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
+                  FittedBox(
+                    child: Text(
+                      "\$${product.price}.00",
+                      style: CustomTextStyles.productTextTitleBlack.copyWith(
+                        color: GlobalColors.black,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   SizedBox(height: 6.h),
