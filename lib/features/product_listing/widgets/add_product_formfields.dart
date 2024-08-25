@@ -133,6 +133,12 @@ class DescriptionFormField extends StatelessWidget {
         borderColor: GlobalColors.containerBorderColor,
         hintText: AppLocalizations.of(context)!.productDescriptionPlaceholder,
         showCounter: false,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return AppLocalizations.of(context)!.descriptionPlaceholder;
+          }
+          return null;
+        },
       ),
     );
   }
@@ -153,7 +159,14 @@ class ProductPriceFormField extends StatelessWidget {
           DecimalTextInputFormatter(decimalRange: 2),
         ],
         borderColor: GlobalColors.containerBorderColor,
-        hintText: '\$ 0.00',
+        hintText: '0.00',
+        prefixIcon: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Icon(
+            Icons.attach_money,
+            //size: 20,
+          ),
+        ),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter a value';

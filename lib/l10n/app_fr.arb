@@ -177,6 +177,7 @@
   "productAddedSuccessfullyMessage": "Produit ajouté avec succès",
   "productNameLabel": "Nom du produit",
   "productNamePlaceholder": "Veuillez entrer un nom de produit",
+  "descriptionPlaceholder": "Veuillez entrer la description",
   "productDescriptionPlaceholder": "Entrez la description du produit",
   "pricePlaceholder": "Veuillez entrer un prix",
   "productQuantityPlaceholder": "Veuillez entrer la quantité de produit",
