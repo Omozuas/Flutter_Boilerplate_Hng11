@@ -48,7 +48,8 @@ class HomeScreen extends ConsumerWidget {
                     radius: 28,
                     child: Center(
                       child: Text(
-                        asyncUser.value!.fullname.isEmpty
+                        // ignore: unnecessary_null_comparison
+                        asyncUser.value!.fullname == null
                             ? 'AN'
                             : initials(asyncUser.value),
                         style: const TextStyle(
