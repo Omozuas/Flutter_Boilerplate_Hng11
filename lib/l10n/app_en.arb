@@ -47,7 +47,7 @@
   "registrationFailed": "Registration failed. Please try again.",
   "cartScreen": "CartScreen",
   "myCart": "My Cart",
-  "home": "Home",
+
   "products": "Products",
   "cart": "Cart",
 
@@ -124,10 +124,10 @@
     "bio": "Bio",
     "typeYourMessageHere": "Type your message here",
     "connectSocials": "Connect Socials",
-    "add": "Add",
+ 
     "save": "Save",
     "link": "Link",
-    "cancel": "Cancel",
+   
     "select": "Select",
     "maximumOf64Character": "Maximum of 64 characters",
     "settingsSavedSuccessfully": "Settings have been saved successfully.",
@@ -228,7 +228,7 @@
       "threeActiveMember": "3 active members",
       "profileName": "Chad Bosewick",
       "profileEmail": "ChadBosew@gmail.com",
-      "anErrorOccured": "An error occurred while fetching the current user details",
+
       "organisationalSettings": "Organizational Settings",
       "logOut": "Log Out",
       "addXLink": "Add X link",
@@ -268,7 +268,7 @@
       "takeAPicture": "Take a Picture",
       "pickFromGallery": "Pick from gallery",
       "recentTransactions": "Recent Transactions",
-      "paid": "Paid",
+   
       "invoice": "Invoice",
       "download": "Download",
       "total": "Total",
@@ -437,7 +437,7 @@
     "passwordOneNumber": "Password must contain at least one number",
     "productDescription": "Product Description",
     "addAProduct": "Add a Product",
-    "orderDetails": "Order Details",
+  
      "noResultFound": "No result found",
       "continueWithGoogle": "Continue with Google",
       "description": "Description",

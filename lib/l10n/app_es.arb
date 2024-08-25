@@ -47,7 +47,7 @@
   "registrationFailed": "Registro fallido. Por favor, inténtalo de nuevo.",
   "cartScreen": "Pantalla del carrito",
   "myCart": "Mi carrito",
-  "home": "Inicio",
+
   "products": "Productos",
   "cart": "Carrito",
   "settings": "Configuraciones",
@@ -122,10 +122,10 @@
   "bio": "Biografía",
   "typeYourMessageHere": "Escriba su mensaje aquí",
   "connectSocials": "Conectar redes sociales",
-  "add": "Agregar",
+ 
   "save": "Guardar",
   "link": "enlace",
-  "cancel": "Cancelar",
+
   "select": "Seleccionar",
   "maximumOf64Character": "Máximo de 64 caracteres",
   "settingsSavedSuccessfully": "Los ajustes se han guardado con éxito.",
@@ -226,7 +226,7 @@
   "threeActiveMember": "3 miembros activos",
   "profileName": "Chad Bosewick",
   "profileEmail": "ChadBosew@gmail.com",
-  "anErrorOccured": "Se produjo un error al obtener los detalles del usuario actual",
+
   "organisationalSettings": "Configuración Organizacional",
   "logOut": "Cerrar Sesión",
   "addXLink": "Agregar enlace X",
@@ -266,7 +266,7 @@
   "takeAPicture": "Tomar una Foto",
   "pickFromGallery": "Seleccionar de la galería",
   "recentTransactions": "Transacciones Recientes",
-  "paid": "Pagado",
+
   "invoice": "Factura",
   "download": "Descargar",
   "total": "Total",
@@ -359,7 +359,7 @@
     "passwordOneNumber": "La contraseña debe contener al menos un número",
     "productDescription": "Descripción del producto",
     "addAProduct": "Agregar un producto",
-    "orderDetails": "Detalles del pedido",
+  
     "noResultFound": "No se encontraron resultados",
       "continueWithGoogle": "Continuar con Google",
       "description": "Descripción",
