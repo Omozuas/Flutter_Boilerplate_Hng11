@@ -51,6 +51,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void dispose() {
     _tapGestureRecognizerForTermsAndConditions.dispose();
     _tapGestureRecognizerForPrivacy.dispose();
+
     super.dispose();
   }
 
@@ -189,7 +190,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     controller: LoginScreen._emailController,
                     keyboardType: TextInputType.emailAddress,
                     hintText: AppLocalizations.of(context)!.enterEmail,
-                    validator: (v) => Validators.emailValidator(v,context),
+                    validator: (v) => Validators.emailValidator(v, context),
                   ),
                   SizedBox(
                     height: 16.h,
@@ -363,12 +364,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  void _handleLoginAccount(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).login({
-
-      'email': LoginScreen._emailController.text.trim().toLowerCase(),
-      'password': LoginScreen._passwordController.text,
-    }, context);
+  void _handleLoginAccount(WidgetRef ref, BuildContext context) async {
+    await ref.read(authProvider.notifier).login(
+        {
+          'email': LoginScreen._emailController.text.trim().toLowerCase(),
+          'password': LoginScreen._passwordController.text,
+        },
+        context,
+        [LoginScreen._emailController, LoginScreen._passwordController]);
   }
 }
 

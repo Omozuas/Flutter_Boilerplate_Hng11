@@ -179,7 +179,8 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
         throw Exception("User does not have a valid organization ID");
       }
       state = state.copyWith(inviteLink: const AsyncLoading());
-      final inviteLink = await settingsApi.generateInviteLink(orgId: user.orgId);
+      final inviteLink =
+          await settingsApi.generateInviteLink(orgId: user.orgId);
       state = state.copyWith(inviteLink: AsyncData(inviteLink));
     } catch (e) {
       state = state.copyWith(inviteLink: AsyncError(e, StackTrace.current));
@@ -202,7 +203,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
   // get organisation members
   Future<void> getOrganisationMembers() async {
     final userOrgId = state.user.sureValue?.orgId;
-    if (userOrgId == null)  {}
+    if (userOrgId == null) {}
     final settingsApi = ref.read(settingsApiProvider);
     try {
       state = state.copyWith(organisationMembers: const AsyncLoading());

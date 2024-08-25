@@ -13,7 +13,7 @@ class Validators {
     return null;
   }
 
-  static String? emailValidator(String? value,BuildContext context) {
+  static String? emailValidator(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
       return context.emailRequired;
     }

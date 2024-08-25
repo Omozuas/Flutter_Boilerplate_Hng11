@@ -176,8 +176,6 @@ class ProductPriceFormField extends StatelessWidget {
   }
 }
 
-
-
 class ProductQuantityFormField extends StatelessWidget {
   const ProductQuantityFormField({super.key, required this.controller});
   final TextEditingController controller;
@@ -201,7 +199,6 @@ class ProductQuantityFormField extends StatelessWidget {
     );
   }
 }
-
 
 class DecimalTextInputFormatter extends TextInputFormatter {
   final int decimalRange;

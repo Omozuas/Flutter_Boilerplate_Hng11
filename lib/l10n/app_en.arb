@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "signUp": "Sign up",
-  "createAnAccount": "Create an account to get started with us.",
+  "createAnAccount": "Create an account logto get started with us.",
   "companyName": "Company's Name",
   "enterCompanyName": "Enter company's name",
   "pleaseEnterName": "Please enter name",
@@ -441,6 +441,22 @@
      "noResultFound": "No result found",
       "continueWithGoogle": "Continue with Google",
       "description": "Description",
-      "inStock": "In Stock"
+      "inStock": "In Stock",
+      "orders": "Orders",
+        "home": "Home",
+        "logoutConfirmation": "Are you sure you want to logout from this Device?",
+    "addProductFailure": "Failed to add product:",
+    "productFormIncomplete": "Please Complete form fill",
+    "ok": "Ok",
+    "success": "Success",
+    "addProductSuccessDescription": "Product added successfully",
+    "anErrorOccured": "An Error occurred",
+    "title": "Title",
+    "category": "Category",
+    "descriptionFieldHint": "Maximum of 72 characters",
+    "standardPrice": "Standard Price",
+    "quantity": "Quantity",
+    "cancel": "Cancel",
+    "add": "Add"
 }
 
