@@ -199,6 +199,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     label: AppLocalizations.of(context)!.password,
                     controller: LoginScreen._passwordController,
                     hintText: AppLocalizations.of(context)!.password,
+                    validator: (v) => Validators.passwordValidator(v,context),
                   ),
                   SizedBox(
                     height: 16.h,
