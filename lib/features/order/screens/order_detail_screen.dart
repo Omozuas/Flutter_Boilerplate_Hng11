@@ -34,12 +34,13 @@ class OrderDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: context.orderDetails,
+        showDivider: false,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            13.h.sbH,
+            // 13.h.sbH,
             Padding(
               padding: EdgeInsets.only(
                   right: GlobalScreenSize.getScreenWidth(context) * 0.04,
@@ -55,7 +56,7 @@ class OrderDetailScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.r),
                       image: DecorationImage(
                         image: AssetImage(image),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -78,11 +79,13 @@ class OrderDetailScreen extends StatelessWidget {
                             onTap: () {},
                             borderColor: GlobalColors.greenTextColor,
                             text: context.paid,
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                0.029,
+                            // height: GlobalScreenSize.getScreenHeight(context) *
+                            //     0.029,
                             containerColor: GlobalColors.greenTextColor,
-                            width:
-                                GlobalScreenSize.getScreenWidth(context) * 0.13,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            // width:
+                            //     GlobalScreenSize.getScreenWidth(context) * 0.13,
                             textColor: GlobalColors.white),
                         10.w.sbHW,
                         CustomButton(
@@ -90,12 +93,14 @@ class OrderDetailScreen extends StatelessWidget {
                             borderColor: GlobalColors.lightBlueTextColor100
                                 .withOpacity(0.9),
                             text: context.packaing,
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                0.029,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            // height: GlobalScreenSize.getScreenHeight(context) *
+                            //     0.029,
                             containerColor: GlobalColors.lightBlueTextColor100
                                 .withAlpha(210),
-                            width:
-                                GlobalScreenSize.getScreenWidth(context) * 0.2,
+                            // width:
+                            //     GlobalScreenSize.getScreenWidth(context) * 0.2,
                             textColor: GlobalColors.lightBlueTextColor)
                       ],
                     ),

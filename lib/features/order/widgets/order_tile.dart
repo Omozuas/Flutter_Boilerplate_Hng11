@@ -18,7 +18,7 @@ class OrderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 16.0),
+      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 0),
       child: GestureDetector(
         onTap: () {
           context.push(AppRoute.orderDetails);
@@ -29,10 +29,10 @@ class OrderTile extends StatelessWidget {
               width: double.infinity,
               height: 107.0,
               padding: const EdgeInsets.only(
-                left: 20.0,
-                right: 11.0,
+                left: 10.0,
+                right: 10.0,
                 top: 10.0,
-                bottom: 8.0,
+                bottom: 13.0,
               ),
               decoration: BoxDecoration(
                 color: GlobalColors.white,
