@@ -16,5 +16,4 @@ class Order {
   final String deliveryTime;
   final String deliveryText;
   final Color deliveryColor;
-
 }
