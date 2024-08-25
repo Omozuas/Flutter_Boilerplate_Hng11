@@ -179,6 +179,7 @@
     "productAddedSuccessfullyMessage": "Product added successfully",
     "productNameLabel": "Product name",
     "productNamePlaceholder": "Please enter a product name",
+    "descriptionPlaceholder": "Please enter description",
     "productDescriptionPlaceholder": "Enter product description",
     "pricePlaceholder": "Please enter a price",
     "productQuantityPlaceholder": "Please enter the quantity of product",
@@ -260,7 +261,7 @@
       "atLeastOneNumber": "At least 1 number",
       "atLeastEightCharacters": "At least 8 characters",
       "confirmNewPassword": "Confirm new password",
-      "passwordDoNotMatch": "Passwords do not match",
+      "passwordDoNotMatch": "Password does not match",
       "update": "Update password",
       "deleteMember": "Delete Member",
       "deleteUser": "Are you sure you want to delete Chad Bosewick? All data will be permanently removed. This action cannot be undone.",
@@ -276,7 +277,7 @@
       "currentPlan": "Current Plan",
       "upgrade": "Upgrade",
 
-"editOrganization": "Edit Organization",
+"editOrganization": "Create Organization",
 
   "country1": "Germany",
   "country2": "Nigeria",

@@ -6,10 +6,11 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_p
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
+import '../../../utils/routing/app_router.dart';
 import '../widgets/product_listing_card_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,7 +26,7 @@ class ProductScreen extends ConsumerWidget {
         titleText: AppLocalizations.of(context)!.products,
         subTitle: AppLocalizations.of(context)!.viewAllProducts,
         onBack: () {
-          // context.go(AppRoute.home);
+          context.go(AppRoute.home);
         },
       ),
       body: Column(
