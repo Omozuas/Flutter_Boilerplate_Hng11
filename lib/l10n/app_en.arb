@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "signUp": "Sign up",
-  "createAnAccount": "Create an account logto get started with us.",
+  "createAnAccount": "Create an account to get started with us.",
   "companyName": "Company's Name",
   "enterCompanyName": "Enter company's name",
   "pleaseEnterName": "Please enter name",
@@ -458,6 +458,26 @@
     "standardPrice": "Standard Price",
     "quantity": "Quantity",
     "cancel": "Cancel",
-    "add": "Add"
+    "add": "Add",
+ "order": "Order",
+   "paid": "Paid",
+   "packaging": "Packaging",
+   "orderCreated": "Order Created",
+   "augustDate": "August 16th, 2024 at 10:30 pm",
+   "progress": "Progress",
+   "processing": "Processing",
+   "estimate": "Estimated Shipping Date: ",
+   "aug": "Aug 20, 2024 ",
+   "confirmShip": "Confirm Shipment",
+   "cusDetails": "Customer Details",
+   "james": "James Hung Ltd",
+   "shippingDetails": "Shipping Details",
+   "orderSummary": "Order Summary",
+   "subTotal": "Sub Total",
+   "dis": "Discount",
+   "shippingCost": "Shipping Cost",
+   "tot": "Total",
+   "resendInvoice": "Resend Invoice",
+   "orderDetails": "Order Details"
 }
 

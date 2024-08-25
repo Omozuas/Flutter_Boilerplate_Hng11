@@ -379,6 +379,26 @@
   "standardPrice": "Precio estándar",
   "quantity": "Cantidad",
   "cancel": "Cancelar",
-  "add": "Agregar"
+  "add": "Agregar",
+   "order": "Orden",
+    "paid": "Pagado",
+    "packaging": "Empaque",
+    "orderCreated": "Orden Creada",
+    "augustDate": "16 de agosto de 2024 a las 10:30 pm",
+    "progress": "Progreso",
+    "processing": "Procesando",
+    "estimate": "Fecha estimada de envío: ",
+    "aug": "20 de agosto de 2024 ",
+    "confirmShip": "Confirmar envío",
+    "cusDetails": "Detalles del cliente",
+    "james": "James Hung Ltd",
+    "shippingDetails": "Detalles del envío",
+    "orderSummary": "Resumen de la orden",
+    "subTotal": "Subtotal",
+    "dis": "Descuento",
+    "shippingCost": "Costo de envío",
+    "tot": "Total",
+    "resendInvoice": "Reenviar factura",
+    "orderDetails": "Detalles del pedido"
 }
 
