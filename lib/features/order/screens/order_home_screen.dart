@@ -3,8 +3,6 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.d
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
-import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
-import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
