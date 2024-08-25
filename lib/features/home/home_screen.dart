@@ -214,7 +214,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 borderColor: GlobalColors.orange,
                 text: context.addAProduct,
                 textStyle: CustomTextStyle.medium(
-                    color: Colors.white, fontSize: 14.sp),
+                    color: Colors.white, fontSize: 11.sp),
                 // height: 46.h,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -235,7 +235,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 borderColor: const Color(0xFFD3D3D3),
                 text: context.addAMember,
                 textStyle: CustomTextStyle.medium(
-                    color: Colors.black, fontSize: 14.sp),
+                    color: Colors.black, fontSize: 11.sp),
                 // height: 46.h,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
