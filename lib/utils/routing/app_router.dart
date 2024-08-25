@@ -11,6 +11,7 @@ import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_detail_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_by_catetory_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/product_details_screen.dart';
@@ -188,6 +189,9 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.productsByCategory,
         builder: (context, state, ref) {
+          ref
+              .read(productsInCategoryProvider.notifier)
+              .getProductsInCategory(state.uri.queryParameters['key']!);
           return const ProductsByCategory();
         },
       ),

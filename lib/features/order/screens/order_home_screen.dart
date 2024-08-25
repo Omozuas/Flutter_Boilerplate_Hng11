@@ -10,7 +10,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class OrderHomeScreen extends StatefulWidget {
   const OrderHomeScreen({super.key});
 
@@ -23,7 +22,9 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        onBack: () {},
+        onBack: () {
+          context.go(AppRoute.home);
+        },
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

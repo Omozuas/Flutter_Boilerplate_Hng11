@@ -10,7 +10,7 @@ import '../../../utils/Styles/text_styles.dart';
 import 'product_card.dart';
 
 class ProductCardListWidget extends StatelessWidget {
-   const ProductCardListWidget(
+  const ProductCardListWidget(
       {super.key, required this.categoryName, required this.products});
 
   final String categoryName;
@@ -31,7 +31,12 @@ class ProductCardListWidget extends StatelessWidget {
               ),
               TextButton(
                 // onPressed: () => context.push(AppRoute.productsByCategory),
-                onPressed: () {context.go(AppRoute.productsByCategory);},
+                onPressed: () {
+                  final url = Uri(
+                      path: AppRoute.productsByCategory,
+                      queryParameters: {'key': categoryName});
+                  context.push(url.toString());
+                },
                 child: Text(
                   'See More',
                   // '',

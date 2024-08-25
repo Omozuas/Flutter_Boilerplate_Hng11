@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_loader.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,72 +17,24 @@ import '../widgets/add_product_formfields.dart';
 import '../widgets/product_card.dart';
 
 class ProductsByCategory extends ConsumerWidget {
-   const ProductsByCategory({super.key});
+  const ProductsByCategory({super.key});
 
- @override
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Product> products = [
-     const Product(
-          name: 'Product 1',
-          status: 'In Stock',
-          category: 'P001',
-          price: 19,
-          image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
-          name: 'Product 1',
-          status: 'In Stock',
-          category: 'P001',
-          price: 19,
-          image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
-          name: 'Product 1',
-          status: 'In Stock',
-          category: 'P001',
-          price: 19,
-          image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
-          name: 'Product 1',
-          status: 'In Stock',
-          category: 'P001',
-          price: 5,
-          image: 'assets/images/png/product_listing/iphone.png'),
-          
-           const Product(
-          name: 'Product 1',
-          status: 'In Stock',
-          category: 'P001',
-          price: 200,
-          image: 'assets/images/png/product_listing/iphone.png'),
-    ];
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                context.push(AppRoute.addProduct);
-              },
-              backgroundColor: GlobalColors.orange,
-              shape:
-               const CircleBorder(),
-              child: Icon(
-                Icons.add,
-                color: GlobalColors.white,
-              ),
-            ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Padding(
             padding: EdgeInsets.only(
                 left: 10.w, top: 48.h, right: 24.w, bottom: 10.h),
             child: Row(
               children: [
                 IconButton(
-                    onPressed: () {},
-                    icon:
-                     const Icon(Icons.arrow_back_ios_new_rounded)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -98,11 +53,10 @@ class ProductsByCategory extends ConsumerWidget {
           SizedBox(
             height: 24.h,
           ),
-           Padding(
+          Padding(
             padding: EdgeInsets.only(left: 23.w, right: 23.w),
             child: CustomTextField(
-              suffixIcon:
-               const Icon(Icons.search),
+              suffixIcon: const Icon(Icons.search),
               hintText: 'Search Product',
               onChanged: (value) {
                 if (value != null) {
@@ -119,15 +73,29 @@ class ProductsByCategory extends ConsumerWidget {
             ),
             child: SizedBox(
               height: GlobalScreenSize.getScreenHeight(context),
-              child: Builder(builder: (context) {
+              child: Consumer(builder: (context, ref, child) {
+                final products = ref.watch(productsInCategoryProvider);
+                if (products.isEmpty) {
+                  return ListView(
+                    children: [
+                      (MediaQuery.sizeOf(context).height / 4).sbH,
+                      Center(
+                        child: Text(
+                          'Your products will show here',
+                          style: CustomTextStyles.productTextBody4Black,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  );
+                }
                 return ListView.separated(
-                  itemCount: 3,
+                  itemCount: products.length,
                   padding: EdgeInsets.zero,
                   itemBuilder: (txt, index) {
                     final product = products[index];
                     return Padding(
-                        padding:
-                         const EdgeInsets.only(bottom: 0),
+                        padding: const EdgeInsets.only(bottom: 0),
                         child: ProductCardWiget(
                           productNmae: '${product.name}',
                           status: '${product.status}'.capitalize,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/product_api.dart';
@@ -30,7 +31,30 @@ class ProductList extends _$ProductList {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
+class ProductsInCategory extends _$ProductsInCategory {
+  @override
+  List<Product> build() => [];
+
+  getProductsInCategory(String key) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        final data = ref.watch(productListProvider).whenData(
+          (value) {
+            return value.where((element) => element.category == key).toList();
+          },
+        );
+        data.whenData(
+          (value) {
+            state = value;
+          },
+        );
+      },
+    );
+  }
+}
+
+@Riverpod(keepAlive: true)
 AsyncValue<Map<String, List<Product>>> productsByCategory(
     ProductsByCategoryRef ref) {
   final queryString = ref.watch(searchInputProvider);
@@ -52,15 +76,18 @@ AsyncValue<Map<String, List<Product>>> productsByCategory(
       );
 }
 
-// final keyProvider = StateProvider<String>((ref) => '');
+@Riverpod(keepAlive: true)
+class Key extends _$Key {
+  @override
+  String build() {
+    return '';
+  }
 
-// @riverpod
-// AsyncValue<List<Product>> productsInCategory(ProductsInCategoryRef ref) {
-//   final key = ref.watch(keyProvider);
-//   return ref.watch(productsByCategoryProvider).whenData(
-//         (value) => value[key]!,
-//       );
-// }
+  void update(String queryString) {
+    log(queryString);
+    state = queryString;
+  }
+}
 
 Map<String, List<Product>> _getProductMapping(List<Product> products) {
   final allCategories = products.map((e) => e.category).toSet().toList();
@@ -73,7 +100,7 @@ Map<String, List<Product>> _getProductMapping(List<Product> products) {
   return categoryMap;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SearchInput extends _$SearchInput {
   @override
   String build() {

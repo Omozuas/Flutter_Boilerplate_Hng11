@@ -7,12 +7,12 @@ part of 'product.provider.dart';
 // **************************************************************************
 
 String _$productsByCategoryHash() =>
-    r'60b5db89ebbfdbc9ab53b94ef3809684fe29e717';
+    r'5ef918ade66907e52e7e9b67a28c016c7d7f6993';
 
 /// See also [productsByCategory].
 @ProviderFor(productsByCategory)
 final productsByCategoryProvider =
-    AutoDisposeProvider<AsyncValue<Map<String, List<Product>>>>.internal(
+    Provider<AsyncValue<Map<String, List<Product>>>>.internal(
   productsByCategory,
   name: r'productsByCategoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,8 +23,8 @@ final productsByCategoryProvider =
 );
 
 typedef ProductsByCategoryRef
-    = AutoDisposeProviderRef<AsyncValue<Map<String, List<Product>>>>;
-String _$productListHash() => r'2e85e9e4ed06128a248ba1412d1eda885eda0cc5';
+    = ProviderRef<AsyncValue<Map<String, List<Product>>>>;
+String _$productListHash() => r'c14b9767dcee72dbd31bcefc8c5376715236a026';
 
 /// See also [ProductList].
 @ProviderFor(ProductList)
@@ -39,12 +39,42 @@ final productListProvider =
 );
 
 typedef _$ProductList = AsyncNotifier<List<Product>>;
-String _$searchInputHash() => r'7fe9dd60db1196df18c6e98a988f3f13a88ccfc2';
+String _$productsInCategoryHash() =>
+    r'd21c7a81db664b5c90fc5983a9adce501f31889b';
+
+/// See also [ProductsInCategory].
+@ProviderFor(ProductsInCategory)
+final productsInCategoryProvider =
+    AutoDisposeNotifierProvider<ProductsInCategory, List<Product>>.internal(
+  ProductsInCategory.new,
+  name: r'productsInCategoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$productsInCategoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ProductsInCategory = AutoDisposeNotifier<List<Product>>;
+String _$keyHash() => r'6940647495834a9981e29c4d3b86e09167a4a814';
+
+/// See also [Key].
+@ProviderFor(Key)
+final keyProvider = NotifierProvider<Key, String>.internal(
+  Key.new,
+  name: r'keyProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$keyHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Key = Notifier<String>;
+String _$searchInputHash() => r'5e4ea6afce0fbea6f69942c25fef206b215fad47';
 
 /// See also [SearchInput].
 @ProviderFor(SearchInput)
-final searchInputProvider =
-    AutoDisposeNotifierProvider<SearchInput, String>.internal(
+final searchInputProvider = NotifierProvider<SearchInput, String>.internal(
   SearchInput.new,
   name: r'searchInputProvider',
   debugGetCreateSourceHash:
@@ -53,6 +83,6 @@ final searchInputProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$SearchInput = AutoDisposeNotifier<String>;
+typedef _$SearchInput = Notifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

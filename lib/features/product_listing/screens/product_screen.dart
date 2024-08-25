@@ -22,6 +22,7 @@ class ProductScreen extends ConsumerWidget {
   const ProductScreen({super.key});
 
   @override
+  
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
