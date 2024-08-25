@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_loader.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/Styles/text_styles.dart';
-import '../../../utils/global_colors.dart';
 import '../../../utils/global_size.dart';
-import '../../../utils/routing/app_router.dart';
-import '../models/product/product_model.dart';
 import '../provider/product.provider.dart';
 import '../widgets/add_product_formfields.dart';
 import '../widgets/product_card.dart';
@@ -21,35 +19,15 @@ class ProductsByCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final name = ref.watch(productsInCategoryProvider).name;
+
     return Scaffold(
+      appBar: CustomAppBar.simpleTitle(
+        titleText: name,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-                left: 10.w, top: 48.h, right: 24.w, bottom: 10.h),
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Breakfast',
-                      style: CustomTextStyles.producHeaderBlack,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            color: GlobalColors.diverColor,
-          ),
           SizedBox(
             height: 24.h,
           ),
@@ -60,7 +38,7 @@ class ProductsByCategory extends ConsumerWidget {
               hintText: 'Search Product',
               onChanged: (value) {
                 if (value != null) {
-                  ref.read(searchInputProvider.notifier).update(value);
+                  ref.read(searchInputCategoryProvider.notifier).update(value);
                 }
               },
             ),
@@ -74,14 +52,14 @@ class ProductsByCategory extends ConsumerWidget {
             child: SizedBox(
               height: GlobalScreenSize.getScreenHeight(context),
               child: Consumer(builder: (context, ref, child) {
-                final products = ref.watch(productsInCategoryProvider);
-                if (products.isEmpty) {
+                final data = ref.watch(productsInCategoryDataProvider);
+                if (data.isEmpty) {
                   return ListView(
                     children: [
                       (MediaQuery.sizeOf(context).height / 4).sbH,
                       Center(
                         child: Text(
-                          'Your products will show here',
+                          context.yourProductsWillShowHere,
                           style: CustomTextStyles.productTextBody4Black,
                           textAlign: TextAlign.center,
                         ),
@@ -90,18 +68,23 @@ class ProductsByCategory extends ConsumerWidget {
                   );
                 }
                 return ListView.separated(
-                  itemCount: products.length,
+                  itemCount: data.length,
                   padding: EdgeInsets.zero,
                   itemBuilder: (txt, index) {
-                    final product = products[index];
+                    final product = data[index];
                     return Padding(
-                        padding: const EdgeInsets.only(bottom: 0),
-                        child: ProductCardWiget(
-                          productNmae: '${product.name}',
-                          status: '${product.status}'.capitalize,
-                          category: '${product.category}',
-                          price: product.price ?? 0,
-                          image: product.image ?? '',
+                        padding: EdgeInsets.only(
+                            bottom: data.last == product ? 60 : 0),
+                        child: InkWell(
+                          onTap: () => context
+                              .push('${AppRoute.products}/${product.id!}'),
+                          child: ProductCardWiget(
+                            productNmae: '${product.name}',
+                            status: '${product.status}'.capitalize,
+                            category: '${product.category}',
+                            price: product.price ?? 0,
+                            image: product.image ?? '',
+                          ),
                         ));
                   },
                   separatorBuilder: (BuildContext context, int index) =>

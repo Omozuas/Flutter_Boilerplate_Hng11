@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/product_api.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product.provider.g.dart';
+part 'product.provider.freezed.dart';
 
 @Riverpod(keepAlive: true)
 class ProductList extends _$ProductList {
@@ -34,7 +36,7 @@ class ProductList extends _$ProductList {
 @Riverpod(keepAlive: true)
 class ProductsInCategory extends _$ProductsInCategory {
   @override
-  List<Product> build() => [];
+  CategoryData build() => CategoryData(name: '', products: []);
 
   getProductsInCategory(String key) {
     WidgetsBinding.instance.addPostFrameCallback(
@@ -46,12 +48,35 @@ class ProductsInCategory extends _$ProductsInCategory {
         );
         data.whenData(
           (value) {
-            state = value;
+            state = CategoryData(
+              name: key,
+              products: value,
+            );
           },
         );
       },
     );
   }
+}
+
+@freezed
+class CategoryData with _$CategoryData {
+  factory CategoryData({
+    required String name,
+    required List<Product> products,
+  }) = _CategoryData;
+}
+
+@Riverpod(keepAlive: true)
+List<Product> productsInCategoryData(ProductsInCategoryDataRef ref) {
+  final queryString = ref.watch(searchInputCategoryProvider);
+  final data = ref.watch(productsInCategoryProvider).products;
+  return data
+      .where(
+        (element) =>
+            element.name!.toLowerCase().contains(queryString.toLowerCase()),
+      )
+      .toList();
 }
 
 @Riverpod(keepAlive: true)
@@ -102,6 +127,19 @@ Map<String, List<Product>> _getProductMapping(List<Product> products) {
 
 @Riverpod(keepAlive: true)
 class SearchInput extends _$SearchInput {
+  @override
+  String build() {
+    return '';
+  }
+
+  void update(String queryString) {
+    log(queryString);
+    state = queryString;
+  }
+}
+
+@Riverpod(keepAlive: true)
+class SearchInputCategory extends _$SearchInputCategory {
   @override
   String build() {
     return '';
