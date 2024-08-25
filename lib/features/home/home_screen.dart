@@ -155,8 +155,7 @@ class HomeScreen extends ConsumerWidget {
                     RevenueCard(
                       title: StringManager.totalProducts,
                       image: AppSvgs.activeMembers,
-                      value: formatNumber(
-                          dashBoardStateProvider.productCount,
+                      value: formatNumber(dashBoardStateProvider.productCount,
                           decimalPlaces: 0),
                       details: "",
                     ),

@@ -3,10 +3,10 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.d
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
@@ -25,7 +25,7 @@ class ProductScreen extends ConsumerWidget {
         titleText: AppLocalizations.of(context)!.products,
         subTitle: AppLocalizations.of(context)!.viewAllProducts,
         onBack: () {
-          context.go(AppRoute.home);
+          // context.go(AppRoute.home);
         },
       ),
       body: Column(
@@ -74,23 +74,27 @@ class ProductScreen extends ConsumerWidget {
                       return data.when(
                         data: (data) {
                           final allKeys = data.keys.toList();
-                          return ListView.separated(
-                            itemCount: allKeys.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (txt, index) {
-                              final myKey = allKeys[index];
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: allKeys.last == myKey ? 60 : 0),
-                                child: ProductCardListWidget(
-                                  categoryName: allKeys[index],
-                                  products: data[myKey]!.reversed.toList(),
-                                ),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                              height: 24.h,
+                          return RefreshIndicator.adaptive(
+                            onRefresh: () =>
+                                ref.refresh(productListProvider.future),
+                            child: ListView.separated(
+                              itemCount: allKeys.length,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (txt, index) {
+                                final myKey = allKeys[index];
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: allKeys.last == myKey ? 60 : 0),
+                                  child: ProductCardListWidget(
+                                    categoryName: allKeys[index],
+                                    products: data[myKey]!.reversed.toList(),
+                                  ),
+                                );
+                              },
+                              separatorBuilder:
+                                  (BuildContext context, int index) => SizedBox(
+                                height: 24.h,
+                              ),
                             ),
                           );
                         },
@@ -106,6 +110,7 @@ class ProductScreen extends ConsumerWidget {
                 );
               },
               error: (Object error, StackTrace stackTrace) {
+                debugPrint(error.toString());
                 return Scaffold(
                   body: ListView(
                     children: [

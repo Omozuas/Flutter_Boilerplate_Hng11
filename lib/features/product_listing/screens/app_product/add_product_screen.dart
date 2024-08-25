@@ -190,7 +190,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                       children: [
                         ProductImage(getProductFiles: onFilesSelected),
                         SizedBox(
-                          height: 6.h,
+                          height: 12.h,
                         ),
                         SizedBox(
                           width: 379.w,
@@ -199,41 +199,25 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               compulsoryTitle(context.title),
-                              6.h.sbH,
+                              8.h.sbH,
                               ProductNameFormField(
                                 controller: productNameController,
                               )
-                              // Container(
-                              //   height: 40.h,
-                              //   width: 379.w,
-                              //   child: const Text('Product textfield here'),
-                              // )
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: 6.h,
+                          height: 12.h,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: 379.w,
-                              child: Text(
-                                context.category,
-                                style: CustomTextStyle.medium(
-                                  color: GlobalColors.dark2,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                            6.h.sbH,
+                            compulsoryTitle(context.category),
+                            8.h.sbH,
                             SizedBox(
                               height: 40.h,
                               width: 379.w,
-                              // child: const Text(
-                              //   'Category dropdown here',
-                              // ),
                               child: ProductCategory(
                                 onCategorySelected: onCategorySelected,
                               ),
@@ -241,7 +225,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 6.h,
+                          height: 12.h,
                         ),
                         SizedBox(
                           width: 379.w,
@@ -249,26 +233,11 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
-                                width: 379.w,
-                                child: Text(
-                                  context.description,
-                                  style: CustomTextStyle.medium(
-                                    color: GlobalColors.dark2,
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                              ),
-                              6.h.sbH,
-
+                              compulsoryTitle(context.description),
+                              8.h.sbH,
                               DescriptionFormField(
                                 controller: productDescriptionController,
                               ),
-                              // Container(
-                              //   height: 80.h,
-                              //   width: 379.w,
-                              //   child: const Text('description textfield here'),
-                              // ),
                               SizedBox(
                                 width: 379.w,
                                 child: Text(
@@ -283,7 +252,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 6.h,
+                          height: 12.h,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -292,21 +261,14 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle(context.standardPrice),
                             ),
-                            6.h.sbH,
+                            8.h.sbH,
                             ProductPriceFormField(
                               controller: productPriceController,
                             ),
-                            // Container(
-                            //   height: 40.h,
-                            //   width: 379.w,
-                            //   child: const Text(
-                            //     'Standard Price textfield here',
-                            //   ),
-                            // )
                           ],
                         ),
                         SizedBox(
-                          height: 6.h,
+                          height: 12.h,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -315,47 +277,15 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                               width: 379.w,
                               child: compulsoryTitle(context.quantity),
                             ),
-                            6.h.sbH,
-
+                            8.h.sbH,
                             ProductQuantityFormField(
                               controller: productQuantityController,
                             )
-                            // Container(
-                            //   height: 40.h,
-                            //   width: 379.w,
-                            //   child: const Text('Quantity textfield here'),
-                            // )
                           ],
                         ),
                         SizedBox(
-                          height: 100.h,
+                          height: 50.h,
                         ),
-                        // SizedBox(
-                        //   width: 379.w,
-                        //   height: 93.h,
-                        //   child: Column(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     children: [
-                        //       SizedBox(
-                        //         height: 20.h,
-                        //         width: 379.w,
-                        //         child: compulsoryTitle('Product Variations'),
-                        //       ),
-                        // ProductVariation(
-                        //   getProductList: (List<PlatformFile> files) {},
-                        // ),
-                        // Container(
-                        //   height: 67.h,
-                        //   width: 368.w,
-                        //   child: const Text(
-                        //       'Product Variations container list here'),
-                        // ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: 28.h,
-                        // ),
                       ],
                     ),
                   ),

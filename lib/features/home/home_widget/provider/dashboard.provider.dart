@@ -59,7 +59,8 @@ class DashBoardState {
   }
 }
 
-class DashBoardProvider extends StateNotifier<DashBoardState> with WidgetsBindingObserver {
+class DashBoardProvider extends StateNotifier<DashBoardState>
+    with WidgetsBindingObserver {
   final GetStorage _storageService = locator<GetStorage>();
   UserService userService = locator<UserService>();
 
@@ -115,7 +116,6 @@ class DashBoardProvider extends StateNotifier<DashBoardState> with WidgetsBindin
 
   List<SalesData> data = [];
 
-
   set setOverViewLoading(bool value) {
     state = state.copyWith(overViewLoading: value);
   }
@@ -166,8 +166,6 @@ class DashBoardProvider extends StateNotifier<DashBoardState> with WidgetsBindin
       } else {
         setAllProductCount = 0;
       }
-      debugPrint(res.length.toString());
-    
     } catch (e) {
       setAllProductCount = 0;
       rethrow;
@@ -307,7 +305,7 @@ class DashBoardProvider extends StateNotifier<DashBoardState> with WidgetsBindin
 }
 
 final dashBoardProvider =
-StateNotifierProvider<DashBoardProvider, DashBoardState>((ref) {
+    StateNotifierProvider<DashBoardProvider, DashBoardState>((ref) {
   return DashBoardProvider();
 });
 
