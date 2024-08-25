@@ -54,7 +54,8 @@ class MyApp extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           progressIndicatorTheme: ProgressIndicatorThemeData(
-            color: GlobalColors.orange, // Set the color for CircularProgressIndicator here
+            color: GlobalColors
+                .orange, // Set the color for CircularProgressIndicator here
           ),
           primaryColor: GlobalColors.orange, // gobal primary color
           textTheme: GoogleFonts.interTextTheme(),
@@ -78,7 +79,7 @@ class MyApp extends ConsumerWidget {
               color: Colors.grey[800], // Content text style
             ),
           ),
-         
+
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,
