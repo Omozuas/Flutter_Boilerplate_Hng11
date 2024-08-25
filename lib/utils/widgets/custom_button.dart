@@ -74,15 +74,18 @@ class CustomButton extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [icon!, 7.w.sbW],
+                          children: [icon!, 5.w.sbW],
                         ),
                       Text(
                         text,
                         textAlign: TextAlign.center,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
                         style: textStyle ??
                             TextStyle(
                                 fontSize: 14,
                                 color: textColor,
+                                overflow: TextOverflow.ellipsis,
                                 fontWeight: fontWeight ?? FontWeight.w500),
                       ),
                     ],
