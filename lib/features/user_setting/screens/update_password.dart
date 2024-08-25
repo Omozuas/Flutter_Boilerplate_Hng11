@@ -198,7 +198,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       hintText: context.enterCurrentPassword,
                       borderRadius: 8.r,
                       focusedBorderColor: GlobalColors.borderColor,
-                      validator: Validators.passwordValidator,
+                      validator: (v) => Validators.passwordValidator(v,context),
                       suffixIcon: IconButton(
                         icon: Icon(
                           currentPasswordVissible
@@ -224,7 +224,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       focusNode: newPasswordFocusNode,
                       obscureText: !newPasswordVissible,
                       borderRadius: 8.r,
-                      validator: Validators.passwordValidator,
+                      validator: (v) => Validators.passwordValidator(v,context),
                       onchanged: (String? value) {
                         checkPasswordStrength(value!);
                         validatePasswords();
@@ -359,7 +359,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       focusNode: confirmPasswordFocusNode,
                       controller: confirmPasswordController,
                       obscureText: !confPasswordVissible,
-                      validator: Validators.passwordValidator,
+                      validator: (v) => Validators.passwordValidator(v,context),
                       onchanged: (value) => validatePasswords(),
                       borderRadius: 8.r,
                       hintText:
