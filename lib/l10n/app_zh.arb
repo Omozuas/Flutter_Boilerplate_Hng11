@@ -161,8 +161,7 @@
   "inStockLabel": "有货",
   "productRatingsAndReviews": "产品评分和评论",
   "variationLabel": "变体",
-  "dashboard": "仪表盘",
-  "thisMonthSummary": "本月摘要",
+
   "totalRevenue": "总收入",
   "overview": "概述",
  
@@ -172,12 +171,12 @@
   "errorOccurred": "发生错误",
   "failedToAddProduct": "添加产品失败",
   "completeFormFill": "请完成表格填写",
-  "recentSalesTitle": "最近销售",
+ 
   "addProductButton": "添加产品",
   "productAddedSuccessfullyMessage": "产品添加成功",
   "productNameLabel": "产品名称",
   "productNamePlaceholder": "请输入产品名称",
-  "descriptionPlaceholder": "请输入描述",
+
   "productDescriptionPlaceholder": "输入产品描述",
   "pricePlaceholder": "请输入价格",
   "productQuantityPlaceholder": "请输入产品数量",

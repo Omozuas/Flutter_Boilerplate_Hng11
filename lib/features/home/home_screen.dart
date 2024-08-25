@@ -62,7 +62,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             authStateProvider.user!.avatarUrl == null
                 ? CircleAvatar(
                     radius: 28,
@@ -88,7 +87,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             fit: BoxFit.cover)),
                   ),
             6.sp.sbHW,
-
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,52 +208,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: CustomButton(
-                  onTap: () {
-                    context.go(AppRoute.products);
-                    context.push(AppRoute.addProduct);
-                  },
-                  borderColor: GlobalColors.orange,
-                  text: context.addAProduct,
-                  textStyle: CustomTextStyle.medium(
-                      color: Colors.white, fontSize: 14.sp),
-                  // height: 46.h,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  containerColor: GlobalColors.orange,
-                  // width: 151.w,
-                  textColor: Colors.white,
-                  icon: SvgPicture.asset(
-                    AppSvgs.products,
-                    height: 20.h,
-                    width: 20.w,
-                    // ignore: deprecated_member_use
-                    color: Colors.white,
-                  ),
+              CustomButton(
+                onTap: () {
+                  context.go(AppRoute.products);
+                  context.push(AppRoute.addProduct);
+                },
+                borderColor: GlobalColors.orange,
+                text: context.addAProduct,
+                textStyle: CustomTextStyle.medium(
+                    color: Colors.white, fontSize: 14.sp),
+                // height: 46.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                containerColor: GlobalColors.orange,
+                // width: 151.w,
+                textColor: Colors.white,
+                icon: SvgPicture.asset(
+                  AppSvgs.products,
+                  height: 20.h,
+                  width: 20.w,
+                  // ignore: deprecated_member_use
+                  color: Colors.white,
                 ),
               ),
               10.w.sbW,
-              Flexible(
-                child: CustomButton(
-                  onTap: () {},
-                  borderColor: const Color(0xFFD3D3D3),
-                  text: context.addAMember,
-                  textStyle: CustomTextStyle.medium(
-                      color: Colors.black, fontSize: 14.sp),
-                  // height: 46.h,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  containerColor: Colors.transparent,
-                  // width: 151.w,
-                  textColor: GlobalColors.black,
-                  icon: SvgPicture.asset(
-                    AppSvgs.addUser,
-                    height: 20.h,
-                    width: 20.w,
-                    // ignore: deprecated_member_use
-                    color: Colors.black,
-                  ),
+              CustomButton(
+                onTap: () {},
+                borderColor: const Color(0xFFD3D3D3),
+                text: context.addAMember,
+                textStyle: CustomTextStyle.medium(
+                    color: Colors.black, fontSize: 14.sp),
+                // height: 46.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                containerColor: Colors.transparent,
+                // width: 151.w,
+                textColor: GlobalColors.black,
+                icon: SvgPicture.asset(
+                  AppSvgs.addUser,
+                  height: 20.h,
+                  width: 20.w,
+                  // ignore: deprecated_member_use
+                  color: Colors.black,
                 ),
               ),
             ],

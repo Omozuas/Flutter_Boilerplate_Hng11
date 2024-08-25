@@ -166,7 +166,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                       width: 7.w,
                     ),
                     SizedBox(
-                      height: 39.w,
+                      height: 45.w,
                       width: 280.w,
                       child: asyncLinkValue.when(
                         data: (inviteLink) => Scrollbar(
@@ -272,9 +272,9 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 24.h,
-              ),
+              // SizedBox(
+              //   height: 24.h,
+              // ),
               SizedBox(
                 height: 5.h,
               ),

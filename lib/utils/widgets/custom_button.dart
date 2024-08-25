@@ -39,58 +39,55 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(6.r),
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          width: width,
-          height: height,
-          padding: padding,
-          decoration: BoxDecoration(
-              color: containerColor == Colors.transparent
-                  ? Colors.transparent
-                  : containerColor.withOpacity(loading ? 0.5 : 1),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(6.r),
-              border: Border.all(
-                  width: 1,
-                  color: borderColors ??
-                      borderColor.withOpacity(loading ? 0.5 : 1))),
-          child: Center(
-            child: loading
-                ? SizedBox(
-                    width: 16.w,
-                    height: 16.w,
-                    child: CircularProgressIndicator.adaptive(
-                      strokeWidth: 2.w,
-                    ),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      if (icon != null)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [icon!, 5.w.sbW],
-                        ),
-                      Text(
-                        text,
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        style: textStyle ??
-                            TextStyle(
-                                fontSize: 14,
-                                color: textColor,
-                                overflow: TextOverflow.ellipsis,
-                                fontWeight: fontWeight ?? FontWeight.w500),
-                      ),
-                    ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        padding: padding,
+        decoration: BoxDecoration(
+            color: containerColor == Colors.transparent
+                ? Colors.transparent
+                : containerColor.withOpacity(loading ? 0.5 : 1),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(6.r),
+            border: Border.all(
+                width: 1,
+                color: borderColors ??
+                    borderColor.withOpacity(loading ? 0.5 : 1))),
+        child: Center(
+          child: loading
+              ? SizedBox(
+                  width: 16.w,
+                  height: 16.w,
+                  child: CircularProgressIndicator.adaptive(
+                    strokeWidth: 2.w,
                   ),
-          ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (icon != null)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [icon!, 5.w.sbW],
+                      ),
+                    Text(
+                      text,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: textStyle ??
+                          TextStyle(
+                              fontSize: 14,
+                              color: textColor,
+                              overflow: TextOverflow.ellipsis,
+                              fontWeight: fontWeight ?? FontWeight.w500),
+                    ),
+                  ],
+                ),
         ),
       ),
     );
