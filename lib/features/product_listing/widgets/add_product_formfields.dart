@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/global_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
   final Function(String?)? onChanged;
   final int? maxLength;
@@ -34,6 +36,7 @@ class CustomTextField extends StatelessWidget {
     this.showCounter = true,
     this.onChanged,
     this.prefixIcon,
+    this.inputFormatters,
   });
 
   @override
@@ -78,6 +81,7 @@ class CustomTextField extends StatelessWidget {
               keyboardType: keyboardType,
               validator: validator,
               maxLength: maxLength,
+              inputFormatters: inputFormatters,
               onChanged: onChanged,
               maxLines: maxLines,
               expands: maxLines == null,
@@ -144,12 +148,27 @@ class ProductPriceFormField extends StatelessWidget {
       child: CustomTextField(
         controller: controller,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          DecimalTextInputFormatter(decimalRange: 2),
+        ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '\$ 0.00',
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return AppLocalizations.of(context)!.pricePlaceholder;
+            return 'Please enter a value';
           }
+
+          try {
+            double parsedValue = double.parse(value);
+
+            if (parsedValue <= 0) {
+              return 'Please enter a value greater than 0';
+            }
+          } catch (e) {
+            return 'Please enter a valid number';
+          }
+
           return null;
         },
       ),
@@ -178,5 +197,42 @@ class ProductQuantityFormField extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class DecimalTextInputFormatter extends TextInputFormatter {
+  final int decimalRange;
+
+  DecimalTextInputFormatter({required this.decimalRange})
+      : assert(decimalRange >= 0);
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String text = newValue.text;
+
+    if (text == '') {
+      return newValue;
+    }
+
+    // Only allow a single decimal point
+    if (text.contains('.') && text.split('.').length > 2) {
+      return oldValue;
+    }
+
+    // Limit the number of decimal places
+    if (text.contains('.') &&
+        text.substring(text.indexOf('.') + 1).length > decimalRange) {
+      return oldValue;
+    }
+
+    // Ensure the value is a valid double
+    try {
+      double.parse(text);
+    } catch (e) {
+      return oldValue;
+    }
+
+    return newValue;
   }
 }

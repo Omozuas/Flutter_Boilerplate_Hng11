@@ -25,7 +25,8 @@ class NotificationState {
     return NotificationState(
         overViewLoading: overViewLoading ?? this.overViewLoading,
         trendLoading: trendLoading ?? this.trendLoading,
-        unReadNotificationCount: unReadNotificationCount ?? this.unReadNotificationCount,
+        unReadNotificationCount:
+            unReadNotificationCount ?? this.unReadNotificationCount,
         notifications: notifications ?? []);
   }
 }
@@ -38,7 +39,10 @@ final notificationProvider =
 class NotificationProvider extends StateNotifier<NotificationState> {
   NotificationProvider()
       : super(NotificationState(
-            overViewLoading: false, trendLoading: false, unReadNotificationCount: 0, notifications: [])) {
+            overViewLoading: false,
+            trendLoading: false,
+            unReadNotificationCount: 0,
+            notifications: [])) {
     getNotifications();
   }
 
@@ -64,7 +68,8 @@ class NotificationProvider extends StateNotifier<NotificationState> {
       List<Notifications> res = await NotificationApi().getAllNotifications();
       if (res.isNotEmpty) {
         setNotifications = res;
-        List<Notifications> unread = state.notifications.where((e)=> e.isRead == false).toList();
+        List<Notifications> unread =
+            state.notifications.where((e) => e.isRead == false).toList();
         setUnreadNotificationCount = unread.length;
       }
       setTrendLoading = true;

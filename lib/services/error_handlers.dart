@@ -52,10 +52,9 @@ class ErrorHandlers {
     log('serverE1${response.data}');
 
     if (response.data != null) {
-      try{
+      try {
         showSnackBar(response.data['message']);
-      }
-      catch(e){
+      } catch (e) {
         showSnackBar('Seems something happened');
       }
     } else {
