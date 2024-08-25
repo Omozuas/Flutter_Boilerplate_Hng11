@@ -75,7 +75,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                     }
 
                     return InkWell(
-                      onTap: () =>  context.push(AppRoute.order);,
+                      onTap: () =>  context.push(AppRoute.ordersDetail);,
                       child: OrderTile(
                         order: Order(
                           number: 99012,
