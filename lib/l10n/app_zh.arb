@@ -424,6 +424,28 @@
      "dis": "折扣",
      "shippingCost": "运费",
      "tot": "总计",
-     "resendInvoice": "重新发送发票"
+     "resendInvoice": "重新发送发票",
+
+   "descriptionPlaceholder": "请输入描述",
+     "welcomeBack": "欢迎回来！",
+     "discover": "发现",
+     "searchProduct": "搜索产品",
+     "product": "产品",
+     "noProductAvailable": "没有可用的产品。",
+     "plusTwentyThree": "比上个月多 23 个",
+     "plusFourFromLastMonth": "比上个月多 4 个",
+     "plusTwoFromLastMonth": "比上个月多 2 个",
+     "unknownCustomer": "未知客户",
+     "noEmailProvided": "未提供电子邮件",
+     "dashboard": "仪表板",
+     "thisMonthSummary": "本月摘要",
+     "noSales": "本月还没有销售",
+     "recentSalesTitle": "最近销售",
+     "addAMember": "添加成员",
+     "totalProducts": "总产品",
+     "subscriptions": "订阅",
+     "totalMembers": "总会员",
+     "selectIsRequired": "请选择一个有效的值"
+
 }
 
