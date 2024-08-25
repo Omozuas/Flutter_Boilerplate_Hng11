@@ -60,8 +60,6 @@ class ErrorHandlers {
     } else {
       showSnackBar('Seems something happened');
     }
-
-    log('serverE2${response.toString()}');
     switch (response.statusCode) {
       case 400:
       case 401:
