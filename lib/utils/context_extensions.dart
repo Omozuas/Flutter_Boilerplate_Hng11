@@ -9,47 +9,46 @@ extension Translation on BuildContext {
 // String get login => 'Login';
 // In your UI, use this : context.login (importing this context_extension file);
 
-  String get login => 'Login';
 
-  String get order => 'Order';
+  String get order => text.order;
 
-  String get paid => 'Paid';
+  String get paid => text.paid;
 
-  String get packaing => 'Packaging';
+  String get packaing => text.packaging;
 
-  String get orderCreated => 'Order Created';
+  String get orderCreated => text.orderCreated;
 
-  String get augustDate => 'August 16th, 2024 at 10:30 pm';
+  String get augustDate => text.augustDate;
 
-  String get progress => "Progress";
+  String get progress => text.progress;
 
-  String get processing => 'Processing';
+  String get processing => text.processing;
 
-  String get estimate => 'Estimated Shipping Date: ';
+  String get estimate => text.estimate;
 
-  String get aug => 'Aug 20, 2024 ';
+  String get aug => text.aug;
 
-  String get confirmShip => "Confirm Shipment";
+  String get confirmShip => text.confirmShip;
 
-  String get cusDetails => "Customer Details";
+  String get cusDetails => text.cusDetails;
 
-  String get james => "James Hung Ltd";
+  String get james => text.james;
 
-  String get shippingDetails => "Shipping Details";
+  String get shippingDetails => text.shippingDetails;
 
-  String get orderSumarry => "Order Summary";
+  String get orderSumarry => text.orderSummary;
 
-  String get subTotal => "Sub Total";
+  String get subTotal => text.subTotal;
 
-  String get dis => "Discount";
+  String get dis => text.dis;
 
-  String get shippingCost => "Shipping Cost";
+  String get shippingCost => text.shippingCost;
 
-  String get tot => "Total";
+  String get tot => text.tot;
 
-  String get resendInvoice => "Resend Invoice";
+  String get resendInvoice => text.resendInvoice;
 
-  String get orderDetails => "Order Details";
+  String get orderDetails => text.orderDetails;
 
   String get signUpText => text.signUpText;
 

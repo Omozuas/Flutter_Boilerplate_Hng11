@@ -101,7 +101,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 48.h,
                   ),
                   Text(
-                    context.login,
+                    AppLocalizations.of(context)!.login,
                     style: CustomTextStyle.semiBold(
                       fontSize: 24.sp,
                       color: GlobalColors.iconColor,
