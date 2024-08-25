@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+
 
 import '../../../gen/assets.gen.dart';
 
@@ -49,7 +51,7 @@ class OrderTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Order#: ${order.number}',
+                        '${context.orderNumberText} ${order.number}',
                         style: GoogleFonts.inter(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,

@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
-
-// import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-// import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
-
-// import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +25,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Orders',
+              context.orderText,
               style: GoogleFonts.inter(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
@@ -59,13 +55,13 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                     Color deliveryColor;
 
                     if (index < 2) {
-                      deliveryText = 'Estimated Delivery on 26th Aug';
+                      deliveryText = context.deliveryText;
                       deliveryColor = GlobalColors.verified; // Green color
                     } else {
                       bool isEstimatedDelivery = (index - 2) % 2 == 1;
                       deliveryText = isEstimatedDelivery
-                          ? 'Estimated Delivery on 26th Aug'
-                          : 'Delivered on 19th Aug';
+                          ? context.deliveryText
+                          : context.deliveryDateText;
                       deliveryColor = isEstimatedDelivery
                           ? GlobalColors.verified // Green color
                           : GlobalColors.redColor; // Red color
