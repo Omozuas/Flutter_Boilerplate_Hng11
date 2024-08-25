@@ -272,7 +272,6 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
       final res = _storageService.read("allProducts");
       if (res != null) {
         setAllProductCount = getProductListFromJsontoString(res).length;
-        print(res);
       }
     } catch (e) {
       log(e.toString());
