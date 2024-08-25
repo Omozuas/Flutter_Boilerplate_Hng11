@@ -81,6 +81,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       backgroundColor: Colors.white,
       appBar: CustomAppBar.simpleTitle(
         titleText: context.editProfile,
+        showDivider: false,
       ),
       body: SingleChildScrollView(
         child: Form(
