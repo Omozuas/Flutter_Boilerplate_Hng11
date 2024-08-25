@@ -8,6 +8,7 @@ import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_scre
 import 'package:flutter_boilerplate_hng11/features/auth/screen/verification_success.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/main_view/main_view.dart';
+import 'package:flutter_boilerplate_hng11/features/order/screens/order_detail_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/order/screens/order_home_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/add_product_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_by_catetory_screen.dart';
@@ -226,7 +227,7 @@ class AppRouter {
                 return const OrderHomeScreen();
               },
             ),
-          ]),
+          ]),  
           StatefulShellBranch(routes: [
             ConsumerGoRoute(
               path: AppRoute.settings,
