@@ -71,7 +71,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     final settingsApi = ref.read(settingsApiProvider);
     if (profile == null) {
       state = state.copyWith(
-        profileUpdater: AsyncError('An error occurred', StackTrace.current),
+        profileUpdater: AsyncError('', StackTrace.current),
       );
       return;
     }
@@ -106,7 +106,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     final user = state.user.sureValue;
     if (user == null) {
       state = state.copyWith(
-        notificationFetch: AsyncError('An error occurred', StackTrace.current),
+        notificationFetch: AsyncError('', StackTrace.current),
       );
       return;
     }
@@ -153,7 +153,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
     final user = state.user.sureValue;
     if (user == null) {
       state = state.copyWith(
-        fetchSubcription: AsyncError('An error occurred', StackTrace.current),
+        fetchSubcription: AsyncError('', StackTrace.current),
       );
       return;
     }
@@ -210,7 +210,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
 
     if (inviteLink == null) {
       state = state.copyWith(
-        inviteLink: AsyncError('An error occurred', StackTrace.current),
+        inviteLink: AsyncError('', StackTrace.current),
       );
       return;
     }
@@ -229,8 +229,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
 
     if (userOrgId == null) {
       state = state.copyWith(
-        organisationMembers:
-            AsyncError('An error occurred', StackTrace.current),
+        organisationMembers: AsyncError('', StackTrace.current),
       );
       return;
     }
@@ -257,8 +256,7 @@ class ProfileProvider extends AutoDisposeNotifier<ProfileProviderStates> {
 
     if (email == null) {
       state = state.copyWith(
-        initiateSubscription:
-            AsyncError('An error occurred', StackTrace.current),
+        initiateSubscription: AsyncError('', StackTrace.current),
       );
       return;
     }
