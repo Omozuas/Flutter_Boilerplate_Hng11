@@ -88,8 +88,8 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(organisations: state.organisations..add(org));
   }
 
-  Future<void> registerSingleUser(
-      Map<String, dynamic> data, BuildContext context) async {
+  Future<void> registerSingleUser(Map<String, dynamic> data,
+      BuildContext context, List<TextEditingController> controllers) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
@@ -106,6 +106,9 @@ class AuthProvider extends StateNotifier<AuthState> {
             [];
 
         if (context.mounted) {
+          for (var c in controllers) {
+            c.clear;
+          }
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
           _userService.storeToken(userRegData.accessToken ?? "");
@@ -196,11 +199,11 @@ class AuthProvider extends StateNotifier<AuthState> {
   }
 
   Future<void> login(Map<String, dynamic> data, BuildContext context,
+      List<TextEditingController> controllers,
       {bool fromLoginScreen = true}) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().loginUser(data);
-
       if (res != null) {
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
@@ -211,6 +214,9 @@ class AuthProvider extends StateNotifier<AuthState> {
                 .toList() ??
             [];
         if (context.mounted) {
+          for (var c in controllers) {
+            c.clear;
+          }
           context.go(AppRoute.home);
           box.write('accessToken', userRegData.accessToken);
           if (fromLoginScreen) {
