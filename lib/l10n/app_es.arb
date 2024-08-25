@@ -400,6 +400,25 @@
     "shippingCost": "Costo de envío",
     "tot": "Total",
     "resendInvoice": "Reenviar factura",
-    "orderDetails": "Detalles del pedido"
+    "orderDetails": "Detalles del pedido",
+   "descriptionPlaceholder": "Por favor ingrese la descripción",
+    "welcomeBack": "¡Bienvenido de nuevo!",
+    "discover": "Descubrir",
+    "searchProduct": "Buscar producto",
+    "product": "Productos",
+    "noProductAvailable": "No hay productos disponibles.",
+    "plusTwentyThree": "+ 23 desde el mes pasado",
+    "plusFourFromLastMonth": "+ 4 desde el mes pasado",
+    "plusTwoFromLastMonth": "+ 2 desde el mes pasado",
+    "unknownCustomer": "Cliente desconocido",
+    "noEmailProvided": "No se proporcionó correo electrónico",
+    "dashboard": "Tablero",
+    "thisMonthSummary": "Resumen de este mes",
+    "noSales": "No hay ventas este mes",
+    "recentSalesTitle": "Ventas recientes",
+    "addAMember": "Agregar un miembro",
+    "totalProducts": "Total de productos",
+    "subscriptions": "Suscripciones",
+    "totalMembers": "Total de miembros"
 }
 
