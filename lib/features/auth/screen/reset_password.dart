@@ -85,7 +85,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     controller: _newPasswordController,
                     obscureText: true,
                     hintText: localizations.enterNewPassword,
-                    validator: Validators.passwordValidator,
+                    validator: (v) => Validators.passwordValidator(v,context),
                   ),
                   SizedBox(height: 16.sp),
                   PasswordTextField(

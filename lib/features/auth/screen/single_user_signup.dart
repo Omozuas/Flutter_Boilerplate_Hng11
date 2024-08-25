@@ -126,14 +126,14 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       controller: SingleUserSignUpScreen.firstNameController,
                       hintText: localizations.enterFirstName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.nameValidator,
+                      validator: (v) => Validators.nameValidator(v,context),
                     ),
                     CustomTextField(
                       label: localizations.lastName,
                       controller: lastNameController,
                       hintText: localizations.enterLastName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.nameValidator,
+                      validator: (v) => Validators.nameValidator(v,context),
                     ),
                     CustomTextField(
                       label: localizations.email,
@@ -148,7 +148,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       hintText: localizations.createPassword,
                       obscureText: true,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.passwordValidator,
+                      validator: (v) => Validators.passwordValidator(v,context),
                     ),
                     SizedBox(height: 10.h),
                     CustomButton(
