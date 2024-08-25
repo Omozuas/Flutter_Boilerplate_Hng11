@@ -43,11 +43,14 @@ class HomeScreen extends ConsumerWidget {
             Container(
               height: 50.h,
               width: 50.w,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: NetworkImage(
-                          "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
+                      image: authStateProvider.user!.avatarUrl == null
+                          ? const NetworkImage(
+                              "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg")
+                          : NetworkImage(
+                              "${authStateProvider.user!.avatarUrl}"),
                       fit: BoxFit.cover)),
             ),
             8.sp.sbHW,
