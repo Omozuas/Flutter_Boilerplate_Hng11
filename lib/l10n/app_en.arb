@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "signUp": "Sign up",
-  "createAnAccount": "Create an account logto get started with us.",
+  "createAnAccount": "Create an account to get started with us.",
   "companyName": "Company's Name",
   "enterCompanyName": "Enter company's name",
   "pleaseEnterName": "Please enter name",
@@ -275,7 +275,7 @@
       "currentPlan": "Current Plan",
       "upgrade": "Upgrade",
 
-"editOrganization": "Edit Organization",
+"editOrganization": "Create Organization",
 
   "country1": "Germany",
   "country2": "Nigeria",
