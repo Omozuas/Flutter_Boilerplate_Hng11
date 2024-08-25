@@ -147,7 +147,7 @@ class LogOutDialog extends StatelessWidget {
                 const SizedBox(width: 8),
                 CustomButton(
                   onTap: onTap,
-                  borderColor: Colors.transparent,
+                  borderColor: GlobalColors.white,
                   text: AppLocalizations.of(context)!.logOut,
                   height: 40,
                   containerColor: GlobalColors.red,
