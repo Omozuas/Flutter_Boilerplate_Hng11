@@ -61,6 +61,7 @@ extension Translation on BuildContext {
   String get quantity => 'Quantity';
   String get cancel => 'Cancel';
   String get add => 'Add';
+  String get noResultFound => 'No Result Found';
 
   String get order => 'Order';
   String get paid => 'Paid';
