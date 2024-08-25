@@ -118,9 +118,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    localizations.verificationCodeTitle, // Localized title
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 24),
+                    localizations.verificationCodeTitle,  // Localized title
+                    style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(height: 16.h),
                   RichText(
@@ -221,8 +220,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       child: TextButton(
                         onPressed: _handleChangeEmail,
                         child: Text(
-                          localizations.changeEmailText, // Localized text
-                          style: const TextStyle(
+                          localizations.changeEmailText,  // Localized text
+                          style:const TextStyle(
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
                           ),
