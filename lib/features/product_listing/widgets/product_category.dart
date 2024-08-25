@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/custom_text_style.dart';
 
+
 class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key, required this.onCategorySelected});
   final Function(String) onCategorySelected;
