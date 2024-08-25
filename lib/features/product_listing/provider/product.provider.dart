@@ -20,6 +20,14 @@ class ProductList extends _$ProductList {
         .watch(productApiProvider)
         .getAllProducts(orgId: org.organisationId!);
   }
+
+  void addProduct(Product product) {
+    if (state.value != null) {
+      final currentData = List<Product>.from(state.value!);
+      currentData.add(product);
+      state = AsyncValue.data(currentData);
+    }
+  }
 }
 
 @riverpod
