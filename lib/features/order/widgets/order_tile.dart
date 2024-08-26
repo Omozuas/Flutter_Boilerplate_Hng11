@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
-
 class OrderTile extends StatelessWidget {
   const OrderTile({super.key, required this.order});
 
@@ -59,6 +58,7 @@ class OrderTile extends StatelessWidget {
                           fontSize: 12.sp,
                           color: Colors.grey,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -68,11 +68,13 @@ class OrderTile extends StatelessWidget {
                         'assets/images/svg/product_listing/delivery.svg',
                       ),
                       SizedBox(width: 6.w),
-                      Text(
-                        order.deliveryText,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: order.deliveryColor,
+                      Expanded(
+                        child: Text(
+                          order.deliveryText,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: order.deliveryColor,
+                          ),
                         ),
                       ),
                     ],

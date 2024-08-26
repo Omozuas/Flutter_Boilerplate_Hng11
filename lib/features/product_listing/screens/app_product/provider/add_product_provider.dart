@@ -81,7 +81,8 @@ class AddProductProvider extends _$AddProductProvider {
 
       if (product != null) {
         log('ADD PRODUCT RESULT $product');
-        ref.read(productListProvider.notifier).addProduct(product);
+        // ignore: unused_result
+        ref.refresh(productListProvider.future);
         // ignore: avoid_manual_providers_as_generated_provider_dependency
         ref.read(dashBoardProvider.notifier).getAllOrgProducts();
       }

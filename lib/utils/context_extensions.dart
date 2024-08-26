@@ -193,4 +193,5 @@ extension Translation on BuildContext {
   String get deliveryTime => '7:41 PM';
   String get orderNumberText => 'Order#:';
   String get orderText => 'Orders';
+  String get yourProductsWillShowHere => 'Your products will show here';
 }

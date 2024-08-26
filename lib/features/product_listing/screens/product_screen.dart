@@ -10,7 +10,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
@@ -58,7 +57,7 @@ class ProductScreen extends ConsumerWidget {
                       (MediaQuery.sizeOf(context).height / 4).sbH,
                       Center(
                         child: Text(
-                          'Your products will show here',
+                          context.yourProductsWillShowHere,
                           style: CustomTextStyles.productTextBody4Black,
                           textAlign: TextAlign.center,
                         ),
