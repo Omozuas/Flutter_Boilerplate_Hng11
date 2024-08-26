@@ -15,10 +15,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
- 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncUser = ref.watch(profileProvider).user;
@@ -49,9 +48,7 @@ class SettingsScreen extends ConsumerWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ProfileAvatar(
-                            user: locator<UserService>().user,
-                          ),
+                          const ProfileAvatar(),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Padding(
