@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
@@ -244,6 +245,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       final pUpdater = ref.read(profileProvider).profileUpdater;
       if (pUpdater.hasError) throw pUpdater.error!;
       if (!mounted) return;
+      ref.read(authProvider.notifier).getUser();
       await showDialog(
         context: context,
         builder: (ctx) => ProfileDialog(
