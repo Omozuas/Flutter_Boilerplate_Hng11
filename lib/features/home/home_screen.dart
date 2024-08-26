@@ -6,8 +6,11 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
-import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
-import 'package:flutter_boilerplate_hng11/services/user.service.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
+
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -19,19 +22,34 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
-import '../user_setting/widgets/profile_avatar.dart';
+// import '../user_setting/widgets/profile_avatar.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 //import 'home_widget/widgets/chart_loader.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.watch(profileProvider.notifier).getUser();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
+    final asyncUser = ref.watch(profileProvider).user;
 
     return Scaffold(
       appBar: AppBar(
@@ -41,11 +59,31 @@ class HomeScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ProfileAvatar(
-              size: 50.w,
-              user: locator<UserService>().user,
-            ),
-            8.sp.sbHW,
+            authStateProvider.user!.avatarUrl == null
+                ? CircleAvatar(
+                    radius: 28,
+                    child: Center(
+                      child: Text(
+                        // ignore: unnecessary_null_comparison
+                        asyncUser.value == null
+                            ? 'AN'
+                            : initials(asyncUser.value),
+                        style: const TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: 50.h,
+                    width: 50.w,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "${authStateProvider.user!.avatarUrl}"),
+                            fit: BoxFit.cover)),
+                  ),
+            6.sp.sbHW,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,14 +206,16 @@ class HomeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                onTap: ()=> dashBoardProviderNotifier.goToProduct(context),
+                onTap: () => dashBoardProviderNotifier.goToProduct(context),
                 borderColor: GlobalColors.orange,
                 text: context.addAProduct,
                 textStyle: CustomTextStyle.medium(
-                    color: Colors.white, fontSize: 14.sp),
-                height: 46.h,
+                    color: Colors.white, fontSize: 11.sp),
+                // height: 46.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 containerColor: GlobalColors.orange,
-                width: 151.w,
+                // width: 151.w,
                 textColor: Colors.white,
                 icon: SvgPicture.asset(
                   AppSvgs.products,
@@ -185,16 +225,18 @@ class HomeScreen extends ConsumerWidget {
                   color: Colors.white,
                 ),
               ),
-              16.w.sbW,
+              10.w.sbW,
               CustomButton(
                 onTap: () {},
                 borderColor: const Color(0xFFD3D3D3),
                 text: context.addAMember,
                 textStyle: CustomTextStyle.medium(
-                    color: Colors.black, fontSize: 14.sp),
-                height: 46.h,
+                    color: Colors.black, fontSize: 11.sp),
+                // height: 46.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 containerColor: Colors.transparent,
-                width: 151.w,
+                // width: 151.w,
                 textColor: GlobalColors.black,
                 icon: SvgPicture.asset(
                   AppSvgs.addUser,
@@ -283,6 +325,20 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  String initials([UserModel? user]) {
+    try {
+      var initials = 'AN';
+      if (user == null) return initials;
+      if (user.fullname.isEmpty) return initials;
+
+      final u = user.fullname.split(' ');
+      if (u.length == 1) return u.first;
+      return '${u[0][0]}${u[1][0]}';
+    } catch (e) {
+      return 'AN';
+    }
   }
 }
 

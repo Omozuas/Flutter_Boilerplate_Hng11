@@ -3,6 +3,7 @@ import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -118,7 +119,7 @@ class LogOutDialog extends StatelessWidget {
               ),
               textAlign: TextAlign.left,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text(
               context.logoutConfirmation,
               style: GoogleFonts.inter(
@@ -139,9 +140,11 @@ class LogOutDialog extends StatelessWidget {
                   },
                   borderColor: GlobalColors.lightGray,
                   text: AppLocalizations.of(context)!.cancel,
-                  height: 40,
+                  // height: 40,
                   containerColor: GlobalColors.white,
-                  width: 80,
+                  // width: 80,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   textColor: GlobalColors.darkTwo,
                 ),
                 const SizedBox(width: 8),
@@ -149,9 +152,11 @@ class LogOutDialog extends StatelessWidget {
                   onTap: onTap,
                   borderColor: GlobalColors.white,
                   text: AppLocalizations.of(context)!.logOut,
-                  height: 40,
+                  // height: 40,
                   containerColor: GlobalColors.red,
-                  width: 80,
+                  // width: 80,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   textColor: GlobalColors.white,
                 ),
               ],

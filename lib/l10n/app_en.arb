@@ -47,7 +47,7 @@
   "registrationFailed": "Registration failed. Please try again.",
   "cartScreen": "CartScreen",
   "myCart": "My Cart",
-  "home": "Home",
+
   "products": "Products",
   "cart": "Cart",
 
@@ -124,10 +124,10 @@
     "bio": "Bio",
     "typeYourMessageHere": "Type your message here",
     "connectSocials": "Connect Socials",
-    "add": "Add",
+ 
     "save": "Save",
     "link": "Link",
-    "cancel": "Cancel",
+   
     "select": "Select",
     "maximumOf64Character": "Maximum of 64 characters",
     "settingsSavedSuccessfully": "Settings have been saved successfully.",
@@ -163,8 +163,7 @@
     "inStockLabel": "In stock",
     "productRatingsAndReviews": "Product Ratings and Reviews",
     "variationLabel": "Variation",
-    "dashboard": "Dashboard",
-    "thisMonthSummary": "This Month's Summary",
+    
     "totalRevenue": "Total Revenue",
     "overview": "Overview",
   
@@ -174,19 +173,19 @@
     "errorOccurred": "An error occurred",
     "failedToAddProduct": "Failed to add product",
     "completeFormFill": "Please complete form fill",
-    "recentSalesTitle": "Recent Sales",
+
     "addProductButton": "Add a product",
     "productAddedSuccessfullyMessage": "Product added successfully",
     "productNameLabel": "Product name",
     "productNamePlaceholder": "Please enter a product name",
-    "descriptionPlaceholder": "Please enter description",
+
     "productDescriptionPlaceholder": "Enter product description",
     "pricePlaceholder": "Please enter a price",
     "productQuantityPlaceholder": "Please enter the quantity of product",
     "filterByStatusLabel": "Filter by status",
     "filterByPriceRangeLabel": "Filter by Price Range",
     "resetFiltersButton": "Reset Filters",
-    "seeMore":"See More",
+
     "uploadNewButton": "Upload New",
      "acceptsImagesVideosOr3DModels": "Accepts images, videos or 3D models",
       "deleteMemberButton": "Delete Member",
@@ -230,7 +229,7 @@
       "threeActiveMember": "3 active members",
       "profileName": "Chad Bosewick",
       "profileEmail": "ChadBosew@gmail.com",
-      "anErrorOccured": "An error occurred while fetching the current user details",
+
       "organisationalSettings": "Organizational Settings",
       "logOut": "Log Out",
       "addXLink": "Add X link",
@@ -270,7 +269,7 @@
       "takeAPicture": "Take a Picture",
       "pickFromGallery": "Pick from gallery",
       "recentTransactions": "Recent Transactions",
-      "paid": "Paid",
+   
       "invoice": "Invoice",
       "download": "Download",
       "total": "Total",
@@ -438,7 +437,7 @@
     "passwordOneNumber": "Password must contain at least one number",
     "productDescription": "Product Description",
     "addAProduct": "Add a Product",
-    "orderDetails": "Order Details",
+  
      "noResultFound": "No result found",
       "continueWithGoogle": "Continue with Google",
       "description": "Description",

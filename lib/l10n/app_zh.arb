@@ -161,8 +161,7 @@
   "inStockLabel": "有货",
   "productRatingsAndReviews": "产品评分和评论",
   "variationLabel": "变体",
-  "dashboard": "仪表盘",
-  "thisMonthSummary": "本月摘要",
+
   "totalRevenue": "总收入",
   "overview": "概述",
  
@@ -172,12 +171,12 @@
   "errorOccurred": "发生错误",
   "failedToAddProduct": "添加产品失败",
   "completeFormFill": "请完成表格填写",
-  "recentSalesTitle": "最近销售",
+ 
   "addProductButton": "添加产品",
   "productAddedSuccessfullyMessage": "产品添加成功",
   "productNameLabel": "产品名称",
   "productNamePlaceholder": "请输入产品名称",
-  "descriptionPlaceholder": "请输入描述",
+
   "productDescriptionPlaceholder": "输入产品描述",
   "pricePlaceholder": "请输入价格",
   "productQuantityPlaceholder": "请输入产品数量",
@@ -219,7 +218,7 @@
    "takeAPicture": "拍照",
    "pickFromGallery": "从图库中选择",
    "recentTransactions": "最近的交易",
-   "paid": "已支付",
+
    "invoice": "发票",
    "download": "下载",
    "total": "总计",
@@ -392,7 +391,7 @@
     "description": "描述",
     "inStock": "有库存",
   "orders": "订单",
-   "home": "首页",
+
    "logoutConfirmation": "您确定要退出此设备吗？",
  "addProductFailure": "添加产品失败：",
    "productFormIncomplete": "请完成表单填写",
@@ -405,8 +404,7 @@
    "descriptionFieldHint": "最多72个字符",
    "standardPrice": "标准价格",
    "quantity": "数量",
-   "cancel": "取消",
-   "add": "添加",
+  
      "paid": "已支付",
      "packaging": "包装",
      "orderCreated": "订单已创建",
