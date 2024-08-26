@@ -145,8 +145,7 @@ extension Translation on BuildContext {
 
   String get add => text.add;
 
-  String get somethingWentWrong =>
-      'Something went wrong. \nPlease pull to refresh';
+
   String get descriptionPlaceholder => text.descriptionPlaceholder;
 
   String get welcomeBack => text.welcomeBack;
@@ -192,6 +191,8 @@ extension Translation on BuildContext {
   String get deliveryDate => '20-Aug-2024';
   String get deliveryTime => '7:41 PM';
   String get orderNumberText => 'Order#:';
-  String get orderText => 'Orders';
   String get yourProductsWillShowHere => 'Your products will show here';
+  String get somethingWentWrong =>
+      'Something went wrong. \nPlease pull to refresh';
 }
+
