@@ -10,7 +10,7 @@ import '../provider/profile_provider.dart';
 import 'custom_network_image.dart';
 
 class ProfileAvatar extends ConsumerWidget {
-  const ProfileAvatar({super.key, this.radius= 40.0, this.pickedImage});
+  const ProfileAvatar({super.key, this.radius = 40.0, this.pickedImage});
   final XFile? pickedImage;
   final double radius;
 

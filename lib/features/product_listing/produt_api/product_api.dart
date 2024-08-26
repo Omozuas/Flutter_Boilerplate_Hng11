@@ -18,16 +18,27 @@ ProductApi productApi(ProductApiRef ref) {
 class ProductApi implements ProductsApiContract {
   //Inject the DioProvider Dependency
   DioProvider dioProvider = locator<DioProvider>();
-
   @override
-  Future createProduct({required String orgId, required Map product}) async {
+  Future<Product?> createProduct({
+    required String orgId,
+    required Map product,
+  }) async {
     try {
       log(product.toString());
-      return dioProvider.post(
-          productsForOrganisationEndpoint(
-            orgId: orgId,
-          ),
-          data: product);
+
+      final result = await dioProvider.post(
+        productsForOrganisationEndpoint(orgId: orgId),
+        data: product,
+      );
+
+      if (result == null) return null;
+
+      final data = result.data['data'] ?? result.data;
+      try {
+        return Product.fromJson(data);
+      } catch (e) {
+        return null;
+      }
     } catch (e) {
       rethrow;
     }
