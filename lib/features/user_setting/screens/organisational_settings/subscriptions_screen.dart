@@ -31,8 +31,7 @@ class _SubscriptionsScreenState extends ConsumerState<SubscriptionsScreen> {
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(profileProvider).fetchSubcription.isLoading;
-    final currentPlan =
-        ref.watch(profileProvider).fetchSubcription.sureValue?.plan;
+    final currentPlan = ref.watch(profileProvider).fetchSubcription.sureValue;
 
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
