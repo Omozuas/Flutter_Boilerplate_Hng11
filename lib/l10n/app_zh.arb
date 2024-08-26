@@ -443,7 +443,14 @@
      "totalProducts": "总产品",
      "subscriptions": "订阅",
      "totalMembers": "总会员",
-     "selectIsRequired": "请选择一个有效的值"
+     "selectIsRequired": "请选择一个有效的值",
+  "deliveryText": "预计送达 8 月 26 日",
+  "deliveryDateText": "已于 8 月 19 日送达",
+  "deliveryDate": "2024-08-20",
+  "deliveryTime": "下午 7:41",
+  "orderNumberText": "订单编号#：",
+  "yourProductsWillShowHere": "您的产品将显示在这里",
+  "somethingWentWrong": "出了点问题。\n请下拉刷新"
 
 }
 

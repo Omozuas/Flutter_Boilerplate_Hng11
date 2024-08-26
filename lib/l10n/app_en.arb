@@ -497,6 +497,13 @@
      "totalProducts": "Total Products",
      "subscriptions": "Subscriptions",
      "totalMembers": "Total Members",
-    "selectIsRequired": "Select a valid value"
+    "selectIsRequired": "Select a valid value",
+  "deliveryText": "Estimated Delivery on 26th Aug",
+  "deliveryDateText": "Delivered on 19th Aug",
+  "deliveryDate": "20-Aug-2024",
+  "deliveryTime": "7:41 PM",
+  "orderNumberText": "Order#:",
+  "yourProductsWillShowHere": "Your products will show here",
+  "somethingWentWrong": "Something went wrong. \nPlease pull to refresh"
 }
 
