@@ -6,8 +6,11 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
-import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
-import 'package:flutter_boilerplate_hng11/services/user.service.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
+
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -19,7 +22,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
-import '../user_setting/widgets/profile_avatar.dart';
+// import '../user_setting/widgets/profile_avatar.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 //import 'home_widget/widgets/chart_loader.dart';
@@ -56,11 +59,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ProfileAvatar(
-              size: 50.w,
-              user: locator<UserService>().user,
-            ),
-            8.sp.sbHW,
+            authStateProvider.user!.avatarUrl == null
+                ? CircleAvatar(
+                    radius: 28,
+                    child: Center(
+                      child: Text(
+                        // ignore: unnecessary_null_comparison
+                        asyncUser.value == null
+                            ? 'AN'
+                            : initials(asyncUser.value),
+                        style: const TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: 50.h,
+                    width: 50.w,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "${authStateProvider.user!.avatarUrl}"),
+                            fit: BoxFit.cover)),
+                  ),
+            6.sp.sbHW,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +206,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                onTap: ()=> dashBoardProviderNotifier.goToProduct(context),
+                onTap: () => dashBoardProviderNotifier.goToProduct(context),
                 borderColor: GlobalColors.orange,
                 text: context.addAProduct,
                 textStyle: CustomTextStyle.medium(
