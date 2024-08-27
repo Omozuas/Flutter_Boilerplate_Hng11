@@ -419,7 +419,14 @@
     "totalProducts": "Total de productos",
     "subscriptions": "Suscripciones",
     "totalMembers": "Total de miembros",
-    "selectIsRequired": "Seleccione un valor válido"
+    "selectIsRequired": "Seleccione un valor válido",
+  "deliveryText": "Entrega estimada el 26 de agosto",
+  "deliveryDateText": "Entregado el 19 de agosto",
+  "deliveryDate": "20-ago-2024",
+  "deliveryTime": "7:41 PM",
+  "orderNumberText": "Pedido#:",
+  "yourProductsWillShowHere": "Tus productos se mostrarán aquí",
+  "somethingWentWrong": "Algo salió mal. \nPor favor, tire para actualizar"
 
 }
 
