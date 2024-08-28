@@ -44,10 +44,10 @@ dependencies:
   intl: any
 
   http_parser: ^4.0.2
-  flutter_inappwebview: ^6.0.0
-
   badges: ^3.1.2
   share_plus: ^10.0.2
+  jiffy: ^6.3.1
+  flutter_inappwebview: ^6.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -57,9 +57,9 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
-  #flutter_gen: ^5.6.0
-  #flutter_gen_runner:   // I had to comment out this as it is conflicting with l10n for localization
+  # flutter_lints: ^4.0.0
+  # flutter_gen: ^5.6.0
+  flutter_gen_runner:  
   flutter_launcher_icons: ^0.13.1
   build_runner: ^2.4.11
   json_serializable: ^6.8.0
@@ -67,6 +67,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
+  flutter_lints: ^4.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"

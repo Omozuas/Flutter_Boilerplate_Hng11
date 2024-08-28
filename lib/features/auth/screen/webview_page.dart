@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
+ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-import '../widgets/custom_app_bar.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 class WebviewPage extends StatefulWidget {
   const WebviewPage({super.key, required this.url, required this.appBarTitle});
@@ -54,11 +52,10 @@ class _WebviewPageState extends State<WebviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final localizations = AppLocalizations.of(context)!;  // Access localization
 
     return Scaffold(
-        appBar: CustomAppBar.simpleTitle(
-          titleText: widget.appBarTitle,
+        appBar: AppBar(
+          title: Text(widget.appBarTitle),
         ),
         body: SafeArea(
             child: Column(children: <Widget>[

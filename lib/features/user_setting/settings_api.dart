@@ -63,7 +63,7 @@ class SettingsApi {
       );
       final response = await dio.multipartPut(
         '/profile/picture',
-        data: {'DisplayPhoto': multipart},
+        data: {'display_photo': multipart},
         options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
       return response?.data['data']['avatar_url'] ?? '';
@@ -144,8 +144,7 @@ class SettingsApi {
 
   Future<String> generateInviteLink({required String orgId}) async {
     try {
-      final response =
-      await dio.get('organisations/$orgId/invites');
+      final response = await dio.get('organisations/$orgId/invites');
       return response?.data['data']['invite_link'];
     } catch (e) {
       rethrow;

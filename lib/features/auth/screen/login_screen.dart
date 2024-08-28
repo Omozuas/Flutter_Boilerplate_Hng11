@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
-
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -52,6 +52,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void dispose() {
     _tapGestureRecognizerForTermsAndConditions.dispose();
     _tapGestureRecognizerForPrivacy.dispose();
+
     super.dispose();
   }
 
@@ -101,7 +102,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     height: 48.h,
                   ),
                   Text(
-                    context.login,
+                    AppLocalizations.of(context)!.login,
                     style: CustomTextStyle.semiBold(
                       fontSize: 24.sp,
                       color: GlobalColors.iconColor,
@@ -156,9 +157,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Google",
+                                  context.continueWithGoogle,
                                   style: CustomTextStyle.medium(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       color: GlobalColors.dark2),
                                 )
                               ],
@@ -190,7 +191,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     controller: LoginScreen._emailController,
                     keyboardType: TextInputType.emailAddress,
                     hintText: AppLocalizations.of(context)!.enterEmail,
-                    validator: (v) => Validators.emailValidator(v),
+                    validator: (v) => Validators.emailValidator(v, context),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                   ),
                   SizedBox(
                     height: 16.h,
@@ -199,6 +203,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     label: AppLocalizations.of(context)!.password,
                     controller: LoginScreen._passwordController,
                     hintText: AppLocalizations.of(context)!.password,
+                    validator: (v) => Validators.passwordValidator(v, context),
                   ),
                   SizedBox(
                     height: 16.h,
@@ -364,12 +369,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  void _handleLoginAccount(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).login({
-
-      'email': LoginScreen._emailController.text.trim().toLowerCase(),
-      'password': LoginScreen._passwordController.text,
-    }, context);
+  void _handleLoginAccount(WidgetRef ref, BuildContext context) async {
+    await ref.read(authProvider.notifier).login(
+        {
+          'email': LoginScreen._emailController.text.trim().toLowerCase(),
+          'password': LoginScreen._passwordController.text,
+        },
+        context,
+        [LoginScreen._emailController, LoginScreen._passwordController]);
   }
 }
 

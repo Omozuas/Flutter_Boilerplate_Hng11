@@ -30,12 +30,14 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-.pubspec.lock
-/ios/
-/linux/
+.fvm/
+pubspec.lock
+ios/
+linux/
 
 # Symbolication related
 app.*.symbols
+linux
 
 # Obfuscation related
 app.*.map.json
@@ -47,3 +49,5 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+pubspec.lock
+macos

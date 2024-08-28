@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,12 +19,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canPop = ModalRoute.of(context)?.canPop ?? false;
+
     return Padding(
       padding: const EdgeInsets.only(top: 4.0),
       child: AppBar(
-        titleSpacing: 0,
+        titleSpacing: !canPop && onBack == null ? 24.w : 0,
         leading: _buildBackButton(context),
         title: title,
+        centerTitle: false,
         bottom: showDivider
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(
@@ -55,7 +59,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(singleLine ? kToolbarHeight : 75.h);
+  Size get preferredSize =>
+      Size.fromHeight(singleLine ? kToolbarHeight.h : 75.h);
 
   const CustomAppBar.empty({super.key})
       : singleLine = true,
@@ -76,23 +81,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   static Widget? _buildTitle(
       String? titleText, String? subTitle, VoidCallback? onBack) {
     if (titleText == null) return null;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          titleText,
-          style: CustomTextStyles.titleTextBlack,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-        ),
-        if (subTitle != null) ...[
+    return Padding(
+      padding: const EdgeInsets.only(left: .0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (subTitle == null) ...[
+            2.h.sbH,
+          ],
           Text(
-            subTitle,
-            style: CustomTextStyles.productSmallBodyTextBlack,
+            titleText,
+            style: CustomTextStyles.titleTextBlack,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
+          if (subTitle != null) ...[
+            Text(
+              subTitle,
+              style: CustomTextStyles.productSmallBodyTextBlack,
+            ),
+          ],
         ],
-      ],
+      ),
     );
   }
 }

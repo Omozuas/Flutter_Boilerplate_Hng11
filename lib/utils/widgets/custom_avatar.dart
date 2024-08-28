@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members_profile.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,5 +73,19 @@ class CustomAvatar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String initials([UserModel? user]) {
+    try {
+      var initials = 'AN';
+      if (user == null) return initials;
+      if (user.fullname.isEmpty) return initials;
+
+      final u = user.fullname.split(' ');
+      if (u.length == 1) return u.first;
+      return '${u[0][0]}${u[1][0]}';
+    } catch (e) {
+      return 'AN';
+    }
   }
 }

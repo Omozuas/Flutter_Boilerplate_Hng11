@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../utils/context_extensions.dart';
+import '../../../../utils/custom_text_style.dart';
+import '../../../../utils/global_colors.dart';
 import '../../../../utils/widgets/custom_snackbar.dart';
-import '../../models/custom_api_error.dart';
 import '../../models/subscription_model.dart';
 import '../../provider/profile_provider.dart';
 import '../../widgets/dialogs/reusable_dialog_content.dart';
@@ -70,10 +70,16 @@ class _UpgradePlanCheckoutScreenState
         ref.watch(profileProvider).initiateSubscription.isLoading;
 
     return Scaffold(
-      appBar: CustomAppBar.simpleTitle(
-        titleText: isCurrentPlan
-            ? context.text.currentPlan
-            : widget.plan.getUpgradeToText(context),
+      appBar: AppBar(
+        title: Text(
+          isCurrentPlan
+              ? context.text.currentPlan
+              : widget.plan.getUpgradeToText(context),
+          style: CustomTextStyle.semiBold(
+            fontSize: 16,
+            color: GlobalColors.iconColor,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -99,7 +105,11 @@ class _UpgradePlanCheckoutScreenState
                                 .read(profileProvider)
                                 .initiateSubscription
                                 .sureValue;
-                            if (uri == null) return;
+                            if (uri == null) {
+                              if (!context.mounted) return;
+                              showSnackBar(context.text.errorOccurred);
+                              return;
+                            }
                             await browser.open(
                               url: WebUri(uri),
                               settings: ChromeSafariBrowserSettings(
@@ -109,8 +119,6 @@ class _UpgradePlanCheckoutScreenState
                                 barCollapsingEnabled: true,
                               ),
                             );
-                          } on CustomApiError catch (e) {
-                            showSnackBar(e.message);
                           } catch (e) {
                             if (!context.mounted) return;
                             showSnackBar(

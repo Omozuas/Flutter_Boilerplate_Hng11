@@ -18,6 +18,34 @@ class CustomTextStyles {
       fontSize: 20.sp, color: GlobalColors.white, fontWeight: FontWeight.w700);
   static TextStyle bannerbodyTextOrange = TextStyle(
       fontSize: 12.sp, color: GlobalColors.orange, fontWeight: FontWeight.w400);
+  static TextStyle bannerbodyTextBlack = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.black200Color,
+      fontWeight: FontWeight.w500);
+  static TextStyle bannerbodyTextBlack500 = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.black200Color,
+      fontWeight: FontWeight.w400);
+  static TextStyle bannerbodyTextBlack200 = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.mutedTextColor,
+      fontWeight: FontWeight.w600);
+  static TextStyle bannerbodyTextBlack300 = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.mutedTextColor,
+      fontWeight: FontWeight.w500);
+  static TextStyle bannerbodyTextBlack400 = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.mutedTextColor,
+      fontWeight: FontWeight.w400);
+  static TextStyle bannerbodyTextgrey = TextStyle(
+      fontSize: 12.sp, color: GlobalColors.grays, fontWeight: FontWeight.w400);
+  static TextStyle bannerbodyTextBlack100 = TextStyle(
+      fontSize: 12.sp, color: GlobalColors.black, fontWeight: FontWeight.w400);
+  static TextStyle bannerbodyTextBlue100 = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.blueTextColor,
+      fontWeight: FontWeight.w500);
   static TextStyle titleTextBlack = TextStyle(
       fontSize: 18.sp,
       color: GlobalColors.blackColor,
@@ -26,6 +54,14 @@ class CustomTextStyles {
       fontSize: 16.sp,
       color: GlobalColors.gray200Color,
       fontWeight: FontWeight.w500);
+  static TextStyle productTextTitleMute = TextStyle(
+      fontSize: 18.sp,
+      color: GlobalColors.mutedTextColor,
+      fontWeight: FontWeight.w500);
+  static TextStyle productTextTitleBlue = TextStyle(
+      fontSize: 18.sp,
+      color: GlobalColors.blueTextColor,
+      fontWeight: FontWeight.w500);
   static TextStyle productTextBodyBlack = TextStyle(
       fontSize: 14.sp,
       color: GlobalColors.gray300Color,
@@ -33,6 +69,10 @@ class CustomTextStyles {
   static TextStyle productTextBody2Black = TextStyle(
       fontSize: 16.sp,
       color: GlobalColors.black200Color,
+      fontWeight: FontWeight.w700);
+  static TextStyle productTextBody2Black100 = TextStyle(
+      fontSize: 16.sp,
+      color: GlobalColors.black300Color,
       fontWeight: FontWeight.w700);
   static TextStyle productTextBody3Black = TextStyle(
       fontSize: 14.sp,
@@ -50,6 +90,10 @@ class CustomTextStyles {
   static TextStyle productSmallBodyTextBlack = TextStyle(
       fontSize: 12.sp,
       color: GlobalColors.darkOne,
+      fontWeight: FontWeight.w400);
+  static TextStyle productSmallBodyTextMuted = TextStyle(
+      fontSize: 12.sp,
+      color: GlobalColors.mutedTextColor,
       fontWeight: FontWeight.w400);
 }
 

@@ -6,27 +6,47 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/customer_lis
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/model/dashboard_model.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card.dart';
-import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
+
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
+
+//import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../utils/app_images.dart';
 import '../../utils/custom_text_style.dart';
+// import '../user_setting/widgets/profile_avatar.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 
 //import 'home_widget/widgets/chart_loader.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.watch(profileProvider.notifier).getUser();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
@@ -39,23 +59,14 @@ class HomeScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 50.h,
-              width: 50.w,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://img.freepik.com/free-photo/cartoon-character-with-handbag-sunglasses_71767-99.jpg"),
-                      fit: BoxFit.cover)),
-            ),
-            8.sp.sbHW,
+            const ProfileAvatar(radius: 26),
+            7.sp.sbW,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  StringManager.welcomeBackDashboard,
+                  context.welcomeBack,
                   style: CustomTextStyles.productSmallBodyTextBlack
                       .copyWith(color: const Color(0xFF71717A)),
                 ),
@@ -92,11 +103,11 @@ class HomeScreen extends ConsumerWidget {
         padding: 16.w.padH,
         children: [
           16.h.sbH,
-          Text(StringManager.dashboard,
+          Text(context.dashboard,
               style:
                   CustomTextStyle.bold(fontSize: 24.sp, color: Colors.black)),
           Text(
-            StringManager.thisMonthSummary,
+            context.thisMonthSummary,
             style: TextStyle(
               fontSize: 16.sp,
               color: GlobalColors.gray600Color,
@@ -110,7 +121,7 @@ class HomeScreen extends ConsumerWidget {
                 Row(
                   children: [
                     RevenueCard(
-                      title: StringManager.totalMembers,
+                      title: context.totalMembers,
                       image: AppSvgs.people,
                       value: dashBoardStateProvider.dashBoardData.revenue ==
                               null
@@ -118,30 +129,31 @@ class HomeScreen extends ConsumerWidget {
                           : formatNumber(
                               dashBoardStateProvider.dashBoardData.revenue ?? 0,
                               decimalPlaces: 0),
-                      details: "+ 23 from last month",
+                      details: context.plusTwentyThree,
                     ),
                     18.w.sbW,
                     RevenueCard(
-                      title: StringManager.totalProducts,
-                      image: AppSvgs.totalProducts,
-                      value:
-                          dashBoardStateProvider.dashBoardData.subscriptions ==
-                                  null
-                              ? "0"
-                              : formatNumber(
-                                  dashBoardStateProvider
-                                          .dashBoardData.subscriptions ??
-                                      0,
-                                  decimalPlaces: 0),
-                      details: "+ 4 from last month",
-                    ),
+                        title: context.totalProducts,
+                        image: AppSvgs.totalProducts,
+                        value: dashBoardStateProvider
+                                    .dashBoardData.subscriptions ==
+                                null
+                            ? "0"
+                            : formatNumber(
+                                dashBoardStateProvider
+                                        .dashBoardData.subscriptions ??
+                                    0,
+                                decimalPlaces: 0),
+                        details: context.plusFourFromLastMonth
+                        //"+ 4 from last month",
+                        ),
                   ],
                 ),
                 16.w.sbH,
                 Row(
                   children: [
                     RevenueCard(
-                      title: StringManager.subscriptions,
+                      title: context.subscriptions,
                       image: AppSvgs.allSub,
                       value: dashBoardStateProvider.dashBoardData.revenue ==
                               null
@@ -149,22 +161,16 @@ class HomeScreen extends ConsumerWidget {
                           : formatNumber(
                               dashBoardStateProvider.dashBoardData.revenue ?? 0,
                               decimalPlaces: 0),
-                      details: "+ 2 from last month",
+                      details: context.plusTwoFromLastMonth,
+                      //"+ 2 from last month",
                     ),
                     18.w.sbW,
                     RevenueCard(
-                      title: StringManager.totalProducts,
+                      title: context.totalProducts,
                       image: AppSvgs.activeMembers,
-                      value:
-                          dashBoardStateProvider.dashBoardData.subscriptions ==
-                                  null
-                              ? "0"
-                              : formatNumber(
-                                  dashBoardStateProvider
-                                          .dashBoardData.subscriptions ??
-                                      0,
-                                  decimalPlaces: 0),
-                      details: "+ 23 from last month",
+                      value: formatNumber(dashBoardStateProvider.productCount,
+                          decimalPlaces: 0),
+                      details: "",
                     ),
                   ],
                 ),
@@ -177,17 +183,16 @@ class HomeScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                onTap: () {
-                  context.go(AppRoute.products);
-                  context.push(AppRoute.addProduct);
-                },
+                onTap: () => dashBoardProviderNotifier.goToProduct(context),
                 borderColor: GlobalColors.orange,
-                text: StringManager.addAProduct,
+                text: context.addAProduct,
                 textStyle: CustomTextStyle.medium(
-                    color: Colors.white, fontSize: 14.sp),
-                height: 46.h,
+                    color: Colors.white, fontSize: 11.sp),
+                // height: 46.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 containerColor: GlobalColors.orange,
-                width: 151.w,
+                // width: 151.w,
                 textColor: Colors.white,
                 icon: SvgPicture.asset(
                   AppSvgs.products,
@@ -197,16 +202,18 @@ class HomeScreen extends ConsumerWidget {
                   color: Colors.white,
                 ),
               ),
-              16.w.sbW,
+              10.w.sbW,
               CustomButton(
                 onTap: () {},
-                borderColor: const Color(0xFFF6F6F6),
-                text: StringManager.addAMember,
+                borderColor: const Color(0xFFD3D3D3),
+                text: context.addAMember,
                 textStyle: CustomTextStyle.medium(
-                    color: Colors.black, fontSize: 14.sp),
-                height: 46.h,
+                    color: Colors.black, fontSize: 11.sp),
+                // height: 46.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 containerColor: Colors.transparent,
-                width: 151.w,
+                // width: 151.w,
                 textColor: GlobalColors.black,
                 icon: SvgPicture.asset(
                   AppSvgs.addUser,
@@ -234,7 +241,7 @@ class HomeScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      StringManager.recentSalesTitle,
+                      context.recentSalesTitle,
                       style: CustomTextStyle.bold(
                           fontSize: 16.sp, color: GlobalColors.black),
                     ),
@@ -243,7 +250,7 @@ class HomeScreen extends ConsumerWidget {
                       child: Padding(
                         padding: 8.h.padV,
                         child: Text(
-                          StringManager.seeMore,
+                          context.seeMore,
                           style: CustomTextStyle.regular(
                             fontSize: 14.sp,
                           ),
@@ -264,7 +271,7 @@ class HomeScreen extends ConsumerWidget {
                     width: width(context),
                     child: Center(
                       child: Text(
-                        StringManager.noSales,
+                        context.noSales,
                         style: CustomTextStyle.regular(
                                 color: const Color(0xFF98A2B3), fontSize: 16.sp)
                             .copyWith(
@@ -283,8 +290,8 @@ class HomeScreen extends ConsumerWidget {
                               .dashBoardData.monthSales?[index] ??
                           MonthSale();
                       return CustomerListTile(
-                        customerName: 'Unknown Customer',
-                        email: 'No Email Provided',
+                        customerName: context.unknownCustomer,
+                        email: context.noEmailProvided,
                         amount: monthlySale.amount ?? 0,
                       );
                     }),
@@ -296,13 +303,28 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
+
+  String initials([UserModel? user]) {
+    try {
+      var initials = 'AN';
+      if (user == null) return initials;
+      if (user.fullname.isEmpty) return initials;
+
+      final u = user.fullname.split(' ');
+      if (u.length == 1) return u.first;
+      return '${u[0][0]}${u[1][0]}';
+    } catch (e) {
+      return 'AN';
+    }
+  }
 }
 
+// The SalesData class represents the data for each bar in the chart
 class SalesData {
-  final String month;
-  final int veryGood;
-  final int good;
-  final int poor;
-
   SalesData(this.month, this.veryGood, this.good, this.poor);
+
+  final String month;
+  final double veryGood;
+  final double good;
+  final double poor;
 }
