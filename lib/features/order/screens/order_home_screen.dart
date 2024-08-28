@@ -30,7 +30,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.orderText,
+              context.order,
               style: GoogleFonts.inter(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,

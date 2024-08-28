@@ -35,6 +35,7 @@ class OrderDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: context.orderDetails,
+        showDivider: false,
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
   final Color containerColor, borderColor, textColor;
   final String text;
   final Color? borderColors;
-  final double? width, height;
+  final double? width, height, fontsize;
   final bool loading;
   final Widget? icon;
   final FontWeight? fontWeight;
@@ -31,6 +31,7 @@ class CustomButton extends StatelessWidget {
       this.width,
       this.padding,
       required this.textColor,
+      this.fontsize,
       this.loading = false,
       this.fontWeight,
       this.borderColors,
@@ -78,11 +79,14 @@ class CustomButton extends StatelessWidget {
                         ),
                       Text(
                         text,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: textStyle ??
                             TextStyle(
-                                fontSize: 14,
+                                fontSize: fontsize ?? 14,
                                 color: textColor,
+                                overflow: TextOverflow.ellipsis,
                                 fontWeight: fontWeight ?? FontWeight.w500),
                       ),
                     ],
