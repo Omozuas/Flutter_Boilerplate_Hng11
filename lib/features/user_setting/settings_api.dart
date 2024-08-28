@@ -63,7 +63,7 @@ class SettingsApi {
       );
       final response = await dio.multipartPut(
         '/profile/picture',
-        data: {'DisplayPhoto': multipart},
+        data: {'display_photo': multipart},
         options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
       return response?.data['data']['avatar_url'] ?? '';

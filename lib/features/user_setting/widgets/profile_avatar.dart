@@ -22,7 +22,7 @@ class ProfileAvatar extends ConsumerWidget {
       radius: radius,
       child: pickedImage != null
           ? ClipRRect(
-              borderRadius: BorderRadius.circular(40.0),
+              borderRadius: BorderRadius.circular(radius),
               child: Image.file(
                 height: 80.0,
                 width: 80.0,
@@ -78,7 +78,7 @@ class ProfileAvatar extends ConsumerWidget {
       if (user == null) return initials;
       if (user.fullname.isEmpty) return initials;
 
-      final u = user.fullname.split(' ');
+      final u = user.fullname.toUpperCase().split(' ');
       if (u.length == 1) return u.first;
       return '${u[0][0]}${u[1][0]}';
     } catch (e) {
