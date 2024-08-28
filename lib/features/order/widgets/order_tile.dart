@@ -17,7 +17,7 @@ class OrderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 0),
+      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 10),
       child: GestureDetector(
         onTap: () {
           context.push(AppRoute.orderDetails);
@@ -25,7 +25,7 @@ class OrderTile extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              width: double.infinity,
+              // width: double.infinity,
               height: 107.0,
               padding: const EdgeInsets.only(
                 left: 10.0,
@@ -86,17 +86,21 @@ class OrderTile extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: 92.0,
-              height: 79.0,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(
-                  color: const Color.fromRGBO(247, 247, 247, 1),
+            Positioned(
+              right: 10,
+              bottom: 15,
+              child: Container(
+                width: 92.0,
+                height: 79.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(
+                    color: const Color.fromRGBO(247, 247, 247, 1),
+                  ),
                 ),
+                child: Image.asset(order.image),
               ),
-              child: Image.asset(order.image),
             ),
           ],
         ),
