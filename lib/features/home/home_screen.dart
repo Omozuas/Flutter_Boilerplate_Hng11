@@ -10,6 +10,7 @@ import 'package:flutter_boilerplate_hng11/features/home/home_widget/revenue_card
 import 'package:flutter_boilerplate_hng11/features/user_setting/provider/profile_provider.dart';
 
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/profile_avatar.dart';
 
 //import 'package:flutter_boilerplate_hng11/localiza/strings.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
@@ -49,7 +50,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
     final dashBoardProviderNotifier = ref.watch(dashBoardProvider.notifier);
     final authStateProvider = ref.watch(authProvider);
-    final asyncUser = ref.watch(profileProvider).user;
 
     return Scaffold(
       appBar: AppBar(
@@ -59,31 +59,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            authStateProvider.user!.avatarUrl == null
-                ? CircleAvatar(
-                    radius: 28,
-                    child: Center(
-                      child: Text(
-                        // ignore: unnecessary_null_comparison
-                        asyncUser.value == null
-                            ? 'AN'
-                            : initials(asyncUser.value),
-                        style: const TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  )
-                : Container(
-                    height: 50.h,
-                    width: 50.w,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "${authStateProvider.user!.avatarUrl}"),
-                            fit: BoxFit.cover)),
-                  ),
-            6.sp.sbHW,
+            const ProfileAvatar(radius: 26),
+            7.sp.sbW,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
