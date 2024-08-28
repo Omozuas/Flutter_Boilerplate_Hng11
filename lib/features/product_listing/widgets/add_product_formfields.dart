@@ -135,7 +135,7 @@ class DescriptionFormField extends StatelessWidget {
         showCounter: false,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return AppLocalizations.of(context)!.descriptionPlaceholder;
+            return AppLocalizations.of(context)!.productDescriptionPlaceholder;
           }
           return null;
         },
