@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,6 +34,13 @@ class ProductScreen extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ref.read(productsByCategoryProvider).isLoading && ref.watch(productsInCategoryDataProvider).isNotEmpty? SizedBox(
+            height: 10.h,
+            width: width(context),
+            child: LinearProgressIndicator(
+              backgroundColor: GlobalColors.orange.withOpacity(0.1),
+            ),
+          ): 0.0.sbH,
           SizedBox(
             height: 24.h,
           ),

@@ -50,12 +50,12 @@ class CustomButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: containerColor == Colors.transparent
                   ? Colors.transparent
-                  : containerColor.withOpacity(loading ? 0.5 : 1),
+                  : loading? containerColor.withOpacity(0.6): containerColor,
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(6.r),
               border: Border.all(
                   width: 1,
-                  color: borderColors ??
+                  color: borderColor == Colors.transparent? Colors.transparent: borderColors ??
                       borderColor.withOpacity(loading ? 0.5 : 1))),
           child: Center(
             child: loading

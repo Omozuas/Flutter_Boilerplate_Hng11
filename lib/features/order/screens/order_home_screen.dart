@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
+import 'package:flutter_boilerplate_hng11/utils/app_images.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -76,8 +77,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                       child: OrderTile(
                         order: Order(
                           number: 99012,
-                          image:
-                              'assets/images/png/product_listing/sport-shoes.png',
+                          image: AppImages.shoes,
                           deliveryDate: '20-Aug-2024',
                           deliveryTime: '7:41 PM',
                           deliveryText: deliveryText,

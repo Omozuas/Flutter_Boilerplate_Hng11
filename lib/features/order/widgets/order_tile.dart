@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,15 +16,15 @@ class OrderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
+      padding: EdgeInsets.only(left: 24.sp, right: 24.sp, top: 24.sp),
       child: Container(
-        width: double.infinity,
-        height: 107.0,
-        padding: const EdgeInsets.only(
-          left: 20.0,
-          right: 20.0,
-          top: 10.0,
-          bottom: 8.0,
+        width: width(context),
+        height: 107.h,
+        padding: EdgeInsets.only(
+          left: 20.w,
+          right: 20.w,
+          top: 10.h,
+          bottom: 8.h,
         ),
         decoration: BoxDecoration(
           color: GlobalColors.white,
@@ -83,8 +84,8 @@ class OrderTile extends StatelessWidget {
               ),
             ),
             Container(
-              width: 92.0,
-              height: 79.0,
+              width: 92.sp,
+              height: 79.sp,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8.r),

@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../gen/assets.gen.dart';
 
+import '../../../utils/custom_text_style.dart';
 import '../../../utils/widgets/divider.dart';
 import '../../../utils/widgets/list_tile.dart';
 
@@ -41,22 +42,21 @@ class OrderDetailScreen extends StatelessWidget {
           children: [
             13.h.sbH,
             Padding(
-              padding: EdgeInsets.only(
-                  right: GlobalScreenSize.getScreenWidth(context) * 0.04,
-                  left: GlobalScreenSize.getScreenWidth(context) * 0.04),
+              padding: 16.h.padH,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: double.infinity,
-                    height: GlobalScreenSize.getScreenHeight(context) * 0.203,
+                    height: 203.h,
+                    padding: 10.sp.padA,
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      color: const Color(0xFFF3F3F4),
                       borderRadius: BorderRadius.circular(12.r),
-                      image: DecorationImage(
-                        image: AssetImage(image),
-                        fit: BoxFit.cover,
-                      ),
+                    ),
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                   20.h.sbH,
@@ -66,12 +66,17 @@ class OrderDetailScreen extends StatelessWidget {
                       children: [
                         Text(
                           "${context.order}:",
-                          style: CustomTextStyles.productTextTitleMute,
+                          style: CustomTextStyle.semiBold(
+                            fontSize: 18.sp
+                          )
                         ),
                         10.w.sbHW,
                         Text(
                           "#${order.number}:",
-                          style: CustomTextStyles.productTextTitleBlue,
+                            style: CustomTextStyle.semiBold(
+                              fontSize: 18.sp,
+                              color: const Color(0xF40013C1)
+                            )
                         ),
                         const Spacer(),
                         CustomButton(
@@ -87,13 +92,12 @@ class OrderDetailScreen extends StatelessWidget {
                         10.w.sbHW,
                         CustomButton(
                             onTap: () {},
-                            borderColor: GlobalColors.lightBlueTextColor100
-                                .withOpacity(0.9),
+                            borderColor: Colors.transparent,
                             text: context.packaing,
                             height: GlobalScreenSize.getScreenHeight(context) *
                                 0.029,
-                            containerColor: GlobalColors.lightBlueTextColor100
-                                .withAlpha(210),
+                            containerColor: const Color(0xFFEBF8FF),
+
                             width:
                                 GlobalScreenSize.getScreenWidth(context) * 0.2,
                             textColor: GlobalColors.lightBlueTextColor)
@@ -103,12 +107,17 @@ class OrderDetailScreen extends StatelessWidget {
                   8.h.sbH,
                   Text(
                     context.orderCreated,
-                    style: CustomTextStyles.bannerbodyTextBlack,
+                    style: CustomTextStyle.semiBold(
+                      fontSize: 12.sp,
+                      color: GlobalColors.black
+                    )
                   ),
                   8.h.sbH,
                   Text(
                     context.augustDate,
-                    style: CustomTextStyles.bannerbodyTextgrey,
+                      style: CustomTextStyle.regular(
+                        fontSize: 12.sp,
+                      )
                   ),
                 ],
               ),
@@ -118,7 +127,7 @@ class OrderDetailScreen extends StatelessWidget {
               height: GlobalScreenSize.getScreenHeight(context) * 0.269,
               width: GlobalScreenSize.getScreenWidth(context),
               color: GlobalColors.zinc50,
-              padding: EdgeInsets.all(23.w),
+              padding: EdgeInsets.all(16.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -174,7 +183,6 @@ class OrderDetailScreen extends StatelessWidget {
                                 .040,
                             padding: EdgeInsets.only(left: 10.r, right: 10.r),
                             decoration: BoxDecoration(
-                                color: GlobalColors.white,
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(
