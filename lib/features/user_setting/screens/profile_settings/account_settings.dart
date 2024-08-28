@@ -11,31 +11,15 @@ import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_list_tile.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/custom_api_error.dart';
-
-class SettingsScreen extends ConsumerStatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await handleGetUser();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final asyncUser = ref.watch(profileProvider).user;
     final user = ref.watch(profileProvider).user.sureValue;
 
@@ -231,15 +215,5 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         },
       ),
     );
-  }
-
-  Future<void> handleGetUser() async {
-    try {
-      await ref.read(profileProvider.notifier).getUser();
-    } on CustomApiError catch (e) {
-      showSnackBar(e.message);
-    } catch (e) {
-      showSnackBar('An error occurred');
-    }
   }
 }
