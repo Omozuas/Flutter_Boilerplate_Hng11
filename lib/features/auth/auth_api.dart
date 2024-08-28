@@ -36,7 +36,6 @@ class AuthApi {
       debugPrint('Errors In Resetting password: ${e.toString()}');
       return null;
     }
-
   }
 
   Future<ResponseModel?> verifyCode({

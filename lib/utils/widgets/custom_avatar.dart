@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/user_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/members_profile.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomAvatar extends StatelessWidget {
@@ -41,7 +43,7 @@ class CustomAvatar extends StatelessWidget {
                   'https://github.com/user-attachments/assets/93e38020-8447-4f79-a623-cfea02d6bd4b',
             ),
           ),
-          const SizedBox(width: 10.0),
+          const SizedBox(width: 16.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,7 +54,7 @@ class CustomAvatar extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       height: 16.94 / 14,
-                      color: const Color(0xff525252),
+                      color: GlobalColors.darkOne,
                     ),
               ),
               const SizedBox(height: 3.0),
@@ -63,7 +65,7 @@ class CustomAvatar extends StatelessWidget {
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       height: 14.52 / 12,
-                      color: const Color(0xff525252),
+                      color: GlobalColors.darkOne,
                     ),
               ),
             ],
@@ -71,5 +73,19 @@ class CustomAvatar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String initials([UserModel? user]) {
+    try {
+      var initials = 'AN';
+      if (user == null) return initials;
+      if (user.fullname.isEmpty) return initials;
+
+      final u = user.fullname.split(' ');
+      if (u.length == 1) return u.first;
+      return '${u[0][0]}${u[1][0]}';
+    } catch (e) {
+      return 'AN';
+    }
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/dashboard_api.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
@@ -19,6 +21,7 @@ class DashBoardState {
   final bool overViewLoading;
   final bool trendLoading;
   final bool recentSaleLoading;
+  final int productCount;
   final DashBoardModel dashBoardData;
   final OrganizationOverviewModel organizationOverviewModel;
   final List<GetSalesTrend> salesTrend;
@@ -28,6 +31,7 @@ class DashBoardState {
     required this.overViewLoading,
     required this.trendLoading,
     required this.recentSaleLoading,
+    required this.productCount,
     required this.dashBoardData,
     required this.organizationOverviewModel,
     required this.salesTrend,
@@ -38,6 +42,7 @@ class DashBoardState {
     bool? overViewLoading,
     bool? trendLoading,
     bool? recentSaleLoading,
+    int? productCount,
     DashBoardModel? dashBoardData,
     OrganizationOverviewModel? organizationOverviewModel,
     List<GetSalesTrend>? salesTrend,
@@ -46,6 +51,7 @@ class DashBoardState {
     return DashBoardState(
         overViewLoading: overViewLoading ?? this.overViewLoading,
         trendLoading: trendLoading ?? this.trendLoading,
+        productCount: productCount ?? this.productCount,
         recentSaleLoading: recentSaleLoading ?? this.recentSaleLoading,
         organizationOverviewModel:
             organizationOverviewModel ?? OrganizationOverviewModel(),
@@ -55,15 +61,31 @@ class DashBoardState {
   }
 }
 
-class DashBoardProvider extends StateNotifier<DashBoardState> {
+class DashBoardProvider extends StateNotifier<DashBoardState>
+    with WidgetsBindingObserver {
   final GetStorage _storageService = locator<GetStorage>();
   UserService userService = locator<UserService>();
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // App has resumed, re-initialize the dashboard data
+      _initializeDashboardData();
+    }
+  }
 
   DashBoardProvider()
       : super(DashBoardState(
             overViewLoading: false,
             trendLoading: false,
             recentSaleLoading: false,
+            productCount: 0,
             dashBoardData: DashBoardModel(),
             organizationOverviewModel: OrganizationOverviewModel(),
             salesTrend: [],
@@ -82,8 +104,9 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
 
   getAllCached() async {
     data = [];
-    await getCachedDashboardData();
-    await getCachedSalesTrend();
+    getCachedDashboardData();
+    getAllCachedProducts();
+    getCachedSalesTrend();
     await getCachedOrganizationOverview();
   }
 
@@ -91,46 +114,17 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     getSalesTrend();
     getDashboardData();
     getOrganizationOverView();
+    getAllOrgProducts();
   }
 
   List<SalesData> data = [];
-  // String _getMonthAbbreviation(DateTime date) {
-  //   // Create a DateFormat instance with the pattern 'MMM'
-  //   DateFormat formatter = DateFormat('MMM');
-  //
-  //   // Format the DateTime object to get the abbreviated month name
-  //   String month = formatter.format(date);
-  //
-  //   return month;
-  // }
-  //
-  // DateTime _subtractMonths(int months) {
-  //   // Get the current date
-  //   DateTime now = DateTime.now();
-  //
-  //   // Subtract the specified number of months from the current date
-  //   int newMonth = now.month - months;
-  //   int newYear = now.year;
-  //
-  //   // Handle the year adjustment if subtracting months results in a previous year
-  //   while (newMonth <= 0) {
-  //     newYear -= 1;
-  //     newMonth += 12;
-  //   }
-  //
-  //   // Create a new DateTime object with the calculated year, month, and day
-  //   DateTime newDate = DateTime(newYear, newMonth, now.day);
-  //
-  //   // Handle cases where the resulting month has fewer days than the current day
-  //   while (newDate.month != newMonth) {
-  //     newDate = newDate.subtract(const Duration(days: 1));
-  //   }
-  //
-  //   return newDate;
-  // }
 
   set setOverViewLoading(bool value) {
     state = state.copyWith(overViewLoading: value);
+  }
+
+  set setAllProductCount(int value) {
+    state = state.copyWith(productCount: value);
   }
 
   set setRecentSaleLoading(bool value) {
@@ -162,6 +156,22 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
         return null;
       }
     } catch (e) {
+      rethrow;
+      //tODO: Do something with caught error;
+    }
+  }
+
+  getAllOrgProducts() async {
+    try {
+      final res = await DashboardApi().getAllOrgProducts();
+      if (res.isNotEmpty) {
+        setAllProductCount = res.length;
+        await saveProducts(res);
+      } else {
+        setAllProductCount = 0;
+      }
+    } catch (e) {
+      setAllProductCount = 0;
       rethrow;
       //tODO: Do something with caught error;
     }
@@ -257,6 +267,20 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     }
   }
 
+  Future<void> getAllCachedProducts() async {
+    try {
+      final res = _storageService.read("allProducts");
+      if (res != null) {
+        setAllProductCount = getProductListFromJsontoString(res).length;
+      }
+    } catch (e) {
+      log(e.toString());
+      //tODO: Do something with caught error;
+    } finally {
+      // setNormalButtonLoading = false;
+    }
+  }
+
   Future<bool> saveDashboardData(DashBoardModel value) async {
     try {
       _storageService.write("dashboard_data", jsonEncode(value));
@@ -268,6 +292,28 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     } catch (err) {
       return false;
     }
+  }
+
+  Future<bool> saveProducts(List<Product> value) async {
+    try {
+      _storageService.write("allProducts", getProductListFromJsontoString(value));
+      bool res = _storageService.hasData("allProducts");
+      if (res) {
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  goToProduct(BuildContext context){
+    goToAddProduct(context).whenComplete(_initializeDashboardData);
+  }
+
+  Future<void> goToAddProduct(BuildContext context)async{
+    context.go(AppRoute.products);
+    context.push(AppRoute.addProduct);
   }
 
   Future<bool> saveOrganizationOverview(OrganizationOverviewModel value) async {

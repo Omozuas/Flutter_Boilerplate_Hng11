@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_shimmer/flutter_shimmer.dart';
 
 class Skeleton extends StatefulWidget {
@@ -48,9 +49,9 @@ class _SkeletonState extends State<Skeleton>
         padding: EdgeInsets.all(defaultPadding / 2),
         decoration: radiusBoxDecoration(
           colors: [
-            Colors.blueAccent,
-            Colors.deepOrange,
-            Colors.purple,
+            Colors.black,
+            GlobalColors.orange,
+            GlobalColors.green,
             Colors.white
           ],
           animation: _animation,

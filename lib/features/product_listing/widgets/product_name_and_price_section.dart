@@ -26,36 +26,45 @@ class ProductNameAndPriceSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${product.name}',
-                    style: CustomTextStyles.productTextTitleBlack.copyWith(
-                      color: GlobalColors.dark2,
-                      fontWeight: FontWeight.w600,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        '${product.name}',
+                        style: CustomTextStyles.productTextTitleBlack.copyWith(
+                          color: GlobalColors.dark2,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 6.h),
-                  Text(
-                    '${product.category}',
-                    style: TextStyle(
-                      color: GlobalColors.dark2,
+                    SizedBox(height: 6.h),
+                    Text(
+                      '${product.category}',
+                      style: TextStyle(
+                        color: GlobalColors.dark2,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+              SizedBox(width: 20.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    "\$${product.price}.00",
-                    style: CustomTextStyles.productTextTitleBlack.copyWith(
-                      color: GlobalColors.black,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
+                  FittedBox(
+                    child: Text(
+                      "\$${product.price}.00",
+                      style: CustomTextStyles.productTextTitleBlack.copyWith(
+                        color: GlobalColors.black,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   SizedBox(height: 6.h),

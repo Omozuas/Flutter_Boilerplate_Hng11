@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
+
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../utils/widgets/custom_avatar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../provider/profile_provider.dart';
 
 class MembersSettings extends ConsumerStatefulWidget {
@@ -24,23 +26,48 @@ class MembersSettings extends ConsumerStatefulWidget {
 }
 
 class _MembersSettingsState extends ConsumerState<MembersSettings> {
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _membersController = TextEditingController();
+
   List<Members> organisationMembers = [
-    Members(),
+    /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
+    Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
   ];
+  List<Members> filteredMembers = [];
+  TextEditingController searchController = TextEditingController();
   String inviteLink = ''; // Variable to store the invitation link
 
   @override
   void initState() {
     super.initState();
+    filteredMembers = organisationMembers;
+    searchController.addListener(filterMembers);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final org = ref.watch(getOrganisationProvider);
-      ref
-          .read(profileProvider.notifier)
-          .getOrganisationMembers(orgId: org.organisationId.toString());
-      Future(() {
-        fetchLinkFromAPI();
-      });
+      ref.read(profileProvider.notifier).getOrganisationMembers();
+      ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
     });
+  }
+
+  void filterMembers() {
+    final filter = searchController.text.toLowerCase();
+    setState(() {
+      filteredMembers = organisationMembers.where((member) {
+        final firstName = (member.firstName ?? '').toLowerCase();
+        final lastName = (member.lastName ?? '').toLowerCase();
+        final email = (member.email ?? '').toLowerCase();
+        return firstName.contains(filter) ||
+            lastName.contains(filter) ||
+            email.contains(filter);
+      }).toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    _scrollController.dispose();
+    _membersController.dispose();
+    super.dispose();
   }
 
   Future<Object> fetchLinkFromAPI() async {
@@ -64,7 +91,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
       CustomToast(
         message: message,
         backgroundColor: GlobalColors.toastBgSurface2,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: GlobalColors.green, width: 2),
       ),
     );
@@ -74,6 +101,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   Widget build(BuildContext context) {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
+
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.members,
@@ -82,96 +110,116 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: CustomTextStyle.regular(
+                  fontSize: 13.sp,
+                  color: GlobalColors.black400,
+                ),
               ),
+              SizedBox(height: 12.h),
               Divider(
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
               SizedBox(
-                height: 10.h,
+                height: 12.h,
               ),
-              Text(
-                AppLocalizations.of(context)!.inviteLink,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    height: 16.94 / 14,
-                    fontSize: 14,
-                    color: GlobalColors.integrationTextColor),
-              ),
-              Text(AppLocalizations.of(context)!.inviteLinkDescr),
               SizedBox(
-                height: 10.h,
+                height: 39.h,
+                width: 270.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLink,
+                  style: CustomTextStyle.bold(
+                    fontSize: 14.sp,
+                    color: GlobalColors.integrationTextColor,
+                  ),
+                ),
               ),
+              SizedBox(
+                width: 276.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLinkDescr,
+                  style: CustomTextStyle.regular(
+                    fontSize: 12.sp,
+                    color: GlobalColors.darkOne,
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
               Container(
-                padding: const EdgeInsets.only(top: 8, left: 8),
+                padding:
+                    EdgeInsets.symmetric(horizontal: 9.sp, vertical: 11.sp),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(
-                        color: GlobalColors.borderColor, width: 0.7)),
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
-                  children: [
-                    Expanded(
-                      child: asyncLinkValue.when(
-                        data: (inviteLink) => Padding(
-                          padding: const EdgeInsets.only(bottom: 9.0),
+                  borderRadius: BorderRadius.circular(4.r),
+                  border:
+                      Border.all(color: GlobalColors.borderColor, width: 0.7),
+                ),
+                child: asyncLinkValue.when(
+                  loading: () => Center(
+                    child: SizedBox(
+                      height: 15.h,
+                      width: 15.h,
+                      child: const CircularProgressIndicator.adaptive(),
+                    ),
+                  ),
+                  error: (e, st) {
+                    return Center(
+                      child: Text(
+                        context.text.errorFetchingLink,
+                        style: CustomTextStyle.medium(
+                          fontSize: 10.sp,
+                          color: GlobalColors.dark2,
+                        ),
+                      ),
+                    );
+                  },
+                  data: (inviteLink) {
+                    if (inviteLink == null) {
+                      return const Center(child: SizedBox(height: 14.0));
+                    }
+                    return Row(
+                      children: [
+                        Flexible(
                           child: Text(
-                            inviteLink ?? "No link ",
+                            inviteLink,
                             softWrap: true,
+                            style: CustomTextStyle.medium(
+                              fontSize: 10.sp,
+                              color: GlobalColors.dark2,
+                            ),
                           ),
                         ),
-                        loading: () => const Center(
-                          child: CircularProgressIndicator.adaptive(),
+                        SizedBox(width: 10.w),
+                        InkWell(
+                          onTap: () => Share.share(inviteLink),
+                          child: SvgPicture.asset(
+                            "assets/images/svg/shareIcon.svg",
+                          ),
                         ),
-                        error: (e, st) {
-                          return Center(
-                            child: Text(AppLocalizations.of(context)!
-                                .errorFetchingLink),
-                          );
-                        },
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              asyncLinkValue.whenData((link) {
-                                if (link != null) {
-                                  Share.share(link); // Share the link
-                                }
-                              });
-                            },
-                            icon: Icon(
-                              Icons.share,
-                              color: GlobalColors.orange,
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              asyncLinkValue.whenData((link) {
-                                if (link != null) {
-                                  Clipboard.setData(ClipboardData(
-                                      text: link)); // Copy the link
-                                  showCustomToast(context,
-                                      AppLocalizations.of(context)!.copyLink);
-                                }
-                              });
-                            },
-                            icon: Icon(
-                              Icons.copy,
-                              color: GlobalColors.orange,
-                            ))
+                        SizedBox(width: 5.5.w),
+                        InkWell(
+                          onTap: () {
+                            Clipboard.setData(
+                              ClipboardData(text: inviteLink),
+                            ); // Copy the link
+                            showCustomToast(context, context.text.copyLink);
+                          },
+                          child: SvgPicture.asset(
+                            "assets/images/svg/copyIcon.svg",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ],
-                    )
-                  ],
+                    );
+                  },
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               Divider(
                 thickness: 1,
@@ -180,65 +228,65 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
               const SizedBox(
                 height: 24,
               ),
-              SizedBox(
-                height: 40,
-                width: double.infinity,
-                child: TextField(
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                      child:
-                          Icon(Icons.search, color: GlobalColors.gray200Color),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                        color: GlobalColors.borderColor,
-                      ),
-                    ),
-                    prefixIconConstraints: const BoxConstraints(),
-                    contentPadding: const EdgeInsets.only(top: 8.0),
+              CustomTextField(
+                controller: searchController,
+                hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
+                hintTextStyle: CustomTextStyle.regular(
+                  fontSize: 14.sp,
+                  color: GlobalColors.darkOne,
+                ),
+                prefixIcon: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  height: 24.h,
+                  width: 24.w,
+                  child: SvgPicture.asset(
+                    "assets/images/svg/searchIcon.svg",
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
-              SizedBox(height: 10.w),
+              // SizedBox(
+              //   height: 24.h,
+              // ),
               SizedBox(
-                height: 10.h,
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               asyncMembersValue.when(
-                  loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      ),
-                  error: (e, st) {
-                    return Center(
-                      child: Text(
-                          AppLocalizations.of(context)!.errorFetchingMembers),
-                    );
-                  },
-                  data: (members) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomAvatar(
-                          memberDetail:
-                              members?[index] ?? organisationMembers[index],
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (e, st) {
+                  return Center(
+                    child: Text(
+                        AppLocalizations.of(context)!.errorFetchingMembers),
+                  );
+                },
+                data: (members) {
+                  if (organisationMembers.isEmpty) {
+                    setState(() {
+                      organisationMembers = members ?? [];
+                      filteredMembers = organisationMembers;
+                    });
+                  }
+
+                  return filteredMembers.isEmpty
+                      ? Center(
+                          child: Text(
+                              '${context.noResultFound} "${searchController.text}"'))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomAvatar(
+                              memberDetail: filteredMembers[index],
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
+                          itemCount: filteredMembers.length,
                         );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const Divider();
-                      },
-                      itemCount: members?.length ?? organisationMembers.length,
-                    );
-                  })
+                },
+              )
             ])),
       ),
     );

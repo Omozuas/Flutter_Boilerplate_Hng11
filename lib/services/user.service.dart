@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../common_models/get_user_response.dart';
 import 'service_locator.dart';
@@ -77,24 +78,17 @@ class UserService {
     final box = locator<GetStorage>();
     box.remove('accessToken');
     box.remove('user');
+    box.remove('allProducts');
+    box.remove('dashboard_data');
+    box.remove('organization_overview');
+    box.remove('sales_trend');
     initializer();
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // await prefs.clear();
-    // await storageService.deleteItem(key: DbTable.USER_TABLE_NAME);
-    // await storageService.deleteItem(key: DbTable.TOKEN_TABLE_NAME);
-    // await storageService.deleteItem(key: DbTable.LOGIN_TABLE_NAME);
-    // await storageService.deleteItem(key: DbTable.BANK_LIST_TABLE_NAME);
-    // await storageService.deleteItem(key: DbTable.STORE_ALL_CHATS_TABLE_NAME);
-    // await storageService.deleteItem(key: DbTable.BOOKMARK_TABLE_NAME);
-    // await storageService.deleteItem(key: DbTable.SERVICE_DETAIL_TABLE_NAME);
-    // await locator<NotificationService>().channel?.sink.close();
-    // await locator<ChatServices>().channel?.sink.close();
-    // locator<ChatServices>().channel = null;
-    // locator<NotificationService>().channel = null;
-    // locator<NotificationService>().channel = null;
-    // isUserLoggedIn = false;
-    // user = User();
-    // navigationService.navigateToAndRemoveUntil(loginScreenRoute);
-    // showCustomToast("Session Has Ended, Log In to proceed");
+    final googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+      ],
+    );
+    googleSignIn.signOut();
   }
 }

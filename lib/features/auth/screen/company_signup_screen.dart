@@ -3,11 +3,12 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.d
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button_form_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
 class CompanySignUpScreen extends ConsumerWidget {
   CompanySignUpScreen({super.key});
@@ -119,7 +120,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 5.sp),
-                          CustomDropdownButton(
+                          CustomDropdownButtonFormField(
                             items: [
                               localizations.agricultureIndustry,
                               localizations.manufacturingIndustry,
@@ -127,6 +128,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                               localizations.healthcareIndustry,
                               localizations.educationIndustry,
                             ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return context.selectIsRequired;
+                              }
+                              return null;
+                            },
                             onChanged: (String? value) {
                               _companyIndustryController.text = value ?? '';
                             },
@@ -135,11 +142,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                               fontSize: 13.sp,
                             ),
                             borderColor: GlobalColors.lightGray,
-                            height: 48,
                             containerColor: GlobalColors.white,
                             textPadding:
                                 const EdgeInsets.only(left: 10, right: 10),
-                            width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
@@ -151,12 +156,18 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 5.sp),
-                          CustomDropdownButton(
+                          CustomDropdownButtonFormField(
                             items: [
                               localizations.soleProprietorship,
                               localizations.partnership,
                               localizations.corporation,
                             ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return context.selectIsRequired;
+                              }
+                              return null;
+                            },
                             onChanged: (String? value) {
                               _companyTypeController.text = value ?? '';
                             },
@@ -165,11 +176,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                               fontSize: 13.sp,
                             ),
                             borderColor: GlobalColors.lightGray,
-                            height: 48,
                             containerColor: GlobalColors.white,
                             textPadding:
                                 const EdgeInsets.only(left: 10, right: 10),
-                            width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                         ],
@@ -196,7 +205,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 5.sp),
-                          CustomDropdownButton(
+                          CustomDropdownButtonFormField(
                             items: [
                               localizations.country1,
                               localizations.country2,
@@ -204,6 +213,12 @@ class CompanySignUpScreen extends ConsumerWidget {
                               localizations.country4,
                               localizations.country5,
                             ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return context.selectIsRequired;
+                              }
+                              return null;
+                            },
                             onChanged: (String? value) {
                               _companyCountryController.text = value ?? '';
                             },
@@ -212,11 +227,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                               fontSize: 13.sp,
                             ),
                             borderColor: GlobalColors.lightGray,
-                            height: 48,
                             containerColor: GlobalColors.white,
                             textPadding:
                                 const EdgeInsets.only(left: 10, right: 10),
-                            width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
@@ -228,13 +241,19 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 5.sp),
-                          CustomDropdownButton(
+                          CustomDropdownButtonFormField(
                             items: [
                               localizations.state1,
                               localizations.state2,
                               localizations.state3,
                               localizations.state4,
                             ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return context.selectIsRequired;
+                              }
+                              return null;
+                            },
                             onChanged: (String? value) {
                               _companyStateController.text = value ?? '';
                             },
@@ -245,9 +264,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                             borderColor: GlobalColors.lightGray,
                             textPadding:
                                 const EdgeInsets.only(left: 10, right: 10),
-                            height: 48,
                             containerColor: GlobalColors.white,
-                            width: double.infinity,
                             textColor: GlobalColors.darkOne,
                           ),
                           SizedBox(height: 25.sp),
@@ -279,13 +296,19 @@ class CompanySignUpScreen extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 5.sp),
-                          CustomDropdownButton(
+                          CustomDropdownButtonFormField(
                             items: [
                               localizations.lga1,
                               localizations.lga2,
                               localizations.lga3,
                               localizations.lga4,
                             ],
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return context.selectIsRequired;
+                              }
+                              return null;
+                            },
                             onChanged: (String? value) {
                               _companyLgaController.text = value ?? '';
                             },
@@ -294,9 +317,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                               fontSize: 13.sp,
                             ),
                             borderColor: GlobalColors.lightGray,
-                            height: 48,
                             containerColor: GlobalColors.white,
-                            width: double.infinity,
                             textPadding:
                                 const EdgeInsets.only(left: 10, right: 10),
                             textColor: GlobalColors.darkOne,
