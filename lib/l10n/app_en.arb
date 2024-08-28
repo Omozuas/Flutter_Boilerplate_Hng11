@@ -504,6 +504,9 @@
   "deliveryTime": "7:41 PM",
   "orderNumberText": "Order#:",
   "yourProductsWillShowHere": "Your products will show here",
-  "somethingWentWrong": "Something went wrong. \nPlease pull to refresh"
+  "somethingWentWrong": "Something went wrong. \nPlease pull to refresh",
+  "logOutAfterUpdate": "Your account will logout after password update",
+  "correctCurrentPassword":"Please enter the correct current password",
+  "notSameCurrentNewPassword":"New password should not be the same as current password"
 }
 

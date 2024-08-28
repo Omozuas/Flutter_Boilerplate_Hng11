@@ -450,7 +450,9 @@
   "deliveryTime": "下午 7:41",
   "orderNumberText": "订单编号#：",
   "yourProductsWillShowHere": "您的产品将显示在这里",
-  "somethingWentWrong": "出了点问题。\n请下拉刷新"
-
+  "somethingWentWrong": "出了点问题。\n请下拉刷新",
+  "logOutAfterUpdate": "更新密码后，您的账户将会注销",
+  "correctCurrentPassword":"请输入正确的当前密码",
+  "notSameCurrentNewPassword":"新密码不应与当前密码相同"
 }
 
