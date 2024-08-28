@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Note for all, The CustomButton class updated.
@@ -14,37 +15,43 @@ class CustomButton extends StatelessWidget {
   final Color containerColor, borderColor, textColor;
   final String text;
   final Color? borderColors;
-  final double width, height;
+  final double? width, height, fontsize;
   final bool loading;
+  final Widget? icon;
   final FontWeight? fontWeight;
   final TextStyle? textStyle;
+  final EdgeInsetsGeometry? padding;
   const CustomButton(
       {super.key,
       required this.onTap,
       required this.borderColor,
       required this.text,
-      required this.height,
+      this.height,
       required this.containerColor,
-      required this.width,
+      this.width,
+      this.padding,
       required this.textColor,
+      this.fontsize,
       this.loading = false,
       this.fontWeight,
       this.borderColors,
-      this.textStyle});
+      this.textStyle,
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Container(
         width: width,
         height: height,
+        padding: padding,
         decoration: BoxDecoration(
-            color: containerColor.withOpacity(loading ? 0.5 : 1),
+            color: containerColor == Colors.transparent
+                ? Colors.transparent
+                : containerColor.withOpacity(loading ? 0.5 : 1),
             shape: BoxShape.rectangle,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(6),
-            ),
+            borderRadius: BorderRadius.circular(6.r),
             border: Border.all(
                 width: 1,
                 color: borderColors ??
@@ -58,14 +65,29 @@ class CustomButton extends StatelessWidget {
                     strokeWidth: 2.w,
                   ),
                 )
-              : Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: textStyle ??
-                      TextStyle(
-                          fontSize: 14,
-                          color: textColor,
-                          fontWeight: fontWeight ?? FontWeight.w500),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (icon != null)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [icon!, 5.w.sbW],
+                      ),
+                    Text(
+                      text,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: textStyle ??
+                          TextStyle(
+                              fontSize: fontsize ?? 14,
+                              color: textColor,
+                              overflow: TextOverflow.ellipsis,
+                              fontWeight: fontWeight ?? FontWeight.w500),
+                    ),
+                  ],
                 ),
         ),
       ),

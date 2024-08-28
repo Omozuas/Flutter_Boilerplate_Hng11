@@ -8,7 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? labelStyle;
   final TextEditingController controller;
   final EdgeInsets? padding;
-  final String? hintText;
+  final String? hintText, errorText;
   final TextStyle? hintTextStyle;
   final TextInputType? keyboardType;
   final bool? obscureText;
@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.padding,
     this.hintText,
+    this.errorText,
     this.hintTextStyle,
     this.keyboardType,
     this.obscureText,
@@ -58,8 +59,8 @@ class CustomTextField extends StatelessWidget {
               style: labelStyle ??
                   TextStyle(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF0F172A),
+                    fontWeight: FontWeight.w500,
+                    color: GlobalColors.darkTwo,
                   ),
             ),
           ],
@@ -87,6 +88,7 @@ class CustomTextField extends StatelessWidget {
                     horizontal: 12.w,
                   ),
               hintText: hintText,
+              errorText: errorText,
               hintStyle: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,

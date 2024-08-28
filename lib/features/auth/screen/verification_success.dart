@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
-import '../../../utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 class VerificationSuccessScreen extends StatelessWidget {
   const VerificationSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -20,14 +23,14 @@ class VerificationSuccessScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 80.h),
                 Text(
-                  'Verification Successful',
+                  localizations.verificationSuccess,
                   style:
                       TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
                 ),
                 SizedBox(height: 16.sp),
-                const Text(
-                  'Your verification was successful, you can now proceed to login',
-                  style: TextStyle(fontSize: 13),
+                Text(
+                  localizations.verificationSuccessDescription,
+                  style: const TextStyle(fontSize: 13),
                 ),
                 SizedBox(height: 24.sp),
                 CustomButton(
@@ -36,11 +39,10 @@ class VerificationSuccessScreen extends StatelessWidget {
 
                     if (c.mounted) {
                       c.go(AppRoute.login);
-                      // AppRouter.router.p
                     }
                   },
                   borderColor: GlobalColors.borderColor,
-                  text: "Continue to Login",
+                  text: localizations.continueToLogin, // Localized button text
                   height: 48.h,
                   containerColor: GlobalColors.orange,
                   width: 342.w,

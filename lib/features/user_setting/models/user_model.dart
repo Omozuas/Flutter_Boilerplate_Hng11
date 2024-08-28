@@ -8,14 +8,15 @@ class UserModel {
   final String email;
   final String? avatarURL;
   final UserProfile? profile;
+  final String orgId;
 
-  const UserModel({
-    required this.id,
-    required this.fullname,
-    required this.email,
-    required this.avatarURL,
-    required this.profile,
-  });
+  const UserModel(
+      {required this.id,
+      required this.fullname,
+      required this.email,
+      required this.avatarURL,
+      required this.profile,
+      required this.orgId});
 
   UserModel copyWith({
     String? id,
@@ -23,6 +24,7 @@ class UserModel {
     String? email,
     String? avatarURL,
     UserProfile? profile,
+    String? orgId,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -30,6 +32,7 @@ class UserModel {
       email: email ?? this.email,
       avatarURL: avatarURL ?? this.avatarURL,
       profile: profile ?? this.profile,
+      orgId: orgId ?? this.orgId,
     );
   }
 
@@ -42,6 +45,10 @@ class UserModel {
       profile: map['profile'] == null
           ? null
           : UserProfile.fromMap(map['profile'] as Map<String, dynamic>),
+      orgId: map['organisations'] != null &&
+              (map['organisations'] as List).isNotEmpty
+          ? (map['organisations'][0]['id'] as String)
+          : '', // Handle the case where there might be no organisations
     );
   }
 
@@ -50,7 +57,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'User(id: $id, fullname: $fullname, email: $email, avatarURL: $avatarURL, profile: $profile)';
+    return 'User(id: $id, fullname: $fullname, email: $email, avatarURL: $avatarURL, profile: $profile, orgId: $orgId)';
   }
 
   @override

@@ -33,15 +33,9 @@ class AuthApi {
       );
       return response;
     } catch (e) {
-      debugPrint('Error In Resetting password: ${e.toString()}');
+      debugPrint('Errors In Resetting password: ${e.toString()}');
       return null;
     }
-    // return await dioProvider.post(
-    //   '/auth/$email/forgot-password',
-    //   data: {
-    //     'email': email,
-    //   },
-    // );
   }
 
   Future<ResponseModel?> verifyCode({

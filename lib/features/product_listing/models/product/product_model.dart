@@ -8,8 +8,7 @@ part 'product_model.freezed.dart';
 part 'product_model.g.dart';
 
 List<Product> getProductListFromStringtoJson(String str) =>
-    List<Product>.from(
-        json.decode(str).map((x) => Product.fromJson(x)));
+    List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
 
 String getProductListFromJsontoString(List<Product> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -21,7 +20,7 @@ class Product with _$Product {
     String? id,
     String? name,
     String? description,
-    int? price,
+    num? price,
     int? cartQuantity,
     String? category,
     @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -34,5 +33,6 @@ class Product with _$Product {
     @JsonKey(name: 'delete_at') DateTime? deleteAt,
   }) = _Product;
 
-  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJson(json);
 }

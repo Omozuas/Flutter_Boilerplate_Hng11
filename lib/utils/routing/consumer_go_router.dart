@@ -56,6 +56,7 @@ import 'package:go_router/go_router.dart';
 class ConsumerGoRoute extends GoRoute {
   ConsumerGoRoute({
     required super.path,
+     super.name,
     required Widget Function(BuildContext, GoRouterState, WidgetRef) builder,
     List<GoRoute>? routes,
   }) : super(

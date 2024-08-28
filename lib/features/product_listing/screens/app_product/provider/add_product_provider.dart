@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/organisation/organisation.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/produt_api/product_api.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -73,14 +74,19 @@ class AddProductProvider extends _$AddProductProvider {
     final org = ref.read(getOrganisationProvider);
     try {
       state = AddProductState.isLoading();
-      final result = await ref.read(productApiProvider).createProduct(
+      final product = await ref.read(productApiProvider).createProduct(
             product: data,
             orgId: org.organisationId!,
           );
 
-      log('ADD PRODUCT RESULT $result');
-      // ignore: unused_result
-      ref.refresh(productListProvider.future);
+      if (product != null) {
+        log('ADD PRODUCT RESULT $product');
+        // ignore: unused_result
+        ref.refresh(productListProvider.future);
+        // ignore: avoid_manual_providers_as_generated_provider_dependency
+        ref.read(dashBoardProvider.notifier).getAllOrgProducts();
+      }
+
       onSuccess();
       state = AddProductState.isSuccess();
     } catch (e) {

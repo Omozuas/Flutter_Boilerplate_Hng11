@@ -1,11 +1,16 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import '../../../services/dio_provider.dart';
 import '../../../services/service_locator.dart';
+import '../../product_listing/models/product/product_model.dart';
+import '../../product_listing/product_endpoints.dart';
+import '../../user_home/model/all_products.dart';
 import 'model/dashboard_model.dart';
 import 'model/organization_overview_model.dart';
 import 'model/sales_trend_model.dart';
+import 'model/user_by_id_response.dart';
 
 class DashboardApi implements DashboardApiContract {
   //Inject the DioProvider Dependency
@@ -20,6 +25,50 @@ class DashboardApi implements DashboardApiContract {
           .get("Dashboards", query: {"userId": _userService.user.id});
       return DashBoardModel.fromJson(jsonDecode(jsonEncode(response?.data)));
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<GetUserByIDResponse> getUserById({required String userId}) async {
+    try {
+      var response = await dioProvider.get("users/$userId");
+      return GetUserByIDResponse.fromJson(
+          jsonDecode(jsonEncode(response?.data)));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Product>> getAllOrgProducts() async {
+    try {
+      log('API CALLED');
+      final result = await dioProvider.get(productsForOrganisationEndpoint(
+          orgId: _userService.user.organisations?[0].id ?? ""));
+
+      final jsonList = result?.data['data'] as List;
+      return jsonList
+          .map(
+            (e) => Product.fromJson(e),
+          )
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Product>> getAllProducts({int? pageSize, int? page}) async {
+    try {
+      var response = await dioProvider.get("products",
+          query: {"PageSize": pageSize ?? 100000, "PageNumber": page ?? 1});
+      var res =
+          AllProduct.fromJson(jsonDecode(jsonEncode(response?.data))).data ??
+              [];
+      return res;
+    } catch (e) {
+      log(e.toString());
       rethrow;
     }
   }
@@ -62,6 +111,9 @@ class DashboardApi implements DashboardApiContract {
 
 abstract class DashboardApiContract {
   Future<DashBoardModel> getDashboardData();
+  Future<List<Product>> getAllOrgProducts();
+  Future<GetUserByIDResponse> getUserById({required String userId});
+  Future<List<Product>> getAllProducts({int? pageSize, int? page});
   Future<OrganizationOverviewModel> getOrganizationOverView();
   Future<List<GetSalesTrend>> getSalesTrend(
       {DateTime? startDate, DateTime? endDate});

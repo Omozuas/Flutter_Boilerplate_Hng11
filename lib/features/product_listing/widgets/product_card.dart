@@ -22,7 +22,7 @@ class ProductCardWiget extends StatelessWidget {
   final String productNmae;
   final String category;
   final String status;
-  final int price;
+  final num price;
 
   final String image;
   @override
@@ -119,11 +119,15 @@ class ProductCardWiget extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
-            child: Text(
-              "\$$price",
-              textAlign: TextAlign.end,
-              style: CustomTextStyles.productTextBody2Black,
+            flex: 4,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                "\$$price",
+                textAlign: TextAlign.end,
+                style: CustomTextStyles.productTextBody2Black,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           )
         ],

@@ -30,9 +30,14 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+.fvm/
+pubspec.lock
+ios/
+linux/
 
 # Symbolication related
 app.*.symbols
+linux
 
 # Obfuscation related
 app.*.map.json
@@ -41,3 +46,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# FVM Version Cache
+.fvm/
+pubspec.lock
+macos

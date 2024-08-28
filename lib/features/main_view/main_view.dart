@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -30,12 +31,30 @@ class _MainViewState extends State<MainView> {
       name: widget.name,
       context: context,
     );
+    AppRouter.router.routeInformationProvider.addListener(_watchRoute);
+  }
+
+  void _watchRoute() {
+    if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.home) {
+      _bottomBarIndex.value = 0;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.products) {
+      _bottomBarIndex.value = 1;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.order) {
+      _bottomBarIndex.value = 3;
+    } else if (AppRouter.router.routeInformationProvider.value.uri.toString() ==
+        AppRoute.settings) {
+      _bottomBarIndex.value = 4;
+    }
   }
 
   @override
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+    AppRouter.router.routeInformationProvider.removeListener(_watchRoute);
   }
 
   void goBranch(int index) {
@@ -67,24 +86,24 @@ class _MainViewState extends State<MainView> {
           : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               NavBar.home,
             ),
-            label: 'Home',
+            label: context.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.products),
-            label: 'Products',
+            icon: const Icon(NavBar.products),
+            label: context.text.products,
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.order),
-            label: 'Orders',
+            icon: const Icon(NavBar.order),
+            label: context.orders,
           ),
           BottomNavigationBarItem(
-            icon: Icon(NavBar.settings),
-            label: 'Settings',
+            icon: const Icon(NavBar.settings),
+            label: context.text.settings,
           ),
         ],
         currentIndex: _bottomBarIndex.value,
