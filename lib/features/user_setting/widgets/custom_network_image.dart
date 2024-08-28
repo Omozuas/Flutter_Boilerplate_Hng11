@@ -5,10 +5,17 @@ import 'package:flutter/material.dart';
 // to be downloaded and the bytes received already.
 // displays an error icon if an error occurred while dowloading.
 class CustomNetworkImage extends StatelessWidget {
-  const CustomNetworkImage({super.key, required this.url, this.fit, this.size});
+  const CustomNetworkImage({
+    super.key,
+    required this.url,
+    this.fit,
+    this.size,
+    this.circleProgressSize = 20.0,
+  });
   final String url;
   final BoxFit? fit;
   final Size? size;
+  final double? circleProgressSize;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +30,16 @@ class CustomNetworkImage extends StatelessWidget {
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
         return Center(
-          child: CircularProgressIndicator.adaptive(
-            value: loadingProgress.expectedTotalBytes != null
-                ? loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes!
-                : null,
+          child: SizedBox(
+            height: circleProgressSize,
+            width: circleProgressSize,
+            child: CircularProgressIndicator.adaptive(
+              strokeWidth: 3.0,
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
           ),
         );
       },

@@ -48,7 +48,7 @@ class SettingsScreen extends ConsumerWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ProfileAvatar(),
+                          const ProfileAvatar(radius: 36.0),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Padding(
