@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/profile_dialogs.dart';
 import 'package:flutter_boilerplate_hng11/services/password_service.dart';
 import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
@@ -46,6 +47,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
   final userServiceProvider = Provider<UserService>((ref) {
     return locator<UserService>();
   });
+  static final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -68,98 +70,6 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
-  }
-
-  void updatePassword() async {
-    final currentPassword = currentPasswordController.text;
-    final newPassword = newPasswordController.text;
-    final confirmPassword = confirmPasswordController.text;
-
-    if (newPassword == confirmPasswordController.text) {
-      try {
-        final passwordService = ref.read(passwordServiceProvider);
-        final userService = ref.read(userServiceProvider);
-        final authToken = await userService.getToken();
-        await passwordService
-            .updatePassword(
-          currentPassword: currentPassword,
-          newPassword: newPassword,
-          confirmPassword: confirmPassword,
-          token: authToken.toString(),
-        )
-            .then(
-          (value) {
-            OneContext().showDialog(
-              builder: (ctx) {
-                return ProfileDialog(
-                    title: context.passwordUpdated,
-                    description: context.passwordUpdatedMessage,
-                    onContinue: () {
-                      Navigator.pop(ctx);
-                      context.go(AppRoute.login);
-                    });
-              },
-            );
-          },
-        );
-
-        //Handle errors
-      } on DioException catch (e) {
-        // Handle DioException
-        if (e.response?.statusCode == 404) {
-          setState(() {
-            errorMessage = context.passwordUpdated404Error;
-          });
-        } else {
-          setState(() {
-            errorMessage = context.passwordUpdatedError;
-          });
-        }
-        OneContext().showDialog(
-          builder: (context) {
-            return ProfileDialog(
-              title: context.error,
-              description: errorMessage!,
-            );
-          },
-        );
-      } catch (e) {
-        // Handle other exceptions
-        setState(() {
-          errorMessage = context.passwordUpdatedCatchError;
-        });
-        OneContext().showDialog(
-          builder: (context) {
-            return ProfileDialog(
-              title: AppLocalizations.of(context)!.errorMessage,
-              description: errorMessage!,
-            );
-          },
-        );
-      }
-    } else {
-      setState(() {
-        passwordsMatch = false;
-      });
-    }
-  }
-
-  void checkPasswordStrength(String password) {
-    setState(() {
-      this.password = password;
-      hasUppercase = password.contains(RegExp(r'[A-Z]'));
-      hasNumber = password.contains(RegExp(r'[0-9]'));
-      hasMinLength = password.length >= 8;
-    });
-  }
-
-  void validatePasswords() {
-    if (confirmPasswordFocusNode.hasFocus) {
-      setState(() {
-        passwordsMatch =
-            newPasswordController.text == confirmPasswordController.text;
-      });
-    }
   }
 
   @override
@@ -188,6 +98,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
               ),
               // Form section starts here
               Form(
+                key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -198,7 +109,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       hintText: context.enterCurrentPassword,
                       borderRadius: 8.r,
                       focusedBorderColor: GlobalColors.borderColor,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (v) =>
+                          Validators.passwordValidator(v, context),
                       suffixIcon: IconButton(
                         icon: Icon(
                           currentPasswordVissible
@@ -224,7 +136,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       focusNode: newPasswordFocusNode,
                       obscureText: !newPasswordVissible,
                       borderRadius: 8.r,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (v) =>
+                          Validators.passwordValidator(v, context),
                       onchanged: (String? value) {
                         checkPasswordStrength(value!);
                         validatePasswords();
@@ -359,7 +272,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       focusNode: confirmPasswordFocusNode,
                       controller: confirmPasswordController,
                       obscureText: !confPasswordVissible,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (value) =>
+                          Validators.passwordValidator(value, context),
                       onchanged: (value) => validatePasswords(),
                       borderRadius: 8.r,
                       hintText:
@@ -427,7 +341,11 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              updatePassword();
+                              setState(() {
+                                if (formKey.currentState!.validate()) {
+                                  updatePassword();
+                                }
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: GlobalColors.orange,
@@ -459,6 +377,129 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
         ),
       ),
     );
+  }
+
+  void checkPasswordStrength(String password) {
+    setState(() {
+      this.password = password;
+      hasUppercase = password.contains(RegExp(r'[A-Z]'));
+      hasNumber = password.contains(RegExp(r'[0-9]'));
+      hasMinLength = password.length >= 8;
+    });
+  }
+
+  void validatePasswords() {
+    if (confirmPasswordFocusNode.hasFocus) {
+      setState(() {
+        passwordsMatch =
+            newPasswordController.text == confirmPasswordController.text;
+      });
+    }
+  }
+
+  // update password function
+  void updatePassword() async {
+    final currentPassword = currentPasswordController.text;
+    final newPassword = newPasswordController.text;
+    final confirmPassword = confirmPasswordController.text;
+
+    if (newPassword == confirmPassword &&
+        (newPassword != currentPassword ||
+            confirmPassword != currentPassword)) {
+      showDialog(
+        context: context,
+        builder: (ctx) => LogOutAfterUpdateDialog(
+          onTap: () async {
+            if (!ctx.mounted) return;
+            Navigator.pop(ctx);
+            if (!context.mounted) return;
+            try {
+              final passwordService = ref.read(passwordServiceProvider);
+              final userService = ref.read(userServiceProvider);
+              final authToken = await userService.getToken();
+              await passwordService
+                  .updatePassword(
+                currentPassword: currentPassword,
+                newPassword: newPassword,
+                confirmPassword: confirmPassword,
+                token: authToken.toString(),
+              )
+                  .then(
+                (value) {
+                  OneContext().showDialog(
+                    barrierDismissible: false,
+                    builder: (ctx) {
+                      return ProfileDialog(
+                          title: context.passwordUpdated,
+                          description: context.passwordUpdatedMessage,
+                          onContinue: () {
+                            final userService = locator<UserService>();
+                            userService.logout();
+                            context.go(AppRoute.login);
+                            Navigator.pop(ctx);
+                          });
+                    },
+                  );
+                },
+              );
+
+              //Handle errors
+            } on DioException catch (e) {
+              // Handle DioException
+              if (e.response?.statusCode == 404) {
+                setState(() {
+                  errorMessage = context.passwordUpdated404Error;
+                });
+              }
+              if (e.response?.statusCode == 400) {
+                setState(() {
+                  errorMessage = context.correctCurrentPassword;
+                });
+              } else {
+                setState(() {
+                  errorMessage = context.passwordUpdatedError;
+                });
+              }
+              OneContext().showDialog(
+                builder: (context) {
+                  return ProfileDialog(
+                    title: context.error.toUpperCase(),
+                    description: errorMessage!,
+                  );
+                },
+              );
+            } catch (e) {
+              // Handle other exceptions
+              setState(() {
+                errorMessage = context.passwordUpdatedCatchError;
+              });
+              OneContext().showDialog(
+                builder: (context) {
+                  return ProfileDialog(
+                    title: AppLocalizations.of(context)!.errorMessage,
+                    description: errorMessage!,
+                  );
+                },
+              );
+            }
+          },
+        ),
+      );
+    } else if ((newPassword == currentPassword ||
+        confirmPassword == currentPassword)) {
+      OneContext().showDialog(
+        builder: (context) {
+          return ProfileDialog(
+            title: context.error.toUpperCase(),
+            description: context.notSameCurrentNewPassword,
+          );
+        },
+      );
+    } else {
+      setState(() {
+        passwordsMatch = false;
+      });
+    }
   }
 
   // Color changes for password strength
