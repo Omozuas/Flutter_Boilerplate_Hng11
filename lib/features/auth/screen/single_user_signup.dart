@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
@@ -126,14 +127,14 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       controller: SingleUserSignUpScreen.firstNameController,
                       hintText: localizations.enterFirstName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.nameValidator(v,context),
+                      validator: (v) => Validators.nameValidator(v, context),
                     ),
                     CustomTextField(
                       label: localizations.lastName,
                       controller: lastNameController,
                       hintText: localizations.enterLastName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.nameValidator(v,context),
+                      validator: (v) => Validators.nameValidator(v, context),
                     ),
                     CustomTextField(
                       label: localizations.email,
@@ -141,6 +142,9 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       hintText: localizations.enterEmail,
                       focusedBorderColor: GlobalColors.orange,
                       validator: (v) => Validators.emailValidator(v, context),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
                     ),
                     PasswordTextField(
                       label: localizations.password,
@@ -148,7 +152,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       hintText: localizations.createPassword,
                       obscureText: true,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.passwordValidator(v,context),
+                      validator: (v) =>
+                          Validators.passwordValidator(v, context),
                     ),
                     SizedBox(height: 10.h),
                     CustomButton(

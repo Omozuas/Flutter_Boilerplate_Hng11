@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -191,6 +192,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     keyboardType: TextInputType.emailAddress,
                     hintText: AppLocalizations.of(context)!.enterEmail,
                     validator: (v) => Validators.emailValidator(v, context),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                   ),
                   SizedBox(
                     height: 16.h,
@@ -199,7 +203,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     label: AppLocalizations.of(context)!.password,
                     controller: LoginScreen._passwordController,
                     hintText: AppLocalizations.of(context)!.password,
-                    validator: (v) => Validators.passwordValidator(v,context),
+                    validator: (v) => Validators.passwordValidator(v, context),
                   ),
                   SizedBox(
                     height: 16.h,
