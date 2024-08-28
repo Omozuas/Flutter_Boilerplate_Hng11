@@ -426,7 +426,9 @@
   "deliveryTime": "7:41 PM",
   "orderNumberText": "Pedido#:",
   "yourProductsWillShowHere": "Tus productos se mostrarán aquí",
-  "somethingWentWrong": "Algo salió mal. \nPor favor, tire para actualizar"
-
+  "somethingWentWrong": "Algo salió mal. \nPor favor, tire para actualizar",
+  "logOutAfterUpdate": "Tu cuenta se cerrará después de actualizar la contraseña",
+  "correctCurrentPassword":"Por favor, ingrese la contraseña actual correcta",
+  "notSameCurrentNewPassword":"La nueva contraseña no debe ser la misma que la contraseña actual"
 }
 
