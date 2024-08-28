@@ -189,14 +189,7 @@ extension Translation on BuildContext {
 
   String get correctCurrentPassword => text.correctCurrentPassword;
 
-String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
-
-
-  // String get logOutAfterUpdate => text.logOutAfterUpdate;
-  //
-  // String get correctCurrentPassword => text.correctCurrentPassword;
-  //
-  // String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
+  String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
 
 
   String get deliveryText => 'Estimated Delivery on 26th Aug';
