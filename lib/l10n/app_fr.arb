@@ -468,7 +468,7 @@
     "tot": "Total",
     "resendInvoice": "Renvoyer la facture",
     "orderDetails": "Détails de la commande",
-  "descriptionPlaceholder": "Veuillez entrer une description",
+
     "welcomeBack": "Bon retour!",
     "discover": "Découvrir",
     "searchProduct": "Rechercher un produit",
@@ -479,14 +479,21 @@
     "plusTwoFromLastMonth": "+ 2 depuis le mois dernier",
     "unknownCustomer": "Client inconnu",
     "noEmailProvided": "Aucun email fourni",
-    "dashboard": "Tableau de bord",
-    "thisMonthSummary": "Résumé de ce mois",
+   
+   
     "noSales": "Pas de ventes ce mois-ci",
-    "recentSalesTitle": "Ventes récentes",
+    
     "addAMember": "Ajouter un membre",
     "totalProducts": "Total des produits",
     "subscriptions": "Abonnements",
     "totalMembers": "Nombre total de membres",
-    "selectIsRequired": "Sélectionnez une valeur valide"
+    "selectIsRequired": "Sélectionnez une valeur valide",
+  "deliveryText": "Livraison estimée le 26 août",
+  "deliveryDateText": "Livré le 19 août",
+  "deliveryDate": "20-août-2024",
+  "deliveryTime": "19:41",
+  "orderNumberText": "Commande#:",
+  "yourProductsWillShowHere": "Vos produits apparaîtront ici",
+  "somethingWentWrong": "Quelque chose s'est mal passé. \nVeuillez tirer pour rafraîchir"
 
 }

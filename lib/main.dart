@@ -54,13 +54,16 @@ class MyApp extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           progressIndicatorTheme: ProgressIndicatorThemeData(
-            color: GlobalColors.orange, // Set the color for CircularProgressIndicator here
+            color: GlobalColors
+                .orange, // Set the color for CircularProgressIndicator here
           ),
+          primaryColor: GlobalColors.orange, // gobal primary color
           textTheme: GoogleFonts.interTextTheme(),
           scaffoldBackgroundColor: Colors.white,
           dialogTheme: DialogTheme(
             backgroundColor:
                 GlobalColors.deemWhiteColor, // Dialog background color
+
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0), // Dialog shape
             ),
@@ -76,10 +79,17 @@ class MyApp extends ConsumerWidget {
               color: Colors.grey[800], // Content text style
             ),
           ),
+
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,
             systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: WidgetStateProperty.all(GlobalColors
+                  .orange), // Set the global color for the TextButton texts
+            ),
           ),
         ),
       ),

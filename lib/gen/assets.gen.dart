@@ -270,6 +270,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/all_sub.svg
   SvgGenImage get allSub => const SvgGenImage('assets/images/svg/all_sub.svg');
 
+  /// File path: assets/images/svg/copyIcon.svg
+  SvgGenImage get copyIcon =>
+      const SvgGenImage('assets/images/svg/copyIcon.svg');
+
   /// File path: assets/images/svg/error_icon.svg
   SvgGenImage get errorIcon =>
       const SvgGenImage('assets/images/svg/error_icon.svg');
@@ -289,6 +293,14 @@ class $AssetsImagesSvgGen {
   $AssetsImagesSvgProductListingGen get productListing =>
       const $AssetsImagesSvgProductListingGen();
 
+  /// File path: assets/images/svg/searchIcon.svg
+  SvgGenImage get searchIcon =>
+      const SvgGenImage('assets/images/svg/searchIcon.svg');
+
+  /// File path: assets/images/svg/shareIcon.svg
+  SvgGenImage get shareIcon =>
+      const SvgGenImage('assets/images/svg/shareIcon.svg');
+
   /// File path: assets/images/svg/success_icon.svg
   SvgGenImage get successIcon =>
       const SvgGenImage('assets/images/svg/success_icon.svg');
@@ -305,10 +317,13 @@ class $AssetsImagesSvgGen {
         activeMembers,
         addUser,
         allSub,
+        copyIcon,
         errorIcon,
         notificationIcon,
         peopleHng,
         product,
+        searchIcon,
+        shareIcon,
         successIcon,
         system,
         totalProduct
@@ -331,11 +346,16 @@ class $AssetsImagesPngProductListingGen {
       const AssetGenImage('assets/images/png/product_listing/profile.png');
 
   /// File path: assets/images/png/product_listing/sport-shoes.png
-  AssetGenImage get sportShoes =>
+  AssetGenImage get sportShoesPng =>
       const AssetGenImage('assets/images/png/product_listing/sport-shoes.png');
 
+  /// File path: assets/images/png/product_listing/sport_shoes.png
+  AssetGenImage get sportShoesPng_ =>
+      const AssetGenImage('assets/images/png/product_listing/sport_shoes.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [iphone, product, profile, sportShoes];
+  List<AssetGenImage> get values =>
+      [iphone, product, profile, sportShoesPng, sportShoesPng_];
 }
 
 class $AssetsImagesSvgAccountSettingsGen {

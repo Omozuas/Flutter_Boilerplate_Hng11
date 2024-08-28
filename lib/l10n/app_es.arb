@@ -161,8 +161,7 @@
   "inStockLabel": "En stock",
   "productRatingsAndReviews": "Calificaciones y reseñas del producto",
   "variationLabel": "Variación",
-  "dashboard": "Tablero",
-  "thisMonthSummary": "Resumen de este mes",
+
   "totalRevenue": "Ingresos totales",
   "overview": "Resumen",
   
@@ -172,12 +171,12 @@
   "errorOccurred": "Ocurrió un error",
   "failedToAddProduct": "Error al agregar el producto",
   "completeFormFill": "Por favor, completa el formulario",
-  "recentSalesTitle": "Ventas recientes",
+  
   "addProductButton": "Agregar un producto",
   "productAddedSuccessfullyMessage": "Producto agregado con éxito",
   "productNameLabel": "Nombre del producto",
   "productNamePlaceholder": "Por favor, ingrese un nombre de producto",
-  "descriptionPlaceholder": "Por favor ingrese la descripción",
+
   "productDescriptionPlaceholder": "Ingrese la descripción del producto",
   "pricePlaceholder": "Por favor, ingrese un precio",
   "productQuantityPlaceholder": "Por favor, ingrese la cantidad del producto",
@@ -420,7 +419,14 @@
     "totalProducts": "Total de productos",
     "subscriptions": "Suscripciones",
     "totalMembers": "Total de miembros",
-    "selectIsRequired": "Seleccione un valor válido"
+    "selectIsRequired": "Seleccione un valor válido",
+  "deliveryText": "Entrega estimada el 26 de agosto",
+  "deliveryDateText": "Entregado el 19 de agosto",
+  "deliveryDate": "20-ago-2024",
+  "deliveryTime": "7:41 PM",
+  "orderNumberText": "Pedido#:",
+  "yourProductsWillShowHere": "Tus productos se mostrarán aquí",
+  "somethingWentWrong": "Algo salió mal. \nPor favor, tire para actualizar"
 
 }
 
