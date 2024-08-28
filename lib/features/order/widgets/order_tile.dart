@@ -26,7 +26,8 @@ class OrderTile extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              width: width(context),
+              width: 383.w,
+              //width(context),
               height: 107.h,
               padding: EdgeInsets.only(
                 left: 20.w,
@@ -87,17 +88,23 @@ class OrderTile extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: 92.sp,
-              height: 79.sp,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(
-                  color: const Color.fromRGBO(247, 247, 247, 1),
+            Positioned(
+              top: 16,
+              bottom: 12.h,
+              right: 20.w,
+              left: 251.w,
+              child: Container(
+                width: 92.sp,
+                height: 79.sp,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(
+                    color: const Color.fromRGBO(247, 247, 247, 1),
+                  ),
                 ),
+                child: Image.asset(order.image),
               ),
-              child: Image.asset(order.image),
             ),
           ],
         ),
