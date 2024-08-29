@@ -101,6 +101,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
   Widget build(BuildContext context) {
     final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
     final asyncLinkValue = ref.watch(profileProvider).inviteLink;
+
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.members,
@@ -148,101 +149,73 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 16.h,
-              ),
+              SizedBox(height: 16.h),
               Container(
-                height: 61.h,
-                width: double.infinity,
-                padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                padding:
+                    EdgeInsets.symmetric(horizontal: 9.sp, vertical: 11.sp),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4.r),
-                    border: Border.all(
-                        color: GlobalColors.borderColor, width: 0.7)),
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.start,  // Align text to the start
-                  children: [
-                    SizedBox(
-                      width: 7.w,
+                  borderRadius: BorderRadius.circular(4.r),
+                  border:
+                      Border.all(color: GlobalColors.borderColor, width: 0.7),
+                ),
+                child: asyncLinkValue.when(
+                  loading: () => Center(
+                    child: SizedBox(
+                      height: 15.h,
+                      width: 15.h,
+                      child: const CircularProgressIndicator.adaptive(),
                     ),
-                    SizedBox(
-                      height: 45.w,
-                      width: 280.w,
-                      child: asyncLinkValue.when(
-                        data: (inviteLink) => Scrollbar(
-                          thumbVisibility: true,
-                          thickness: 2.0.w,
-                          controller: _scrollController,
-                          child: SingleChildScrollView(
-                            controller: _scrollController,
-                            child: Text(inviteLink ?? "No link ",
-                                softWrap: true,
-                                style: CustomTextStyle.medium(
-                                  fontSize: 10.sp,
-                                  color: GlobalColors.dark2,
-                                )),
+                  ),
+                  error: (e, st) {
+                    return Center(
+                      child: Text(
+                        context.text.errorFetchingLink,
+                        style: CustomTextStyle.medium(
+                          fontSize: 10.sp,
+                          color: GlobalColors.dark2,
+                        ),
+                      ),
+                    );
+                  },
+                  data: (inviteLink) {
+                    if (inviteLink == null) {
+                      return const Center(child: SizedBox(height: 14.0));
+                    }
+                    return Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            inviteLink,
+                            softWrap: true,
+                            style: CustomTextStyle.medium(
+                              fontSize: 10.sp,
+                              color: GlobalColors.dark2,
+                            ),
                           ),
                         ),
-                        loading: () => Center(
-                          child: SizedBox(
-                              height: 15.h,
-                              width: 15.h,
-                              child:
-                                  const CircularProgressIndicator.adaptive()),
-                        ),
-                        error: (e, st) {
-                          return Center(
-                            child: Text(
-                                AppLocalizations.of(context)!.errorFetchingLink,
-                                style: CustomTextStyle.medium(
-                                  fontSize: 10.sp,
-                                  color: GlobalColors.dark2,
-                                )),
-                          );
-                        },
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 24.h,
-                          width: 24.w,
-                          child: InkWell(
-                            onTap: () {
-                              asyncLinkValue.whenData((link) {
-                                if (link != null) {
-                                  Share.share(link); // Share the link
-                                }
-                              });
-                            },
-                            child: SvgPicture.asset(
-                                "assets/images/svg/shareIcon.svg"),
+                        SizedBox(width: 10.w),
+                        InkWell(
+                          onTap: () => Share.share(inviteLink),
+                          child: SvgPicture.asset(
+                            "assets/images/svg/shareIcon.svg",
                           ),
                         ),
                         SizedBox(width: 5.5.w),
-                        SizedBox(
-                          height: 24.h,
-                          width: 24.w,
-                          child: InkWell(
-                              onTap: () {
-                                asyncLinkValue.whenData((link) {
-                                  if (link != null) {
-                                    Clipboard.setData(ClipboardData(
-                                        text: link)); // Copy the link
-                                    showCustomToast(context,
-                                        AppLocalizations.of(context)!.copyLink);
-                                  }
-                                });
-                              },
-                              child: SvgPicture.asset(
-                                "assets/images/svg/copyIcon.svg",
-                                fit: BoxFit.contain,
-                              )),
+                        InkWell(
+                          onTap: () {
+                            Clipboard.setData(
+                              ClipboardData(text: inviteLink),
+                            ); // Copy the link
+                            showCustomToast(context, context.text.copyLink);
+                          },
+                          child: SvgPicture.asset(
+                            "assets/images/svg/copyIcon.svg",
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ],
-                    )
-                  ],
+                    );
+                  },
                 ),
               ),
               const SizedBox(
