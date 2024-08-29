@@ -389,6 +389,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         },
         context,
         [LoginScreen._emailController, LoginScreen._passwordController]);
+    _isLoggingIn = false;
   }
 }
 
