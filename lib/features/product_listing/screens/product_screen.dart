@@ -3,10 +3,12 @@ import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.d
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
@@ -25,7 +27,7 @@ class ProductScreen extends ConsumerWidget {
         titleText: AppLocalizations.of(context)!.products,
         subTitle: AppLocalizations.of(context)!.viewAllProducts,
         onBack: () {
-          // context.go(AppRoute.home);
+          context.go(AppRoute.home);
         },
       ),
       body: Column(
@@ -55,7 +57,7 @@ class ProductScreen extends ConsumerWidget {
                       (MediaQuery.sizeOf(context).height / 4).sbH,
                       Center(
                         child: Text(
-                          'Your products will show here',
+                          context.yourProductsWillShowHere,
                           style: CustomTextStyles.productTextBody4Black,
                           textAlign: TextAlign.center,
                         ),
@@ -112,17 +114,21 @@ class ProductScreen extends ConsumerWidget {
               error: (Object error, StackTrace stackTrace) {
                 debugPrint(error.toString());
                 return Scaffold(
-                  body: ListView(
-                    children: [
-                      (MediaQuery.sizeOf(context).height / 3).sbH,
-                      Center(
-                        child: Text(
-                          'Something went wrong',
-                          style: TextStyle(color: Colors.red, fontSize: 16.sp),
-                          textAlign: TextAlign.center,
+                  body: RefreshIndicator.adaptive(
+                    onRefresh: () => ref.refresh(productListProvider.future),
+                    child: ListView(
+                      children: [
+                        (MediaQuery.sizeOf(context).height / 3).sbH,
+                        Center(
+                          child: Text(
+                            context.somethingWentWrong,
+                            style:
+                                TextStyle(color: Colors.red, fontSize: 16.sp),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

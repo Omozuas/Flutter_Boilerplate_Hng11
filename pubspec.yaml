@@ -44,10 +44,11 @@ dependencies:
   intl: any
 
   http_parser: ^4.0.2
-  # flutter_inappwebview: ^5.8.0
   badges: ^3.1.2
   share_plus: ^10.0.2
   jiffy: ^6.3.1
+  flutter_inappwebview: ^6.0.0
+  country_state_city_pro: ^0.0.6
 dev_dependencies:
   flutter_test:
     sdk: flutter

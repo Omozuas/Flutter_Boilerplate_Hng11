@@ -1,5 +1,6 @@
 //custom_textfield.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,7 +23,7 @@ class CustomTextField extends StatelessWidget {
   final Color? borderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
-  
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
@@ -30,7 +31,8 @@ class CustomTextField extends StatelessWidget {
     this.labelStyle,
     required this.controller,
     this.padding,
-    this.hintText, this.errorText,
+    this.hintText,
+    this.errorText,
     this.hintTextStyle,
     this.keyboardType,
     this.obscureText,
@@ -44,6 +46,7 @@ class CustomTextField extends StatelessWidget {
     this.focusedBorderColor,
     this.focusNode,
     this.onchanged,
+    this.inputFormatters,
   });
 
   @override
@@ -78,6 +81,7 @@ class CustomTextField extends StatelessWidget {
             obscureText: obscureText ?? false,
             maxLines: maxLines ?? 1,
             validator: validator,
+            inputFormatters: inputFormatters,
             focusNode: focusNode,
             onChanged: onchanged,
             textInputAction: TextInputAction.next,
@@ -86,7 +90,6 @@ class CustomTextField extends StatelessWidget {
                   EdgeInsets.symmetric(
                     vertical: 8.h,
                     horizontal: 12.w,
-                  
                   ),
               hintText: hintText,
               errorText: errorText,

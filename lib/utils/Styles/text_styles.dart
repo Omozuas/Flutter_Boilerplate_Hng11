@@ -21,19 +21,20 @@ class CustomTextStyles {
   static TextStyle bannerbodyTextBlack = TextStyle(
       fontSize: 12.sp,
       color: GlobalColors.black200Color,
-      fontWeight: FontWeight.w500); 
-      static TextStyle bannerbodyTextBlack500 = TextStyle(
+      fontWeight: FontWeight.w500);
+  static TextStyle bannerbodyTextBlack500 = TextStyle(
       fontSize: 12.sp,
       color: GlobalColors.black200Color,
       fontWeight: FontWeight.w400);
   static TextStyle bannerbodyTextBlack200 = TextStyle(
       fontSize: 12.sp,
       color: GlobalColors.mutedTextColor,
-      fontWeight: FontWeight.w600); 
-      static TextStyle bannerbodyTextBlack300 = TextStyle(
+      fontWeight: FontWeight.w600);
+  static TextStyle bannerbodyTextBlack300 = TextStyle(
       fontSize: 12.sp,
       color: GlobalColors.mutedTextColor,
-      fontWeight: FontWeight.w500);static TextStyle bannerbodyTextBlack400 = TextStyle(
+      fontWeight: FontWeight.w500);
+  static TextStyle bannerbodyTextBlack400 = TextStyle(
       fontSize: 12.sp,
       color: GlobalColors.mutedTextColor,
       fontWeight: FontWeight.w400);

@@ -50,13 +50,13 @@ class NotificationHomeScreen extends ConsumerWidget {
                         padding: 16.sp.padH,
                         child: Row(
                           children: [
-                            Text(
+                            Wrap( children: [Text(
                               "General",
                               style: GoogleFonts.outfit(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
                                   color: GlobalColors.black),
-                            ),
+                            ),],),
                             if(notificationStateProvider.unReadNotificationCount > 0)
                               NotificationCountCard(
                                 count: notificationStateProvider.unReadNotificationCount,

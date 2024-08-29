@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/dashboard_api.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/models/product/product_model.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_storage/get_storage.dart';
@@ -102,8 +104,9 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
 
   getAllCached() async {
     data = [];
-    await getCachedDashboardData();
-    await getCachedSalesTrend();
+    getCachedDashboardData();
+    getAllCachedProducts();
+    getCachedSalesTrend();
     await getCachedOrganizationOverview();
   }
 
@@ -163,6 +166,7 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
       final res = await DashboardApi().getAllOrgProducts();
       if (res.isNotEmpty) {
         setAllProductCount = res.length;
+        await saveProducts(res);
       } else {
         setAllProductCount = 0;
       }
@@ -263,6 +267,20 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
     }
   }
 
+  Future<void> getAllCachedProducts() async {
+    try {
+      final res = _storageService.read("allProducts");
+      if (res != null) {
+        setAllProductCount = getProductListFromJsontoString(res).length;
+      }
+    } catch (e) {
+      log(e.toString());
+      //tODO: Do something with caught error;
+    } finally {
+      // setNormalButtonLoading = false;
+    }
+  }
+
   Future<bool> saveDashboardData(DashBoardModel value) async {
     try {
       _storageService.write("dashboard_data", jsonEncode(value));
@@ -274,6 +292,28 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
     } catch (err) {
       return false;
     }
+  }
+
+  Future<bool> saveProducts(List<Product> value) async {
+    try {
+      _storageService.write("allProducts", getProductListFromJsontoString(value));
+      bool res = _storageService.hasData("allProducts");
+      if (res) {
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  goToProduct(BuildContext context){
+    goToAddProduct(context).whenComplete(_initializeDashboardData);
+  }
+
+  Future<void> goToAddProduct(BuildContext context)async{
+    context.go(AppRoute.products);
+    context.push(AppRoute.addProduct);
   }
 
   Future<bool> saveOrganizationOverview(OrganizationOverviewModel value) async {

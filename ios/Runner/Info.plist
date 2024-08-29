@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>App needs permission to use camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App needs permission to access gallery to pick a photo</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -27,23 +31,23 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	 <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>com.googleusercontent.apps.77479405288-aeagqg4lmhgqv6sohvhtds41cht6mje6</string>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.googleusercontent.apps.77479405288-aeagqg4lmhgqv6sohvhtds41cht6mje6</string>
+	</array>
 	<key>CFBundleURLTypes</key>
-<array>
-    <dict>
-        <key>CFBundleIdentifier</key>
-        <string></string>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-            <string>com.googleusercontent.apps.77479405288-aeagqg4lmhgqv6sohvhtds41cht6mje6</string>
-        </array>
-    </dict>
-</array>
+	<array>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.77479405288-aeagqg4lmhgqv6sohvhtds41cht6mje6</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>

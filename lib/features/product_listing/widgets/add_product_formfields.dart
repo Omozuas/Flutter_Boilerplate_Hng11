@@ -133,6 +133,12 @@ class DescriptionFormField extends StatelessWidget {
         borderColor: GlobalColors.containerBorderColor,
         hintText: AppLocalizations.of(context)!.productDescriptionPlaceholder,
         showCounter: false,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return AppLocalizations.of(context)!.descriptionPlaceholder;
+          }
+          return null;
+        },
       ),
     );
   }
@@ -146,7 +152,6 @@ class ProductPriceFormField extends StatelessWidget {
     // final productPriceController = TextEditingController();
     return SizedBox(
       child: CustomTextField(
-       
         controller: controller,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -155,7 +160,7 @@ class ProductPriceFormField extends StatelessWidget {
         ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
-         prefixIcon: const Padding(
+        prefixIcon: const Padding(
           padding: EdgeInsets.all(12.0),
           child: Icon(
             Icons.attach_money,
@@ -184,8 +189,6 @@ class ProductPriceFormField extends StatelessWidget {
   }
 }
 
-
-
 class ProductQuantityFormField extends StatelessWidget {
   const ProductQuantityFormField({super.key, required this.controller});
   final TextEditingController controller;
@@ -197,8 +200,11 @@ class ProductQuantityFormField extends StatelessWidget {
       child: CustomTextField(
         controller: controller,
         keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*')),
+        ],
         borderColor: GlobalColors.containerBorderColor,
-        hintText: '0.00 pcs',
+        hintText: '2 pcs',
         validator: (value) {
           if (value == null || value.isEmpty) {
             return AppLocalizations.of(context)!.productQuantityPlaceholder;
@@ -209,7 +215,6 @@ class ProductQuantityFormField extends StatelessWidget {
     );
   }
 }
-
 
 class DecimalTextInputFormatter extends TextInputFormatter {
   final int decimalRange;

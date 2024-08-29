@@ -27,6 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: !canPop && onBack == null ? 24.w : 0,
         leading: _buildBackButton(context),
         title: title,
+        centerTitle: false,
         bottom: showDivider
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(
@@ -58,7 +59,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(singleLine ? kToolbarHeight.h : 75.h);
+  Size get preferredSize =>
+      Size.fromHeight((singleLine ? kToolbarHeight.h : 75.h) + 10);
 
   const CustomAppBar.empty({super.key})
       : singleLine = true,
