@@ -56,6 +56,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (_, index) {
+                    int number = 9900 + index;
                     String deliveryText;
                     Color deliveryColor;
 
@@ -73,10 +74,13 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                     }
 
                     return InkWell(
-                      onTap: () => context.push(AppRoute.orderDetails),
+                      onTap: () =>
+                          context.go('${AppRoute.orderDetails}/$index'),
+                      //context.push(AppRoute.orderDetails),
                       child: OrderTile(
                         order: Order(
-                          number: 99012,
+                          id: index,
+                          number: number,
                           image: AppImages.shoes,
                           deliveryDate: '20-Aug-2024',
                           deliveryTime: '7:41 PM',
