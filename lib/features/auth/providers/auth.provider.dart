@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
@@ -11,6 +14,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../common_models/user.dart';
+import '../../../services/error_handlers.dart';
 import '../../../services/service_locator.dart';
 import '../../../services/user.service.dart';
 
@@ -95,7 +99,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       final res = await AuthApi().registerSingleUser(data: data);
 
       if (res != null) {
-        showSnackBar(res.message.toString());
+        showSnackBar(res.message.toString(), success: true);
         UserRegData userRegData = UserRegData.fromJson(res.data);
         setUser = User.fromJson(userRegData.data?['user']);
         setOrganizations = (userRegData.data?['organisations'] as List?)
@@ -137,7 +141,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         final googleAuth = await googleUser.authentication;
         final res = await AuthApi().googleSignIn(googleAuth.idToken ?? '');
         if (res != null) {
-          showSnackBar(res.message.toString());
+          showSnackBar(res.message.toString(), success: true);
           UserRegData userRegData = UserRegData.fromJson(res.data);
           setUser = User.fromJson(userRegData.data?['user']);
           setOrganizations = (userRegData.data?['organisations'] as List?)
@@ -256,7 +260,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       setPasswordButtonLoading = true;
       final res = await AuthApi().forgotPassword(email: email);
       if (res != null) {
-        showSnackBar(res.message.toString());
+        showSnackBar(res.message.toString(), success: true);
         setPasswordButtonLoading = false;
         if (context.mounted) {
           context.push('/verificationScreen/$email');
@@ -273,7 +277,7 @@ class AuthProvider extends StateNotifier<AuthState> {
       final res = await AuthApi().verifyCode(email: email, code: code);
 
       if (res != null) {
-        showSnackBar(res.message.toString());
+        showSnackBar(res.message.toString(), success: true);
 
         if (context.mounted) {
           context.replace('/resetPassword/$email');

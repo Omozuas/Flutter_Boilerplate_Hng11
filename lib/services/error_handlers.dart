@@ -11,6 +11,12 @@ class ErrorHandlers {
       return;
     }
 
+    DioException err = error;
+    if(err.response?.statusCode == 404){
+      log('Check not found : ${err.requestOptions.path}');
+      return;
+    }
+
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
         showSnackBar('Connection timed out');
@@ -48,26 +54,30 @@ class ErrorHandlers {
     }
   }
 
-  static void _serverErrorHandler(Response response) {
+  static _serverErrorHandler(Response response) {
     log('serverE1${response.data}');
 
     if (response.data != null) {
       try {
         showSnackBar(response.data['message']);
+        return response.data['message'];
       } catch (e) {
         showSnackBar('Seems something happened');
+        return "Nothing";
       }
     } else {
       showSnackBar('Seems something happened');
+      return "Nothings";
     }
-    switch (response.statusCode) {
-      case 400:
-      case 401:
 
-      // case 403:
-      // case 404:
-      case 500:
-      default:
-    }
+    // switch (response.statusCode) {
+    //   case 400:
+    //   case 401:
+    //
+    //   // case 403:
+    //   // case 404:
+    //   case 500:
+    //   default:
+    // }
   }
 }
