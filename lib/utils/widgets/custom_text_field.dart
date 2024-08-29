@@ -46,7 +46,7 @@ class CustomTextField extends StatelessWidget {
     this.focusedBorderColor,
     this.focusNode,
     this.onchanged,
-    this.inputFormatters,
+    this.inputFormatters, required Null Function(dynamic value) onChanged,
   });
 
   @override

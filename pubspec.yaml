@@ -49,6 +49,7 @@ dependencies:
   jiffy: ^6.3.1
   flutter_inappwebview: ^6.0.0
   country_state_city_pro: ^0.0.6
+  lottie: ^3.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

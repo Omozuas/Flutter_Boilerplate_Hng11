@@ -2,43 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
-import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-
+import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../widgets/product_loader.dart';
 
-class ProductScreen extends ConsumerWidget {
+class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _ProductScreenState createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends ConsumerState<ProductScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late TextEditingController _searchController; // Initialize the controller
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(vsync: this);
+    _searchController = TextEditingController(); // Instantiate the controller
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _searchController.dispose(); // Dispose of the controller
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.products,
         subTitle: AppLocalizations.of(context)!.viewAllProducts,
-        // onBack: () {
-        //   context.go(AppRoute.home);
-        // },
+        onBack: () {
+          context.go(AppRoute.home);
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ref.read(productsByCategoryProvider).isLoading && ref.watch(productsInCategoryDataProvider).isNotEmpty? SizedBox(
-            height: 10.h,
-            width: width(context),
-            child: LinearProgressIndicator(
-              backgroundColor: GlobalColors.orange.withOpacity(0.1),
-            ),
-          ): 0.0.sbH,
           SizedBox(
             height: 24.h,
           ),
@@ -47,8 +62,9 @@ class ProductScreen extends ConsumerWidget {
             child: CustomTextField(
               suffixIcon: const Icon(Icons.search),
               hintText: AppLocalizations.of(context)!.searchProductButton,
+              controller: _searchController, // Assign the controller
               onChanged: (value) {
-                if (value != null) {
+                if (value.isNotEmpty) {
                   ref.read(searchInputProvider.notifier).update(value);
                 }
               },
@@ -58,17 +74,17 @@ class ProductScreen extends ConsumerWidget {
             child: ref.watch(productListProvider).when(
               data: (data) {
                 if (data.isEmpty) {
-                  return ListView(
-                    children: [
-                      (MediaQuery.sizeOf(context).height / 4).sbH,
-                      Center(
-                        child: Text(
-                          context.yourProductsWillShowHere,
-                          style: CustomTextStyles.productTextBody4Black,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
+                  return Center(
+                    child: Lottie.asset(
+                      '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                      controller: _animationController,
+                      onLoaded: (composition) {
+                        _animationController
+                          ..duration = composition.duration
+                          ..repeat(); // Set the animation to repeat
+                      },
+                      fit: BoxFit.cover, // Set the fit to BoxFit.cover
+                    ),
                   );
                 }
                 return Padding(
@@ -100,7 +116,8 @@ class ProductScreen extends ConsumerWidget {
                                 );
                               },
                               separatorBuilder:
-                                  (BuildContext context, int index) => SizedBox(
+                                  (BuildContext context, int index) =>
+                                      SizedBox(
                                 height: 24.h,
                               ),
                             ),
@@ -110,7 +127,7 @@ class ProductScreen extends ConsumerWidget {
                           return const SizedBox();
                         },
                         loading: () {
-                          return const SizedBox();
+                          return const ProductLoader();
                         },
                       );
                     }),
@@ -128,8 +145,7 @@ class ProductScreen extends ConsumerWidget {
                         Center(
                           child: Text(
                             context.somethingWentWrong,
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp),
+                            style: TextStyle(color: Colors.red, fontSize: 16.sp),
                             textAlign: TextAlign.center,
                           ),
                         ),
