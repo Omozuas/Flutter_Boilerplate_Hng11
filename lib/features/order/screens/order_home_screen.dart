@@ -22,9 +22,9 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        onBack: () {
-          context.go(AppRoute.home);
-        },
+        // onBack: () {
+        //   context.go(AppRoute.home);
+        // },
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

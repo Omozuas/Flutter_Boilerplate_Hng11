@@ -26,9 +26,9 @@ class ProductScreen extends ConsumerWidget {
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.products,
         subTitle: AppLocalizations.of(context)!.viewAllProducts,
-        onBack: () {
-          context.go(AppRoute.home);
-        },
+        // onBack: () {
+        //   context.go(AppRoute.home);
+        // },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
