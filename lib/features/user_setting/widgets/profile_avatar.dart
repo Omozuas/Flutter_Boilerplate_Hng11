@@ -10,18 +10,19 @@ import '../provider/profile_provider.dart';
 import 'custom_network_image.dart';
 
 class ProfileAvatar extends ConsumerWidget {
-  const ProfileAvatar({super.key, this.pickedImage});
+  const ProfileAvatar({super.key, this.radius = 40.0, this.pickedImage});
   final XFile? pickedImage;
+  final double radius;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncUser = ref.watch(profileProvider).user;
 
     return CircleAvatar(
-      radius: 40.0,
+      radius: radius,
       child: pickedImage != null
           ? ClipRRect(
-              borderRadius: BorderRadius.circular(40.0),
+              borderRadius: BorderRadius.circular(radius),
               child: Image.file(
                 height: 80.0,
                 width: 80.0,
@@ -40,7 +41,7 @@ class ProfileAvatar extends ConsumerWidget {
                   error: (_, __) {
                     return const Center(
                       child: Text(
-                        'AN',
+                        '',
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w500),
                       ),
@@ -73,11 +74,11 @@ class ProfileAvatar extends ConsumerWidget {
 
   String initials([UserModel? user]) {
     try {
-      var initials = 'AN';
+      var initials = '';
       if (user == null) return initials;
       if (user.fullname.isEmpty) return initials;
 
-      final u = user.fullname.split(' ');
+      final u = user.fullname.toUpperCase().split(' ');
       if (u.length == 1) return u.first;
       return '${u[0][0]}${u[1][0]}';
     } catch (e) {

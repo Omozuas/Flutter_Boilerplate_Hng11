@@ -132,7 +132,11 @@ class DescriptionFormField extends StatelessWidget {
         showCounter: false,
         validator: (value) {
           if (value == null || value.isEmpty) {
+<<<<<<< HEAD
             return 'Description is required';
+=======
+            return AppLocalizations.of(context)!.descriptionPlaceholder;
+>>>>>>> dev
           }
           return null;
         },
@@ -152,6 +156,7 @@ class ProductPriceFormField extends StatelessWidget {
         controller: controller,
         keyboardType: TextInputType.number,
         inputFormatters: [
+<<<<<<< HEAD
           FilteringTextInputFormatter.allow(
             RegExp(r'^\d{1,3}(,\d{3})*(\.\d{0,2})?$'),
           ),
@@ -159,15 +164,34 @@ class ProductPriceFormField extends StatelessWidget {
         ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '\$ 0.00',
+=======
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          DecimalTextInputFormatter(decimalRange: 2),
+        ],
+        borderColor: GlobalColors.containerBorderColor,
+        hintText: '0.00',
+        prefixIcon: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Icon(
+            Icons.attach_money,
+            //size: 20,
+          ),
+        ),
+>>>>>>> dev
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter a value';
           }
 
+<<<<<<< HEAD
           String sanitizedValue = value.replaceAll(',', '');
 
           try {
             double parsedValue = double.parse(sanitizedValue);
+=======
+          try {
+            double parsedValue = double.parse(value);
+>>>>>>> dev
 
             if (parsedValue <= 0) {
               return 'Please enter a value greater than 0';
@@ -221,6 +245,7 @@ class ProductQuantityFormField extends StatelessWidget {
         controller: controller,
         keyboardType: TextInputType.number,
         inputFormatters: [
+<<<<<<< HEAD
           FilteringTextInputFormatter.digitsOnly,
         ],
         borderColor: GlobalColors.containerBorderColor,
@@ -258,10 +283,56 @@ class ProductCategoryFormField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Category is required';
+=======
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*')),
+        ],
+        borderColor: GlobalColors.containerBorderColor,
+        hintText: '2 pcs',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return AppLocalizations.of(context)!.productQuantityPlaceholder;
+>>>>>>> dev
           }
           return null;
         },
       ),
     );
+  }
+}
+
+class DecimalTextInputFormatter extends TextInputFormatter {
+  final int decimalRange;
+
+  DecimalTextInputFormatter({required this.decimalRange})
+      : assert(decimalRange >= 0);
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    String text = newValue.text;
+
+    if (text == '') {
+      return newValue;
+    }
+
+    // Only allow a single decimal point
+    if (text.contains('.') && text.split('.').length > 2) {
+      return oldValue;
+    }
+
+    // Limit the number of decimal places
+    if (text.contains('.') &&
+        text.substring(text.indexOf('.') + 1).length > decimalRange) {
+      return oldValue;
+    }
+
+    // Ensure the value is a valid double
+    try {
+      double.parse(text);
+    } catch (e) {
+      return oldValue;
+    }
+
+    return newValue;
   }
 }

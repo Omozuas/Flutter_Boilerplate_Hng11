@@ -17,16 +17,25 @@ class PasswordService {
   PasswordService(this._dio);
 
   Future<void> updatePassword({
-    required String email,
+    required String currentPassword,
     required String newPassword,
     required String confirmPassword,
+    required String token,
   }) async {
     try {
-      await _dio.put('auth/reset-password-mobile', data: {
-        'email': email,
-        'newPassword': newPassword,
-        'confirmNewPassword': confirmPassword,
-      });
+      await _dio.put(
+        'auth/password',
+        data: {
+          'old_password': currentPassword,
+          'new_password': newPassword,
+          'confirm_new_password': confirmPassword,
+        },
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
     } catch (e) {
       rethrow;
     }

@@ -21,7 +21,7 @@ class ProductCardListWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(right: 24.w),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -29,10 +29,19 @@ class ProductCardListWidget extends StatelessWidget {
                 categoryName,
                 style: PlusJakartaTextStyle.headerText2,
               ),
-              Text(
-                // "See more",
-                '',
-                style: PlusJakartaTextStyle.bodyTextGrey,
+              TextButton(
+                // onPressed: () => context.push(AppRoute.productsByCategory),
+                onPressed: () {
+                  final url = Uri(
+                      path: AppRoute.productsByCategory,
+                      queryParameters: {'key': categoryName});
+                  context.push(url.toString());
+                },
+                child: Text(
+                  'See More',
+                  // '',
+                  style: PlusJakartaTextStyle.bodyTextGrey,
+                ),
               )
             ],
           ),
@@ -48,17 +57,22 @@ class ProductCardListWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (ctx, index) {
                 final product = products[index];
-                return InkWell(
-                  onTap: () =>
-                      context.push('${AppRoute.products}/${product.id!}'),
-                  child: SizedBox(
-                    width: GlobalScreenSize.getScreenWidth(context) * 0.88,
-                    child: ProductCardWiget(
-                      productNmae: '${product.name}',
-                      status: '${product.status}'.capitalize,
-                      category: '${product.category}',
-                      price: product.price ?? 0,
-                      image: product.image ?? '',
+                return Padding(
+                  padding: EdgeInsets.only(
+                      left: index == 0 ? 24.w : 0,
+                      right: index == products.length - 1 ? 24.0.w : 0),
+                  child: InkWell(
+                    onTap: () =>
+                        context.push('${AppRoute.products}/${product.id!}'),
+                    child: SizedBox(
+                      width: GlobalScreenSize.getScreenWidth(context) * 0.88,
+                      child: ProductCardWiget(
+                        productNmae: '${product.name}',
+                        status: '${product.status}'.capitalize,
+                        category: '${product.category}',
+                        price: product.price ?? 0,
+                        image: product.image ?? '',
+                      ),
                     ),
                   ),
                 );

@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/revie
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductRatingAndReviewSection extends StatefulWidget {
   const ProductRatingAndReviewSection({super.key});
@@ -36,7 +37,7 @@ class _ProductRatingAndReviewSectionState
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Product Ratings and Reviews",
+                  AppLocalizations.of(context)!.productRatingsAndReviews,
                   style: TextStyle(color: GlobalColors.mutedTextColor),
                 ),
                 Icon(showRatingAndReview

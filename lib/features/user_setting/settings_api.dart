@@ -1,11 +1,13 @@
 import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/notification_model.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/models/subscription_model.dart';
-import 'package:http_parser/http_parser.dart';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http_parser/http_parser.dart';
 
 import '../../services/dio_provider.dart';
 import '../../services/service_locator.dart';
@@ -13,6 +15,7 @@ import 'models/user_model.dart';
 import 'models/user_profile.dart';
 
 class SettingsApi {
+  GetStorage storage = GetStorage();
   SettingsApi(this.ref);
   final Ref ref;
 
@@ -42,25 +45,16 @@ class SettingsApi {
     }
   }
 
-  Future<UserProfile> updateProfile({
-    required String email,
-    required UserProfile profile,
-  }) async {
+  Future<UserProfile> updateProfile(UserProfile profile) async {
     try {
-      final response = await dio.putUpdate(
-        '/profile/$email',
-        data: profile.toMap(),
-      );
+      final response = await dio.putUpdate('/profile', data: profile.toMap());
       return UserProfile.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<String> updateProfileAvatar({
-    required File file,
-    required String email,
-  }) async {
+  Future<String> updateProfileAvatar(File file) async {
     try {
       final multipart = await MultipartFile.fromFile(
         file.path,
@@ -68,8 +62,8 @@ class SettingsApi {
         contentType: MediaType('image', 'png'),
       );
       final response = await dio.multipartPut(
-        '/profile/$email/picture',
-        data: {'DisplayPhoto': multipart},
+        '/profile/picture',
+        data: {'display_photo': multipart},
         options: Options(headers: {'Content-Type': 'multipart/form-data'}),
       );
       return response?.data['data']['avatar_url'] ?? '';
@@ -100,12 +94,24 @@ class SettingsApi {
     }
   }
 
-  Future<SubscriptionModel> getsubscription({required String orgId}) async {
+  Future<SubscriptionModel> getsubscriptionOrgId(
+      {required String orgId}) async {
     try {
       final response = await dio.get(
-        '/subscriptions/user/$orgId',
+        '/subscriptions/organization/$orgId',
       );
-      return subscriptionModelFromJson(response?.data['data']);
+      return SubscriptionModel.fromMap(response?.data['data']);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<SubscriptionModel> getSubscriptionUserId(String userId) async {
+    try {
+      final response = await dio.get(
+        '/subscriptions/user/$userId',
+      );
+      return SubscriptionModel.fromMap(response?.data['data']);
     } catch (e) {
       rethrow;
     }
@@ -131,6 +137,56 @@ class SettingsApi {
         "confirmNewPassword": confirmNewPassword
       });
       return;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> generateInviteLink({required String orgId}) async {
+    try {
+      final response = await dio.get('organisations/$orgId/invites');
+      return response?.data['data']['invite_link'];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> sendInviteLink(
+      {required String email, required String inviteLink}) async {
+    try {
+      await dio.post('/invite/send',
+          data: {'email': email, 'inviteLink': inviteLink});
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Members>> getOrganisationMembers({required String orgId}) async {
+    try {
+      final response = await dio.get('/organisations/$orgId/users');
+      List<dynamic> usersJson = response?.data['data']['users'];
+      final members = usersJson.map((json) => Members.fromJson(json)).toList();
+      return members;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> initiateSubscription({
+    required String email,
+    required double amount,
+    required String plan,
+    required String frequency,
+  }) async {
+    try {
+      final response = await dio.post('/transactions/initiate/subscription',
+          data: {
+            "email": email,
+            "amount": amount,
+            "plan": plan,
+            "frequency": frequency
+          });
+      return response?.data['data']['authorization_url'];
     } catch (e) {
       rethrow;
     }

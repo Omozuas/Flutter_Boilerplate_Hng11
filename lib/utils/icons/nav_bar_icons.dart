@@ -28,6 +28,8 @@ class NavBar {
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData products =
       IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData cart =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData settings =
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

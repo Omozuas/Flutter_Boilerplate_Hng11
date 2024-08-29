@@ -1,33 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/delete_member_dialog.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/invite_dialog.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/features/user_setting/models/list_members_model.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
+
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/widgets/custom_search_field.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_toast.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../utils/widgets/custom_avatar.dart';
-import '../../../../utils/widgets/custom_button.dart';
-import '../../../../utils/widgets/custom_dropdown_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../provider/profile_provider.dart';
 
-class MembersSettings extends StatefulWidget {
+class MembersSettings extends ConsumerStatefulWidget {
   const MembersSettings({super.key});
 
   @override
-  State<MembersSettings> createState() => _MembersSettingsState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _MembersSettingsState();
 }
 
-class _MembersSettingsState extends State<MembersSettings> {
-  bool isInviteLinkActive = false;
+class _MembersSettingsState extends ConsumerState<MembersSettings> {
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _membersController = TextEditingController();
 
-  void showCustomToast(BuildContext context) {
+  List<Members> organisationMembers = [
+    /* Members(email: 'email@email', lastName: 'Shayor', firstName: 'Mofo'),
+    Members(email: 'myemail@email', lastName: 'Kiki', firstName: 'Mush'),*/
+  ];
+  List<Members> filteredMembers = [];
+  TextEditingController searchController = TextEditingController();
+  String inviteLink = ''; // Variable to store the invitation link
+
+  @override
+  void initState() {
+    super.initState();
+    filteredMembers = organisationMembers;
+    searchController.addListener(filterMembers);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(profileProvider.notifier).getOrganisationMembers();
+      ref.read(profileProvider.notifier).generateInviteLinkFromCurrentUser();
+    });
+  }
+
+  void filterMembers() {
+    final filter = searchController.text.toLowerCase();
+    setState(() {
+      filteredMembers = organisationMembers.where((member) {
+        final firstName = (member.firstName ?? '').toLowerCase();
+        final lastName = (member.lastName ?? '').toLowerCase();
+        final email = (member.email ?? '').toLowerCase();
+        return firstName.contains(filter) ||
+            lastName.contains(filter) ||
+            email.contains(filter);
+      }).toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    _scrollController.dispose();
+    _membersController.dispose();
+    super.dispose();
+  }
+
+  Future<Object> fetchLinkFromAPI() async {
+    // Trigger the sendInvite method from ProfileProvider
+    await ref
+        .read(profileProvider.notifier)
+        .generateInviteLinkFromCurrentUser();
+    // final org = ref.watch(getOrganisationProvider);
+    // await ref
+    //     .read(profileProvider.notifier)
+    //     .generateInviteLink(orgId: org.organisationId.toString());
+
+    // Check the inviteResponse state
+    final inviteResponse = ref.read(profileProvider).inviteLink;
+    return inviteResponse;
+  }
+
+  void showCustomToast(BuildContext context, String message) {
     CustomToast.show(
       context,
       CustomToast(
-        message: "Invite Sent Successfully",
+        message: message,
         backgroundColor: GlobalColors.toastBgSurface2,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: GlobalColors.green, width: 2),
       ),
     );
@@ -35,386 +99,195 @@ class _MembersSettingsState extends State<MembersSettings> {
 
   @override
   Widget build(BuildContext context) {
+    final asyncMembersValue = ref.watch(profileProvider).organisationMembers;
+    final asyncLinkValue = ref.watch(profileProvider).inviteLink;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Members',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.members,
+        showDivider: false,
       ),
       backgroundColor: GlobalColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                "Manage who has access to this workspace",
-                style: TextStyle(
+                AppLocalizations.of(context)!.manageAccessToWorkspace,
+                style: CustomTextStyle.regular(
                   fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
-                  color: GlobalColors.darkOne,
+                  color: GlobalColors.black400,
                 ),
               ),
+              SizedBox(height: 12.h),
               Divider(
                 color: GlobalColors.borderColor,
                 thickness: 1.h,
               ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                value: isInviteLinkActive,
-                onChanged: (bool value) {
-                  setState(() {
-                    isInviteLinkActive = value;
-                  });
-                },
-                inactiveTrackColor: GlobalColors.borderColor,
-                inactiveThumbColor: GlobalColors.white,
-                activeColor: GlobalColors.white,
-                activeTrackColor: GlobalColors.orange,
-                title: Text(
-                  'Invite Link',
-                  style: GoogleFonts.inter(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 48, 47, 47),
-                  ),
-                ),
-                subtitle: Text(
-                  'This provides a unique URL that allows anyone to join your workspace',
-                  style: GoogleFonts.inter(
-                    fontSize: 12.5.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff525252),
+              SizedBox(
+                height: 12.h,
+              ),
+              SizedBox(
+                height: 39.h,
+                width: 270.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLink,
+                  style: CustomTextStyle.bold(
+                    fontSize: 14.sp,
+                    color: GlobalColors.integrationTextColor,
                   ),
                 ),
               ),
-              if (isInviteLinkActive) ...[
-                SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 80.h,
-                      width: 350.w,
-                      child: TextField(
-                        readOnly: true,
-                        maxLines: null,
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Colors.black,
+              SizedBox(
+                width: 276.w,
+                child: Text(
+                  AppLocalizations.of(context)!.inviteLinkDescr,
+                  style: CustomTextStyle.regular(
+                    fontSize: 12.sp,
+                    color: GlobalColors.darkOne,
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: 9.sp, vertical: 11.sp),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  border:
+                      Border.all(color: GlobalColors.borderColor, width: 0.7),
+                ),
+                child: asyncLinkValue.when(
+                  loading: () => Center(
+                    child: SizedBox(
+                      height: 15.h,
+                      width: 15.h,
+                      child: const CircularProgressIndicator.adaptive(),
+                    ),
+                  ),
+                  error: (e, st) {
+                    return Center(
+                      child: Text(
+                        context.text.errorFetchingLink,
+                        style: CustomTextStyle.medium(
+                          fontSize: 10.sp,
+                          color: GlobalColors.dark2,
                         ),
-                        decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15.0, horizontal: 10.5),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Wrap(
-                                children: [
-                                  InkWell(
-                                      onTap: () {},
-                                      child: Icon(Icons.refresh,
-                                          color: GlobalColors.orange)),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Icon(Icons.copy,
-                                        color: GlobalColors.orange),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            hintText:
-                                'https://www.figma.com/design/7hCSTNzQOJLj9aww6wEEd1/',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: GlobalColors.borderColor),
-                            )),
                       ),
-                    )
-                  ],
-                ),
-              ],
-              Divider(
-                color: GlobalColors.borderColor,
-                thickness: 1.h,
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Manage Members',
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15,
-                        color: const Color(0xff0A0A0A)),
-                  ),
-                  const Spacer(),
-                  CustomButton(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const InviteDialog();
-                            });
-                      },
-                      borderColor: const Color(0xffF97316),
-                      text: 'Invite people',
-                      height: 31.h,
-                      containerColor: const Color(0xffF97316),
-                      width: 105.h,
-                      textColor: const Color(0xffFFFFFF))
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                'On the Free plan all members in a workspace are administrators. ',
-                style: GoogleFonts.inter(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 51, 50, 50),
-                ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    height: 40.h,
-                    width: 250.w,
-                    child: CustomSearchField(
-                      hintText: 'Search by name or email',
-                      leading:
-                          Icon(Icons.search, color: GlobalColors.gray200Color),
-                    ),
-                  ),
-                  SizedBox(width: 13.w),
-                  Expanded(
-                    child: CustomDropdownButton(
-                        initialValue: 'All',
-                        items: const [
-                          'All',
-                          'Members',
-                          'Suspended',
-                          'Left workspace'
-                        ],
-                        borderColor: const Color(0xffCBD5E1),
-                        height: 40.h,
-                        containerColor: Colors.white,
-                        width: 100.w,
-                        textColor: const Color(0xff0F172A)),
-                  )
-                ],
-              ),
-              SizedBox(height: 10.w),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    '3 active members',
-                    style: GoogleFonts.inter(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xff525252)),
-                  ),
-                  PopupMenuButton<String>(
-                    offset: const Offset(0, 30),
-                    padding: EdgeInsets.zero,
-                    icon: const Icon(
-                      Icons.more_vert_rounded,
-                      size: 25,
-                      color: Color(0xff525252),
-                    ),
-                    onSelected: (value) {
-                      // Handle the selected action here
-                      if (value == 'delete') {
-                        showDialog(
-                          context: context,
-                          builder: (context) => const DeleteMemberDialog(),
-                        );
-                      }
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      PopupMenuItem<String>(
-                        value: 'delete',
-                        padding: EdgeInsets.zero,
-                        child: SizedBox(
-                          height: 20,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: 4.0,
-                              ),
-                              child: Text(
-                                'Delete member',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xff09090B),
-                                ),
-                              ),
+                    );
+                  },
+                  data: (inviteLink) {
+                    if (inviteLink == null) {
+                      return const Center(child: SizedBox(height: 14.0));
+                    }
+                    return Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            inviteLink,
+                            softWrap: true,
+                            style: CustomTextStyle.medium(
+                              fontSize: 10.sp,
+                              color: GlobalColors.dark2,
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Row(
-                children: [
-                  CustomAvatar(
-                      profileEmailStyle: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xff525252),
-                      ),
-                      profileNameStyle: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff525252),
-                      ),
-                      padding: 0,
-                      radius: 23,
-                      profileName: 'Chad Bosewick',
-                      profileEmail: 'ChadBoseW@gmail.com'),
-                  const Spacer(),
-                  CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
-                      borderColor: Colors.transparent,
-                      height: 40.h,
-                      containerColor: Colors.white,
-                      width: 90.w,
-                      textColor: const Color(0xff525252)),
-                ],
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  CustomAvatar(
-                      profileEmailStyle: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xff525252),
-                      ),
-                      profileNameStyle: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff525252),
-                      ),
-                      padding: 0,
-                      radius: 23,
-                      profileName: 'Chad Bosewick',
-                      profileEmail: 'ChadBoseW@gmail.com'),
-                  const Spacer(),
-                  CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
-                      borderColor: Colors.transparent,
-                      height: 40.h,
-                      containerColor: Colors.white,
-                      width: 90.w,
-                      textColor: const Color(0xff525252)),
-                ],
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  CustomAvatar(
-                      profileEmailStyle: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xff525252),
-                      ),
-                      profileNameStyle: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff525252),
-                      ),
-                      padding: 0,
-                      radius: 23,
-                      profileName: 'Chad Bosewick',
-                      profileEmail: 'ChadBoseW@gmail.com'),
-                  const Spacer(),
-                  CustomDropdownButton(
-                      initialValue: 'Admin',
-                      items: const ['Admin', 'User', 'Guest'],
-                      borderColor: Colors.transparent,
-                      height: 40.h,
-                      containerColor: Colors.white,
-                      width: 90.w,
-                      textColor: const Color(0xff525252)),
-                ],
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Export Members List',
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: const Color(0xff0A0A0A)),
-                  ),
-                  const Spacer(),
-                  CustomButton(
-                      onTap: () {},
-                      borderColor: const Color(0xffF97316),
-                      text: 'Export CSV',
-                      height: 31.h,
-                      containerColor: Colors.white,
-                      width: 91.h,
-                      textColor: const Color(0xffF97316))
-                ],
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                'Export a CSV with information of all members of your team',
-                style: GoogleFonts.inter(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff525252),
+                        SizedBox(width: 10.w),
+                        InkWell(
+                          onTap: () => Share.share(inviteLink),
+                          child: SvgPicture.asset(
+                            "assets/images/svg/shareIcon.svg",
+                          ),
+                        ),
+                        SizedBox(width: 5.5.w),
+                        InkWell(
+                          onTap: () {
+                            Clipboard.setData(
+                              ClipboardData(text: inviteLink),
+                            ); // Copy the link
+                            showCustomToast(context, context.text.copyLink);
+                          },
+                          child: SvgPicture.asset(
+                            "assets/images/svg/copyIcon.svg",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Divider(
+                thickness: 1,
+                color: GlobalColors.borderColor,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              CustomTextField(
+                controller: searchController,
+                hintText: AppLocalizations.of(context)!.searchByNameOrEmail,
+                hintTextStyle: CustomTextStyle.regular(
+                  fontSize: 14.sp,
+                  color: GlobalColors.darkOne,
+                ),
+                prefixIcon: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                  height: 24.h,
+                  width: 24.w,
+                  child: SvgPicture.asset(
+                    "assets/images/svg/searchIcon.svg",
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              // SizedBox(
+              //   height: 24.h,
+              // ),
+              SizedBox(
+                height: 5.h,
+              ),
+              asyncMembersValue.when(
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                error: (e, st) {
+                  return Center(
+                    child: Text(
+                        AppLocalizations.of(context)!.errorFetchingMembers),
+                  );
+                },
+                data: (members) {
+                  if (organisationMembers.isEmpty) {
+                    setState(() {
+                      organisationMembers = members ?? [];
+                      filteredMembers = organisationMembers;
+                    });
+                  }
+
+                  return filteredMembers.isEmpty
+                      ? Center(
+                          child: Text(
+                              '${context.noResultFound} "${searchController.text}"'))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomAvatar(
+                              memberDetail: filteredMembers[index],
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
+                          itemCount: filteredMembers.length,
+                        );
+                },
               )
-            ],
-          ),
-        ),
+            ])),
       ),
     );
   }

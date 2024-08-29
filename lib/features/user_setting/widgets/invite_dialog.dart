@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/invite_dialog_header.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// Ensure this is imported
 
 class InviteDialog extends StatefulWidget {
   final String? title;
@@ -42,10 +45,9 @@ class InviteDialogState extends State<InviteDialog> {
             ),
             const Divider(),
             const SizedBox(height: 16),
-
             // Email TextField
             CustomTextField(
-              label: 'Email',
+              label: AppLocalizations.of(context)!.email,
               hintText: 'email@example.com, email2@example.com...',
               controller: emailController,
               borderColor: GlobalColors.lightGray, // Match email border color
@@ -62,7 +64,7 @@ class InviteDialogState extends State<InviteDialog> {
                 });
               },
               decoration: InputDecoration(
-                labelText: 'Invite As',
+                labelText: AppLocalizations.of(context)!.inviteAs,
                 hintText: 'Select role',
                 labelStyle: const TextStyle(
                   fontSize: 14,
@@ -88,12 +90,38 @@ class InviteDialogState extends State<InviteDialog> {
                   horizontal: 12,
                 ),
               ),
-              items: <String>['Admin', 'User', 'Guest'].map((String value) {
+              items: <String>[
+                AppLocalizations.of(context)!.admin,
+                AppLocalizations.of(context)!.user,
+                AppLocalizations.of(context)!.guest
+              ].map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
                 );
               }).toList(),
+              // Invite Button
+//             Center(
+//               child: CustomButton(
+//                 onTap: widget.onInvite ?? () {},
+//                 borderColor: const Color(0xffF97316),
+//                 text: 'Invite',
+//                 height: 31.0, // Adjusted for height
+//                 containerColor: const Color(0xffF97316),
+//                 width: 105.0, // Adjusted for width
+//                 textColor: const Color(0xffFFFFFF),
+//               ),
+            ),
+            Center(
+              child: CustomButton(
+                onTap: widget.onInvite ?? () {},
+                borderColor: const Color(0xffF97316),
+                text: 'Invite',
+                height: 31.0, // Adjusted for height
+                containerColor: const Color(0xffF97316),
+                width: 105.0, // Adjusted for width
+                textColor: const Color(0xffFFFFFF),
+              ),
             ),
           ],
         ),

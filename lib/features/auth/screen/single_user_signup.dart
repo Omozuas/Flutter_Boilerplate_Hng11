@@ -1,12 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/password_textfield.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
+
 import '../../../utils/global_colors.dart';
 import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -26,6 +30,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authProviderState = ref.watch(authProvider);
+    final localizations = AppLocalizations.of(context)!; // Access localization
 
     return LoadingOverlay(
       isLoading: authProviderState.normalButtonLoading ||
@@ -43,7 +48,12 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
+<<<<<<< HEAD
                       AppLocalizations.of(context)!.signUpTitle,
+=======
+                      localizations.signUp, // Localized text
+
+>>>>>>> dev
                       style: TextStyle(
                         fontSize: 28.w,
                         fontWeight: FontWeight.bold,
@@ -51,8 +61,13 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     ),
                     SizedBox(height: 10.h),
                     Text(
+<<<<<<< HEAD
                       AppLocalizations.of(context)!.signUpSubtitle,
                       style: TextStyle(
+=======
+                      localizations.createAnAccount, // Localized text
+                      style: const TextStyle(
+>>>>>>> dev
                         fontSize: 16.0,
                         color: Colors.grey,
                       ),
@@ -91,9 +106,13 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                                   width: 10,
                                 ),
                                 Text(
+<<<<<<< HEAD
                                   AppLocalizations.of(context)!.googleButton,
+=======
+                                  context.continueWithGoogle,
+>>>>>>> dev
                                   style: CustomTextStyle.medium(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       color: GlobalColors.dark2),
                                 )
                               ],
@@ -107,7 +126,11 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                         SizedBox(width: 105.w, child: const Divider()),
                         const Spacer(),
                         Text(
+<<<<<<< HEAD
                           AppLocalizations.of(context)!.continueWithText,
+=======
+                          localizations.orContinueWith,
+>>>>>>> dev
                           style: CustomTextStyle.regular(
                             color: GlobalColors.darkOne,
                           ),
@@ -118,37 +141,69 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     ),
                     SizedBox(height: 10.h),
                     CustomTextField(
+<<<<<<< HEAD
                       label: AppLocalizations.of(context)!.firstName,
                       controller: SingleUserSignUpScreen.firstNameController,
                       hintText: AppLocalizations.of(context)!.enterFirstName,
+=======
+                      label: localizations.firstName,
+                      controller: SingleUserSignUpScreen.firstNameController,
+                      hintText: localizations.enterFirstName,
+>>>>>>> dev
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.nameValidator,
+                      validator: (v) => Validators.nameValidator(v, context),
                     ),
                     CustomTextField(
+<<<<<<< HEAD
                       label: AppLocalizations.of(context)!.lastName,
                       controller: lastNameController,
                       hintText: AppLocalizations.of(context)!.enterLastName,
+=======
+                      label: localizations.lastName,
+                      controller: lastNameController,
+                      hintText: localizations.enterLastName,
+>>>>>>> dev
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.nameValidator,
+                      validator: (v) => Validators.nameValidator(v, context),
                     ),
                     CustomTextField(
+<<<<<<< HEAD
                       label: AppLocalizations.of(context)!.email,
                       controller: SingleUserSignUpScreen.emailController,
                       hintText: AppLocalizations.of(context)!.enterEmail,
+=======
+                      label: localizations.email,
+                      controller: SingleUserSignUpScreen.emailController,
+                      hintText: localizations.enterEmail,
+>>>>>>> dev
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.emailValidator,
+                      validator: (v) => Validators.emailValidator(v, context),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
                     ),
                     PasswordTextField(
+<<<<<<< HEAD
                       label: AppLocalizations.of(context)!.password,
                       controller: SingleUserSignUpScreen.passwordController,
                       hintText: AppLocalizations.of(context)!.createPassword,
+=======
+                      label: localizations.password,
+                      controller: SingleUserSignUpScreen.passwordController,
+                      hintText: localizations.createPassword,
+>>>>>>> dev
                       obscureText: true,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: Validators.passwordValidator,
+                      validator: (v) =>
+                          Validators.passwordValidator(v, context),
                     ),
                     SizedBox(height: 10.h),
                     CustomButton(
+<<<<<<< HEAD
                       text: AppLocalizations.of(context)!.createAccountButton,
+=======
+                      text: localizations.createAccountButton,
+>>>>>>> dev
                       loading: authProviderState.normalButtonLoading,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
@@ -165,11 +220,19 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                     Center(
                       child: RichText(
                         text: TextSpan(
+<<<<<<< HEAD
                           text: AppLocalizations.of(context)!.alreadyHaveAccount,
                           style: TextStyle(color: GlobalColors.black),
                           children: <TextSpan>[
                             TextSpan(
                               text: AppLocalizations.of(context)!.login,
+=======
+                          text: localizations.alreadyHaveAccount,
+                          style: TextStyle(color: GlobalColors.black),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: " ${localizations.login}",
+>>>>>>> dev
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -194,11 +257,19 @@ class SingleUserSignUpScreen extends ConsumerWidget {
   }
 
   void _handleCreateAccount(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).registerSingleUser({
-      'email': emailController.text,
-      'first_name': firstNameController.text,
-      'last_name': lastNameController.text,
-      'password': passwordController.text,
-    }, context);
+    ref.read(authProvider.notifier).registerSingleUser(
+        {
+          'email': emailController.text.trim().toLowerCase(),
+          'first_name': firstNameController.text,
+          'last_name': lastNameController.text,
+          'password': passwordController.text,
+        },
+        context,
+        [
+          firstNameController,
+          lastNameController,
+          passwordController,
+          emailController
+        ]);
   }
 }

@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/chevron_back_button.dart';
+
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+<<<<<<< HEAD
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
+=======
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
+>>>>>>> dev
 
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -28,7 +32,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
   int _countdown = 420;
   late final Timer _timer;
   bool loading = false;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> dev
   @override
   void initState() {
     super.initState();
@@ -47,7 +55,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     });
   }
 
-  _restartTimer() {
+  void _restartTimer() {
     _timer.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_countdown > 0) {
@@ -65,7 +73,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
       loading = true;
     });
     final code = _codeControllers.map((c) => c.text).join();
-    debugPrint(code.runtimeType.toString());
     final res = await ref
         .read(authProvider.notifier)
         .verifyCode(widget.email, code, context);
@@ -103,10 +110,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!; // Access localization
+
     return Scaffold(
-      appBar: AppBar(
-        leading: const ChevronBackButton(),
-      ),
+      // appBar: AppBar(
+      //   leading: const ChevronBackButton(),
+      //   title: Text(localizations.verificationAppBarTitle),  // Localized AppBar title
+      // ),
       body: Consumer(builder: (context, ref, child) {
         return Stack(
           children: [
@@ -116,13 +126,23 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
+<<<<<<< HEAD
                     AppLocalizations.of(context)!.verificationCode,  
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+=======
+                    localizations.verificationCodeTitle,  // Localized title
+                    style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+>>>>>>> dev
                   ),
                   SizedBox(height: 16.h),
                   RichText(
                     text: TextSpan(
+<<<<<<< HEAD
                       text: '${AppLocalizations.of(context)!.confirmEmail} ${widget.email} ${AppLocalizations.of(context)!.enterVerificationCode} ',  
+=======
+                      text:
+                          '${localizations.verificationCodeDescription(widget.email)} ${_countdown.toString()} ',
+>>>>>>> dev
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
@@ -182,7 +202,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       _handleVerify(ref, context);
                     },
                     borderColor: GlobalColors.borderColor,
+<<<<<<< HEAD
                     text: AppLocalizations.of(context)!.continueText,  
+=======
+                    text: localizations.verify, // Localized button text
+>>>>>>> dev
                     height: 48.h,
                     containerColor: GlobalColors.orange,
                     width: 342.w,
@@ -193,11 +217,21 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Center(
                       child: RichText(
                         text: TextSpan(
+<<<<<<< HEAD
                           text: AppLocalizations.of(context)!.didNotReceiveCode,  
                           style: TextStyle(color: GlobalColors.darkOne),
                           children: [
                             TextSpan(
                               text: AppLocalizations.of(context)!.resendOtp,  
+=======
+                          text: localizations
+                              .didntReceiveCodeText, // Localized text
+                          style: TextStyle(color: GlobalColors.darkOne),
+                          children: [
+                            TextSpan(
+                              text:
+                                  localizations.resendOtpText, // Localized text
+>>>>>>> dev
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -214,8 +248,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       child: TextButton(
                         onPressed: _handleChangeEmail,
                         child: Text(
+<<<<<<< HEAD
                           AppLocalizations.of(context)!.changeEmail,  
                           style: const TextStyle(
+=======
+                          localizations.changeEmailText,  // Localized text
+                          style:const TextStyle(
+>>>>>>> dev
                             color: Colors.orange,
                             decoration: TextDecoration.underline,
                           ),

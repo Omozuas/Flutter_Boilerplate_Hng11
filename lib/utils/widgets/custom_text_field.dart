@@ -1,5 +1,6 @@
 //custom_textfield.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +9,7 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? labelStyle;
   final TextEditingController controller;
   final EdgeInsets? padding;
-  final String? hintText;
+  final String? hintText, errorText;
   final TextStyle? hintTextStyle;
   final TextInputType? keyboardType;
   final bool? obscureText;
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
   final Color? borderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.padding,
     this.hintText,
+    this.errorText,
     this.hintTextStyle,
     this.keyboardType,
     this.obscureText,
@@ -43,6 +46,7 @@ class CustomTextField extends StatelessWidget {
     this.focusedBorderColor,
     this.focusNode,
     this.onchanged,
+    this.inputFormatters,
   });
 
   @override
@@ -58,8 +62,8 @@ class CustomTextField extends StatelessWidget {
               style: labelStyle ??
                   TextStyle(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF0F172A),
+                    fontWeight: FontWeight.w500,
+                    color: GlobalColors.darkTwo,
                   ),
             ),
           ],
@@ -77,6 +81,7 @@ class CustomTextField extends StatelessWidget {
             obscureText: obscureText ?? false,
             maxLines: maxLines ?? 1,
             validator: validator,
+            inputFormatters: inputFormatters,
             focusNode: focusNode,
             onChanged: onchanged,
             textInputAction: TextInputAction.next,
@@ -87,6 +92,7 @@ class CustomTextField extends StatelessWidget {
                     horizontal: 12.w,
                   ),
               hintText: hintText,
+              errorText: errorText,
               hintStyle: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,

@@ -1,6 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
+<<<<<<< HEAD
+=======
+import 'package:flutter_boilerplate_hng11/features/auth/screen/webview_page.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
+>>>>>>> dev
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -15,7 +21,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../services/service_locator.dart';
 import '../widgets/loading_overlay.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static GetStorage box = locator<GetStorage>();
   const LoginScreen({super.key});
 
@@ -24,11 +30,68 @@ class LoginScreen extends ConsumerWidget {
   static final _formKey = GlobalKey<FormState>();
 
   @override
+<<<<<<< HEAD
   Widget build(BuildContext context, WidgetRef ref) {
     final authStateProvider = ref.watch(authProvider);
+=======
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  late TapGestureRecognizer _tapGestureRecognizerForTermsAndConditions;
+  late TapGestureRecognizer _tapGestureRecognizerForPrivacy;
+
+  @override
+  void initState() {
+    super.initState();
+    _tapGestureRecognizerForTermsAndConditions = TapGestureRecognizer()
+      ..onTap = _handlePressForTandC;
+    _tapGestureRecognizerForPrivacy = TapGestureRecognizer()
+      ..onTap = _handlePressForPrivacy;
+  }
+
+  @override
+  void dispose() {
+    _tapGestureRecognizerForTermsAndConditions.dispose();
+    _tapGestureRecognizerForPrivacy.dispose();
+
+    super.dispose();
+  }
+
+  void _handlePressForTandC() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WebviewPage(
+            url:
+                'https://staging.nextjs.boilerplate.hng.tech/terms-and-conditions',
+            appBarTitle: 'Terms and Conditions',
+          ),
+        ));
+  }
+
+  void _handlePressForPrivacy() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WebviewPage(
+            url: 'https://staging.nextjs.boilerplate.hng.tech/privacy-policy',
+            appBarTitle: 'Privacy Policy',
+          ),
+        ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final isChecked = ref.watch(checkBoxState);
+    final authStateProvider = ref.watch(authProvider);
+    //  final loadingGoogle = ref.watch(loadingGoogleButton);
+
+>>>>>>> dev
     return LoadingOverlay(
       isLoading: authStateProvider.normalButtonLoading || authStateProvider.googleButtonLoading,
       child: SafeArea(
+<<<<<<< HEAD
         child: Scaffold(
           body: SingleChildScrollView(
             child: Form(
@@ -44,6 +107,52 @@ class LoginScreen extends ConsumerWidget {
                       style: CustomTextStyle.semiBold(
                         fontSize: 24.sp,
                         color: GlobalColors.iconColor,
+=======
+          child: Scaffold(
+        body: SingleChildScrollView(
+          child: Form(
+            key: LoginScreen._formKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 48.h,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.login,
+                    style: CustomTextStyle.semiBold(
+                      fontSize: 24.sp,
+                      color: GlobalColors.iconColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.welcomeBackMessage,
+                    style: CustomTextStyle.regular(
+                      color: GlobalColors.darkOne,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 28.h,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: authStateProvider.normalButtonLoading
+                            ? Colors.grey.withOpacity(0.2)
+                            : Colors.white,
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
+                        side: const BorderSide(color: Colors.grey),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                        ),
+>>>>>>> dev
                       ),
                     ),
                     SizedBox(height: 8.h),
@@ -78,6 +187,7 @@ class LoginScreen extends ConsumerWidget {
                                 child: CircularProgressIndicator.adaptive(
                                   strokeWidth: 2.w,
                                 ),
+<<<<<<< HEAD
                               )
                             : Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -133,6 +243,67 @@ class LoginScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
+=======
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  context.continueWithGoogle,
+                                  style: CustomTextStyle.medium(
+                                      fontSize: 16.sp,
+                                      color: GlobalColors.dark2),
+                                )
+                              ],
+                            ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: 105.w, child: const Divider()),
+                      const Spacer(),
+                      Text(
+                        AppLocalizations.of(context)!.continueWithButton,
+                        style: CustomTextStyle.regular(
+                          color: GlobalColors.darkOne,
+                        ),
+                      ),
+                      const Spacer(),
+                      SizedBox(width: 105.w, child: const Divider()),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 28.h,
+                  ),
+                  CustomTextField(
+                    label: AppLocalizations.of(context)!.email,
+                    controller: LoginScreen._emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    hintText: AppLocalizations.of(context)!.enterEmail,
+                    validator: (v) => Validators.emailValidator(v, context),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  PasswordTextField(
+                    label: AppLocalizations.of(context)!.password,
+                    controller: LoginScreen._passwordController,
+                    hintText: AppLocalizations.of(context)!.password,
+                    validator: (v) => Validators.passwordValidator(v, context),
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+>>>>>>> dev
                           padding: EdgeInsets.zero,
                           child: GestureDetector(
                             onTap: () {
@@ -176,8 +347,10 @@ class LoginScreen extends ConsumerWidget {
                     CustomButton(
                       loading: authStateProvider.normalButtonLoading,
                       onTap: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          box.write('rememberMe', authStateProvider.checkBoxState);
+                        if (LoginScreen._formKey.currentState?.validate() ??
+                            false) {
+                          LoginScreen.box.write(
+                              'rememberMe', authStateProvider.checkBoxState);
                           _handleLoginAccount(ref, context);
                         }
                       },
@@ -189,6 +362,7 @@ class LoginScreen extends ConsumerWidget {
                           ? Colors.grey.withOpacity(0.2)
                           : GlobalColors.orange,
                       width: 342.w,
+<<<<<<< HEAD
                       textColor: Colors.white,
                     ),
                     SizedBox(height: 8.h),
@@ -201,6 +375,31 @@ class LoginScreen extends ConsumerWidget {
                           children: [
                             TextSpan(
                               text: AppLocalizations.of(context)!.signUp,
+=======
+                      textColor: Colors.white),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  // CustomButton(
+                  //     onTap: () {},
+                  //     borderColor: GlobalColors.borderColor,
+                  //     text: "Use Magic Link instead",
+                  //     height: 48.h,
+                  //     containerColor: Colors.white,
+                  //     width: 342.w,
+                  //     textColor: GlobalColors.darkOne),
+                  const SizedBox(
+                    height: 23.5,
+                  ),
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: AppLocalizations.of(context)!.dontHaveAnAccount,
+                        style: TextStyle(color: GlobalColors.darkOne),
+                        children: [
+                          TextSpan(
+                              text: ' ${AppLocalizations.of(context)!.signUp}',
+>>>>>>> dev
                               style: TextStyle(
                                 color: GlobalColors.orange,
                                 fontWeight: FontWeight.bold,
@@ -208,10 +407,68 @@ class LoginScreen extends ConsumerWidget {
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   context.go(AppRoute.singleUserSignUp);
+<<<<<<< HEAD
                                 },
                             ),
                           ],
                         ),
+=======
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           const SingleUserSignUpScreen()),
+                                  // );
+                                }),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 49.h,
+                  ),
+                  SizedBox(
+                    width: 342.w,
+                    // height: 35.h,
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: AppLocalizations.of(context)!
+                            .termsAndConditionText1,
+                        style: CustomTextStyle.regular(
+                          color: GlobalColors.bgsurface700,
+                          fontSize: 14.sp,
+                        ),
+                        // GoogleFonts.inter(
+                        //   color: GlobalColors.bgsurface700,
+                        //   fontSize: 14.sp,
+                        //   fontWeight: FontWeight.w400,
+
+                        children: [
+                          TextSpan(
+                            recognizer:
+                                _tapGestureRecognizerForTermsAndConditions,
+                            text: AppLocalizations.of(context)!
+                                .termsAndConditionText2,
+                            style: CustomTextStyle.regular(
+                              fontSize: 14.sp,
+                              color: GlobalColors.orange,
+                            ),
+                          ),
+                          TextSpan(
+                              text: AppLocalizations.of(context)!
+                                  .termsAndConditionText3),
+                          TextSpan(
+                            recognizer: _tapGestureRecognizerForPrivacy,
+                            text: AppLocalizations.of(context)!
+                                .termsAndConditionText4,
+                            style: CustomTextStyle.regular(
+                              fontSize: 14.sp,
+                              color: GlobalColors.orange,
+                            ),
+                          ),
+                        ],
+>>>>>>> dev
                       ),
                     ),
                     SizedBox(height: 49.h),
@@ -255,10 +512,21 @@ class LoginScreen extends ConsumerWidget {
     );
   }
 
+<<<<<<< HEAD
   void _handleLoginAccount(WidgetRef ref, BuildContext context) {
     ref.read(authProvider.notifier).login({
       'email': _emailController.text,
       'password': _passwordController.text,
     }, context);
+=======
+  void _handleLoginAccount(WidgetRef ref, BuildContext context) async {
+    await ref.read(authProvider.notifier).login(
+        {
+          'email': LoginScreen._emailController.text.trim().toLowerCase(),
+          'password': LoginScreen._passwordController.text,
+        },
+        context,
+        [LoginScreen._emailController, LoginScreen._passwordController]);
+>>>>>>> dev
   }
 }

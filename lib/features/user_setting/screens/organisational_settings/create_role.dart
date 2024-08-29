@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/organisational_settings/roles_screen.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_search_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateRole extends StatefulWidget {
   const CreateRole({super.key});
@@ -19,18 +21,9 @@ class _CreateRoleState extends State<CreateRole> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text('Create Role',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-              )),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )),
+      appBar: CustomAppBar.simpleTitle(
+        titleText: AppLocalizations.of(context)!.createRole,
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 20.h),
         child: Column(
@@ -49,14 +42,14 @@ class _CreateRoleState extends State<CreateRole> {
             ),
             CustomSearchField(
               searchController: searchRolesController,
-              hintText: "Search",
+              hintText: AppLocalizations.of(context)!.search,
               leading: Image.asset("assets/icons/search_icon.png"),
             ),
             SizedBox(
               height: 40.h,
             ),
             Text(
-              "Permissions",
+              AppLocalizations.of(context)!.permissions,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
@@ -143,20 +136,32 @@ class _CreateRoleState extends State<CreateRole> {
                 ),
                 PermissionsListTile(
                     isPermitted: true,
-                    permissionTitle: 'Can view transactions'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can view refunds'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can log refunds'),
-                PermissionsListTile(
-                    isPermitted: false, permissionTitle: 'Can view users'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can create users'),
-                PermissionsListTile(
-                    isPermitted: true, permissionTitle: 'Can edit users'),
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canViewTransactions),
                 PermissionsListTile(
                     isPermitted: true,
-                    permissionTitle: 'Can blacklist/whitelist users'),
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canViewRefunds),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canLogRefunds),
+                PermissionsListTile(
+                    isPermitted: false,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canViewUsers),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canCreateUsers),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canEditUsers),
+                PermissionsListTile(
+                    isPermitted: true,
+                    permissionTitle:
+                        AppLocalizations.of(context)!.canBlacklist),
                 SizedBox(
                   height: 25.h,
                 ),
