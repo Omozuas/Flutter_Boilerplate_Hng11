@@ -197,10 +197,14 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
-        path: AppRoute.orderDetails,
+        path: '/orderDetails/:id',
+        //'${AppRoute.orderDetails}/:id',
         builder: (context, state, ref) {
+          //parse id from route parameter
+          final id = int.parse(state.pathParameters['id']!);
           return OrderDetailScreen(
             order: Order(
+                id: id,
                 number: 00,
                 image: AppImages.shoes,
                 deliveryDate: "20-Aug-2024",
