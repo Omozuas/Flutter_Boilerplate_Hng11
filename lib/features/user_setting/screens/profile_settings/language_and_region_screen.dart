@@ -29,16 +29,17 @@ class _LanguageAndRegionScreenState
 
   void validateSelections() {
     setState(() {
-      // Reset feedback message and color
-      feedBackMessage = null;
-      feedBackMessageColor = Colors.transparent;
+      showError = selectedLanguage == null &&
+          // selectedRegion == null &&
+          selectedTimeZone == null;
 
-      // Check if the language is selected and save it
-      if (selectedLanguage != null) {
-        ref
-            .read(languageProvider.notifier)
-            .setLanguage(getLanguageCode(selectedLanguage!));
+      if (!showError) {
         feedBackMessage = context.text.settingsSavedSuccessfully;
+        if (selectedLanguage != null) {
+          ref
+              .read(languageProvider.notifier)
+              .setLanguage(getLanguageCode(selectedLanguage!));
+        }
         feedBackMessageColor = GlobalColors.green;
       }
 
