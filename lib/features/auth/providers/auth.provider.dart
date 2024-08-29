@@ -1,6 +1,4 @@
-import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
@@ -14,7 +12,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../common_models/user.dart';
-import '../../../services/error_handlers.dart';
 import '../../../services/service_locator.dart';
 import '../../../services/user.service.dart';
 
