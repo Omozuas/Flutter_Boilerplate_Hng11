@@ -135,7 +135,7 @@ class DescriptionFormField extends StatelessWidget {
         showCounter: false,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return AppLocalizations.of(context)!.descriptionPlaceholder;
+            return AppLocalizations.of(context)!.productDescriptionPlaceholder;
           }
           return null;
         },
@@ -160,12 +160,9 @@ class ProductPriceFormField extends StatelessWidget {
         ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
-        prefixIcon: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Icon(
-            Icons.attach_money,
-            //size: 20,
-          ),
+        prefixIcon: Icon(
+          Icons.attach_money,
+          size: 25.r,
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {

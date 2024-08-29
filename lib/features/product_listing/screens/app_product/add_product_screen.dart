@@ -216,9 +216,14 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             compulsoryTitle(context.category),
                             8.h.sbH,
                             SizedBox(
-                              height: 40.h,
                               width: 379.w,
                               child: ProductCategory(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return context.selectIsRequired;
+                                  }
+                                  return null;
+                                },
                                 onCategorySelected: onCategorySelected,
                               ),
                             )
