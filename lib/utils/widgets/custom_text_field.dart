@@ -118,21 +118,15 @@ class CustomTextField extends StatelessWidget {
                   ),
                   prefixIcon: prefixIcon,
                   suffixIcon: suffixIcon,
-                  errorStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 12.sp,
-                  ),
                 ),
               ),
               if (errorText != null) ...[
                 SizedBox(height: 4.h),
                 Padding(
-                  padding: padding ??
-                      EdgeInsets.only(left: 12.w),
+                  padding: padding ?? EdgeInsets.only(left: 12.w),
                   child: Text(
                     errorText!,
                     style: TextStyle(
-
                       fontSize: 12.sp,
                     ),
                   ),
@@ -145,4 +139,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
