@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
+//import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -21,12 +21,13 @@ class OrderTile extends StatelessWidget {
       padding: EdgeInsets.only(left: 24.sp, right: 24.sp, top: 10.sp),
       child: GestureDetector(
         onTap: () {
-          context.push(AppRoute.orderDetails);
+          context.push('${AppRoute.orderDetails}/${order.id}');
         },
         child: Stack(
           children: [
             Container(
-              width: width(context),
+              width: 383.w,
+              //width(context),
               height: 107.h,
               padding: EdgeInsets.only(
                 left: 20.w,
@@ -55,6 +56,7 @@ class OrderTile extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: const Color(0xFF71717A),
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 5.0.h),
                       Text(
@@ -80,6 +82,7 @@ class OrderTile extends StatelessWidget {
                             fontSize: 12.sp,
                             color: order.deliveryColor,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -87,17 +90,23 @@ class OrderTile extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: 92.sp,
-              height: 79.sp,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(
-                  color: const Color.fromRGBO(247, 247, 247, 1),
+            Positioned(
+              top: 16,
+              bottom: 12.h,
+              right: 20.w,
+              left: 251.w,
+              child: Container(
+                width: 92.sp,
+                height: 79.sp,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(
+                    color: const Color.fromRGBO(247, 247, 247, 1),
+                  ),
                 ),
+                child: Image.asset(order.image),
               ),
-              child: Image.asset(order.image),
             ),
           ],
         ),
