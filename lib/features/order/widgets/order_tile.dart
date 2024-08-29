@@ -11,18 +11,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
 class OrderTile extends StatelessWidget {
-  const OrderTile({super.key, required this.order});
+  const OrderTile({super.key, required this.order, required this.onTap});
 
   final Order order;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 24.sp, right: 24.sp, top: 10.sp),
       child: GestureDetector(
-        onTap: () {
-          context.push('${AppRoute.orderDetails}/${order.id}');
-        },
+        onTap: onTap,
         child: Stack(
           children: [
             Container(
