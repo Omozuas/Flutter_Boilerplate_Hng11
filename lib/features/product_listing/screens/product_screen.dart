@@ -2,26 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:lottie/lottie.dart';
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../widgets/product_loader.dart';
 
-class ProductScreen extends ConsumerWidget {
+class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _ProductScreenState createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends ConsumerState<ProductScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
         titleText: AppLocalizations.of(context)!.products,
@@ -52,17 +69,17 @@ class ProductScreen extends ConsumerWidget {
             child: ref.watch(productListProvider).when(
               data: (data) {
                 if (data.isEmpty) {
-                  return ListView(
-                    children: [
-                      (MediaQuery.sizeOf(context).height / 4).sbH,
-                      Center(
-                        child: Text(
-                          context.yourProductsWillShowHere,
-                          style: CustomTextStyles.productTextBody4Black,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
+                  return Center(
+                    child: Lottie.asset(
+                      'assets/animations/empty_state.json',
+                      controller: _animationController,
+                      onLoaded: (composition) {
+                        _animationController
+                          ..duration = composition.duration
+                          ..repeat();  // Set the animation to repeat
+                      },
+                      fit: BoxFit.cover, // Set the fit to BoxFit.cover
+                    ),
                   );
                 }
                 return Padding(
@@ -104,7 +121,7 @@ class ProductScreen extends ConsumerWidget {
                           return const SizedBox();
                         },
                         loading: () {
-                          return const SizedBox();
+                          return const ProductLoader();
                         },
                       );
                     }),
