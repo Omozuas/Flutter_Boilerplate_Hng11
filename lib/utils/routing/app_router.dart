@@ -59,7 +59,7 @@ class AppRouter {
       ConsumerGoRoute(
         path: AppRoute.singleUserSignUp,
         builder: (context, state, ref) {
-          return const SingleUserSignUpScreen();
+          return SingleUserSignUpScreen();
         },
       ),
       ConsumerGoRoute(
