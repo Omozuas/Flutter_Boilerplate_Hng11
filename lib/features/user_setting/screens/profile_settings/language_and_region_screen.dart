@@ -29,15 +29,17 @@ class _LanguageAndRegionScreenState
 
   void validateSelections() {
     setState(() {
-      showError = selectedLanguage == null ||
-          // selectedRegion == null ||
+      showError = selectedLanguage == null &&
+          // selectedRegion == null &&
           selectedTimeZone == null;
 
       if (!showError) {
         feedBackMessage = context.text.settingsSavedSuccessfully;
-        ref
-            .read(languageProvider.notifier)
-            .setLanguage(getLanguageCode(selectedLanguage!));
+        if (selectedLanguage != null) {
+          ref
+              .read(languageProvider.notifier)
+              .setLanguage(getLanguageCode(selectedLanguage!));
+        }
         feedBackMessageColor = GlobalColors.green;
       } else {
         feedBackMessage = null;
