@@ -186,7 +186,7 @@ All new features include tests.
 - [Mofolasayo](https://github.com/Mofolasayo)
 - [EzeanyimHenry](https://github.com/ezeanyimhenry)
 - [Fidelity](https://github.com/fidelity2851)
-- [Dehbyk](https://github.com/Dehbbyk)
+- [Dehbbyk](https://github.com/Dehbbyk)
 - [dexterousNorthpaw](https://github.com/dexterousNorthpaw)
 - [Lukas-io](https://github.com/Lukas-io)
 - [Daveohi](https://github.com/Daveohi)
