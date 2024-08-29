@@ -45,7 +45,7 @@ class _OrganizationState extends ConsumerState<Organization> {
               //  style: CustomTextStyle.regular(fontSize: 14.sp, ),
             ),
             SizedBox(height: 40.h,),
-            OrganizationWidget(),
+            // OrganizationWidget(),
             SizedBox(height: 20.h)
           ],
         ),
@@ -58,7 +58,7 @@ class _OrganizationState extends ConsumerState<Organization> {
         //   return
         // },
         )
-    )],
+    ),
 
       ),
     ),
