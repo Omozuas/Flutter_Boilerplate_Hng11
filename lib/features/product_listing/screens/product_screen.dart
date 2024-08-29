@@ -14,6 +14,7 @@ import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/product_loader.dart';
+import 'package:lottie/lottie.dart';
 
 class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
@@ -25,19 +26,19 @@ class ProductScreen extends ConsumerStatefulWidget {
 class _ProductScreenState extends ConsumerState<ProductScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late TextEditingController _searchController; // Initialize the controller
+  late TextEditingController _searchController; 
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(vsync: this);
-    _searchController = TextEditingController(); // Instantiate the controller
+    _searchController = TextEditingController(); 
   }
 
   @override
   void dispose() {
     _animationController.dispose();
-    _searchController.dispose(); // Dispose of the controller
+    _searchController.dispose(); 
     super.dispose();
   }
 
@@ -62,7 +63,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
             child: CustomTextField(
               suffixIcon: const Icon(Icons.search),
               hintText: AppLocalizations.of(context)!.searchProductButton,
-              controller: _searchController, // Assign the controller
+              controller: _searchController, 
               onChanged: (value) {
                 if (value.isNotEmpty) {
                   ref.read(searchInputProvider.notifier).update(value);
@@ -81,9 +82,9 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                       onLoaded: (composition) {
                         _animationController
                           ..duration = composition.duration
-                          ..repeat(); // Set the animation to repeat
+                          ..repeat(); 
                       },
-                      fit: BoxFit.cover, // Set the fit to BoxFit.cover
+                      fit: BoxFit.cover, 
                     ),
                   );
                 }
