@@ -5,10 +5,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/custom_text_style.dart';
 
-
 class ProductCategory extends StatefulWidget {
-  const ProductCategory({super.key, required this.onCategorySelected});
+  const ProductCategory({
+    super.key,
+    required this.onCategorySelected,
+    this.validator,
+  });
   final Function(String) onCategorySelected;
+  final String? Function(String?)? validator;
   @override
   State<ProductCategory> createState() => _ProductCategoryState();
 }
@@ -31,20 +35,49 @@ class _ProductCategoryState extends State<ProductCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border:
-              Border.all(color: GlobalColors.containerBorderColor, width: 1),
-          borderRadius: BorderRadius.circular(6)),
+    return SizedBox(
       // unable to reuse created customdropdown, it is overflowing with error
-      child: DropdownButton<String>(
-        padding: const EdgeInsets.only(left: 8),
+      child: DropdownButtonFormField<String>(
+        validator: widget.validator,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(8.w),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6.r),
+            borderSide: BorderSide(
+              color: GlobalColors.borderColor,
+              width: 1.w,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6.r),
+            borderSide: BorderSide(
+              color: GlobalColors.orange,
+              width: 1.w,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6.r),
+            borderSide: BorderSide(
+              color: GlobalColors.red,
+              width: 1.w,
+            ),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6.r),
+            borderSide: BorderSide(
+              color: GlobalColors.borderColor,
+              width: 1.w,
+            ),
+          ),
+        ),
         dropdownColor: GlobalColors.deemWhiteColor,
         hint: Text(AppLocalizations.of(context)!.select),
-        icon: const Icon(Icons.arrow_drop_down),
-        iconSize: 30,
+        icon: Icon(
+          Icons.keyboard_arrow_down,
+          color: GlobalColors.dark2,
+        ),
+        iconSize: 20.r,
         isExpanded: true,
-        underline: const SizedBox(),
         style: CustomTextStyle.medium(
           color: GlobalColors.dark2,
           fontSize: 14.sp,
