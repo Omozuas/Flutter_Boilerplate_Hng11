@@ -190,6 +190,8 @@ extension Translation on BuildContext {
   String get correctCurrentPassword => text.correctCurrentPassword;
 
   String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
+  String get typeYourMessageHere => text.typeYourMessageHere;
+  String get maximumOf64Character => text.maximumOf64Character;
 
 
   String get deliveryText => 'Estimated Delivery on 26th Aug';
