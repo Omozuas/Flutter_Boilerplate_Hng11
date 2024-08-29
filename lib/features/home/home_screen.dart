@@ -172,6 +172,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           decimalPlaces: 0),
                       details: "",
                     ),
+                    // StreamBuilder(
+                    //     stream: dashBoardProviderNotifier.getAllOrgProducts(),
+                    //     builder: (context, snapshot) {
+                    //       return RevenueCard(
+                    //         title: context.totalProducts,
+                    //         image: AppSvgs.activeMembers,
+                    //         value: formatNumber(dashBoardStateProvider.productCount,
+                    //             decimalPlaces: 0),
+                    //         details: "",
+                    //       );
+                    //     }
+                    // ),
                   ],
                 ),
               ],
