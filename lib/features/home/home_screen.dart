@@ -245,7 +245,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       style: CustomTextStyle.bold(
                           fontSize: 16.sp, color: GlobalColors.black),
                     ),
-                    InkWell(
+                   if ((dashBoardStateProvider.dashBoardData.monthSales?.length ??
+                        0) ==
+                    0) const Text('')
+                    else InkWell(
                       onTap: () {},
                       child: Padding(
                         padding: 8.h.padV,
