@@ -21,7 +21,7 @@ class ChevronBackButton extends StatelessWidget {
         children: [
           if (includeBottomSpace) ...[
             SizedBox(
-              height: 4.h,
+              height: 2.h,
             ),
           ],
           Icon(Icons.chevron_left, size: 30.sp),
