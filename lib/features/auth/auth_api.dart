@@ -134,9 +134,8 @@ class AuthApi {
         data: company.toMap(),
       );
 
-      return response?.data;
+      return response!;
     } catch (e) {
-      debugPrint(e.toString());
       rethrow;
     }
   }
