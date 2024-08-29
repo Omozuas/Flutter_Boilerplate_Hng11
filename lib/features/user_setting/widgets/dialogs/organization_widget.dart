@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/switch_organization_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -22,7 +23,14 @@ class OrganizationWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0, right: 20),
       child: Row(
         children: [
-        Image.network(imageUrl),
+          Container(
+            height: 77.h,
+            width: 80.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              image: DecorationImage(image: CachedNetworkImageProvider(imageUrl), fit: BoxFit.cover),
+            ),
+          ),
           SizedBox(width: 13.w,),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
