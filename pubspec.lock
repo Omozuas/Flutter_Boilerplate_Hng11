@@ -241,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  country_state_city_pro:
+    dependency: "direct main"
+    description:
+      name: country_state_city_pro
+      sha256: "22a53349836f8ddb016e1e0f45b26b61f3546ae5257a818b0935a9222ed4b20b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   cross_file:
     dependency: transitive
     description:
@@ -1510,10 +1518,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
+      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.5"
+    version: "14.2.4"
   watcher:
     dependency: transitive
     description:
