@@ -133,10 +133,14 @@ class DescriptionFormField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             return 'Description is required';
 =======
             return AppLocalizations.of(context)!.descriptionPlaceholder;
 >>>>>>> dev
+=======
+            return AppLocalizations.of(context)!.productDescriptionPlaceholder;
+>>>>>>> 63ce5556642ea90c04a89994d26f4419d9caf4d9
           }
           return null;
         },
@@ -170,12 +174,9 @@ class ProductPriceFormField extends StatelessWidget {
         ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
-        prefixIcon: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Icon(
-            Icons.attach_money,
-            //size: 20,
-          ),
+        prefixIcon: Icon(
+          Icons.attach_money,
+          size: 25.r,
         ),
 >>>>>>> dev
         validator: (value) {
