@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product_provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -79,7 +79,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                 if (data.isEmpty) {
                   return Center(
                     child: Lottie.asset(
-                      '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                      'assets/animation/empty.json',
                       controller: _animationController,
                       onLoaded: (composition) {
                         _animationController
@@ -97,24 +97,24 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
                     child: Builder(builder: (context) {
-                      final data = ref.watch(productsByCategoryProvider);
-                      return data.when(
-                        data: (data) {
-                          final allKeys = data.keys.toList();
+                      final categoryData = ref.watch(productsByCategoryProvider);
+                      return categoryData.when(
+                        data: (categoryData) {
+                          final allKeys = categoryData.keys.toList();
                           return RefreshIndicator.adaptive(
                             onRefresh: () =>
                                 ref.refresh(productListProvider.future),
                             child: ListView.separated(
                               itemCount: allKeys.length,
                               padding: EdgeInsets.zero,
-                              itemBuilder: (txt, index) {
+                              itemBuilder: (context, index) {
                                 final myKey = allKeys[index];
                                 return Padding(
                                   padding: EdgeInsets.only(
                                       bottom: allKeys.last == myKey ? 60 : 0),
                                   child: ProductCardListWidget(
                                     categoryName: allKeys[index],
-                                    products: data[myKey]!.reversed.toList(),
+                                    products: categoryData[myKey]!.reversed.toList(),
                                   ),
                                 );
                               },
@@ -134,7 +134,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                               children: [
                                 Center(
                                   child: Lottie.asset(
-                                    '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                                    'assets/animation/empty.json',
                                     controller: _animationController,
                                     onLoaded: (composition) {
                                       _animationController
@@ -175,7 +175,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                     children: [
                       Center(
                         child: Lottie.asset(
-                          '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                          'assets/animation/empty.json',
                           controller: _animationController,
                           onLoaded: (composition) {
                             _animationController
@@ -211,3 +211,4 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
     );
   }
 }
+
