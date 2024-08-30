@@ -9,36 +9,40 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+// ignore: unused_import
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/product_loader.dart';
-import 'package:lottie/lottie.dart';
 
 class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductScreenState createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends ConsumerState<ProductScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late TextEditingController _searchController; 
+  late TextEditingController _searchController;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this);
-    _searchController = TextEditingController(); 
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    );
+    _searchController = TextEditingController();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
-    _searchController.dispose(); 
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -63,7 +67,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
             child: CustomTextField(
               suffixIcon: const Icon(Icons.search),
               hintText: AppLocalizations.of(context)!.searchProductButton,
-              controller: _searchController, 
+              controller: _searchController,
               onChanged: (value) {
                 if (value.isNotEmpty) {
                   ref.read(searchInputProvider.notifier).update(value);
@@ -82,16 +86,16 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                       onLoaded: (composition) {
                         _animationController
                           ..duration = composition.duration
-                          ..repeat(); 
+                          ..repeat();
                       },
-                      fit: BoxFit.cover, 
+                      height: 250.h,
+                      width: 250.w,
+                      fit: BoxFit.cover,
                     ),
                   );
                 }
                 return Padding(
-                  padding: EdgeInsets.only(
-                    top: 24.h,
-                  ),
+                  padding: EdgeInsets.only(top: 24.h),
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
                     child: Builder(builder: (context) {
@@ -136,7 +140,6 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                 );
               },
               error: (Object error, StackTrace stackTrace) {
-                debugPrint(error.toString());
                 return Scaffold(
                   body: RefreshIndicator.adaptive(
                     onRefresh: () => ref.refresh(productListProvider.future),

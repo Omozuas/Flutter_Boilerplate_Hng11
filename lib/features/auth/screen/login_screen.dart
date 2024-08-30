@@ -194,7 +194,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     validator: (v) => Validators.emailValidator(v, context),
                     inputFormatters: [
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    ],
+                    ], onChanged: (value) {  },
                   ),
                   SizedBox(
                     height: 16.h,

@@ -115,6 +115,8 @@ flutter:
     - assets/images/svg/account_settings/
     - assets/images/svg/
     - assets/icons/
+    - assets/animation/empty.json
+
 
     - .env
 

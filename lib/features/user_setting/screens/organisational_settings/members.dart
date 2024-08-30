@@ -243,7 +243,7 @@ class _MembersSettingsState extends ConsumerState<MembersSettings> {
                     "assets/images/svg/searchIcon.svg",
                     fit: BoxFit.contain,
                   ),
-                ),
+                ), onChanged: (value) {  },
               ),
               // SizedBox(
               //   height: 24.h,

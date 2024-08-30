@@ -85,7 +85,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                                   hintTextStyle: CustomTextStyle.medium(
                                     color: GlobalColors.darkOne,
                                     fontSize: 13.sp,
-                                  ),
+                                  ), onChanged: (value) {  },
                                 ),
                                 SizedBox(height: 10.sp),
                                 CustomTextField(
@@ -111,7 +111,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                                   hintTextStyle: CustomTextStyle.medium(
                                     color: GlobalColors.darkOne,
                                     fontSize: 13.sp,
-                                  ),
+                                  ), onChanged: (value) {  },
                                 ),
                                 SizedBox(height: 10.sp),
                                 Text(
@@ -266,7 +266,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                                   hintTextStyle: CustomTextStyle.medium(
                                     color: GlobalColors.darkOne,
                                     fontSize: 13.sp,
-                                  ),
+                                  ), onChanged: (value) {  },
                                 ),
                                 SizedBox(height: 25.sp),
                                 SizedBox(

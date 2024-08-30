@@ -127,14 +127,14 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       controller: SingleUserSignUpScreen.firstNameController,
                       hintText: localizations.enterFirstName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.nameValidator(v, context),
+                      validator: (v) => Validators.nameValidator(v, context), onChanged: (value) {  },
                     ),
                     CustomTextField(
                       label: localizations.lastName,
                       controller: lastNameController,
                       hintText: localizations.enterLastName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.nameValidator(v, context),
+                      validator: (v) => Validators.nameValidator(v, context), onChanged: (value) {  },
                     ),
                     CustomTextField(
                       label: localizations.email,
@@ -144,7 +144,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       validator: (v) => Validators.emailValidator(v, context),
                       inputFormatters: [
                         FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      ],
+                      ], onChanged: (value) {  },
                     ),
                     PasswordTextField(
                       label: localizations.password,

@@ -125,7 +125,7 @@ class CartHomeScreen extends ConsumerWidget {
                                             hintText: "Promo Code",
                                             onchanged:
                                                 cartDataProvider.onChanged,
-                                            margin: EdgeInsets.zero,
+                                            margin: EdgeInsets.zero, onChanged: (value) {  },
                                           ),
                                         ),
                                         16.w.sbW,

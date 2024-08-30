@@ -160,7 +160,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                             },
                           );
                         },
-                      ),
+                      ), onChanged: (value) {  },
                     ),
                     // Password strength and criteria section starts here
                     if (isPasswordFieldFocused) ...[
