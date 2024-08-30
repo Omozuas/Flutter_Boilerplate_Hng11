@@ -9,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-// ignore: unused_import
 import '../../../utils/Styles/text_styles.dart';
 import '../../../utils/global_size.dart';
 import '../widgets/product_listing_card_list.dart';
@@ -20,7 +19,6 @@ class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _ProductScreenState createState() => _ProductScreenState();
 }
 
@@ -129,7 +127,38 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                           );
                         },
                         error: (error, stackTrace) {
-                          return const SizedBox();
+                          return RefreshIndicator.adaptive(
+                            onRefresh: () =>
+                                ref.refresh(productListProvider.future),
+                            child: ListView(
+                              children: [
+                                Center(
+                                  child: Lottie.asset(
+                                    '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                                    controller: _animationController,
+                                    onLoaded: (composition) {
+                                      _animationController
+                                        ..duration = composition.duration
+                                        ..repeat();
+                                    },
+                                    height: 250.h,
+                                    width: 250.w,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .pullToRefreshInstruction,
+                                    style: TextStyle(
+                                        color: Colors.red, fontSize: 16.sp),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         loading: () {
                           return const ProductLoader();
@@ -140,21 +169,35 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                 );
               },
               error: (Object error, StackTrace stackTrace) {
-                return Scaffold(
-                  body: RefreshIndicator.adaptive(
-                    onRefresh: () => ref.refresh(productListProvider.future),
-                    child: ListView(
-                      children: [
-                        (MediaQuery.sizeOf(context).height / 3).sbH,
-                        Center(
-                          child: Text(
-                            context.somethingWentWrong,
-                            style: TextStyle(color: Colors.red, fontSize: 16.sp),
-                            textAlign: TextAlign.center,
-                          ),
+                return RefreshIndicator.adaptive(
+                  onRefresh: () => ref.refresh(productListProvider.future),
+                  child: ListView(
+                    children: [
+                      Center(
+                        child: Lottie.asset(
+                          '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                          controller: _animationController,
+                          onLoaded: (composition) {
+                            _animationController
+                              ..duration = composition.duration
+                              ..repeat();
+                          },
+                          height: 250.h,
+                          width: 250.w,
+                          fit: BoxFit.cover,
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 20.h),
+                      Center(
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .pullToRefreshInstruction,
+                          style:
+                              TextStyle(color: Colors.red, fontSize: 16.sp),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },
