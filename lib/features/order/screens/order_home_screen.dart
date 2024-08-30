@@ -60,6 +60,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,11 +73,11 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
           children: [
             !isSearching
                 ? Text(
-              context.order,
-              style: GoogleFonts.inter(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-              ),
+                    context.order,
+                    style: GoogleFonts.inter(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   )
                 : Expanded(
                     child: TextField(
@@ -115,7 +116,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
               children: [
                 ListView.builder(
                     itemCount: filteredOrder.length,
-                  shrinkWrap: true,
+                    shrinkWrap: true,
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemBuilder: (_, index) => OrderTile(
                           order: filteredOrder[index],
@@ -126,7 +127,6 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                   Center(
                       child: Text(
                           'No Order id found for "${searchController.text}"'))
-                
               ],
             ),
           )
