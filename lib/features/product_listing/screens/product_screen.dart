@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product_provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product_provider.dart'; // Ensure this import is correct
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -19,10 +19,10 @@ class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
 
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  ProductScreenState createState() => ProductScreenState();
 }
 
-class _ProductScreenState extends ConsumerState<ProductScreen>
+class ProductScreenState extends ConsumerState<ProductScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late TextEditingController _searchController;
@@ -68,7 +68,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
               controller: _searchController,
               onChanged: (value) {
                 if (value.isNotEmpty) {
-                  ref.read(searchInputProvider.notifier).update(value);
+                  ref.read(searchInputProvider.notifier).update(value); // Ensure this provider is properly defined
                 }
               },
             ),
@@ -83,7 +83,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                       controller: _animationController,
                       onLoaded: (composition) {
                         _animationController
-                          ..duration = composition.duration
+                          ..duration = const Duration(seconds: 5)  // Reaffirming the duration to 5 seconds
                           ..repeat();
                       },
                       height: 250.h,
@@ -97,7 +97,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
                     child: Builder(builder: (context) {
-                      final categoryData = ref.watch(productsByCategoryProvider);
+                      final categoryData = ref.watch(productsByCategoryProvider); // Ensure this provider is correctly defined
                       return categoryData.when(
                         data: (categoryData) {
                           final allKeys = categoryData.keys.toList();
@@ -138,7 +138,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                                     controller: _animationController,
                                     onLoaded: (composition) {
                                       _animationController
-                                        ..duration = composition.duration
+                                        ..duration = const Duration(seconds: 5) // Reaffirming the duration to 5 seconds
                                         ..repeat();
                                     },
                                     height: 250.h,
@@ -179,7 +179,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                           controller: _animationController,
                           onLoaded: (composition) {
                             _animationController
-                              ..duration = composition.duration
+                              ..duration = const Duration(seconds: 5)  // Reaffirming the duration to 5 seconds
                               ..repeat();
                           },
                           height: 250.h,
@@ -211,4 +211,5 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
     );
   }
 }
+
 
