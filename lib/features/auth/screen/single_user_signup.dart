@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+// import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -18,26 +18,32 @@ import '../../../utils/widgets/custom_text_field.dart';
 import '../providers/auth.provider.dart';
 
 class SingleUserSignUpScreen extends ConsumerWidget {
-  const SingleUserSignUpScreen({super.key});
+  SingleUserSignUpScreen({super.key});
 
   static final firstNameController = TextEditingController();
   static final lastNameController = TextEditingController();
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
   static final formKey = GlobalKey<FormState>();
+  bool _isSigningUp = false;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authProviderState = ref.watch(authProvider);
     final localizations = AppLocalizations.of(context)!; // Access localization
 
-    return LoadingOverlay(
-      isLoading: authProviderState.normalButtonLoading ||
-          authProviderState.googleButtonLoading,
+    return
+        //  LoadingOverlay(
+        //   isLoading: authProviderState.normalButtonLoading ||
+        //       authProviderState.googleButtonLoading,
+        IgnorePointer(
+      ignoring: _isSigningUp,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 76.h),
             child: FocusScope(
@@ -75,6 +81,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       ),
                       onPressed: () {
                         ref.read(authProvider.notifier).googleSignin(context);
+                        _isSigningUp = true;
                       },
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
@@ -162,6 +169,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           _handleCreateAccount(ref, context);
+                          _isSigningUp = true;
                         }
                       },
                       textColor: GlobalColors.white,
@@ -217,5 +225,6 @@ class SingleUserSignUpScreen extends ConsumerWidget {
           passwordController,
           emailController
         ]);
+    _isSigningUp = false;
   }
 }
