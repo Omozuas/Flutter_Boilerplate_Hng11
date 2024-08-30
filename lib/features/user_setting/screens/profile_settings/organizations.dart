@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/organization_widget.dart';
+import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,8 +19,9 @@ class _OrganizationState extends ConsumerState<Organization> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.simpleTitle(
-        titleText: 'Manage Organizations',
+        titleText: context.manageOrganization,
         showDivider: true,
+        onBack: () {},
       ),
       body: SafeArea(
         child: Column(
@@ -29,7 +31,7 @@ class _OrganizationState extends ConsumerState<Organization> {
               children: [
                 SizedBox(height: 20.h),
                 Text(
-                  'Keep Track of your organizations here.',
+                  context.keepTrack,
                   style: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
@@ -39,7 +41,7 @@ class _OrganizationState extends ConsumerState<Organization> {
                 Padding(
                   padding: const EdgeInsets.only(left: 90, right: 90),
                   child: Text(
-                    'Click the toggle buttons to switch through organizations',
+                    context.toggleSwitch,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.w400,
@@ -50,11 +52,11 @@ class _OrganizationState extends ConsumerState<Organization> {
                 SizedBox(
                   height: 40.h,
                 ),
-                const OrganizationWidget(
+                OrganizationWidget(
                     imageUrl:
                         'https://github.com/user-attachments/assets/984db31e-108f-4940-87e5-d6a494a2e1da',
-                    name: 'Jumia',
-                    domain: 'jumia.boilerplate.com',
+                    name: context.jumia,
+                    domain: context.jumiaDomain,
                     isCurrentOrg: false),
               ],
             ),
@@ -65,25 +67,29 @@ class _OrganizationState extends ConsumerState<Organization> {
             SizedBox(
               height: 20.h,
             ),
-            const OrganizationWidget(
+            OrganizationWidget(
                 imageUrl:
-                'https://github.com/user-attachments/assets/6b7a6f1c-cc8e-4d7b-9baf-febb9e41a103',
-                name: 'Compad App',
-                domain: 'compadapp.boilerplate.com',
+                    'https://github.com/user-attachments/assets/6b7a6f1c-cc8e-4d7b-9baf-febb9e41a103',
+                name: context.compad,
+                domain: context.compadDomain,
                 isCurrentOrg: true),
-             SizedBox(height: 20.h,),
-            const OrganizationWidget(
+            SizedBox(
+              height: 20.h,
+            ),
+            OrganizationWidget(
                 imageUrl:
-                'https://github.com/user-attachments/assets/a6b741e2-bacf-40c7-b02d-59ca042bdade',
-                name: 'Slack',
-                domain: 'slack.boilerplate.com',
+                    'https://github.com/user-attachments/assets/a6b741e2-bacf-40c7-b02d-59ca042bdade',
+                name: context.slack,
+                domain: context.slackDomain,
                 isCurrentOrg: true),
-            SizedBox(height: 20.h,),
-            const OrganizationWidget(
+            SizedBox(
+              height: 20.h,
+            ),
+            OrganizationWidget(
                 imageUrl:
-                'https://github.com/user-attachments/assets/6167ac5f-612e-4bc7-bdbd-45d72782db55',
-                name: 'Facebook',
-                domain: 'facebook.boilerplate.com',
+                    'https://github.com/user-attachments/assets/6167ac5f-612e-4bc7-bdbd-45d72782db55',
+                name: context.faceBook,
+                domain: context.faceBookDomain,
                 isCurrentOrg: true),
           ],
         ),
