@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+// import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/provider/add_product_provider.dart';
@@ -36,6 +36,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   final productDescriptionController = TextEditingController();
   final productPriceController = TextEditingController();
   final productQuantityController = TextEditingController();
+  bool _isLoadingProduct = false;
 
   String? selectedCategory;
   List<PlatformFile> selectedFiles = [];
@@ -173,13 +174,16 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addProductProviderProvider);
-    return LoadingOverlay(
-      isLoading: state.isLoading,
-      child: Scaffold(
-        appBar: CustomAppBar.simpleTitle(
-          titleText: context.addAProduct,
-        ),
-        body: SingleChildScrollView(
+    return
+        // LoadingOverlay(
+        //   isLoading: state.isLoading,
+        Scaffold(
+      appBar: CustomAppBar.simpleTitle(
+        titleText: context.addAProduct,
+      ),
+      body: IgnorePointer(
+        ignoring: _isLoadingProduct,
+        child: SingleChildScrollView(
           child: Center(
             child: Form(
               key: formKey,
@@ -218,9 +222,14 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                             compulsoryTitle(context.category),
                             8.h.sbH,
                             SizedBox(
-                              height: 40.h,
                               width: 379.w,
                               child: ProductCategory(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return context.selectIsRequired;
+                                  }
+                                  return null;
+                                },
                                 onCategorySelected: onCategorySelected,
                               ),
                             )
@@ -318,7 +327,12 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
                         12.w.sbW,
                         Expanded(
                           child: CustomButton(
-                            onTap: state.isLoading ? () {} : addProduct,
+                            onTap: state.isLoading
+                                ? () {
+                                    _isLoadingProduct = true;
+                                  }
+                                : addProduct,
+
                             // () {},
                             borderColor: GlobalColors.white,
                             text: context.add,

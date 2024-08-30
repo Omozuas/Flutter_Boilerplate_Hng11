@@ -191,13 +191,11 @@ extension Translation on BuildContext {
 
   String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
 
-
-  String get deliveryText => 'Estimated Delivery on 26th Aug';
-  String get deliveryDateText => 'Delivered on 19th Aug';
-  String get deliveryDate => '20-Aug-2024';
-  String get deliveryTime => '7:41 PM';
-  String get orderNumberText => 'Order#:';
-  String get yourProductsWillShowHere => 'Your products will show here';
-  String get somethingWentWrong =>
-      'Something went wrong. \nPlease pull to refresh';
+  String get deliveryText => text.deliveryText;
+  String get deliveryDateText => text.deliveryDateText;
+  String get deliveryDate => text.deliveryDate;
+  String get deliveryTime => text.deliveryTime;
+  String get orderNumberText => text.orderNumberText;
+  String get yourProductsWillShowHere => text.yourProductsWillShowHere;
+  String get somethingWentWrong => text.somethingWentWrong;
 }

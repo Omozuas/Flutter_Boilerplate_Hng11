@@ -69,12 +69,12 @@ class CustomTextField extends StatelessWidget {
                   color: GlobalColors.lightGrey,
                   fontSize: 14.sp,
                 ),
-                contentPadding: const EdgeInsets.only(
-                  left: 12,
-                  top: 12,
-                  right: 12,
-                  bottom: 10,
-                ),
+                // contentPadding: const EdgeInsets.only(
+                //   left: 12,
+                //   top: 10,
+                //   right: 12,
+                //   bottom: 10,
+                // ),
                 prefixIcon: prefixIcon,
                 alignLabelWithHint: true,
               ),
@@ -85,7 +85,7 @@ class CustomTextField extends StatelessWidget {
               onChanged: onChanged,
               maxLines: maxLines,
               expands: maxLines == null,
-              textAlignVertical: TextAlignVertical.top,
+              textAlignVertical: TextAlignVertical.center,
             ),
           ),
         ),
@@ -160,11 +160,11 @@ class ProductPriceFormField extends StatelessWidget {
         ],
         borderColor: GlobalColors.containerBorderColor,
         hintText: '0.00',
-        prefixIcon: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Icon(
-            Icons.attach_money,
-            //size: 20,
+        prefixIcon: SizedBox(
+          width: 20,
+          height: 20,
+          child: Center(
+            child: Icon(Icons.attach_money),
           ),
         ),
         validator: (value) {

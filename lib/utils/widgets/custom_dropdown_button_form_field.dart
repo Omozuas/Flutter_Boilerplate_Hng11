@@ -47,6 +47,7 @@ class CustomDropdownButtonFormFieldState
     return DropdownButtonFormField<String>(
       validator: widget.validator,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(8.w),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius ?? 6.r),
           borderSide: BorderSide(
