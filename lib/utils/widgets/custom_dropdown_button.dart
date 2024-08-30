@@ -67,7 +67,7 @@ class CustomDropdownButtonState extends State<CustomDropdownButton> {
                 style: TextStyle(color: widget.textColor),
               ),
               dropdownColor: widget.containerColor,
-              icon: Icon(Icons.keyboard_arrow_down, color: widget.textColor),
+              icon: Icon(Icons.keyboard_arrow_down, size: 16, color: widget.textColor),
               onChanged: (String? newValue) {
                 setState(() {
                   _selectedItem = newValue;
