@@ -8,6 +8,9 @@ import 'package:one_context/one_context.dart';
 void showSnackBar(String message, {bool? success}) {
   OneContext().showSnackBar(
       builder: (context) => SnackBar(
+            showCloseIcon: true,
+            closeIconColor: GlobalColors.white,
+            dismissDirection: DismissDirection.horizontal,
             backgroundColor:
                 success == true ? GlobalColors.green : GlobalColors.red,
             content: Text(
