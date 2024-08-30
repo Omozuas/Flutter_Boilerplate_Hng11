@@ -125,18 +125,23 @@ class AuthApi {
   }
 
 //Keep in mind that an organisation/company is generated for every user upon successful sign up.
-  Future<ResponseModel> createOrganisation(Company company) async {
+  Future<Company> registerCompany(Company company) async {
     DioProvider dioProvider = locator<DioProvider>();
     // An authenticated user is required for this request to be completed based on the api.
+    // tODO: Remove access token in place of currently signed user's token.
+    // box.write('accessToken','accessToken');
+
+    var registeredCompany = Company.initial();
     try {
       var response = await dioProvider.post(
         'organisations',
         data: company.toMap(),
       );
-
-      return response!;
+      registeredCompany = Company.fromMap(response?.data);
     } catch (e) {
       rethrow;
     }
+
+    return registeredCompany;
   }
 }
