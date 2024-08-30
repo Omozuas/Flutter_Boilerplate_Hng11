@@ -17,6 +17,7 @@ import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 import '../providers/auth.provider.dart';
 
+// ignore: must_be_immutable
 class SingleUserSignUpScreen extends ConsumerWidget {
   SingleUserSignUpScreen({super.key});
 
