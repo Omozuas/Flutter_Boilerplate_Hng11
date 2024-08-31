@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 // import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/product_detail/provider/product_detail.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/edit_and_delete.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_name_and_price_section.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/string_extension.dart';
+import 'package:flutter_boilerplate_hng11/utils/widgets/custom_dropdown_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -123,23 +125,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ],
                 ),
               ),
-              // Divider(color: GlobalColors.dividerColor),
-              // CustomDropdownButton(
-              //   borderRadius: 0,
-              //   valueStyle: TextStyle(color: GlobalColors.mutedTextColor),
-              //   placeholder: "Delivery Address",
-              //   items: const ["Ibadan", 'Eko', "Uyo"],
-              //   borderColor: GlobalColors.borderColor,
-              //   height: 64,
-              //   containerColor: Colors.white,
-              //   textPadding:
-              //       EdgeInsets.symmetric(vertical: 12, horizontal: 24.w),
-              //   width: double.infinity,
-              //   textColor: GlobalColors.mutedTextColor,
-              // ),
-              // DeleteAndEditActions(
-              //   productId: '${state.product?.id}',
-              // )
+              Divider(color: GlobalColors.dividerColor),
+              CustomDropdownButton(
+                borderRadius: 0,
+                valueStyle: TextStyle(color: GlobalColors.mutedTextColor),
+                placeholder: "Delivery Address",
+                items: const ["Ibadan", 'Eko', "Uyo"],
+                borderColor: GlobalColors.borderColor,
+                height: 64,
+                containerColor: Colors.white,
+                textPadding:
+                    EdgeInsets.symmetric(vertical: 12, horizontal: 24.w),
+                width: double.infinity,
+                textColor: GlobalColors.mutedTextColor,
+              ),
+              DeleteAndEditActions(
+                productId: '${state.product?.id}',
+              )
             ],
           ),
         );

@@ -51,7 +51,7 @@ class InviteDialogState extends State<InviteDialog> {
               hintText: 'email@example.com, email2@example.com...',
               controller: emailController,
               borderColor: GlobalColors.lightGray, // Match email border color
-              focusedBorderColor: GlobalColors.orange, // Match focused color
+              focusedBorderColor: GlobalColors.orange, onChanged: (value) {  }, // Match focused color
             ),
             const SizedBox(height: 16),
 

@@ -129,6 +129,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                           );
                         },
                       ),
+                      onChanged: (value) {},
                     ),
                     CustomTextField(
                       label: AppLocalizations.of(context)!.newPassword,
