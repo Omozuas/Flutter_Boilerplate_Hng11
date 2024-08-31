@@ -128,6 +128,7 @@ class UserDashBoardScreen extends ConsumerWidget {
                           )
                         ],
                       ),
+
                       0.h.sbH,
                       dashBoardStateProvider.isLoading &&
                               dashboardProvider.displayedProducts.isEmpty
