@@ -199,3 +199,4 @@ String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
   String get yourProductsWillShowHere => text.yourProductsWillShowHere;
   String get somethingWentWrong =>text.somethingWentWrong;
 }
+

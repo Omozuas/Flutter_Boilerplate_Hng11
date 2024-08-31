@@ -25,7 +25,6 @@ class SingleUserSignUpScreen extends ConsumerWidget {
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
   static final formKey = GlobalKey<FormState>();
-  bool _isSigningUp = false;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +36,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
         //   isLoading: authProviderState.normalButtonLoading ||
         //       authProviderState.googleButtonLoading,
         IgnorePointer(
-      ignoring: _isSigningUp,
+      ignoring: authProviderState.normalButtonLoading ||
+          authProviderState.googleButtonLoading,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: GestureDetector(
@@ -81,12 +81,11 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       ),
                       onPressed: () {
                         ref.read(authProvider.notifier).googleSignin(context);
-                        _isSigningUp = true;
                       },
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
                               width: 16.w,
-                              height: 25.w,
+                              height: 16.w,
                               child: CircularProgressIndicator.adaptive(
                                 strokeWidth: 2.w,
                               ),
@@ -169,7 +168,6 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           _handleCreateAccount(ref, context);
-                          _isSigningUp = true;
                         }
                       },
                       textColor: GlobalColors.white,
@@ -210,8 +208,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
     );
   }
 
-  void _handleCreateAccount(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).registerSingleUser(
+  void _handleCreateAccount(WidgetRef ref, BuildContext context) async{
+    await ref.read(authProvider.notifier).registerSingleUser(
         {
           'email': emailController.text.trim().toLowerCase(),
           'first_name': firstNameController.text,
@@ -225,6 +223,6 @@ class SingleUserSignUpScreen extends ConsumerWidget {
           passwordController,
           emailController
         ]);
-    _isSigningUp = false;
+
   }
 }

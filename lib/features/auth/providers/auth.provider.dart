@@ -88,12 +88,11 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(organisations: state.organisations..add(org));
   }
 
-  Future<void> registerSingleUser(Map<String, dynamic> data,
+  Future <void> registerSingleUser(Map<String, dynamic> data,
       BuildContext context, List<TextEditingController> controllers) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
-
       if (res != null) {
         showSnackBar(res.message.toString());
         UserRegData userRegData = UserRegData.fromJson(res.data);
@@ -116,7 +115,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
-      //tODO: Do something with caught error;
+    //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
     }

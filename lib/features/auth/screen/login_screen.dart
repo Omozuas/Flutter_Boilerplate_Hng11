@@ -145,7 +145,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         child: authStateProvider.googleButtonLoading
                             ? SizedBox(
                                 width: 16.w,
-                                height: 25.w,
+                                height: 16.w,
                                 child: CircularProgressIndicator.adaptive(
                                   strokeWidth: 2.w,
                                 ),
