@@ -138,7 +138,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       borderRadius: 8.r,
                       validator: (v) =>
                           Validators.passwordValidator(v, context),
-                      onchanged: (String? value) {
+                      onChanged: (String? value) {
                         checkPasswordStrength(value!);
                         validatePasswords();
                       },
@@ -274,7 +274,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       obscureText: !confPasswordVissible,
                       validator: (value) =>
                           Validators.passwordValidator(value, context),
-                      onchanged: (value) => validatePasswords(),
+                      onChanged: (value) => validatePasswords(),
                       borderRadius: 8.r,
                       hintText:
                           AppLocalizations.of(context)!.confirmNewPassword,

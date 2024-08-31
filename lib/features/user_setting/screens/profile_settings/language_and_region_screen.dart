@@ -41,8 +41,21 @@ class _LanguageAndRegionScreenState
               .setLanguage(getLanguageCode(selectedLanguage!));
         }
         feedBackMessageColor = GlobalColors.green;
+      }
+
+      // Check if the time zone is selected and save it
+      if (selectedTimeZone != null) {
+        feedBackMessage = context.text.settingsSavedSuccessfully;
+        feedBackMessageColor = GlobalColors.green;
+      }
+
+      // Check if neither of the fields is selected and show feedback message
+      if (selectedLanguage == null && selectedTimeZone == null) {
+        showError = true;
+        // feedBackMessage = context.text.noChangesMade;
+        // feedBackMessageColor = GlobalColors.redColor;
       } else {
-        feedBackMessage = null;
+        showError = false;
       }
     });
   }
@@ -165,11 +178,11 @@ class _LanguageAndRegionScreenState
             //     });
             //   },
             // ),
-            if (showError && selectedRegion == null)
-              Text(
-                AppLocalizations.of(context)!.regionUpdateError,
-                style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
-              ),
+            // if (showError && selectedRegion == null)
+            //   Text(
+            //     AppLocalizations.of(context)!.regionUpdateError,
+            //     style: TextStyle(color: GlobalColors.redColor, fontSize: 12.sp),
+            //   ),
             SizedBox(height: 20.h),
             CustomDropdownButton(
               items: const [
