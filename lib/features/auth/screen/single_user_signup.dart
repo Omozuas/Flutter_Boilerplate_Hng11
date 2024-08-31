@@ -82,6 +82,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       onPressed: () {
                         ref.read(authProvider.notifier).googleSignin(context);
                       },
+                      autofocus: _isSigningUp = false,
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
                               width: 16.w,
