@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/dialogs/profile_dialog/switch_organization_dialog.dart';
 import 'package:flutter_boilerplate_hng11/utils/app_images.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';

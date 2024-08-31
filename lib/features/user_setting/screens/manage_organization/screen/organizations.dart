@@ -88,7 +88,7 @@ class ManageUserOrganizations extends ConsumerWidget {
                     name: organizationManageProvider.allOrganizations[i].name??"",
                     domain: organizationManageProvider.allOrganizations[i].name??"",
                     onTap:()=> organizationProvider.switchOrg(context,  organizationManageProvider.allOrganizations[i]),
-                    isCurrentOrg:  organizationManageProvider.allOrganizations[i].id == organizationProvider.userService.selectedOrganization
+                    isCurrentOrg:  organizationManageProvider.allOrganizations[i].id == organizationProvider.userService.selectedOrganization?.id
                   );
                 }
               ),

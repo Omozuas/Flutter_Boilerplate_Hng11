@@ -8,7 +8,6 @@ import 'model/all_organization_model.dart';
 class OrganizationsApi implements OrganizationsApiContract {
   //Inject the DioProvider Dependency
   final DioProvider _dioProvider = locator<DioProvider>();
-  final UserService _userService = locator<UserService>();
 
   @override
   Future<AllOrganizationResponse?> getOrganizations() async {
