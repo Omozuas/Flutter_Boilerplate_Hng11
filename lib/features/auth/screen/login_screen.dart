@@ -142,6 +142,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ref.read(authProvider.notifier).googleSignin(context);
                           _isLoggingIn = true;
                         },
+                        autofocus: _isLoggingIn = false,
                         child: authStateProvider.googleButtonLoading
                             ? SizedBox(
                                 width: 16.w,

@@ -111,10 +111,10 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
   }
 
   getRemote() {
+    getAllOrgProducts();
     getSalesTrend();
     getDashboardData();
     getOrganizationOverView();
-    getAllOrgProducts();
   }
 
   List<SalesData> data = [];
@@ -176,6 +176,25 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
       //tODO: Do something with caught error;
     }
   }
+
+  // Stream<List<Product>> getAllOrgProducts() async* {
+  //   try {
+  //     final res = await DashboardApi().getAllOrgProducts();
+  //     if (res.isNotEmpty) {
+  //       setAllProductCount = res.length;
+  //       await saveProducts(res);
+  //     } else {
+  //       setAllProductCount = 0;
+  //     }
+  //     yield res;
+  //     await Future.delayed(const Duration(seconds: 15));
+  //   } catch (e) {
+  //     setAllProductCount = 0;
+  //     await Future.delayed(const Duration(seconds: 15));
+  //     rethrow;
+  //     //tODO: Do something with caught error;
+  //   }
+  // }
 
   Future<void> getDashboardData() async {
     setRecentSaleLoading = state.dashBoardData.revenue == null ? true : false;
@@ -271,7 +290,7 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
     try {
       final res = _storageService.read("allProducts");
       if (res != null) {
-        setAllProductCount = getProductListFromJsontoString(res).length;
+        setAllProductCount = getProductListFromStringtoJson(res).length;
       }
     } catch (e) {
       log(e.toString());
@@ -295,6 +314,7 @@ class DashBoardProvider extends StateNotifier<DashBoardState>
   }
 
   Future<bool> saveProducts(List<Product> value) async {
+    log("SAVE PRODUCTS");
     try {
       _storageService.write("allProducts", getProductListFromJsontoString(value));
       bool res = _storageService.hasData("allProducts");
