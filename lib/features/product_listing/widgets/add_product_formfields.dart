@@ -69,12 +69,12 @@ class CustomTextField extends StatelessWidget {
                   color: GlobalColors.lightGrey,
                   fontSize: 14.sp,
                 ),
-                contentPadding: const EdgeInsets.only(
-                  left: 12,
-                  top: 12,
-                  right: 12,
-                  bottom: 10,
-                ),
+                // contentPadding: const EdgeInsets.only(
+                //   left: 12,
+                //   top: 12,
+                //   right: 12,
+                //   bottom: 10,
+                // ),
                 prefixIcon: prefixIcon,
                 alignLabelWithHint: true,
               ),
@@ -124,7 +124,7 @@ class DescriptionFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     // final productDescriptionController = TextEditingController();
     return SizedBox(
-      height: 80.h,
+      height: 90.h,
       width: 379.w,
       child: CustomTextField(
         controller: controller,
