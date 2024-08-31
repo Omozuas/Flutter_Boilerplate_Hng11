@@ -18,7 +18,7 @@ import '../../../utils/widgets/custom_text_field.dart';
 import '../providers/auth.provider.dart';
 
 class SingleUserSignUpScreen extends ConsumerWidget {
-  SingleUserSignUpScreen({super.key});
+  const SingleUserSignUpScreen({super.key});
 
   static final firstNameController = TextEditingController();
   static final lastNameController = TextEditingController();

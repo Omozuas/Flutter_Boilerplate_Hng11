@@ -13,6 +13,7 @@ class ErrorHandlers {
 
     DioException err = error;
     if(err.response?.statusCode == 404){
+
       log('Check not found : ${err.requestOptions.path}');
       return;
     }
