@@ -1,4 +1,5 @@
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
@@ -89,12 +90,11 @@ class AuthProvider extends StateNotifier<AuthState> {
     state = state.copyWith(organisations: state.organisations..add(org));
   }
 
-  Future<void> registerSingleUser(Map<String, dynamic> data,
+  Future <void> registerSingleUser(Map<String, dynamic> data,
       BuildContext context, List<TextEditingController> controllers) async {
     setNormalButtonLoading = true;
     try {
       final res = await AuthApi().registerSingleUser(data: data);
-
       if (res != null) {
         showSnackBar(res.message.toString(), success: true);
         UserRegData userRegData = UserRegData.fromJson(res.data);
@@ -117,7 +117,7 @@ class AuthProvider extends StateNotifier<AuthState> {
         }
       }
     } catch (e) {
-      //tODO: Do something with caught error;
+    //tODO: Do something with caught error;
     } finally {
       setNormalButtonLoading = false;
     }
@@ -252,7 +252,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     }
   }
 
-  Future<void> forgotPassword(String email, BuildContext context) async {
+  Future forgotPassword(String email, BuildContext context) async {
     try {
       setPasswordButtonLoading = true;
       final res = await AuthApi().forgotPassword(email: email);
@@ -263,9 +263,15 @@ class AuthProvider extends StateNotifier<AuthState> {
           context.push('/verificationScreen/$email');
         }
       }
-    } catch (e) {
+    }  on DioException catch (e) {
+      if(e.response?.statusCode == 404){
+        showSnackBar(e.response?.data['message']);
+      }
       //:TODO catch error
     }
+    finally {
+      setPasswordButtonLoading = false;
+  }
   }
 
   Future<bool?> verifyCode(
