@@ -23,7 +23,6 @@ class CustomInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     UserService user = locator<UserService>();
     String? userToken = user.userAccessToken;
-
     log('Endpoint >> ${options.path}');
     log('Request body >> ${options.data}');
     if (userToken != null) {

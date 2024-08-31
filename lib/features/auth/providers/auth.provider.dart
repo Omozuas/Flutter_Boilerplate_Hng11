@@ -1,4 +1,5 @@
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/auth_api.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/models/organisation/organisation.dart';
@@ -251,7 +252,7 @@ class AuthProvider extends StateNotifier<AuthState> {
     }
   }
 
-  Future<void> forgotPassword(String email, BuildContext context) async {
+  Future forgotPassword(String email, BuildContext context) async {
     try {
       setPasswordButtonLoading = true;
       final res = await AuthApi().forgotPassword(email: email);
@@ -262,9 +263,15 @@ class AuthProvider extends StateNotifier<AuthState> {
           context.push('/verificationScreen/$email');
         }
       }
-    } catch (e) {
+    }  on DioException catch (e) {
+      if(e.response?.statusCode == 404){
+        showSnackBar(e.response?.data['message']);
+      }
       //:TODO catch error
     }
+    finally {
+      setPasswordButtonLoading = false;
+  }
   }
 
   Future<bool?> verifyCode(
