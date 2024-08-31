@@ -44,7 +44,10 @@ class AuthApi {
   }) async {
     try {
       final response = await dioProvider.post(
-        '/auth/$email/$code/verify-code',
+        '/auth/verify-code',data: {
+          "code" : code,
+        "email" :  email
+      }
       );
       return response;
     } catch (e) {
