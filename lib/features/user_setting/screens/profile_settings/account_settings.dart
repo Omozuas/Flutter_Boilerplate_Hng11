@@ -150,6 +150,8 @@ class SettingsScreen extends ConsumerWidget {
                                 'assets/icons/fluent_organization-16-regular.svg',
                             title: context.text.manageOrganization,
                             onTap: () {
+                              // manageOrganizationsScreen
+                              context.push(AppRoute.manageOrganizationsScreen);
                               // Navigate to Manage Organization
                             },
                           ),
