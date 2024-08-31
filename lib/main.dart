@@ -50,7 +50,9 @@ class MyApp extends ConsumerWidget {
         supportedLocales: AppLocalizations.supportedLocales,
         builder: OneContext().builder,
         key: OneContext().key,
-        routerConfig: AppRouter.router,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
+        routerDelegate: AppRouter.router.routerDelegate,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           progressIndicatorTheme: ProgressIndicatorThemeData(

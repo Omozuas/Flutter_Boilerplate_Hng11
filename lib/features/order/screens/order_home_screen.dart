@@ -25,10 +25,14 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   final TextEditingController searchController = TextEditingController();
   @override
   void initState() {
-    allOrders = generateOrders();
-    filteredOrder = List.from(allOrders);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      allOrders = generateOrders();
+      filteredOrder = List.from(allOrders);
+      setState(() {});
+    });
     super.initState();
   }
+
 //List to generate orders
   List<Order> generateOrders() {
     return List.generate(8, (index) {
@@ -120,7 +124,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemBuilder: (_, index) => OrderTile(
                           order: filteredOrder[index],
-                          onTap: () => context.go(
+                          onTap: () => context.push(
                               '${AppRoute.orderDetails}/${filteredOrder[index].id}'),
                         )),
                 if (isSearching && filteredOrder.isEmpty)

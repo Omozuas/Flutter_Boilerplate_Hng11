@@ -15,7 +15,9 @@ import '../../../utils/validator.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_text_field.dart';
 import '../providers/auth.provider.dart';
+import '../providers/signup_state_provider.dart';
 
+// ignore: must_be_immutable
 class SingleUserSignUpScreen extends ConsumerWidget {
   const SingleUserSignUpScreen({super.key});
 
@@ -24,6 +26,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
   static final formKey = GlobalKey<FormState>();
+
+  // bool _isSigningUp = false;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -80,6 +84,9 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       ),
                       onPressed: () {
                         ref.read(authProvider.notifier).googleSignin(context);
+                        ref
+                            .read(signUpProvider.notifier)
+                            .startSignUp(); //This starts the signup, setting the boolen to true
                       },
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
@@ -133,6 +140,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       hintText: localizations.enterFirstName,
                       focusedBorderColor: GlobalColors.orange,
                       validator: (v) => Validators.nameValidator(v, context),
+                      onChanged: (value) {},
                     ),
                     CustomTextField(
                       label: localizations.lastName,
@@ -140,6 +148,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       hintText: localizations.enterLastName,
                       focusedBorderColor: GlobalColors.orange,
                       validator: (v) => Validators.nameValidator(v, context),
+                      onChanged: (value) {},
                     ),
                     CustomTextField(
                       label: localizations.email,
@@ -150,6 +159,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       inputFormatters: [
                         FilteringTextInputFormatter.deny(RegExp(r'\s')),
                       ],
+                      onChanged: (value) {},
                     ),
                     PasswordTextField(
                       label: localizations.password,
@@ -166,7 +176,15 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       loading: authProviderState.normalButtonLoading,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
+                          ref
+                              .read(signUpProvider.notifier)
+                              .startSignUp(); // Start signing up by setting the boolen to true
+
                           _handleCreateAccount(ref, context);
+
+                          ref
+                              .read(signUpProvider.notifier)
+                              .finishSignUp(); // Finish signing up
                         }
                       },
                       textColor: GlobalColors.white,
@@ -207,7 +225,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
     );
   }
 
-  void _handleCreateAccount(WidgetRef ref, BuildContext context) async{
+  void _handleCreateAccount(WidgetRef ref, BuildContext context) async {
     await ref.read(authProvider.notifier).registerSingleUser(
         {
           'email': emailController.text.trim().toLowerCase(),
@@ -222,6 +240,5 @@ class SingleUserSignUpScreen extends ConsumerWidget {
           passwordController,
           emailController
         ]);
-
   }
 }

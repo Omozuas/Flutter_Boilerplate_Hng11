@@ -3,6 +3,8 @@ import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
+//import 'package:go_router/go_router.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -35,7 +37,8 @@ class OrderTile extends StatelessWidget {
                 color: GlobalColors.white,
                 borderRadius: BorderRadius.circular(8.r),
                 border: Border.all(
-                  color: const Color(0xFFF7F7F7),
+                  color: GlobalColors.borderWhite,
+                  //  const Color(0xFFF7F7F7),
                 ),
               ),
               child: Column(
@@ -50,7 +53,7 @@ class OrderTile extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF71717A),
+                          color: GlobalColors.mutedTextColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -98,7 +101,7 @@ class OrderTile extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(
-                    color: const Color.fromRGBO(247, 247, 247, 1),
+                    color: GlobalColors.borderWhite,
                   ),
                 ),
                 child: Image.asset(order.image),

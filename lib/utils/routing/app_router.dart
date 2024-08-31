@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
@@ -42,9 +43,18 @@ import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
 import '../../features/user_setting/screens/manage_organization/screen/organizations.dart';
 
+
+final _rootNavKey = GlobalKey<NavigatorState>();
+final _homeNavKey = GlobalKey<NavigatorState>();
+final _productsNavKey = GlobalKey<NavigatorState>();
+final _ordersNavKey = GlobalKey<NavigatorState>();
+final _settingsNavKey = GlobalKey<NavigatorState>();
+
+
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoute.splash,
+    navigatorKey: _rootNavKey,
     routes: [
       ConsumerGoRoute(
         path: AppRoute.splash,
@@ -223,14 +233,15 @@ class AppRouter {
         },
       ),
       StatefulShellRoute.indexedStack(
+        parentNavigatorKey: _rootNavKey,
         branches: [
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _homeNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
               builder: (context, state, ref) => const HomeScreen(),
             ),
           ]),
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _productsNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.products,
               builder: (context, state, ref) => const ProductScreen(),
@@ -251,7 +262,7 @@ class AppRouter {
           //     ),
           //   ),
           // ]),
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _ordersNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.order,
               builder: (context, state, ref) {
@@ -259,7 +270,7 @@ class AppRouter {
               },
             ),
           ]),
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _settingsNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.settings,
               builder: (context, state, ref) => const SettingsScreen(),
@@ -275,7 +286,7 @@ class AppRouter {
 }
 
 class AppRoute {
-  static const String splash = '/splash';
+  static const String splash = '/';
   static const String companySignUp = '/companySignUp';
   static const String singleUserSignUp = '/singleUserSignUp';
   static const String login = '/login';
