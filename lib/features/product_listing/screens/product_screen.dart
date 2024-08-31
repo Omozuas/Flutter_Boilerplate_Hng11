@@ -1,7 +1,10 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product_provider.dart'; // Ensure this import is correct
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product_provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -68,7 +71,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
               controller: _searchController,
               onChanged: (value) {
                 if (value.isNotEmpty) {
-                  ref.read(searchInputProvider.notifier).update(value); // Ensure this provider is properly defined
+                  ref.read(searchInputProvider.notifier).update(value);
                 }
               },
             ),
@@ -83,7 +86,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                       controller: _animationController,
                       onLoaded: (composition) {
                         _animationController
-                          ..duration = const Duration(seconds: 5)  // Reaffirming the duration to 5 seconds
+                          ..duration = const Duration(seconds: 5)
                           ..repeat();
                       },
                       height: 250.h,
@@ -97,7 +100,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
                     child: Builder(builder: (context) {
-                      final categoryData = ref.watch(productsByCategoryProvider); // Ensure this provider is correctly defined
+                      final categoryData = ref.watch(productsByCategoryProvider);
                       return categoryData.when(
                         data: (categoryData) {
                           final allKeys = categoryData.keys.toList();
@@ -138,7 +141,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                                     controller: _animationController,
                                     onLoaded: (composition) {
                                       _animationController
-                                        ..duration = const Duration(seconds: 5) // Reaffirming the duration to 5 seconds
+                                        ..duration = const Duration(seconds: 5)
                                         ..repeat();
                                     },
                                     height: 250.h,
@@ -149,8 +152,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                                 SizedBox(height: 20.h),
                                 Center(
                                   child: Text(
-                                    AppLocalizations.of(context)!
-                                        .pullToRefreshInstruction,
+                                    'Pull to refresh',
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 16.sp),
                                     textAlign: TextAlign.center,
@@ -179,7 +181,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                           controller: _animationController,
                           onLoaded: (composition) {
                             _animationController
-                              ..duration = const Duration(seconds: 5)  // Reaffirming the duration to 5 seconds
+                              ..duration = const Duration(seconds: 5)
                               ..repeat();
                           },
                           height: 250.h,
@@ -190,8 +192,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                       SizedBox(height: 20.h),
                       Center(
                         child: Text(
-                          AppLocalizations.of(context)!
-                              .pullToRefreshInstruction,
+                          'Pull to refresh',
                           style:
                               TextStyle(color: Colors.red, fontSize: 16.sp),
                           textAlign: TextAlign.center,
@@ -211,5 +212,3 @@ class ProductScreenState extends ConsumerState<ProductScreen>
     );
   }
 }
-
-
