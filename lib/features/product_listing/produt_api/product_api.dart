@@ -47,7 +47,7 @@ class ProductApi implements ProductsApiContract {
   @override
   Future deleteProduct({required String id}) async {
     try {
-      return dioProvider.delete('$userProductsEndpoint/$id');
+      return dioProvider.delete(productsByIdEndpoint(id: id));
     } catch (e) {
       rethrow;
     }
