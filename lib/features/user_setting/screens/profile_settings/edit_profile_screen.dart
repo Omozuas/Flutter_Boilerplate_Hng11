@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
+import 'package:flutter_boilerplate_hng11/services/service_locator.dart';
+import 'package:flutter_boilerplate_hng11/services/user.service.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,6 +31,7 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
+  final userService = locator<UserService>();
 
   late final TextEditingController _firstnameController;
   late final TextEditingController _lastnameController;
@@ -125,9 +128,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 SizedBox(height: 16.w),
                 TextFormField(
             controller: _bioController,
-           
             maxLines: 3,
-            
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               contentPadding:
@@ -135,7 +136,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     vertical: 8.h,
                     horizontal: 12.w,
                   ),
-              hintText: AppLocalizations.of(context)!.typeYourMessageHere,
+              hintText: context.typeYourMessageHere,
               hintStyle: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
@@ -166,7 +167,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           ),
                SizedBox(height: 5.h),
                 Text(
-                  AppLocalizations.of(context)!.maximumOf64Character,
+                  context.maximumOf64Character,
                   textAlign: TextAlign.start,
                   textDirection: TextDirection.rtl,
                   style: GoogleFonts.inter(
