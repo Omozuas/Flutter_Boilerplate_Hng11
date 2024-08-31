@@ -82,7 +82,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                 if (data.isEmpty) {
                   return Center(
                     child: Lottie.asset(
-                      '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
+                      'assets/animation/empty.json',
                       controller: _animationController,
                       onLoaded: (composition) {
                         _animationController

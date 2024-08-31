@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -25,9 +26,14 @@ class ForgotPasswordScreen extends ConsumerWidget {
         .forgotPassword(_emailController.text, context);
   }
 
+
+  static final FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final loading = ref.watch(authProvider);
+  //  ref.read(authProvider.notifier).setPasswordButtonLoading = false;
+
     final localizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: const CustomAppBar.empty(),
@@ -51,6 +57,10 @@ class ForgotPasswordScreen extends ConsumerWidget {
               ),
               SizedBox(height: 28.sp),
               CustomTextField(
+                focusNode: _focusNode,
+                inputFormatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
                 label: localizations.email,
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -62,6 +72,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                 loading: loading.passwordButtonLoading,
                 onTap: () async {
                   if (_emailKey.currentState?.validate() ?? false) {
+                    _focusNode.unfocus();
                     _handleSend(ref, context);
                   }
                 },

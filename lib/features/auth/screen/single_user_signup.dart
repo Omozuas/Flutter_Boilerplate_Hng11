@@ -20,28 +20,28 @@ import '../providers/signup_state_provider.dart';
 
 // ignore: must_be_immutable
 class SingleUserSignUpScreen extends ConsumerWidget {
-   const SingleUserSignUpScreen({super.key});
+  const SingleUserSignUpScreen({super.key});
 
   static final firstNameController = TextEditingController();
   static final lastNameController = TextEditingController();
   static final emailController = TextEditingController();
   static final passwordController = TextEditingController();
   static final formKey = GlobalKey<FormState>();
-  
+
   // bool _isSigningUp = false;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authProviderState = ref.watch(authProvider);
     final localizations = AppLocalizations.of(context)!; // Access localization
-    final signUpState = ref.watch(signUpProvider); // Listen to the signUpProvider rather than managing the state locally
 
     return
         //  LoadingOverlay(
         //   isLoading: authProviderState.normalButtonLoading ||
         //       authProviderState.googleButtonLoading,
         IgnorePointer(
-      ignoring: signUpState.isSigningUp,
+      ignoring: authProviderState.normalButtonLoading ||
+          authProviderState.googleButtonLoading,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: GestureDetector(
@@ -85,12 +85,14 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       ),
                       onPressed: () {
                         ref.read(authProvider.notifier).googleSignin(context);
-                        ref.read(signUpProvider.notifier).startSignUp(); //This starts the signup, setting the boolen to true
+                        ref
+                            .read(signUpProvider.notifier)
+                            .startSignUp(); //This starts the signup, setting the boolen to true
                       },
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
                               width: 16.w,
-                              height: 25.w,
+                              height: 16.w,
                               child: CircularProgressIndicator.adaptive(
                                 strokeWidth: 2.w,
                               ),
@@ -138,14 +140,16 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       controller: SingleUserSignUpScreen.firstNameController,
                       hintText: localizations.enterFirstName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.nameValidator(v, context), onChanged: (value) {  },
+                      validator: (v) => Validators.nameValidator(v, context),
+                      onChanged: (value) {},
                     ),
                     CustomTextField(
                       label: localizations.lastName,
                       controller: lastNameController,
                       hintText: localizations.enterLastName,
                       focusedBorderColor: GlobalColors.orange,
-                      validator: (v) => Validators.nameValidator(v, context), onChanged: (value) {  },
+                      validator: (v) => Validators.nameValidator(v, context),
+                      onChanged: (value) {},
                     ),
                     CustomTextField(
                       label: localizations.email,
@@ -155,7 +159,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       validator: (v) => Validators.emailValidator(v, context),
                       inputFormatters: [
                         FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                      ], onChanged: (value) {  },
+                      ],
+                      onChanged: (value) {},
                     ),
                     PasswordTextField(
                       label: localizations.password,
@@ -172,12 +177,15 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       loading: authProviderState.normalButtonLoading,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                     ref.read(signUpProvider.notifier).startSignUp(); // Start signing up by setting the boolen to true
+                          ref
+                              .read(signUpProvider.notifier)
+                              .startSignUp(); // Start signing up by setting the boolen to true
 
-                      await   _handleCreateAccount(ref, context);
+                          _handleCreateAccount(ref, context);
 
-                       ref.read(signUpProvider.notifier).finishSignUp(); // Finish signing up
-
+                          ref
+                              .read(signUpProvider.notifier)
+                              .finishSignUp(); // Finish signing up
                         }
                       },
                       textColor: GlobalColors.white,
@@ -218,7 +226,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _handleCreateAccount(WidgetRef ref, BuildContext context) async{
+  void _handleCreateAccount(WidgetRef ref, BuildContext context) async {
     await ref.read(authProvider.notifier).registerSingleUser(
         {
           'email': emailController.text.trim().toLowerCase(),
