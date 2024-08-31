@@ -1,10 +1,9 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product.provider.dart';
-import 'package:flutter_boilerplate_hng11/features/product_listing/provider/product_provider.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_boilerplate_hng11/utils/widgets/custom_text_field.dart';
@@ -22,10 +21,10 @@ class ProductScreen extends ConsumerStatefulWidget {
   const ProductScreen({super.key});
 
   @override
-  ProductScreenState createState() => ProductScreenState();
+  _ProductScreenState createState() => _ProductScreenState();
 }
 
-class ProductScreenState extends ConsumerState<ProductScreen>
+class _ProductScreenState extends ConsumerState<ProductScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late TextEditingController _searchController;
@@ -82,11 +81,11 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                 if (data.isEmpty) {
                   return Center(
                     child: Lottie.asset(
-                      'assets/animation/empty.json',
+                      '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
                       controller: _animationController,
                       onLoaded: (composition) {
                         _animationController
-                          ..duration = const Duration(seconds: 5)
+                          ..duration = composition.duration
                           ..repeat();
                       },
                       height: 250.h,
@@ -100,24 +99,24 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                   child: SizedBox(
                     height: GlobalScreenSize.getScreenHeight(context),
                     child: Builder(builder: (context) {
-                      final categoryData = ref.watch(productsByCategoryProvider);
-                      return categoryData.when(
-                        data: (categoryData) {
-                          final allKeys = categoryData.keys.toList();
+                      final data = ref.watch(productsByCategoryProvider);
+                      return data.when(
+                        data: (data) {
+                          final allKeys = data.keys.toList();
                           return RefreshIndicator.adaptive(
                             onRefresh: () =>
                                 ref.refresh(productListProvider.future),
                             child: ListView.separated(
                               itemCount: allKeys.length,
                               padding: EdgeInsets.zero,
-                              itemBuilder: (context, index) {
+                              itemBuilder: (txt, index) {
                                 final myKey = allKeys[index];
                                 return Padding(
                                   padding: EdgeInsets.only(
                                       bottom: allKeys.last == myKey ? 60 : 0),
                                   child: ProductCardListWidget(
                                     categoryName: allKeys[index],
-                                    products: categoryData[myKey]!.reversed.toList(),
+                                    products: data[myKey]!.reversed.toList(),
                                   ),
                                 );
                               },
@@ -141,7 +140,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                                     controller: _animationController,
                                     onLoaded: (composition) {
                                       _animationController
-                                        ..duration = const Duration(seconds: 5)
+                                        ..duration = composition.duration
                                         ..repeat();
                                     },
                                     height: 250.h,
@@ -152,7 +151,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                                 SizedBox(height: 20.h),
                                 Center(
                                   child: Text(
-                                    'Pull to refresh',
+                                    AppLocalizations.of(context)!.pullToRefreshInstruction,
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 16.sp),
                                     textAlign: TextAlign.center,
@@ -177,11 +176,11 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                     children: [
                       Center(
                         child: Lottie.asset(
-                          'assets/animation/empty.json',
+                          '/home/user/Flutter_Boilerplate_Hng11/assets/animation/empty.json',
                           controller: _animationController,
                           onLoaded: (composition) {
                             _animationController
-                              ..duration = const Duration(seconds: 5)
+                              ..duration = composition.duration
                               ..repeat();
                           },
                           height: 250.h,
@@ -192,7 +191,7 @@ class ProductScreenState extends ConsumerState<ProductScreen>
                       SizedBox(height: 20.h),
                       Center(
                         child: Text(
-                          'Pull to refresh',
+                          AppLocalizations.of(context)!.pullToRefreshInstruction,
                           style:
                               TextStyle(color: Colors.red, fontSize: 16.sp),
                           textAlign: TextAlign.center,
