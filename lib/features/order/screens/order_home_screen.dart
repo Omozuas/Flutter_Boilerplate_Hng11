@@ -101,7 +101,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
                   });
                 },
                 child: isSearching
-                    ? Icon(Icons.close)
+                    ? const Icon(Icons.close)
                     : SvgPicture.asset('assets/icons/search.svg'),
               ),
             )

@@ -1,5 +1,6 @@
 import 'package:country_state_city_pro/country_state_city_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -89,6 +90,9 @@ class CompanySignUpScreen extends ConsumerWidget {
                                     controller: _companyEmailController,
                                     keyboardType: TextInputType.emailAddress,
                                     hintText: localizations.enterCompanyEmail,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                    ],
                                     validator: (value) {
                                       final emailRegex = RegExp(
                                           r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
@@ -112,6 +116,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                                   SizedBox(height: 10.sp),
                                   Text(
                                     localizations.selectIndustry,
+
                                     style: CustomTextStyle.medium(
                                       color: GlobalColors.darkOne,
                                       fontSize: 13.sp,
@@ -126,6 +131,7 @@ class CompanySignUpScreen extends ConsumerWidget {
                                       localizations.healthcareIndustry,
                                       localizations.educationIndustry,
                                     ],
+
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return context.selectIsRequired;
