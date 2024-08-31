@@ -35,7 +35,7 @@ extension StringManager on BuildContext {
   static const String dontHaveAnAccount = 'Don\'t have an account? ';
   static const String termsAndConditionText1 =
       'By logging in, you agree with our ';
-  static const String termsAndConditionText2 = 'Terms & \nUse ';
+  static const String termsAndConditionText2 = 'Terms & \nConditions ';
   static const String termsAndConditionText3 = 'and ';
   static const String termsAndConditionText4 = 'Privacy Policy.';
   static const String or = 'Or';
