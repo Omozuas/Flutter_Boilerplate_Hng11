@@ -62,8 +62,8 @@ class ManageOrganizationProvider extends StateNotifier<ManageOrganizationState> 
   }
 
   _init()async{
+    getSelectedLocalOrganizations();
     await getLocalOrganizations();
-    setSelectedOrganization = userService.selectedOrganization ?? await getSelectedLocalOrganizations();
     getOrganizations();
   }
 
@@ -130,17 +130,15 @@ class ManageOrganizationProvider extends StateNotifier<ManageOrganizationState> 
     }
   }
 
-  Future<SingleOrganization?> getSelectedLocalOrganizations() async {
+  getSelectedLocalOrganizations() async {
     try{
       var res = await _storageService.read("selected_organizations");
       if(res != null){
         setSelectedOrganization = SingleOrganization.fromJson(jsonDecode(res));
-        return state.selectedOrganization;
+        userService.selectedOrganization = SingleOrganization.fromJson(jsonDecode(res));
       }
-      return null;
     }catch(err){
       log("Getting Saved Organization Error $err");
-      return null;
     }
   }
 
