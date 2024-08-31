@@ -70,8 +70,8 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
               hintText: AppLocalizations.of(context)!.searchProductButton,
               controller: _searchController,
               onChanged: (value) {
-                if (value.isNotEmpty) {
-                  ref.read(searchInputProvider.notifier).update(value);
+                if (value?.isNotEmpty ?? false) {
+                  ref.read(searchInputProvider.notifier).update(value!);
                 }
               },
             ),

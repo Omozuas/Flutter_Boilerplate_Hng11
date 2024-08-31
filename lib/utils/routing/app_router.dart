@@ -41,9 +41,13 @@ import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
+import '../../features/user_setting/screens/manage_organization/screen/organizations.dart';
 
 final _rootNavKey = GlobalKey<NavigatorState>();
 final _homeNavKey = GlobalKey<NavigatorState>();
+final _productsNavKey = GlobalKey<NavigatorState>();
+final _ordersNavKey = GlobalKey<NavigatorState>();
+final _settingsNavKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -187,6 +191,12 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
+        path: AppRoute.manageOrganizationsScreen,
+        builder: (context, state, ref) {
+          return const ManageUserOrganizations();
+        },
+      ),
+      ConsumerGoRoute(
         path: AppRoute.notification,
         builder: (context, state, ref) {
           return const NotificationHomeScreen();
@@ -221,15 +231,15 @@ class AppRouter {
         },
       ),
       StatefulShellRoute.indexedStack(
-        parentNavigatorKey: _homeNavKey,
+        parentNavigatorKey: _rootNavKey,
         branches: [
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _homeNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.home,
               builder: (context, state, ref) => const HomeScreen(),
             ),
           ]),
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _productsNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.products,
               builder: (context, state, ref) => const ProductScreen(),
@@ -250,7 +260,7 @@ class AppRouter {
           //     ),
           //   ),
           // ]),
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _ordersNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.order,
               builder: (context, state, ref) {
@@ -258,7 +268,7 @@ class AppRouter {
               },
             ),
           ]),
-          StatefulShellBranch(routes: [
+          StatefulShellBranch(navigatorKey: _settingsNavKey, routes: [
             ConsumerGoRoute(
               path: AppRoute.settings,
               builder: (context, state, ref) => const SettingsScreen(),
@@ -274,7 +284,7 @@ class AppRouter {
 }
 
 class AppRoute {
-  static const String splash = '/splash';
+  static const String splash = '/';
   static const String companySignUp = '/companySignUp';
   static const String singleUserSignUp = '/singleUserSignUp';
   static const String login = '/login';
@@ -292,6 +302,7 @@ class AppRoute {
   static const String userSettings = '/user-settings';
 
   static const String products = '/products';
+  static const String manageOrganizationsScreen = '/manageOrganizationsScreen';
   static const String userProducts = '/user-products';
   static const String addProduct = '/add-product';
 

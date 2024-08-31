@@ -58,7 +58,7 @@ class ProductNameAndPriceSection extends StatelessWidget {
                 children: [
                   FittedBox(
                     child: Text(
-                      "\$${product.price}.00",
+                      "\$${product.price?.toStringAsFixed(2)}",
                       style: CustomTextStyles.productTextTitleBlack.copyWith(
                         color: GlobalColors.black,
                         fontSize: 20.sp,

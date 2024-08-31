@@ -25,11 +25,15 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
   final TextEditingController searchController = TextEditingController();
   @override
   void initState() {
-    allOrders = generateOrders();
-    filteredOrder = List.from(allOrders);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      allOrders = generateOrders();
+      filteredOrder = List.from(allOrders);
+      setState(() {});
+    });
     super.initState();
   }
 
+//List to generate orders
   List<Order> generateOrders() {
     return List.generate(8, (index) {
       int number = 9900 + index;
@@ -38,8 +42,8 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
         id: index,
         number: number,
         image: AppImages.shoes,
-        deliveryDate: '20-Aug-2024',
-        deliveryTime: '7:41 PM',
+        deliveryDate: context.deliveryDate,
+        deliveryTime: context.deliveryTime,
         deliveryText: isEstimatedDelivery
             ? context.deliveryText
             : context.deliveryDateText,
@@ -60,6 +64,7 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,11 +77,11 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
           children: [
             !isSearching
                 ? Text(
-              context.order,
-              style: GoogleFonts.inter(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-              ),
+                    context.order,
+                    style: GoogleFonts.inter(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   )
                 : Expanded(
                     child: TextField(
@@ -115,18 +120,17 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
               children: [
                 ListView.builder(
                     itemCount: filteredOrder.length,
-                  shrinkWrap: true,
+                    shrinkWrap: true,
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemBuilder: (_, index) => OrderTile(
                           order: filteredOrder[index],
-                          onTap: () => context.go(
+                          onTap: () => context.push(
                               '${AppRoute.orderDetails}/${filteredOrder[index].id}'),
                         )),
                 if (isSearching && filteredOrder.isEmpty)
                   Center(
                       child: Text(
                           'No Order id found for "${searchController.text}"'))
-                
               ],
             ),
           )

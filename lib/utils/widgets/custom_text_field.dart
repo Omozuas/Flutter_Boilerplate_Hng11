@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
   final EdgeInsets? margin;
   final int? maxLines;
   final String? Function(String?)? validator;
-  final Function(String?)? onchanged;
+  final Function(String?)? onChanged;
   final Color? borderColor;
   final Color? focusedBorderColor;
   final FocusNode? focusNode;
@@ -45,8 +45,8 @@ class CustomTextField extends StatelessWidget {
     this.borderColor,
     this.focusedBorderColor,
     this.focusNode,
-    this.onchanged,
-    this.inputFormatters, required Null Function(dynamic value) onChanged,
+    this.onChanged,
+    this.inputFormatters,
   });
 
   @override
@@ -54,7 +54,7 @@ class CustomTextField extends StatelessWidget {
     return Container(
       margin: margin ?? EdgeInsets.only(bottom: 16.h),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (label != null) ...[
             Text(
@@ -66,62 +66,73 @@ class CustomTextField extends StatelessWidget {
                     color: GlobalColors.darkTwo,
                   ),
             ),
+            SizedBox(height: 8.h),
           ],
-          label == null
-              ? SizedBox(
-                  height: 0.h,
-                  // child: Text("data"),
-                )
-              : SizedBox(
-                  height: 8.h,
-                ),
-          TextFormField(
-            controller: controller,
-            keyboardType: keyboardType,
-            obscureText: obscureText ?? false,
-            maxLines: maxLines ?? 1,
-            validator: validator,
-            inputFormatters: inputFormatters,
-            focusNode: focusNode,
-            onChanged: onchanged,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-              contentPadding: padding ??
-                  EdgeInsets.symmetric(
-                    vertical: 8.h,
-                    horizontal: 12.w,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                controller: controller,
+                keyboardType: keyboardType,
+                obscureText: obscureText ?? false,
+                maxLines: maxLines ?? 1,
+                validator: validator,
+                inputFormatters: inputFormatters,
+                focusNode: focusNode,
+                cursorColor: GlobalColors.orange,
+                onChanged: onChanged,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  contentPadding: padding ??
+                      EdgeInsets.symmetric(
+                        vertical: 8.h,
+                        horizontal: 12.w,
+                      ),
+                  hintText: hintText,
+                  hintStyle: hintTextStyle ??
+                      TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFF94A3B8),
+                      ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+                    borderSide: BorderSide(
+                      color: GlobalColors.borderColor,
+                      width: 1.w,
+                    ),
                   ),
-              hintText: hintText,
-              errorText: errorText,
-              hintStyle: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF94A3B8),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
-                borderSide: BorderSide(
-                  color: GlobalColors.borderColor,
-                  width: 1.w,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+                    borderSide: BorderSide(
+                      color: borderColor ?? GlobalColors.borderColor,
+                      width: 1.w,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
+                    borderSide: BorderSide(
+                      color: focusedBorderColor ?? GlobalColors.orange,
+                      width: 1.w,
+                    ),
+                  ),
+                  prefixIcon: prefixIcon,
+                  suffixIcon: suffixIcon,
                 ),
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
-                borderSide: BorderSide(
-                  color: borderColor ?? GlobalColors.borderColor,
-                  width: 1.w,
+              if (errorText != null) ...[
+                SizedBox(height: 4.h),
+                Padding(
+                  padding: padding ?? EdgeInsets.only(left: 12.w),
+                  child: Text(
+                    errorText!,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                    ),
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 6.r),
-                borderSide: BorderSide(
-                  color: focusedBorderColor ?? GlobalColors.orange,
-                  width: 1.w,
-                ),
-              ),
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
-            ),
+              ],
+            ],
           ),
         ],
       ),

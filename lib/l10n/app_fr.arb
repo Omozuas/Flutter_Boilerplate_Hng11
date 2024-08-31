@@ -497,5 +497,6 @@
   "somethingWentWrong": "Quelque chose s'est mal passé. \nVeuillez tirer pour rafraîchir",
   "logOutAfterUpdate": "Votre compte se déconnectera après la mise à jour du mot de passe",
   "correctCurrentPassword":"Veuillez entrer le mot de passe actuel correct",
-  "notSameCurrentNewPassword":"Le nouveau mot de passe ne doit pas être identique à l'ancien mot de passe"
+  "notSameCurrentNewPassword":"Le nouveau mot de passe ne doit pas être identique à l'ancien mot de passe",
+  "noChangesMade": "Aucun changement n'a été apporté"
 }

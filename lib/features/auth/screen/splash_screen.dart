@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
-
 import '../../../services/service_locator.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
