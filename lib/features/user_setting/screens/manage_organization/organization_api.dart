@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import '../../../../services/dio_provider.dart';
 import '../../../../services/service_locator.dart';
-import '../../../../services/user.service.dart';
 import 'model/all_organization_model.dart';
 
 class OrganizationsApi implements OrganizationsApiContract {
