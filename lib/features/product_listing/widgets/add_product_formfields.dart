@@ -74,6 +74,7 @@ class CustomTextField extends StatelessWidget {
                 //   top: 12,
                 //   right: 12,
                 //   bottom: 10,
+
                 // ),
                 prefixIcon: prefixIcon,
                 alignLabelWithHint: true,
