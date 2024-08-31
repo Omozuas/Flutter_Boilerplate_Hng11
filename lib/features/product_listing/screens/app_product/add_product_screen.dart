@@ -4,8 +4,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
+// import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/provider/add_product_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_category.dart';
@@ -35,6 +36,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   final productDescriptionController = TextEditingController();
   final productPriceController = TextEditingController();
   final productQuantityController = TextEditingController();
+  bool _isLoadingProduct = false;
 
   String? selectedCategory;
   List<PlatformFile> selectedFiles = [];
@@ -125,6 +127,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
             productPriceController.clear();
             productQuantityController.clear();
             resetForm();
+            ref.watch(dashBoardProvider.notifier).getAllOrgProducts();
             context.pop();
           },
         );
@@ -171,179 +174,186 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addProductProviderProvider);
-    return LoadingOverlay(
-      isLoading: state.isLoading,
-      child: Scaffold(
+    return 
+    // LoadingOverlay(
+    //   isLoading: state.isLoading,
+      Scaffold(
         appBar: CustomAppBar.simpleTitle(
           titleText: context.addAProduct,
         ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Container(
-                    width: 355.w,
-                    margin: EdgeInsets.only(top: 17.h),
-                    child: Column(
-                      children: [
-                        ProductImage(getProductFiles: onFilesSelected),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        SizedBox(
-                          width: 379.w,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+        body: IgnorePointer(
+          ignoring: _isLoadingProduct,
+          child: SingleChildScrollView(
+            child: Center(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 355.w,
+                      margin: EdgeInsets.only(top: 17.h),
+                      child: Column(
+                        children: [
+                          ProductImage(getProductFiles: onFilesSelected),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          SizedBox(
+                            width: 379.w,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                compulsoryTitle(context.title),
+                                8.h.sbH,
+                                ProductNameFormField(
+                                  controller: productNameController,
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              compulsoryTitle(context.title),
+                              compulsoryTitle(context.category),
                               8.h.sbH,
-                              ProductNameFormField(
-                                controller: productNameController,
+                              SizedBox(
+                                width: 379.w,
+                                child: ProductCategory(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return context.selectIsRequired;
+                                    }
+                                    return null;
+                                  },
+                                  onCategorySelected: onCategorySelected,
+                                ),
                               )
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            compulsoryTitle(context.category),
-                            8.h.sbH,
-                            SizedBox(
-                              width: 379.w,
-                              child: ProductCategory(
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return context.selectIsRequired;
-                                  }
-                                  return null;
-                                },
-                                onCategorySelected: onCategorySelected,
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        SizedBox(
-                          width: 379.w,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              compulsoryTitle(context.description),
-                              8.h.sbH,
-                              DescriptionFormField(
-                                controller: productDescriptionController,
-                              ),
-                              SizedBox(
-                                width: 379.w,
-                                child: Text(
-                                  context.descriptionFieldHint,
-                                  style: CustomTextStyle.medium(
-                                    color: GlobalColors.lightGrey,
-                                    fontSize: 14.sp,
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          SizedBox(
+                            width: 379.w,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                compulsoryTitle(context.description),
+                                8.h.sbH,
+                                DescriptionFormField(
+                                  controller: productDescriptionController,
+                                ),
+                                SizedBox(
+                                  width: 379.w,
+                                  child: Text(
+                                    context.descriptionFieldHint,
+                                    style: CustomTextStyle.medium(
+                                      color: GlobalColors.lightGrey,
+                                      fontSize: 14.sp,
+                                    ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 379.w,
+                                child: compulsoryTitle(context.standardPrice),
+                              ),
+                              8.h.sbH,
+                              ProductPriceFormField(
+                                controller: productPriceController,
                               ),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 379.w,
-                              child: compulsoryTitle(context.standardPrice),
-                            ),
-                            8.h.sbH,
-                            ProductPriceFormField(
-                              controller: productPriceController,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 12.h,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 379.w,
-                              child: compulsoryTitle(context.quantity),
-                            ),
-                            8.h.sbH,
-                            ProductQuantityFormField(
-                              controller: productQuantityController,
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 50.h,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                    width: 355.h,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: CustomButton(
-                            onTap: state.isLoading
-                                ? () {}
-                                : () {
-                                    context.pop();
-                                  },
-                            borderColor: GlobalColors.lightGray,
-                            text: context.cancel,
-                            height: 40.h,
-                            containerColor: GlobalColors.white,
-                            width: 172.5.w,
-                            textColor: GlobalColors.darkTwo,
+                          SizedBox(
+                            height: 12.h,
                           ),
-                        ),
-                        // SizedBox(
-                        //   width: 10.w,
-                        // ),
-                        12.w.sbW,
-                        Expanded(
-                          child: CustomButton(
-                            onTap: state.isLoading ? () {} : addProduct,
-                            // () {},
-                            borderColor: GlobalColors.white,
-                            text: context.add,
-                            loading: state.isLoading,
-                            height: 40.h,
-                            containerColor: GlobalColors.orange,
-                            width: 172.5.w,
-                            textColor: GlobalColors.zinc50,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 379.w,
+                                child: compulsoryTitle(context.quantity),
+                              ),
+                              8.h.sbH,
+                              ProductQuantityFormField(
+                                controller: productQuantityController,
+                              )
+                            ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 50.h,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                ],
+                    SizedBox(
+                      height: 40.h,
+                      width: 355.h,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                              onTap: state.isLoading
+                                  ? () {}
+                                  : () {
+                                      context.pop();
+                                    },
+                              borderColor: GlobalColors.lightGray,
+                              text: context.cancel,
+                              height: 40.h,
+                              containerColor: GlobalColors.white,
+                              width: 172.5.w,
+                              textColor: GlobalColors.darkTwo,
+                            ),
+                          ),
+                          // SizedBox(
+                          //   width: 10.w,
+                          // ),
+                          12.w.sbW,
+                          Expanded(
+                            child: CustomButton(
+                              onTap: state.isLoading ? () {
+                                _isLoadingProduct = true;
+                              } : addProduct,
+                              
+                              // () {},
+                              borderColor: GlobalColors.white,
+                              text: context.add,
+                              loading: state.isLoading,
+                              height: 40.h,
+                              containerColor: GlobalColors.orange,
+                              width: 172.5.w,
+                              textColor: GlobalColors.zinc50,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
+      
     );
   }
 }

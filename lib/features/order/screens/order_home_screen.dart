@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_boilerplate_hng11/features/order/widgets/order_tile.dart';
+import 'package:flutter_boilerplate_hng11/utils/app_images.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
@@ -18,28 +19,90 @@ class OrderHomeScreen extends StatefulWidget {
 }
 
 class _OrderHomeScreenState extends State<OrderHomeScreen> {
+  bool isSearching = false;
+  List<Order> allOrders = [];
+  List<Order> filteredOrder = [];
+  final TextEditingController searchController = TextEditingController();
+  @override
+  void initState() {
+    allOrders = generateOrders();
+    filteredOrder = List.from(allOrders);
+    super.initState();
+  }
+
+  List<Order> generateOrders() {
+    return List.generate(8, (index) {
+      int number = 9900 + index;
+      bool isEstimatedDelivery = index < 2 || (index - 2) % 2 == 1;
+      return Order(
+        id: index,
+        number: number,
+        image: AppImages.shoes,
+        deliveryDate: '20-Aug-2024',
+        deliveryTime: '7:41 PM',
+        deliveryText: isEstimatedDelivery
+            ? context.deliveryText
+            : context.deliveryDateText,
+        deliveryColor:
+            isEstimatedDelivery ? GlobalColors.verified : GlobalColors.redColor,
+      );
+    });
+  }
+
+  void searchOrders(String filter) {
+    setState(() {
+      if (filter.isEmpty) {
+        filteredOrder = List.from(allOrders);
+      } else {
+        filteredOrder = allOrders
+            .where((order) => order.number.toString().contains(filter))
+            .toList();
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        onBack: () {
-          context.go(AppRoute.home);
-        },
+        // onBack: () {
+        //   context.go(AppRoute.home);
+        // },
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            !isSearching
+                ? Text(
               context.order,
               style: GoogleFonts.inter(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
               ),
-            ),
+                  )
+                : Expanded(
+                    child: TextField(
+                      controller: searchController,
+                      decoration: const InputDecoration(
+                        hintText: 'Search by Order ID',
+                        border: InputBorder.none,
+                      ),
+                      onChanged: searchOrders,
+                    ),
+                  ),
             Padding(
               padding: const EdgeInsets.only(right: 29.25),
               child: InkWell(
-                onTap: () {},
-                child: SvgPicture.asset('assets/icons/search.svg'),
+                onTap: () {
+                  setState(() {
+                    isSearching = !isSearching;
+                    if (!isSearching) {
+                      searchController.clear();
+                      searchOrders('');
+                    }
+                  });
+                },
+                child: isSearching
+                    ? const Icon(Icons.close)
+                    : SvgPicture.asset('assets/icons/search.svg'),
               ),
             )
           ],
@@ -51,42 +114,19 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
             child: ListView(
               children: [
                 ListView.builder(
-                  itemCount: 8,
+                    itemCount: filteredOrder.length,
                   shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (_, index) {
-                    String deliveryText;
-                    Color deliveryColor;
-
-                    if (index < 2) {
-                      deliveryText = context.deliveryText;
-                      deliveryColor = GlobalColors.verified; // Green color
-                    } else {
-                      bool isEstimatedDelivery = (index - 2) % 2 == 1;
-                      deliveryText = isEstimatedDelivery
-                          ? context.deliveryText
-                          : context.deliveryDateText;
-                      deliveryColor = isEstimatedDelivery
-                          ? GlobalColors.verified // Green color
-                          : GlobalColors.redColor; // Red color
-                    }
-
-                    return InkWell(
-                      onTap: () => context.push(AppRoute.orderDetails),
-                      child: OrderTile(
-                        order: Order(
-                          number: 99012,
-                          image:
-                              'assets/images/png/product_listing/sport-shoes.png',
-                          deliveryDate: '20-Aug-2024',
-                          deliveryTime: '7:41 PM',
-                          deliveryText: deliveryText,
-                          deliveryColor: deliveryColor,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemBuilder: (_, index) => OrderTile(
+                          order: filteredOrder[index],
+                          onTap: () => context.go(
+                              '${AppRoute.orderDetails}/${filteredOrder[index].id}'),
+                        )),
+                if (isSearching && filteredOrder.isEmpty)
+                  Center(
+                      child: Text(
+                          'No Order id found for "${searchController.text}"'))
+                
               ],
             ),
           )
