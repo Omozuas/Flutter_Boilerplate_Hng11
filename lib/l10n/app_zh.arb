@@ -453,6 +453,7 @@
   "somethingWentWrong": "出了点问题。\n请下拉刷新",
   "logOutAfterUpdate": "更新密码后，您的账户将会注销",
   "correctCurrentPassword":"请输入正确的当前密码",
-  "notSameCurrentNewPassword":"新密码不应与当前密码相同"
+  "notSameCurrentNewPassword":"新密码不应与当前密码相同",
+  "noChangesMade": "没有做任何更改"
 }
 
