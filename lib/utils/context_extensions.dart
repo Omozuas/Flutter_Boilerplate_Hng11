@@ -192,7 +192,6 @@ extension Translation on BuildContext {
   String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
   String get typeYourMessageHere => text.typeYourMessageHere;
   String get maximumOf64Character => text.maximumOf64Character;
-  String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
 
   String get deliveryText => text.deliveryText;
   String get deliveryDateText => text.deliveryDateText;

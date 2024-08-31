@@ -128,9 +128,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 SizedBox(height: 16.w),
                 TextFormField(
             controller: _bioController,
-           
             maxLines: 3,
-            
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               contentPadding:
