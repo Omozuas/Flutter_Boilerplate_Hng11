@@ -38,6 +38,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
     );
     _searchController = TextEditingController();
   }
+
 // please merge my codeeeeeeeeee pleasseeeeeeeeeeeee
   @override
   void dispose() {
@@ -121,8 +122,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                                 );
                               },
                               separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      SizedBox(
+                                  (BuildContext context, int index) => SizedBox(
                                 height: 24.h,
                               ),
                             ),
@@ -133,7 +133,8 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                             onRefresh: () =>
                                 ref.refresh(productListProvider.future),
                             child: ListView(
-                              children: [//try to merge my code plssssssssssss
+                              children: [
+                                //try to merge my code plssssssssssss
                                 Center(
                                   child: Lottie.asset(
                                     'assets/animation/empty.json',
@@ -151,7 +152,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                                 SizedBox(height: 20.h),
                                 Center(
                                   child: Text(
-                                    AppLocalizations.of(context)!.pullToRefreshInstruction,
+                                    context.pullToRefresh,
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 16.sp),
                                     textAlign: TextAlign.center,
@@ -191,9 +192,8 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                       SizedBox(height: 20.h),
                       Center(
                         child: Text(
-                          AppLocalizations.of(context)!.pullToRefreshInstruction,
-                          style:
-                              TextStyle(color: Colors.red, fontSize: 16.sp),
+                          context.pullToRefresh,
+                          style: TextStyle(color: Colors.red, fontSize: 16.sp),
                           textAlign: TextAlign.center,
                         ),
                       ),

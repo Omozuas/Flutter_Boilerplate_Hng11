@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/company_signup_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/forgot_password.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/screen/login_screen.dart';
@@ -41,9 +42,13 @@ import '../../features/user_setting/models/subscription_model.dart';
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
 
+final _rootNavKey = GlobalKey<NavigatorState>();
+final _homeNavKey = GlobalKey<NavigatorState>();
+
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoute.splash,
+    navigatorKey: _rootNavKey,
     routes: [
       ConsumerGoRoute(
         path: AppRoute.splash,
@@ -216,6 +221,7 @@ class AppRouter {
         },
       ),
       StatefulShellRoute.indexedStack(
+        parentNavigatorKey: _homeNavKey,
         branches: [
           StatefulShellBranch(routes: [
             ConsumerGoRoute(

@@ -200,4 +200,6 @@ extension Translation on BuildContext {
   String get yourProductsWillShowHere => 'Your products will show here';
   String get somethingWentWrong =>
       'Something went wrong. \nPlease pull to refresh';
+
+  String get pullToRefresh => 'Pull to refresh';
 }
