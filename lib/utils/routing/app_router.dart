@@ -40,6 +40,7 @@ import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
+import '../../features/user_setting/screens/manage_organization/screen/organizations.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -182,6 +183,12 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
+        path: AppRoute.manageOrganizationsScreen,
+        builder: (context, state, ref) {
+          return const ManageUserOrganizations();
+        },
+      ),
+      ConsumerGoRoute(
         path: AppRoute.notification,
         builder: (context, state, ref) {
           return const NotificationHomeScreen();
@@ -286,6 +293,7 @@ class AppRoute {
   static const String userSettings = '/user-settings';
 
   static const String products = '/products';
+  static const String manageOrganizationsScreen = '/manageOrganizationsScreen';
   static const String userProducts = '/user-products';
   static const String addProduct = '/add-product';
 
