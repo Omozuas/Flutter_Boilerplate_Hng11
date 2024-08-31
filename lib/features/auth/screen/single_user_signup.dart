@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/custom_text_style.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
@@ -31,13 +30,19 @@ class SingleUserSignUpScreen extends ConsumerWidget {
     final authProviderState = ref.watch(authProvider);
     final localizations = AppLocalizations.of(context)!; // Access localization
 
-    return LoadingOverlay(
-      isLoading: authProviderState.normalButtonLoading ||
+    return
+        //  LoadingOverlay(
+        //   isLoading: authProviderState.normalButtonLoading ||
+        //       authProviderState.googleButtonLoading,
+        IgnorePointer(
+      ignoring: authProviderState.normalButtonLoading ||
           authProviderState.googleButtonLoading,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 76.h),
             child: FocusScope(
@@ -79,7 +84,7 @@ class SingleUserSignUpScreen extends ConsumerWidget {
                       child: authProviderState.googleButtonLoading
                           ? SizedBox(
                               width: 16.w,
-                              height: 25.w,
+                              height: 16.w,
                               child: CircularProgressIndicator.adaptive(
                                 strokeWidth: 2.w,
                               ),
@@ -202,8 +207,8 @@ class SingleUserSignUpScreen extends ConsumerWidget {
     );
   }
 
-  void _handleCreateAccount(WidgetRef ref, BuildContext context) {
-    ref.read(authProvider.notifier).registerSingleUser(
+  void _handleCreateAccount(WidgetRef ref, BuildContext context) async{
+    await ref.read(authProvider.notifier).registerSingleUser(
         {
           'email': emailController.text.trim().toLowerCase(),
           'first_name': firstNameController.text,
@@ -217,5 +222,6 @@ class SingleUserSignUpScreen extends ConsumerWidget {
           passwordController,
           emailController
         ]);
+
   }
 }

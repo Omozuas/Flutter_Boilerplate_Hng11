@@ -8,6 +8,7 @@ class Order {
     required this.deliveryTime,
     required this.deliveryText,
     required this.deliveryColor,
+    required this.id,
   });
 
   final int number;
@@ -16,4 +17,5 @@ class Order {
   final String deliveryTime;
   final String deliveryText;
   final Color deliveryColor;
+  final int id;
 }

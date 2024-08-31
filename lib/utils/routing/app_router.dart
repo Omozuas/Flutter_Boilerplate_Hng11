@@ -31,6 +31,7 @@ import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/profile_settings/notification_screen.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/screens/update_password.dart';
 import 'package:flutter_boilerplate_hng11/features/user_setting/widgets/ref_extension.dart';
+import 'package:flutter_boilerplate_hng11/utils/app_images.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/consumer_go_router.dart';
 import 'package:go_router/go_router.dart';
@@ -39,6 +40,7 @@ import '../../features/user_setting/models/subscription_model.dart';
 
 import '../../features/main_view/user_main_view.dart';
 import '../../features/notification/screens/notification_home_screen.dart';
+import '../../features/user_setting/screens/manage_organization/screen/organizations.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -181,6 +183,12 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
+        path: AppRoute.manageOrganizationsScreen,
+        builder: (context, state, ref) {
+          return const ManageUserOrganizations();
+        },
+      ),
+      ConsumerGoRoute(
         path: AppRoute.notification,
         builder: (context, state, ref) {
           return const NotificationHomeScreen();
@@ -196,12 +204,16 @@ class AppRouter {
         },
       ),
       ConsumerGoRoute(
-        path: AppRoute.orderDetails,
+        path: '/orderDetails/:id',
+        //'${AppRoute.orderDetails}/:id',
         builder: (context, state, ref) {
+          //parse id from route parameter
+          final id = int.parse(state.pathParameters['id']!);
           return OrderDetailScreen(
             order: Order(
+                id: id,
                 number: 00,
-                image: 'assets/images/png/product_listing/sport-shoes.png',
+                image: AppImages.shoes,
                 deliveryDate: "20-Aug-2024",
                 deliveryTime: "24-Aug-2024",
                 deliveryText: "Delivered on 19th August",
@@ -281,6 +293,7 @@ class AppRoute {
   static const String userSettings = '/user-settings';
 
   static const String products = '/products';
+  static const String manageOrganizationsScreen = '/manageOrganizationsScreen';
   static const String userProducts = '/user-products';
   static const String addProduct = '/add-product';
 
