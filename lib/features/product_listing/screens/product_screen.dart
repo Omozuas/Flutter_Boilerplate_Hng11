@@ -133,7 +133,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                             onRefresh: () =>
                                 ref.refresh(productListProvider.future),
                             child: ListView(
-                              children: [
+                              children: [//try to merge my code plssssssssssss
                                 Center(
                                   child: Lottie.asset(
                                     'assets/animation/empty.json',
