@@ -38,7 +38,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
     );
     _searchController = TextEditingController();
   }
-
+// please merge my codeeeeeeeeee pleasseeeeeeeeeeeee
   @override
   void dispose() {
     _animationController.dispose();
