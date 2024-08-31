@@ -100,7 +100,8 @@ class ProductHomeScreen extends StatelessWidget {
                     GlobalColors.cardGradintColorThree,
                   ]),
                   borderRadius: BorderRadius.circular(12.r)),
-              child: Stack(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,12 +136,10 @@ class ProductHomeScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
-                    width: 21.w,
-                  ),
                   Align(
-                      alignment: Alignment.centerRight,
-                      child: Assets.images.png.productListing.iphone.image()),
+                    alignment: Alignment.centerRight,
+                    child: Assets.images.png.productListing.iphone.image(),
+                  ),
                 ],
               ),
             ),

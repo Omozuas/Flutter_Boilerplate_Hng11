@@ -29,12 +29,12 @@ class AuthApi {
   }) async {
     try {
       final response = await dioProvider.post(
-        '/auth/$email/forgot-password-mobile',
+        '/auth/forgot-password-mobile',data: {"email" :email}
       );
       return response;
     } catch (e) {
       debugPrint('Errors In Resetting password: ${e.toString()}');
-      return null;
+      rethrow;
     }
   }
 

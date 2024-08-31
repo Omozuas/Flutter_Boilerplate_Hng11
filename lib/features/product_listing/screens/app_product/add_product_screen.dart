@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 // import 'package:flutter_boilerplate_hng11/features/auth/widgets/loading_overlay.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
+import 'package:flutter_boilerplate_hng11/features/home/home_widget/provider/dashboard.provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/screens/app_product/provider/add_product_provider.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/add_product_formfields.dart';
 import 'package:flutter_boilerplate_hng11/features/product_listing/widgets/product_category.dart';
@@ -126,6 +127,7 @@ class _AddProductScreenState extends ConsumerState<AddProductScreen> {
             productPriceController.clear();
             productQuantityController.clear();
             resetForm();
+            ref.watch(dashBoardProvider.notifier).getAllOrgProducts();
             context.pop();
           },
         );

@@ -189,7 +189,7 @@ extension Translation on BuildContext {
 
   String get correctCurrentPassword => text.correctCurrentPassword;
 
-String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
+  String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
 
   String get deliveryText => text.deliveryText;
   String get deliveryDateText => text.deliveryDateText;
@@ -199,3 +199,4 @@ String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
   String get yourProductsWillShowHere => text.yourProductsWillShowHere;
   String get somethingWentWrong =>text.somethingWentWrong;
 }
+
