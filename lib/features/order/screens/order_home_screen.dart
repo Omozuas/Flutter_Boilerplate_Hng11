@@ -32,7 +32,6 @@ class _OrderHomeScreenState extends State<OrderHomeScreen> {
     });
     super.initState();
   }
-
 //List to generate orders
   List<Order> generateOrders() {
     return List.generate(8, (index) {

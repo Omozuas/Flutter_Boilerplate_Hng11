@@ -45,8 +45,8 @@ import '../../features/user_setting/screens/manage_organization/screen/organizat
 
 final _rootNavKey = GlobalKey<NavigatorState>();
 final _homeNavKey = GlobalKey<NavigatorState>();
-final _productsNavKey = GlobalKey<NavigatorState>();
 final _ordersNavKey = GlobalKey<NavigatorState>();
+final _productsNavKey = GlobalKey<NavigatorState>();
 final _settingsNavKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
