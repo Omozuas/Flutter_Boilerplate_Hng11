@@ -108,7 +108,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       obscureText: !currentPasswordVissible,
                       hintText: context.enterCurrentPassword,
                       borderRadius: 8.r,
-                      focusedBorderColor: GlobalColors.borderColor,
+                      focusedBorderColor: GlobalColors.lightOrangeColor,
                       validator: (v) =>
                           Validators.passwordValidator(v, context),
                       suffixIcon: IconButton(
@@ -144,7 +144,7 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                         validatePasswords();
                       },
                       hintText: AppLocalizations.of(context)!.enterNewPassword,
-                      focusedBorderColor: GlobalColors.borderColor,
+                      focusedBorderColor: GlobalColors.lightOrangeColor,
                       suffixIcon: IconButton(
                         icon: Icon(
                           newPasswordVissible
@@ -279,11 +279,8 @@ class _UpdatePasswordState extends ConsumerState<UpdatePassword> {
                       borderRadius: 8.r,
                       hintText:
                           AppLocalizations.of(context)!.confirmNewPassword,
-                      errorText: passwordsMatch
-                          ? null
-                          : AppLocalizations.of(context)!.passwordDoNotMatch,
                       focusedBorderColor: passwordsMatch
-                          ? GlobalColors.borderColor
+                          ? GlobalColors.lightOrangeColor
                           : const Color(0xffdc2626),
                       borderColor: passwordsMatch
                           ? GlobalColors.borderColor
