@@ -217,6 +217,7 @@ extension Translation on BuildContext {
   String get switchTitle => 'Switch Organization';
 
 
-  String get pullToRefresh => 'Pull to refresh';
+    String get pullToRefresh => 'Pull to refresh';
+
 
 }

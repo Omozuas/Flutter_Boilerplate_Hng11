@@ -78,6 +78,7 @@ class OrganizationsApi implements OrganizationsApiContract {
 
 abstract class OrganizationsApiContract {
   Future<AllOrganizationResponse?> getOrganizations();
+
   Future<SingleOrganization?> createOrganizations(
       {required SingleOrganization organisation});
 

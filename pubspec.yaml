@@ -50,6 +50,8 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   country_state_city_pro: ^0.0.6
   lottie: ^3.1.2
+
+
   pin_code_fields: ^8.0.1
 
 dev_dependencies:
