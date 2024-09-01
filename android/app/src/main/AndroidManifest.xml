@@ -4,7 +4,6 @@
     <application
         android:label="flutter_boilerplate_hng11"
         android:name="${applicationName}"
-        android:enableOnBackInvokedCallback="false"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
