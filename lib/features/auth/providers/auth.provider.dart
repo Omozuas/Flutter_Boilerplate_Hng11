@@ -303,7 +303,7 @@ class AuthProvider extends StateNotifier<AuthState> {
           confirmNewPassword: confirmNewPassword,
           newPassword: newPassword);
       if (res != null) {
-        showSnackBar(res.message.toString());
+        showSnackBar(res.message.toString(),success: true);
         if (context.mounted) {
           context.replace(AppRoute.verificationSuccess);
           // context.go(AppRoute.verificationScreen);
