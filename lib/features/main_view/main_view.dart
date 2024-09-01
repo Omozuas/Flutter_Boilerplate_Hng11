@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
 import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:go_router/go_router.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key, required this.navigationShell});
@@ -27,11 +25,7 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     super.initState();
-    // BackButtonInterceptor.add(
-    //   myInterceptor,
-    //   name: widget.name,
-    //   context: context,
-    // );
+
     AppRouter.router.routeInformationProvider.addListener(_watchRoute);
   }
 
@@ -53,7 +47,6 @@ class _MainViewState extends State<MainView> {
 
   @override
   void dispose() {
-    // BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
     AppRouter.router.routeInformationProvider.removeListener(_watchRoute);
   }
@@ -118,27 +111,5 @@ class _MainViewState extends State<MainView> {
         },
       ),
     );
-  }
-
-  FutureOr<bool> myInterceptor(
-      bool stopDefaultButtonEvent, RouteInfo routeInfo) {
-    if (ModalRoute.of(context)?.canPop ?? false) {
-      log('This is true');
-      return false;
-    }
-    final route =
-        AppRouter.router.routeInformationProvider.value.uri.toString();
-    log(route);
-
-    final name = ModalRoute.of(context)?.settings.name;
-    log('$name');
-
-    if (widget.navigationShell.currentIndex != 0) {
-      log('This is true current INDEX is not 0');
-
-      goBranch(0);
-      return true;
-    }
-    return false;
   }
 }
