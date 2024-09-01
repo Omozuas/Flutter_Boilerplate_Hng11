@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/order/models/order.dart';
 import 'package:flutter_boilerplate_hng11/utils/global_colors.dart';
-import 'package:flutter_boilerplate_hng11/utils/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_boilerplate_hng11/utils/context_extensions.dart';
 
 class OrderTile extends StatelessWidget {
-  const OrderTile({super.key, required this.order});
+  const OrderTile({super.key, required this.order, required this.onTap});
 
   final Order order;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 10),
+      padding: EdgeInsets.only(left: 24.sp, right: 24.sp, top: 10.sp),
       child: GestureDetector(
-        onTap: () {
-          context.push(AppRoute.orderDetails);
-        },
+        onTap: onTap,
         child: Stack(
           children: [
             Container(
-              // width: double.infinity,
-              height: 107.0,
-              padding: const EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-                top: 10.0,
-                bottom: 13.0,
+              width: 383.w,
+              //width(context),
+              height: 107.h,
+              padding: EdgeInsets.only(
+                left: 20.w,
+                right: 20.w,
+                top: 10.h,
+                bottom: 8.h,
               ),
               decoration: BoxDecoration(
                 color: GlobalColors.white,
@@ -54,6 +52,7 @@ class OrderTile extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: const Color(0xFF71717A),
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 5.0.h),
                       Text(
@@ -79,6 +78,7 @@ class OrderTile extends StatelessWidget {
                             fontSize: 12.sp,
                             color: order.deliveryColor,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -87,11 +87,13 @@ class OrderTile extends StatelessWidget {
               ),
             ),
             Positioned(
-              right: 10,
-              bottom: 15,
+              top: 16,
+              bottom: 12.h,
+              right: 20.w,
+              left: 251.w,
               child: Container(
-                width: 92.0,
-                height: 79.0,
+                width: 92.sp,
+                height: 79.sp,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.r),

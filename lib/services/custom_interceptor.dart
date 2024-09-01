@@ -14,15 +14,15 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
+    // super.onError(err, handler);
     ErrorHandlers.allErrorHandler(err);
-    super.onError(err, handler);
+    return handler.next(err);
   }
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     UserService user = locator<UserService>();
     String? userToken = user.userAccessToken;
-
     log('Endpoint >> ${options.path}');
     log('Request body >> ${options.data}');
     if (userToken != null) {

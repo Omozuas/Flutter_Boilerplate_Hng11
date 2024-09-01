@@ -189,7 +189,9 @@ extension Translation on BuildContext {
 
   String get correctCurrentPassword => text.correctCurrentPassword;
 
-String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
+  String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
+  String get typeYourMessageHere => text.typeYourMessageHere;
+  String get maximumOf64Character => text.maximumOf64Character;
 
   String get deliveryText => text.deliveryText;
   String get deliveryDateText => text.deliveryDateText;
@@ -198,4 +200,20 @@ String get notSameCurrentNewPassword => text.notSameCurrentNewPassword;
   String get orderNumberText => text.orderNumberText;
   String get yourProductsWillShowHere => text.yourProductsWillShowHere;
   String get somethingWentWrong =>text.somethingWentWrong;
+  String get manageOrganization => 'Manage Organizations';
+  String get keepTrack => 'Keep Track of your organizations here.';
+  String get toggleSwitch => 'Click the toggle buttons to switch through organizations';
+  String get jumia => 'Jumia';
+  String get jumiaDomain => 'jumia.boilerplate.com';
+  String get compad => 'Compad App';
+  String get compadDomain => 'compadapp.boilerplate.com';
+  String get slack => 'Slack';
+  String get slackDomain => 'slack.boilerplate.com';
+  String get faceBook => 'Facebook';
+  String get faceBookDomain => 'facebook.boilerplate.com';
+  String get switchButton => 'Switch';
+  String get confirmButton => 'Confirm';
+  String get switchDialogMessage => 'You\'re about to change your workspace to slack organization. This action will direct you to a different environment within the platform, where you can access resources, projects, and settings specific to that organization.';
+  String get switchTitle => 'Switch Organization';
 }
+

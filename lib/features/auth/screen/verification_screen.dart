@@ -3,10 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_boilerplate_hng11/features/auth/providers/auth.provider.dart';
+import 'package:flutter_boilerplate_hng11/features/auth/widgets/custom_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../utils/global_colors.dart';
 import '../../../utils/widgets/custom_button.dart';
@@ -21,8 +23,7 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  final List<TextEditingController> _codeControllers =
-      List.generate(6, (_) => TextEditingController());
+  final TextEditingController codeController =  TextEditingController();
   bool isCodeComplete = false;
   bool _isCodeValid = true;
   int _countdown = 420;
@@ -64,10 +65,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
     setState(() {
       loading = true;
     });
-    final code = _codeControllers.map((c) => c.text).join();
     final res = await ref
         .read(authProvider.notifier)
-        .verifyCode(widget.email, code, context);
+        .verifyCode(widget.email, codeController.text, context);
     if (res != null && !res) {
       _isCodeValid = false;
     }
@@ -105,6 +105,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     final localizations = AppLocalizations.of(context)!; // Access localization
 
     return Scaffold(
+      appBar: const CustomAppBar.empty(),
       // appBar: AppBar(
       //   leading: const ChevronBackButton(),
       //   title: Text(localizations.verificationAppBarTitle),  // Localized AppBar title
@@ -125,7 +126,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   RichText(
                     text: TextSpan(
                       text:
-                          '${localizations.verificationCodeDescription(widget.email)} ${_countdown.toString()} ',
+                          '${localizations.verificationCodeDescription(widget.email)} ',
                       style: TextStyle(color: GlobalColors.darkOne),
                       children: [
                         TextSpan(
@@ -139,46 +140,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     ),
                   ),
                   SizedBox(height: 16.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(6, (index) {
-                      return SizedBox(
-                        width: 40.w,
-                        height: 40.h,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 0),
-                          child: TextField(
-                            controller: _codeControllers[index],
-                            maxLength: 1,
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color:
-                                      _isCodeValid ? Colors.orange : Colors.red,
-                                ),
-                              ),
-                              counterText: '',
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              if (value.length == 1 && index < 5) {
-                                FocusScope.of(context).nextFocus();
-                              } else if (value.isEmpty && index > 0) {
-                                FocusScope.of(context).previousFocus();
-                              }
-                              setState(() {
-                                isCodeComplete = _codeControllers.every(
-                                  (controller) => controller.text.isNotEmpty,
-                                );
-                              });
-                            },
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
+                  PincodeField(controller: codeController),
                   SizedBox(height: 16.sp),
                   CustomButton(
                     loading: loading,
@@ -238,3 +200,56 @@ class _VerificationScreenState extends State<VerificationScreen> {
     );
   }
 }
+
+class PincodeField extends StatelessWidget {
+  const PincodeField({super.key, required this.controller});
+final TextEditingController controller;
+  @override
+  Widget build(BuildContext context) {
+    return PinCodeTextField(
+      appContext: context,
+      pastedTextStyle: TextStyle(
+        color: Colors.green.shade600,
+        fontWeight: FontWeight.bold,
+      ),
+      length: 6,
+      blinkWhenObscuring: true,
+      animationType: AnimationType.fade,
+      pinTheme: PinTheme(
+        activeColor: GlobalColors.orange,
+        inactiveColor: GlobalColors.lightGrey,
+        selectedColor: GlobalColors.orange,
+        shape: PinCodeFieldShape.box,
+        borderRadius: BorderRadius.circular(5),
+        fieldHeight: 40,
+        fieldWidth: 40,
+        activeFillColor: Colors.white,
+      ),
+      cursorColor: Colors.black,
+      animationDuration: const Duration(milliseconds: 300),
+      controller: controller,
+      keyboardType: TextInputType.number,
+      boxShadows: const [
+        BoxShadow(
+          offset: Offset(0, 1),
+          color: Colors.black12,
+          blurRadius: 10,
+        )
+      ],
+      onCompleted: (v) {
+        debugPrint("Completed");
+      },
+      // onTap: () {
+      //   print("Pressed");
+      // },
+
+      beforeTextPaste: (text) {
+        debugPrint("Allowing to paste $text");
+        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+        //but you can show anything you want here, like your pop up saying wrong paste format or etc
+        return true;
+      },
+    );
+  }
+}
+

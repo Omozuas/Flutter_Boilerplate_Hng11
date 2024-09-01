@@ -40,6 +40,7 @@ class GlobalColors {
   static HexColor lightGrey = HexColor('#94A3B8');
   static HexColor lightGrey200 = HexColor('#DDDDDD');
   static HexColor lightBlue = HexColor('#ACCCEC');
+  static HexColor borderWhite = HexColor('#F7F7F7');
 
   static HexColor mutedTextColor = HexColor('#71717A');
   static HexColor blueTextColor = HexColor('#0013C1');

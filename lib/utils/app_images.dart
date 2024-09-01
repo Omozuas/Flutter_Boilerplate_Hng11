@@ -1,6 +1,8 @@
 class AppImages {
   static String boilerCard = 'assets/images/png/top_boiler.png';
   static String system = 'assets/images/png/system.png';
+  static String shoe = 'assets/images/png/shoe.png';
+  static String shoes = 'assets/images/png/shoes.png';
 }
 
 class AppSvgs {
