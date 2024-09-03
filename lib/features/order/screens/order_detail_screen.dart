@@ -65,61 +65,43 @@ class OrderDetailScreen extends StatelessWidget {
                     width: GlobalScreenSize.getScreenWidth(context),
                     child: Row(
                       children: [
-                        Text(
-                          "${context.order}:",
-                          style: CustomTextStyle.semiBold(
-                            fontSize: 18.sp
-                          )
-                        ),
+                        Text("${context.order}:",
+                            style: CustomTextStyle.semiBold(fontSize: 18.sp)),
                         10.w.sbHW,
-                        Text(
-                          "#${order.number}:",
+                        Text("#${order.number}:",
                             style: CustomTextStyle.semiBold(
-                              fontSize: 18.sp,
-                              color: const Color(0xF40013C1)
-                            )
-                        ),
+                                fontSize: 18.sp,
+                                color: const Color(0xF40013C1))),
                         const Spacer(),
                         CustomButton(
                             onTap: () {},
                             borderColor: GlobalColors.greenTextColor,
                             text: context.paid,
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                0.029,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 13, vertical: 8),
                             containerColor: GlobalColors.greenTextColor,
-                            width:
-                                GlobalScreenSize.getScreenWidth(context) * 0.13,
                             textColor: GlobalColors.white),
                         10.w.sbHW,
                         CustomButton(
                             onTap: () {},
                             borderColor: Colors.transparent,
                             text: context.packaing,
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                0.029,
                             containerColor: const Color(0xFFEBF8FF),
-
-                            width:
-                                GlobalScreenSize.getScreenWidth(context) * 0.2,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 13, vertical: 8),
                             textColor: GlobalColors.lightBlueTextColor)
                       ],
                     ),
                   ),
                   8.h.sbH,
-                  Text(
-                    context.orderCreated,
-                    style: CustomTextStyle.semiBold(
-                      fontSize: 12.sp,
-                      color: GlobalColors.black
-                    )
-                  ),
+                  Text(context.orderCreated,
+                      style: CustomTextStyle.semiBold(
+                          fontSize: 12.sp, color: GlobalColors.black)),
                   8.h.sbH,
-                  Text(
-                    context.augustDate,
+                  Text(context.augustDate,
                       style: CustomTextStyle.regular(
                         fontSize: 12.sp,
-                      )
-                  ),
+                      )),
                 ],
               ),
             ),
@@ -178,11 +160,8 @@ class OrderDetailScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                            width:
-                                GlobalScreenSize.getScreenWidth(context) * .75,
-                            height: GlobalScreenSize.getScreenHeight(context) *
-                                .040,
-                            padding: EdgeInsets.only(left: 10.r, right: 10.r),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(10.r),
