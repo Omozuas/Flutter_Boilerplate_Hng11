@@ -27,7 +27,6 @@ dependencies:
   get_storage: ^2.1.1
   cached_network_image: ^3.4.0
   flutter_svg: ^2.0.10+1
-  back_button_interceptor: ^7.0.3
   file_picker: ^8.1.1
   vector_graphics: any
   firebase_auth: ^4.16.0
@@ -49,8 +48,8 @@ dependencies:
   jiffy: ^6.3.1
   flutter_inappwebview: ^6.0.0
   country_state_city_pro: ^0.0.6
-
   lottie: ^3.1.2
+
 
   pin_code_fields: ^8.0.1
 

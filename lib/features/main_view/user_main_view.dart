@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate_hng11/features/cart/utils/widget_extensions.dart';
 import 'package:flutter_boilerplate_hng11/utils/Styles/text_styles.dart';
 import 'package:flutter_boilerplate_hng11/utils/icons/nav_bar_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 import '../cart/screens/cart_home_screen.dart';
 import '../product_listing/screens/product_screen.dart';
@@ -37,16 +34,10 @@ class _UserMainViewState extends State<UserMainView> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(
-      myInterceptor,
-      name: widget.name,
-      context: context,
-    );
   }
 
   @override
   void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
   }
 
@@ -97,15 +88,6 @@ class _UserMainViewState extends State<UserMainView> {
         ),
       ),
     );
-  }
-
-  FutureOr<bool> myInterceptor(
-      bool stopDefaultButtonEvent, RouteInfo routeInfo) {
-    if (_bottomBarIndex.value != 0) {
-      updateIndex(0);
-      return true;
-    }
-    return false;
   }
 }
 

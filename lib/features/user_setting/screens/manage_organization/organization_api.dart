@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-
 import 'package:flutter_boilerplate_hng11/features/product_listing/product_endpoints.dart';
-
 
 import '../../../../services/dio_provider.dart';
 import '../../../../services/service_locator.dart';
@@ -15,7 +13,6 @@ class OrganizationsApi implements OrganizationsApiContract {
   @override
   Future<AllOrganizationResponse?> getOrganizations() async {
     try {
-
       var response = await _dioProvider.get(organisationEndpoint);
       if (response != null) {
         return AllOrganizationResponse.fromJson(
@@ -77,7 +74,6 @@ class OrganizationsApi implements OrganizationsApiContract {
     }
     return null;
   }
-
 }
 
 abstract class OrganizationsApiContract {
@@ -89,4 +85,3 @@ abstract class OrganizationsApiContract {
   Future<AllOrganizationResponse?> switchOrganisation(
       {required String organisationId});
 }
-
