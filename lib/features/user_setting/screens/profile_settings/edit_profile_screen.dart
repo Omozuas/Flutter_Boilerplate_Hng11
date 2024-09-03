@@ -106,17 +106,17 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 CustomTextField(
                   label: AppLocalizations.of(context)!.firstName,
                   controller: _firstnameController,
-                  hintText: AppLocalizations.of(context)!.enterFirstName,
+                  hintText: AppLocalizations.of(context)!.enterFirstName, onChanged: (value) {  },
                 ),
                 CustomTextField(
                   label: AppLocalizations.of(context)!.lastName,
                   controller: _lastnameController,
-                  hintText: AppLocalizations.of(context)!.enterLastName,
+                  hintText: AppLocalizations.of(context)!.enterLastName, onChanged: (value) {  },
                 ),
                 CustomTextField(
                   label: AppLocalizations.of(context)!.username,
                   controller: _usernameController,
-                  hintText: AppLocalizations.of(context)!.enterUsername,
+                  hintText: AppLocalizations.of(context)!.enterUsername, onChanged: (value) {  },
                 ),
                 // SizedBox(height: 16.h),
                

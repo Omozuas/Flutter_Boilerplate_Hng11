@@ -215,5 +215,9 @@ extension Translation on BuildContext {
   String get confirmButton => 'Confirm';
   String get switchDialogMessage => 'You\'re about to change your workspace to slack organization. This action will direct you to a different environment within the platform, where you can access resources, projects, and settings specific to that organization.';
   String get switchTitle => 'Switch Organization';
-}
 
+
+    String get pullToRefresh => 'Pull to refresh';
+
+
+}
